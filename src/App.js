@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import './App.css';
 import {getRepos,getUserData} from './controllers/github-api';
 import { withStyles, MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
+import CircularProgress from '@material-ui/core/CircularProgress';
 import Input from '@material-ui/core/Input';
 import InputLabel from '@material-ui/core/InputLabel';
 import FormControl from '@material-ui/core/FormControl';
@@ -16,6 +17,9 @@ class App extends Component {
 
   render() {
     const styles = theme => ({
+      progress: {
+        margin: theme.spacing.unit * 2,
+      },
       container: {
         display: 'flex',
         flexWrap: 'wrap',
@@ -91,6 +95,9 @@ class App extends Component {
               id="custom-css-input"
             />
           </FormControl>
+          <div>
+            <CircularProgress className={styles.progress} style={{ color: purple[500] }} thickness={7} />
+          </div>
       </div>
     );
   }
