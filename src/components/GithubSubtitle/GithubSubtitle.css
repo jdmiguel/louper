@@ -1,0 +1,26 @@
+.subtitleContainer{
+    margin: 32px 0 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+h2{
+    font-size: 4.3em;
+    font-weight: 400;
+    margin: 20px 0 0;
+    line-height: 0;
+    animation-name: introSubtitle;
+    animation-duration: .4s;
+    animation-timing-function: ease-out;
+    animation-delay: .3s;
+    animation-iteration-count: 1;
+    animation-fill-mode: forwards;
+    opacity: 0;
+}
+
+@keyframes introSubtitle {
+    from { transform: translateY(-30px) ; opacity: 0;}
+    to { transform: translateY(0px) ; opacity: 1;}
+}
+

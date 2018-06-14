@@ -1,0 +1,17 @@
+.githubIcon{
+    animation-name: introIcon;
+    animation-duration: 1.1s;
+    animation-timing-function: cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    animation-delay: .7s;
+    animation-iteration-count: 1;
+    transform-origin: 50%;
+    animation-fill-mode: forwards;
+    opacity: 0;
+    width: 50px;
+    margin: 20px 0 0 17px;
+}
+
+@keyframes introIcon {
+    from { transform: scale(.4) rotateY(180deg); opacity: 0;}
+    to { transform: scale(1) rotateY(0deg); opacity: 1;}
+}
