@@ -7,6 +7,7 @@ import { getRepos,getUserData } from '../../controllers/github-api';
 import storeInstance from '../../store/Store';
 import { observer } from 'mobx-react';
 import GithubLoader from '../../components/GithubLoader/GithubLoader';
+import PropTypes from 'prop-types';
 
 class Intro extends Component {
 
@@ -51,9 +52,11 @@ class Intro extends Component {
     }
 
     entryApp = () => {
-        this.setState({
+        /*this.setState({
             isLoaderVisible: false
-        });
+        });*/
+
+        this.props.offIntro();
     }
 
     render() {
@@ -70,5 +73,9 @@ class Intro extends Component {
         );
     }
 }
+
+Intro.propTypes = {
+    offIntro: PropTypes.func
+};
 
 export default observer(Intro);
