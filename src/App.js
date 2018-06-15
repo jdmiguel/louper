@@ -1,30 +1,45 @@
-import React, { Component } from 'react';
-import Intro from './containers/Intro/Intro';
-import Content from './containers/Content/Content';
+import React from 'react';
+import { BrowserRouter as Router , Route } from "react-router-dom";
+import createHistory from 'history/createBrowserHistory';
+import Intro from './containers/Intro/';
+import Content from './containers/Content/';
+import UserData from './containers/UserData';
+import UserRepos from './containers/UserRepos';
+import UserFollowing from './containers/UserFollowing';
+import UserFollowers from './containers/UserFollowers';
 
-class App extends Component {
+const history = createHistory();
 
-  state = {
-    inUserContent: false
-  }
-
-  offIntroHandler = () => {
-    this.setState({
-      inUserContent: true
-    });
-  }
-
-  render() {
-    const intro = !this.state.inUserContent ? <Intro offIntro={this.offIntroHandler}/> : null;
-    const content = this.state.inUserContent ? <Content /> : null;
-
-    return (
-      <div className="App">
-        {intro}
-        {content}
-      </div>
-    );
-  }
-}
+const App = () => (
+  <Router >
+    <div>
+      <Route history={history} 
+            exact 
+            path="/" 
+            component={Intro}
+      />
+      <Route history={history} 
+          path="/user" 
+          component={Content}
+      />
+      <Route history={history} 
+          path="/user/data" 
+          component={UserData}
+      />
+      <Route history={history} 
+          path="/user/repos" 
+          component={UserRepos}
+      />
+      <Route history={history} 
+          path="/user/following" 
+          component={UserFollowing}
+      />
+      <Route history={history} 
+          path="/user/followers" 
+          component={UserFollowers}
+      />
+    </div>
+  </Router>
+)
 
 export default App;

@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
-import './Intro.css';
-import GithubHeader from '../../components/GithubHeader/GithubHeader';
-import GithubInput from '../../components/GithubInput/GithubInput';
-import GithubBtn from '../../components/GithubBtn/GithubBtn';
+import './styles.css';
+import GithubLoader from '../../components/GithubLoader';
+import GithubHeader from '../../components/GithubHeader';
+import GithubInput from '../../components/GithubInput';
+import GithubBtn from '../../components/GithubBtn';
 import { getRepos,getUserData } from '../../controllers/github-api';
 import storeInstance from '../../store/Store';
 import { observer } from 'mobx-react';
-import GithubLoader from '../../components/GithubLoader/GithubLoader';
 import PropTypes from 'prop-types';
 
 class Intro extends Component {
@@ -38,29 +38,17 @@ class Intro extends Component {
 
     fetchData = async (data) => {
         await getUserData(data).then( result => storeInstance.setUserData( result.user ) );
-        //await getRepos(data).then( result => { console.log('initResult',result); storeInstance.setUserRepos( Array.of(result) ) });
         await getRepos(data).then( result => storeInstance.setUserRepos( result) );
-        //await this.checkData();
         await this.entryApp();
     }
 
-    checkData = () => {
-        let user = storeInstance.getUserData();
-        let repos = storeInstance.getUserRepos();
-        console.log('user: ', user.name);
-        console.log('repos: ', repos);
-    }
-
     entryApp = () => {
-        /*this.setState({
-            isLoaderVisible: false
-        });*/
-
-        this.props.offIntro();
+        const userId = storeInstance.getUserData().id;
+        this.props.history.push('/user/data');
     }
 
     render() {
-        const btn = this.state.isInputEmpty ? <GithubBtn onClickBtn={this.clickBtnHandler}/> : null;
+        const btn = this.state.isInputEmpty ? <GithubBtn onClickBtn={this.clickBtnHandler} type="forward" txt="GO AHEAD"/> : null;
         const loader = this.state.isLoaderVisible ? <GithubLoader/> : null;
 
         return (

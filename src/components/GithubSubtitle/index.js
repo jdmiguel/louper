@@ -1,6 +1,6 @@
 import React from 'react';
-import './GithubSubtitle.css';
-import GithubIcon from '../GithubIcon/GithubIcon';
+import './styles.css';
+import GithubIcon from '../GithubIcon/index';
 import PropTypes from 'prop-types';
 
 const GithubSubtitle = (props) => (

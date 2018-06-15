@@ -2,7 +2,7 @@ import React from 'react';
 import Input from '@material-ui/core/Input';
 import InputLabel from '@material-ui/core/InputLabel';
 import FormControl from '@material-ui/core/FormControl';
-import './GithubInput.css';
+import './styles.css';
 
 const GithubInput = (props) => {
     return (

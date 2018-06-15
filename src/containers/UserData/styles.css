@@ -1,0 +1,59 @@
+.dataContainer{
+    width: 1200px;
+    margin: 80px auto 0;
+    padding: 25px;
+}
+
+.dataContainer h1{
+    font-size: 3.2em;
+    margin: 50px 0 0;
+    line-height: 0;
+    animation-name: introUserName;
+    animation-duration: .35s;
+    animation-timing-function: ease-out;
+    animation-delay: 0s;
+    animation-iteration-count: 1;
+    animation-fill-mode: forwards;
+    opacity: 0;
+    font-weight: 500;
+}
+
+@keyframes introUserName {
+    from { transform: translateX(30px) ; opacity: 0;}
+    to { transform: translateX(0px) ; opacity: 1;}
+}
+
+.dataContainer h2{
+    font-size: 2em;
+    font-weight: 400;
+    margin: 45px 0 0;
+    line-height: 0;
+    animation-name: introUserDescription;
+    animation-duration: .4s;
+    animation-timing-function: ease-out;
+    animation-delay: .3s;
+    animation-iteration-count: 1;
+    animation-fill-mode: forwards;
+    opacity: 0;
+}
+
+@keyframes introUserDescription {
+    from { transform: translateX(30px) ; opacity: 0;}
+    to { transform: translateX(0px) ; opacity: 1;}
+}
+
+
+.userAvatar{
+    width: 140px !important;
+    height: 140px !important;
+    float: right;
+}
+
+.userAvatar img{
+    width: 140px;
+    height: 140px;
+}
+
+.txtContainer{
+    float: left;
+}

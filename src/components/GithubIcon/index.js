@@ -1,5 +1,5 @@
 import React from 'react';
-import './GithubIcon.css';
+import './styles.css';
 
 const GithubIcon = () => (
     <svg className="githubIcon" version="1.1" x="0px" y="0px" viewBox="0 0 120.8 117.8" enableBackground="new 0 0 120.8 117.8">

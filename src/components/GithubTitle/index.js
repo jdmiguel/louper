@@ -1,5 +1,5 @@
 import React from 'react';
-import './GithubTitle.css';
+import './styles.css';
 import PropTypes from 'prop-types';
 
 const GithubTitle = (props) => (

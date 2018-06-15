@@ -1,7 +1,7 @@
 import React from 'react';
-import './GithubHeader.css';
-import GithubTitle from '../GithubTitle/GithubTitle';
-import GithubSubtitle from '../GithubSubtitle/GithubSubtitle';
+import './styles.css';
+import GithubTitle from '../GithubTitle';
+import GithubSubtitle from '../GithubSubtitle';
 
 const txt = {
     title: 'Github',
