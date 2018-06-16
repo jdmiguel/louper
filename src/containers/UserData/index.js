@@ -2,9 +2,10 @@ import React from 'react';
 import storeInstance from '../../store/Store';
 /* import Avatar from '@material-ui/core/Avatar';
 import Paper from '@material-ui/core/Paper'; */
-import Map from '@material-ui/icons/Map';
 import Email from '@material-ui/icons/Email';
-//import AccountMultiple from '@material-ui/icons/AccountMultiple';
+import Home from '@material-ui/icons/Home';
+import Link from '@material-ui/icons/Link';
+import Contacts from '@material-ui/icons/Contacts';
 import Btn from '../../components/Btn';
 import './styles.css';
 
@@ -14,26 +15,34 @@ const clickBtnHandler = () => {
     window.open(storeInstance.getUserData().html_url,'_blank');
 };
 
-const UserData = () => (
-    
-    <div className='userDataContainer'>
-    {console.log(storeInstance.getUserData())}
-        <div className='dataContainer'>
+const UserData = () => {
+    console.log(storeInstance.getUserData())
+    const data = storeInstance.getUserData();
+    const location = data.location ? <p><Home className='userDataIcon'/>{data.location}</p> : null;
+    const company = data.company ? <p><Contacts className='userDataIcon'/>{data.company}</p> : null;
+    const email = data.email ? <p><Email className='userDataIcon'/><a href={data.email}>{data.email}</a></p> : null;
+    const url = data.blog ? <p><Link className='userDataIcon'/><a href={data.email}>{data.blog}</a></p> : null;
+
+    return (
+        <div className='userDataContainer'>
             <img alt="user image"
-                 src={storeInstance.getUserData().avatar_url}
-                 className='userAvatar'/>
+                src={data.avatar_url}
+                className='userAvatar'/>
             <div className='txtContainer'>
-                <h1>{storeInstance.getUserData().name}</h1>
-                <h2>{storeInstance.getUserData().bio}</h2>
+                <h1>{data.name}</h1>
+                <h2>{data.bio}</h2>
                 <div className='subUserInfo'>
-                    <p><Email/>{storeInstance.getUserData().email}</p>
-                    <p><Map/>{storeInstance.getUserData().location}</p>
-                    <p>{storeInstance.getUserData().blog}</p>
+                    {email}
+                    {location}
+                    {url}
+                    {company}
                 </div>
-                <Btn onClickBtn={this.clickBtnHandler} type="forward" txt="VISIT PROFILE"/>
+                <Btn onClickBtn={this.clickBtnHandler}
+                        type="forward"
+                        txt="VISIT PROFILE" />
             </div>
         </div>
-    </div>
-);
+    )
+};
 
 export default UserData;
