@@ -4,7 +4,7 @@ import InputLabel from '@material-ui/core/InputLabel';
 import FormControl from '@material-ui/core/FormControl';
 import './styles.css';
 
-const GithubInput = (props) => {
+const IntroInput = (props) => {
     return (
         <FormControl className="formContainer">
             <InputLabel className='label'>
@@ -14,4 +14,4 @@ const GithubInput = (props) => {
         </FormControl>
     );
 };
-export default GithubInput;
+export default IntroInput;

@@ -1,17 +1,17 @@
 import React from 'react';
-import './styles.css';
-import GithubIcon from '../GithubIcon/index';
+import GithubIcon from '../GithubIcon';
 import PropTypes from 'prop-types';
+import './styles.css';
 
-const GithubSubtitle = (props) => (
+const Subtitle = (props) => (
     <div className='subtitleContainer'>
         <h2>{props.txt}</h2>
         <GithubIcon/>
     </div>
 );
 
-GithubSubtitle.propTypes = {
+Subtitle.propTypes = {
     txt: PropTypes.string.isRequired
 };
 
-export default GithubSubtitle;
+export default Subtitle;

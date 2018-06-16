@@ -1,15 +1,15 @@
 import React from 'react';
-import './styles.css';
 import PropTypes from 'prop-types';
+import './styles.css';
 
-const GithubTitle = (props) => (
+const Title = (props) => (
     <div className='titleContainer'>
         <h1>{props.txt}</h1>
     </div>
 );
 
-GithubTitle.propTypes = {
+Title.propTypes = {
     txt: PropTypes.string.isRequired
 };
 
-export default GithubTitle;
+export default Title;

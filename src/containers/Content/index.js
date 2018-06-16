@@ -1,12 +1,12 @@
-import React, { Component } from 'react';
-import './styles.css';
-import GithubTabs from '../../components/GithubTabs';
+import React from 'react';
+import Menu from '../../components/Menu';
 import { Wrapper } from '../../utils/wrapper';
+import './styles.css';
 
 
 const Content = () => (
     <Wrapper>
-        <GithubTabs/>
+        <Menu/>
     </Wrapper>
 )
 

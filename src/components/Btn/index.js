@@ -3,7 +3,7 @@ import Button from '@material-ui/core/Button';
 import Icon from '@material-ui/core/Icon';
 import './styles.css';
 
-const GithubBtn = (props) => (
+const Btn = (props) => (
     <div className="btnContainer">
         <Button variant="contained" color="primary" className="button" onClick={props.onClickBtn}>
             {props.txt}
@@ -12,4 +12,4 @@ const GithubBtn = (props) => (
     </div>
 );
 
-export default GithubBtn;
+export default Btn;

@@ -1,11 +1,10 @@
 import React, { Component } from 'react';
-import PropTypes from 'prop-types';
-import './styles.css';
 import Paper from '@material-ui/core/Paper';
 import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
+import './styles.css';
 
-class GithubTabs extends Component {
+class Menu extends Component {
     state = {
         value: 0,
     };
@@ -18,13 +17,11 @@ class GithubTabs extends Component {
         return (
             <div className='tabsContainer'>
                 <Paper>
-                    <Tabs
-                    value={this.state.value}
-                    onChange={this.handleChange}
-                    indicatorColor="primary"
-                    textColor="primary"
-                    centered
-                    >
+                    <Tabs value={this.state.value}
+                          onChange={this.handleChange}
+                          indicatorColor="primary"
+                          textColor="primary"
+                          centered>
                         <Tab label="USER DATA" />
                         <Tab label="USER REPOS" />
                         <Tab label="USER FOLLOWING" />
@@ -36,10 +33,4 @@ class GithubTabs extends Component {
     }
 }
 
-
-
-GithubTabs.propTypes = {
-    
-};
-
-export default GithubTabs;
+export default Menu;

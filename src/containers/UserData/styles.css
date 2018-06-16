@@ -1,11 +1,15 @@
 .dataContainer{
-    width: 1200px;
+    /* max-width: 1200px; */
     margin: 80px auto 0;
     padding: 25px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
 }
 
 .dataContainer h1{
-    font-size: 3.2em;
+    font-size: 2.6em;
     margin: 50px 0 0;
     line-height: 0;
     animation-name: introUserName;
@@ -16,6 +20,7 @@
     animation-fill-mode: forwards;
     opacity: 0;
     font-weight: 500;
+    text-align: center;
 }
 
 @keyframes introUserName {
@@ -24,9 +29,9 @@
 }
 
 .dataContainer h2{
-    font-size: 2em;
+    font-size: 1.5em;
     font-weight: 400;
-    margin: 45px 0 0;
+    margin: 38px 0 0;
     line-height: 0;
     animation-name: introUserDescription;
     animation-duration: .4s;
@@ -35,6 +40,17 @@
     animation-iteration-count: 1;
     animation-fill-mode: forwards;
     opacity: 0;
+    text-align: center;
+}
+
+.dataContainer p{
+    margin-top: 21px;
+    line-height: 0;
+    font-size: 1.1em;
+}
+
+.subUserInfo{
+    margin-top: 30px;
 }
 
 @keyframes introUserDescription {
@@ -44,16 +60,11 @@
 
 
 .userAvatar{
-    width: 140px !important;
-    height: 140px !important;
-    float: right;
-}
-
-.userAvatar img{
-    width: 140px;
-    height: 140px;
+    width: 180px !important;
+    height: 180px !important;
+    border-radius: 20px;
 }
 
 .txtContainer{
-    float: left;
+    
 }
