@@ -11,11 +11,12 @@ class Menu extends Component {
 
     handleChange = (event, value) => {
         this.setState({ value });
+        this.props.onClickMenu(value);
     };
 
     render() {
         return (
-            <div className='tabsContainer'>
+            <div className='menu'>
                 <Paper>
                     <Tabs value={this.state.value}
                           onChange={this.handleChange}

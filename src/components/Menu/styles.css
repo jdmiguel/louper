@@ -1,3 +1,14 @@
-.tabsContainer{
-    
+.menu{
+    animation-name: introMenu;
+    animation-duration: .35s;
+    animation-timing-function: ease-out;
+    animation-delay: 0s;
+    animation-iteration-count: 1;
+    animation-fill-mode: forwards;
+    transform: translateY(-150px)
+}
+
+@keyframes introMenu {
+    from { transform: translateY(-150px)}
+    to { transform: translateY(0px)}
 }

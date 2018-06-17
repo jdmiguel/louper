@@ -9,8 +9,6 @@ import Contacts from '@material-ui/icons/Contacts';
 import Btn from '../../components/Btn';
 import './styles.css';
 
-//const userData = storeInstance.getUserData();
-
 const clickBtnHandler = () => {
     window.open(storeInstance.getUserData().html_url,'_blank');
 };
@@ -20,8 +18,8 @@ const UserData = () => {
     const data = storeInstance.getUserData();
     const location = data.location ? <p><Home className='userDataIcon'/>{data.location}</p> : null;
     const company = data.company ? <p><Contacts className='userDataIcon'/>{data.company}</p> : null;
-    const email = data.email ? <p><Email className='userDataIcon'/><a href={data.email}>{data.email}</a></p> : null;
-    const url = data.blog ? <p><Link className='userDataIcon'/><a href={data.email}>{data.blog}</a></p> : null;
+    const email = data.email ? <p><Email className='userDataIcon'/><a href={data.email} target='_blank'>{data.email}</a></p> : null;
+    const url = data.blog ? <p><Link className='userDataIcon'/><a href={data.blog} target='_blank'>{data.blog}</a></p> : null;
 
     return (
         <div className='userDataContainer'>
@@ -37,7 +35,7 @@ const UserData = () => {
                     {url}
                     {company}
                 </div>
-                <Btn onClickBtn={this.clickBtnHandler}
+                <Btn onClickBtn={() => clickBtnHandler()}
                         type="forward"
                         txt="VISIT PROFILE" />
             </div>
