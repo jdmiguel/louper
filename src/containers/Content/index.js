@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import Menu from '../../components/Menu';
+import FloatBtn from '../../components/FloatBtn';
 import { Wrapper } from '../../utils/wrapper';
 import './styles.css';
 
@@ -22,10 +23,15 @@ class Content extends Component {
         }
     }
 
+    backIntroHandler = () => {
+        this.props.history.push('/');
+    }
+
     render(){
         return(
             <Wrapper>
                 <Menu onClickMenu={this.menuHandler}/>
+                <FloatBtn clickHandler={this.backIntroHandler}/>
             </Wrapper>
         )
     }

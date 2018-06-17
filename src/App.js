@@ -34,10 +34,6 @@ const App = () => (
           path="/user/following" 
           component={UserFollowing}
       />
-      <Route history={history} 
-          path="/user/followers" 
-          component={UserFollowers}
-      />
     </div>
   </Router>
 )
