@@ -1,0 +1,31 @@
+.userReposContainer{
+    width: 320px;
+    background: #FFFFFF;
+    margin: 50px auto;
+    box-shadow: 0px 0px 2px 2px #d5d5d5;
+    animation-name: introUserRepos;
+    animation-duration: .35s;
+    animation-timing-function: ease-out;
+    animation-delay: .4s;
+    animation-iteration-count: 1;
+    animation-fill-mode: forwards;
+    opacity: 0;
+}
+
+.userReposContainer ul{
+    padding: 0 !important;
+}
+
+@keyframes introUserRepos {
+    from { opacity: 0 }
+    to { opacity: 1 }
+}
+
+.itemRepo{
+    line-height: 1.5;
+    border-bottom: 1px solid #eeeeee !important;
+}
+
+.iconUserRepos{
+    margin-right:10px;
+}

@@ -22,6 +22,7 @@ class Menu extends Component {
                           onChange={this.handleChange}
                           indicatorColor="primary"
                           textColor="primary"
+                          className="tabs"
                           centered>
                         <Tab label="USER DATA" />
                         <Tab label="USER REPOS" />

@@ -1,5 +1,5 @@
 .userDataContainer{
-    margin: 40px auto 0;
+    margin: 30px auto 0;
     padding: 25px;
     display: flex;
     flex-direction: column;
@@ -58,7 +58,7 @@
 }
 
 .txtContainer{
-    width: 220px;
+    width: 200px;
     margin-top: 18px;
 }
 
@@ -71,8 +71,8 @@
 }
 
 .userAvatar{
-    width: 220px !important;
-    height: 220px !important;
+    width: 200px !important;
+    height: 200px !important;
     border-radius: 20px;
 }
 

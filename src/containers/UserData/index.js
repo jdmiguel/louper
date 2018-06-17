@@ -1,7 +1,5 @@
 import React from 'react';
 import storeInstance from '../../store/Store';
-/* import Avatar from '@material-ui/core/Avatar';
-import Paper from '@material-ui/core/Paper'; */
 import Email from '@material-ui/icons/Email';
 import Home from '@material-ui/icons/Home';
 import Link from '@material-ui/icons/Link';
@@ -9,12 +7,9 @@ import Contacts from '@material-ui/icons/Contacts';
 import Btn from '../../components/Btn';
 import './styles.css';
 
-const clickBtnHandler = () => {
-    window.open(storeInstance.getUserData().html_url,'_blank');
-};
+const clickBtnHandler = url => window.open(url,'_blank');
 
 const UserData = () => {
-    console.log(storeInstance.getUserData())
     const data = storeInstance.getUserData();
     const location = data.location ? <p><Home className='userDataIcon'/>{data.location}</p> : null;
     const company = data.company ? <p><Contacts className='userDataIcon'/>{data.company}</p> : null;
@@ -35,8 +30,8 @@ const UserData = () => {
                     {url}
                     {company}
                 </div>
-                <Btn onClickBtn={() => clickBtnHandler()}
-                        type="forward"
+                <Btn onClickBtn={() => clickBtnHandler(data.html_url)}
+                        type="account_circle"
                         txt="VISIT PROFILE" />
             </div>
         </div>

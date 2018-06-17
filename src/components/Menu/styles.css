@@ -5,10 +5,14 @@
     animation-delay: 0s;
     animation-iteration-count: 1;
     animation-fill-mode: forwards;
-    transform: translateY(-150px)
+    transform: translateY(-150px);
 }
 
 @keyframes introMenu {
     from { transform: translateY(-150px)}
     to { transform: translateY(0px)}
+}
+
+.menu .tabs > div > div > div{
+    flex-wrap: wrap;
 }
