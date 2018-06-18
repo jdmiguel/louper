@@ -1,11 +1,15 @@
-React application that retrieves and displays the user repositories and organisations in Github.
+## REACT APPLICATION TO DISPLAY GITHUB USER DATA AND HIS REPOSITORIES
 
-## Technologies
+### TECHNOLOGIES
 
-Axios
-https://material-ui.com
+* **FEATURES ES6** SUCH AS ASYNC/AWAIT,CONST AND LET,ARROW FUNCTIONS...*
+* **REACT**
+* **REACT-ROUTER**
+* **MOBX**
+* **AXIOS**
+* **MATERIAL-UI**
 
-Considerations:
+### INSTALATION
 
-npm install
-npm install @material-ui/core
+* **clone repo**: In your folder, open a new terminal and clone the repo
+* **install dependencies**: In your terminal, execute npm install script
