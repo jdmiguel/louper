@@ -14,4 +14,5 @@ const IntroInput = (props) => {
         </FormControl>
     );
 };
+
 export default IntroInput;

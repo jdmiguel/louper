@@ -2,7 +2,6 @@ import React, {Component} from 'react';
 import Menu from '../../components/Menu';
 import FloatBtn from '../../components/FloatBtn';
 import { Wrapper } from '../../utils/wrapper';
-import PropTypes from 'prop-types';
 import './styles.css';
 class Content extends Component {
 
@@ -28,9 +27,5 @@ class Content extends Component {
         )
     }
 }
-
-Content.propTypes = {
-    history: PropTypes.func
-};
 
 export default Content;

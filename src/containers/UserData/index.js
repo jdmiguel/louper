@@ -18,7 +18,7 @@ const UserData = () => {
 
     return (
         <div className='userDataContainer'>
-            <img alt="user image"
+            <img alt="user avatar"
                  src={data.avatar_url}
                  className='userAvatar'/>
             <div className='txtContainer'>
