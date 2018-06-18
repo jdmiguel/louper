@@ -8,7 +8,6 @@ import storeInstance from '../../store/Store';
 import { observer } from 'mobx-react';
 import PropTypes from 'prop-types';
 import './styles.css';
-
 class Intro extends Component {
 
     state = {
@@ -37,15 +36,12 @@ class Intro extends Component {
     }
 
     fetchData = async (data) => {
-        await getUserData(data).then( result => storeInstance.setUserData( result.user ) );
+        getUserData(data).then( result => storeInstance.setUserData( result.user ) );
         await getRepos(data).then( result => storeInstance.setUserRepos( result) );
         await this.entryApp();
     }
 
-    entryApp = () => {
-        //const userId = storeInstance.getUserData().id;
-        this.props.history.push('/user/data');
-    }
+    entryApp = () => this.props.history.push('/user/data');
 
     render() {
         const btn = this.state.isInputEmpty ? <Btn onClickBtn={this.clickBtnHandler} type="forward" txt="GO AHEAD"/> : null;
@@ -63,7 +59,7 @@ class Intro extends Component {
 }
 
 Intro.propTypes = {
-    offIntro: PropTypes.func
+    history: PropTypes.func
 };
 
 export default observer(Intro);

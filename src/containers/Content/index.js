@@ -2,8 +2,8 @@ import React, {Component} from 'react';
 import Menu from '../../components/Menu';
 import FloatBtn from '../../components/FloatBtn';
 import { Wrapper } from '../../utils/wrapper';
+import PropTypes from 'prop-types';
 import './styles.css';
-
 class Content extends Component {
 
     menuHandler = index => {
@@ -14,18 +14,10 @@ class Content extends Component {
             case 1:
                 this.props.history.push('/user/repos');
             break; 
-            case 2:
-                this.props.history.push('/user/following');
-            break; 
-            case 3:
-                this.props.history.push('/user/followers');
-            break;  
         }
     }
 
-    backIntroHandler = () => {
-        this.props.history.push('/');
-    }
+    backIntroHandler = () => this.props.history.push('/');
 
     render(){
         return(
@@ -36,5 +28,9 @@ class Content extends Component {
         )
     }
 }
+
+Content.propTypes = {
+    history: PropTypes.func
+};
 
 export default Content;

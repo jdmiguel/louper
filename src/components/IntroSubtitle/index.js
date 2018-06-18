@@ -1,6 +1,5 @@
 import React from 'react';
 import GithubIcon from '../GithubIcon';
-import PropTypes from 'prop-types';
 import './styles.css';
 
 const Subtitle = (props) => (
@@ -9,9 +8,5 @@ const Subtitle = (props) => (
         <GithubIcon/>
     </div>
 );
-
-Subtitle.propTypes = {
-    txt: PropTypes.string.isRequired
-};
 
 export default Subtitle;

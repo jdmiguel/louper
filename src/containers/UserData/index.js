@@ -19,8 +19,8 @@ const UserData = () => {
     return (
         <div className='userDataContainer'>
             <img alt="user image"
-                src={data.avatar_url}
-                className='userAvatar'/>
+                 src={data.avatar_url}
+                 className='userAvatar'/>
             <div className='txtContainer'>
                 <h1>{data.name}</h1>
                 <h2>{data.bio}</h2>
@@ -31,8 +31,8 @@ const UserData = () => {
                     {company}
                 </div>
                 <Btn onClickBtn={ () => clickBtnHandler(data.html_url) }
-                        type="account_circle"
-                        txt="VISIT PROFILE" />
+                     type="account_circle"
+                     txt="VISIT PROFILE" />
             </div>
         </div>
     )

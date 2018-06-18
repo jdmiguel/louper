@@ -1,5 +1,5 @@
 {
-  "name": "github-api",
+  "name": "github-finder",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
@@ -14,15 +14,24 @@
     "react-router-dom": "^4.3.1",
     "react-scripts": "1.1.4"
   },
+  "devDependencies": {
+    "eslint": "^4.19.1",
+    "eslint-plugin-react": "^7.9.1",
+    "eslint-watch": "^3.1.5"
+  },
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject"
   },
-  "devDependencies": {
-    "eslint": "^4.19.1",
-    "eslint-plugin-react": "^7.9.1",
-    "eslint-watch": "^3.1.5"
+  "homepage": ".",
+  "babel": {
+    "presets": [
+      "react-app"
+    ]
+  },
+  "eslintConfig": {
+    "extends": "react-app"
   }
 }
