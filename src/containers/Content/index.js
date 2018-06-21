@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import Menu from '../../components/Menu';
 import FloatBtn from '../../components/FloatBtn';
+import storeInstance from '../../store/Store';
 import { Wrapper } from '../../utils/wrapper';
 import './styles.css';
 class Content extends Component {
@@ -20,6 +21,11 @@ class Content extends Component {
     }
 
     backIntroHandler = () => this.props.history.push('/');
+
+
+    componentWillMount(){
+        if(!storeInstance.getIfUserExists()) this.backIntroHandler();
+    }
 
     render(){
         return(

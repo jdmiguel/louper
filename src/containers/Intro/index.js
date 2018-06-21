@@ -69,7 +69,10 @@ class Intro extends Component {
         await this.entryApp();
     }
 
-    entryApp = () => this.props.history.push('/user/data');
+    entryApp = () => {
+        storeInstance.setUserExists();
+        this.props.history.push('/user/data');
+    }
 
     render() {
         const btn = this.state.isInputEmpty ? <Btn onClickBtn={this.clickBtnHandler} 

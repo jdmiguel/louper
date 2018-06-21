@@ -4,11 +4,24 @@ class Store{
     constructor(){
         extendObservable(this,
             {
+                userExists: false,
                 userData: '',
                 userRepos: '',
                 userFollowing: ''
             }
         );
+    }
+
+    setUserExists(){
+        this.userExists = true;
+    }
+
+    getIfUserExists(){
+        return this.userExists;
+    }
+
+    getUserData(){
+        return this.userData;
     }
 
     setUserData(data){
