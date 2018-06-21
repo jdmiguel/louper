@@ -5,7 +5,8 @@ class Store{
         extendObservable(this,
             {
                 userData: '',
-                userRepos: ''
+                userRepos: '',
+                userFollowing: ''
             }
         );
     }
@@ -24,6 +25,14 @@ class Store{
 
     getUserRepos(){
         return this.userRepos;
+    }
+
+    setUserFollowing(data){
+        this.userFollowing = data;
+    }
+
+    getUserFollowing(){
+        return this.userFollowing;
     }
 }
 

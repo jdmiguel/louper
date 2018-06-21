@@ -9,13 +9,13 @@ const clickListHandler = url => window.open(url,'_blank');
 
 const UserRepos = props => {
     const data = storeInstance.getUserRepos();
+    console.log('userRepos: ',data);
     
     return (
         <div className='userReposContainer'>
             <List>
             {
-                data.map((repo,i) => {
-                    return(
+                data.map((repo,i) => (
                         <ListItem key={i}
                               button
                               onClick={ () => clickListHandler(repo.html_url) }
@@ -23,8 +23,7 @@ const UserRepos = props => {
                                 <Folder className='iconUserRepos'/>
                                 {repo.name}
                         </ListItem> 
-                    )
-                })
+                    ))
             }
             </List>
         </div>

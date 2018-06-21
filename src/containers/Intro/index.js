@@ -4,7 +4,7 @@ import Header from '../Header';
 import Input from '../../components/IntroInput';
 import Btn from '../../components/Btn';
 import ErrorModal from '../../components/ErrorModal';
-import { getRepos,getUserData } from '../../controllers/github-api';
+import { getRepos,getUserData,getUserFollowing } from '../../controllers/github-api';
 import storeInstance from '../../store/Store';
 import { observer } from 'mobx-react';
 import './styles.css';
@@ -45,10 +45,14 @@ class Intro extends Component {
         inputHTML.focus();
     }
 
-    fetchData = async (data) => {
-        getUserData(data)
+    fetchData = async (user) => {
+        let userName = '';
+
+        getUserData(user)
             .then( result => {
                 storeInstance.setUserData( result.user )
+                userName = result.user.login;
+                console.log('userName: ',userName);
             })
             .catch( error => {
                 this.setState({
@@ -56,11 +60,12 @@ class Intro extends Component {
                     onErrorModal: true
                 });
 
-                console.log('error from getUserData in Intro',error);
+                console.log('error from getUserData in Intro', error);
             }
         );
 
-        await getRepos(data).then( result => storeInstance.setUserRepos( result) );
+        await getRepos(user).then( result => storeInstance.setUserRepos( result) );
+        await getUserFollowing(userName).then( result => storeInstance.setUserFollowing( result) );
         await this.entryApp();
     }
 

@@ -1,0 +1,62 @@
+.userFollowingContainer{
+    margin-top: 20px !important;
+    padding: 25px;
+    animation-name: introUserFollowing;
+    animation-duration: .35s;
+    animation-timing-function: ease-out;
+    animation-delay: .4s;
+    animation-iteration-count: 1;
+    animation-fill-mode: forwards;
+    opacity: 0;
+}
+
+@keyframes introUserFollowing {
+    from { opacity: 0 }
+    to { opacity: 1 }
+}
+
+.userFollowingDataContainer{
+    background: #FFFFFF;
+    box-shadow: 0 0 2px 2px #cdcdcd;
+    padding: 18px;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.userFollowingContainer h1{
+    font-size: 1.5em;
+    margin: 10px 0 7px;
+    line-height: 1;
+    font-weight: 500;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.userFollowingContainer button{
+    width: 90%;
+    font-size: .8em;
+}
+
+.userFollowingTxtContainer{
+    width: 170px;
+    height: 100px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+}
+
+.subUserFollowingInfo{
+    margin-top: 20px;
+}
+
+.userFollowingIcon{
+    margin-right: 7px;
+}
+
+.userFollowingAvatar{
+    width: 100px !important;
+    height: 100px !important;
+    border-radius: 10px;
+}
+

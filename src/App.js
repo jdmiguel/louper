@@ -5,6 +5,7 @@ import Intro from './containers/Intro/';
 import Content from './containers/Content/';
 import UserData from './containers/UserData';
 import UserRepos from './containers/UserRepos';
+import UserFollowing from './containers/UserFollowing';
 
 const history = createHistory();
 
@@ -27,6 +28,10 @@ const App = () => (
       <Route history={history} 
           path="/user/repos" 
           component={UserRepos}
+      />
+      <Route history={history} 
+          path="/user/following" 
+          component={UserFollowing}
       />
     </div>
   </Router>

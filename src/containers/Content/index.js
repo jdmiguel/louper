@@ -13,6 +13,9 @@ class Content extends Component {
             case 1:
                 this.props.history.push('/user/repos');
             break; 
+            case 2:
+                this.props.history.push('/user/following');
+            break; 
         }
     }
 

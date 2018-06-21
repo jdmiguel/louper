@@ -25,7 +25,8 @@ class Menu extends Component {
                           className="tabs"
                           centered>
                         <Tab label="USER DATA" />
-                        <Tab label="USER REPOS" />
+                        <Tab label="REPOSITORIES" />
+                        <Tab label="FOLLOWING" />
                     </Tabs>
                 </Paper>
             </div>

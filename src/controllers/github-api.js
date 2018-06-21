@@ -18,3 +18,8 @@ export const getUserData = (username) => {
       orgs: orgs.data
     }));
 }
+
+export const getUserFollowing = (username) => {
+  const url = `${BASE_URL}/users/${username}/following?per_page=250`;
+  return axios.get(url).then(response => response.data);
+}
