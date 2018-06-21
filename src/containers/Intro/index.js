@@ -12,14 +12,14 @@ import './styles.css';
 class Intro extends Component {
 
     state = {
-        isInputEmpty: false,
+        isInputEmpty: true,
         userSelected: '',
         isLoaderVisible: false,
         onErrorModal: false
     }
 
     getInputValue = (e) => {
-        let isEmpty = e.target.value ? true : false;
+        let isEmpty = e.target.value ? false : true;
 
         this.setState({
             isInputEmpty: isEmpty,
@@ -27,7 +27,8 @@ class Intro extends Component {
         });
     }
 
-    clickBtnHandler = () => {
+    sendUserData = () => {
+        console.log('sendUserData');
         let userSelected = this.state.userSelected;
 
         this.setState({
@@ -74,8 +75,17 @@ class Intro extends Component {
         this.props.history.push('/user/data');
     }
 
+    onKeyDown = event => {
+        console.log('this.state.isInputEmpty',this.state.isInputEmpty)
+        if(!this.state.isInputEmpty && event.keyCode === 13) this.sendUserData();
+    }
+
+    componentDidMount(){
+        document.addEventListener('keydown',this.onKeyDown);
+    }
+
     render() {
-        const btn = this.state.isInputEmpty ? <Btn onClickBtn={this.clickBtnHandler} 
+        const btn = !this.state.isInputEmpty ? <Btn onClickBtn={this.sendUserData} 
                                                    type="forward"
                                                    txt="GO AHEAD"/> 
                                               : null;
