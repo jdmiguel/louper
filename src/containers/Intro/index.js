@@ -28,7 +28,6 @@ class Intro extends Component {
     }
 
     sendUserData = () => {
-        console.log('sendUserData');
         let userSelected = this.state.userSelected;
 
         this.setState({
@@ -53,7 +52,7 @@ class Intro extends Component {
             .then( result => {
                 storeInstance.setUserData( result.user )
                 userName = result.user.login;
-                console.log('userName: ',userName);
+                //console.log('userName: ',userName);
             })
             .catch( error => {
                 this.setState({
@@ -76,7 +75,6 @@ class Intro extends Component {
     }
 
     onKeyDown = event => {
-        console.log('this.state.isInputEmpty',this.state.isInputEmpty)
         if(!this.state.isInputEmpty && event.keyCode === 13) this.sendUserData();
     }
 

@@ -8,7 +8,7 @@ const clickBtnHandler = url => window.open(url,'_blank');
 
 const UserFollowing = () => {
     const data = storeInstance.getUserFollowing();
-    console.log('userFollowingData: ',data);
+    //console.log('userFollowingData: ',data);
 
     return (
         <Grid container className='userFollowingContainer' spacing={16}>

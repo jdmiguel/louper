@@ -9,7 +9,7 @@ const clickListHandler = url => window.open(url,'_blank');
 
 const UserRepos = props => {
     const data = storeInstance.getUserRepos();
-    console.log('userRepos: ',data);
+    //console.log('userRepos: ',data);
     
     return (
         <div className='userReposContainer'>

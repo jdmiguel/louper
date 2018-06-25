@@ -22,8 +22,10 @@
 .userDataContainer h1{
     font-size: 2em;
     margin: 10px 0 7px;
-    line-height: 1;
+    line-height: 1.5;
     font-weight: 500;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 .userDataContainer h2{
