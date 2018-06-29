@@ -2,9 +2,9 @@ import React from 'react';
 import GithubIcon from '../GithubIcon';
 import './styles.css';
 
-const Subtitle = (props) => (
+const Subtitle = ({txt}) => (
     <div className='subtitleContainer'>
-        <h2>{props.txt}</h2>
+        <h2>{txt}</h2>
         <GithubIcon/>
     </div>
 );

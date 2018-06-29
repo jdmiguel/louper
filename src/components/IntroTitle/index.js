@@ -1,9 +1,9 @@
 import React from 'react';
 import './styles.css';
 
-const Title = (props) => (
+const Title = ({txt}) => (
     <div className='titleContainer'>
-        <h1>{props.txt}</h1>
+        <h1>{txt}</h1>
     </div>
 );
 

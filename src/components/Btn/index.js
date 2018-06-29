@@ -3,11 +3,12 @@ import Button from '@material-ui/core/Button';
 import Icon from '@material-ui/core/Icon';
 import './styles.css';
 
-const Btn = (props) => (
-    <Button variant="contained" color="primary" className="button" onClick={props.onClickBtn}>
-        {props.txt}
-        <Icon className="rightIcon">{props.type}</Icon>
+const Btn = ({onClickBtn, txt, type}) => (
+    <Button variant="contained" color="primary" className="button" onClick={onClickBtn}>
+        {txt}
+        <Icon className="rightIcon">{type}</Icon>
     </Button>
 );
+
 
 export default Btn;

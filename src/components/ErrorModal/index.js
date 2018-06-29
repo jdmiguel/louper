@@ -6,15 +6,15 @@ import Btn from '../Btn';
 import './styles.css';
 
 
-const ErrorModal = (props) => (
-    <Dialog open={props.isErrorModalOpen} 
+const ErrorModal = ({isErrorModalOpen,clickErrorModalBtnHandler}) => (
+    <Dialog open={isErrorModalOpen} 
             aria-labelledby='simple-dialog-title'
             className='errorModal'>
                 <DialogTitle>Please, choose an available user</DialogTitle>
                 <DialogContent className='errorContentModal'>
                     <Btn type='restore'
                          txt='TRY AGAIN'
-                         onClickBtn={props.clickErrorModalBtnHandler}/>
+                         onClickBtn={clickErrorModalBtnHandler}/>
                 </DialogContent>
     </Dialog>
 );

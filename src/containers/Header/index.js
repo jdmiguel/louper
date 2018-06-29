@@ -8,7 +8,7 @@ const txt = {
     subtitle: 'Finder'
 }
 
-const Header = (props) => (
+const Header = () => (
     <div className='header'>
         <Title txt={txt.title}/>
         <Subtitle txt={txt.subtitle}/> 
