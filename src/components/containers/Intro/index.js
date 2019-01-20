@@ -42,7 +42,7 @@ class Intro extends Component {
         this.fetchData(userSelected);
     }
 
-    errorModalCloseHandler = () => {
+    errorModalHandler = () => {
         const inputHTML = document.querySelector('input');
         
         inputHTML.value = '';
@@ -85,7 +85,9 @@ class Intro extends Component {
     }
 
     onKeyDown = event => {
-        if(!this.state.isInputEmpty && event.keyCode === 13) this.sendUserData();
+        const { isInputEmpty } = this.props;
+
+        if(!isInputEmpty && event.keyCode === 13) this.sendUserData();
     }
 
     componentDidMount(){
@@ -111,8 +113,8 @@ class Intro extends Component {
                             txt="GO AHEAD"/> }
                     { isLoaderVisible && <Loader/> }
                     { onErrorModal && 
-                            <ErrorModal isErrorModalOpen={this.state.onErrorModal}
-                                        clickErrorModalBtnHandler={this.errorModalCloseHandler}
+                            <ErrorModal isErrorModalOpen={onErrorModal}
+                                onClick={this.errorModalHandler}
                             /> }
                 </div>
             </Fragment>

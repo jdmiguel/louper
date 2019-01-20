@@ -1,12 +1,12 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import Dialog from '@material-ui/core/Dialog';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import DialogContent from '@material-ui/core/DialogContent';
 import Btn from '../Btn';
 import './styles.css';
 
-
-const ErrorModal = ({isErrorModalOpen,clickErrorModalBtnHandler}) => (
+const ErrorModal = ({isErrorModalOpen,onClick}) => (
     <Dialog open={isErrorModalOpen} 
             aria-labelledby='simple-dialog-title'
             className='errorModal'>
@@ -14,9 +14,14 @@ const ErrorModal = ({isErrorModalOpen,clickErrorModalBtnHandler}) => (
                 <DialogContent className='errorContentModal'>
                     <Btn type='restore'
                          txt='TRY AGAIN'
-                         onClickBtn={clickErrorModalBtnHandler}/>
+                         onClick={onClick}/>
                 </DialogContent>
     </Dialog>
 );
+
+ErrorModal.propTypes = {
+    isErrorModalOpen: PropTypes.bool.isRequired,
+    onClick: PropTypes.func.isRequired
+};
 
 export default ErrorModal;
