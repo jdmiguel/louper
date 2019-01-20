@@ -4,8 +4,6 @@ import Grid from '@material-ui/core/Grid';
 import Btn from '../../core/Btn';
 import './styles.css';
 
-const clickBtnHandler = url => window.open(url,'_blank');
-
 const UserFollowing = ({ data }) => (
         <Grid container className='userFollowingContainer' spacing={16}>
             {

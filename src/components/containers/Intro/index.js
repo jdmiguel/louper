@@ -1,7 +1,8 @@
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
 import PropTypes from 'prop-types';
 import Loader from '../../core/Loader';
 import Header from '../Header';
+import GithubCorner from '../../core/GithubCorner/';
 import Input from '../../core/IntroInput';
 import Btn from '../../core/Btn';
 import ErrorModal from '../../core/ErrorModal';
@@ -99,19 +100,22 @@ class Intro extends Component {
         const { isInputEmpty, isLoaderVisible, onErrorModal } = this.state;
 
         return (
-            <div className='intro'>
-                <Header/>
-                <Input changeUserHandler={this.getInputValue} />
-                { !isInputEmpty && 
-                    <Btn onClick={this.sendUserData} 
-                        type="forward"
-                        txt="GO AHEAD"/> }
-                { isLoaderVisible && <Loader/> }
-                { onErrorModal && 
-                        <ErrorModal isErrorModalOpen={this.state.onErrorModal}
-                                    clickErrorModalBtnHandler={this.errorModalCloseHandler}
-                        /> }
-            </div>
+            <Fragment>
+                <GithubCorner />
+                <div className='intro'>
+                    <Header/>
+                    <Input changeUserHandler={this.getInputValue} />
+                    { !isInputEmpty && 
+                        <Btn onClick={this.sendUserData} 
+                            type="forward"
+                            txt="GO AHEAD"/> }
+                    { isLoaderVisible && <Loader/> }
+                    { onErrorModal && 
+                            <ErrorModal isErrorModalOpen={this.state.onErrorModal}
+                                        clickErrorModalBtnHandler={this.errorModalCloseHandler}
+                            /> }
+                </div>
+            </Fragment>
         );
     }
 }
