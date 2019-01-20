@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
-import Loader from '../../components/Loader';
+import Loader from '../../core/Loader';
 import Header from '../Header';
-import Input from '../../components/IntroInput';
-import Btn from '../../components/Btn';
-import ErrorModal from '../../components/ErrorModal';
-import { getRepos,getUserData,getUserFollowing } from '../../controllers/github-api';
-import storeInstance from '../../store/Store';
+import Input from '../../core/IntroInput';
+import Btn from '../../core/Btn';
+import ErrorModal from '../../core/ErrorModal';
+import { getRepos,getUserData,getUserFollowing } from '../../../services/github-api';
+import storeInstance from '../../../store/Store';
 import { observer } from 'mobx-react';
 import './styles.css';
 

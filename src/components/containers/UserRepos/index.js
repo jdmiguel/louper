@@ -1,5 +1,5 @@
 import React from 'react';
-import storeInstance from '../../store/Store';
+import storeInstance from '../../../store/Store';
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
 import Folder from '@material-ui/icons/Folder';

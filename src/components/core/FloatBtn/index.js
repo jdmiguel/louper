@@ -9,7 +9,7 @@ const FloatBtn = ({clickHandler}) => {
                 color="secondary"
                 className='floatBtn'
                 onClick={clickHandler}>
-            <Icon>arrow_back_icon</Icon>
+            <Icon>search</Icon>
         </Button>
     )
 };

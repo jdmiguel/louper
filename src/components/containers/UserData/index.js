@@ -1,10 +1,10 @@
 import React from 'react';
-import storeInstance from '../../store/Store';
+import storeInstance from '../../../store/Store';
 import IconEmail from '@material-ui/icons/Email';
 import IconHome from '@material-ui/icons/Home';
 import IconLink from '@material-ui/icons/Link';
 import IconCompany from '@material-ui/icons/Contacts';
-import Btn from '../../components/Btn';
+import Btn from '../../core/Btn';
 import './styles.css';
 
 const clickBtnHandler = url => window.open(url,'_blank');
@@ -13,8 +13,8 @@ const UserData = () => {
     const data = storeInstance.getUserData();
     const location = data.location ? <p><IconHome className='userDataIcon'/>{data.location}</p> : null;
     const company = data.company ? <p><IconCompany className='userDataIcon'/>{data.company}</p> : null;
-    const email = data.email ? <p><IconEmail className='userDataIcon'/><a mailto={data.email} target='_blank'>{data.email}</a></p> : null;
-    const url = data.blog ? <p><IconLink className='userDataIcon'/><a href={data.blog} target='_blank'>{data.blog}</a></p> : null;
+    const email = data.email ? <p><IconEmail className='userDataIcon'/><a href="http.jdmiguel.com" rel="noopener noreferrer" mailto={data.email} target='_blank'>{data.email}</a></p> : null;
+    const url = data.blog ? <p><IconLink className='userDataIcon'/><a href={data.blog} rel="noopener noreferrer" target='_blank'>{data.blog}</a></p> : null;
 
     return (
         <div className='userDataContainer'>

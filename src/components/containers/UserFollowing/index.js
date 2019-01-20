@@ -1,7 +1,7 @@
 import React from 'react';
-import storeInstance from '../../store/Store';
+import storeInstance from '../../../store/Store';
 import Grid from '@material-ui/core/Grid';
-import Btn from '../../components/Btn';
+import Btn from '../../core/Btn';
 import './styles.css';
 
 const clickBtnHandler = url => window.open(url,'_blank');

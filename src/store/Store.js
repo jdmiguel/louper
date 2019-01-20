@@ -28,10 +28,6 @@ class Store{
         this.userData = data;
     }
 
-    getUserData(){
-        return this.userData;
-    }
-
     setUserRepos(data){
         this.userRepos = data;
     }

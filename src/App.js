@@ -1,11 +1,11 @@
 import React from 'react';
 import { HashRouter  as Router , Route } from "react-router-dom";
 import createHistory from 'history/createBrowserHistory';
-import Intro from './containers/Intro/';
-import Content from './containers/Content/';
-import UserData from './containers/UserData';
-import UserRepos from './containers/UserRepos';
-import UserFollowing from './containers/UserFollowing';
+import Intro from './components/containers/Intro/';
+import Content from './components/containers/Content/';
+import UserData from './components/containers/UserData';
+import UserRepos from './components/containers/UserRepos';
+import UserFollowing from './components/containers/UserFollowing';
 
 const history = createHistory();
 
