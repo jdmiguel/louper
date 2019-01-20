@@ -1,40 +1,76 @@
-import React from 'react';
-import { HashRouter  as Router , Route } from "react-router-dom";
-import createHistory from 'history/createBrowserHistory';
+import React, {Component, Fragment} from 'react';
 import Intro from './components/containers/Intro/';
 import Content from './components/containers/Content/';
-import UserData from './components/containers/UserData';
-import UserRepos from './components/containers/UserRepos';
-import UserFollowing from './components/containers/UserFollowing';
 
-const history = createHistory();
+class App extends Component{
+    constructor(props){
+        super(props);
+        this.state = {
+            userData: '',
+            userRepos: '',
+            userFollowing: '',
+            intro: true
+        }
+    }
 
-const App = () => (
-  <Router >
-    <div>
-      <Route history={history} 
-            exact 
-            path="/" 
-            component={Intro}
-      />
-      <Route history={history} 
-          path="/user" 
-          component={Content}
-      />
-      <Route history={history} 
-          path="/user/data" 
-          component={UserData}
-      />
-      <Route history={history} 
-          path="/user/repos" 
-          component={UserRepos}
-      />
-      <Route history={history} 
-          path="/user/following" 
-          component={UserFollowing}
-      />
-    </div>
-  </Router>
-);
+    setUserDataHandler = userData => {
+        this.setState({
+            userData
+        })
+    }
+
+    setUserReposHandler = userRepos => {
+        this.setState({
+            userRepos
+        })
+    }
+
+    setUserFollowingHandler = userFollowing => {
+        this.setState({
+            userFollowing
+        })
+    }
+
+    onIntroHandler = () => {
+        this.setState({
+            intro: true
+        })
+    }
+
+    outIntroHandler = () => {
+        this.setState({
+            intro: false
+        })
+    }
+
+    render(){
+        const { 
+                intro,
+                userData, 
+                userRepos, 
+                userFollowing
+            } = this.state;
+
+        return(
+            <Fragment>
+                { intro 
+                    ? <Intro 
+                        setUserExists={this.setUserExistsHandler}
+                        setUserData={this.setUserDataHandler}
+                        setUserRepos={this.setUserReposHandler}
+                        setUserFollowing={this.setUserFollowingHandler}
+                        outIntro={this.outIntroHandler}
+                        /> 
+                    : <Content 
+                        userData={userData}
+                        userRepos={userRepos}
+                        userFollowing={userFollowing}
+                        onIntro={this.onIntroHandler}
+                    />
+                }
+            </Fragment>
+        )
+    }
+}
 
 export default App;

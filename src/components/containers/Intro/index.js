@@ -1,25 +1,29 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import Loader from '../../core/Loader';
 import Header from '../Header';
 import Input from '../../core/IntroInput';
 import Btn from '../../core/Btn';
 import ErrorModal from '../../core/ErrorModal';
-import { getRepos,getUserData,getUserFollowing } from '../../../services/github-api';
-import storeInstance from '../../../store/Store';
-import { observer } from 'mobx-react';
+import { 
+    getRepos,
+    getUserData,
+    getUserFollowing } from '../../../services/github-api';
 import './styles.css';
 
 class Intro extends Component {
-
-    state = {
-        isInputEmpty: true,
-        userSelected: '',
-        isLoaderVisible: false,
-        onErrorModal: false
+    constructor(props){
+        super(props);
+        this.state = {
+            isInputEmpty: true,
+            userSelected: '',
+            isLoaderVisible: false,
+            onErrorModal: false
+        }
     }
 
     getInputValue = (e) => {
-        let isEmpty = e.target.value ? false : true;
+        const isEmpty = e.target.value ? false : true;
 
         this.setState({
             isInputEmpty: isEmpty,
@@ -28,7 +32,7 @@ class Intro extends Component {
     }
 
     sendUserData = () => {
-        let userSelected = this.state.userSelected;
+        const userSelected = this.state.userSelected;
 
         this.setState({
             isLoaderVisible: true
@@ -38,21 +42,23 @@ class Intro extends Component {
     }
 
     errorModalCloseHandler = () => {
-        this.setState({onErrorModal: false});
+        const inputHTML = document.querySelector('input');
         
-        let inputHTML = document.querySelector('input');
         inputHTML.value = '';
         inputHTML.focus();
+
+        this.setState({onErrorModal: false});
     }
 
     fetchData = async (user) => {
+        const { setUserData, setUserRepos, setUserFollowing } = this.props;
         let userName = '';
 
         getUserData(user)
             .then( result => {
-                storeInstance.setUserData( result.user )
+                setUserData( result.user )
                 userName = result.user.login;
-                //console.log('userName: ',userName);
+               // console.log('userName: ',userName);
             })
             .catch( error => {
                 this.setState({
@@ -64,14 +70,17 @@ class Intro extends Component {
             }
         );
 
-        await getRepos(user).then( result => storeInstance.setUserRepos( result) );
-        await getUserFollowing(userName).then( result => storeInstance.setUserFollowing( result) );
-        await this.entryApp();
+        await getRepos(user)
+                .then( result => setUserRepos( result) );
+        await getUserFollowing(userName)
+                .then( result => setUserFollowing( result) );
+        await this.goContent();
     }
 
-    entryApp = () => {
-        storeInstance.setUserExists();
-        this.props.history.push('/user/data');
+    goContent = () => {
+        const { outIntro } = this.props;
+        
+        outIntro();
     }
 
     onKeyDown = event => {
@@ -82,28 +91,36 @@ class Intro extends Component {
         document.addEventListener('keydown',this.onKeyDown);
     }
 
+    componentWillUnmount(){
+        document.removeEventListener('keydown',this.onKeyDown);
+    } 
+
     render() {
-        const btn = !this.state.isInputEmpty ? <Btn onClickBtn={this.sendUserData} 
-                                                   type="forward"
-                                                   txt="GO AHEAD"/> 
-                                              : null;
-
-        const loader = this.state.isLoaderVisible ? <Loader/> : null;
-
-        const errorModal = this.state.onErrorModal ? <ErrorModal isErrorModalOpen={this.state.onErrorModal}
-                                                                 clickErrorModalBtnHandler={this.errorModalCloseHandler}/> 
-                                                     : null;
+        const { isInputEmpty, isLoaderVisible, onErrorModal } = this.state;
 
         return (
             <div className='intro'>
                 <Header/>
                 <Input changeUserHandler={this.getInputValue} />
-                {btn}
-                {loader}
-                {errorModal}
+                { !isInputEmpty && 
+                    <Btn onClick={this.sendUserData} 
+                        type="forward"
+                        txt="GO AHEAD"/> }
+                { isLoaderVisible && <Loader/> }
+                { onErrorModal && 
+                        <ErrorModal isErrorModalOpen={this.state.onErrorModal}
+                                    clickErrorModalBtnHandler={this.errorModalCloseHandler}
+                        /> }
             </div>
         );
     }
 }
 
-export default observer(Intro);
+Intro.propTypes = {
+    setUserData: PropTypes.func.isRequired,
+    setUserRepos: PropTypes.func.isRequired,
+    setUserFollowing: PropTypes.func.isRequired,
+    outIntro: PropTypes.func.isRequired
+};
+
+export default Intro;

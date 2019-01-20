@@ -24,7 +24,15 @@
     align-items: center;
 }
 
-.userFollowingContainer h1{
+.userFollowingTxtContainer{
+    width: 170px;
+    height: 100px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+}
+
+.userFollowingTxtContainer h3{
     font-size: 1.5em;
     margin: 10px 0 7px;
     line-height: 1;
@@ -33,17 +41,9 @@
     text-overflow: ellipsis;
 }
 
-.userFollowingContainer button{
+.userFollowingTxtContainer button{
     width: 90%;
-    font-size: .8em;
-}
-
-.userFollowingTxtContainer{
-    width: 170px;
-    height: 100px;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-around;
+    font-size: .7em;
 }
 
 .subUserFollowingInfo{

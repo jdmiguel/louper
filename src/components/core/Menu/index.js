@@ -1,25 +1,34 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import Paper from '@material-ui/core/Paper';
 import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
 import './styles.css';
 
 class Menu extends Component {
-    state = {
-        value: 0,
-    };
+    constructor(props){
+        super(props);
 
-    handleChange = (event, value) => {
+        this.state = {
+            value: 0
+        }
+    }
+
+    changeHandler = (event, value) => {
+        const { onClick } = this.props;
+        
+        onClick(value);
         this.setState({ value });
-        this.props.onClickMenu(value);
     };
 
     render() {
+        const { value } = this.state;
+
         return (
             <div className='menu'>
                 <Paper>
-                    <Tabs value={this.state.value}
-                          onChange={this.handleChange}
+                    <Tabs value={value}
+                          onChange={this.changeHandler}
                           indicatorColor="primary"
                           textColor="primary"
                           className="tabs"
@@ -33,5 +42,9 @@ class Menu extends Component {
         );
     }
 }
+
+Menu.propTypes = {
+    onClick: PropTypes.func.isRequired
+};
 
 export default Menu;
