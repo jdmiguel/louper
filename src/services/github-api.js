@@ -19,6 +19,11 @@ export const getUserData = (username) => {
     }));
 }
 
+export const getUserFollowers = (username) => {
+  const url = `${BASE_URL}/users/${username}/followers?per_page=250`;
+  return axios.get(url).then(response => response.data);
+}
+
 export const getUserFollowing = (username) => {
   const url = `${BASE_URL}/users/${username}/following?per_page=250`;
   return axios.get(url).then(response => response.data);

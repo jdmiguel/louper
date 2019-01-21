@@ -9,6 +9,7 @@ import ErrorModal from '../../core/ErrorModal';
 import { 
     getRepos,
     getUserData,
+    getUserFollowers,
     getUserFollowing } from '../../../services/github-api';
 import './styles.css';
 
@@ -52,7 +53,10 @@ class Intro extends Component {
     }
 
     fetchData = async (user) => {
-        const { setUserData, setUserRepos, setUserFollowing } = this.props;
+        const { setUserData, 
+            setUserRepos, 
+            setUserFollowers, 
+            setUserFollowing } = this.props;
         let userName = '';
 
         getUserData(user)
@@ -72,9 +76,11 @@ class Intro extends Component {
         );
 
         await getRepos(user)
-                .then( result => setUserRepos( result) );
+                .then( result => setUserRepos(result) );
+        await getUserFollowers(userName)
+                .then( result => setUserFollowers(result))        
         await getUserFollowing(userName)
-                .then( result => setUserFollowing( result) );
+                .then( result => setUserFollowing(result) );
         await this.goContent();
     }
 
@@ -125,6 +131,7 @@ class Intro extends Component {
 Intro.propTypes = {
     setUserData: PropTypes.func.isRequired,
     setUserRepos: PropTypes.func.isRequired,
+    setUserFollowers: PropTypes.func.isRequired,
     setUserFollowing: PropTypes.func.isRequired,
     outIntro: PropTypes.func.isRequired
 };

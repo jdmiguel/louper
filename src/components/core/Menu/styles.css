@@ -16,3 +16,10 @@
 .menu .tabs > div > div > div{
     flex-wrap: wrap;
 }
+
+@media (max-width: 468px) {
+    .MuiTab-label-128, .MuiTab-labelContainer-127{
+        display: none;
+    }
+}
+

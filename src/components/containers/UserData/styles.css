@@ -1,5 +1,5 @@
 .userDataContainer{
-    margin: 30px auto 0;
+    margin: 10px auto 0;
     padding: 25px;
     display: flex;
     flex-direction: column;
@@ -61,7 +61,7 @@
 
 .txtContainer{
     width: 200px;
-    margin-top: 18px;
+    margin-top: 10px;
 }
 
 .subUserInfo{

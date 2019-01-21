@@ -3,12 +3,14 @@ import PropTypes from 'prop-types';
 import { 
     userDataModel, 
     repoDataModel, 
-    followingDataModel } from '../../../utils/models';
+    followingDataModel,
+    followersDataModel } from '../../../utils/models';
 import Menu from '../../core/Menu';
 import FloatBtn from '../../core/FloatBtn';
 import UserData from '../UserData';
 import UserRepos from '../UserRepos';
 import UserFollowing from '../UserFollowing';
+import UserFollowers from '../UserFollowers';
 import './styles.css';
 class Content extends Component {
     constructor(props){
@@ -16,7 +18,8 @@ class Content extends Component {
         this.state = {
             isUserDataActive: true,
             isUserReposActive: false,
-            isUserFollowingActive: false
+            isUserFollowingActive: false,
+            isUserFollowersActive: false
         }
     }
 
@@ -27,21 +30,32 @@ class Content extends Component {
                 this.setState({
                     isUserDataActive: true,
                     isUserReposActive: false,
-                    isUserFollowingActive: false
+                    isUserFollowingActive: false,
+                    isUserFollowersActive: false
                 });
             break;
             case 1:
                 this.setState({
                     isUserDataActive: false,
                     isUserReposActive: true,
-                    isUserFollowingActive: false
+                    isUserFollowingActive: false,
+                    isUserFollowersActive: false
                 });
             break;
             case 2:
                 this.setState({
                     isUserDataActive: false,
                     isUserReposActive: false,
-                    isUserFollowingActive: true
+                    isUserFollowingActive: true,
+                    isUserFollowersActive: false
+                });
+            break;
+            case 3:
+                this.setState({
+                    isUserDataActive: false,
+                    isUserReposActive: false,
+                    isUserFollowingActive: false,
+                    isUserFollowersActive: true
                 });
             break;
         }
@@ -54,8 +68,14 @@ class Content extends Component {
     }
 
     render(){
-        const { isUserDataActive, isUserReposActive, isUserFollowingActive } = this.state;
-        const { userData, userRepos, userFollowing } = this.props;
+        const { isUserDataActive, 
+            isUserReposActive,  
+            isUserFollowingActive,
+            isUserFollowersActive } = this.state;
+        const { userData, 
+            userRepos, 
+            userFollowing,
+            userFollowers } = this.props;
 
         return(
             <Fragment>
@@ -64,6 +84,7 @@ class Content extends Component {
                 { isUserDataActive && <UserData data={userData}/> }
                 { isUserReposActive && <UserRepos data={userRepos}/> }
                 { isUserFollowingActive && <UserFollowing data={userFollowing}/> }
+                { isUserFollowersActive && <UserFollowers data={userFollowers}/> }
             </Fragment>
         )
     }
@@ -73,7 +94,8 @@ Content.propTypes = {
     userData: userDataModel,
     userRepos: repoDataModel,
     userFollowing: followingDataModel,
-    onIntro: PropTypes.func.isRequired
+    userFollowers: followersDataModel,
+    onIntro: PropTypes.func.isRequired,
 };
 
 export default Content;

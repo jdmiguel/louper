@@ -8,6 +8,7 @@ class App extends Component{
         this.state = {
             userData: '',
             userRepos: '',
+            userFollowers: '',
             userFollowing: '',
             intro: true
         }
@@ -22,6 +23,12 @@ class App extends Component{
     setUserReposHandler = userRepos => {
         this.setState({
             userRepos
+        })
+    }
+
+    setUserFollowersHandler = userFollowers => {
+        this.setState({
+            userFollowers
         })
     }
 
@@ -48,6 +55,7 @@ class App extends Component{
                 intro,
                 userData, 
                 userRepos, 
+                userFollowers,
                 userFollowing
             } = this.state;
 
@@ -58,12 +66,14 @@ class App extends Component{
                         setUserExists={this.setUserExistsHandler}
                         setUserData={this.setUserDataHandler}
                         setUserRepos={this.setUserReposHandler}
+                        setUserFollowers={this.setUserFollowersHandler}
                         setUserFollowing={this.setUserFollowingHandler}
                         outIntro={this.outIntroHandler}
                         /> 
                     : <Content 
                         userData={userData}
                         userRepos={userRepos}
+                        userFollowers={userFollowers}
                         userFollowing={userFollowing}
                         onIntro={this.onIntroHandler}
                     />
