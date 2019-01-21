@@ -43,6 +43,24 @@ h2{
     opacity: 0;
 }
 
+@media (max-width: 728px) and (orientation: landscape) {
+    .header{
+        margin: 0 0 40px;
+    }
+
+    h1{
+        font-size: 5.7em;
+    }
+    
+    .subtitleContainer{
+        margin: 24px 0 0;
+    }
+    
+    h2{
+        font-size: 3.5em;
+    }
+}
+
 @keyframes introTitle {
     from { transform: translateY(50px) ; opacity: 0;}
     to { transform: translateY(0px) ; opacity: 1;}
