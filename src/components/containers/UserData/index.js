@@ -14,7 +14,6 @@ const UserData =  ({ data }) => {
         bio, 
         email, 
         location, 
-        url, 
         blog, 
         company, 
         html_url
@@ -47,7 +46,7 @@ const UserData =  ({ data }) => {
                             <IconHome className='userDataIcon'/> {location}
                         </p>
                     }
-                    { url && 
+                    { blog && 
                         <p>
                             <IconLink className='userDataIcon'/>
                             <a 
