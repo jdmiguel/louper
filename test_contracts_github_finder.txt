@@ -3,6 +3,7 @@ INTRO CONTAINER:
 - Render Header component
 - Render GithubCorner component
 - Render IntroInput component
+- Receive props expected
 - If isInputEmpty state is false, Btn component is not renderer
 - If isInputEmpty state is true, Btn component is renderer
 - If isLoaderVisible state is false, Loader component is not renderer

@@ -109,10 +109,10 @@ class Intro extends Component {
 
         return (
             <Fragment>
-                <GithubCorner data-test="component-githubCorner"/>
-                <div className='intro' data-test="container-intro">
-                    <Header data-test="component-header"/>
-                    <Input data-test="component-input" 
+                <GithubCorner data-test="intro-githubCorner"/>
+                <div className='intro' data-test="intro-container">
+                    <Header data-test="intro-header"/>
+                    <Input data-test="intro-input" 
                         changeUserHandler={this.getInputValue} />
                     { !isInputEmpty && 
                         <Btn onClick={this.sendUserData} 

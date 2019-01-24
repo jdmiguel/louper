@@ -4,6 +4,7 @@ import { shallow } from 'enzyme';
 import Intro from '.';
 
 import { findByTestAttr } from '../../../utils/testUtils';
+import { intro } from '../../../utils/testLiterals';
 
 /**
  * Factory function to create a shallowWrapper for the Counter Component
@@ -19,25 +20,25 @@ const setup = (props={}) => {
 
 test('renders div container without error', () => {
     const wrapper = setup();
-    const counterComponent = findByTestAttr(wrapper,'container-intro');
+    const counterComponent = findByTestAttr(wrapper, intro.container);
     expect(counterComponent.length).toBe(1);
 });
 
 test('renders githubCorner component without error', () => {
     const wrapper = setup();
-    const counterComponent = findByTestAttr(wrapper,'component-githubCorner');
+    const counterComponent = findByTestAttr(wrapper,intro.githubCorner);
     expect(counterComponent.length).toBe(1);
 });
 
 test('renders Header component without error', () => {
     const wrapper = setup();
-    const counterComponent = findByTestAttr(wrapper,'component-header');
+    const counterComponent = findByTestAttr(wrapper, intro.header);
     expect(counterComponent.length).toBe(1);
 });
 
 test('renders Input component without error', () => {
     const wrapper = setup();
-    const counterComponent = findByTestAttr(wrapper,'component-input');
+    const counterComponent = findByTestAttr(wrapper, intro.input);
     expect(counterComponent.length).toBe(1);
 });
 
