@@ -15,7 +15,7 @@ export const findByTestAttr = (wrapper, val) => wrapper.find(`[data-test="${val}
  * Create error with checkPropTypes and logic implemented in order to
  * check that that error is undefined
  * @function checkProps
- * @param {component} component - component whose properties are checked
+ * @param {JSX.Element} component - component whose properties are checked
  * @param {object} conformingProps - props checked
  */
 

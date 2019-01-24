@@ -20,28 +20,52 @@ const setup = (props={}) => {
 }
 
 test('renders div container without error', () => {
-    const wrapper = setup();
+    const wrapper = setup({ 
+        setUserData: PropTypes.func.isRequired,
+        setUserRepos: PropTypes.func.isRequired,
+        setUserFollowers: PropTypes.func.isRequired,
+        setUserFollowing: PropTypes.func.isRequired,
+        outIntro: PropTypes.func.isRequired
+    });
     const counterComponent = findByTestAttr(wrapper, intro.container);
 
     expect(counterComponent.length).toBe(1);
 });
 
 test('renders githubCorner component without error', () => {
-    const wrapper = setup();
+    const wrapper = setup({ 
+        setUserData: PropTypes.func.isRequired,
+        setUserRepos: PropTypes.func.isRequired,
+        setUserFollowers: PropTypes.func.isRequired,
+        setUserFollowing: PropTypes.func.isRequired,
+        outIntro: PropTypes.func.isRequired
+    });
     const counterComponent = findByTestAttr(wrapper,intro.githubCorner);
 
     expect(counterComponent.length).toBe(1);
 });
 
 test('renders Header component without error', () => {
-    const wrapper = setup();
+    const wrapper = setup({ 
+        setUserData: PropTypes.func.isRequired,
+        setUserRepos: PropTypes.func.isRequired,
+        setUserFollowers: PropTypes.func.isRequired,
+        setUserFollowing: PropTypes.func.isRequired,
+        outIntro: PropTypes.func.isRequired
+    });
     const counterComponent = findByTestAttr(wrapper, intro.header);
 
     expect(counterComponent.length).toBe(1);
 });
 
 test('renders Input component without error', () => {
-    const wrapper = setup();
+    const wrapper = setup({ 
+        setUserData: PropTypes.func.isRequired,
+        setUserRepos: PropTypes.func.isRequired,
+        setUserFollowers: PropTypes.func.isRequired,
+        setUserFollowing: PropTypes.func.isRequired,
+        outIntro: PropTypes.func.isRequired
+    });
     const counterComponent = findByTestAttr(wrapper, intro.input);
 
     expect(counterComponent.length).toBe(1);
