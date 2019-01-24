@@ -5,12 +5,12 @@ import {
     repoDataModel, 
     followingDataModel,
     followersDataModel } from '../../../utils/models';
-import Menu from '../../core/Menu';
-import FloatBtn from '../../core/FloatBtn';
+import Menu from '../Menu';
 import UserData from '../UserData';
 import UserRepos from '../UserRepos';
 import UserFollowing from '../UserFollowing';
 import UserFollowers from '../UserFollowers';
+import FloatBtn from '../../core/FloatBtn';
 import './styles.css';
 class Content extends Component {
     constructor(props){
