@@ -49,11 +49,11 @@ test('renders Input component without error', () => {
 
 test('does not warning with expected props', () => {
     const expectedProps = { 
-        setUserData: PropTypes.func,
-        setUserRepos: PropTypes.func,
-        setUserFollowers: PropTypes.func,
-        setUserFollowing: PropTypes.func,
-        outIntro: PropTypes.func,
+        setUserData: PropTypes.func.isRequired,
+        setUserRepos: PropTypes.func.isRequired,
+        setUserFollowers: PropTypes.func.isRequired,
+        setUserFollowing: PropTypes.func.isRequired,
+        outIntro: PropTypes.func.isRequired
     }
 
     checkProps(Intro, expectedProps);
