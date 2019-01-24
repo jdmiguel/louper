@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import Loader from '../../core/Loader';
 import Header from '../Header';
 import GithubCorner from '../../core/GithubCorner/';
-import Input from '../../core/IntroInput';
+import Input from '../../core/Input';
 import Btn from '../../core/Btn';
 import ErrorModal from '../../core/ErrorModal';
 import { 
@@ -109,10 +109,11 @@ class Intro extends Component {
 
         return (
             <Fragment>
-                <GithubCorner />
-                <div className='intro'>
-                    <Header/>
-                    <Input changeUserHandler={this.getInputValue} />
+                <GithubCorner data-test="component-githubCorner"/>
+                <div className='intro' data-test="container-intro">
+                    <Header data-test="component-header"/>
+                    <Input data-test="component-input" 
+                        changeUserHandler={this.getInputValue} />
                     { !isInputEmpty && 
                         <Btn onClick={this.sendUserData} 
                             type="forward"
@@ -129,11 +130,11 @@ class Intro extends Component {
 }
 
 Intro.propTypes = {
-    setUserData: PropTypes.func.isRequired,
-    setUserRepos: PropTypes.func.isRequired,
-    setUserFollowers: PropTypes.func.isRequired,
-    setUserFollowing: PropTypes.func.isRequired,
-    outIntro: PropTypes.func.isRequired
+    setUserData: PropTypes.func,
+    setUserRepos: PropTypes.func,
+    setUserFollowers: PropTypes.func,
+    setUserFollowing: PropTypes.func,
+    outIntro: PropTypes.func
 };
 
 export default Intro;
