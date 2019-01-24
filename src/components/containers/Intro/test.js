@@ -1,12 +1,9 @@
 import React from 'react';
-import Enzyme, { shallow } from 'enzyme';
-import EnzymeAdapter from 'enzyme-adapter-react-16';
+import { shallow } from 'enzyme';
 
 import Intro from '.';
 
 import { findByTestAttr } from '../../../utils/testUtils';
-
-Enzyme.configure( {adapter: new EnzymeAdapter()} );
 
 /**
  * Factory function to create a shallowWrapper for the Counter Component
