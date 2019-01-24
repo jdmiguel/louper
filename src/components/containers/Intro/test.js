@@ -1,9 +1,10 @@
 import React from 'react';
 import { shallow } from 'enzyme';
+import PropTypes from 'prop-types';
 
 import Intro from '.';
 
-import { findByTestAttr } from '../../../utils/testUtils';
+import { findByTestAttr, checkProps } from '../../../utils/testUtils';
 import { intro } from '../../../utils/testLiterals';
 
 /**
@@ -21,25 +22,41 @@ const setup = (props={}) => {
 test('renders div container without error', () => {
     const wrapper = setup();
     const counterComponent = findByTestAttr(wrapper, intro.container);
+
     expect(counterComponent.length).toBe(1);
 });
 
 test('renders githubCorner component without error', () => {
     const wrapper = setup();
     const counterComponent = findByTestAttr(wrapper,intro.githubCorner);
+
     expect(counterComponent.length).toBe(1);
 });
 
 test('renders Header component without error', () => {
     const wrapper = setup();
     const counterComponent = findByTestAttr(wrapper, intro.header);
+
     expect(counterComponent.length).toBe(1);
 });
 
 test('renders Input component without error', () => {
     const wrapper = setup();
     const counterComponent = findByTestAttr(wrapper, intro.input);
+
     expect(counterComponent.length).toBe(1);
+});
+
+test('does not warning with expected props', () => {
+    const expectedProps = { 
+        setUserData: PropTypes.func,
+        setUserRepos: PropTypes.func,
+        setUserFollowers: PropTypes.func,
+        setUserFollowing: PropTypes.func,
+        outIntro: PropTypes.func,
+    }
+
+    checkProps(Intro, expectedProps);
 });
 
 

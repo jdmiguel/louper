@@ -130,11 +130,11 @@ class Intro extends Component {
 }
 
 Intro.propTypes = {
-    setUserData: PropTypes.func,
-    setUserRepos: PropTypes.func,
-    setUserFollowers: PropTypes.func,
-    setUserFollowing: PropTypes.func,
-    outIntro: PropTypes.func
+    setUserData: PropTypes.func.isRequired,
+    setUserRepos: PropTypes.func.isRequired,
+    setUserFollowers: PropTypes.func.isRequired,
+    setUserFollowing: PropTypes.func.isRequired,
+    outIntro: PropTypes.func.isRequired
 };
 
 export default Intro;
