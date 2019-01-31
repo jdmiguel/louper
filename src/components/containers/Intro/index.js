@@ -25,11 +25,12 @@ class Intro extends Component {
     }
 
     getInputValue = (e) => {
-        const isEmpty = e.target.value ? false : true;
+        const value = e.target.value;
+        const isEmpty = !value;
 
         this.setState({
             isInputEmpty: isEmpty,
-            userSelected: e.target.value
+            userSelected: value
         });
     }
 
@@ -115,12 +116,14 @@ class Intro extends Component {
                     <Input data-test="intro-input" 
                         changeUserHandler={this.getInputValue} />
                     { !isInputEmpty && 
-                        <Btn onClick={this.sendUserData} 
+                        <Btn data-test="intro-btn"
+                            onClick={this.sendUserData} 
                             type="forward"
                             txt="GO AHEAD"/> }
-                    { isLoaderVisible && <Loader/> }
+                    { isLoaderVisible && <Loader data-test="intro-loader"/> }
                     { onErrorModal && 
-                            <ErrorModal isErrorModalOpen={onErrorModal}
+                            <ErrorModal data-test="intro-errorModal"
+                                isErrorModalOpen={onErrorModal}
                                 onClick={this.errorModalHandler}
                             /> }
                 </div>

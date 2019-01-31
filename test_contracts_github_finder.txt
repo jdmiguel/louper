@@ -4,12 +4,12 @@ INTRO CONTAINER:
 - Render GithubCorner component
 - Render IntroInput component
 - Receive props expected
-- If isInputEmpty state is false, Btn component is not renderer
-- If isInputEmpty state is true, Btn component is renderer
-- If isLoaderVisible state is false, Loader component is not renderer
+- If isInputEmpty state is false, Btn component is renderer
+- If isInputEmpty state is true, Btn component is not renderer
 - If isLoaderVisible state is true, Loader component is renderer
-- If onErrorModal state is false, ErrorModal component is not renderer
+- If isLoaderVisible state is false, Loader component is not renderer
 - If onErrorModal state is true, ErrorModal component is renderer
+- If onErrorModal state is false, ErrorModal component is not renderer
 - If enter key is clicked, isLoaderVisible state is true
 - If Btn component is clicked, isLoaderVisible state is true
 
