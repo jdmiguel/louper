@@ -115,11 +115,13 @@ class Intro extends Component {
                     <Header data-test="intro-header"/>
                     <Input data-test="intro-input" 
                         changeUserHandler={this.getInputValue} />
+                    <div className='intro-btn-container'>    
                     { !isInputEmpty && 
                         <Btn data-test="intro-btn"
                             onClick={this.sendUserData} 
                             type="forward"
                             txt="GO AHEAD"/> }
+                    </div>        
                     { isLoaderVisible && <Loader data-test="intro-loader"/> }
                     { onErrorModal && 
                             <ErrorModal data-test="intro-errorModal"
