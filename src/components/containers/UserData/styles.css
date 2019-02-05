@@ -22,7 +22,7 @@
 .userDataContainer h1{
     font-size: 2em;
     margin: 10px 0 7px;
-    line-height: 1.5;
+    line-height: 1em;
     font-weight: 500;
     overflow: hidden;
     text-overflow: ellipsis;
@@ -31,7 +31,7 @@
 .userDataContainer h2{
     font-size: 1.2em;
     font-weight: 400;
-    line-height: 1.2;
+    line-height: .7em;
     margin: 0 0 15px 0;
 }
 
