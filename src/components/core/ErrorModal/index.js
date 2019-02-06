@@ -6,11 +6,11 @@ import DialogContent from '@material-ui/core/DialogContent';
 import Btn from '../Btn';
 import './styles.css';
 
-const ErrorModal = ({isErrorModalOpen,onClick}) => (
+const ErrorModal = ({isErrorModalOpen, msg, onClick}) => (
     <Dialog open={isErrorModalOpen} 
             aria-labelledby='simple-dialog-title'
             className='errorModal'>
-                <DialogTitle>Please, choose an available user</DialogTitle>
+                <DialogTitle>{msg}</DialogTitle>
                 <DialogContent className='errorContentModal'>
                     <Btn type='restore'
                          txt='TRY AGAIN'
@@ -21,7 +21,8 @@ const ErrorModal = ({isErrorModalOpen,onClick}) => (
 
 ErrorModal.propTypes = {
     isErrorModalOpen: PropTypes.bool.isRequired,
-    onClick: PropTypes.func.isRequired
+    onClick: PropTypes.func.isRequired,
+    msg: PropTypes.string.isRequired
 };
 
 export default ErrorModal;

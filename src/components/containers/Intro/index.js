@@ -10,7 +10,8 @@ import {
     getRepos,
     getUserData,
     getUserFollowers,
-    getUserFollowing } from '../../../services/github-api';
+    getUserFollowing } from '../../../services/github';
+import { errorLiterals } from '../../../utils/errorLiterals';   
 import './styles.css';
 
 class Intro extends Component {
@@ -20,6 +21,7 @@ class Intro extends Component {
             isInputEmpty: true,
             userSelected: '',
             isLoaderVisible: false,
+            errorMsg: '',
             onErrorModal: false
         }
     }
@@ -58,30 +60,44 @@ class Intro extends Component {
             setUserRepos, 
             setUserFollowers, 
             setUserFollowing } = this.props;
+        const { maximumRequest, unavailableUser } = errorLiterals; 
+
         let userName = '';
 
-        getUserData(user)
-            .then( result => {
-                setUserData( result.user )
-                userName = result.user.login;
-               // console.log('userName: ',userName);
+        await getUserData(user)
+            .then( response => {
+                setUserData( response )
+                userName = response.login;
             })
             .catch( error => {
+                let errorMsg = '';
+
+                console.log(error.code)
+
+                switch (error.code) {
+                    case 403:
+                        errorMsg = maximumRequest;
+                        break;
+                    case 404:
+                    default:
+                        errorMsg = unavailableUser;
+                        break;
+                }
+
                 this.setState({
                     isLoaderVisible: false,
-                    onErrorModal: true
+                    onErrorModal: true,
+                    errorMsg
                 });
-
-                console.log('error from getUserData in Intro', error);
             }
         );
 
         await getRepos(user)
-                .then( result => setUserRepos(result) );
+                .then( response => setUserRepos(response) );
         await getUserFollowers(userName)
-                .then( result => setUserFollowers(result))        
+                .then( response => setUserFollowers(response))        
         await getUserFollowing(userName)
-                .then( result => setUserFollowing(result) );
+                .then( response => setUserFollowing(response) );
         await this.goContent();
     }
 
@@ -106,7 +122,10 @@ class Intro extends Component {
     } 
 
     render() {
-        const { isInputEmpty, isLoaderVisible, onErrorModal } = this.state;
+        const { isInputEmpty, 
+                isLoaderVisible, 
+                onErrorModal, 
+                errorMsg } = this.state;
 
         return (
             <Fragment>
@@ -127,6 +146,7 @@ class Intro extends Component {
                             <ErrorModal data-test="intro-errorModal"
                                 isErrorModalOpen={onErrorModal}
                                 onClick={this.errorModalHandler}
+                                msg={errorMsg}
                             /> }
                 </div>
             </Fragment>
