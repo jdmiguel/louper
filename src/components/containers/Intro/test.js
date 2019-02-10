@@ -29,32 +29,40 @@ const setup = (props={}, state = null) => {
     return wrapper;
 }
 
-test('renders div container without error', () => {
-    const wrapper = setup();
-    const container = findByTestAttr(wrapper, intro.container);
+describe('No conditional rendered elements', () => {
+    let wrapper;
 
-    expect(container.length).toBe(1);
-});
+    beforeEach( () => {
+        wrapper = setup();
+    });
 
-test('renders githubCorner component without error', () => {
-    const wrapper = setup();
-    const githubCornerComponent = findByTestAttr(wrapper,intro.githubCorner);
-
-    expect(githubCornerComponent.length).toBe(1);
-});
-
-test('renders Header component without error', () => {
-    const wrapper = setup();
-    const headerComponent = findByTestAttr(wrapper, intro.header);
-
-    expect(headerComponent.length).toBe(1);
-});
-
-test('renders Input component without error', () => {
-    const wrapper = setup();
-    const inputComponent = findByTestAttr(wrapper, intro.input);
-
-    expect(inputComponent.length).toBe(1);
+    test('renders div container without error', () => {
+        const wrapper = setup();
+        const container = findByTestAttr(wrapper, intro.container);
+    
+        expect(container.length).toBe(1);
+    });
+    
+    test('renders githubCorner component without error', () => {
+        const wrapper = setup();
+        const githubCornerComponent = findByTestAttr(wrapper,intro.githubCorner);
+    
+        expect(githubCornerComponent.length).toBe(1);
+    });
+    
+    test('renders Header component without error', () => {
+        const wrapper = setup();
+        const headerComponent = findByTestAttr(wrapper, intro.header);
+    
+        expect(headerComponent.length).toBe(1);
+    });
+    
+    test('renders Input component without error', () => {
+        const wrapper = setup();
+        const inputComponent = findByTestAttr(wrapper, intro.input);
+    
+        expect(inputComponent.length).toBe(1);
+    });
 });
 
 test('does not warning with expected props', () => {
