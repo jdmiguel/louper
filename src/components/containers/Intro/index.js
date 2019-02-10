@@ -17,6 +17,7 @@ import './styles.css';
 class Intro extends Component {
     constructor(props){
         super(props);
+
         this.state = {
             isInputEmpty: true,
             userSelected: '',
@@ -37,7 +38,7 @@ class Intro extends Component {
     }
 
     sendUserData = () => {
-        const userSelected = this.state.userSelected;
+        const { userSelected } = this.state;
 
         this.setState({
             isLoaderVisible: true
@@ -107,19 +108,11 @@ class Intro extends Component {
         outIntro();
     }
 
-    onKeyDown = event => {
-        const { isInputEmpty } = this.props;
+    onKeyUpHandler = event => {
+        const { isInputEmpty } = this.state;
 
         if(!isInputEmpty && event.keyCode === 13) this.sendUserData();
     }
-
-    componentDidMount(){
-        document.addEventListener('keydown',this.onKeyDown);
-    }
-
-    componentWillUnmount(){
-        document.removeEventListener('keydown',this.onKeyDown);
-    } 
 
     render() {
         const { isInputEmpty, 
@@ -130,7 +123,9 @@ class Intro extends Component {
         return (
             <Fragment>
                 <GithubCorner data-test="intro-githubCorner"/>
-                <div className='intro' data-test="intro-container">
+                <div className='intro' 
+                    data-test="intro-container" 
+                    onKeyUp={this.onKeyUpHandler}>
                     <Header data-test="intro-header"/>
                     <Input data-test="intro-input" 
                         changeUserHandler={this.getInputValue} />
@@ -143,11 +138,11 @@ class Intro extends Component {
                     </div>        
                     { isLoaderVisible && <Loader data-test="intro-loader"/> }
                     { onErrorModal && 
-                            <ErrorModal data-test="intro-errorModal"
-                                isErrorModalOpen={onErrorModal}
-                                onClick={this.errorModalHandler}
-                                msg={errorMsg}
-                            /> }
+                        <ErrorModal data-test="intro-errorModal"
+                            isErrorModalOpen={onErrorModal}
+                            onClick={this.errorModalHandler}
+                            msg={errorMsg}
+                        /> }
                 </div>
             </Fragment>
         );

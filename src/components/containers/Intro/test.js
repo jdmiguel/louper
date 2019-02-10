@@ -6,7 +6,6 @@ import Intro from '.';
 
 import { findByTestAttr, checkProps } from '../../../utils/testUtils';
 import { intro } from '../../../utils/testLiterals';
-import ErrorModal from '../../core/ErrorModal';
 
 const defaultProps = { 
     setUserData: PropTypes.func.isRequired,
@@ -32,30 +31,30 @@ const setup = (props={}, state = null) => {
 
 test('renders div container without error', () => {
     const wrapper = setup();
-    const counterComponent = findByTestAttr(wrapper, intro.container);
+    const container = findByTestAttr(wrapper, intro.container);
 
-    expect(counterComponent.length).toBe(1);
+    expect(container.length).toBe(1);
 });
 
 test('renders githubCorner component without error', () => {
     const wrapper = setup();
-    const counterComponent = findByTestAttr(wrapper,intro.githubCorner);
+    const githubCornerComponent = findByTestAttr(wrapper,intro.githubCorner);
 
-    expect(counterComponent.length).toBe(1);
+    expect(githubCornerComponent.length).toBe(1);
 });
 
 test('renders Header component without error', () => {
     const wrapper = setup();
-    const counterComponent = findByTestAttr(wrapper, intro.header);
+    const headerComponent = findByTestAttr(wrapper, intro.header);
 
-    expect(counterComponent.length).toBe(1);
+    expect(headerComponent.length).toBe(1);
 });
 
 test('renders Input component without error', () => {
     const wrapper = setup();
-    const counterComponent = findByTestAttr(wrapper, intro.input);
+    const inputComponent = findByTestAttr(wrapper, intro.input);
 
-    expect(counterComponent.length).toBe(1);
+    expect(inputComponent.length).toBe(1);
 });
 
 test('does not warning with expected props', () => {
@@ -89,33 +88,47 @@ test('Btn component is not rendered when isInputEmpty state is true', () => {
 test('Loader component is rendered when isLoaderVisible state is true', () => {
     const isLoaderVisible = true;
     const wrapper = setup(null,{ isLoaderVisible });
-    const btnComponent = findByTestAttr(wrapper, intro.loader);
+    const loaderComponent = findByTestAttr(wrapper, intro.loader);
 
-    expect(btnComponent.length).toBe(1);
+    expect(loaderComponent.length).toBe(1);
 });
 
 test('Loader component is not rendered when isLoaderVisible state is false', () => {
     const isLoaderVisible = false;
     const wrapper = setup(null,{ isLoaderVisible });
-    const btnComponent = findByTestAttr(wrapper, intro.loader);
+    const loaderComponent = findByTestAttr(wrapper, intro.loader);
 
-    expect(btnComponent.length).toBe(0);
+    expect(loaderComponent.length).toBe(0);
 });
 
 test('ErrorModal component is rendered when onErrorModal state is true', () => {
     const onErrorModal = true;
     const wrapper = setup(null,{ onErrorModal });
-    const btnComponent = findByTestAttr(wrapper, intro.errorModal);
+    const errorModalComponent = findByTestAttr(wrapper, intro.errorModal);
 
-    expect(btnComponent.length).toBe(1);
+    expect(errorModalComponent.length).toBe(1);
 });
 
 test('ErrorModal component is not rendered when onErrorModal state is false', () => {
     const onErrorModal = false;
     const wrapper = setup(null,{ onErrorModal });
-    const btnComponent = findByTestAttr(wrapper, intro.errorModal);
+    const errorModalComponent = findByTestAttr(wrapper, intro.errorModal);
 
-    expect(btnComponent.length).toBe(0);
+    expect(errorModalComponent.length).toBe(0);
+});
+
+test('isLoaderVisible state is true when btn is clicked', () => {
+    const isInputEmpty = false;
+    const isLoaderVisible = false;
+    const wrapper = setup(null,{ isInputEmpty, isLoaderVisible });
+
+    const btnComponent = findByTestAttr(wrapper, intro.btn);
+    btnComponent.simulate('click');
+    
+    wrapper.setState({ isLoaderVisible: true }, () => {
+        wrapper.update();
+        expect(wrapper.state('isLoaderVisible')).toBeTruthy();
+    });
 });
 
 
