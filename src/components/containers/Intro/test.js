@@ -37,28 +37,24 @@ describe('No conditional rendered elements', () => {
     });
 
     test('renders div container without error', () => {
-        const wrapper = setup();
         const container = findByTestAttr(wrapper, intro.container);
     
         expect(container.length).toBe(1);
     });
     
     test('renders githubCorner component without error', () => {
-        const wrapper = setup();
         const githubCornerComponent = findByTestAttr(wrapper,intro.githubCorner);
     
         expect(githubCornerComponent.length).toBe(1);
     });
     
     test('renders Header component without error', () => {
-        const wrapper = setup();
         const headerComponent = findByTestAttr(wrapper, intro.header);
     
         expect(headerComponent.length).toBe(1);
     });
     
     test('renders Input component without error', () => {
-        const wrapper = setup();
         const inputComponent = findByTestAttr(wrapper, intro.input);
     
         expect(inputComponent.length).toBe(1);
@@ -77,17 +73,17 @@ test('does not warning with expected props', () => {
     checkProps(Intro, expectedProps);
 });
 
-test('Btn component is rendered when isInputEmpty state is false', () => {
-    const isInputEmpty = false;
-    const wrapper = setup(null,{ isInputEmpty });
+test('Btn component is rendered when userSelected state is not empty', () => {
+    const userSelected = 'prueba';
+    const wrapper = setup(null,{ userSelected });
     const btnComponent = findByTestAttr(wrapper, intro.btn);
 
     expect(btnComponent.length).toBe(1);
 });
 
-test('Btn component is not rendered when isInputEmpty state is true', () => {
-    const isInputEmpty = true;
-    const wrapper = setup(null,{ isInputEmpty });
+test('Btn component is not rendered when userSelected state is empty', () => {
+    const userSelected = '';
+    const wrapper = setup(null,{ userSelected });
     const btnComponent = findByTestAttr(wrapper, intro.btn);
 
     expect(btnComponent.length).toBe(0);
@@ -125,18 +121,16 @@ test('ErrorModal component is not rendered when onErrorModal state is false', ()
     expect(errorModalComponent.length).toBe(0);
 });
 
-test('isLoaderVisible state is true when btn is clicked', () => {
-    const isInputEmpty = false;
-    const isLoaderVisible = false;
-    const wrapper = setup(null,{ isInputEmpty, isLoaderVisible });
-
+test('Loader component is rendered when btn is clicked', () => {
+    const userSelected = 'prueba';
+    const wrapper = setup(null,{userSelected});
+    
     const btnComponent = findByTestAttr(wrapper, intro.btn);
     btnComponent.simulate('click');
+    wrapper.update();
     
-    wrapper.setState({ isLoaderVisible: true }, () => {
-        wrapper.update();
-        expect(wrapper.state('isLoaderVisible')).toBeTruthy();
-    });
+    const loaderComponent = findByTestAttr(wrapper, intro.loader);
+    expect(loaderComponent.length).toBe(1);
 });
 
 

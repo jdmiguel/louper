@@ -19,7 +19,6 @@ class Intro extends Component {
         super(props);
 
         this.state = {
-            isInputEmpty: true,
             userSelected: '',
             isLoaderVisible: false,
             errorMsg: '',
@@ -29,10 +28,8 @@ class Intro extends Component {
 
     getInputValue = (e) => {
         const value = e.target.value;
-        const isEmpty = !value;
 
         this.setState({
-            isInputEmpty: isEmpty,
             userSelected: value
         });
     }
@@ -48,11 +45,6 @@ class Intro extends Component {
     }
 
     errorModalHandler = () => {
-        const inputHTML = document.querySelector('input');
-        
-        inputHTML.value = '';
-        inputHTML.focus();
-
         this.setState({onErrorModal: false});
     }
 
@@ -109,15 +101,15 @@ class Intro extends Component {
     }
 
     onKeyUpHandler = event => {
-        const { isInputEmpty } = this.state;
+        const { userSelected } = this.state;
 
-        if(!isInputEmpty && event.keyCode === 13) this.sendUserData();
+        if(!userSelected && event.keyCode === 13) this.sendUserData();
     }
 
     render() {
-        const { isInputEmpty, 
-                isLoaderVisible, 
+        const { isLoaderVisible, 
                 onErrorModal, 
+                userSelected,
                 errorMsg } = this.state;
 
         return (
@@ -128,9 +120,10 @@ class Intro extends Component {
                     onKeyUp={this.onKeyUpHandler}>
                     <Header data-test="intro-header"/>
                     <Input data-test="intro-input" 
-                        changeUserHandler={this.getInputValue} />
+                        changeUserHandler={this.getInputValue} 
+                        value={userSelected} />
                     <div className='intro-btn-container'>    
-                    { !isInputEmpty && 
+                    { userSelected && 
                         <Btn data-test="intro-btn"
                             onClick={this.sendUserData} 
                             type="forward"
