@@ -121,6 +121,16 @@ test('ErrorModal component is not rendered when onErrorModal state is false', ()
     expect(errorModalComponent.length).toBe(0);
 });
 
+test('update userSelected state when input changes', () => {
+    const wrapper = setup();
+
+    const inputComponent = findByTestAttr(wrapper, intro.input);
+    inputComponent.simulate('change', { target: { value: 'txt' } });
+    wrapper.update();
+
+    expect(wrapper.state().userSelected).toBe('txt');
+});
+
 test('Loader component is rendered when btn is clicked', () => {
     const userSelected = 'prueba';
     const wrapper = setup(null,{userSelected});

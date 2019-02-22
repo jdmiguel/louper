@@ -9,8 +9,6 @@
     "axios": "^0.18.0",
     "enzyme": "^3.7.0",
     "enzyme-adapter-react-16": "^1.7.0",
-    "mobx": "^5.0.2",
-    "mobx-react": "^5.2.3",
     "prop-types": "^15.6.1",
     "react": "^16.7.0",
     "react-dom": "^16.7.0",

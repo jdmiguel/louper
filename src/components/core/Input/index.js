@@ -5,17 +5,17 @@ import InputLabel from '@material-ui/core/InputLabel';
 import FormControl from '@material-ui/core/FormControl';
 import './styles.css';
 
-const IntroInput = ({changeUserHandler}) => (
+const IntroInput = ({onChange}) => (
     <FormControl className="formContainer">
         <InputLabel className='label'>
             Add Github User 
         </InputLabel>
-        <Input className='input' onChange={event => changeUserHandler(event)}/>
+        <Input className='input' onChange={event => onChange(event)}/>
     </FormControl>
 );
 
 IntroInput.propTypes = {
-    changeUserHandler: PropTypes.func.isRequired
+    onChange: PropTypes.func.isRequired
   };
 
 export default IntroInput;

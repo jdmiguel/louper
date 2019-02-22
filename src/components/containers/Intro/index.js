@@ -26,7 +26,7 @@ class Intro extends Component {
         }
     }
 
-    getInputValue = (e) => {
+    onChangeHandler = (e) => {
         const value = e.target.value;
 
         this.setState({
@@ -120,7 +120,7 @@ class Intro extends Component {
                     onKeyUp={this.onKeyUpHandler}>
                     <Header data-test="intro-header"/>
                     <Input data-test="intro-input" 
-                        changeUserHandler={this.getInputValue} 
+                        onChange={this.onChangeHandler} 
                         value={userSelected} />
                     <div className='intro-btn-container'>    
                     { userSelected && 
