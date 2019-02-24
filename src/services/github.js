@@ -13,3 +13,6 @@ export const getUserFollowers = username =>
 
 export const getUserFollowing = username => 
   request(`${BASE_URL}/users/${username}/following`);
+
+  export const getStarredProjects = username => 
+  request(`${BASE_URL}/users/${username}/starred`);

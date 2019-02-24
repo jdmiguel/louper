@@ -5,8 +5,9 @@ import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
 import PersonIcon from '@material-ui/icons/Person';
 import FolderIcon from '@material-ui/icons/Folder';
-import VisibilityIcon from '@material-ui/icons/Visibility';
 import FavoriteIcon from '@material-ui/icons/Favorite';
+import VisibilityIcon from '@material-ui/icons/Visibility';
+import StarIcon from '@material-ui/icons/Star';
 import './styles.css';
 
 class Menu extends Component {
@@ -41,6 +42,7 @@ class Menu extends Component {
                         <Tab label="REPOSITORIES" icon={ <FolderIcon /> }/>
                         <Tab label="FOLLOWING" icon={ <FavoriteIcon /> }/>
                         <Tab label="FOLLOWERS" icon={ <VisibilityIcon /> }/>
+                        <Tab label="STARRED PROJECTS" icon={ <StarIcon /> }/>
                     </Tabs>
                 </Paper>
             </div>

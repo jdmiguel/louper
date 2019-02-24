@@ -1,9 +1,9 @@
 import React from 'react';
 import { userDataModel } from '../../../utils/models';
-import IconEmail from '@material-ui/icons/Email';
-import IconHome from '@material-ui/icons/Home';
-import IconLink from '@material-ui/icons/Link';
-import IconCompany from '@material-ui/icons/Contacts';
+import EmailIcon from '@material-ui/icons/Email';
+import HomeIcon from '@material-ui/icons/Home';
+import LinkIcon from '@material-ui/icons/Link';
+import CompanyIcon from '@material-ui/icons/Contacts';
 import Btn from '../../core/Btn';
 import './styles.css';
 
@@ -32,7 +32,7 @@ const UserData =  ({ data }) => {
                 <div className='subUserInfo'>
                     { email && 
                         <p>
-                            <IconEmail className='userDataIcon'/>
+                            <EmailIcon className='userDataIcon'/>
                             <a 
                                 href={email} 
                                 rel="noopener noreferrer" 
@@ -43,12 +43,12 @@ const UserData =  ({ data }) => {
                     }
                     { location && 
                         <p>
-                            <IconHome className='userDataIcon'/> {location}
+                            <HomeIcon className='userDataIcon'/> {location}
                         </p>
                     }
                     { blog && 
                         <p>
-                            <IconLink className='userDataIcon'/>
+                            <LinkIcon className='userDataIcon'/>
                             <a 
                                 href={blog}
                                 rel="noopener noreferrer" 
@@ -58,7 +58,7 @@ const UserData =  ({ data }) => {
                     }
                     { company && 
                         <p>
-                            <IconCompany className='userDataIcon'/> {company}
+                            <CompanyIcon className='userDataIcon'/> {company}
                         </p>
                     }
                 </div>

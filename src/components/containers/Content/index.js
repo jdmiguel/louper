@@ -10,6 +10,7 @@ import UserData from '../UserData';
 import UserRepos from '../UserRepos';
 import UserFollowing from '../UserFollowing';
 import UserFollowers from '../UserFollowers';
+import StarredProjects from '../StarredProjects';
 import FloatBtn from '../../core/FloatBtn';
 import './styles.css';
 class Content extends Component {
@@ -19,27 +20,20 @@ class Content extends Component {
             isUserDataActive: true,
             isUserReposActive: false,
             isUserFollowingActive: false,
-            isUserFollowersActive: false
+            isUserFollowersActive: false,
+            isStarredProjectsActive: false,
         }
     }
 
     menuHandler = index => {
         switch(index){
-            default:
-            case 0:
-                this.setState({
-                    isUserDataActive: true,
-                    isUserReposActive: false,
-                    isUserFollowingActive: false,
-                    isUserFollowersActive: false
-                });
-            break;
             case 1:
                 this.setState({
                     isUserDataActive: false,
                     isUserReposActive: true,
                     isUserFollowingActive: false,
-                    isUserFollowersActive: false
+                    isUserFollowersActive: false,
+                    isStarredProjectsActive: false
                 });
             break;
             case 2:
@@ -47,7 +41,8 @@ class Content extends Component {
                     isUserDataActive: false,
                     isUserReposActive: false,
                     isUserFollowingActive: true,
-                    isUserFollowersActive: false
+                    isUserFollowersActive: false,
+                    isStarredProjectsActive: false
                 });
             break;
             case 3:
@@ -55,7 +50,27 @@ class Content extends Component {
                     isUserDataActive: false,
                     isUserReposActive: false,
                     isUserFollowingActive: false,
-                    isUserFollowersActive: true
+                    isUserFollowersActive: true,
+                    isStarredProjectsActive: false
+                });
+            break;
+            case 4:
+                this.setState({
+                    isUserDataActive: false,
+                    isUserReposActive: false,
+                    isUserFollowingActive: false,
+                    isUserFollowersActive: false,
+                    isStarredProjectsActive: true
+                });
+            break;
+            default:
+            case 0:
+                this.setState({
+                    isUserDataActive: true,
+                    isUserReposActive: false,
+                    isUserFollowingActive: false,
+                    isUserFollowersActive: false,
+                    isStarredProjectsActive: false
                 });
             break;
         }
@@ -71,11 +86,15 @@ class Content extends Component {
         const { isUserDataActive, 
             isUserReposActive,  
             isUserFollowingActive,
-            isUserFollowersActive } = this.state;
+            isUserFollowersActive,
+            isStarredProjectsActive
+        } = this.state;
         const { userData, 
             userRepos, 
             userFollowing,
-            userFollowers } = this.props;
+            userFollowers,
+            starredProjects
+         } = this.props
 
         return(
             <Fragment>
@@ -85,6 +104,7 @@ class Content extends Component {
                 { isUserReposActive && <UserRepos data={userRepos}/> }
                 { isUserFollowingActive && <UserFollowing data={userFollowing}/> }
                 { isUserFollowersActive && <UserFollowers data={userFollowers}/> }
+                { isStarredProjectsActive && <StarredProjects data={starredProjects}/> }
             </Fragment>
         )
     }
@@ -95,6 +115,7 @@ Content.propTypes = {
     userRepos: repoDataModel,
     userFollowing: followingDataModel,
     userFollowers: followersDataModel,
+    starredProjects: followersDataModel,
     onIntro: PropTypes.func.isRequired,
 };
 

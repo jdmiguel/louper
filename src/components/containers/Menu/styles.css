@@ -23,3 +23,9 @@
     } 
 }
 
+@media (max-width: 360px) {
+    .menu .tabs button {
+        min-width: 60px !important;
+    }
+}
+

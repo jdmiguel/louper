@@ -15,6 +15,7 @@ export const userDataModel = PropTypes.shape({
 export const repoDataModel = PropTypes.arrayOf(
     PropTypes.shape({
         name: PropTypes.string,
+        description: PropTypes.string,
         html_url: PropTypes.string
     })
 );
@@ -34,5 +35,13 @@ export const followingDataModel = PropTypes.arrayOf(
         login: PropTypes.string,
         html_url: PropTypes.string,
         avatar_url: PropTypes.string
+    })
+);
+
+export const starredProjectsDataModel = PropTypes.arrayOf(
+    PropTypes.shape({
+        name: PropTypes.string,
+        login: PropTypes.string,
+        html_url: PropTypes.string
     })
 );

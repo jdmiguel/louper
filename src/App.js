@@ -10,6 +10,7 @@ class App extends Component{
             userRepos: '',
             userFollowers: '',
             userFollowing: '',
+            starredProjects: '',
             intro: true
         }
     }
@@ -38,6 +39,12 @@ class App extends Component{
         })
     }
 
+    setStarredProjectsHandler = starredProjects => {
+        this.setState({
+            starredProjects
+        })
+    }
+
     onIntroHandler = () => {
         this.setState({
             intro: true
@@ -56,7 +63,8 @@ class App extends Component{
                 userData, 
                 userRepos, 
                 userFollowers,
-                userFollowing
+                userFollowing,
+                starredProjects
             } = this.state;
 
         return(
@@ -68,6 +76,7 @@ class App extends Component{
                         setUserRepos={this.setUserReposHandler}
                         setUserFollowers={this.setUserFollowersHandler}
                         setUserFollowing={this.setUserFollowingHandler}
+                        setStarredProjects={this.setStarredProjectsHandler}
                         outIntro={this.outIntroHandler}
                         /> 
                     : <Content 
@@ -75,6 +84,7 @@ class App extends Component{
                         userRepos={userRepos}
                         userFollowers={userFollowers}
                         userFollowing={userFollowing}
+                        starredProjects={starredProjects}
                         onIntro={this.onIntroHandler}
                     />
                 }

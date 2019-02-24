@@ -10,7 +10,9 @@ import {
     getRepos,
     getUserData,
     getUserFollowers,
-    getUserFollowing } from '../../../services/github';
+    getUserFollowing,
+    getStarredProjects
+ } from '../../../services/github';
 import { errorLiterals } from '../../../utils/errorLiterals';   
 import './styles.css';
 
@@ -52,7 +54,9 @@ class Intro extends Component {
         const { setUserData, 
             setUserRepos, 
             setUserFollowers, 
-            setUserFollowing } = this.props;
+            setUserFollowing,
+            setStarredProjects
+         } = this.props;
         const { maximumRequest, unavailableUser } = errorLiterals; 
 
         let userName = '';
@@ -91,6 +95,8 @@ class Intro extends Component {
                 .then( response => setUserFollowers(response))        
         await getUserFollowing(userName)
                 .then( response => setUserFollowing(response) );
+        await getStarredProjects(userName)
+                .then( response => setStarredProjects(response) );        
         await this.goContent();
     }
 
@@ -103,7 +109,7 @@ class Intro extends Component {
     onKeyUpHandler = event => {
         const { userSelected } = this.state;
 
-        if(!userSelected && event.keyCode === 13) this.sendUserData();
+        if(userSelected && event.keyCode === 13) this.sendUserData();
     }
 
     render() {
@@ -147,6 +153,7 @@ Intro.propTypes = {
     setUserRepos: PropTypes.func.isRequired,
     setUserFollowers: PropTypes.func.isRequired,
     setUserFollowing: PropTypes.func.isRequired,
+    setStarredProjects: PropTypes.func.isRequired,
     outIntro: PropTypes.func.isRequired
 };
 
