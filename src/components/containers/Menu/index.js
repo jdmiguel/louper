@@ -28,6 +28,12 @@ class Menu extends Component {
 
     render() {
         const { value } = this.state;
+        const { availableSections } = this.props;
+        const [ userRepos,
+                userFollowing,
+                userFollowers, 
+                userStarred 
+            ] = availableSections;
 
         return (
             <div className='menu'>
@@ -39,10 +45,10 @@ class Menu extends Component {
                           className="tabs"
                           centered>
                         <Tab label="USER DATA" icon={ <PersonIcon /> }/>
-                        <Tab label="REPOSITORIES" icon={ <FolderIcon /> }/>
-                        <Tab label="FOLLOWING" icon={ <FavoriteIcon /> }/>
-                        <Tab label="FOLLOWERS" icon={ <VisibilityIcon /> }/>
-                        <Tab label="STARRED PROJECTS" icon={ <StarIcon /> }/>
+                        { userRepos && <Tab label="REPOSITORIES" icon={ <FolderIcon /> }/> }
+                        { userFollowing && <Tab label="FOLLOWING" icon={ <FavoriteIcon /> }/> }
+                        { userFollowers && <Tab label="FOLLOWERS" icon={ <VisibilityIcon /> }/> }
+                        { userStarred && <Tab label="STARRED" icon={ <StarIcon /> }/> }
                     </Tabs>
                 </Paper>
             </div>
@@ -51,7 +57,8 @@ class Menu extends Component {
 }
 
 Menu.propTypes = {
-    onClick: PropTypes.func.isRequired
+    onClick: PropTypes.func.isRequired,
+    availableSections: PropTypes.arrayOf(PropTypes.any).isRequired
 };
 
 export default Menu;

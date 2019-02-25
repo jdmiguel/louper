@@ -17,12 +17,13 @@
     padding: 0 !important;
 }
 
+.itemUserRepos{
+    line-height: 1.5;
+    border-bottom: 1px solid #eeeeee !important;
+}
+
 @keyframes introUserRepos {
     from { opacity: 0 }
     to { opacity: 1 }
 }
 
-.itemRepo{
-    line-height: 1.5;
-    border-bottom: 1px solid #eeeeee !important;
-}

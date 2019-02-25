@@ -17,7 +17,7 @@ const UserRepos = ({ data }) => (
                     <ListItem key={repo.name + i}
                             button
                             onClick={ () => clickListHandler(repo.html_url) }
-                            className='itemRepo'>
+                            className='itemUserRepos'>
                             <Avatar>
                                 <FolderIcon className='iconUserRepos'/>
                             </Avatar>

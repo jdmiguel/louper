@@ -38,7 +38,7 @@ export const followingDataModel = PropTypes.arrayOf(
     })
 );
 
-export const starredProjectsDataModel = PropTypes.arrayOf(
+export const starredDataModel = PropTypes.arrayOf(
     PropTypes.shape({
         name: PropTypes.string,
         login: PropTypes.string,

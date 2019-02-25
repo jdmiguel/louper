@@ -4,76 +4,39 @@ import {
     userDataModel, 
     repoDataModel, 
     followingDataModel,
-    followersDataModel } from '../../../utils/models';
+    followersDataModel,
+    starredDataModel
+} from '../../../utils/models';
 import Menu from '../Menu';
 import UserData from '../UserData';
 import UserRepos from '../UserRepos';
 import UserFollowing from '../UserFollowing';
 import UserFollowers from '../UserFollowers';
-import StarredProjects from '../StarredProjects';
+import UserStarred from '../UserStarred';
 import FloatBtn from '../../core/FloatBtn';
-import './styles.css';
 class Content extends Component {
     constructor(props){
         super(props);
+
+        const availableSectionsUpdated = 
+            Object.values(props).reduce( (total,acc) => {
+                if(acc.length > 0){
+                    total.push(acc);
+                }
+
+                return total;
+            }, []);
+
         this.state = {
-            isUserDataActive: true,
-            isUserReposActive: false,
-            isUserFollowingActive: false,
-            isUserFollowersActive: false,
-            isStarredProjectsActive: false,
+            itemActive: 0,
+            availableSections: availableSectionsUpdated
         }
     }
 
     menuHandler = index => {
-        switch(index){
-            case 1:
-                this.setState({
-                    isUserDataActive: false,
-                    isUserReposActive: true,
-                    isUserFollowingActive: false,
-                    isUserFollowersActive: false,
-                    isStarredProjectsActive: false
-                });
-            break;
-            case 2:
-                this.setState({
-                    isUserDataActive: false,
-                    isUserReposActive: false,
-                    isUserFollowingActive: true,
-                    isUserFollowersActive: false,
-                    isStarredProjectsActive: false
-                });
-            break;
-            case 3:
-                this.setState({
-                    isUserDataActive: false,
-                    isUserReposActive: false,
-                    isUserFollowingActive: false,
-                    isUserFollowersActive: true,
-                    isStarredProjectsActive: false
-                });
-            break;
-            case 4:
-                this.setState({
-                    isUserDataActive: false,
-                    isUserReposActive: false,
-                    isUserFollowingActive: false,
-                    isUserFollowersActive: false,
-                    isStarredProjectsActive: true
-                });
-            break;
-            default:
-            case 0:
-                this.setState({
-                    isUserDataActive: true,
-                    isUserReposActive: false,
-                    isUserFollowingActive: false,
-                    isUserFollowersActive: false,
-                    isStarredProjectsActive: false
-                });
-            break;
-        }
+        this.setState({
+            itemActive: index
+        });
     }
 
     backIntroHandler = () => {
@@ -83,28 +46,33 @@ class Content extends Component {
     }
 
     render(){
-        const { isUserDataActive, 
-            isUserReposActive,  
-            isUserFollowingActive,
-            isUserFollowersActive,
-            isStarredProjectsActive
-        } = this.state;
-        const { userData, 
-            userRepos, 
-            userFollowing,
-            userFollowers,
-            starredProjects
-         } = this.props
+        const { userData } = this.props;
+
+        const userDataComponent = userData[0].length 
+                                    ? <UserData data={userData[0]}/>
+                                    : null;         
+        const ReposComponent = userData[1].length 
+                                    ? <UserRepos data={userData[1]}/>
+                                    : null; 
+        const FollowingComponent = userData[2].length 
+                                    ? <UserFollowing data={userData[2]}/> 
+                                    : null;                             
+        const FollowersComponent = userData[3].length 
+                                    ? <UserFollowers data={userData[3]}/> 
+                                    : null;                                       
+        const starredComponent = userData[4].length 
+                                    ? <UserStarred data={userData[4]}/> 
+                                    : null;                                     
 
         return(
             <Fragment>
-                <Menu onClick={this.menuHandler}/>
+                <Menu onClick={this.menuHandler} />
                 <FloatBtn onClick={this.backIntroHandler}/>
-                { isUserDataActive && <UserData data={userData}/> }
-                { isUserReposActive && <UserRepos data={userRepos}/> }
-                { isUserFollowingActive && <UserFollowing data={userFollowing}/> }
-                { isUserFollowersActive && <UserFollowers data={userFollowers}/> }
-                { isStarredProjectsActive && <StarredProjects data={starredProjects}/> }
+                { userDataComponent }
+                { ReposComponent }
+                { FollowersComponent }
+                { FollowingComponent }
+                { starredComponent }
             </Fragment>
         )
     }
@@ -115,7 +83,7 @@ Content.propTypes = {
     userRepos: repoDataModel,
     userFollowing: followingDataModel,
     userFollowers: followersDataModel,
-    starredProjects: followersDataModel,
+    userStarred: starredDataModel,
     onIntro: PropTypes.func.isRequired,
 };
 

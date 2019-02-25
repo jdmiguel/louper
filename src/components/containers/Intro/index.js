@@ -11,7 +11,7 @@ import {
     getUserData,
     getUserFollowers,
     getUserFollowing,
-    getStarredProjects
+    getUserStarred
  } from '../../../services/github';
 import { errorLiterals } from '../../../utils/errorLiterals';   
 import './styles.css';
@@ -51,19 +51,14 @@ class Intro extends Component {
     }
 
     fetchData = async (user) => {
-        const { setUserData, 
-            setUserRepos, 
-            setUserFollowers, 
-            setUserFollowing,
-            setStarredProjects
-         } = this.props;
+        const { setData } = this.props;
         const { maximumRequest, unavailableUser } = errorLiterals; 
 
         let userName = '';
 
         await getUserData(user)
             .then( response => {
-                setUserData( response )
+                setData( response )
                 userName = response.login;
             })
             .catch( error => {
@@ -90,13 +85,17 @@ class Intro extends Component {
         );
 
         await getRepos(user)
-                .then( response => setUserRepos(response) );
+                .then( response => setData(response) );
+
         await getUserFollowers(userName)
-                .then( response => setUserFollowers(response))        
+                .then( response => setData(response) );  
+
         await getUserFollowing(userName)
-                .then( response => setUserFollowing(response) );
-        await getStarredProjects(userName)
-                .then( response => setStarredProjects(response) );        
+                .then( response => setData(response) );
+
+        await getUserStarred(userName)
+                .then( response => setData(response) );  
+
         await this.goContent();
     }
 
@@ -153,7 +152,7 @@ Intro.propTypes = {
     setUserRepos: PropTypes.func.isRequired,
     setUserFollowers: PropTypes.func.isRequired,
     setUserFollowing: PropTypes.func.isRequired,
-    setStarredProjects: PropTypes.func.isRequired,
+    setUserStarred: PropTypes.func.isRequired,
     outIntro: PropTypes.func.isRequired
 };
 
