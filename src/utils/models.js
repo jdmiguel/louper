@@ -1,5 +1,7 @@
 import PropTypes from 'prop-types';
 
+export const dataModel = PropTypes.arrayOf(PropTypes.any);
+
 export const userDataModel = PropTypes.shape({
     avatar_url: PropTypes.string,
     name: PropTypes.string,
@@ -45,3 +47,11 @@ export const starredDataModel = PropTypes.arrayOf(
         html_url: PropTypes.string
     })
 );
+
+export const tabDataModel = PropTypes.shape({
+    userSection: PropTypes.bool,
+    reposSection: PropTypes.bool,
+    followingSection: PropTypes.bool,
+    followersSection: PropTypes.bool,
+    starredSection: PropTypes.bool
+});

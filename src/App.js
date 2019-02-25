@@ -22,6 +22,12 @@ class App extends Component{
         })
     }
 
+    resetDataHandler = () => {
+        this.setState({
+            allUserData: []
+        })
+    }
+
     toogleIntro = state => {
         this.setState({
             intro: state
@@ -34,6 +40,7 @@ class App extends Component{
             allUserData
         } = this.state; 
 
+
         return(
             <Fragment>
                 { intro 
@@ -42,8 +49,9 @@ class App extends Component{
                         outIntro={() => this.toogleIntro(false)}
                         /> 
                     : <Content 
-                        userData={allUserData}
+                        data={allUserData}
                         onIntro={() => this.toogleIntro(true)}
+                        resetData={this.resetDataHandler}
                     />
                 }
             </Fragment>

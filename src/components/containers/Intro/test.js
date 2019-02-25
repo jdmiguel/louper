@@ -63,10 +63,7 @@ describe('No conditional rendered elements', () => {
 
 test('does not warning with expected props', () => {
     const expectedProps = { 
-        setUserData: PropTypes.func.isRequired,
-        setUserRepos: PropTypes.func.isRequired,
-        setUserFollowers: PropTypes.func.isRequired,
-        setUserFollowing: PropTypes.func.isRequired,
+        setData: PropTypes.func.isRequired,
         outIntro: PropTypes.func.isRequired
     }
 

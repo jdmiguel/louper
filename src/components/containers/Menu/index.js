@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import { tabDataModel } from '../../../utils/models';
 import Paper from '@material-ui/core/Paper';
 import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
@@ -28,12 +29,13 @@ class Menu extends Component {
 
     render() {
         const { value } = this.state;
-        const { availableSections } = this.props;
-        const [ userRepos,
-                userFollowing,
-                userFollowers, 
-                userStarred 
-            ] = availableSections;
+        const { tabNames } = this.props;
+        const {
+            reposSection,
+            followingSection,
+            followersSection,
+            starredSection
+        } = tabNames;
 
         return (
             <div className='menu'>
@@ -45,10 +47,10 @@ class Menu extends Component {
                           className="tabs"
                           centered>
                         <Tab label="USER DATA" icon={ <PersonIcon /> }/>
-                        { userRepos && <Tab label="REPOSITORIES" icon={ <FolderIcon /> }/> }
-                        { userFollowing && <Tab label="FOLLOWING" icon={ <FavoriteIcon /> }/> }
-                        { userFollowers && <Tab label="FOLLOWERS" icon={ <VisibilityIcon /> }/> }
-                        { userStarred && <Tab label="STARRED" icon={ <StarIcon /> }/> }
+                        { reposSection && <Tab label="REPOSITORIES" icon={ <FolderIcon /> }/> }
+                        { followingSection && <Tab label="FOLLOWING" icon={ <FavoriteIcon /> }/> }
+                        { followersSection && <Tab label="FOLLOWERS" icon={ <VisibilityIcon /> }/> }
+                        { starredSection && <Tab label="STARRED" icon={ <StarIcon /> }/> }
                     </Tabs>
                 </Paper>
             </div>
@@ -58,7 +60,7 @@ class Menu extends Component {
 
 Menu.propTypes = {
     onClick: PropTypes.func.isRequired,
-    availableSections: PropTypes.arrayOf(PropTypes.any).isRequired
+    tabNames: tabDataModel
 };
 
 export default Menu;

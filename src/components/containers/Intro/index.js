@@ -9,8 +9,8 @@ import ErrorModal from '../../core/ErrorModal';
 import { 
     getRepos,
     getUserData,
-    getUserFollowers,
     getUserFollowing,
+    getUserFollowers,
     getUserStarred
  } from '../../../services/github';
 import { errorLiterals } from '../../../utils/errorLiterals';   
@@ -58,10 +58,10 @@ class Intro extends Component {
 
         await getUserData(user)
             .then( response => {
-                setData( response )
+                setData(response);
                 userName = response.login;
             })
-            .catch( error => {
+            .catch(error => {
                 let errorMsg = '';
 
                 console.log(error.code)
@@ -87,11 +87,11 @@ class Intro extends Component {
         await getRepos(user)
                 .then( response => setData(response) );
 
+        await getUserFollowing(userName)
+                .then( response => setData(response) );        
+
         await getUserFollowers(userName)
                 .then( response => setData(response) );  
-
-        await getUserFollowing(userName)
-                .then( response => setData(response) );
 
         await getUserStarred(userName)
                 .then( response => setData(response) );  
@@ -148,11 +148,7 @@ class Intro extends Component {
 }
 
 Intro.propTypes = {
-    setUserData: PropTypes.func.isRequired,
-    setUserRepos: PropTypes.func.isRequired,
-    setUserFollowers: PropTypes.func.isRequired,
-    setUserFollowing: PropTypes.func.isRequired,
-    setUserStarred: PropTypes.func.isRequired,
+    setData: PropTypes.func.isRequired,
     outIntro: PropTypes.func.isRequired
 };
 

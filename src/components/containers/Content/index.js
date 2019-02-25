@@ -1,12 +1,6 @@
 import React, {Component, Fragment} from 'react';
 import PropTypes from 'prop-types';
-import { 
-    userDataModel, 
-    repoDataModel, 
-    followingDataModel,
-    followersDataModel,
-    starredDataModel
-} from '../../../utils/models';
+import { dataModel } from '../../../utils/models';
 import Menu from '../Menu';
 import UserData from '../UserData';
 import UserRepos from '../UserRepos';
@@ -18,73 +12,112 @@ class Content extends Component {
     constructor(props){
         super(props);
 
-        const availableSectionsUpdated = 
-            Object.values(props).reduce( (total,acc) => {
-                if(acc.length > 0){
-                    total.push(acc);
-                }
+        const { data } = props;
 
-                return total;
-            }, []);
+        let availableDataSections = {
+            userSection: true,
+            reposSection: false,
+            followingSection: false,
+            followersSection: false,
+            starredSection: false
+        };
+
+        data.forEach( (item,index) => {
+            switch (index) {
+                case 2:
+                    availableDataSections.followingSection = !!item.length;
+                    break;
+                case 3:
+                    availableDataSections.followersSection = !!item.length;
+                    break;
+                case 4:
+                    availableDataSections.starredSection = !!item.length;
+                    break;    
+                case 1:
+                default:
+                    availableDataSections.reposSection = !!item.length;    
+                    break;
+            }
+        });
+
+        const availableSections = [];
+        const allSections = [];
+        
+        for (const key in availableDataSections) {
+            if(availableDataSections[key] === true) {
+                availableSections.push(key.toString());
+            }
+
+            allSections.push(key.toString());
+        };
+        
 
         this.state = {
-            itemActive: 0,
-            availableSections: availableSectionsUpdated
+            activeSection: 'userSection',
+            availableDataSections,
+            availableSections,
+            allSections
         }
     }
 
     menuHandler = index => {
+        const { availableSections } = this.state;
+        const activeSection = availableSections[index];
+
         this.setState({
-            itemActive: index
+            activeSection
         });
     }
 
     backIntroHandler = () => {
-        const { onIntro } = this.props;
-
+        const { onIntro, resetData } = this.props;
+        
         onIntro();
+        resetData();
     }
 
     render(){
-        const { userData } = this.props;
+        const { data } = this.props;
+        const { activeSection , 
+                availableDataSections, 
+                allSections 
+        } = this.state;
 
-        const userDataComponent = userData[0].length 
-                                    ? <UserData data={userData[0]}/>
-                                    : null;         
-        const ReposComponent = userData[1].length 
-                                    ? <UserRepos data={userData[1]}/>
-                                    : null; 
-        const FollowingComponent = userData[2].length 
-                                    ? <UserFollowing data={userData[2]}/> 
-                                    : null;                             
-        const FollowersComponent = userData[3].length 
-                                    ? <UserFollowers data={userData[3]}/> 
-                                    : null;                                       
-        const starredComponent = userData[4].length 
-                                    ? <UserStarred data={userData[4]}/> 
-                                    : null;                                     
+        const [
+            userSection,
+            reposSection,
+            followingSection,
+            followersSection,
+            starredSection
+        ] = allSections; 
+
+        const [
+            userData,
+            reposData,
+            followingData,
+            followersData,
+            starredData
+        ] = data;  
 
         return(
             <Fragment>
-                <Menu onClick={this.menuHandler} />
+                <Menu onClick={this.menuHandler} 
+                    tabNames={availableDataSections}/>
                 <FloatBtn onClick={this.backIntroHandler}/>
-                { userDataComponent }
-                { ReposComponent }
-                { FollowersComponent }
-                { FollowingComponent }
-                { starredComponent }
+                { activeSection === userSection && <UserData data={userData}/> }
+                { activeSection === reposSection && <UserRepos data={reposData}/> }
+                { activeSection === followingSection && <UserFollowing data={followingData}/>  }
+                { activeSection === followersSection && <UserFollowers data={followersData}/> }
+                { activeSection === starredSection && <UserStarred data={starredData}/> }
             </Fragment>
         )
     }
 }
 
 Content.propTypes = {
-    userData: userDataModel,
-    userRepos: repoDataModel,
-    userFollowing: followingDataModel,
-    userFollowers: followersDataModel,
-    userStarred: starredDataModel,
+    data: dataModel,
     onIntro: PropTypes.func.isRequired,
+    resetData: PropTypes.func.isRequired
 };
 
 export default Content;
