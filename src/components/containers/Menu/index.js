@@ -29,13 +29,13 @@ class Menu extends Component {
 
     render() {
         const { value } = this.state;
-        const { tabNames } = this.props;
+        const { tabs } = this.props;
         const {
             reposSection,
             followingSection,
             followersSection,
             starredSection
-        } = tabNames;
+        } = tabs;
 
         return (
             <div className='menu'>

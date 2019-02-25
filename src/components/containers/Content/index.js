@@ -13,14 +13,7 @@ class Content extends Component {
         super(props);
 
         const { data } = props;
-
-        let availableDataSections = {
-            userSection: true,
-            reposSection: false,
-            followingSection: false,
-            followersSection: false,
-            starredSection: false
-        };
+        let availableDataSections = { userSection: true };
 
         data.forEach( (item,index) => {
             switch (index) {
@@ -45,10 +38,10 @@ class Content extends Component {
         
         for (const key in availableDataSections) {
             if(availableDataSections[key] === true) {
-                availableSections.push(key.toString());
+                availableSections.push(`${key}`);
             }
 
-            allSections.push(key.toString());
+            allSections.push(`${key}`);
         };
         
 
@@ -101,8 +94,7 @@ class Content extends Component {
 
         return(
             <Fragment>
-                <Menu onClick={this.menuHandler} 
-                    tabNames={availableDataSections}/>
+                <Menu onClick={this.menuHandler} tabs={availableDataSections}/>
                 <FloatBtn onClick={this.backIntroHandler}/>
                 { activeSection === userSection && <UserData data={userData}/> }
                 { activeSection === reposSection && <UserRepos data={reposData}/> }
