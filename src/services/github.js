@@ -8,11 +8,11 @@ export const getUserData = user =>
 export const getRepos = username => 
   request(`${BASE_URL}/users/${username}/repos?per_page=250`);
 
-export const getUserFollowers = username => 
+export const getFollowers = username => 
   request(`${BASE_URL}/users/${username}/followers`);
 
-export const getUserFollowing = username => 
+export const getFollowing = username => 
   request(`${BASE_URL}/users/${username}/following`);
 
-  export const getUserStarred = username => 
+  export const getStarred = username => 
   request(`${BASE_URL}/users/${username}/starred`);

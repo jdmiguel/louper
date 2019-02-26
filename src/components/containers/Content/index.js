@@ -17,6 +17,10 @@ class Content extends Component {
 
         data.forEach( (item,index) => {
             switch (index) {
+                case 1:
+                default:
+                    availableDataSections.reposSection = !!item.length;    
+                    break;
                 case 2:
                     availableDataSections.followingSection = !!item.length;
                     break;
@@ -26,10 +30,6 @@ class Content extends Component {
                 case 4:
                     availableDataSections.starredSection = !!item.length;
                     break;    
-                case 1:
-                default:
-                    availableDataSections.reposSection = !!item.length;    
-                    break;
             }
         });
 

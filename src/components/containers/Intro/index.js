@@ -9,9 +9,9 @@ import ErrorModal from '../../core/ErrorModal';
 import { 
     getRepos,
     getUserData,
-    getUserFollowing,
-    getUserFollowers,
-    getUserStarred
+    getFollowing,
+    getFollowers,
+    getStarred
  } from '../../../services/github';
 import { errorLiterals } from '../../../utils/errorLiterals';   
 import './styles.css';
@@ -50,16 +50,26 @@ class Intro extends Component {
         this.setState({onErrorModal: false});
     }
 
-    fetchData = async (user) => {
+    fetchData = user => {
         const { setData } = this.props;
         const { maximumRequest, unavailableUser } = errorLiterals; 
 
-        let userName = '';
-
-        await getUserData(user)
-            .then( response => {
+        getUserData(user)
+            .then(response => {
                 setData(response);
-                userName = response.login;
+                
+                const userName = response.login;
+                const reposRequest = getRepos(userName).then(response => setData(response));
+                const followingRequest = getFollowing(userName).then(response => setData(response));
+                const followersRequest = getFollowers(userName).then(response => setData(response));
+                const starredRequest = getStarred(userName).then(response => setData(response));
+
+                Promise.all([
+                    reposRequest,
+                    followingRequest,
+                    followersRequest,
+                    starredRequest
+                ]).then(() => this.goContent());
             })
             .catch(error => {
                 let errorMsg = '';
@@ -77,26 +87,11 @@ class Intro extends Component {
                 }
 
                 this.setState({
-                    isLoaderVisible: false,
                     onErrorModal: true,
+                    isLoaderVisible: false,
                     errorMsg
                 });
-            }
-        );
-
-        await getRepos(user)
-                .then( response => setData(response) );
-
-        await getUserFollowing(userName)
-                .then( response => setData(response) );        
-
-        await getUserFollowers(userName)
-                .then( response => setData(response) );  
-
-        await getUserStarred(userName)
-                .then( response => setData(response) );  
-
-        await this.goContent();
+            });
     }
 
     goContent = () => {
