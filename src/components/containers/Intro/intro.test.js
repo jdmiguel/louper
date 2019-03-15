@@ -59,6 +59,24 @@ describe('No conditional rendered elements', () => {
     
         expect(inputComponent.length).toBe(1);
     });
+
+    test('no renders Btn', () => {
+        const btnComponent = findByTestAttr(wrapper, intro.btn);
+
+        expect(btnComponent.length).toBe(0);
+    });
+
+    test('no renders Loader', () => {
+        const loaderComponent = findByTestAttr(wrapper, intro.loader);
+
+        expect(loaderComponent.length).toBe(0);
+    });
+
+    test('no renders ErrorModal', () => {
+        const errorModalComponent = findByTestAttr(wrapper, intro.errorModal);
+
+        expect(errorModalComponent.length).toBe(0);
+    });
 });
 
 test('does not warning with expected props', () => {
@@ -70,66 +88,52 @@ test('does not warning with expected props', () => {
     checkProps(Intro, expectedProps);
 });
 
-test('Btn component is rendered when userSelected state is not empty', () => {
-    const userSelected = 'prueba';
-    const wrapper = setup(null,{ userSelected });
-    const btnComponent = findByTestAttr(wrapper, intro.btn);
+/* TO-DO
+test('ErrorModal component is rendered when service fail', () => {
 
-    expect(btnComponent.length).toBe(1);
 });
 
-test('Btn component is not rendered when userSelected state is empty', () => {
-    const userSelected = '';
-    const wrapper = setup(null,{ userSelected });
-    const btnComponent = findByTestAttr(wrapper, intro.btn);
+test('ErrorModal component shows suitable msg when user exceds the maximum number of request allowed', () => {
 
-    expect(btnComponent.length).toBe(0);
 });
 
-test('Loader component is rendered when isLoaderVisible state is true', () => {
-    const isLoaderVisible = true;
-    const wrapper = setup(null,{ isLoaderVisible });
-    const loaderComponent = findByTestAttr(wrapper, intro.loader);
+test('ErrorModal component shows suitable msg when user searchs an unavailable github user', () => {
 
-    expect(loaderComponent.length).toBe(1);
 });
 
-test('Loader component is not rendered when isLoaderVisible state is false', () => {
-    const isLoaderVisible = false;
-    const wrapper = setup(null,{ isLoaderVisible });
-    const loaderComponent = findByTestAttr(wrapper, intro.loader);
-
-    expect(loaderComponent.length).toBe(0);
+test('ErrorModal component is hidden when user click in try again button', () => {
+    
 });
 
-test('ErrorModal component is rendered when onErrorModal state is true', () => {
-    const onErrorModal = true;
-    const wrapper = setup(null,{ onErrorModal });
-    const errorModalComponent = findByTestAttr(wrapper, intro.errorModal);
+*/
 
-    expect(errorModalComponent.length).toBe(1);
-});
-
-test('ErrorModal component is not rendered when onErrorModal state is false', () => {
-    const onErrorModal = false;
-    const wrapper = setup(null,{ onErrorModal });
-    const errorModalComponent = findByTestAttr(wrapper, intro.errorModal);
-
-    expect(errorModalComponent.length).toBe(0);
-});
-
-test('update userSelected state when input changes', () => {
+test('Input shows the text introduced by user', () => {
     const wrapper = setup();
+    const mockTxt = 'txt';
 
     const inputComponent = findByTestAttr(wrapper, intro.input);
     inputComponent.simulate('change', { target: { value: 'txt' } });
     wrapper.update();
 
-    expect(wrapper.state().userSelected).toBe('txt');
+    // try  with findByTestAttr
+
+    expect(inputComponent.find('.input')).toEqual(mockTxt);
+});
+
+test('Btn component is rendered when input shows at least one character', () => {
+    const wrapper = setup();
+
+    const inputComponent = findByTestAttr(wrapper, intro.input);
+    inputComponent.simulate('change', { target: { value: 'r' } });
+    wrapper.update();
+
+    const btnComponent = findByTestAttr(wrapper, intro.btn);
+
+    expect(btnComponent.length).toBe(1);
 });
 
 test('Loader component is rendered when btn is clicked', () => {
-    const userSelected = 'prueba';
+    const userSelected = 'testUser';
     const wrapper = setup(null,{userSelected});
     
     const btnComponent = findByTestAttr(wrapper, intro.btn);
