@@ -14,5 +14,5 @@ export const getFollowers = username =>
 export const getFollowing = username => 
   request(`${BASE_URL}/users/${username}/following`);
 
-  export const getStarred = username => 
+export const getStarred = username => 
   request(`${BASE_URL}/users/${username}/starred`);

@@ -13,10 +13,10 @@ class Content extends Component {
     constructor(props){
         super(props);
 
-        const { data } = props;
+        const { remainingData } = props;
         let availableDataSections = { userSection: true };
 
-        data.forEach( (item,index) => {
+        remainingData.forEach( (item,index) => {
             switch (index) {
                 case 1:
                     availableDataSections.reposSection = !!item.length;    
@@ -72,8 +72,8 @@ class Content extends Component {
     }
 
     render(){
-        const { data } = this.props;
-        const { activeSection , 
+        const { userData, remainingData } = this.props;
+        const { activeSection, 
                 availableDataSections, 
                 allSections 
         } = this.state;
@@ -87,12 +87,11 @@ class Content extends Component {
         ] = allSections; 
 
         const [
-            userData,
             reposData,
             followingData,
             followersData,
             starredData
-        ] = data;  
+        ] = remainingData;  
 
         return(
             <Fragment>

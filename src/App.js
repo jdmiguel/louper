@@ -6,52 +6,48 @@ class App extends Component{
     constructor(props){
         super(props);
         this.state = {
-            allUserData: [],
+            userData: null,
+            remainingData: null,
             intro: true
         }
-    }
-
-    setDataHandler = data => {
-        const { allUserData } = this.state;
-        const allUserDataCloned = [...allUserData];
-
-        allUserDataCloned.push(data);
-
-        this.setState({
-            allUserData: allUserDataCloned
-        })
-    }
-
-    resetDataHandler = () => {
-        this.setState({
-            allUserData: []
-        })
-    }
-
-    toogleIntro = state => {
-        this.setState({
-            intro: state
-        })
     }
 
     render(){
         const { 
             intro,
-            allUserData
+            userData,
+            remainingData
         } = this.state; 
-
 
         return(
             <Fragment>
                 { intro 
                     ? <Intro 
-                        setData={ data => this.setDataHandler(data)}
-                        outIntro={() => this.toogleIntro(false)}
+                        setData={(userData, remainingData) => {
+                                    this.setState({
+                                        userData,
+                                        remainingData,
+                                        intro: false
+                                    }
+                                )}
+                        }
                         /> 
                     : <Content 
-                        data={allUserData}
-                        onIntro={() => this.toogleIntro(true)}
-                        resetData={this.resetDataHandler}
+                        userData={userData}
+                        remainingData={remainingData}
+                        onIntro={() => {
+                                    this.setState({
+                                        intro: true
+                                    })
+                                }
+                        }
+                        resetData={() => {
+                                this.setState({
+                                    userData: null,
+                                    remainingData: null
+                                })
+                            }
+                        }
                     />
                 }
             </Fragment>

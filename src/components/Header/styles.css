@@ -9,7 +9,7 @@
                                   supported by Chrome and Opera */
 }
 
-h1{
+.header h1{
     font-size: 6.7em;
     margin: 50px 0 0;
     line-height: 0;
@@ -29,7 +29,7 @@ h1{
     align-items: center;
 }
 
-h2{
+.header h2{
     font-size: 4.3em;
     font-weight: 400;
     margin: 20px 0 0;

@@ -28,7 +28,7 @@ class Intro extends Component {
         }
     }
 
-    onChangeHandler = (e) => {
+    onChangeHandler = e => {
         const value = e.target.value;
 
         this.setState({
@@ -46,35 +46,31 @@ class Intro extends Component {
         this.fetchData(userSelected);
     }
 
-    errorModalHandler = () => {
-        this.setState({onErrorModal: false});
-    }
-
     fetchData = user => {
         const { setData } = this.props;
         const { maximumRequest, unavailableUser } = errorLiterals; 
 
+        this.setState({
+            isLoaderVisible: true
+        });
+
         getUserData(user)
-            .then(response => {
-                setData(response);
-                
-                const userName = response.login;
-                const reposRequest = getRepos(userName).then(response => setData(response));
-                const followingRequest = getFollowing(userName).then(response => setData(response));
-                const followersRequest = getFollowers(userName).then(response => setData(response));
-                const starredRequest = getStarred(userName).then(response => setData(response));
+            .then(userData => {
+                const userName = userData.login;
+                const reposRequest = getRepos(userName).then(response => response);
+                const followingRequest = getFollowing(userName).then(response => response);
+                const followersRequest = getFollowers(userName).then(response => response);
+                const starredRequest = getStarred(userName).then(response => response);
 
                 Promise.all([
                     reposRequest,
                     followingRequest,
                     followersRequest,
                     starredRequest
-                ]).then(() => this.goContent());
+                ]).then(remainingData => setData(userData, remainingData));
             })
             .catch(error => {
                 let errorMsg = '';
-
-                console.log(error.code)
 
                 switch (error.code) {
                     case 403:
@@ -88,16 +84,14 @@ class Intro extends Component {
 
                 this.setState({
                     onErrorModal: true,
-                    isLoaderVisible: false,
                     errorMsg
                 });
+            })
+            .finally(()=> {
+                this.setState({
+                    isLoaderVisible: false
+                });
             });
-    }
-
-    goContent = () => {
-        const { outIntro } = this.props;
-        
-        outIntro();
     }
 
     onKeyUpHandler = event => {
@@ -122,20 +116,22 @@ class Intro extends Component {
                     <Input data-test="intro-input" 
                         onChange={this.onChangeHandler} 
                         value={userSelected} />
-                    <div className='intro-btn-container'>    
-                    { userSelected && 
-                        <Btn data-test="intro-btn"
-                            onClick={this.sendUserData} 
-                            type="forward"
-                            txt="GO AHEAD"/> }
-                    </div>        
+                    { userSelected && (
+                        <div className='intro-btn-container'>    
+                            <Btn data-test="intro-btn"
+                                onClick={this.sendUserData} 
+                                type="forward"
+                                txt="GO AHEAD"/> 
+                        </div>
+                    )}
                     { isLoaderVisible && <Loader data-test="intro-loader"/> }
-                    { onErrorModal && 
+                    { onErrorModal && (
                         <ErrorModal data-test="intro-errorModal"
                             isErrorModalOpen={onErrorModal}
-                            onClick={this.errorModalHandler}
+                            onClick={() => this.setState({onErrorModal: false})}
                             msg={errorMsg}
-                        /> }
+                        /> 
+                    )}
                 </div>
             </Fragment>
         );
