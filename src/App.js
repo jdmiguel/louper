@@ -1,6 +1,6 @@
 import React, {Component, Fragment} from 'react';
-import Intro from './components/containers/Intro/';
-import Content from './components/containers/Content/';
+import Intro from './components/Intro/';
+import Content from './components/Content/';
 
 class App extends Component{
     constructor(props){

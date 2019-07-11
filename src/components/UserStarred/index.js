@@ -1,28 +1,29 @@
 import React from 'react';
-import { repoDataModel } from '../../../utils/models';
+import { starredDataModel } from '../../utils/models';
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemText from '@material-ui/core/ListItemText';
 import Avatar from '@material-ui/core/Avatar';
-import FolderIcon from '@material-ui/icons/Folder';
+import StarIcon from '@material-ui/icons/Star';
 import './styles.css';
 
 const clickListHandler = url => window.open(url,'_blank');
 
-const UserRepos = ({ data }) => (
-    <div className='userReposContainer'>
+const Starred = ({ data }) => (
+    <div className='userStarredContainer'>
         <List>
         {
             data.map((repo,i) => (
                     <ListItem key={repo.name + i}
                             button
                             onClick={ () => clickListHandler(repo.html_url) }
-                            className='itemUserRepos'>
+                            className='itemUserStarred'>
                             <Avatar>
-                                <FolderIcon className='iconUserRepos'/>
+                                <StarIcon className='iconUserStarred'/>
                             </Avatar>
                             <ListItemText primary={repo.name} 
-                                        secondary={repo.description} />
+                                        secondary={repo.owner.login} />
+                            
                     </ListItem> 
                 ))
         }
@@ -30,8 +31,8 @@ const UserRepos = ({ data }) => (
     </div>
 );
 
-UserRepos.propTypes = {
-    data: repoDataModel
-};
+Starred.propTypes = {
+    data: starredDataModel
+}
 
-export default UserRepos;
+export default Starred;

@@ -1,10 +1,10 @@
 import React from 'react';
-import { userDataModel } from '../../../utils/models';
+import { userDataModel } from '../../utils/models';
 import EmailIcon from '@material-ui/icons/Email';
 import HomeIcon from '@material-ui/icons/Home';
 import LinkIcon from '@material-ui/icons/Link';
 import CompanyIcon from '@material-ui/icons/Contacts';
-import Btn from '../../core/Btn';
+import Btn from '../core/Btn';
 import './styles.css';
 
 const UserData =  ({ data }) => {
@@ -27,8 +27,8 @@ const UserData =  ({ data }) => {
                 className='userAvatar'
             />
             <div className='txtContainer'>
-                <h1>{name}</h1>
-                <h2>{bio}</h2>
+                <h3>{name}</h3>
+                <h4>{bio}</h4>
                 <div className='subUserInfo'>
                     { email && 
                         <p>

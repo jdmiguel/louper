@@ -1,7 +1,7 @@
 import React from 'react';
-import { followingDataModel } from '../../../utils/models';
+import { followingDataModel } from '../../utils/models';
 import Grid from '@material-ui/core/Grid';
-import Btn from '../../core/Btn';
+import Btn from '../core/Btn';
 import './styles.css';
 
 const UserFollowing = ({ data }) => (

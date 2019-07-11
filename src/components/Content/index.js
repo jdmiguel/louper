@@ -1,13 +1,14 @@
 import React, {Component, Fragment} from 'react';
 import PropTypes from 'prop-types';
-import { dataModel } from '../../../utils/models';
+import { dataModel } from '../../utils/models';
 import Menu from '../Menu';
 import UserData from '../UserData';
 import UserRepos from '../UserRepos';
 import UserFollowing from '../UserFollowing';
 import UserFollowers from '../UserFollowers';
 import UserStarred from '../UserStarred';
-import FloatBtn from '../../core/FloatBtn';
+import FloatBtn from '../core/FloatBtn';
+
 class Content extends Component {
     constructor(props){
         super(props);
@@ -18,7 +19,6 @@ class Content extends Component {
         data.forEach( (item,index) => {
             switch (index) {
                 case 1:
-                default:
                     availableDataSections.reposSection = !!item.length;    
                     break;
                 case 2:
@@ -30,6 +30,8 @@ class Content extends Component {
                 case 4:
                     availableDataSections.starredSection = !!item.length;
                     break;    
+                default:
+                    return false;
             }
         });
 

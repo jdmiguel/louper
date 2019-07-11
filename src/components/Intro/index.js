@@ -1,19 +1,19 @@
 import React, { Component, Fragment } from 'react';
 import PropTypes from 'prop-types';
-import Loader from '../../core/Loader';
+import Loader from '../core/Loader';
 import Header from '../Header';
-import GithubCorner from '../../core/GithubCorner/';
-import Input from '../../core/Input';
-import Btn from '../../core/Btn';
-import ErrorModal from '../../core/ErrorModal';
+import GithubCorner from '../core/GithubCorner';
+import Input from '../core/Input';
+import Btn from '../core/Btn';
+import ErrorModal from '../core/ErrorModal';
 import { 
     getRepos,
     getUserData,
     getFollowing,
     getFollowers,
     getStarred
- } from '../../../services/github';
-import { errorLiterals } from '../../../utils/errorLiterals';   
+ } from '../../services/github';
+import { errorLiterals } from '../../utils/errorLiterals';   
 import './styles.css';
 
 class Intro extends Component {
