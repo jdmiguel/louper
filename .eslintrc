@@ -1,0 +1,31 @@
+{
+  "extends": [
+    "./eslint-config.js"
+  ],
+  "plugins": ["react", "prettier"],
+  
+  "rules": {
+    "no-console": ["warn", { "allow": ["warn", "error", "log"] }],
+      "linebreak-style": "off",
+      "indent": 0,
+      "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx"] }],
+      "prettier/prettier": [
+        "error",
+        {
+          "tabWidth": 2,
+          "singleQuote": true,
+          "trailingComma": "none",
+          "jsxBracketSameLine": false
+        }
+      ],
+    "react/require-default-props": 0,
+    "react/prop-types": 0,
+    "react/no-find-dom-node": 0,
+    "no-shadow": 0,
+    "no-restricted-syntax": 0
+  },
+  "parser": "babel-eslint",
+  "env": {
+    "browser": true
+  }
+}

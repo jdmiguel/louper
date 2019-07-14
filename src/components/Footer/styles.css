@@ -1,0 +1,23 @@
+.footer{
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  width: 100%;
+  position: absolute;
+  left: 25px;
+  bottom: 0;
+  z-index: 2;
+  color: rgba(0, 0, 0, 0.7);
+  font-size: 15px;
+}
+
+.footer a{
+  color: rgba(0, 0, 0, 0.7);
+}
+
+@media (max-width: 1200px) {
+  .footer{
+    justify-content: center;
+    left: 0;
+  }
+}
