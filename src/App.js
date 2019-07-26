@@ -29,13 +29,9 @@ class App extends Component {
         ) : (
           <Content
             userData={userData}
-            onIntro={() => {
+            backIntro={() => {
               this.setState({
-                intro: true
-              });
-            }}
-            resetData={() => {
-              this.setState({
+                intro: true,
                 userData: null
               });
             }}
