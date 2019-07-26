@@ -36,7 +36,12 @@ class Content extends Component {
   render() {
     const { userData, backIntro } = this.props;
     const { login } = userData;
-    const { activeSection, reposData, followingData, followersData } = this.state;
+    const {
+      activeSection,
+      reposData,
+      followingData,
+      followersData
+    } = this.state;
 
     return (
       <Fragment>
@@ -50,15 +55,27 @@ class Content extends Component {
         />
         <FloatBtn onClick={backIntro} />
         {activeSection === 0 && <UserData data={userData} />}
-        {activeSection === 1 && <UserRepos user={login} 
-                                  setReposData={data =>this.setState({reposData: data})}
-                                  reposData={reposData}/>}
-        {activeSection === 2 && <UserFollowing user={login} 
-                                  setFollowingData={data =>this.setState({followingData: data})}
-                                  followingData={followingData}/>}
-        {activeSection === 3 && <UserFollowers user={login} 
-                                  setFollowersData={data =>this.setState({followersData: data})}
-                                  followersData={followersData}/>}
+        {activeSection === 1 && (
+          <UserRepos
+            user={login}
+            setReposData={data => this.setState({ reposData: data })}
+            reposData={reposData}
+          />
+        )}
+        {activeSection === 2 && (
+          <UserFollowing
+            user={login}
+            setFollowingData={data => this.setState({ followingData: data })}
+            followingData={followingData}
+          />
+        )}
+        {activeSection === 3 && (
+          <UserFollowers
+            user={login}
+            setFollowersData={data => this.setState({ followersData: data })}
+            followersData={followersData}
+          />
+        )}
       </Fragment>
     );
   }

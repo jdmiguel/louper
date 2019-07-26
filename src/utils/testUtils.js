@@ -8,8 +8,8 @@ import checkPropTypes from 'check-prop-types';
  * @returns {ShallowWrapper}
  */
 
-export const findByTestAttr = (wrapper, val) => wrapper.find(`[data-test="${val}"]`);
-
+export const findByTestAttr = (wrapper, val) =>
+  wrapper.find(`[data-test="${val}"]`);
 
 /**
  * Create error with checkPropTypes and logic implemented in order to
@@ -20,12 +20,12 @@ export const findByTestAttr = (wrapper, val) => wrapper.find(`[data-test="${val}
  */
 
 export const checkProps = (component, conformingProps) => {
-    const propError = checkPropTypes(
-        component.propTypes, 
-        conformingProps,
-        'props', 
-        component.name);
+  const propError = checkPropTypes(
+    component.propTypes,
+    conformingProps,
+    'props',
+    component.name
+  );
 
-    expect(propError).toBeUndefined();
-}
-
+  expect(propError).toBeUndefined();
+};

@@ -8,7 +8,6 @@ import FolderIcon from '@material-ui/icons/Folder';
 import FavoriteIcon from '@material-ui/icons/Favorite';
 import VisibilityIcon from '@material-ui/icons/Visibility';
 import StarIcon from '@material-ui/icons/Star';
-import { tabDataModel } from '../../utils/models';
 import './styles.css';
 
 class Menu extends Component {
@@ -65,8 +64,7 @@ class Menu extends Component {
 }
 
 Menu.propTypes = {
-  onClick: PropTypes.func.isRequired,
-  tabNames: tabDataModel
+  onClick: PropTypes.func.isRequired
 };
 
 export default Menu;

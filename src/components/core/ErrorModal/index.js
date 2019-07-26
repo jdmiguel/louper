@@ -6,23 +6,23 @@ import DialogContent from '@material-ui/core/DialogContent';
 import Btn from '../Btn';
 import './styles.css';
 
-const ErrorModal = ({isErrorModalOpen, msg, onClick}) => (
-    <Dialog open={isErrorModalOpen} 
-            aria-labelledby='simple-dialog-title'
-            className='errorModal'>
-                <DialogTitle>{msg}</DialogTitle>
-                <DialogContent className='errorContentModal'>
-                    <Btn type='restore'
-                         txt='TRY AGAIN'
-                         onClick={onClick}/>
-                </DialogContent>
-    </Dialog>
+const ErrorModal = ({ isErrorModalOpen, msg, onClick }) => (
+  <Dialog
+    open={isErrorModalOpen}
+    aria-labelledby="simple-dialog-title"
+    className="errorModal"
+  >
+    <DialogTitle>{msg}</DialogTitle>
+    <DialogContent className="errorContentModal">
+      <Btn type="restore" txt="TRY AGAIN" onClick={onClick} />
+    </DialogContent>
+  </Dialog>
 );
 
 ErrorModal.propTypes = {
-    isErrorModalOpen: PropTypes.bool.isRequired,
-    onClick: PropTypes.func.isRequired,
-    msg: PropTypes.string.isRequired
+  isErrorModalOpen: PropTypes.bool.isRequired,
+  onClick: PropTypes.func.isRequired,
+  msg: PropTypes.string.isRequired
 };
 
 export default ErrorModal;

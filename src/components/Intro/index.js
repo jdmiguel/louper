@@ -32,11 +32,11 @@ class Intro extends Component {
     };
   }
 
-  componentDidMount(){
+  componentDidMount() {
     document.addEventListener('keyup', this.onKeyUpHandler);
   }
 
-  componentWillUnmount(){
+  componentWillUnmount() {
     document.removeEventListener('keyup', this.onKeyUpHandler);
   }
 
@@ -104,12 +104,7 @@ class Intro extends Component {
   };
 
   render() {
-    const {
-      isLoading,
-      onErrorModal,
-      userSelected,
-      errorMsg
-    } = this.state;
+    const { isLoading, onErrorModal, userSelected, errorMsg } = this.state;
 
     return (
       <Fragment>
