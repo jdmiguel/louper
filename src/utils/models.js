@@ -14,7 +14,7 @@ export const userDataModel = PropTypes.shape({
     html_url: PropTypes.string
 });
 
-export const repoDataModel = PropTypes.arrayOf(
+export const reposDataModel = PropTypes.arrayOf(
     PropTypes.shape({
         name: PropTypes.string,
         description: PropTypes.string,

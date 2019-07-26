@@ -36,6 +36,10 @@ class Intro extends Component {
     document.addEventListener('keyup', this.onKeyUpHandler);
   }
 
+  componentWillUnmount(){
+    document.removeEventListener('keyup', this.onKeyUpHandler);
+  }
+
   onChangeHandler = e => {
     const { value } = e.target;
 

@@ -1,4 +1,5 @@
 import React, {Component} from 'react';
+import PropTypes from 'prop-types';
 
 /* core */
 import List from '@material-ui/core/List';
@@ -15,6 +16,7 @@ import { getRepos } from '../../services/github';
 
 /* utils */
 import {externalLink} from '../../utils/externalLink';
+import {reposDataModel} from '../../utils/models';
 
 /* styles */
 import './styles.css';
@@ -24,26 +26,32 @@ class UserRepos extends Component {
         super(props);
     
         this.state = {
-            data: null,
-            isLoading: true
+            data: props.reposData || null,
+            isLoading: !props.reposData
         };
     }
 
     componentDidMount(){
-        getRepos(this.props.user)
-        .then(data => {
-            this.setState({
-                data
-            }); 
-        })
-        .catch(error => {
-            throw error; 
-        })
-        .finally( ()=> {
-            this.setState({
-                isLoading: false
-            });  
-        });
+        const {setReposData} = this.props;
+        const {data} = this.state;
+
+        if(!data){
+            getRepos(this.props.user)
+                .then(data => {
+                    this.setState({
+                        data
+                    }); 
+                    setReposData(data);
+                })
+                .catch(error => {
+                    throw error; 
+                })
+                .finally( ()=> {
+                    this.setState({
+                        isLoading: false
+                    });  
+                });
+        }
     }
 
     render(){
@@ -71,5 +79,11 @@ class UserRepos extends Component {
         )
     }
 } 
+
+UserRepos.propTypes = {
+    user: PropTypes.string,
+    setReposData: PropTypes.func,
+    reposData: reposDataModel
+}
 
 export default UserRepos;

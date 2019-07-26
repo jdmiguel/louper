@@ -7,7 +7,6 @@ import UserData from '../UserData';
 import UserRepos from '../UserRepos';
 import UserFollowing from '../UserFollowing';
 import UserFollowers from '../UserFollowers';
-import UserStarred from '../UserStarred';
 
 /* utils */
 import { userDataModel } from '../../utils/models';
@@ -20,7 +19,10 @@ class Content extends Component {
     super(props);
 
     this.state = {
-      activeSection: 0
+      activeSection: 0,
+      reposData: null,
+      followingData: null,
+      followersData: null
     };
 
     this.availableDataSections = {
@@ -34,7 +36,7 @@ class Content extends Component {
   render() {
     const { userData, backIntro } = this.props;
     const { login } = userData;
-    const { activeSection } = this.state;
+    const { activeSection, reposData, followingData, followersData } = this.state;
 
     return (
       <Fragment>
@@ -48,10 +50,15 @@ class Content extends Component {
         />
         <FloatBtn onClick={backIntro} />
         {activeSection === 0 && <UserData data={userData} />}
-        {activeSection === 1 && <UserRepos user={login} />}
-        {activeSection === 2 && <UserFollowing user={login} />}
-        {activeSection === 3 && <UserFollowers user={login} />}
-        {activeSection === 4 && <UserStarred user={login} />}
+        {activeSection === 1 && <UserRepos user={login} 
+                                  setReposData={data =>this.setState({reposData: data})}
+                                  reposData={reposData}/>}
+        {activeSection === 2 && <UserFollowing user={login} 
+                                  setFollowingData={data =>this.setState({followingData: data})}
+                                  followingData={followingData}/>}
+        {activeSection === 3 && <UserFollowers user={login} 
+                                  setFollowersData={data =>this.setState({followersData: data})}
+                                  followersData={followersData}/>}
       </Fragment>
     );
   }

@@ -1,4 +1,5 @@
 import React, {Component} from 'react';
+import PropTypes from 'prop-types';
 
 /* core */
 import Grid from '@material-ui/core/Grid';
@@ -10,36 +11,42 @@ import { getFollowing } from '../../services/github';
 
 /* utils */
 import {externalLink} from '../../utils/externalLink';
+import {followingDataModel} from '../../utils/models';
 
 /* styles */
 import './styles.css';
-
 
 class UserFollowing extends Component {
     constructor(props) {
         super(props);
     
         this.state = {
-            data: null,
-            isLoading: true
+            data: props.followingData,
+            isLoading: !props.followingData
         };
     }
 
     componentDidMount(){
-        getFollowing(this.props.user)
-        .then(data => {
-            this.setState({
-                data
-            }); 
-        })
-        .catch(error => {
-            throw error; 
-        })
-        .finally( ()=> {
-            this.setState({
-                isLoading: false
-            });  
-        });
+        const {setFollowingData} = this.props;
+        const {data} = this.state;
+
+        if(!data){
+            getFollowing(this.props.user)
+            .then(data => {
+                this.setState({
+                    data
+                }); 
+                setFollowingData(data)
+            })
+            .catch(error => {
+                throw error; 
+            })
+            .finally( ()=> {
+                this.setState({
+                    isLoading: false
+                });  
+            });
+        }
     }
 
     render(){
@@ -67,6 +74,11 @@ class UserFollowing extends Component {
             </Grid>
         )
     }    
+}
+
+UserFollowing.propTypes = {
+    setFollowingData: PropTypes.func,
+    followingData: followingDataModel
 }
 
 export default UserFollowing;

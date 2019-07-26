@@ -1,4 +1,5 @@
 import React, {Component} from 'react';
+import PropTypes from 'prop-types';
 
 /* core */
 import Grid from '@material-ui/core/Grid';
@@ -10,35 +11,41 @@ import { getFollowers } from '../../services/github';
 
 /* utils */
 import {externalLink} from '../../utils/externalLink';
+import {followersDataModel} from '../../utils/models';
 
 /* styles */
 import './styles.css';
-
 class UserFollowers extends Component {
     constructor(props) {
         super(props);
     
         this.state = {
-            data: null,
-            isLoading: true
+            data: props.followersData || null,
+            isLoading: !props.followersData
         };
     }
 
     componentDidMount(){
-        getFollowers(this.props.user)
-        .then(data => {
-            this.setState({
-                data
-            }); 
-        })
-        .catch(error => {
-            throw error; 
-        })
-        .finally( ()=> {
-            this.setState({
-                isLoading: false
-            });  
-        });
+        const {setFollowersData} = this.props;
+        const {data} = this.state;
+
+        if(!data){
+            getFollowers(this.props.user)
+            .then(data => {
+                this.setState({
+                    data
+                }); 
+                setFollowersData(data)
+            })
+            .catch(error => {
+                throw error; 
+            })
+            .finally( ()=> {
+                this.setState({
+                    isLoading: false
+                });  
+            });
+        }
     }
 
     render(){
@@ -67,5 +74,10 @@ class UserFollowers extends Component {
         );
     }
 }    
+
+UserFollowers.propTypes = {
+    setFollowersData: PropTypes.func,
+    followersData: followersDataModel
+}
 
 export default UserFollowers;
