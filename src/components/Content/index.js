@@ -15,20 +15,19 @@ import { userDataModel } from '../../utils/models';
 /* core */
 import FloatBtn from '../core/FloatBtn';
 
-const availableDataSections = {
-  userSection: true,
-  reposSection: false,
-  followingSection: false,
-  followersSection: false,
-  starredSection: false
-};
-
 class Content extends Component {
   constructor(props) {
     super(props);
 
     this.state = {
       activeSection: 0
+    };
+
+    this.availableDataSections = {
+      userSection: true,
+      reposSection: props.userData.public_repos,
+      followingSection: props.userData.followers,
+      followersSection: props.userData.following
     };
   }
 
@@ -45,7 +44,7 @@ class Content extends Component {
               activeSection
             })
           }
-          tabs={availableDataSections}
+          tabs={this.availableDataSections}
         />
         <FloatBtn onClick={backIntro} />
         {activeSection === 0 && <UserData data={userData} />}
