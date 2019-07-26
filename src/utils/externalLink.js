@@ -1,0 +1,1 @@
+export const externalLink = url => window.open(url,'_blank');

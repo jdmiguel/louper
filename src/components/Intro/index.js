@@ -26,10 +26,14 @@ class Intro extends Component {
 
     this.state = {
       userSelected: '',
-      isLoaderVisible: false,
+      isLoading: false,
       errorMsg: '',
       onErrorModal: false
     };
+  }
+
+  componentDidMount(){
+    document.addEventListener('keyup', this.onKeyUpHandler);
   }
 
   onChangeHandler = e => {
@@ -44,7 +48,7 @@ class Intro extends Component {
     const { userSelected } = this.state;
 
     this.setState({
-      isLoaderVisible: true
+      isLoading: true
     });
 
     this.fetchData(userSelected);
@@ -55,7 +59,7 @@ class Intro extends Component {
     const { maximumRequest, unavailableUser } = errorLiterals;
 
     this.setState({
-      isLoaderVisible: true
+      isLoading: true
     });
 
     getUserData(user)
@@ -82,7 +86,7 @@ class Intro extends Component {
       })
       .finally(() => {
         this.setState({
-          isLoaderVisible: false
+          isLoading: false
         });
       });
   };
@@ -97,7 +101,7 @@ class Intro extends Component {
 
   render() {
     const {
-      isLoaderVisible,
+      isLoading,
       onErrorModal,
       userSelected,
       errorMsg
@@ -118,13 +122,12 @@ class Intro extends Component {
               <Btn
                 data-test="intro-btn"
                 onClick={this.sendUserData}
-                onKeyUp={this.onKeyUpHandler}
                 type="forward"
                 txt="GO AHEAD"
               />
             </div>
           )}
-          {isLoaderVisible && <Loader data-test="intro-loader" />}
+          {isLoading && <Loader data-test="intro-loader" />}
           {onErrorModal && (
             <ErrorModal
               data-test="intro-errorModal"

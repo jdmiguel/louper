@@ -3,7 +3,7 @@
   justify-content: flex-start;
   align-items: center;
   width: 100%;
-  position: absolute;
+  position: fixed;
   left: 25px;
   bottom: 0;
   z-index: 2;
@@ -17,7 +17,6 @@
 
 @media (max-width: 1200px) {
   .footer{
-    justify-content: center;
-    left: 0;
+    display: none;
   }
 }
