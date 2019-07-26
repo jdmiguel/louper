@@ -1,4 +1,4 @@
-import axios from "axios";
+import axios from 'axios';
 
 /**
  * get response status and set it as error.code
@@ -52,11 +52,11 @@ const normalizeResponse = response => response.data;
  * @returns {promise} axios
  */
 
-export const request = (url, options = {method: 'get'}) =>
+export const request = (url, options = { method: 'get' }) =>
   axios({
     url,
     ...options
   })
-  .then(checkStatus)
-  .then(normalizeResponse)
-  .catch(handleError);
+    .then(checkStatus)
+    .then(normalizeResponse)
+    .catch(handleError);

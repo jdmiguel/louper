@@ -1,116 +1,66 @@
 import React, { Component, Fragment } from 'react';
 import PropTypes from 'prop-types';
-import { dataModel } from '../../utils/models';
+
+/* components */
 import Menu from '../Menu';
 import UserData from '../UserData';
 import UserRepos from '../UserRepos';
 import UserFollowing from '../UserFollowing';
 import UserFollowers from '../UserFollowers';
 import UserStarred from '../UserStarred';
+
+/* utils */
+import { userDataModel } from '../../utils/models';
+
+/* core */
 import FloatBtn from '../core/FloatBtn';
+
+const availableDataSections = {
+  userSection: true,
+  reposSection: false,
+  followingSection: false,
+  followersSection: false,
+  starredSection: false
+};
 
 class Content extends Component {
   constructor(props) {
     super(props);
 
-    const { remainingData } = props;
-    const availableDataSections = { userSection: true };
-
-    remainingData.forEach((item, index) => {
-      switch (index) {
-        case 1:
-          availableDataSections.reposSection = !!item.length;
-          break;
-        case 2:
-          availableDataSections.followingSection = !!item.length;
-          break;
-        case 3:
-          availableDataSections.followersSection = !!item.length;
-          break;
-        case 4:
-          availableDataSections.starredSection = !!item.length;
-          break;
-        default:
-          return false;
-      }
-    });
-
-    const availableSections = [];
-    const allSections = [];
-
-    for (const key in availableDataSections) {
-      if (availableDataSections[key] === true) {
-        availableSections.push(`${key}`);
-      }
-
-      allSections.push(`${key}`);
-    }
-
     this.state = {
-      activeSection: 'userSection',
-      availableDataSections,
-      availableSections,
-      allSections
+      activeSection: 0
     };
   }
 
-  menuHandler = index => {
-    const { availableSections } = this.state;
-    const activeSection = availableSections[index];
-
-    this.setState({
-      activeSection
-    });
-  };
-
-  backIntroHandler = () => {
-    const { onIntro, resetData } = this.props;
-
-    onIntro();
-    resetData();
-  };
-
   render() {
-    const { userData, remainingData } = this.props;
-    const { activeSection, availableDataSections, allSections } = this.state;
-
-    const [
-      userSection,
-      reposSection,
-      followingSection,
-      followersSection,
-      starredSection
-    ] = allSections;
-
-    const [
-      reposData,
-      followingData,
-      followersData,
-      starredData
-    ] = remainingData;
+    const { userData, backIntro } = this.props;
+    const { login } = userData;
+    const { activeSection } = this.state;
 
     return (
       <Fragment>
-        <Menu onClick={this.menuHandler} tabs={availableDataSections} />
-        <FloatBtn onClick={this.backIntroHandler} />
-        {activeSection === userSection && <UserData data={userData} />}
-        {activeSection === reposSection && <UserRepos data={reposData} />}
-        {activeSection === followingSection && (
-          <UserFollowing data={followingData} />
-        )}
-        {activeSection === followersSection && (
-          <UserFollowers data={followersData} />
-        )}
-        {activeSection === starredSection && <UserStarred data={starredData} />}
+        <Menu
+          onClick={activeSection =>
+            this.setState({
+              activeSection
+            })
+          }
+          tabs={availableDataSections}
+        />
+        <FloatBtn onClick={backIntro} />
+        {activeSection === 0 && <UserData data={userData} />}
+        {activeSection === 1 && <UserRepos user={login} />}
+        {activeSection === 2 && <UserFollowing user={login} />}
+        {activeSection === 3 && <UserFollowers user={login} />}
+        {activeSection === 4 && <UserStarred user={login} />}
       </Fragment>
     );
   }
 }
 
 Content.propTypes = {
-  data: dataModel,
-  onIntro: PropTypes.func.isRequired,
-  resetData: PropTypes.func.isRequired
+  backIntro: PropTypes.func,
+  userData: userDataModel
 };
 
 export default Content;

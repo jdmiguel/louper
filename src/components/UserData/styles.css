@@ -1,6 +1,4 @@
-.userDataContainer{
-    margin: 10px auto 0;
-    padding: 25px;
+.user-wrapper{
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -19,23 +17,25 @@
     to { opacity: 1 }
 }
 
-.userDataContainer h3{
-    font-size: 2.5em;
-    margin: 10px 0 10px;
-    line-height: 1.1em;
+.user-wrapper h3{
+    max-width: 235px;
+    font-size: 2.8em;
     font-weight: 500;
+    margin: 20px 0 10px;
+    line-height: 1.1em;
     overflow: hidden;
     text-overflow: ellipsis;
 }
 
-.userDataContainer h4{
+.user-wrapper h4{
+    max-width: 235px;
     font-size: 1.3em;
     font-weight: 400;
     line-height: 1.1em;
     margin: 0 0 15px 0;
 }
 
-.userDataContainer p{
+.user-wrapper p{
     margin: 0 0 2px;
     line-height: 0;
     font-size: 1em;
@@ -44,24 +44,19 @@
     align-items: center;
 }
 
-.userDataContainer a{
+.user-wrapper a{
     text-decoration: none;
     color: #31409F;
     font-weight: 500;
 }
 
-.userDataContainer a:hover{
+.user-wrapper a:hover{
     text-decoration: underline;
 }
 
-.userDataContainer button{
+.user-wrapper button{
     width: 100%;
     margin-top: 15px;
-}
-
-.txtContainer{
-    width: 200px;
-    margin-top: 10px;
 }
 
 .subUserInfo{
@@ -73,8 +68,8 @@
 }
 
 .userAvatar{
-    width: 200px !important;
-    height: 200px !important;
+    max-width: 235px !important;
+    height: 235px !important;
     border-radius: 20px;
 }
 

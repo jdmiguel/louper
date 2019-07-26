@@ -8,22 +8,20 @@ class App extends Component {
     super(props);
     this.state = {
       userData: null,
-      remainingData: null,
       intro: true
     };
   }
 
   render() {
-    const { intro, userData, remainingData } = this.state;
+    const { intro, userData } = this.state;
 
     return (
       <Fragment>
         {intro ? (
           <Intro
-            setData={(userData, remainingData) => {
+            setUserData={userData => {
               this.setState({
                 userData,
-                remainingData,
                 intro: false
               });
             }}
@@ -31,7 +29,6 @@ class App extends Component {
         ) : (
           <Content
             userData={userData}
-            remainingData={remainingData}
             onIntro={() => {
               this.setState({
                 intro: true
@@ -39,8 +36,7 @@ class App extends Component {
             }}
             resetData={() => {
               this.setState({
-                userData: null,
-                remainingData: null
+                userData: null
               });
             }}
           />
