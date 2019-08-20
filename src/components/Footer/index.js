@@ -7,13 +7,13 @@ const Footer = () => {
       <h3>
         Created by
         <a
-          href="https://jcoder.eu"
+          href="https://jdmiguel.com"
           target="_blank"
           rel="noopener noreferrer"
           aria-label="View source on GitHub"
         >
           {' '}
-          jcoder
+          jdmiguel
         </a>
       </h3>
     </div>
