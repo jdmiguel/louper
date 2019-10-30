@@ -8,11 +8,7 @@ import { findByTestAttr, checkProps } from '../../utils/testUtils';
 import { intro } from '../../utils/testLiterals';
 
 const defaultProps = {
-  setUserData: PropTypes.func.isRequired,
-  setUserRepos: PropTypes.func.isRequired,
-  setUserFollowers: PropTypes.func.isRequired,
-  setUserFollowing: PropTypes.func.isRequired,
-  outIntro: PropTypes.func.isRequired
+  setUserData: PropTypes.func.isRequired
 };
 
 /**
@@ -83,14 +79,15 @@ describe('No conditional rendered elements', () => {
 
 test('does not warning with expected props', () => {
   const expectedProps = {
-    setData: PropTypes.func.isRequired,
-    outIntro: PropTypes.func.isRequired
+    setUserData: PropTypes.func.isRequired
   };
 
   checkProps(Intro, expectedProps);
 });
 
 // TO-DO
+// test('Mock service', () => {
+// });
 // test('ErrorModal component is rendered when service fail', () => {
 // });
 // test('ErrorModal component shows suitable msg when user exceds the maximum number of request allowed', () => {
@@ -99,19 +96,6 @@ test('does not warning with expected props', () => {
 // });
 // test('ErrorModal component is hidden when user click in try again button', () => {
 // });
-
-test('Input shows the text introduced by user', () => {
-  const wrapper = setup();
-  const mockTxt = 'txt';
-
-  const inputComponent = findByTestAttr(wrapper, intro.input);
-  inputComponent.simulate('change', { target: { value: 'txt' } });
-  wrapper.update();
-
-  // try  with findByTestAttr
-
-  expect(inputComponent.find('.input')).toEqual(mockTxt);
-});
 
 test('Btn component is rendered when input shows at least one character', () => {
   const wrapper = setup();

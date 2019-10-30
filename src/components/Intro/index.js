@@ -142,7 +142,7 @@ class Intro extends Component {
 }
 
 Intro.propTypes = {
-  setUserData: PropTypes.func
+  setUserData: PropTypes.func.isRequired
 };
 
 export default Intro;
