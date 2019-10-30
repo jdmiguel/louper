@@ -12,30 +12,29 @@ class App extends Component {
     };
   }
 
+  onSetUserData = userData => {
+    this.setState({
+      userData,
+      intro: false
+    });
+  };
+
+  onBackIntro = () => {
+    this.setState({
+      intro: true,
+      userData: null
+    });
+  };
+
   render() {
     const { intro, userData } = this.state;
 
     return (
       <Fragment>
         {intro ? (
-          <Intro
-            setUserData={userData => {
-              this.setState({
-                userData,
-                intro: false
-              });
-            }}
-          />
+          <Intro setUserData={this.onSetUserData} />
         ) : (
-          <Content
-            userData={userData}
-            backIntro={() => {
-              this.setState({
-                intro: true,
-                userData: null
-              });
-            }}
-          />
+          <Content userData={userData} backIntro={this.onBackIntro} />
         )}
         <Footer />
       </Fragment>

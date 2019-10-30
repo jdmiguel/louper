@@ -25,7 +25,11 @@ module.exports = {
     Cubic: true,
     Elastic: true,
     Linear: true,
-    Bounce: true
+    Bounce: true,
+    describe: true,
+    test: true,
+    beforeEach: true,
+    expect: true
   },
 
   parserOptions: {
