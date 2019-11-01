@@ -29,6 +29,7 @@ module.exports = {
     describe: true,
     test: true,
     beforeEach: true,
+    afterEach: true,
     expect: true
   },
 

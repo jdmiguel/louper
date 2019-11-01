@@ -37,7 +37,6 @@ const checkStatus = response => {
  * check any response and return retrieved data property from the response
  * @function normalizeResponse
  * @param {object} response
- * @param {object} response
  * @returns {object} data - object
  */
 const normalizeResponse = response => response.data;

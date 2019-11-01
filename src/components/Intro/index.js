@@ -69,6 +69,10 @@ class Intro extends Component {
     getUserData(user)
       .then(userData => {
         setUserData(userData);
+
+        this.setState({
+          isLoading: false
+        });
       })
       .catch(error => {
         let errorMsg = '';
@@ -85,11 +89,7 @@ class Intro extends Component {
 
         this.setState({
           onErrorModal: true,
-          errorMsg
-        });
-      })
-      .finally(() => {
-        this.setState({
+          errorMsg,
           isLoading: false
         });
       });
