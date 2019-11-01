@@ -3,7 +3,11 @@ import { shallow } from 'enzyme';
 import PropTypes from 'prop-types';
 import moxios from 'moxios';
 
+/* components */
 import Intro from '.';
+
+/* services */
+import { getUserData } from '../../services/github';
 
 import { findByTestAttr, checkProps } from '../../utils/testUtils';
 import { intro } from '../../utils/testLiterals';
@@ -130,6 +134,60 @@ describe('user data fetching', () => {
   beforeEach(() => {
     moxios.install();
   });
+
+  test('Get login user when service doesn´t fail', () => {
+    const userSelected = 'jdmiguel';
+    const userData = {
+      login: 'jdmiguel',
+      id: 7016824,
+      node_id: 'MDQ6VXNlcjcwMTY4MjQ=',
+      avatar_url: 'https://avatars0.githubusercontent.com/u/7016824?v=4',
+      gravatar_id: '',
+      url: 'https://api.github.com/users/jdmiguel',
+      html_url: 'https://github.com/jdmiguel',
+      followers_url: 'https://api.github.com/users/jdmiguel/followers',
+      following_url:
+        'https://api.github.com/users/jdmiguel/following{/other_user}',
+      gists_url: 'https://api.github.com/users/jdmiguel/gists{/gist_id}',
+      starred_url:
+        'https://api.github.com/users/jdmiguel/starred{/owner}{/repo}',
+      subscriptions_url: 'https://api.github.com/users/jdmiguel/subscriptions',
+      organizations_url: 'https://api.github.com/users/jdmiguel/orgs',
+      repos_url: 'https://api.github.com/users/jdmiguel/repos',
+      events_url: 'https://api.github.com/users/jdmiguel/events{/privacy}',
+      received_events_url:
+        'https://api.github.com/users/jdmiguel/received_events',
+      type: 'User',
+      site_admin: false,
+      name: 'Jaime De Miguel',
+      company: 'Atresmedia',
+      blog: 'https://jdmiguel.com',
+      location: 'Madrid',
+      email: null,
+      hireable: null,
+      bio: 'Senior Frontend developer',
+      public_repos: 24,
+      public_gists: 1,
+      followers: 9,
+      following: 14,
+      created_at: '2014-03-20T23:24:22Z',
+      updated_at: '2019-10-09T14:33:31Z'
+    };
+
+    moxios.wait(() => {
+      const request = moxios.requests.mostRecent();
+      request.respondWith({
+        status: 200,
+        response: userData
+      });
+    });
+
+    getUserData(userSelected).then(response => {
+      expect(response).toBe(userData);
+    });
+  });
+
+  test('Loader component is hidden when service doesn´t fail', () => {});
 
   afterEach(() => {
     moxios.uninstall();
