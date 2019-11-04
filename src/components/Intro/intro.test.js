@@ -12,6 +12,40 @@ import { getUserData } from '../../services/github';
 import { findByTestAttr, checkProps } from '../../utils/testUtils';
 import { intro } from '../../utils/testLiterals';
 
+const userSelected = 'jdmiguel';
+const userData = {
+  login: 'jdmiguel',
+  id: 7016824,
+  node_id: 'MDQ6VXNlcjcwMTY4MjQ=',
+  avatar_url: 'https://avatars0.githubusercontent.com/u/7016824?v=4',
+  gravatar_id: '',
+  url: 'https://api.github.com/users/jdmiguel',
+  html_url: 'https://github.com/jdmiguel',
+  followers_url: 'https://api.github.com/users/jdmiguel/followers',
+  following_url: 'https://api.github.com/users/jdmiguel/following{/other_user}',
+  gists_url: 'https://api.github.com/users/jdmiguel/gists{/gist_id}',
+  starred_url: 'https://api.github.com/users/jdmiguel/starred{/owner}{/repo}',
+  subscriptions_url: 'https://api.github.com/users/jdmiguel/subscriptions',
+  organizations_url: 'https://api.github.com/users/jdmiguel/orgs',
+  repos_url: 'https://api.github.com/users/jdmiguel/repos',
+  events_url: 'https://api.github.com/users/jdmiguel/events{/privacy}',
+  received_events_url: 'https://api.github.com/users/jdmiguel/received_events',
+  type: 'User',
+  site_admin: false,
+  name: 'Jaime De Miguel',
+  company: 'Atresmedia',
+  blog: 'https://jdmiguel.com',
+  location: 'Madrid',
+  email: null,
+  hireable: null,
+  bio: 'Senior Frontend developer',
+  public_repos: 24,
+  public_gists: 1,
+  followers: 9,
+  following: 14,
+  created_at: '2014-03-20T23:24:22Z',
+  updated_at: '2019-10-09T14:33:31Z'
+};
 const defaultProps = {
   setUserData: PropTypes.func.isRequired
 };
@@ -98,29 +132,23 @@ test('Btn component is rendered when input shows at least one character', () => 
   const wrapper = setup();
 
   const inputComponent = findByTestAttr(wrapper, intro.input);
-  inputComponent.simulate('change', { target: { value: 'r' } });
-  wrapper.update();
+  inputComponent.simulate('change', { target: { value: 'a' } });
 
   const btnComponent = findByTestAttr(wrapper, intro.btn);
-
   expect(btnComponent.length).toBe(1);
 });
 
 test('Loader component is rendered when btn is clicked', () => {
-  const userSelected = 'testUser';
   const wrapper = setup(null, { userSelected });
 
   const btnComponent = findByTestAttr(wrapper, intro.btn);
   btnComponent.simulate('click');
-  wrapper.update();
 
   const loaderComponent = findByTestAttr(wrapper, intro.loader);
   expect(loaderComponent.length).toBe(1);
 });
 
 // TO-DO
-// test('Mock service', () => {
-// });
 // test('ErrorModal component is rendered when service fail', () => {
 // });
 // test('ErrorModal component shows suitable msg when user exceds the maximum number of request allowed', () => {
@@ -130,47 +158,17 @@ test('Loader component is rendered when btn is clicked', () => {
 // test('ErrorModal component is hidden when user click in try again button', () => {
 // });
 
-const userSelected = 'jdmiguel';
-const userData = {
-  login: 'jdmiguel',
-  id: 7016824,
-  node_id: 'MDQ6VXNlcjcwMTY4MjQ=',
-  avatar_url: 'https://avatars0.githubusercontent.com/u/7016824?v=4',
-  gravatar_id: '',
-  url: 'https://api.github.com/users/jdmiguel',
-  html_url: 'https://github.com/jdmiguel',
-  followers_url: 'https://api.github.com/users/jdmiguel/followers',
-  following_url: 'https://api.github.com/users/jdmiguel/following{/other_user}',
-  gists_url: 'https://api.github.com/users/jdmiguel/gists{/gist_id}',
-  starred_url: 'https://api.github.com/users/jdmiguel/starred{/owner}{/repo}',
-  subscriptions_url: 'https://api.github.com/users/jdmiguel/subscriptions',
-  organizations_url: 'https://api.github.com/users/jdmiguel/orgs',
-  repos_url: 'https://api.github.com/users/jdmiguel/repos',
-  events_url: 'https://api.github.com/users/jdmiguel/events{/privacy}',
-  received_events_url: 'https://api.github.com/users/jdmiguel/received_events',
-  type: 'User',
-  site_admin: false,
-  name: 'Jaime De Miguel',
-  company: 'Atresmedia',
-  blog: 'https://jdmiguel.com',
-  location: 'Madrid',
-  email: null,
-  hireable: null,
-  bio: 'Senior Frontend developer',
-  public_repos: 24,
-  public_gists: 1,
-  followers: 9,
-  following: 14,
-  created_at: '2014-03-20T23:24:22Z',
-  updated_at: '2019-10-09T14:33:31Z'
-};
-
 describe('user data fetching', () => {
   beforeEach(() => {
     moxios.install();
   });
 
-  test('Get user data response from API', async () => {
+  test('Click btn and get user data response from API when service doesn´t fail', async () => {
+    const wrapper = setup(null, { userSelected });
+
+    const btnComponent = findByTestAttr(wrapper, intro.btn);
+    btnComponent.simulate('click');
+
     moxios.wait(() => {
       const request = moxios.requests.mostRecent();
       request.respondWith({
@@ -180,25 +178,8 @@ describe('user data fetching', () => {
     });
 
     const response = await getUserData(userSelected);
-    // console.log('response: ', response);
+    wrapper.update();
     expect(response).toEqual(userData);
-  });
-
-  test('Loader component is hidden when service doesn´t fail', async () => {
-    const wrapper = setup();
-
-    moxios.wait(() => {
-      const request = moxios.requests.mostRecent();
-      request.respondWith({
-        status: 200,
-        response: userData
-      });
-    });
-
-    await getUserData(userSelected);
-
-    const loaderComponent = findByTestAttr(wrapper, intro.loader);
-    expect(loaderComponent.length).toBe(0);
   });
 
   afterEach(() => {
