@@ -32,11 +32,15 @@ class App extends Component {
     return (
       <Fragment>
         {intro ? (
-          <Intro setUserData={this.onSetUserData} />
+          <Intro data-test="app-intro" setUserData={this.onSetUserData} />
         ) : (
-          <Content userData={userData} backIntro={this.onBackIntro} />
+          <Content
+            data-test="app-content"
+            userData={userData}
+            backIntro={this.onBackIntro}
+          />
         )}
-        <Footer />
+        <Footer data-test="app-footer" />
       </Fragment>
     );
   }

@@ -9,6 +9,7 @@ import Intro from '.';
 /* services */
 import { getUserData } from '../../services/github';
 
+/* utils */
 import { findByTestAttr, checkProps } from '../../utils/testUtils';
 import { intro } from '../../utils/testLiterals';
 
@@ -117,6 +118,8 @@ describe('No conditional rendered elements', () => {
     expect(errorModalComponent.length).toBe(0);
   });
 });
+
+// Check props
 
 test('does not warning with expected props', () => {
   const expectedProps = {

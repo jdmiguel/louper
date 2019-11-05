@@ -1,3 +1,9 @@
+export const app = {
+  intro: 'app-intro',
+  content: 'app-content',
+  footer: 'app-footer'
+};
+
 export const intro = {
   container: 'intro-container',
   githubCorner: 'intro-githubCorner',
