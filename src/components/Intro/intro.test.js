@@ -47,6 +47,8 @@ const userData = {
   created_at: '2014-03-20T23:24:22Z',
   updated_at: '2019-10-09T14:33:31Z'
 };
+const error403 = 403;
+
 const defaultProps = {
   setUserData: PropTypes.func.isRequired
 };
@@ -76,43 +78,43 @@ describe('No conditional rendered elements', () => {
     wrapper = setup();
   });
 
-  test('renders div container without error', () => {
+  test('div container is rendered without error', () => {
     const container = findByTestAttr(wrapper, intro.container);
 
     expect(container.length).toBe(1);
   });
 
-  test('renders githubCorner component without error', () => {
+  test('GithubCorner component is rendered without error', () => {
     const githubCornerComponent = findByTestAttr(wrapper, intro.githubCorner);
 
     expect(githubCornerComponent.length).toBe(1);
   });
 
-  test('renders Header component without error', () => {
+  test('Header component is rendered without error', () => {
     const headerComponent = findByTestAttr(wrapper, intro.header);
 
     expect(headerComponent.length).toBe(1);
   });
 
-  test('renders Input component without error', () => {
+  test('Input component is rendered without error', () => {
     const inputComponent = findByTestAttr(wrapper, intro.input);
 
     expect(inputComponent.length).toBe(1);
   });
 
-  test('no renders Btn', () => {
+  test('Btn component is not rendered ', () => {
     const btnComponent = findByTestAttr(wrapper, intro.btn);
 
     expect(btnComponent.length).toBe(0);
   });
 
-  test('no renders Loader', () => {
+  test('Loader component is not rendered', () => {
     const loaderComponent = findByTestAttr(wrapper, intro.loader);
 
     expect(loaderComponent.length).toBe(0);
   });
 
-  test('no renders ErrorModal', () => {
+  test('ErrorModal is not rendered', () => {
     const errorModalComponent = findByTestAttr(wrapper, intro.errorModal);
 
     expect(errorModalComponent.length).toBe(0);
@@ -166,7 +168,7 @@ describe('user data fetching', () => {
     moxios.install();
   });
 
-  test('Click btn and get user data response from API when service doesn´t fail', async () => {
+  test('User data is received from API when Btn component is clicked and service doesn´t fail', async () => {
     const wrapper = setup(null, { userSelected });
 
     const btnComponent = findByTestAttr(wrapper, intro.btn);
@@ -181,8 +183,27 @@ describe('user data fetching', () => {
     });
 
     const response = await getUserData(userSelected);
-    wrapper.update();
     expect(response).toEqual(userData);
+  });
+
+  test('Error 403 code is received from API when Btn component is clicked and service fails', async () => {
+    const wrapper = setup(null, { userSelected });
+
+    const errorResponse = {
+      status: 403,
+      response: { code: 403 }
+    };
+
+    const btnComponent = findByTestAttr(wrapper, intro.btn);
+    btnComponent.simulate('click');
+
+    moxios.wait(() => {
+      const request = moxios.requests.mostRecent();
+      request.reject(errorResponse);
+    });
+
+    const error = await getUserData(userSelected);
+    expect(error.code).toBe(403);
   });
 
   afterEach(() => {
