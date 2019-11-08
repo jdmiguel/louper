@@ -15,21 +15,21 @@ import { userDataModel } from '../../../utils/models';
 /* styles */
 import './styles.css';
 
-const UserData = ({ data }) => {
+const UserData = ({ userData }) => {
   const {
-    avatar_url,
+    avatar_url: { avatarUrl },
     name,
     bio,
     email,
     location,
     blog,
     company,
-    html_url
-  } = data;
+    html_url: { htmlUrl }
+  } = userData;
 
   return (
     <div className="user-wrapper section">
-      <img alt="user avatar" src={avatar_url} className="userAvatar" />
+      <img alt="user avatar" src={avatarUrl} className="userAvatar" />
       <div className="txtContainer">
         <h3>{name}</h3>
         <h4>{bio}</h4>
@@ -67,7 +67,7 @@ const UserData = ({ data }) => {
           )}
         </div>
         <Btn
-          onClick={() => window.open(html_url, '_blank')}
+          onClick={() => window.open(htmlUrl, '_blank')}
           type="account_circle"
           txt="VISIT PROFILE"
         />
@@ -77,7 +77,7 @@ const UserData = ({ data }) => {
 };
 
 UserData.propTypes = {
-  data: userDataModel
+  userData: userDataModel
 };
 
 export default UserData;

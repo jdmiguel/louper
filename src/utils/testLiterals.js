@@ -13,3 +13,12 @@ export const intro = {
   loader: 'intro-loader',
   errorModal: 'intro-errorModal'
 };
+
+export const userContent = {
+  menu: 'userContent-menu',
+  floatBtn: 'userContent-floatBtn',
+  userData: 'userContent-userData',
+  userRepos: 'userContent-userRepos',
+  userFollowing: 'userContent-userFollowing',
+  userFollowers: 'userContent-userFollowers'
+};

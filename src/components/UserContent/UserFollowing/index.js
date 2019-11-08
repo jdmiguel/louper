@@ -13,7 +13,7 @@ import { getFollowing } from '../../../services/github';
 
 /* utils */
 import { externalLink } from '../../../utils/externalLink';
-import { followingDataModel } from '../../../utils/models';
+import { followDataModel } from '../../../utils/models';
 
 /* styles */
 import './styles.css';
@@ -84,7 +84,7 @@ class UserFollowing extends Component {
 
 UserFollowing.propTypes = {
   setFollowingData: PropTypes.func,
-  followingData: followingDataModel
+  followingData: followDataModel
 };
 
 export default UserFollowing;

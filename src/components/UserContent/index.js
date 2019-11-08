@@ -14,7 +14,7 @@ import { userDataModel } from '../../utils/models';
 /* core */
 import FloatBtn from '../core/FloatBtn';
 
-class Content extends Component {
+class UserContent extends Component {
   constructor(props) {
     super(props);
 
@@ -46,6 +46,7 @@ class Content extends Component {
     return (
       <Fragment>
         <Menu
+          data-test="userContent-menu"
           onClick={activeSection =>
             this.setState({
               activeSection
@@ -53,10 +54,13 @@ class Content extends Component {
           }
           tabs={this.availableDataSections}
         />
-        <FloatBtn onClick={backIntro} />
-        {activeSection === 0 && <UserData data={userData} />}
+        <FloatBtn data-test="userContent-floatBtn" onClick={backIntro} />
+        {activeSection === 0 && (
+          <UserData data-test="userContent-userData" userData={userData} />
+        )}
         {activeSection === 1 && (
           <UserRepos
+            data-test="userContent-userRepos"
             user={login}
             setReposData={data => this.setState({ reposData: data })}
             reposData={reposData}
@@ -64,6 +68,7 @@ class Content extends Component {
         )}
         {activeSection === 2 && (
           <UserFollowing
+            data-test="userContent-userFollowing"
             user={login}
             setFollowingData={data => this.setState({ followingData: data })}
             followingData={followingData}
@@ -71,6 +76,7 @@ class Content extends Component {
         )}
         {activeSection === 3 && (
           <UserFollowers
+            data-test="userContent-userFollowers"
             user={login}
             setFollowersData={data => this.setState({ followersData: data })}
             followersData={followersData}
@@ -81,9 +87,9 @@ class Content extends Component {
   }
 }
 
-Content.propTypes = {
-  backIntro: PropTypes.func,
-  userData: userDataModel
+UserContent.propTypes = {
+  userData: userDataModel,
+  backIntro: PropTypes.func.isRequired
 };
 
-export default Content;
+export default UserContent;

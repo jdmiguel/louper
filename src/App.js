@@ -9,7 +9,7 @@ class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      userData: null,
+      userData: {},
       intro: true
     };
   }
@@ -24,7 +24,7 @@ class App extends Component {
   onBackIntro = () => {
     this.setState({
       intro: true,
-      userData: null
+      userData: {}
     });
   };
 

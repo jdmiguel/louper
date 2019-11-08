@@ -22,16 +22,7 @@ export const reposDataModel = PropTypes.arrayOf(
   })
 );
 
-export const followersDataModel = PropTypes.arrayOf(
-  PropTypes.shape({
-    id: PropTypes.number,
-    login: PropTypes.string,
-    html_url: PropTypes.string,
-    avatar_url: PropTypes.string
-  })
-);
-
-export const followingDataModel = PropTypes.arrayOf(
+export const followDataModel = PropTypes.arrayOf(
   PropTypes.shape({
     id: PropTypes.number,
     login: PropTypes.string,
