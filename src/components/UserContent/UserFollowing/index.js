@@ -1,17 +1,19 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
-/* core */
+/* material-ui */
 import Grid from '@material-ui/core/Grid';
-import Btn from '../core/Btn';
-import Loader from '../core/Loader';
+
+/* core */
+import Btn from '../../core/Btn';
+import Loader from '../../core/Loader';
 
 /* services */
-import { getFollowing } from '../../services/github';
+import { getFollowing } from '../../../services/github';
 
 /* utils */
-import { externalLink } from '../../utils/externalLink';
-import { followingDataModel } from '../../utils/models';
+import { externalLink } from '../../../utils/externalLink';
+import { followingDataModel } from '../../../utils/models';
 
 /* styles */
 import './styles.css';

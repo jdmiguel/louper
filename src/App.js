@@ -1,6 +1,8 @@
 import React, { Component, Fragment } from 'react';
+
+/* components */
 import Intro from './components/Intro';
-import Content from './components/Content';
+import UserContent from './components/UserContent';
 import Footer from './components/Footer';
 
 class App extends Component {
@@ -34,8 +36,8 @@ class App extends Component {
         {intro ? (
           <Intro data-test="app-intro" setUserData={this.onSetUserData} />
         ) : (
-          <Content
-            data-test="app-content"
+          <UserContent
+            data-test="app-userContent"
             userData={userData}
             backIntro={this.onBackIntro}
           />

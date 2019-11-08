@@ -1,6 +1,6 @@
 export const app = {
   intro: 'app-intro',
-  content: 'app-content',
+  userContent: 'app-userContent',
   footer: 'app-footer'
 };
 

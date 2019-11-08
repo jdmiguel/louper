@@ -1,9 +1,15 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+
+/* material-ui */
 import Dialog from '@material-ui/core/Dialog';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import DialogContent from '@material-ui/core/DialogContent';
+
+/* core */
 import Btn from '../Btn';
+
+/* styles */
 import './styles.css';
 
 const ErrorModal = ({ isErrorModalOpen, msg, onClick }) => (

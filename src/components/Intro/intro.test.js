@@ -7,9 +7,6 @@ import MockAdapter from 'axios-mock-adapter';
 /* components */
 import Intro from '.';
 
-/* services */
-import { getUserData } from '../../services/github';
-
 /* utils */
 import { findByTestAttr, checkProps } from '../../utils/testUtils';
 import { intro } from '../../utils/testLiterals';

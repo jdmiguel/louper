@@ -1,10 +1,18 @@
 import React from 'react';
+
+/* material-ui */
 import EmailIcon from '@material-ui/icons/Email';
 import HomeIcon from '@material-ui/icons/Home';
 import LinkIcon from '@material-ui/icons/Link';
 import CompanyIcon from '@material-ui/icons/Contacts';
-import { userDataModel } from '../../utils/models';
-import Btn from '../core/Btn';
+
+/* core */
+import Btn from '../../core/Btn';
+
+/* utils */
+import { userDataModel } from '../../../utils/models';
+
+/* styles */
 import './styles.css';
 
 const UserData = ({ data }) => {

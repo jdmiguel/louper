@@ -44,7 +44,7 @@ test('Intro component is rendered when intro state is true', () => {
 
 test('Content component is not rendered when intro state is true', () => {
   const wrapper = setup(null, { intro: true });
-  const content = findByTestAttr(wrapper, app.content);
+  const content = findByTestAttr(wrapper, app.userContent);
 
   expect(content.length).toBe(0);
 });
@@ -58,7 +58,7 @@ test('Intro component is not rendered when intro state is false', () => {
 
 test('Content component is rendered when intro state is true', () => {
   const wrapper = setup(null, { intro: false });
-  const content = findByTestAttr(wrapper, app.content);
+  const content = findByTestAttr(wrapper, app.userContent);
 
   expect(content.length).toBe(1);
 });

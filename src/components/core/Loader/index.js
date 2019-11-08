@@ -1,5 +1,9 @@
 import React from 'react';
+
+/* material-ui */
 import CircularProgress from '@material-ui/core/CircularProgress';
+
+/* styles */
 import './styles.css';
 
 const Loader = () => (

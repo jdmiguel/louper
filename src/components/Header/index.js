@@ -1,5 +1,9 @@
 import React from 'react';
+
+/* core */
 import GithubIcon from '../core/GithubIcon';
+
+/* styles */
 import './styles.css';
 
 const Header = () => (

@@ -1,3 +1,4 @@
+/* services */
 import { request } from '.';
 
 const BASE_URL = 'https://api.github.com';

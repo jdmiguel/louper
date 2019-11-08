@@ -1,22 +1,22 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
-/* core */
+/* material-ui */
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemText from '@material-ui/core/ListItemText';
 import Avatar from '@material-ui/core/Avatar';
 import FolderIcon from '@material-ui/icons/Folder';
-import Loader from '../core/Loader';
 
-/* icons */
+/* core */
+import Loader from '../../core/Loader';
 
 /* services */
-import { getRepos } from '../../services/github';
+import { getRepos } from '../../../services/github';
 
 /* utils */
-import { externalLink } from '../../utils/externalLink';
-import { reposDataModel } from '../../utils/models';
+import { externalLink } from '../../../utils/externalLink';
+import { reposDataModel } from '../../../utils/models';
 
 /* styles */
 import './styles.css';

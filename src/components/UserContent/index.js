@@ -3,10 +3,10 @@ import PropTypes from 'prop-types';
 
 /* components */
 import Menu from '../Menu';
-import UserData from '../UserData';
-import UserRepos from '../UserRepos';
-import UserFollowing from '../UserFollowing';
-import UserFollowers from '../UserFollowers';
+import UserData from './UserData';
+import UserRepos from './UserRepos';
+import UserFollowing from './UserFollowing';
+import UserFollowers from './UserFollowers';
 
 /* utils */
 import { userDataModel } from '../../utils/models';
