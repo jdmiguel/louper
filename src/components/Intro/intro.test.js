@@ -183,7 +183,7 @@ describe('user data fetching', () => {
     btnComponent.simulate('click');
   });
 
-  test('when service returns a 200 user data is received from API', async () => {
+  test('when service returns a 200 user data is received from API', () => {
     const endPoint = `https://api.github.com/users/${userSelected}`;
     mock.onGet(endPoint).reply(200, userData);
 
@@ -192,7 +192,7 @@ describe('user data fetching', () => {
     });
   });
 
-  test('Error modal is showed with maximumRequest message when service returns a 403 error', async () => {
+  test('Error modal is showed with maximumRequest message when service returns a 403 error', () => {
     const endPoint = `https://api.github.com/users/${userSelected}`;
     mock.onGet(endPoint).reply(200, userData);
 
@@ -205,7 +205,7 @@ describe('user data fetching', () => {
     });
   });
 
-  test('Error modal is showed with unavailableUser message when service returns a 404 error', async () => {
+  test('Error modal is showed with unavailableUser message when service returns a 404 error', () => {
     const endPoint = `https://api.github.com/users/${userNotFound}`;
     mock.onGet(endPoint).networkError();
 
