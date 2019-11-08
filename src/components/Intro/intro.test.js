@@ -1,7 +1,8 @@
 import React from 'react';
 import { shallow } from 'enzyme';
 import PropTypes from 'prop-types';
-import moxios from 'moxios';
+import axios from 'axios';
+import MockAdapter from 'axios-mock-adapter';
 
 /* components */
 import Intro from '.';
@@ -12,42 +13,7 @@ import { getUserData } from '../../services/github';
 /* utils */
 import { findByTestAttr, checkProps } from '../../utils/testUtils';
 import { intro } from '../../utils/testLiterals';
-
-const userSelected = 'jdmiguel';
-const userData = {
-  login: 'jdmiguel',
-  id: 7016824,
-  node_id: 'MDQ6VXNlcjcwMTY4MjQ=',
-  avatar_url: 'https://avatars0.githubusercontent.com/u/7016824?v=4',
-  gravatar_id: '',
-  url: 'https://api.github.com/users/jdmiguel',
-  html_url: 'https://github.com/jdmiguel',
-  followers_url: 'https://api.github.com/users/jdmiguel/followers',
-  following_url: 'https://api.github.com/users/jdmiguel/following{/other_user}',
-  gists_url: 'https://api.github.com/users/jdmiguel/gists{/gist_id}',
-  starred_url: 'https://api.github.com/users/jdmiguel/starred{/owner}{/repo}',
-  subscriptions_url: 'https://api.github.com/users/jdmiguel/subscriptions',
-  organizations_url: 'https://api.github.com/users/jdmiguel/orgs',
-  repos_url: 'https://api.github.com/users/jdmiguel/repos',
-  events_url: 'https://api.github.com/users/jdmiguel/events{/privacy}',
-  received_events_url: 'https://api.github.com/users/jdmiguel/received_events',
-  type: 'User',
-  site_admin: false,
-  name: 'Jaime De Miguel',
-  company: 'Atresmedia',
-  blog: 'https://jdmiguel.com',
-  location: 'Madrid',
-  email: null,
-  hireable: null,
-  bio: 'Senior Frontend developer',
-  public_repos: 24,
-  public_gists: 1,
-  followers: 9,
-  following: 14,
-  created_at: '2014-03-20T23:24:22Z',
-  updated_at: '2019-10-09T14:33:31Z'
-};
-const error403 = 403;
+import { errorLiterals } from '../../utils/errorLiterals';
 
 const defaultProps = {
   setUserData: PropTypes.func.isRequired
@@ -144,7 +110,7 @@ test('Btn component is rendered when input shows at least one character', () => 
 });
 
 test('Loader component is rendered when btn is clicked', () => {
-  const wrapper = setup(null, { userSelected });
+  const wrapper = setup(null, { userSelected: 'sample' });
 
   const btnComponent = findByTestAttr(wrapper, intro.btn);
   btnComponent.simulate('click');
@@ -164,49 +130,78 @@ test('Loader component is rendered when btn is clicked', () => {
 // });
 
 describe('user data fetching', () => {
+  const userSelected = 'jdmiguel';
+  const userNotFound = 'asdhfjauhesdriahser8y9qw38r4eoiAJDFSADJS';
+  const userData = {
+    login: 'jdmiguel',
+    id: 7016824,
+    node_id: 'MDQ6VXNlcjcwMTY4MjQ=',
+    avatar_url: 'https://avatars0.githubusercontent.com/u/7016824?v=4',
+    gravatar_id: '',
+    url: 'https://api.github.com/users/jdmiguel',
+    html_url: 'https://github.com/jdmiguel',
+    followers_url: 'https://api.github.com/users/jdmiguel/followers',
+    following_url:
+      'https://api.github.com/users/jdmiguel/following{/other_user}',
+    gists_url: 'https://api.github.com/users/jdmiguel/gists{/gist_id}',
+    starred_url: 'https://api.github.com/users/jdmiguel/starred{/owner}{/repo}',
+    subscriptions_url: 'https://api.github.com/users/jdmiguel/subscriptions',
+    organizations_url: 'https://api.github.com/users/jdmiguel/orgs',
+    repos_url: 'https://api.github.com/users/jdmiguel/repos',
+    events_url: 'https://api.github.com/users/jdmiguel/events{/privacy}',
+    received_events_url:
+      'https://api.github.com/users/jdmiguel/received_events',
+    type: 'User',
+    site_admin: false,
+    name: 'Jaime De Miguel',
+    company: 'Atresmedia',
+    blog: 'https://jdmiguel.com',
+    location: 'Madrid',
+    email: null,
+    hireable: null,
+    bio: 'Senior Frontend developer',
+    public_repos: 24,
+    public_gists: 1,
+    followers: 9,
+    following: 14,
+    created_at: '2014-03-20T23:24:22Z',
+    updated_at: '2019-10-09T14:33:31Z'
+  };
+  const { maximumRequest, unavailableUser } = errorLiterals;
+
+  let instance;
+  let mock;
+  let wrapper;
+
   beforeEach(() => {
-    moxios.install();
-  });
+    instance = axios.create();
+    mock = new MockAdapter(axios);
 
-  test('User data is received from API when Btn component is clicked and service doesn´t fail', async () => {
-    const wrapper = setup(null, { userSelected });
-
-    const btnComponent = findByTestAttr(wrapper, intro.btn);
-    btnComponent.simulate('click');
-
-    moxios.wait(() => {
-      const request = moxios.requests.mostRecent();
-      request.respondWith({
-        status: 200,
-        response: userData
-      });
-    });
-
-    const response = await getUserData(userSelected);
-    expect(response).toEqual(userData);
-  });
-
-  test('Error 403 code is received from API when Btn component is clicked and service fails', async () => {
-    const wrapper = setup(null, { userSelected });
-
-    const errorResponse = {
-      status: 403,
-      response: { code: 403 }
-    };
+    wrapper = setup(null, { userSelected });
 
     const btnComponent = findByTestAttr(wrapper, intro.btn);
     btnComponent.simulate('click');
-
-    moxios.wait(() => {
-      const request = moxios.requests.mostRecent();
-      request.reject(errorResponse);
-    });
-
-    const error = await getUserData(userSelected);
-    expect(error.code).toBe(403);
   });
 
-  afterEach(() => {
-    moxios.uninstall();
+  test('User data is received from API when service doesn´t fail', async () => {
+    const endPoint = `https://api.github.com/users/${userSelected}`;
+    mock.onGet(endPoint).reply(200, userData);
+
+    return instance.get(endPoint).then(response => {
+      expect(response.data).toEqual(userData);
+    });
+  });
+
+  test('Error modal is showed with unavailableUser message when service retrieves a 404 error', async () => {
+    const endPoint = `https://api.github.com/users/${userNotFound}`;
+    mock.onGet(endPoint).networkError();
+
+    return instance.get(endPoint).catch(error => {
+      expect(error.response.status).toBe(404);
+
+      const errorModal = findByTestAttr(wrapper, intro.errorModal);
+      expect(errorModal.length).toBe(1);
+      expect(errorModal.prop('msg')).toBe(unavailableUser);
+    });
   });
 });
