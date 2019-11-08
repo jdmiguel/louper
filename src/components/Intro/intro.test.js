@@ -119,15 +119,7 @@ test('Loader component is rendered when btn is clicked', () => {
   expect(loaderComponent.length).toBe(1);
 });
 
-// TO-DO
-// test('ErrorModal component is rendered when service fail', () => {
-// });
-// test('ErrorModal component shows suitable msg when user exceds the maximum number of request allowed', () => {
-// });
-// test('ErrorModal component shows suitable msg when user searchs an unavailable github user', () => {
-// });
-// test('ErrorModal component is hidden when user click in try again button', () => {
-// });
+// Data fetching
 
 describe('user data fetching', () => {
   const userSelected = 'jdmiguel';
