@@ -9,15 +9,16 @@ import FormControl from '@material-ui/core/FormControl';
 /* styles */
 import './styles.css';
 
-const IntroInput = ({ onChange }) => (
+const IntroInput = ({ onChange, onKeyUp }) => (
   <FormControl className="formContainer">
     <InputLabel className="label">Add Github User</InputLabel>
-    <Input className="input" onChange={event => onChange(event)} />
+    <Input className="input" onChange={onChange} onKeyUp={onKeyUp} />
   </FormControl>
 );
 
 IntroInput.propTypes = {
-  onChange: PropTypes.func.isRequired
+  onChange: PropTypes.func.isRequired,
+  onKeyUp: PropTypes.func.isRequired
 };
 
 export default IntroInput;

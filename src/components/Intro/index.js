@@ -32,22 +32,6 @@ class Intro extends Component {
     };
   }
 
-  componentDidMount() {
-    document.addEventListener('keyup', this.onKeyUpHandler);
-  }
-
-  componentWillUnmount() {
-    document.removeEventListener('keyup', this.onKeyUpHandler);
-  }
-
-  onChangeHandler = e => {
-    const { value } = e.target;
-
-    this.setState({
-      userSelected: value
-    });
-  };
-
   sendUserData = () => {
     const { userSelected } = this.state;
 
@@ -91,6 +75,14 @@ class Intro extends Component {
       });
   };
 
+  onChangeHandler = e => {
+    const { value } = e.target;
+
+    this.setState({
+      userSelected: value
+    });
+  };
+
   onKeyUpHandler = event => {
     const { userSelected } = this.state;
 
@@ -110,6 +102,7 @@ class Intro extends Component {
           <Input
             data-test="intro-input"
             onChange={this.onChangeHandler}
+            onKeyUp={this.onKeyUpHandler}
             value={userSelected}
           />
           {userSelected && (
