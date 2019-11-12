@@ -177,7 +177,7 @@ describe('user data fetching', () => {
     mock.onGet(endPoint).reply(200, userData);
 
     return instance.get(endPoint).then(response => {
-      expect(response.data).toEqual(userData);
+      expect(response.data.login).toBe(userData.login);
     });
   });
 
