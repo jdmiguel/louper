@@ -17,14 +17,14 @@ import './styles.css';
 
 const UserData = ({ userData }) => {
   const {
-    avatar_url: { avatarUrl },
+    avatar_url: avatarUrl,
     name,
     bio,
     email,
     location,
     blog,
     company,
-    html_url: { htmlUrl }
+    html_url: htmlUrl
   } = userData;
 
   return (
