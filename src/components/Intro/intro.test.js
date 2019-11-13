@@ -116,6 +116,26 @@ test('Loader component is rendered when btn is clicked', () => {
   expect(loaderComponent.length).toBe(1);
 });
 
+test('Loader component is not rendered when enter key is pressed and userSelected state is empty', () => {
+  const wrapper = setup(null, { userSelected: '' });
+
+  const inputComponent = findByTestAttr(wrapper, intro.input);
+  inputComponent.simulate('keyUp', { keyCode: 13 });
+
+  const loaderComponent = findByTestAttr(wrapper, intro.loader);
+  expect(loaderComponent.length).toBe(0);
+});
+
+test('Loader component is rendered when enter key is pressed and userSelected state is not empty', () => {
+  const wrapper = setup(null, { userSelected: 'sample' });
+
+  const inputComponent = findByTestAttr(wrapper, intro.input);
+  inputComponent.simulate('keyUp', { keyCode: 13 });
+
+  const loaderComponent = findByTestAttr(wrapper, intro.loader);
+  expect(loaderComponent.length).toBe(1);
+});
+
 // Data fetching
 
 describe('user data fetching', () => {
@@ -123,44 +143,13 @@ describe('user data fetching', () => {
   const userNotFound = 'asdhfjauhesdriahser8y9qw38r4eoiAJDFSADJS';
   const userData = {
     login: 'jdmiguel',
-    id: 7016824,
-    node_id: 'MDQ6VXNlcjcwMTY4MjQ=',
-    avatar_url: 'https://avatars0.githubusercontent.com/u/7016824?v=4',
-    gravatar_id: '',
-    url: 'https://api.github.com/users/jdmiguel',
-    html_url: 'https://github.com/jdmiguel',
-    followers_url: 'https://api.github.com/users/jdmiguel/followers',
-    following_url:
-      'https://api.github.com/users/jdmiguel/following{/other_user}',
-    gists_url: 'https://api.github.com/users/jdmiguel/gists{/gist_id}',
-    starred_url: 'https://api.github.com/users/jdmiguel/starred{/owner}{/repo}',
-    subscriptions_url: 'https://api.github.com/users/jdmiguel/subscriptions',
-    organizations_url: 'https://api.github.com/users/jdmiguel/orgs',
-    repos_url: 'https://api.github.com/users/jdmiguel/repos',
-    events_url: 'https://api.github.com/users/jdmiguel/events{/privacy}',
-    received_events_url:
-      'https://api.github.com/users/jdmiguel/received_events',
-    type: 'User',
-    site_admin: false,
-    name: 'Jaime De Miguel',
-    company: 'Atresmedia',
-    blog: 'https://jdmiguel.com',
-    location: 'Madrid',
-    email: null,
-    hireable: null,
-    bio: 'Senior Frontend developer',
-    public_repos: 24,
-    public_gists: 1,
-    followers: 9,
-    following: 14,
-    created_at: '2014-03-20T23:24:22Z',
-    updated_at: '2019-10-09T14:33:31Z'
+    id: 7016824
   };
   const { maximumRequest, unavailableUser } = errorLiterals;
 
-  let instance;
-  let mock;
-  let wrapper;
+  let instance = null;
+  let mock = null;
+  let wrapper = null;
 
   beforeEach(() => {
     instance = axios.create();
@@ -177,7 +166,14 @@ describe('user data fetching', () => {
     mock.onGet(endPoint).reply(200, userData);
 
     return instance.get(endPoint).then(response => {
-      expect(response.data.login).toBe(userData.login);
+      const {
+        data: { login, id }
+      } = response;
+      const currentUserData = {
+        login,
+        id
+      };
+      expect(currentUserData).toEqual(userData);
     });
   });
 

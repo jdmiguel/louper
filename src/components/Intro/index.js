@@ -91,8 +91,8 @@ class Intro extends Component {
       });
   };
 
-  onChangeHandler = e => {
-    const { value } = e.target;
+  onChangeHandler = event => {
+    const { value } = event.target;
 
     this.setState({
       userSelected: value

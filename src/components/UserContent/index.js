@@ -8,9 +8,6 @@ import UserRepos from './UserRepos';
 import UserFollowing from './UserFollowing';
 import UserFollowers from './UserFollowers';
 
-/* utils */
-import { userDataModel } from '../../utils/models';
-
 /* core */
 import FloatBtn from '../core/FloatBtn';
 

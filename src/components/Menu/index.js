@@ -10,9 +10,6 @@ import FolderIcon from '@material-ui/icons/Folder';
 import FavoriteIcon from '@material-ui/icons/Favorite';
 import VisibilityIcon from '@material-ui/icons/Visibility';
 
-/* utils */
-import { menuTabsModel } from '../../utils/models';
-
 /* styles */
 import './styles.css';
 
