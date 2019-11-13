@@ -12,6 +12,8 @@ import Btn from '../../core/Btn';
 /* styles */
 import './styles.css';
 
+const SubDataBlock = ({ children }) => <p>{children}</p>;
+
 const UserData = ({ userData }) => {
   const {
     avatarUrl,
@@ -25,14 +27,19 @@ const UserData = ({ userData }) => {
   } = userData;
 
   return (
-    <div className="user-wrapper section">
-      <img alt="user avatar" src={avatarUrl} className="userAvatar" />
+    <div data-test="userData-container" className="user-wrapper section">
+      <img
+        data-test="userData-image"
+        alt="user avatar"
+        src={avatarUrl}
+        className="userAvatar"
+      />
       <div className="txtContainer">
-        <h3>{name}</h3>
-        <h4>{bio}</h4>
+        <h3 data-test="userData-name">{name}</h3>
+        <h4 data-test="userData-bio">{bio}</h4>
         <div className="subUserInfo">
           {email && (
-            <p>
+            <SubDataBlock data-test="userData-email">
               <EmailIcon className="userDataIcon" />
               <a
                 href={email}
@@ -42,25 +49,25 @@ const UserData = ({ userData }) => {
               >
                 {email}
               </a>
-            </p>
+            </SubDataBlock>
           )}
           {location && (
-            <p>
+            <SubDataBlock data-test="userData-location">
               <HomeIcon className="userDataIcon" /> {location}
-            </p>
+            </SubDataBlock>
           )}
           {blog && (
-            <p>
+            <SubDataBlock data-test="userData-blog">
               <LinkIcon className="userDataIcon" />
               <a href={blog} rel="noopener noreferrer" target="_blank">
                 {blog}
               </a>
-            </p>
+            </SubDataBlock>
           )}
           {company && (
-            <p>
+            <SubDataBlock data-test="userData-company">
               <CompanyIcon className="userDataIcon" /> {company}
-            </p>
+            </SubDataBlock>
           )}
         </div>
         <Btn

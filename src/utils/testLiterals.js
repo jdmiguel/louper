@@ -31,3 +31,14 @@ export const menu = {
   tabUserFollowing: 'menu-tab-userFollowing',
   tabUserFollowers: 'menu-tab-userFollowers'
 };
+
+export const userData = {
+  container: 'userData-container',
+  image: 'userData-image',
+  name: 'userData-name',
+  bio: 'userData-bio',
+  email: 'userData-email',
+  location: 'userData-location',
+  blog: 'userData-blog',
+  company: 'userData-company'
+};
