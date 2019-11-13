@@ -11,8 +11,8 @@ import { menu } from '../../utils/testLiterals';
 import { menuTabsModel } from '../../utils/models';
 
 const defaultProps = {
-  onClick: PropTypes.func.isRequired,
-  tabs: menuTabsModel
+  tabs: menuTabsModel,
+  onClick: PropTypes.func.isRequired
 };
 
 /**
@@ -35,11 +35,13 @@ const setup = (props = {}, state = null) => {
 
 test('does not warning with expected props of menu component', () => {
   const expectedProps = {
-    onClick: PropTypes.func.isRequired,
-    tabs: menuTabsModel
+    tabs: menuTabsModel,
+    onClick: PropTypes.func.isRequired
   };
   checkProps(Menu, expectedProps);
 });
+
+// No conditional rendering
 
 describe('rendered no conditional menu component elements', () => {
   let wrapper;

@@ -9,9 +9,6 @@ import CompanyIcon from '@material-ui/icons/Contacts';
 /* core */
 import Btn from '../../core/Btn';
 
-/* utils */
-import { userDataModel } from '../../../utils/models';
-
 /* styles */
 import './styles.css';
 
@@ -74,10 +71,6 @@ const UserData = ({ userData }) => {
       </div>
     </div>
   );
-};
-
-UserData.propTypes = {
-  userData: userDataModel
 };
 
 export default UserData;

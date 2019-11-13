@@ -24,13 +24,6 @@ class UserContent extends Component {
       followingData: null,
       followersData: null
     };
-
-    this.availableDataSections = {
-      userSection: true,
-      reposSection: !!props.userData.public_repos,
-      followingSection: !!props.userData.followers,
-      followersSection: !!props.userData.following
-    };
   }
 
   render() {
@@ -94,7 +87,6 @@ class UserContent extends Component {
 }
 
 UserContent.propTypes = {
-  userData: userDataModel,
   backIntro: PropTypes.func.isRequired
 };
 

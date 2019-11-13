@@ -24,7 +24,7 @@ class App extends Component {
   onBackIntro = () => {
     this.setState({
       intro: true,
-      userData: {}
+      userData: null
     });
   };
 

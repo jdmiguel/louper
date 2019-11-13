@@ -32,6 +32,16 @@ const setup = (props = {}, state = null) => {
   return wrapper;
 };
 
+// Check props
+
+test('does not warning with expected props', () => {
+  const expectedProps = {
+    setUserData: PropTypes.func.isRequired
+  };
+
+  checkProps(Intro, expectedProps);
+});
+
 // No conditional rendering
 
 describe('No conditional rendered elements', () => {
@@ -82,16 +92,6 @@ describe('No conditional rendered elements', () => {
 
     expect(errorModalComponent.length).toBe(0);
   });
-});
-
-// Check props
-
-test('does not warning with expected props', () => {
-  const expectedProps = {
-    setUserData: PropTypes.func.isRequired
-  };
-
-  checkProps(Intro, expectedProps);
 });
 
 // Conditional rendering

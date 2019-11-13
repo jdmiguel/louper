@@ -37,4 +37,4 @@ export const menuTabsModel = PropTypes.shape({
   repos: PropTypes.number,
   following: PropTypes.number,
   followers: PropTypes.number
-});
+}).isRequired;

@@ -82,8 +82,7 @@ class Menu extends Component {
 }
 
 Menu.propTypes = {
-  onClick: PropTypes.func.isRequired,
-  tabs: menuTabsModel
+  onClick: PropTypes.func.isRequired
 };
 
 export default Menu;
