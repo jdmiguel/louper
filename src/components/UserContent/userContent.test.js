@@ -55,13 +55,13 @@ describe('No conditional rendered elements', () => {
 
 // Check props
 
-// test('does not warning with expected props', () => {
-// const expectedProps = {
-// userData: userDataModel,
-// backIntro: PropTypes.func.isRequired
-// };
-// checkProps(UserContent, expectedProps);
-// });
+test('does not warning with expected props', () => {
+  const expectedProps = {
+    userData: userDataModel,
+    backIntro: PropTypes.func.isRequired
+  };
+  checkProps(UserContent, expectedProps);
+});
 
 // Conditional rendering
 

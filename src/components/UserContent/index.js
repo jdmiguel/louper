@@ -27,21 +27,27 @@ class UserContent extends Component {
 
     this.availableDataSections = {
       userSection: true,
-      reposSection: props.userData.public_repos,
-      followingSection: props.userData.followers,
-      followersSection: props.userData.following
+      reposSection: !!props.userData.public_repos,
+      followingSection: !!props.userData.followers,
+      followersSection: !!props.userData.following
     };
   }
 
   render() {
     const { userData, backIntro } = this.props;
-    const { login } = userData;
     const {
       activeSection,
       reposData,
       followingData,
       followersData
     } = this.state;
+
+    const { login } = userData;
+    const tabsData = {
+      repos: userData.repos,
+      following: userData.following,
+      followers: userData.followers
+    };
 
     return (
       <Fragment>
@@ -52,7 +58,7 @@ class UserContent extends Component {
               activeSection
             })
           }
-          tabs={this.availableDataSections}
+          tabs={tabsData}
         />
         <FloatBtn data-test="userContent-floatBtn" onClick={backIntro} />
         {activeSection === 0 && (

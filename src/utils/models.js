@@ -1,9 +1,8 @@
 import PropTypes from 'prop-types';
 
-export const dataModel = PropTypes.arrayOf(PropTypes.any);
-
 export const userDataModel = PropTypes.shape({
-  avatar_url: PropTypes.string,
+  login: PropTypes.string,
+  avatarUrl: PropTypes.string,
   name: PropTypes.string,
   bio: PropTypes.string,
   email: PropTypes.string,
@@ -11,7 +10,10 @@ export const userDataModel = PropTypes.shape({
   url: PropTypes.string,
   blog: PropTypes.string,
   company: PropTypes.string,
-  html_url: PropTypes.string
+  htmlUrl: PropTypes.string,
+  repos: PropTypes.number,
+  followers: PropTypes.number,
+  following: PropTypes.number
 });
 
 export const reposDataModel = PropTypes.arrayOf(
@@ -30,3 +32,9 @@ export const followDataModel = PropTypes.arrayOf(
     avatar_url: PropTypes.string
   })
 );
+
+export const menuTabsModel = PropTypes.shape({
+  repos: PropTypes.number,
+  following: PropTypes.number,
+  followers: PropTypes.number
+});

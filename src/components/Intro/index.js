@@ -51,8 +51,24 @@ class Intro extends Component {
     });
 
     getUserData(user)
-      .then(userData => {
-        setUserData(userData);
+      .then(response => {
+        const userDataUpdated = {
+          login: response.login,
+          avatarUrl: response.avatar_url,
+          name: response.name,
+          bio: response.bio,
+          email: response.email,
+          location: response.location,
+          url: response.url,
+          blog: response.blog,
+          company: response.company,
+          htmlUrl: response.html_url,
+          repos: response.public_repos,
+          followers: response.followers,
+          following: response.following
+        };
+
+        setUserData(userDataUpdated);
       })
       .catch(error => {
         let errorMsg = '';
@@ -97,7 +113,7 @@ class Intro extends Component {
     return (
       <Fragment>
         <GithubCorner data-test="intro-githubCorner" />
-        <div className="intro" data-test="intro-container">
+        <div data-test="intro-container" className="intro">
           <Header data-test="intro-header" />
           <Input
             data-test="intro-input"

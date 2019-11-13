@@ -9,7 +9,9 @@ import PersonIcon from '@material-ui/icons/Person';
 import FolderIcon from '@material-ui/icons/Folder';
 import FavoriteIcon from '@material-ui/icons/Favorite';
 import VisibilityIcon from '@material-ui/icons/Visibility';
-import StarIcon from '@material-ui/icons/Star';
+
+/* utils */
+import { menuTabsModel } from '../../utils/models';
 
 /* styles */
 import './styles.css';
@@ -33,17 +35,12 @@ class Menu extends Component {
   render() {
     const { value } = this.state;
     const { tabs } = this.props;
-    const {
-      reposSection,
-      followingSection,
-      followersSection,
-      starredSection
-    } = tabs;
 
     return (
-      <div className="menu">
+      <div data-test="menu-container" className="menu">
         <Paper>
           <Tabs
+            data-test="menu-tabs"
             value={value}
             onChange={this.changeHandler}
             indicatorColor="primary"
@@ -51,15 +48,32 @@ class Menu extends Component {
             className="tabs"
             centered
           >
-            <Tab label="USER DATA" icon={<PersonIcon />} />
-            {reposSection && <Tab label="REPOSITORIES" icon={<FolderIcon />} />}
-            {followingSection && (
-              <Tab label="FOLLOWING" icon={<FavoriteIcon />} />
+            <Tab
+              data-test="menu-tab-userData"
+              label="USER DATA"
+              icon={<PersonIcon />}
+            />
+            {tabs.repos && (
+              <Tab
+                data-test="menu-tab-userRepos"
+                label="REPOSITORIES"
+                icon={<FolderIcon />}
+              />
             )}
-            {followersSection && (
-              <Tab label="FOLLOWERS" icon={<VisibilityIcon />} />
+            {tabs.following && (
+              <Tab
+                data-test="menu-tab-userFollowing"
+                label="FOLLOWING"
+                icon={<FavoriteIcon />}
+              />
             )}
-            {starredSection && <Tab label="STARRED" icon={<StarIcon />} />}
+            {tabs.followers && (
+              <Tab
+                data-test="menu-tab-userFollowers"
+                label="FOLLOWERS"
+                icon={<VisibilityIcon />}
+              />
+            )}
           </Tabs>
         </Paper>
       </div>
@@ -68,7 +82,8 @@ class Menu extends Component {
 }
 
 Menu.propTypes = {
-  onClick: PropTypes.func.isRequired
+  onClick: PropTypes.func.isRequired,
+  tabs: menuTabsModel
 };
 
 export default Menu;

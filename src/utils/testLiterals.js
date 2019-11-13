@@ -22,3 +22,12 @@ export const userContent = {
   userFollowing: 'userContent-userFollowing',
   userFollowers: 'userContent-userFollowers'
 };
+
+export const menu = {
+  container: 'menu-container',
+  tabs: 'menu-tabs',
+  tabUserData: 'menu-tab-userData',
+  tabUserRepos: 'menu-tab-userRepos',
+  tabUserFollowing: 'menu-tab-userFollowing',
+  tabUserFollowers: 'menu-tab-userFollowers'
+};
