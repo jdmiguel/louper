@@ -13,7 +13,6 @@ import { getFollowers } from '../../../services/github';
 
 /* utils */
 import { externalLink } from '../../../utils/externalLink';
-import { followDataModel } from '../../../utils/models';
 
 /* styles */
 import './styles.css';
@@ -23,8 +22,7 @@ class UserFollowers extends Component {
     super(props);
 
     this.state = {
-      data: props.followersData || null,
-      isLoading: !props.followersData
+      data: props.followersData || []
     };
   }
 
@@ -42,21 +40,14 @@ class UserFollowers extends Component {
         })
         .catch(error => {
           throw error;
-        })
-        .finally(() => {
-          this.setState({
-            isLoading: false
-          });
         });
     }
   }
 
   render() {
-    const { isLoading, data } = this.state;
+    const { data } = this.state;
 
-    return isLoading ? (
-      <Loader data-test="userFollowers-loader" />
-    ) : (
+    return data.length ? (
       <Grid
         data-test="userFollowers-container"
         container
@@ -83,6 +74,8 @@ class UserFollowers extends Component {
           </Grid>
         ))}
       </Grid>
+    ) : (
+      <Loader data-test="userFollowers-loader" />
     );
   }
 }

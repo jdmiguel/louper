@@ -161,7 +161,7 @@ describe('user data fetching', () => {
     btnComponent.simulate('click');
   });
 
-  test('when service returns a 200 user data is received from API', () => {
+  test('when service returns a 200, user data is received from API', () => {
     const endPoint = `https://api.github.com/users/${userSelected}`;
     mock.onGet(endPoint).reply(200, userData);
 
@@ -179,14 +179,14 @@ describe('user data fetching', () => {
 
   test('Error modal is rendered with maximumRequest message when service returns a 403 error', () => {
     const endPoint = `https://api.github.com/users/${userSelected}`;
-    mock.onGet(endPoint).reply(200, userData);
+    mock.onGet(endPoint).networkError();
 
     return instance.get(endPoint).catch(error => {
-      if (error.response.status === 403) {
-        const errorModal = findByTestAttr(wrapper, intro.errorModal);
-        expect(errorModal.length).toBe(1);
-        expect(errorModal.prop('msg')).toBe(maximumRequest);
-      }
+      expect(error.response.status).toBe(403);
+
+      const errorModal = findByTestAttr(wrapper, intro.errorModal);
+      expect(errorModal.length).toBe(1);
+      expect(errorModal.prop('msg')).toBe(maximumRequest);
     });
   });
 

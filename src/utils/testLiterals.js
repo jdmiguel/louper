@@ -44,6 +44,7 @@ export const userData = {
 };
 
 export const userFollowers = {
+  loader: 'userFollowers-loader',
   container: 'userFollowers-container',
   image: 'userFollowers-image',
   name: 'userFollowers-name'
