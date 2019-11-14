@@ -65,12 +65,6 @@ describe('No conditional rendered elements', () => {
     expect(name.length).toBe(1);
   });
 
-  // test('user name text is equal to name prop received', () => {
-  // const nameText = 'Jaime De Miguel';
-  // const name = findByTestAttr(wrapper, userData.name);
-  // expect(name.prop('userData[name]')).toEqual(nameText);
-  // });
-
   test('user bio is rendered without error', () => {
     const bio = findByTestAttr(wrapper, userData.bio);
 

@@ -42,3 +42,9 @@ export const userData = {
   blog: 'userData-blog',
   company: 'userData-company'
 };
+
+export const userFollowers = {
+  container: 'userFollowers-container',
+  image: 'userFollowers-image',
+  name: 'userFollowers-name'
+};

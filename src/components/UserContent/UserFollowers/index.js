@@ -55,14 +55,19 @@ class UserFollowers extends Component {
     const { isLoading, data } = this.state;
 
     return isLoading ? (
-      <Loader />
+      <Loader data-test="userFollowers-loader" />
     ) : (
-      <Grid container className="userFollowerContainer" spacing={16}>
+      <Grid
+        data-test="userFollowers-container"
+        container
+        className="userFollowerContainer"
+        spacing={16}
+      >
         {data.map(userFollower => (
           <Grid item xs={12} sm={6} md={4} lg={3} xl={3} key={userFollower.id}>
             <div className="userFollowerDataContainer">
               <div className="userFollowerTxtContainer">
-                <h3>{userFollower.login}</h3>
+                <h3 data-test="userFollowers-login">{userFollower.login}</h3>
                 <Btn
                   onClick={() => externalLink(userFollower.html_url, '_blank')}
                   type="account_circle"
@@ -83,8 +88,7 @@ class UserFollowers extends Component {
 }
 
 UserFollowers.propTypes = {
-  setFollowersData: PropTypes.func,
-  followersData: followDataModel
+  setFollowersData: PropTypes.func
 };
 
 export default UserFollowers;
