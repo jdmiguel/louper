@@ -54,13 +54,8 @@ test('when service returns a 200, a not empty array is received from API', () =>
 
   mock.onGet(endPoint).reply(200, fakeFollowersList);
 
-  // eslint-disable-next-line no-debugger
-  debugger;
-
   return instance.get(endPoint).then(response => {
-    // eslint-disable-next-line no-debugger
-    debugger;
-    expect(response[0].login).toEqual(fakeFollowersList[0].login);
+    expect(response.data[0].login).toEqual(fakeFollowersList[0].login);
   });
 });
 
@@ -68,7 +63,6 @@ test('when service returns a 200, a not empty array is received from API', () =>
 
 test('Loader component is rendered when data state is empty', () => {
   const wrapper = setup();
-  wrapper.setState({ data: [] });
 
   const loaderComponent = findByTestAttr(wrapper, userFollowers.loader);
   expect(loaderComponent.length).toBe(1);
