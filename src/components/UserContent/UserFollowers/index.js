@@ -22,7 +22,7 @@ class UserFollowers extends Component {
     super(props);
 
     this.state = {
-      data: props.followersData || []
+      data: props.followersData
     };
   }
 
@@ -30,7 +30,7 @@ class UserFollowers extends Component {
     const { user, setFollowersData } = this.props;
     const { data } = this.state;
 
-    if (!data) {
+    if (!data.length) {
       getFollowers(user)
         .then(data => {
           this.setState({
@@ -58,14 +58,16 @@ class UserFollowers extends Component {
           <Grid item xs={12} sm={6} md={4} lg={3} xl={3} key={userFollower.id}>
             <div className="userFollowerDataContainer">
               <div className="userFollowerTxtContainer">
-                <h3 data-test="userFollowers-login">{userFollower.login}</h3>
+                <h3 data-test="userFollowers-name">{userFollower.login}</h3>
                 <Btn
+                  data-test="userFollowers-btn"
                   onClick={() => externalLink(userFollower.html_url, '_blank')}
                   type="account_circle"
                   txt="VISIT PROFILE"
                 />
               </div>
               <img
+                data-test="userFollowers-image"
                 alt="user follower avatar"
                 src={userFollower.avatar_url}
                 className="userFollowerAvatar"

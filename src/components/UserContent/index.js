@@ -17,9 +17,9 @@ class UserContent extends Component {
 
     this.state = {
       activeSection: 0,
-      reposData: null,
-      followingData: null,
-      followersData: null
+      reposData: [],
+      followingData: [],
+      followersData: []
     };
   }
 

@@ -5,16 +5,16 @@ import axios from 'axios';
 import MockAdapter from 'axios-mock-adapter';
 
 /* components */
-import UserFollowers from '.';
+import UserFollowing from '.';
 
 /* utils */
 import { findByTestAttr, checkProps } from '../../../utils/testUtils';
-import { userFollowers } from '../../../utils/testLiterals';
+import { userFollowing } from '../../../utils/testLiterals';
 import { followDataModel } from '../../../utils/models';
 
 const defaultProps = {
-  setFollowersData: PropTypes.func,
-  followersData: followDataModel
+  setFollowingData: PropTypes.func,
+  followingData: followDataModel
 };
 
 /**
@@ -26,7 +26,7 @@ const defaultProps = {
 
 const setup = (props = {}, state = null) => {
   const setupProps = { ...defaultProps, ...props };
-  const wrapper = shallow(<UserFollowers {...setupProps} />);
+  const wrapper = shallow(<UserFollowing {...setupProps} />);
   if (state) {
     wrapper.setState(state);
   }
@@ -40,22 +40,22 @@ test('does not warning with expected props', () => {
     setFollowersData: PropTypes.func,
     followersData: followDataModel
   };
-  checkProps(UserFollowers, expectedProps);
+  checkProps(UserFollowing, expectedProps);
 });
 
 // Data fetching
 
-const fakeFollowersList = [{ login: 'jdmigueldev', id: 35956302 }];
+const fakeFollowingList = [{ login: 'jdmigueldev', id: 35956302 }];
 
 test('when service returns a 200, a not empty array is received from API', () => {
-  const endPoint = 'https://api.github.com/users/jdmiguel/followers';
+  const endPoint = 'https://api.github.com/users/jdmiguel/following';
   const instance = axios.create();
   const mock = new MockAdapter(axios);
 
-  mock.onGet(endPoint).reply(200, fakeFollowersList);
+  mock.onGet(endPoint).reply(200, fakeFollowingList);
 
   return instance.get(endPoint).then(response => {
-    expect(response.data[0].login).toEqual(fakeFollowersList[0].login);
+    expect(response.data[0].login).toEqual(fakeFollowingList[0].login);
   });
 });
 
@@ -66,37 +66,37 @@ describe('if data contains at least one element', () => {
 
   beforeEach(() => {
     wrapper = setup(
-      { followersData: fakeFollowersList },
-      { data: fakeFollowersList }
+      { followingData: fakeFollowingList },
+      { data: fakeFollowingList }
     );
   });
 
   test('Loader component is not rendered when data state is not empty', () => {
-    const loaderComponent = findByTestAttr(wrapper, userFollowers.loader);
+    const loaderComponent = findByTestAttr(wrapper, userFollowing.loader);
 
     expect(loaderComponent.length).toBe(0);
   });
 
   test('div container is rendered when data state is not empty', () => {
-    const container = findByTestAttr(wrapper, userFollowers.container);
+    const container = findByTestAttr(wrapper, userFollowing.container);
 
     expect(container.length).toBe(1);
   });
 
-  test('user follower name is rendered without error', () => {
-    const name = findByTestAttr(wrapper, userFollowers.name);
+  test('user following name is rendered without error', () => {
+    const name = findByTestAttr(wrapper, userFollowing.name);
 
     expect(name.length).toBe(1);
   });
 
-  test('btn follower component is rendered without error', () => {
-    const btn = findByTestAttr(wrapper, userFollowers.btn);
+  test('btn following component is rendered without error', () => {
+    const btn = findByTestAttr(wrapper, userFollowing.btn);
 
     expect(btn.length).toBe(1);
   });
 
-  test('user image follower is rendered without error', () => {
-    const image = findByTestAttr(wrapper, userFollowers.image);
+  test('user image following is rendered without error', () => {
+    const image = findByTestAttr(wrapper, userFollowing.image);
 
     expect(image.length).toBe(1);
   });
@@ -106,17 +106,17 @@ describe('if data contains zero elements', () => {
   let wrapper;
 
   beforeEach(() => {
-    wrapper = setup({ followersData: [] }, { data: [] });
+    wrapper = setup({ followingData: [] }, { data: [] });
   });
 
   test('div container is not rendered when data state is empty', () => {
-    const container = findByTestAttr(wrapper, userFollowers.container);
+    const container = findByTestAttr(wrapper, userFollowing.container);
 
     expect(container.length).toBe(0);
   });
 
   test('Loader component is rendered when data state is empty', () => {
-    const loaderComponent = findByTestAttr(wrapper, userFollowers.loader);
+    const loaderComponent = findByTestAttr(wrapper, userFollowing.loader);
 
     expect(loaderComponent.length).toBe(1);
   });

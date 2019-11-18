@@ -43,9 +43,18 @@ export const userData = {
   company: 'userData-company'
 };
 
+export const userFollowing = {
+  container: 'userFollowing-container',
+  loader: 'userFollowing-loader',
+  name: 'userFollowing-name',
+  btn: 'userFollowing-btn',
+  image: 'userFollowing-image'
+};
+
 export const userFollowers = {
-  loader: 'userFollowers-loader',
-  container: 'userFollowers-container',
-  image: 'userFollowers-image',
-  name: 'userFollowers-name'
+  container: 'userFollowing-container',
+  loader: 'userFollowing-loader',
+  name: 'userFollowing-name',
+  btn: 'userFollowing-btn',
+  image: 'userFollowing-image'
 };

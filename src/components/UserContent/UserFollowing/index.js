@@ -23,8 +23,7 @@ class UserFollowing extends Component {
     super(props);
 
     this.state = {
-      data: props.followingData,
-      isLoading: !props.followingData
+      data: props.followingData
     };
   }
 
@@ -32,7 +31,7 @@ class UserFollowing extends Component {
     const { user, setFollowingData } = this.props;
     const { data } = this.state;
 
-    if (!data) {
+    if (!data.length) {
       getFollowing(user)
         .then(data => {
           this.setState({
@@ -42,34 +41,34 @@ class UserFollowing extends Component {
         })
         .catch(error => {
           throw error;
-        })
-        .finally(() => {
-          this.setState({
-            isLoading: false
-          });
         });
     }
   }
 
   render() {
-    const { isLoading, data } = this.state;
+    const { data } = this.state;
 
-    return isLoading ? (
-      <Loader />
-    ) : (
-      <Grid container className="userFollowingContainer" spacing={16}>
+    return data.length ? (
+      <Grid
+        data-test="userFollowing-container"
+        container
+        className="userFollowingContainer"
+        spacing={16}
+      >
         {data.map(userFollowing => (
           <Grid item xs={12} sm={6} md={4} lg={3} xl={3} key={userFollowing.id}>
             <div className="userFollowingDataContainer">
               <div className="userFollowingTxtContainer">
-                <h3>{userFollowing.login}</h3>
+                <h3 data-test="userFollowing-name">{userFollowing.login}</h3>
                 <Btn
+                  data-test="userFollowing-btn"
                   onClick={() => externalLink(userFollowing.html_url, '_blank')}
                   type="account_circle"
                   txt="VISIT PROFILE"
                 />
               </div>
               <img
+                data-test="userFollowing-image"
                 alt="user following avatar"
                 src={userFollowing.avatar_url}
                 className="userFollowingAvatar"
@@ -78,6 +77,8 @@ class UserFollowing extends Component {
           </Grid>
         ))}
       </Grid>
+    ) : (
+      <Loader data-test="userFollowing-loader" />
     );
   }
 }
