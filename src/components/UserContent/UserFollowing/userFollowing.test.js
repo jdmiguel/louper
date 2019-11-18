@@ -37,15 +37,15 @@ const setup = (props = {}, state = null) => {
 
 test('does not warning with expected props', () => {
   const expectedProps = {
-    setFollowersData: PropTypes.func,
-    followersData: followDataModel
+    setFollowingData: PropTypes.func,
+    followingData: followDataModel
   };
   checkProps(UserFollowing, expectedProps);
 });
 
 // Data fetching
 
-const fakeFollowingList = [{ login: 'jdmigueldev', id: 35956302 }];
+const fakeFollowingList = [{ login: 'mzabriskie', id: 199035 }];
 
 test('when service returns a 200, a not empty array is received from API', () => {
   const endPoint = 'https://api.github.com/users/jdmiguel/following';
@@ -71,16 +71,16 @@ describe('if data contains at least one element', () => {
     );
   });
 
-  test('Loader component is not rendered when data state is not empty', () => {
-    const loaderComponent = findByTestAttr(wrapper, userFollowing.loader);
-
-    expect(loaderComponent.length).toBe(0);
-  });
-
   test('div container is rendered when data state is not empty', () => {
     const container = findByTestAttr(wrapper, userFollowing.container);
 
     expect(container.length).toBe(1);
+  });
+
+  test('Loader component is not rendered when data state is not empty', () => {
+    const loaderComponent = findByTestAttr(wrapper, userFollowing.loader);
+
+    expect(loaderComponent.length).toBe(0);
   });
 
   test('user following name is rendered without error', () => {

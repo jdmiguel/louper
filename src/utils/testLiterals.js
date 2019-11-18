@@ -43,6 +43,14 @@ export const userData = {
   company: 'userData-company'
 };
 
+export const userRepos = {
+  container: 'userRepos-container',
+  loader: 'userRepos-loader',
+  item: 'userRepos-item',
+  icon: 'userRepos-icon',
+  name: 'userRepos-name'
+};
+
 export const userFollowing = {
   container: 'userFollowing-container',
   loader: 'userFollowing-loader',
@@ -52,9 +60,9 @@ export const userFollowing = {
 };
 
 export const userFollowers = {
-  container: 'userFollowing-container',
-  loader: 'userFollowing-loader',
-  name: 'userFollowing-name',
-  btn: 'userFollowing-btn',
-  image: 'userFollowing-image'
+  container: 'userFollowers-container',
+  loader: 'userFollowers-loader',
+  name: 'userFollowers-name',
+  btn: 'userFollowers-btn',
+  image: 'userFollowers-image'
 };

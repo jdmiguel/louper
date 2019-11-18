@@ -83,6 +83,7 @@ class UserFollowers extends Component {
 }
 
 UserFollowers.propTypes = {
+  user: PropTypes.string,
   setFollowersData: PropTypes.func
 };
 

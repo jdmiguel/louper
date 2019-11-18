@@ -5,16 +5,16 @@ import axios from 'axios';
 import MockAdapter from 'axios-mock-adapter';
 
 /* components */
-import UserFollowers from '.';
+import UserRepos from '.';
 
 /* utils */
 import { findByTestAttr, checkProps } from '../../../utils/testUtils';
-import { userFollowers } from '../../../utils/testLiterals';
-import { followDataModel } from '../../../utils/models';
+import { userRepos } from '../../../utils/testLiterals';
+import { reposDataModel } from '../../../utils/models';
 
 const defaultProps = {
-  setFollowersData: PropTypes.func,
-  followersData: followDataModel
+  setReposData: PropTypes.func,
+  reposData: reposDataModel
 };
 
 /**
@@ -26,7 +26,7 @@ const defaultProps = {
 
 const setup = (props = {}, state = null) => {
   const setupProps = { ...defaultProps, ...props };
-  const wrapper = shallow(<UserFollowers {...setupProps} />);
+  const wrapper = shallow(<UserRepos {...setupProps} />);
   if (state) {
     wrapper.setState(state);
   }
@@ -37,25 +37,25 @@ const setup = (props = {}, state = null) => {
 
 test('does not warning with expected props', () => {
   const expectedProps = {
-    setFollowersData: PropTypes.func,
-    followersData: followDataModel
+    setReposData: PropTypes.func,
+    reposData: reposDataModel
   };
-  checkProps(UserFollowers, expectedProps);
+  checkProps(UserRepos, expectedProps);
 });
 
 // Data fetching
 
-const fakeFollowersList = [{ login: 'jdmigueldev', id: 35956302 }];
+const fakeReposList = [{ name: 'banner_js', id: 82056180 }];
 
 test('when service returns a 200, a not empty array is received from API', () => {
-  const endPoint = 'https://api.github.com/users/jdmiguel/followers';
+  const endPoint = 'https://api.github.com/users/jdmiguel/repos';
   const instance = axios.create();
   const mock = new MockAdapter(axios);
 
-  mock.onGet(endPoint).reply(200, fakeFollowersList);
+  mock.onGet(endPoint).reply(200, fakeReposList);
 
   return instance.get(endPoint).then(response => {
-    expect(response.data[0].login).toEqual(fakeFollowersList[0].login);
+    expect(response.data[0].name).toEqual(fakeReposList[0].name);
   });
 });
 
@@ -65,40 +65,37 @@ describe('if data contains at least one element', () => {
   let wrapper;
 
   beforeEach(() => {
-    wrapper = setup(
-      { followersData: fakeFollowersList },
-      { data: fakeFollowersList }
-    );
+    wrapper = setup({ reposData: fakeReposList }, { data: fakeReposList });
   });
 
   test('div container is rendered when data state is not empty', () => {
-    const container = findByTestAttr(wrapper, userFollowers.container);
+    const container = findByTestAttr(wrapper, userRepos.container);
 
     expect(container.length).toBe(1);
   });
 
   test('Loader component is not rendered when data state is not empty', () => {
-    const loaderComponent = findByTestAttr(wrapper, userFollowers.loader);
+    const loaderComponent = findByTestAttr(wrapper, userRepos.loader);
 
     expect(loaderComponent.length).toBe(0);
   });
 
-  test('user follower name is rendered without error', () => {
-    const name = findByTestAttr(wrapper, userFollowers.name);
+  test('user repo item component is rendered without error', () => {
+    const item = findByTestAttr(wrapper, userRepos.item);
+
+    expect(item.length).toBe(1);
+  });
+
+  test('user repo icon is rendered without error', () => {
+    const icon = findByTestAttr(wrapper, userRepos.icon);
+
+    expect(icon.length).toBe(1);
+  });
+
+  test('user repo name is rendered without error', () => {
+    const name = findByTestAttr(wrapper, userRepos.name);
 
     expect(name.length).toBe(1);
-  });
-
-  test('btn follower component is rendered without error', () => {
-    const btn = findByTestAttr(wrapper, userFollowers.btn);
-
-    expect(btn.length).toBe(1);
-  });
-
-  test('user image follower is rendered without error', () => {
-    const image = findByTestAttr(wrapper, userFollowers.image);
-
-    expect(image.length).toBe(1);
   });
 });
 
@@ -106,17 +103,17 @@ describe('if data contains zero elements', () => {
   let wrapper;
 
   beforeEach(() => {
-    wrapper = setup({ followersData: [] }, { data: [] });
+    wrapper = setup({ reposData: [] }, { data: [] });
   });
 
   test('div container is not rendered when data state is empty', () => {
-    const container = findByTestAttr(wrapper, userFollowers.container);
+    const container = findByTestAttr(wrapper, userRepos.container);
 
     expect(container.length).toBe(0);
   });
 
   test('Loader component is rendered when data state is empty', () => {
-    const loaderComponent = findByTestAttr(wrapper, userFollowers.loader);
+    const loaderComponent = findByTestAttr(wrapper, userRepos.loader);
 
     expect(loaderComponent.length).toBe(1);
   });

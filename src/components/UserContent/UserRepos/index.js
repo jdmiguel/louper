@@ -26,8 +26,7 @@ class UserRepos extends Component {
     super(props);
 
     this.state = {
-      data: props.reposData || null,
-      isLoading: !props.reposData
+      data: props.reposData
     };
   }
 
@@ -35,7 +34,7 @@ class UserRepos extends Component {
     const { user, setReposData } = this.props;
     const { data } = this.state;
 
-    if (!data) {
+    if (!data.length) {
       getRepos(user)
         .then(data => {
           this.setState({
@@ -45,46 +44,45 @@ class UserRepos extends Component {
         })
         .catch(error => {
           throw error;
-        })
-        .finally(() => {
-          this.setState({
-            isLoading: false
-          });
         });
     }
   }
 
   render() {
-    const { isLoading, data } = this.state;
+    const { data } = this.state;
 
-    return isLoading ? (
-      <Loader />
-    ) : (
-      <div className="userReposContainer">
+    return data.length ? (
+      <div data-test="userRepos-container" className="userReposContainer">
         <List>
           {data.map(repo => (
             <ListItem
+              data-test="userRepos-item"
               key={repo.name}
               button
               onClick={() => externalLink(repo.html_url)}
               className="itemUserRepos"
             >
-              <Avatar>
+              <Avatar data-test="userRepos-icon">
                 <FolderIcon className="iconUserRepos" />
               </Avatar>
-              <ListItemText primary={repo.name} secondary={repo.description} />
+              <ListItemText
+                data-test="userRepos-name"
+                primary={repo.name}
+                secondary={repo.description}
+              />
             </ListItem>
           ))}
         </List>
       </div>
+    ) : (
+      <Loader data-test="userRepos-loader" />
     );
   }
 }
 
 UserRepos.propTypes = {
   user: PropTypes.string,
-  setReposData: PropTypes.func,
-  reposData: reposDataModel
+  setReposData: PropTypes.func
 };
 
 export default UserRepos;
