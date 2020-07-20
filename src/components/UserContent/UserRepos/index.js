@@ -16,7 +16,6 @@ import { getRepos } from '../../../services/github';
 
 /* utils */
 import { externalLink } from '../../../utils/externalLink';
-import { reposDataModel } from '../../../utils/models';
 
 /* styles */
 import './styles.css';
