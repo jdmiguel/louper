@@ -11,7 +11,7 @@ import axios from 'axios';
 const handleError = ({ response }) => {
   const error = {
     code: response.status,
-    message: response.data ? response.data.message : null
+    message: response.data?.message || null,
   };
   throw error;
 };
@@ -23,7 +23,7 @@ const handleError = ({ response }) => {
  * @param {object} response
  * @returns {object} response - object
  */
-const checkStatus = response => {
+const checkStatus = (response) => {
   if (response.status >= 200 && response.status < 300) {
     return response;
   }
@@ -39,7 +39,7 @@ const checkStatus = response => {
  * @param {object} response
  * @returns {object} data - object
  */
-const normalizeResponse = response => response.data;
+const normalizeResponse = (response) => response.data;
 
 /**
  * create asynchronous call passing as parameter url string
@@ -51,11 +51,12 @@ const normalizeResponse = response => response.data;
  * @returns {promise} axios
  */
 
-export const request = (url, options = { method: 'get' }) =>
-  axios({
+export default function request(url, options = { method: 'get' }) {
+  return axios({
     url,
-    ...options
+    ...options,
   })
     .then(checkStatus)
     .then(normalizeResponse)
     .catch(handleError);
+}

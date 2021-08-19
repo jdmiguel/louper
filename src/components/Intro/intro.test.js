@@ -8,12 +8,11 @@ import MockAdapter from 'axios-mock-adapter';
 import Intro from '.';
 
 /* utils */
-import { findByTestAttr, checkProps } from '../../utils/testUtils';
-import { intro } from '../../utils/testLiterals';
-import { errorLiterals } from '../../utils/errorLiterals';
+import { findByTestAttr, checkProps, intro } from '../../utils/testUtils';
+import { errorLiterals } from '../../utils/';
 
 const defaultProps = {
-  setUserData: PropTypes.func.isRequired
+  setUserData: PropTypes.func.isRequired,
 };
 
 /**
@@ -36,7 +35,7 @@ const setup = (props = {}, state = null) => {
 
 test('does not warning with expected props', () => {
   const expectedProps = {
-    setUserData: PropTypes.func.isRequired
+    setUserData: PropTypes.func.isRequired,
   };
 
   checkProps(Intro, expectedProps);
@@ -143,7 +142,7 @@ describe('user data fetching', () => {
   const userNotFound = 'asdhfjauhesdriahser8y9qw38r4eoiAJDFSADJS';
   const userData = {
     login: 'jdmiguel',
-    id: 7016824
+    id: 7016824,
   };
   const { maximumRequest, unavailableUser } = errorLiterals;
 
@@ -165,13 +164,13 @@ describe('user data fetching', () => {
     const endPoint = `https://api.github.com/users/${userSelected}`;
     mock.onGet(endPoint).reply(200, userData);
 
-    return instance.get(endPoint).then(response => {
+    return instance.get(endPoint).then((response) => {
       const {
-        data: { login, id }
+        data: { login, id },
       } = response;
       const currentUserData = {
         login,
-        id
+        id,
       };
       expect(currentUserData).toEqual(userData);
     });
@@ -181,7 +180,7 @@ describe('user data fetching', () => {
     const endPoint = `https://api.github.com/users/${userSelected}`;
     mock.onGet(endPoint).networkError();
 
-    return instance.get(endPoint).catch(error => {
+    return instance.get(endPoint).catch((error) => {
       expect(error.response.status).toBe(403);
 
       const errorModal = findByTestAttr(wrapper, intro.errorModal);
@@ -194,7 +193,7 @@ describe('user data fetching', () => {
     const endPoint = `https://api.github.com/users/${userNotFound}`;
     mock.onGet(endPoint).networkError();
 
-    return instance.get(endPoint).catch(error => {
+    return instance.get(endPoint).catch((error) => {
       expect(error.response.status).toBe(404);
 
       const errorModal = findByTestAttr(wrapper, intro.errorModal);

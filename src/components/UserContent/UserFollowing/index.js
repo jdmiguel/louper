@@ -12,7 +12,7 @@ import Loader from '../../core/Loader';
 import { getFollowing } from '../../../services/github';
 
 /* utils */
-import { externalLink } from '../../../utils/externalLink';
+import { externalLink } from '../../../utils';
 
 /* styles */
 import './styles.css';
@@ -22,7 +22,7 @@ class UserFollowing extends Component {
     super(props);
 
     this.state = {
-      data: props.followingData
+      data: props.followingData,
     };
   }
 
@@ -32,13 +32,13 @@ class UserFollowing extends Component {
 
     if (!data.length) {
       getFollowing(user)
-        .then(data => {
+        .then((data) => {
           this.setState({
-            data
+            data,
           });
           setFollowingData(data);
         })
-        .catch(error => {
+        .catch((error) => {
           throw error;
         });
     }
@@ -54,7 +54,7 @@ class UserFollowing extends Component {
         className="userFollowingContainer"
         spacing={16}
       >
-        {data.map(userFollowing => (
+        {data.map((userFollowing) => (
           <Grid item xs={12} sm={6} md={4} lg={3} xl={3} key={userFollowing.id}>
             <div className="userFollowingDataContainer">
               <div className="userFollowingTxtContainer">
@@ -84,7 +84,7 @@ class UserFollowing extends Component {
 
 UserFollowing.propTypes = {
   user: PropTypes.string,
-  setFollowingData: PropTypes.func
+  setFollowingData: PropTypes.func,
 };
 
 export default UserFollowing;

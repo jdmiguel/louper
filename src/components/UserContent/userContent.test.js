@@ -12,7 +12,7 @@ import { userDataModel } from '../../utils/models';
 
 const defaultProps = {
   userData: userDataModel,
-  backIntro: PropTypes.func.isRequired
+  backIntro: PropTypes.func.isRequired,
 };
 
 /**
@@ -36,7 +36,7 @@ const setup = (props = {}, state = null) => {
 test('does not warning with expected props', () => {
   const expectedProps = {
     userData: userDataModel,
-    backIntro: PropTypes.func.isRequired
+    backIntro: PropTypes.func.isRequired,
   };
   checkProps(UserContent, expectedProps);
 });
@@ -84,7 +84,7 @@ test('UserFollowings component is rendered when activeSection is 2', () => {
 
   const userFollowingsComponent = findByTestAttr(
     wrapper,
-    userContent.userFollowing
+    userContent.userFollowing,
   );
   expect(userFollowingsComponent.length).toBe(1);
 });
@@ -94,7 +94,7 @@ test('UserFollowers component is rendered when activeSection is 3', () => {
 
   const userFollowersComponent = findByTestAttr(
     wrapper,
-    userContent.userFollowers
+    userContent.userFollowers,
   );
   expect(userFollowersComponent.length).toBe(1);
 });

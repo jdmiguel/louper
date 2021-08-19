@@ -15,7 +15,7 @@ import Loader from '../../core/Loader';
 import { getRepos } from '../../../services/github';
 
 /* utils */
-import { externalLink } from '../../../utils/externalLink';
+import { externalLink } from '../../../utils';
 
 /* styles */
 import './styles.css';
@@ -25,7 +25,7 @@ class UserRepos extends Component {
     super(props);
 
     this.state = {
-      data: props.reposData
+      data: props.reposData,
     };
   }
 
@@ -35,13 +35,13 @@ class UserRepos extends Component {
 
     if (!data.length) {
       getRepos(user)
-        .then(data => {
+        .then((data) => {
           this.setState({
-            data
+            data,
           });
           setReposData(data);
         })
-        .catch(error => {
+        .catch((error) => {
           throw error;
         });
     }
@@ -53,7 +53,7 @@ class UserRepos extends Component {
     return data.length ? (
       <div data-test="userRepos-container" className="userReposContainer">
         <List>
-          {data.map(repo => (
+          {data.map((repo) => (
             <ListItem
               data-test="userRepos-item"
               key={repo.name}
@@ -81,7 +81,7 @@ class UserRepos extends Component {
 
 UserRepos.propTypes = {
   user: PropTypes.string,
-  setReposData: PropTypes.func
+  setReposData: PropTypes.func,
 };
 
 export default UserRepos;

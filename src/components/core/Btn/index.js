@@ -23,7 +23,7 @@ const Btn = ({ onClick, txt, type }) => (
 Btn.propTypes = {
   onClick: PropTypes.func,
   txt: PropTypes.string.isRequired,
-  type: PropTypes.string.isRequired
+  type: PropTypes.string.isRequired,
 };
 
 export default Btn;

@@ -10,21 +10,21 @@ class App extends Component {
     super(props);
     this.state = {
       userData: null,
-      intro: true
+      intro: true,
     };
   }
 
-  onSetUserData = userData => {
+  onSetUserData = (userData) => {
     this.setState({
       userData,
-      intro: false
+      intro: false,
     });
   };
 
   onBackIntro = () => {
     this.setState({
       intro: true,
-      userData: null
+      userData: null,
     });
   };
 
@@ -32,7 +32,7 @@ class App extends Component {
     const { intro, userData } = this.state;
 
     return (
-      <Fragment>
+      <>
         {intro ? (
           <Intro data-test="app-intro" setUserData={this.onSetUserData} />
         ) : (
@@ -43,7 +43,7 @@ class App extends Component {
           />
         )}
         <Footer data-test="app-footer" />
-      </Fragment>
+      </>
     );
   }
 }

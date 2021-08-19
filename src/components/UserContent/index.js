@@ -19,33 +19,29 @@ class UserContent extends Component {
       activeSection: 0,
       reposData: [],
       followingData: [],
-      followersData: []
+      followersData: [],
     };
   }
 
   render() {
     const { userData, backIntro } = this.props;
-    const {
-      activeSection,
-      reposData,
-      followingData,
-      followersData
-    } = this.state;
+    const { activeSection, reposData, followingData, followersData } =
+      this.state;
 
     const { login } = userData;
     const tabsData = {
       repos: userData.repos,
       following: userData.following,
-      followers: userData.followers
+      followers: userData.followers,
     };
 
     return (
-      <Fragment>
+      <>
         <Menu
           data-test="userContent-menu"
-          onClick={activeSection =>
+          onClick={(activeSection) =>
             this.setState({
-              activeSection
+              activeSection,
             })
           }
           tabs={tabsData}
@@ -58,7 +54,7 @@ class UserContent extends Component {
           <UserRepos
             data-test="userContent-userRepos"
             user={login}
-            setReposData={data => this.setState({ reposData: data })}
+            setReposData={(data) => this.setState({ reposData: data })}
             reposData={reposData}
           />
         )}
@@ -66,7 +62,7 @@ class UserContent extends Component {
           <UserFollowing
             data-test="userContent-userFollowing"
             user={login}
-            setFollowingData={data => this.setState({ followingData: data })}
+            setFollowingData={(data) => this.setState({ followingData: data })}
             followingData={followingData}
           />
         )}
@@ -74,17 +70,17 @@ class UserContent extends Component {
           <UserFollowers
             data-test="userContent-userFollowers"
             user={login}
-            setFollowersData={data => this.setState({ followersData: data })}
+            setFollowersData={(data) => this.setState({ followersData: data })}
             followersData={followersData}
           />
         )}
-      </Fragment>
+      </>
     );
   }
 }
 
 UserContent.propTypes = {
-  backIntro: PropTypes.func.isRequired
+  backIntro: PropTypes.func.isRequired,
 };
 
 export default UserContent;

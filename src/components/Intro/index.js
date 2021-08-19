@@ -15,7 +15,7 @@ import ErrorModal from '../core/ErrorModal';
 import { getUserData } from '../../services/github';
 
 /* utils */
-import { errorLiterals } from '../../utils/errorLiterals';
+import { errorLiterals } from '../../utils';
 
 /* styles */
 import './styles.css';
@@ -28,7 +28,7 @@ class Intro extends Component {
       userSelected: '',
       isLoading: false,
       errorMsg: '',
-      onErrorModal: false
+      onErrorModal: false,
     };
   }
 
@@ -36,22 +36,22 @@ class Intro extends Component {
     const { userSelected } = this.state;
 
     this.setState({
-      isLoading: true
+      isLoading: true,
     });
 
     this.fetchData(userSelected);
   };
 
-  fetchData = user => {
+  fetchData = (user) => {
     const { setUserData } = this.props;
     const { maximumRequest, unavailableUser } = errorLiterals;
 
     this.setState({
-      isLoading: true
+      isLoading: true,
     });
 
     getUserData(user)
-      .then(response => {
+      .then((response) => {
         const userDataUpdated = {
           login: response.login,
           avatarUrl: response.avatar_url,
@@ -65,12 +65,12 @@ class Intro extends Component {
           htmlUrl: response.html_url,
           repos: response.public_repos,
           followers: response.followers,
-          following: response.following
+          following: response.following,
         };
 
         setUserData(userDataUpdated);
       })
-      .catch(error => {
+      .catch((error) => {
         let errorMsg = '';
 
         switch (error.code) {
@@ -86,20 +86,20 @@ class Intro extends Component {
         this.setState({
           onErrorModal: true,
           errorMsg,
-          isLoading: false
+          isLoading: false,
         });
       });
   };
 
-  onChangeHandler = event => {
+  onChangeHandler = (event) => {
     const { value } = event.target;
 
     this.setState({
-      userSelected: value
+      userSelected: value,
     });
   };
 
-  onKeyUpHandler = event => {
+  onKeyUpHandler = (event) => {
     const { userSelected } = this.state;
 
     if (userSelected && event.keyCode === 13) {
@@ -111,7 +111,7 @@ class Intro extends Component {
     const { isLoading, onErrorModal, userSelected, errorMsg } = this.state;
 
     return (
-      <Fragment>
+      <>
         <GithubCorner data-test="intro-githubCorner" />
         <div data-test="intro-container" className="intro">
           <Header data-test="intro-header" />
@@ -141,13 +141,13 @@ class Intro extends Component {
             />
           )}
         </div>
-      </Fragment>
+      </>
     );
   }
 }
 
 Intro.propTypes = {
-  setUserData: PropTypes.func.isRequired
+  setUserData: PropTypes.func.isRequired,
 };
 
 export default Intro;

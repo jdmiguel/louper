@@ -10,7 +10,7 @@ import { userData } from '../../../utils/testLiterals';
 import { userDataModel } from '../../../utils/models';
 
 const defaultProps = {
-  userData: userDataModel
+  userData: userDataModel,
 };
 
 /**
@@ -33,7 +33,7 @@ const setup = (props = {}, state = null) => {
 
 test('does not warning with expected props', () => {
   const expectedProps = {
-    userData: userDataModel
+    userData: userDataModel,
   };
   checkProps(UserData, expectedProps);
 });

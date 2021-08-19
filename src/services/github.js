@@ -1,15 +1,15 @@
 /* services */
-import { request } from '.';
+import request from '.';
 
 const BASE_URL = 'https://api.github.com';
 
-export const getUserData = user => request(`${BASE_URL}/users/${user}`);
+export const getUserData = (user) => request(`${BASE_URL}/users/${user}`);
 
-export const getRepos = username =>
+export const getRepos = (username) =>
   request(`${BASE_URL}/users/${username}/repos?per_page=250`);
 
-export const getFollowers = username =>
+export const getFollowers = (username) =>
   request(`${BASE_URL}/users/${username}/followers`);
 
-export const getFollowing = username =>
+export const getFollowing = (username) =>
   request(`${BASE_URL}/users/${username}/following`);

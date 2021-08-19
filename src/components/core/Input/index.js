@@ -18,7 +18,7 @@ const IntroInput = ({ onChange, onKeyUp }) => (
 
 IntroInput.propTypes = {
   onChange: PropTypes.func.isRequired,
-  onKeyUp: PropTypes.func.isRequired
+  onKeyUp: PropTypes.func.isRequired,
 };
 
 export default IntroInput;

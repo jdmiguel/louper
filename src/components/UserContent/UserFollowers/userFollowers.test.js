@@ -14,7 +14,7 @@ import { followDataModel } from '../../../utils/models';
 
 const defaultProps = {
   setFollowersData: PropTypes.func,
-  followersData: followDataModel
+  followersData: followDataModel,
 };
 
 /**
@@ -38,7 +38,7 @@ const setup = (props = {}, state = null) => {
 test('does not warning with expected props', () => {
   const expectedProps = {
     setFollowersData: PropTypes.func,
-    followersData: followDataModel
+    followersData: followDataModel,
   };
   checkProps(UserFollowers, expectedProps);
 });
@@ -54,7 +54,7 @@ test('when service returns a 200, a not empty array is received from API', () =>
 
   mock.onGet(endPoint).reply(200, fakeFollowersList);
 
-  return instance.get(endPoint).then(response => {
+  return instance.get(endPoint).then((response) => {
     expect(response.data[0].login).toEqual(fakeFollowersList[0].login);
   });
 });
@@ -67,7 +67,7 @@ describe('if data contains at least one element', () => {
   beforeEach(() => {
     wrapper = setup(
       { followersData: fakeFollowersList },
-      { data: fakeFollowersList }
+      { data: fakeFollowersList },
     );
   });
 

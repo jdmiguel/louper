@@ -18,7 +18,7 @@ class Menu extends Component {
     super(props);
 
     this.state = {
-      value: 0
+      value: 0,
     };
   }
 
@@ -79,7 +79,7 @@ class Menu extends Component {
 }
 
 Menu.propTypes = {
-  onClick: PropTypes.func.isRequired
+  onClick: PropTypes.func.isRequired,
 };
 
 export default Menu;

@@ -8,21 +8,19 @@ import Icon from '@material-ui/core/Icon';
 /* styles */
 import './styles.css';
 
-const FloatBtn = ({ onClick }) => {
-  return (
-    <Button
-      variant="fab"
-      color="secondary"
-      className="floatBtn"
-      onClick={onClick}
-    >
-      <Icon>search</Icon>
-    </Button>
-  );
-};
+const FloatBtn = ({ onClick }) => (
+  <Button
+    variant="fab"
+    color="secondary"
+    className="floatBtn"
+    onClick={onClick}
+  >
+    <Icon>search</Icon>
+  </Button>
+);
 
 FloatBtn.propTypes = {
-  onClick: PropTypes.func.isRequired
+  onClick: PropTypes.func.isRequired,
 };
 
 export default FloatBtn;

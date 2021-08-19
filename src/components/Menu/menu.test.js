@@ -12,7 +12,7 @@ import { menuTabsModel } from '../../utils/models';
 
 const defaultProps = {
   tabs: menuTabsModel,
-  onClick: PropTypes.func.isRequired
+  onClick: PropTypes.func.isRequired,
 };
 
 /**
@@ -36,7 +36,7 @@ const setup = (props = {}, state = null) => {
 test('does not warning with expected props of menu component', () => {
   const expectedProps = {
     tabs: menuTabsModel,
-    onClick: PropTypes.func.isRequired
+    onClick: PropTypes.func.isRequired,
   };
   checkProps(Menu, expectedProps);
 });

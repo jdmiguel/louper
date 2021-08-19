@@ -13,15 +13,15 @@ export const userDataModel = PropTypes.shape({
   htmlUrl: PropTypes.string,
   repos: PropTypes.number,
   followers: PropTypes.number,
-  following: PropTypes.number
+  following: PropTypes.number,
 });
 
 export const reposDataModel = PropTypes.arrayOf(
   PropTypes.shape({
     name: PropTypes.string,
     description: PropTypes.string,
-    html_url: PropTypes.string
-  })
+    html_url: PropTypes.string,
+  }),
 );
 
 export const followDataModel = PropTypes.arrayOf(
@@ -29,12 +29,12 @@ export const followDataModel = PropTypes.arrayOf(
     id: PropTypes.number,
     login: PropTypes.string,
     html_url: PropTypes.string,
-    avatar_url: PropTypes.string
-  })
+    avatar_url: PropTypes.string,
+  }),
 );
 
 export const menuTabsModel = PropTypes.shape({
   repos: PropTypes.number,
   following: PropTypes.number,
-  followers: PropTypes.number
+  followers: PropTypes.number,
 }).isRequired;

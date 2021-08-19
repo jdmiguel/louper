@@ -28,7 +28,7 @@ const ErrorModal = ({ isErrorModalOpen, msg, onClick }) => (
 ErrorModal.propTypes = {
   isErrorModalOpen: PropTypes.bool.isRequired,
   onClick: PropTypes.func.isRequired,
-  msg: PropTypes.string.isRequired
+  msg: PropTypes.string.isRequired,
 };
 
 export default ErrorModal;

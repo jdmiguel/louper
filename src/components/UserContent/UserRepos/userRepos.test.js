@@ -14,7 +14,7 @@ import { reposDataModel } from '../../../utils/models';
 
 const defaultProps = {
   setReposData: PropTypes.func,
-  reposData: reposDataModel
+  reposData: reposDataModel,
 };
 
 /**
@@ -38,7 +38,7 @@ const setup = (props = {}, state = null) => {
 test('does not warning with expected props', () => {
   const expectedProps = {
     setReposData: PropTypes.func,
-    reposData: reposDataModel
+    reposData: reposDataModel,
   };
   checkProps(UserRepos, expectedProps);
 });
@@ -54,7 +54,7 @@ test('when service returns a 200, a not empty array is received from API', () =>
 
   mock.onGet(endPoint).reply(200, fakeReposList);
 
-  return instance.get(endPoint).then(response => {
+  return instance.get(endPoint).then((response) => {
     expect(response.data[0].name).toEqual(fakeReposList[0].name);
   });
 });

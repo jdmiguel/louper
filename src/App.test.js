@@ -5,8 +5,7 @@ import { shallow } from 'enzyme';
 import App from './App';
 
 /* utils */
-import { findByTestAttr } from './utils/testUtils';
-import { app } from './utils/testLiterals';
+import { findByTestAttr, app } from './utils/testUtils';
 
 /**
  * Factory function to create a shallowWrapper for the Counter Component
