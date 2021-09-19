@@ -5,19 +5,18 @@ import Link from '@material-ui/core/Link';
 
 const useStyles = makeStyles((theme) => ({
   wrapper: {
+    position: 'absolute',
+    left: 0,
+    bottom: 0,
+    zIndex: 2,
+    height: 'auto',
+    width: '100%',
+  },
+  content: {
     display: 'flex',
     justifyContent: 'center',
     alignItems: 'center',
-    padding: '0 16px 12px',
-    width: '100%',
-    height: '5vh',
-    '@media (min-width: 768px)': {
-      position: 'absolute',
-      left: 0,
-      bottom: 0,
-      zIndex: 2,
-      height: 'auto',
-    },
+    padding: '0 16px 16px',
   },
   link: {
     fontWeight: 700,
@@ -29,18 +28,20 @@ const Footer = () => {
 
   return (
     <footer className={classes.wrapper}>
-      <Typography variant="body2">
-        COPYRIGHT @2021 | Created by{' '}
-        <Link
-          className={classes.link}
-          href="https://jdmiguel.netlify.app/"
-          target="_blank"
-          rel="noopener noreferrer"
-          aria-label="View source on GitHub"
-        >
-          jdmiguel
-        </Link>
-      </Typography>
+      <div className={classes.content}>
+        <Typography variant="body2">
+          COPYRIGHT @2021 | Created by{' '}
+          <Link
+            className={classes.link}
+            href="https://jdmiguel.netlify.app/"
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="View source on GitHub"
+          >
+            jdmiguel
+          </Link>
+        </Typography>
+      </div>
     </footer>
   );
 };

@@ -1,6 +1,9 @@
 import { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 
+/* material-ui */
+import { makeStyles } from '@material-ui/core/styles';
+
 /* organisms */
 import Profile from '../../organisms/Profile';
 import Repos from '../../organisms/Repos';
@@ -13,7 +16,16 @@ import Menu from '../../molecules/Menu';
 /* utils */
 import { dataModel } from '../../../utils/models';
 
+const useStyles = makeStyles({
+  wrapper: {
+    minHeight: '100vh',
+    paddingBottom: 50,
+  },
+});
+
 const User = ({ data, onBackFinder }) => {
+  const classes = useStyles();
+
   const [activeSection, setActiveSection] = useState(0);
   const [repos, setRepos] = useState([]);
   const [following, setFollowing] = useState([]);
@@ -27,7 +39,7 @@ const User = ({ data, onBackFinder }) => {
   }, [activeSection]);
 
   return (
-    <>
+    <div className={classes.wrapper}>
       <Menu
         data-test="user-menu"
         onClick={(section) => setActiveSection(section)}
@@ -60,7 +72,7 @@ const User = ({ data, onBackFinder }) => {
           followers={followers}
         />
       )}
-    </>
+    </div>
   );
 };
 

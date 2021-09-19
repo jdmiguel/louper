@@ -120,14 +120,11 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const formatDate = (date: Date) => {
-  const newDate = date.toLocaleString();
-  return newDate.slice(0, newDate.indexOf(','));
-};
-
-const buildDate = (date: string) => {
+const buildCreationDate = (date) => {
   const newDate = new Date(date);
-  return formatDate(newDate);
+  const formattedDate = newDate.toLocaleString();
+
+  return formattedDate.slice(0, formattedDate.indexOf(','));
 };
 
 const Profile = ({
@@ -200,7 +197,7 @@ const Profile = ({
                   }}
                   className="profile__icon"
                 />
-                {buildDate(createdAt)}
+                {buildCreationDate(createdAt)}
               </div>
             )}
             {location && (

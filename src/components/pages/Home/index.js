@@ -1,9 +1,6 @@
 import { useState, useCallback } from 'react';
 import PropTypes from 'prop-types';
 
-/* material-ui */
-import { makeStyles } from '@material-ui/core/styles';
-
 /* molecules */
 import Finder from '../../molecules/Finder';
 import Heading from '../../molecules/Heading';
@@ -20,24 +17,7 @@ import { errorLiterals } from '../../../utils';
 
 const { maximumRequest, unavailableUser } = errorLiterals;
 
-const useStyles = makeStyles({
-  wrapper: {
-    textAlign: 'center',
-    width: 'auto',
-    height: '95vh',
-    display: 'flex',
-    flexDirection: 'column',
-    justifyContent: 'center',
-    alignItems: 'center',
-    '@media (min-width: 768px)': {
-      height: '100vh',
-    },
-  },
-});
-
 const Home = ({ onFetchUser }) => {
-  const classes = useStyles();
-
   const [isLoading, setIsLoading] = useState(false);
   const [errorMsg, setErrorMsg] = useState('');
   const [isErrorModalOpen, setIsErrorModalOpen] = useState(false);
@@ -86,7 +66,7 @@ const Home = ({ onFetchUser }) => {
   };
 
   return (
-    <div data-test="home" className={classes.wrapper}>
+    <div data-test="home">
       <Corner data-test="home-corner" />
       <Heading data-test="home-heading" />
       <Finder
