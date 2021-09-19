@@ -1,0 +1,48 @@
+.followings {
+  margin-top: 2px !important;
+  padding: 25px;
+  animation-name: fadeIn;
+  animation-duration: 0.35s;
+  animation-timing-function: ease-out;
+  animation-delay: 0.4s;
+  animation-iteration-count: 1;
+  animation-fill-mode: forwards;
+  opacity: 0;
+}
+
+.followings img {
+  width: 100px !important;
+  height: 100px !important;
+  border-radius: 10px;
+}
+
+.following__content {
+  background: #ffffff;
+  box-shadow: 0 0 2px 2px #cdcdcd;
+  padding: 18px;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.following__data {
+  width: 170px;
+  height: 100px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+}
+
+.following__data h3 {
+  font-size: 1.5em;
+  margin: 10px 0 7px;
+  line-height: 25px;
+  font-weight: 500;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.following__data button {
+  width: 90%;
+  font-size: 0.7em;
+}

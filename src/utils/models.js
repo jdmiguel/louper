@@ -1,8 +1,9 @@
 import PropTypes from 'prop-types';
 
-export const userDataModel = PropTypes.shape({
+export const dataModel = PropTypes.shape({
   login: PropTypes.string,
   avatarUrl: PropTypes.string,
+  createdAt: PropTypes.string,
   name: PropTypes.string,
   bio: PropTypes.string,
   email: PropTypes.string,
@@ -16,7 +17,7 @@ export const userDataModel = PropTypes.shape({
   following: PropTypes.number,
 });
 
-export const reposDataModel = PropTypes.arrayOf(
+export const reposModel = PropTypes.arrayOf(
   PropTypes.shape({
     name: PropTypes.string,
     description: PropTypes.string,
@@ -24,7 +25,16 @@ export const reposDataModel = PropTypes.arrayOf(
   }),
 );
 
-export const followDataModel = PropTypes.arrayOf(
+export const followersModel = PropTypes.arrayOf(
+  PropTypes.shape({
+    id: PropTypes.number,
+    login: PropTypes.string,
+    html_url: PropTypes.string,
+    avatar_url: PropTypes.string,
+  }),
+);
+
+export const followingModel = PropTypes.arrayOf(
   PropTypes.shape({
     id: PropTypes.number,
     login: PropTypes.string,
@@ -35,6 +45,6 @@ export const followDataModel = PropTypes.arrayOf(
 
 export const menuTabsModel = PropTypes.shape({
   repos: PropTypes.number,
-  following: PropTypes.number,
+  followings: PropTypes.number,
   followers: PropTypes.number,
 }).isRequired;

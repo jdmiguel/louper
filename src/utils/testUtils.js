@@ -32,28 +32,28 @@ export const checkProps = (component, conformingProps) => {
 };
 
 export const app = {
-  intro: 'app-intro',
+  finder: 'app-finder',
   userContent: 'app-userContent',
   footer: 'app-footer',
 };
 
-export const intro = {
-  container: 'intro-container',
-  githubCorner: 'intro-githubCorner',
-  header: 'intro-header',
-  input: 'intro-input',
-  btn: 'intro-btn',
-  loader: 'intro-loader',
-  errorModal: 'intro-errorModal',
+export const finder = {
+  container: 'finder-container',
+  githubCorner: 'finder-githubCorner',
+  header: 'finder-header',
+  input: 'finder-input',
+  btn: 'finder-btn',
+  loader: 'finder-loader',
+  errorModal: 'finder-errorModal',
 };
 
-export const userContent = {
-  menu: 'userContent-menu',
-  floatBtn: 'userContent-floatBtn',
-  userData: 'userContent-userData',
-  userRepos: 'userContent-userRepos',
-  userFollowing: 'userContent-userFollowing',
-  userFollowers: 'userContent-userFollowers',
+export const user = {
+  menu: 'user-menu',
+  floatBtn: 'user-floatBtn',
+  profile: 'user-data',
+  repos: 'user-repos',
+  following: 'user-following',
+  followers: 'user-followers',
 };
 
 export const menu = {

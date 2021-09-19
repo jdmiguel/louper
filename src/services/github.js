@@ -11,5 +11,5 @@ export const getRepos = (username) =>
 export const getFollowers = (username) =>
   request(`${BASE_URL}/users/${username}/followers`);
 
-export const getFollowing = (username) =>
+export const getFollowings = (username) =>
   request(`${BASE_URL}/users/${username}/following`);
