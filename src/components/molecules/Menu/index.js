@@ -2,15 +2,15 @@ import { useState } from 'react';
 import PropTypes from 'prop-types';
 
 /* material-ui */
-import { makeStyles, withStyles } from '@material-ui/core/styles';
-import Paper from '@material-ui/core/Paper';
-import Tabs from '@material-ui/core/Tabs';
-import Tab from '@material-ui/core/Tab';
-import UserIcon from '@material-ui/icons/Person';
-import ReposIcon from '@material-ui/icons/Folder';
-import FollowingIcon from '@material-ui/icons/Visibility';
-import FollowersIcon from '@material-ui/icons/Favorite';
-import SearchIcon from '@material-ui/icons/Search';
+import { makeStyles, withStyles } from '@mui/material/styles';
+import Paper from '@mui/material/Paper';
+import Tabs from '@mui/material/Tabs';
+import Tab from '@mui/material/Tab';
+import UserIcon from '@mui/icons-material/Person';
+import ReposIcon from '@mui/icons-material/Folder';
+import FollowingIcon from '@mui/icons-material/Visibility';
+import FollowersIcon from '@mui/icons-material/Favorite';
+import SearchIcon from '@mui/icons-material/Search';
 
 const useStyles = makeStyles((theme) => ({
   '@keyframes topIn': theme.animation.topIn,

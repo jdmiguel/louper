@@ -1,7 +1,7 @@
 import { useState } from 'react';
 
 /* material-ui */
-import { makeStyles } from '@material-ui/core/styles';
+import { makeStyles } from '@mui/material/styles';
 
 /* pages */
 import Home from './pages/Home';

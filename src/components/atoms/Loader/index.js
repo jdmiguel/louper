@@ -1,5 +1,5 @@
 /* material-ui */
-import CircularProgress from '@material-ui/core/CircularProgress';
+import CircularProgress from '@mui/material/CircularProgress';
 
 /* styles */
 import './styles.css';

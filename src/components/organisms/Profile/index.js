@@ -1,17 +1,17 @@
 /* material-ui */
-import { makeStyles } from '@material-ui/core/styles';
-import Typography from '@material-ui/core/Typography';
-import EventIcon from '@material-ui/icons/Event';
-import FolderIcon from '@material-ui/icons/Folder';
-import VisibilityIcon from '@material-ui/icons/Visibility';
-import FavoriteIcon from '@material-ui/icons/Favorite';
-import EmailIcon from '@material-ui/icons/Email';
-import LocationOnIcon from '@material-ui/icons/LocationOn';
-import AccountBoxIcon from '@material-ui/icons/AccountBox';
-import CompanyIcon from '@material-ui/icons/Business';
-import Button from '@material-ui/core/Button';
-import IconButton from '@material-ui/core/IconButton';
-import Icon from '@material-ui/core/Icon';
+import { makeStyles } from '@mui/material/styles';
+import Typography from '@mui/material/Typography';
+import EventIcon from '@mui/icons-material/Event';
+import FolderIcon from '@mui/icons-material/Folder';
+import VisibilityIcon from '@mui/icons-material/Visibility';
+import FavoriteIcon from '@mui/icons-material/Favorite';
+import EmailIcon from '@mui/icons-material/Email';
+import LocationOnIcon from '@mui/icons-material/LocationOn';
+import AccountBoxIcon from '@mui/icons-material/AccountBox';
+import CompanyIcon from '@mui/icons-material/Business';
+import Button from '@mui/material/Button';
+import IconButton from '@mui/material/IconButton';
+import Icon from '@mui/material/Icon';
 
 /* atoms */
 import GithubIcon from '../../atoms/GithubIcon';

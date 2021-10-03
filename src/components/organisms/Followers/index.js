@@ -2,9 +2,9 @@ import { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 
 /* material-ui */
-import Grid from '@material-ui/core/Grid';
-import Button from '@material-ui/core/Button';
-import Icon from '@material-ui/core/Icon';
+import Grid from '@mui/material/Grid';
+import Button from '@mui/material/Button';
+import Icon from '@mui/material/Icon';
 
 /* core */
 import Loader from '../../atoms/Loader';

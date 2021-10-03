@@ -2,8 +2,8 @@
 import GithubIcon from '../../atoms/GithubIcon';
 
 /* material-ui */
-import { makeStyles } from '@material-ui/core/styles';
-import Typography from '@material-ui/core/Typography';
+import { makeStyles } from '@mui/material/styles';
+import Typography from '@mui/material/Typography';
 
 const useStyles = makeStyles((theme) => ({
   wrapper: {
