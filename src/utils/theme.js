@@ -1,4 +1,5 @@
 /* material-ui */
+import { keyframes } from '@emotion/react';
 import { createTheme } from '@mui/material/styles';
 
 export const theme = createTheme({
@@ -94,26 +95,10 @@ export const theme = createTheme({
     },
   },
   animation: {
-    greet: {
-      '0%,100%': { transform: 'rotate(0)' },
-      '20%,60%': { transform: 'rotate(-25deg)' },
-      '40%,80%': { transform: 'rotate(10deg)' },
-    },
-    topIn: {
-      from: {
-        transform: 'translateY(-150px)',
-      },
-      to: {
-        transform: 'translateY(0)',
-      },
-    },
-    bottomIn: {
-      from: {
-        transform: 'translateY(100%)',
-      },
-      to: {
-        transform: 'translateY(0)',
-      },
-    },
+    greet: keyframes`
+      0%,100% { transform: rotate(0) }
+      20%,60% { transform: rotate(-25deg) }
+      40%,80% { transform: rotate(10deg) }
+    `,
   },
 });

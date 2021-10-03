@@ -2,8 +2,7 @@ import { useState } from 'react';
 import PropTypes from 'prop-types';
 
 /* material-ui */
-import { makeStyles, withStyles } from '@mui/material/styles';
-import Paper from '@mui/material/Paper';
+import { styled } from '@mui/styles';
 import Tabs from '@mui/material/Tabs';
 import Tab from '@mui/material/Tab';
 import UserIcon from '@mui/icons-material/Person';
@@ -12,17 +11,13 @@ import FollowingIcon from '@mui/icons-material/Visibility';
 import FollowersIcon from '@mui/icons-material/Favorite';
 import SearchIcon from '@mui/icons-material/Search';
 
-const useStyles = makeStyles((theme) => ({
-  '@keyframes topIn': theme.animation.topIn,
-  wrapper: {
-    backgroundColor: theme.palette.text.light,
-    color: theme.palette.secondary.light,
-    animation: '$topIn 500ms ease-out forwards',
-    transform: 'translateY(-150px)',
-  },
+const Root = styled('div')(({ theme }) => ({
+  backgroundColor: theme.palette.text.light,
+  color: theme.palette.secondary.light,
+  animation: `${theme.animation.topIn} 500ms ease-out forwards`,
 }));
 
-const StyledTabs = withStyles((theme) => ({
+const StyledTabs = styled(Tabs)(({ theme }) => ({
   flexContainer: {
     '@media (max-width: 768px)': {
       justifyContent: 'space-around',
@@ -34,9 +29,9 @@ const StyledTabs = withStyles((theme) => ({
     maxWidth: 100,
     transform: 'translateX(calc(50% - 20px))',
   },
-}))((props) => <Tabs {...props} />);
+}));
 
-const StyledTab = withStyles((theme) => ({
+const StyledTab = styled(Tab)(({ theme }) => ({
   root: {
     '@media (max-width: 768px)': {
       minWidth: 'auto',
@@ -67,15 +62,13 @@ const StyledTab = withStyles((theme) => ({
   labelIcon: {
     fontSize: 14,
   },
-}))((props) => <Tab {...props} />);
+}));
 
 const Menu = ({ withRepos, withFollowing, withFollowers, onClick }) => {
-  const classes = useStyles();
-
   const [activeMenuItem, setActiveMenuItem] = useState(0);
 
   return (
-    <div className={classes.wrapper}>
+    <Root>
       <StyledTabs
         data-test="menu-tabs"
         value={activeMenuItem}
@@ -127,7 +120,7 @@ const Menu = ({ withRepos, withFollowing, withFollowers, onClick }) => {
           wrapped
         />
       </StyledTabs>
-    </div>
+    </Root>
   );
 };
 

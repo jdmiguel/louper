@@ -1,8 +1,8 @@
-import { useState, useCallback } from 'react';
+import { useState } from 'react';
 import PropTypes from 'prop-types';
 
 /* material-ui */
-import { makeStyles } from '@mui/material/styles';
+import { styled } from '@mui/material/styles';
 import CircularProgress from '@mui/material/CircularProgress';
 import FormControl from '@mui/material/FormControl';
 import TextField from '@mui/material/TextField';
@@ -11,42 +11,33 @@ import UserIcon from '@mui/icons-material/Person';
 import IconButton from '@mui/material/IconButton';
 import Icon from '@mui/material/Icon';
 
-const useStyles = makeStyles((theme) => ({
-  wrapper: {
-    alignItems: 'center',
-    display: 'flex',
-    flexDirection: 'row',
-    justifyContent: 'center',
+const InputWrapper = styled('div')({
+  '& > div > div': {
+    borderTopRightRadius: 0,
+    borderBottomRightRadius: 0,
   },
-  inputWrapper: {
-    '& > div > div': {
-      borderTopRightRadius: 0,
-      borderBottomRightRadius: 0,
-    },
-    '& svg': {
-      width: 22,
-    },
+  '& svg': {
+    width: 22,
   },
-  iconBtn: {
-    backgroundColor: theme.palette.primary.main,
-    color: theme.palette.primary.contrastText,
-    border: 0,
-    borderTopLeftRadius: 0,
-    borderBottomLeftRadius: 0,
-    borderTopRightRadius: 4,
-    borderBottomRightRadius: 4,
-    '& > span > span': {
-      fontSize: '1.03rem',
-    },
-    '&:hover': {
-      backgroundColor: theme.palette.primary.light,
-    },
+});
+
+const StyledIconButton = styled(IconButton)(({ theme }) => ({
+  backgroundColor: theme.palette.primary.main,
+  color: theme.palette.primary.contrastText,
+  border: 0,
+  borderTopLeftRadius: 0,
+  borderBottomLeftRadius: 0,
+  borderTopRightRadius: 4,
+  borderBottomRightRadius: 4,
+  '& > span > span': {
+    fontSize: '1.03rem',
+  },
+  '&:hover': {
+    backgroundColor: theme.palette.primary.light,
   },
 }));
 
 const Finder = ({ isLoading, onFetchUser }) => {
-  const classes = useStyles();
-
   const [inputValue, setInputValue] = useState('');
   const [isValidating, setIsValidating] = useState(null);
 
@@ -61,10 +52,16 @@ const Finder = ({ isLoading, onFetchUser }) => {
   const isNotValid = isValidating && inputValue === '';
 
   return (
-    <FormControl className={classes.wrapper}>
-      <div className={classes.inputWrapper}>
+    <FormControl
+      sx={{
+        alignItems: 'center',
+        display: 'flex',
+        flexDirection: 'row',
+        justifyContent: 'center',
+      }}
+    >
+      <InputWrapper>
         <TextField
-          classes={{ root: classes.inputRoot }}
           placeholder="Type user name..."
           onFocus={() => {
             setIsValidating(false);
@@ -95,10 +92,9 @@ const Finder = ({ isLoading, onFetchUser }) => {
             ),
           }}
         />
-      </div>
-      <IconButton
+      </InputWrapper>
+      <StyledIconButton
         data-test="finder-btn"
-        classes={{ root: classes.iconBtn }}
         onClick={() => {
           setIsValidating(true);
           if (inputValue !== '') {
@@ -106,8 +102,8 @@ const Finder = ({ isLoading, onFetchUser }) => {
           }
         }}
       >
-        <Icon>search</Icon>
-      </IconButton>
+        <Icon sx={{ fontSize: '1.5rem' }}>search</Icon>
+      </StyledIconButton>
     </FormControl>
   );
 };

@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 
 /* material-ui */
-import { makeStyles } from '@mui/material/styles';
+import { styled } from '@mui/material/styles';
 import List from '@mui/material/List';
 import ListItem from '@mui/material/ListItem';
 import ListItemText from '@mui/material/ListItemText';
@@ -19,7 +19,7 @@ import { getRepos } from '../../../services/github';
 import { externalLink } from '../../../utils';
 import { reposModel } from '../../../utils/models';
 
-const useStyles = makeStyles({
+const StyledAvatar = styled(Avatar)({
   root: {
     '& svg': {
       fontSize: '1.5rem',
@@ -28,8 +28,6 @@ const useStyles = makeStyles({
 });
 
 const Repos = ({ repos: reposData, user, onFetchRepos }) => {
-  const classes = useStyles();
-
   const [repos, setRepos] = useState(reposData);
 
   useEffect(() => {
@@ -62,9 +60,9 @@ const Repos = ({ repos: reposData, user, onFetchRepos }) => {
             onClick={() => externalLink(repo.html_url)}
             className="repos__item"
           >
-            <Avatar className={classes.root} data-test="repos-icon">
+            <StyledAvatar data-test="repos-icon">
               <FolderIcon className="repos__icon" />
-            </Avatar>
+            </StyledAvatar>
             <ListItemText
               data-test="repos-name"
               primary={repo.name}

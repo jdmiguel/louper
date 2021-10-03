@@ -1,49 +1,32 @@
 import PropTypes from 'prop-types';
 
 /* material-ui */
-import { makeStyles } from '@mui/material/styles';
 import Dialog from '@mui/material/Dialog';
 import DialogTitle from '@mui/material/DialogTitle';
 import DialogContent from '@mui/material/DialogContent';
 import Button from '@mui/material/Button';
 import Icon from '@mui/material/Icon';
 
-const useStyles = makeStyles((theme) => ({
-  dialog: {
-    textAlign: 'center',
-  },
-  title: {
-    fontSize: '1.1rem',
-  },
-  content: {
-    margin: '0 auto 10px',
-  },
-}));
-
-const ErrorModal = ({ isErrorModalOpen, msg, onClick }) => {
-  const classes = useStyles();
-
-  return (
-    <Dialog
-      open={isErrorModalOpen}
-      aria-labelledby="simple-dialog-title"
-      className={classes.dialog}
-    >
-      <DialogTitle>{msg}</DialogTitle>
-      <DialogContent className={classes.content}>
-        <Button
-          data-test="restore-btn"
-          onClick={onClick}
-          color="primary"
-          variant="contained"
-          endIcon={<Icon>restore</Icon>}
-        >
-          TRY AGAIN
-        </Button>
-      </DialogContent>
-    </Dialog>
-  );
-};
+const ErrorModal = ({ isErrorModalOpen, msg, onClick }) => (
+  <Dialog
+    open={isErrorModalOpen}
+    aria-labelledby="simple-dialog-title"
+    sx={{ textAlign: 'center' }}
+  >
+    <DialogTitle sx={{ fontSize: '1.1rem' }}>{msg}</DialogTitle>
+    <DialogContent sx={{ margin: '0 auto 10px' }}>
+      <Button
+        data-test="restore-btn"
+        onClick={onClick}
+        color="primary"
+        variant="contained"
+        endIcon={<Icon>restore</Icon>}
+      >
+        TRY AGAIN
+      </Button>
+    </DialogContent>
+  </Dialog>
+);
 
 ErrorModal.propTypes = {
   isErrorModalOpen: PropTypes.bool.isRequired,
