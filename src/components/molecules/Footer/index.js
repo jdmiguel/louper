@@ -26,7 +26,7 @@ const Footer = () => (
       COPYRIGHT @2021 | Created by{' '}
       <StyledLink
         href="https://jdmiguel.netlify.app/"
-        target="_blank"
+        target="_self"
         rel="noopener noreferrer"
         aria-label="View source on GitHub"
       >

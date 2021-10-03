@@ -167,7 +167,7 @@ const Profile = ({
         )}
       </ContentInfo>
       <ContentActions>
-        <StyledIconButton onClick={() => window.open(htmlUrl, '_blank')}>
+        <StyledIconButton onClick={() => window.open(htmlUrl, '_self')}>
           <GithubIconWrapper>
             <GithubIcon />
           </GithubIconWrapper>
@@ -175,7 +175,7 @@ const Profile = ({
         {email && (
           <StyledIconButton
             size="small"
-            onClick={() => window.open(`mailto:${email}`, '_blank')}
+            onClick={() => window.open(`mailto:${email}`, '_self')}
           >
             <Icon sx={{ fontSize: 24 }}>email</Icon>
           </StyledIconButton>
@@ -183,7 +183,7 @@ const Profile = ({
         {blog && (
           <StyledIconButton
             size="small"
-            onClick={() => window.open(blog, '_blank')}
+            onClick={() => window.open(blog, '_self')}
           >
             <Icon sx={{ fontSize: 24 }}>link</Icon>
           </StyledIconButton>
