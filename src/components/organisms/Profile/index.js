@@ -8,6 +8,7 @@ import Icon from '@mui/material/Icon';
 import GithubIcon from '../../atoms/GithubIcon';
 
 /* utils */
+import { navigateToUrl } from '../../../utils';
 import { dataModel } from '../../../utils/models';
 
 const Root = styled('div')({
@@ -167,7 +168,7 @@ const Profile = ({
         )}
       </ContentInfo>
       <ContentActions>
-        <StyledIconButton onClick={() => window.open(htmlUrl, '_self')}>
+        <StyledIconButton onClick={() => navigateToUrl(htmlUrl)}>
           <GithubIconWrapper>
             <GithubIcon />
           </GithubIconWrapper>
@@ -175,16 +176,13 @@ const Profile = ({
         {email && (
           <StyledIconButton
             size="small"
-            onClick={() => window.open(`mailto:${email}`, '_self')}
+            onClick={() => navigateToUrl(`mailto:${email}`)}
           >
             <Icon sx={{ fontSize: 24 }}>email</Icon>
           </StyledIconButton>
         )}
         {blog && (
-          <StyledIconButton
-            size="small"
-            onClick={() => window.open(blog, '_self')}
-          >
+          <StyledIconButton size="small" onClick={() => navigateToUrl(blog)}>
             <Icon sx={{ fontSize: 24 }}>link</Icon>
           </StyledIconButton>
         )}

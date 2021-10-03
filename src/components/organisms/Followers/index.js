@@ -13,7 +13,7 @@ import Loader from '../../atoms/Loader';
 import { getFollowers } from '../../../services/github';
 
 /* utils */
-import { externalLink } from '../../../utils';
+import { navigateToUrl } from '../../../utils';
 import { followersModel } from '../../../utils/models';
 
 /* styles */
@@ -50,7 +50,7 @@ const Followers = ({ followers: followersData, user, onFetchFollowers }) => {
               <h3 data-test="follower-name">{follower.login}</h3>
               <Button
                 data-test="follower-btn"
-                onClick={() => externalLink(follower.html_url, '_blank')}
+                onClick={() => navigateToUrl(follower.html_url, '_blank')}
                 color="primary"
                 variant="contained"
                 disabled={false}

@@ -4,4 +4,4 @@ export const errorLiterals = {
   unavailableUser: 'Please, choose an available user',
 };
 
-export const externalLink = (url) => window.open(url, '_blank');
+export const navigateToUrl = (url) => window.open(url, '_self');

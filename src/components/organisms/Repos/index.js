@@ -16,8 +16,13 @@ import Loader from '../../atoms/Loader';
 import { getRepos } from '../../../services/github';
 
 /* utils */
-import { externalLink } from '../../../utils';
+import { navigateToUrl } from '../../../utils';
 import { reposModel } from '../../../utils/models';
+
+const Root = styled('div')({
+  display: 'flex',
+  flexDirection: 'column',
+});
 
 const StyledAvatar = styled(Avatar)({
   root: {
@@ -50,14 +55,14 @@ const Repos = ({ repos: reposData, user, onFetchRepos }) => {
   }
 
   return (
-    <div data-test="repos-wrapper" className="repos__wrapper">
+    <Root>
       <List>
         {repos.map((repo) => (
           <ListItem
             data-test="repos-item"
             key={repo.name}
             button
-            onClick={() => externalLink(repo.html_url)}
+            onClick={() => navigateToUrl(repo.html_url)}
             className="repos__item"
           >
             <StyledAvatar data-test="repos-icon">
@@ -71,7 +76,7 @@ const Repos = ({ repos: reposData, user, onFetchRepos }) => {
           </ListItem>
         ))}
       </List>
-    </div>
+    </Root>
   );
 };
 

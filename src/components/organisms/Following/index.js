@@ -13,7 +13,7 @@ import Loader from '../../atoms/Loader';
 import { getFollowings } from '../../../services/github';
 
 /* utils */
-import { externalLink } from '../../../utils';
+import { navigateToUrl } from '../../../utils';
 import { followingModel } from '../../../utils/models';
 
 /* styles */
@@ -50,7 +50,7 @@ const Following = ({ following: followingData, user, onFetchFollowing }) => {
               <h3 data-test="following-name">{nextFollowing.login}</h3>
               <Button
                 data-test="following-btn"
-                onClick={() => externalLink(nextFollowing.html_url, '_blank')}
+                onClick={() => navigateToUrl(nextFollowing.html_url, '_blank')}
                 color="primary"
                 variant="contained"
                 disabled={false}
