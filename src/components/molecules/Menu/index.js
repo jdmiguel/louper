@@ -11,12 +11,6 @@ import FollowingIcon from '@mui/icons-material/Visibility';
 import FollowersIcon from '@mui/icons-material/Favorite';
 import SearchIcon from '@mui/icons-material/Search';
 
-const Root = styled('div')(({ theme }) => ({
-  backgroundColor: theme.palette.text.light,
-  color: theme.palette.secondary.light,
-  animation: `${theme.animation.topIn} 500ms ease-out forwards`,
-}));
-
 const StyledTabs = styled(Tabs)(({ theme }) => ({
   '& .MuiTabs-flexContainer': {
     '@media (min-width: 992px)': {
@@ -65,59 +59,57 @@ const Menu = ({ withRepos, withFollowing, withFollowers, onClick }) => {
   const [activeMenuItem, setActiveMenuItem] = useState(0);
 
   return (
-    <Root>
-      <StyledTabs
-        data-test="menu-tabs"
-        value={activeMenuItem}
-        onChange={(event, tabValue) => {
-          onClick(tabValue);
-          setActiveMenuItem(tabValue);
-        }}
-        centered
-      >
+    <StyledTabs
+      data-test="menu-tabs"
+      value={activeMenuItem}
+      onChange={(event, tabValue) => {
+        onClick(tabValue);
+        setActiveMenuItem(tabValue);
+      }}
+      centered
+    >
+      <StyledTab
+        data-test="menu-tab-profile"
+        icon={<UserIcon />}
+        disableRipple
+        label={<span>PROFILE</span>}
+        wrapped
+      />
+      {withRepos && (
         <StyledTab
-          data-test="menu-tab-profile"
-          icon={<UserIcon />}
+          data-test="menu-tab-repos"
+          icon={<ReposIcon />}
           disableRipple
-          label={<span>PROFILE</span>}
+          label={<span>REPOS</span>}
           wrapped
         />
-        {withRepos && (
-          <StyledTab
-            data-test="menu-tab-repos"
-            icon={<ReposIcon />}
-            disableRipple
-            label={<span>REPOS</span>}
-            wrapped
-          />
-        )}
-        {withFollowing && (
-          <StyledTab
-            data-test="menu-tab-following"
-            icon={<FollowingIcon />}
-            disableRipple
-            label={<span>FOLLOWING</span>}
-            wrapped
-          />
-        )}
-        {withFollowers && (
-          <StyledTab
-            data-test="menu-tab-followers"
-            icon={<FollowersIcon />}
-            disableRipple
-            label={<span>FOLLOWERS</span>}
-            wrapped
-          />
-        )}
+      )}
+      {withFollowing && (
         <StyledTab
-          data-test="menu-tab-search"
-          icon={<SearchIcon />}
+          data-test="menu-tab-following"
+          icon={<FollowingIcon />}
           disableRipple
-          label={<span>SEARCH</span>}
+          label={<span>FOLLOWING</span>}
           wrapped
         />
-      </StyledTabs>
-    </Root>
+      )}
+      {withFollowers && (
+        <StyledTab
+          data-test="menu-tab-followers"
+          icon={<FollowersIcon />}
+          disableRipple
+          label={<span>FOLLOWERS</span>}
+          wrapped
+        />
+      )}
+      <StyledTab
+        data-test="menu-tab-search"
+        icon={<SearchIcon />}
+        disableRipple
+        label={<span>SEARCH</span>}
+        wrapped
+      />
+    </StyledTabs>
   );
 };
 

@@ -27,7 +27,7 @@ const IconWrapper = styled('div')(({ theme }) => ({
     width: 44,
     marginLeft: 12,
     '& path': {
-      fill: theme.palette.secondary.contrastText,
+      fill: theme.palette.neutral.main,
     },
     '@media (min-width: 768px)': {
       width: 64,

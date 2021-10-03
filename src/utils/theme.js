@@ -55,9 +55,11 @@ export const theme = createTheme({
       letterSpacing: '0.05em',
       textTransform: 'uppercase',
     },
-    h6: {
-      color: '#353D40',
-      fontSize: '1.2rem',
+    h5: {
+      color: '#6b77a1',
+      fontSize: '1rem',
+      fontWeight: 700,
+      textTransform: 'uppercase',
     },
     button: {
       fontSize: '1rem',
@@ -65,10 +67,12 @@ export const theme = createTheme({
     body1: {
       color: '#353D40',
       fontSize: '1rem',
+      lineHeight: '1rem',
     },
     body2: {
       color: '#353D40',
       fontSize: '0.9rem',
+      lineHeight: '1.1rem',
     },
     subtitle2: {
       color: '#353D40',
@@ -88,10 +92,13 @@ export const theme = createTheme({
       contrastText: '#E1D7EC',
     },
     secondary: {
-      main: '#E0E6EF',
-      light: '#F0F3F7',
-      dark: '#b5c0d1',
-      contrastText: '#353D40',
+      main: '#6b77a1',
+      light: '#a3add1',
+      dark: '#565e7a',
+      contrastText: '#bac1d9',
+    },
+    neutral: {
+      main: '#353D40',
     },
   },
   animation: {

@@ -42,8 +42,8 @@ const ContentInfo = styled('div')({
   justifyContent: 'space-between',
   alignItems: 'center',
   display: 'flex',
-  marginTop: 18,
-  marginBottom: 20,
+  marginTop: 28,
+  marginBottom: 26,
   '@media (max-width: 768px)': {
     alignItems: 'center',
     flexDirection: 'column',
@@ -62,17 +62,17 @@ const ContentActions = styled('div')({
   },
 });
 
-const InfoTag = styled('div')({
-  justifyContent: 'center',
+const InfoTag = styled('div')(({ theme }) => ({
   alignItems: 'center',
+  color: theme.palette.secondary.main,
   display: 'flex',
-  alignItems: 'center',
+  justifyContent: 'center',
   marginRight: 12,
   fontSize: '0.9rem',
-});
+}));
 
 const StyledIcon = styled(Icon)(({ theme }) => ({
-  color: theme.palette.text.main,
+  color: theme.palette.secondary.main,
   fontSize: 22,
   marginRight: 3,
 }));
@@ -131,7 +131,7 @@ const Profile = ({
   <Root>
     <img data-test="profile__image" alt="user avatar" src={avatarUrl} />
     <Content>
-      <Typography variant="h3" cx={{ marginBottom: 5 }}>
+      <Typography variant="h3" sx={{ marginBottom: 1 }}>
         {name}
       </Typography>
       <Typography variant="h4">{bio}</Typography>

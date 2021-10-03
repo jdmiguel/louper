@@ -3,9 +3,7 @@ import PropTypes from 'prop-types';
 
 /* material-ui */
 import { styled } from '@mui/material/styles';
-import List from '@mui/material/List';
-import ListItem from '@mui/material/ListItem';
-import ListItemText from '@mui/material/ListItemText';
+import Typography from '@mui/material/Typography';
 import Avatar from '@mui/material/Avatar';
 import FolderIcon from '@mui/icons-material/Folder';
 
@@ -16,21 +14,36 @@ import Loader from '../../atoms/Loader';
 import { getRepos } from '../../../services/github';
 
 /* utils */
-import { navigateToUrl } from '../../../utils';
 import { reposModel } from '../../../utils/models';
 
 const Root = styled('div')({
-  display: 'flex',
-  flexDirection: 'column',
-});
-
-const StyledAvatar = styled(Avatar)({
-  root: {
-    '& svg': {
-      fontSize: '1.5rem',
-    },
+  display: 'grid',
+  gridTemplateColumns: '1fr 1fr 1fr 1fr',
+  gridGap: 20,
+  padding: 50,
+  '@media (max-width: 1500px)': {
+    gridTemplateColumns: '1fr 1fr 1fr',
   },
 });
+
+const Repo = styled('div')(({ theme }) => ({
+  border: `1px solid ${theme.palette.secondary.light}`,
+  borderRadius: 4,
+  display: 'flex',
+  flexDirection: 'column',
+  padding: 20,
+}));
+
+const RepoTitle = styled('div')({
+  alignItems: 'center',
+  display: 'flex',
+});
+
+const RepoIcon = styled(FolderIcon)(({ theme }) => ({
+  color: theme.palette.secondary.main,
+  fontSize: '1.3rem',
+  marginRight: 8,
+}));
 
 const Repos = ({ repos: reposData, user, onFetchRepos }) => {
   const [repos, setRepos] = useState(reposData);
@@ -56,26 +69,19 @@ const Repos = ({ repos: reposData, user, onFetchRepos }) => {
 
   return (
     <Root>
-      <List>
-        {repos.map((repo) => (
-          <ListItem
-            data-test="repos-item"
-            key={repo.name}
-            button
-            onClick={() => navigateToUrl(repo.html_url)}
-            className="repos__item"
-          >
-            <StyledAvatar data-test="repos-icon">
-              <FolderIcon className="repos__icon" />
-            </StyledAvatar>
-            <ListItemText
-              data-test="repos-name"
-              primary={repo.name}
-              secondary={repo.description}
-            />
-          </ListItem>
-        ))}
-      </List>
+      {repos.map((repo) => (
+        <Repo data-test="repos-item" key={repo.name}>
+          <RepoTitle>
+            <RepoIcon />
+            <Typography variant="h5">{repo.name}</Typography>
+          </RepoTitle>
+          {repo.description && (
+            <Typography variant="body2" sx={{ marginTop: 1 }}>
+              {repo.description}
+            </Typography>
+          )}
+        </Repo>
+      ))}
     </Root>
   );
 };

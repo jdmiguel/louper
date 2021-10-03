@@ -7,7 +7,7 @@ const Root = styled('footer')({
   display: 'flex',
   justifyContent: 'center',
   alignItems: 'center',
-  padding: '0 16px 16px',
+  padding: '0 16px 24px',
 });
 
 const StyledLink = styled(Link)(({ theme }) => ({
