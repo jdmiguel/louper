@@ -10,19 +10,28 @@ const Root = styled('footer')({
   padding: '0 16px 16px',
 });
 
+const StyledLink = styled(Link)(({ theme }) => ({
+  fontWeight: 700,
+  textDecoration: 'none',
+  color: theme.palette.primary.dark,
+  transition: 'color ease-out 250ms',
+  '&:hover': {
+    color: theme.palette.primary.light,
+  },
+}));
+
 const Footer = () => (
   <Root>
     <Typography variant="body2">
       COPYRIGHT @2021 | Created by{' '}
-      <Link
-        sx={{ fontWeight: 700 }}
+      <StyledLink
         href="https://jdmiguel.netlify.app/"
         target="_blank"
         rel="noopener noreferrer"
         aria-label="View source on GitHub"
       >
         jdmiguel
-      </Link>
+      </StyledLink>
     </Typography>
   </Root>
 );

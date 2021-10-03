@@ -5,7 +5,7 @@ const Root = styled('a')(({ theme }) => ({
   '& svg': {
     fill: theme.palette.primary.main,
     color: theme.palette.background.default,
-    transition: 'fill linear 250ms',
+    transition: 'fill ease-out 250ms',
   },
   '&:hover': {
     '& svg': {

@@ -33,18 +33,20 @@ const StyledTab = styled(Tab)(({ theme }) => ({
   alignItems: 'center',
   display: 'flex',
   justifyContent: 'center',
-
   '@media (min-width: 992px)': {
     minWidth: 180,
   },
   '& svg': {
     fill: theme.palette.primary.dark,
     marginBottom: '2px !important',
+    transition: 'fill ease-out 250ms',
     width: 22,
   },
   '& > span': {
     color: theme.palette.primary.dark,
     display: 'none',
+    fontSize: '0.9rem',
+    transition: 'color ease-out 250ms',
     '@media (min-width: 992px)': {
       display: 'inline',
     },
@@ -53,9 +55,9 @@ const StyledTab = styled(Tab)(({ theme }) => ({
     '& svg': {
       fill: theme.palette.primary.light,
     },
-  },
-  '& .MuiTab-labelIcon': {
-    fontSize: 14,
+    '& > span': {
+      color: theme.palette.primary.light,
+    },
   },
 }));
 
