@@ -18,48 +18,43 @@ const Root = styled('div')(({ theme }) => ({
 }));
 
 const StyledTabs = styled(Tabs)(({ theme }) => ({
-  flexContainer: {
-    '@media (max-width: 768px)': {
-      justifyContent: 'space-around',
+  '& .MuiTabs-flexContainer': {
+    '@media (min-width: 992px)': {
+      justifyContent: 'center',
     },
   },
-  indicator: {
+  '& .MuiTabs-indicator': {
     backgroundColor: theme.palette.primary.main,
     height: 2,
-    maxWidth: 100,
-    transform: 'translateX(calc(50% - 20px))',
   },
 }));
 
 const StyledTab = styled(Tab)(({ theme }) => ({
-  root: {
-    '@media (max-width: 768px)': {
-      minWidth: 'auto',
+  alignItems: 'center',
+  display: 'flex',
+  justifyContent: 'center',
+
+  '@media (min-width: 992px)': {
+    minWidth: 180,
+  },
+  '& svg': {
+    fill: theme.palette.primary.dark,
+    marginBottom: '2px !important',
+    width: 22,
+  },
+  '& > span': {
+    color: theme.palette.primary.dark,
+    display: 'none',
+    '@media (min-width: 992px)': {
+      display: 'inline',
     },
   },
-  wrapper: {
-    alignItems: 'center',
-    display: 'flex',
-    justifyContent: 'center',
+  '&:hover': {
     '& svg': {
-      fill: theme.palette.primary.dark,
-      marginBottom: '2px !important',
-      width: 22,
-    },
-    '& > span': {
-      color: theme.palette.primary.dark,
-      display: 'none',
-      '@media (min-width: 768px)': {
-        display: 'inline',
-      },
-    },
-    '&:hover': {
-      '& svg': {
-        fill: theme.palette.primary.light,
-      },
+      fill: theme.palette.primary.light,
     },
   },
-  labelIcon: {
+  '& .MuiTab-labelIcon': {
     fontSize: 14,
   },
 }));

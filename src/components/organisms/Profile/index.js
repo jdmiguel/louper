@@ -14,19 +14,17 @@ const Root = styled('div')({
   alignItems: 'center',
   display: 'flex',
   justifyContent: 'center',
+  '@media (max-width: 768px)': {
+    flexDirection: 'column',
+  },
   '& > img': {
     borderRadius: '50%',
     height: 240,
     width: 240,
     '@media (max-width: 768px)': {
-      height: 180,
-      width: 180,
+      height: 200,
+      width: 200,
     },
-  },
-  marginTop: '25vh',
-  '@media (max-width: 768px)': {
-    marginTop: '12vw',
-    flexDirection: 'column',
   },
 });
 
@@ -39,25 +37,19 @@ const Content = styled('div')({
   },
 });
 
-const GithubInfo = styled('div')({
+const ContentInfo = styled('div')({
   justifyContent: 'space-between',
   alignItems: 'center',
   display: 'flex',
   marginTop: 18,
-  marginBottom: 12,
+  marginBottom: 20,
   '@media (max-width: 768px)': {
     alignItems: 'center',
     flexDirection: 'column',
   },
 });
 
-const Data = styled('div')({
-  alignItems: 'center',
-  display: 'flex',
-  marginBottom: 2,
-});
-
-const Actions = styled('div')({
+const ContentActions = styled('div')({
   alignItems: 'center',
   display: 'flex',
   flex: 1,
@@ -69,29 +61,19 @@ const Actions = styled('div')({
   },
 });
 
-const Tag = styled('div')({
+const InfoTag = styled('div')({
   justifyContent: 'center',
   alignItems: 'center',
   display: 'flex',
   alignItems: 'center',
-  marginRight: 8,
+  marginRight: 12,
+  fontSize: '0.9rem',
 });
-
-const GithubIconWrapper = styled('div')(({ theme }) => ({
-  fontSize: 'initial',
-  lineHeight: 0,
-  '& svg': {
-    width: 22,
-    '& path': {
-      fill: theme.palette.primary.contrastText,
-    },
-  },
-}));
 
 const StyledIcon = styled(Icon)(({ theme }) => ({
   color: theme.palette.text.main,
-  fontSize: 25,
-  padding: 4,
+  fontSize: 22,
+  marginRight: 3,
 }));
 
 const StyledIconButton = styled(IconButton)(({ theme }) => ({
@@ -108,6 +90,17 @@ const StyledIconButton = styled(IconButton)(({ theme }) => ({
   },
   '@media (max-width: 768px)': {
     justifyContent: 'center',
+  },
+}));
+
+const GithubIconWrapper = styled('div')(({ theme }) => ({
+  fontSize: 'initial',
+  lineHeight: 0,
+  '& svg': {
+    width: 22,
+    '& path': {
+      fill: theme.palette.primary.contrastText,
+    },
   },
 }));
 
@@ -137,47 +130,43 @@ const Profile = ({
   <Root>
     <img data-test="profile__image" alt="user avatar" src={avatarUrl} />
     <Content>
-      <Typography variant="h3" cx={{ marginBottom: 4 }}>
+      <Typography variant="h3" cx={{ marginBottom: 5 }}>
         {name}
       </Typography>
       <Typography variant="h4">{bio}</Typography>
-      <GithubInfo>
-        <Data>
-          <Tag>
-            <StyledIcon>folder</StyledIcon>
-            {repos}
-          </Tag>
-          <Tag>
-            <StyledIcon>visibility</StyledIcon>
-            {following}
-          </Tag>
-          <Tag>
-            <StyledIcon>favorite</StyledIcon>
-            {followers}
-          </Tag>
-        </Data>
-        <Data>
-          {createdAt && (
-            <Tag>
-              <StyledIcon>event_note</StyledIcon>
-              {buildCreationDate(createdAt)}
-            </Tag>
-          )}
-          {location && (
-            <Tag>
-              <StyledIcon>location_on</StyledIcon>
-              {location}
-            </Tag>
-          )}
-          {company && (
-            <Tag>
-              <StyledIcon>business</StyledIcon>
-              {company}
-            </Tag>
-          )}
-        </Data>
-      </GithubInfo>
-      <Actions>
+      <ContentInfo>
+        <InfoTag>
+          <StyledIcon>folder</StyledIcon>
+          {repos}
+        </InfoTag>
+        <InfoTag>
+          <StyledIcon>visibility</StyledIcon>
+          {following}
+        </InfoTag>
+        <InfoTag>
+          <StyledIcon>favorite</StyledIcon>
+          {followers}
+        </InfoTag>
+        {createdAt && (
+          <InfoTag>
+            <StyledIcon>event_note</StyledIcon>
+            {buildCreationDate(createdAt)}
+          </InfoTag>
+        )}
+        {location && (
+          <InfoTag>
+            <StyledIcon>location_on</StyledIcon>
+            {location}
+          </InfoTag>
+        )}
+        {company && (
+          <InfoTag>
+            <StyledIcon>business</StyledIcon>
+            {company}
+          </InfoTag>
+        )}
+      </ContentInfo>
+      <ContentActions>
         <StyledIconButton onClick={() => window.open(htmlUrl, '_blank')}>
           <GithubIconWrapper>
             <GithubIcon />
@@ -199,7 +188,7 @@ const Profile = ({
             <Icon sx={{ fontSize: 24 }}>link</Icon>
           </StyledIconButton>
         )}
-      </Actions>
+      </ContentActions>
     </Content>
   </Root>
 );

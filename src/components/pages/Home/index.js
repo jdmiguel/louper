@@ -1,13 +1,13 @@
 import { useState } from 'react';
 import PropTypes from 'prop-types';
 
+/* material-ui */
+import { styled } from '@mui/material/styles';
+
 /* molecules */
 import Finder from '../../molecules/Finder';
 import Heading from '../../molecules/Heading';
 import ErrorModal from '../../molecules/ErrorModal';
-
-/* atoms */
-import Corner from '../../atoms/Corner';
 
 /* services */
 import { getUserData } from '../../../services/github';
@@ -16,6 +16,13 @@ import { getUserData } from '../../../services/github';
 import { errorLiterals } from '../../../utils';
 
 const { maximumRequest, unavailableUser } = errorLiterals;
+
+const Root = styled('main')({
+  display: 'flex',
+  flexDirection: 'column',
+  justifyContent: 'center',
+  height: '100vh',
+});
 
 const Home = ({ onFetchUser }) => {
   const [isLoading, setIsLoading] = useState(false);
@@ -66,8 +73,7 @@ const Home = ({ onFetchUser }) => {
   };
 
   return (
-    <div data-test="home">
-      <Corner data-test="home-corner" />
+    <Root>
       <Heading data-test="home-heading" />
       <Finder
         data-test="home-finder"
@@ -80,7 +86,7 @@ const Home = ({ onFetchUser }) => {
         onClick={() => setIsErrorModalOpen(false)}
         msg={errorMsg}
       />
-    </div>
+    </Root>
   );
 };
 

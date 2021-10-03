@@ -2,15 +2,9 @@
 import { styled } from '@mui/material/styles';
 
 const Root = styled('a')(({ theme }) => ({
-  width: '90px',
-  marginLeft: '18px',
   '& svg': {
     fill: theme.palette.primary.main,
     color: theme.palette.background.default,
-    position: 'absolute',
-    top: 0,
-    border: 0,
-    right: 0,
     transition: 'fill linear 250ms',
   },
   '&:hover': {
