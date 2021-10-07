@@ -13,6 +13,7 @@ import SearchIcon from '@mui/icons-material/Search';
 
 const StyledTabs = styled(Tabs)(({ theme }) => ({
   '& .MuiTabs-flexContainer': {
+    justifyContent: 'space-evenly',
     '@media (min-width: 992px)': {
       justifyContent: 'center',
     },
@@ -27,8 +28,12 @@ const StyledTab = styled(Tab)(({ theme }) => ({
   alignItems: 'center',
   display: 'flex',
   justifyContent: 'center',
+  minWidth: 60,
+  '@media (min-width: 768px)': {
+    minWidth: 100,
+  },
   '@media (min-width: 992px)': {
-    minWidth: 180,
+    minWidth: 200,
   },
   '& svg': {
     fill: theme.palette.primary.dark,

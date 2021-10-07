@@ -16,6 +16,7 @@ import { dataModel } from '../../../utils/models';
 const Root = styled('main')({
   display: 'flex',
   flexDirection: 'column',
+  padding: 30,
 });
 
 const User = ({ data, activeSection }) => {

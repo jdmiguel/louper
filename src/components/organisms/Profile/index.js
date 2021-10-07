@@ -42,12 +42,10 @@ const ContentInfo = styled('div')({
   justifyContent: 'space-between',
   alignItems: 'center',
   display: 'flex',
+  flexWrap: 'wrap',
+  justifyContent: 'center',
   marginTop: 28,
-  marginBottom: 26,
-  '@media (max-width: 768px)': {
-    alignItems: 'center',
-    flexDirection: 'column',
-  },
+  marginBottom: 20,
 });
 
 const ContentActions = styled('div')({
@@ -68,6 +66,7 @@ const InfoTag = styled('div')(({ theme }) => ({
   display: 'flex',
   justifyContent: 'center',
   marginRight: 12,
+  marginBottom: 6,
   fontSize: '0.9rem',
 }));
 

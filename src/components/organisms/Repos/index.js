@@ -18,12 +18,8 @@ import { reposModel } from '../../../utils/models';
 
 const Root = styled('div')({
   display: 'grid',
-  gridTemplateColumns: '1fr 1fr 1fr 1fr',
+  gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))',
   gridGap: 20,
-  padding: 50,
-  '@media (max-width: 1500px)': {
-    gridTemplateColumns: '1fr 1fr 1fr',
-  },
 });
 
 const Repo = styled('div')(({ theme }) => ({
