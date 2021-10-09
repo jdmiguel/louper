@@ -25,39 +25,43 @@ export const theme = createTheme({
     htmlFontSize: 12,
     h1: {
       color: '#353D40',
-      fontSize: '4.4rem',
+      fontSize: '4.8rem',
       fontWeight: 700,
       letterSpacing: '-0.25rem',
       lineHeight: 0,
-      '@media (min-width: 768px)': {
+      '@media (min-width: 769px)': {
         fontSize: '6rem',
       },
     },
     h2: {
       color: '#353D40',
-      fontSize: '3rem',
+      fontSize: '3.5rem',
       fontWeight: 300,
       letterSpacing: '-0.1rem',
       lineHeight: 0,
-      '@media (min-width: 768px)': {
+      '@media (min-width: 769px)': {
         fontSize: '4.2rem',
       },
     },
     h3: {
       color: '#353D40',
-      fontSize: '2rem',
+      fontSize: '1.3rem',
       fontWeight: 700,
+      '@media (min-width: 769px)': {
+        fontSize: '1.5rem',
+      },
     },
     h4: {
       color: '#353D40',
       fontSize: '1.1rem',
       fontWeight: 500,
-      letterSpacing: '0.05em',
-      textTransform: 'uppercase',
+      '@media (min-width: 769px)': {
+        fontSize: '1.2rem',
+      },
     },
     h5: {
       color: '#6b77a1',
-      fontSize: '1rem',
+      fontSize: '0.9rem',
       fontWeight: 700,
       textTransform: 'uppercase',
     },
@@ -93,7 +97,7 @@ export const theme = createTheme({
     },
     secondary: {
       main: '#6b77a1',
-      light: '#a3add1',
+      light: '#c7cde1',
       dark: '#565e7a',
       contrastText: '#bac1d9',
     },

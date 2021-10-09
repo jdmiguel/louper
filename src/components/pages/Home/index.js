@@ -7,7 +7,11 @@ import { styled } from '@mui/material/styles';
 /* molecules */
 import Finder from '../../molecules/Finder';
 import Heading from '../../molecules/Heading';
+import Footer from '../../molecules/Footer';
 import ErrorModal from '../../molecules/ErrorModal';
+
+/* atoms */
+import Corner from '../../atoms/Corner';
 
 /* services */
 import { getUserData } from '../../../services/github';
@@ -20,8 +24,14 @@ const { maximumRequest, unavailableUser } = errorLiterals;
 const Root = styled('main')({
   display: 'flex',
   flexDirection: 'column',
-  justifyContent: 'center',
+  justifyContent: 'space-between',
   height: '100vh',
+});
+
+const CornerWrapper = styled('div')({
+  display: 'flex',
+  justifyContent: 'flex-end',
+  width: '100%',
 });
 
 const Home = ({ onFetchUser }) => {
@@ -74,12 +84,18 @@ const Home = ({ onFetchUser }) => {
 
   return (
     <Root>
-      <Heading data-test="home-heading" />
-      <Finder
-        data-test="home-finder"
-        onFetchUser={fetchUser}
-        isLoading={isLoading}
-      />
+      <CornerWrapper>
+        <Corner />
+      </CornerWrapper>
+      <div>
+        <Heading />
+        <Finder
+          data-test="home-finder"
+          onFetchUser={fetchUser}
+          isLoading={isLoading}
+        />
+      </div>
+      <Footer />
       <ErrorModal
         data-test="home-errorModal"
         isErrorModalOpen={isErrorModalOpen}

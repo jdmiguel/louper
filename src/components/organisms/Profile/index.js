@@ -12,41 +12,40 @@ import { navigateToUrl } from '../../../utils';
 import { dataModel } from '../../../utils/models';
 
 const Root = styled('div')({
-  alignItems: 'center',
   display: 'flex',
-  justifyContent: 'center',
+  flexDirection: 'column',
+  maxWidth: 240,
+  position: 'sticky',
+  top: 60,
   '@media (max-width: 768px)': {
-    flexDirection: 'column',
+    display: 'none',
   },
   '& > img': {
     borderRadius: '50%',
-    height: 240,
-    width: 240,
-    '@media (max-width: 768px)': {
-      height: 200,
-      width: 200,
+    height: 220,
+    width: 220,
+    '@media (min-width: 1200px)': {
+      height: 240,
+      width: 240,
     },
   },
 });
 
 const Content = styled('div')({
-  marginLeft: 30,
-  '@media (max-width: 768px)': {
-    textAlign: 'center',
-    marginLeft: 0,
-    marginTop: 36,
-  },
+  marginTop: 20,
+  maxWidth: 300,
 });
 
-const ContentInfo = styled('div')({
-  justifyContent: 'space-between',
-  alignItems: 'center',
+const ContentInfo = styled('div')(({ theme }) => ({
+  borderBottom: `1px solid ${theme.palette.secondary.light}`,
+  borderTop: `1px solid ${theme.palette.secondary.light}`,
   display: 'flex',
   flexWrap: 'wrap',
-  justifyContent: 'center',
-  marginTop: 28,
   marginBottom: 20,
-});
+  marginTop: 24,
+  paddingBottom: 10,
+  paddingTop: 10,
+}));
 
 const ContentActions = styled('div')({
   alignItems: 'center',
@@ -115,6 +114,7 @@ const Profile = ({
   data: {
     avatarUrl,
     name,
+    login,
     bio,
     email,
     repos,
@@ -130,10 +130,13 @@ const Profile = ({
   <Root>
     <img data-test="profile__image" alt="user avatar" src={avatarUrl} />
     <Content>
-      <Typography variant="h3" sx={{ marginBottom: 1 }}>
+      <Typography variant="h3" sx={{ marginBottom: 0.4 }}>
         {name}
       </Typography>
-      <Typography variant="h4">{bio}</Typography>
+      <Typography variant="h4" sx={{ marginBottom: 2 }}>
+        {login}
+      </Typography>
+      <Typography variant="h5">{bio}</Typography>
       <ContentInfo>
         <InfoTag>
           <StyledIcon>folder</StyledIcon>

@@ -4,7 +4,6 @@ import PropTypes from 'prop-types';
 /* material-ui */
 import { styled } from '@mui/material/styles';
 import Typography from '@mui/material/Typography';
-import Avatar from '@mui/material/Avatar';
 import FolderIcon from '@mui/icons-material/Folder';
 
 /* atoms */
@@ -18,8 +17,10 @@ import { reposModel } from '../../../utils/models';
 
 const Root = styled('div')({
   display: 'grid',
+  gridColumn: '2/5',
   gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))',
   gridGap: 20,
+  marginTop: 30,
 });
 
 const Repo = styled('div')(({ theme }) => ({

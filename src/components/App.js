@@ -7,37 +7,20 @@ import { styled } from '@mui/material/styles';
 import Home from './pages/Home';
 import User from './pages/User';
 
-/* molecules */
-import Header from './molecules/Header';
-import Footer from './molecules/Footer';
-
-const Root = styled('div')({
-  display: 'flex',
-  flexDirection: 'column',
-  justifyContent: 'space-between',
-  height: '100vh',
-});
-
 const App = () => {
   const [userData, setUserData] = useState(null);
   const [hasSelectedUser, setHasSelectedUser] = useState(false);
-  const [activeUserSection, setActiveUserSection] = useState(0);
 
   return (
-    <Root>
-      <Header
-        showMenu={hasSelectedUser}
-        data={userData}
-        activeSection={activeUserSection}
-        onActiveSection={(section) => setActiveUserSection(section)}
-        onBackFinder={() => {
-          setUserData(null);
-          setHasSelectedUser(false);
-          setActiveUserSection(0);
-        }}
-      />
+    <>
       {hasSelectedUser ? (
-        <User data={userData} activeSection={activeUserSection} />
+        <User
+          data={userData}
+          onBackFinder={() => {
+            setUserData(null);
+            setHasSelectedUser(false);
+          }}
+        />
       ) : (
         <Home
           onFetchUser={(data) => {
@@ -46,8 +29,7 @@ const App = () => {
           }}
         />
       )}
-      <Footer data-test="app-footer" />
-    </Root>
+    </>
   );
 };
 

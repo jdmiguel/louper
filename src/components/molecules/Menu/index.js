@@ -5,16 +5,19 @@ import PropTypes from 'prop-types';
 import { styled } from '@mui/styles';
 import Tabs from '@mui/material/Tabs';
 import Tab from '@mui/material/Tab';
-import UserIcon from '@mui/icons-material/Person';
 import ReposIcon from '@mui/icons-material/Folder';
 import FollowingIcon from '@mui/icons-material/Visibility';
 import FollowersIcon from '@mui/icons-material/Favorite';
 import SearchIcon from '@mui/icons-material/Search';
 
 const StyledTabs = styled(Tabs)(({ theme }) => ({
+  backgroundColor: theme.palette.background.default,
+  borderBottom: `1px solid ${theme.palette.secondary.light}`,
+  position: 'sticky',
+  top: 0,
   '& .MuiTabs-flexContainer': {
-    justifyContent: 'space-evenly',
-    '@media (min-width: 992px)': {
+    justifyContent: 'space-between',
+    '@media (min-width: 1200x)': {
       justifyContent: 'center',
     },
   },
@@ -29,10 +32,10 @@ const StyledTab = styled(Tab)(({ theme }) => ({
   display: 'flex',
   justifyContent: 'center',
   minWidth: 60,
-  '@media (min-width: 768px)': {
-    minWidth: 100,
-  },
   '@media (min-width: 992px)': {
+    minWidth: 120,
+  },
+  '@media (min-width: 1200px)': {
     minWidth: 200,
   },
   '& svg': {
@@ -73,13 +76,6 @@ const Menu = ({ withRepos, withFollowing, withFollowers, onClick }) => {
       }}
       centered
     >
-      <StyledTab
-        data-test="menu-tab-profile"
-        icon={<UserIcon />}
-        disableRipple
-        label={<span>PROFILE</span>}
-        wrapped
-      />
       {withRepos && (
         <StyledTab
           data-test="menu-tab-repos"
