@@ -1,8 +1,8 @@
 /* material-ui */
 import { styled } from '@mui/material/styles';
 import Typography from '@mui/material/Typography';
-import IconButton from '@mui/material/IconButton';
 import Icon from '@mui/material/Icon';
+import Button from '@mui/material/Button';
 
 /* atoms */
 import GithubIcon from '../../atoms/GithubIcon';
@@ -41,22 +41,13 @@ const ContentInfo = styled('div')(({ theme }) => ({
   borderTop: `1px solid ${theme.palette.secondary.light}`,
   display: 'flex',
   flexWrap: 'wrap',
-  marginBottom: 20,
   marginTop: 24,
   paddingBottom: 10,
   paddingTop: 10,
 }));
 
 const ContentActions = styled('div')({
-  alignItems: 'center',
-  display: 'flex',
-  flex: 1,
-  marginRight: 14,
-  '@media (max-width: 768px)': {
-    justifyContent: 'center',
-    marginRight: 0,
-    marginBottom: 30,
-  },
+  marginTop: 20,
 });
 
 const InfoTag = styled('div')(({ theme }) => ({
@@ -75,17 +66,23 @@ const StyledIcon = styled(Icon)(({ theme }) => ({
   marginRight: 3,
 }));
 
-const StyledIconButton = styled(IconButton)(({ theme }) => ({
+const StyledButton = styled(Button)(({ theme }) => ({
+  alignItems: 'center',
   backgroundColor: theme.palette.primary.main,
   border: 0,
-  borderRadius: '50%',
+  borderRadius: 4,
   color: theme.palette.primary.contrastText,
-  height: 22,
-  padding: 18,
-  marginRight: 8,
-  width: 22,
+  display: 'flex',
+  fontSize: '0.9rem',
+  justifyContent: 'space-evenly',
+  padding: 10,
+  marginBottom: 8,
+  width: '100%',
   '&:hover': {
     backgroundColor: theme.palette.primary.light,
+  },
+  '& span': {
+    marginRight: 8,
   },
   '@media (max-width: 768px)': {
     justifyContent: 'center',
@@ -170,23 +167,28 @@ const Profile = ({
         )}
       </ContentInfo>
       <ContentActions>
-        <StyledIconButton onClick={() => navigateToUrl(htmlUrl)}>
+        <StyledButton
+          variant="contained"
+          onClick={() => navigateToUrl(htmlUrl)}
+        >
+          <span>Visit Profile</span>
           <GithubIconWrapper>
             <GithubIcon />
           </GithubIconWrapper>
-        </StyledIconButton>
+        </StyledButton>
         {email && (
-          <StyledIconButton
-            size="small"
+          <StyledButton
+            variant="contained"
             onClick={() => navigateToUrl(`mailto:${email}`)}
           >
             <Icon sx={{ fontSize: 24 }}>email</Icon>
-          </StyledIconButton>
+          </StyledButton>
         )}
         {blog && (
-          <StyledIconButton size="small" onClick={() => navigateToUrl(blog)}>
+          <StyledButton variant="contained" onClick={() => navigateToUrl(blog)}>
+            <span>Visit portfolio</span>
             <Icon sx={{ fontSize: 24 }}>link</Icon>
-          </StyledIconButton>
+          </StyledButton>
         )}
       </ContentActions>
     </Content>

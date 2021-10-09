@@ -66,17 +66,17 @@ export const theme = createTheme({
       textTransform: 'uppercase',
     },
     button: {
-      fontSize: '1rem',
+      fontSize: '0.9rem',
     },
     body1: {
       color: '#353D40',
-      fontSize: '1rem',
-      lineHeight: '1rem',
-    },
-    body2: {
-      color: '#353D40',
       fontSize: '0.9rem',
       lineHeight: '1.1rem',
+    },
+    body2: {
+      color: '#E1D7EC',
+      fontSize: '0.8rem',
+      lineHeight: '1rem',
     },
     subtitle2: {
       color: '#353D40',

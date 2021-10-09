@@ -22,13 +22,13 @@ const StyledLink = styled(Link)(({ theme }) => ({
 
 const Footer = () => (
   <Root>
-    <Typography variant="body2">
+    <Typography variant="body1">
       COPYRIGHT @2021 | Created by{' '}
       <StyledLink
         href="https://jdmiguel.netlify.app/"
         target="_self"
         rel="noopener noreferrer"
-        aria-label="View source on GitHub"
+        aria-label="View profile of jdmiguel on GitHub"
       >
         jdmiguel
       </StyledLink>

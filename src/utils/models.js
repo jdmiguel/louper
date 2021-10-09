@@ -22,6 +22,7 @@ export const reposModel = PropTypes.arrayOf(
     name: PropTypes.string,
     description: PropTypes.string,
     html_url: PropTypes.string,
+    topics: PropTypes.arrayOf(PropTypes.string),
   }),
 );
 

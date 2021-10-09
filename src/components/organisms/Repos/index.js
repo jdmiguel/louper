@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 /* material-ui */
 import { styled } from '@mui/material/styles';
 import Typography from '@mui/material/Typography';
+import Link from '@mui/material/Link';
 import FolderIcon from '@mui/icons-material/Folder';
 
 /* atoms */
@@ -31,15 +32,43 @@ const Repo = styled('div')(({ theme }) => ({
   padding: 20,
 }));
 
-const RepoTitle = styled('div')({
+const StyledLink = styled(Link)(({ theme }) => ({
+  cursor: 'pointer',
   alignItems: 'center',
   display: 'flex',
-});
+  fontSize: '0.9rem',
+  fontWeight: 700,
+  textDecoration: 'none',
+  textTransform: 'uppercase',
+  transition: 'color ease-out 250ms',
+  '& path': { transition: 'fill ease-out 250ms' },
+  '&:hover': {
+    color: theme.palette.primary.light,
+    '& path': { fill: theme.palette.primary.light },
+  },
+}));
 
 const RepoIcon = styled(FolderIcon)(({ theme }) => ({
-  color: theme.palette.secondary.main,
+  color: theme.palette.primary.main,
   fontSize: '1.3rem',
-  marginRight: 8,
+  marginRight: 6,
+  marginBottom: 2,
+}));
+
+const Topics = styled('div')({
+  display: 'flex',
+  flexWrap: 'wrap',
+  marginTop: 14,
+  marginBottom: 10,
+});
+
+const Topic = styled('div')(({ theme }) => ({
+  backgroundColor: theme.palette.secondary.main,
+  borderRadius: 4,
+  color: theme.palette.secondary.light,
+  padding: '4px 8px',
+  marginBottom: 5,
+  marginRight: 5,
 }));
 
 const Repos = ({ repos: reposData, user, onFetchRepos }) => {
@@ -68,15 +97,38 @@ const Repos = ({ repos: reposData, user, onFetchRepos }) => {
     <Root>
       {repos.map((repo) => (
         <Repo data-test="repos-item" key={repo.name}>
-          <RepoTitle>
+          <StyledLink
+            href={repo.html_url}
+            target="_self"
+            rel="noopener noreferrer"
+            aria-label="View profile of jdmiguel on GitHub"
+          >
             <RepoIcon />
-            <Typography variant="h5">{repo.name}</Typography>
-          </RepoTitle>
-          {repo.description && (
-            <Typography variant="body2" sx={{ marginTop: 1 }}>
+            {repo.name}
+          </StyledLink>
+          {repo.description ? (
+            <Typography variant="body1" sx={{ marginTop: 1 }}>
               {repo.description}
             </Typography>
+          ) : (
+            <Typography variant="h5" sx={{ marginTop: 1 }}>
+              No description added
+            </Typography>
           )}
+
+          <Topics>
+            {repo.topics?.length > 0 ? (
+              repo.topics.map((topic) => (
+                <Topic key={topic}>
+                  <Typography variant="body2">{topic}</Typography>
+                </Topic>
+              ))
+            ) : (
+              <Topic>
+                <Typography variant="body2">NO TOPICS</Typography>
+              </Topic>
+            )}
+          </Topics>
         </Repo>
       ))}
     </Root>
