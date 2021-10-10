@@ -67,9 +67,6 @@ const User = ({ data, onBackFinder }) => {
                 onBackFinder();
               }
             }}
-            withRepos={!!data.repos}
-            withFollowing={!!data.following}
-            withFollowers={!!data.followers}
           />
           {activeSection === 0 && (
             <Repos

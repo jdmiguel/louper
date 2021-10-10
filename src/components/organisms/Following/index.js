@@ -85,6 +85,12 @@ const GithubIconWrapper = styled('div')(({ theme }) => ({
   },
 }));
 
+const EmptyMsg = styled('div')({
+  display: 'flex',
+  justifyContent: 'center',
+  marginTop: 8,
+});
+
 const Following = ({ following: followingData, user, onFetchFollowing }) => {
   const [following, setFollowing] = useState(followingData);
 
@@ -109,32 +115,38 @@ const Following = ({ following: followingData, user, onFetchFollowing }) => {
 
   return (
     <Root>
-      {following.map((nextFollowing) => (
-        <FollowingCard>
-          <img
-            data-test="following-image"
-            alt="user following avatar"
-            src={nextFollowing.avatar_url}
-          />
-          <Content>
-            <Title>
-              <StyledFollowingIcon />
-              <Typography variant="h5">{nextFollowing.login}</Typography>
-            </Title>
-            <StyledLink
-              onClick={() => navigateToUrl(nextFollowing.html_url)}
-              target="_self"
-              rel="noopener noreferrer"
-              aria-label={`View ${nextFollowing.login} profile on GitHub`}
-            >
-              <GithubIconWrapper>
-                <GithubIcon />
-              </GithubIconWrapper>
-              Visit profile
-            </StyledLink>
-          </Content>
-        </FollowingCard>
-      ))}
+      {following.length > 0 ? (
+        following.map((nextFollowing) => (
+          <FollowingCard>
+            <img
+              data-test="following-image"
+              alt="user following avatar"
+              src={nextFollowing.avatar_url}
+            />
+            <Content>
+              <Title>
+                <StyledFollowingIcon />
+                <Typography variant="h5">{nextFollowing.login}</Typography>
+              </Title>
+              <StyledLink
+                onClick={() => navigateToUrl(nextFollowing.html_url)}
+                target="_self"
+                rel="noopener noreferrer"
+                aria-label={`View ${nextFollowing.login} profile on GitHub`}
+              >
+                <GithubIconWrapper>
+                  <GithubIcon />
+                </GithubIconWrapper>
+                Visit profile
+              </StyledLink>
+            </Content>
+          </FollowingCard>
+        ))
+      ) : (
+        <EmptyMsg>
+          <Typography variant="h6">No following added</Typography>
+        </EmptyMsg>
+      )}
     </Root>
   );
 };

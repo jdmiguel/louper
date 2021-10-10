@@ -92,6 +92,12 @@ const GithubIconWrapper = styled('div')(({ theme }) => ({
   },
 }));
 
+const EmptyMsg = styled('div')({
+  display: 'flex',
+  justifyContent: 'center',
+  marginTop: 8,
+});
+
 const Repos = ({ repos: reposData, user, onFetchRepos }) => {
   const [repos, setRepos] = useState(reposData);
 
@@ -116,50 +122,56 @@ const Repos = ({ repos: reposData, user, onFetchRepos }) => {
 
   return (
     <Root>
-      {repos.map((repo) => (
-        <Repo data-test="repos-item" key={repo.name}>
-          <div>
-            <Title>
-              <RepoIcon />
-              <Typography variant="h5">{repo.name}</Typography>
-            </Title>
-            {repo.description ? (
-              <Typography variant="body1" sx={{ marginTop: 1 }}>
-                {repo.description}
-              </Typography>
-            ) : (
-              <Typography variant="h6" sx={{ marginTop: 1 }}>
-                No description added
-              </Typography>
-            )}
-
-            <Topics>
-              {repo.topics?.length > 0 ? (
-                repo.topics.map((topic) => (
-                  <Topic key={topic}>
-                    <Typography variant="body2">{topic}</Typography>
-                  </Topic>
-                ))
+      {repos.length > 0 ? (
+        repos.map((repo) => (
+          <Repo data-test="repos-item" key={repo.name}>
+            <div>
+              <Title>
+                <RepoIcon />
+                <Typography variant="h5">{repo.name}</Typography>
+              </Title>
+              {repo.description ? (
+                <Typography variant="body1" sx={{ marginTop: 1 }}>
+                  {repo.description}
+                </Typography>
               ) : (
-                <Topic>
-                  <Typography variant="body2">NO TOPICS</Typography>
-                </Topic>
+                <Typography variant="h6" sx={{ marginTop: 1 }}>
+                  No description added
+                </Typography>
               )}
-            </Topics>
-          </div>
-          <StyledLink
-            href={repo.html_url}
-            target="_self"
-            rel="noopener noreferrer"
-            aria-label={`View ${repo.name} repository on GitHub`}
-          >
-            <GithubIconWrapper>
-              <GithubIcon />
-            </GithubIconWrapper>
-            Visit repo
-          </StyledLink>
-        </Repo>
-      ))}
+
+              <Topics>
+                {repo.topics?.length > 0 ? (
+                  repo.topics.map((topic) => (
+                    <Topic key={topic}>
+                      <Typography variant="body2">{topic}</Typography>
+                    </Topic>
+                  ))
+                ) : (
+                  <Topic>
+                    <Typography variant="body2">NO TOPICS</Typography>
+                  </Topic>
+                )}
+              </Topics>
+            </div>
+            <StyledLink
+              href={repo.html_url}
+              target="_self"
+              rel="noopener noreferrer"
+              aria-label={`View ${repo.name} repository on GitHub`}
+            >
+              <GithubIconWrapper>
+                <GithubIcon />
+              </GithubIconWrapper>
+              Visit repo
+            </StyledLink>
+          </Repo>
+        ))
+      ) : (
+        <EmptyMsg>
+          <Typography variant="h6">No repos added</Typography>
+        </EmptyMsg>
+      )}
     </Root>
   );
 };
