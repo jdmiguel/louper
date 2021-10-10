@@ -2,7 +2,7 @@
 import { styled } from '@mui/material/styles';
 import Typography from '@mui/material/Typography';
 import Icon from '@mui/material/Icon';
-import Button from '@mui/material/Button';
+import Link from '@mui/material/Link';
 
 /* atoms */
 import GithubIcon from '../../atoms/GithubIcon';
@@ -66,38 +66,37 @@ const StyledIcon = styled(Icon)(({ theme }) => ({
   marginRight: 3,
 }));
 
-const StyledButton = styled(Button)(({ theme }) => ({
+const StyledLink = styled(Link)(({ theme }) => ({
+  cursor: 'pointer',
   alignItems: 'center',
-  backgroundColor: theme.palette.primary.main,
-  border: 0,
-  borderRadius: 4,
-  color: theme.palette.primary.contrastText,
   display: 'flex',
   fontSize: '0.9rem',
-  justifyContent: 'space-evenly',
-  padding: 10,
-  marginBottom: 8,
-  width: '100%',
+  fontWeight: 700,
+  marginBottom: 6,
+  textDecoration: 'none',
+  textTransform: 'uppercase',
+  transition: 'color ease-out 250ms',
+  '& path': { transition: 'fill ease-out 250ms' },
   '&:hover': {
-    backgroundColor: theme.palette.primary.light,
-  },
-  '& span': {
-    marginRight: 8,
-  },
-  '@media (max-width: 768px)': {
-    justifyContent: 'center',
+    color: theme.palette.primary.light,
+    '& path': { fill: theme.palette.primary.light },
   },
 }));
 
 const GithubIconWrapper = styled('div')(({ theme }) => ({
-  fontSize: 'initial',
-  lineHeight: 0,
+  marginRight: 6,
   '& svg': {
     width: 22,
     '& path': {
-      fill: theme.palette.primary.contrastText,
+      fill: theme.palette.primary.main,
     },
   },
+}));
+
+const StyledLinkIcon = styled(Icon)(({ theme }) => ({
+  color: theme.palette.primary.main,
+  fontSize: 22,
+  marginRight: 6,
 }));
 
 const buildCreationDate = (date) => {
@@ -167,28 +166,38 @@ const Profile = ({
         )}
       </ContentInfo>
       <ContentActions>
-        <StyledButton
-          variant="contained"
+        <StyledLink
           onClick={() => navigateToUrl(htmlUrl)}
+          target="_self"
+          rel="noopener noreferrer"
+          aria-label={`Send email to ${login}`}
         >
-          <span>Visit Profile</span>
           <GithubIconWrapper>
             <GithubIcon />
           </GithubIconWrapper>
-        </StyledButton>
+          Visit Profile
+        </StyledLink>
         {email && (
-          <StyledButton
-            variant="contained"
+          <StyledLink
             onClick={() => navigateToUrl(`mailto:${email}`)}
+            target="_self"
+            rel="noopener noreferrer"
+            aria-label={`Send email to ${login}`}
           >
-            <Icon sx={{ fontSize: 24 }}>email</Icon>
-          </StyledButton>
+            <StyledLinkIcon>email</StyledLinkIcon>
+            Send email
+          </StyledLink>
         )}
         {blog && (
-          <StyledButton variant="contained" onClick={() => navigateToUrl(blog)}>
-            <span>Visit portfolio</span>
-            <Icon sx={{ fontSize: 24 }}>link</Icon>
-          </StyledButton>
+          <StyledLink
+            onClick={() => navigateToUrl(blog)}
+            target="_self"
+            rel="noopener noreferrer"
+            aria-label={`Send email to ${login}`}
+          >
+            <StyledLinkIcon>web</StyledLinkIcon>
+            Visit portfolio
+          </StyledLink>
         )}
       </ContentActions>
     </Content>

@@ -101,7 +101,7 @@ const Repos = ({ repos: reposData, user, onFetchRepos }) => {
             href={repo.html_url}
             target="_self"
             rel="noopener noreferrer"
-            aria-label="View profile of jdmiguel on GitHub"
+            aria-label={`View ${repo.name} repository on GitHub`}
           >
             <RepoIcon />
             {repo.name}
