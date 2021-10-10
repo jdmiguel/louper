@@ -3,6 +3,7 @@ import { styled } from '@mui/material/styles';
 import Typography from '@mui/material/Typography';
 import Icon from '@mui/material/Icon';
 import Link from '@mui/material/Link';
+import WebIcon from '@mui/icons-material/Web';
 
 /* atoms */
 import GithubIcon from '../../atoms/GithubIcon';
@@ -20,7 +21,7 @@ const Root = styled('div')({
   '@media (max-width: 768px)': {
     display: 'none',
   },
-  '& > img': {
+  '& img': {
     borderRadius: '50%',
     height: 220,
     width: 220,
@@ -99,6 +100,13 @@ const StyledLinkIcon = styled(Icon)(({ theme }) => ({
   marginRight: 6,
 }));
 
+const StyledWebIcon = styled(WebIcon)(({ theme }) => ({
+  color: theme.palette.primary.main,
+  fontSize: '1.3rem',
+  marginRight: 6,
+  marginBottom: 2,
+}));
+
 const buildCreationDate = (date) => {
   const newDate = new Date(date);
   const formattedDate = newDate.toLocaleString();
@@ -170,7 +178,7 @@ const Profile = ({
           onClick={() => navigateToUrl(htmlUrl)}
           target="_self"
           rel="noopener noreferrer"
-          aria-label={`Send email to ${login}`}
+          aria-label={`View ${name} profile on GitHub`}
         >
           <GithubIconWrapper>
             <GithubIcon />
@@ -193,9 +201,9 @@ const Profile = ({
             onClick={() => navigateToUrl(blog)}
             target="_self"
             rel="noopener noreferrer"
-            aria-label={`Send email to ${login}`}
+            aria-label={`View portfolio of ${name}`}
           >
-            <StyledLinkIcon>web</StyledLinkIcon>
+            <StyledWebIcon />
             Visit portfolio
           </StyledLink>
         )}

@@ -8,6 +8,7 @@ import Link from '@mui/material/Link';
 import FolderIcon from '@mui/icons-material/Folder';
 
 /* atoms */
+import GithubIcon from '../../atoms/GithubIcon';
 import Loader from '../../atoms/Loader';
 
 /* services */
@@ -29,23 +30,14 @@ const Repo = styled('div')(({ theme }) => ({
   borderRadius: 4,
   display: 'flex',
   flexDirection: 'column',
+  justifyContent: 'space-between',
   padding: 20,
 }));
 
-const StyledLink = styled(Link)(({ theme }) => ({
-  cursor: 'pointer',
+const Title = styled('div')(({ theme }) => ({
   alignItems: 'center',
   display: 'flex',
-  fontSize: '0.9rem',
-  fontWeight: 700,
-  textDecoration: 'none',
-  textTransform: 'uppercase',
-  transition: 'color ease-out 250ms',
-  '& path': { transition: 'fill ease-out 250ms' },
-  '&:hover': {
-    color: theme.palette.primary.light,
-    '& path': { fill: theme.palette.primary.light },
-  },
+  '& path': { fill: theme.palette.secondary.main },
 }));
 
 const RepoIcon = styled(FolderIcon)(({ theme }) => ({
@@ -59,7 +51,7 @@ const Topics = styled('div')({
   display: 'flex',
   flexWrap: 'wrap',
   marginTop: 14,
-  marginBottom: 10,
+  marginBottom: 12,
 });
 
 const Topic = styled('div')(({ theme }) => ({
@@ -69,6 +61,35 @@ const Topic = styled('div')(({ theme }) => ({
   padding: '4px 8px',
   marginBottom: 5,
   marginRight: 5,
+}));
+
+const StyledLink = styled(Link)(({ theme }) => ({
+  borderTop: `1px solid ${theme.palette.secondary.light}`,
+  cursor: 'pointer',
+  alignItems: 'center',
+  display: 'flex',
+  fontSize: '0.9rem',
+  fontWeight: 700,
+  paddingTop: 10,
+  marginTop: 10,
+  textDecoration: 'none',
+  textTransform: 'uppercase',
+  transition: 'color ease-out 250ms',
+  '& path': { transition: 'fill ease-out 250ms' },
+  '&:hover': {
+    color: theme.palette.primary.light,
+    '& path': { fill: theme.palette.primary.light },
+  },
+}));
+
+const GithubIconWrapper = styled('div')(({ theme }) => ({
+  marginRight: 6,
+  '& svg': {
+    width: 22,
+    '& path': {
+      fill: theme.palette.primary.main,
+    },
+  },
 }));
 
 const Repos = ({ repos: reposData, user, onFetchRepos }) => {
@@ -97,38 +118,46 @@ const Repos = ({ repos: reposData, user, onFetchRepos }) => {
     <Root>
       {repos.map((repo) => (
         <Repo data-test="repos-item" key={repo.name}>
+          <div>
+            <Title>
+              <RepoIcon />
+              <Typography variant="h5">{repo.name}</Typography>
+            </Title>
+            {repo.description ? (
+              <Typography variant="body1" sx={{ marginTop: 1 }}>
+                {repo.description}
+              </Typography>
+            ) : (
+              <Typography variant="h6" sx={{ marginTop: 1 }}>
+                No description added
+              </Typography>
+            )}
+
+            <Topics>
+              {repo.topics?.length > 0 ? (
+                repo.topics.map((topic) => (
+                  <Topic key={topic}>
+                    <Typography variant="body2">{topic}</Typography>
+                  </Topic>
+                ))
+              ) : (
+                <Topic>
+                  <Typography variant="body2">NO TOPICS</Typography>
+                </Topic>
+              )}
+            </Topics>
+          </div>
           <StyledLink
             href={repo.html_url}
             target="_self"
             rel="noopener noreferrer"
             aria-label={`View ${repo.name} repository on GitHub`}
           >
-            <RepoIcon />
-            {repo.name}
+            <GithubIconWrapper>
+              <GithubIcon />
+            </GithubIconWrapper>
+            Visit repo
           </StyledLink>
-          {repo.description ? (
-            <Typography variant="body1" sx={{ marginTop: 1 }}>
-              {repo.description}
-            </Typography>
-          ) : (
-            <Typography variant="h5" sx={{ marginTop: 1 }}>
-              No description added
-            </Typography>
-          )}
-
-          <Topics>
-            {repo.topics?.length > 0 ? (
-              repo.topics.map((topic) => (
-                <Topic key={topic}>
-                  <Typography variant="body2">{topic}</Typography>
-                </Topic>
-              ))
-            ) : (
-              <Topic>
-                <Typography variant="body2">NO TOPICS</Typography>
-              </Topic>
-            )}
-          </Topics>
         </Repo>
       ))}
     </Root>

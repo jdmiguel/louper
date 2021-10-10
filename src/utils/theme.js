@@ -65,6 +65,12 @@ export const theme = createTheme({
       fontWeight: 700,
       textTransform: 'uppercase',
     },
+    h6: {
+      color: '#757d81',
+      fontSize: '0.8rem',
+      fontWeight: 500,
+      textTransform: 'uppercase',
+    },
     button: {
       fontSize: '0.9rem',
     },
