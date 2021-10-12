@@ -1,14 +1,15 @@
-import { useState } from 'react';
+import { useState, forwardRef } from 'react';
 import PropTypes from 'prop-types';
 
 /* material-ui */
 import { styled } from '@mui/material/styles';
+import Snackbar from '@mui/material/Snackbar';
+import MuiAlert from '@mui/material/Alert';
 
 /* molecules */
 import Finder from '../../molecules/Finder';
 import Heading from '../../molecules/Heading';
 import Footer from '../../molecules/Footer';
-import ErrorModal from '../../molecules/ErrorModal';
 
 /* atoms */
 import Corner from '../../atoms/Corner';
@@ -34,10 +35,29 @@ const CornerWrapper = styled('div')({
   width: '100%',
 });
 
+const StyledAlert = styled(MuiAlert)({
+  '& .MuiAlert-icon': {
+    padding: '9px 0',
+  },
+  '& .MuiAlert-message': {
+    padding: '12px 0',
+  },
+  '& .MuiAlert-action': {
+    svg: {
+      height: '1.4rem',
+      width: '1.4rem',
+    },
+  },
+});
+
+const Alert = forwardRef(function Alert(props, ref) {
+  return <StyledAlert elevation={4} ref={ref} variant="filled" {...props} />;
+});
+
 const Home = ({ onFetchUser }) => {
   const [isLoading, setIsLoading] = useState(false);
   const [errorMsg, setErrorMsg] = useState('');
-  const [isErrorModalOpen, setIsErrorModalOpen] = useState(false);
+  const [isErrorAlertOpen, setIsErrorAlertOpen] = useState(false);
 
   const fetchUser = (userName) => {
     setIsLoading(true);
@@ -74,12 +94,20 @@ const Home = ({ onFetchUser }) => {
             break;
         }
 
-        setIsErrorModalOpen(true);
+        setIsErrorAlertOpen(true);
         setErrorMsg(errorMsg);
       })
       .finally(() => {
         setIsLoading(false);
       });
+  };
+
+  const onClose = (event, reason) => {
+    if (reason === 'clickaway') {
+      return;
+    }
+
+    setIsErrorAlertOpen(false);
   };
 
   return (
@@ -96,12 +124,19 @@ const Home = ({ onFetchUser }) => {
         />
       </div>
       <Footer />
-      <ErrorModal
-        data-test="home-errorModal"
-        isErrorModalOpen={isErrorModalOpen}
-        onClick={() => setIsErrorModalOpen(false)}
-        msg={errorMsg}
-      />
+      <Snackbar
+        open={isErrorAlertOpen}
+        anchorOrigin={{
+          vertical: 'bottom',
+          horizontal: 'right',
+        }}
+        autoHideDuration={3000}
+        onClose={onClose}
+      >
+        <Alert onClose={onClose} severity="error">
+          {errorMsg}
+        </Alert>
+      </Snackbar>
     </Root>
   );
 };
