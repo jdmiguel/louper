@@ -18,9 +18,6 @@ const Root = styled('div')({
   maxWidth: 240,
   position: 'sticky',
   top: 60,
-  '@media (max-width: 768px)': {
-    display: 'none',
-  },
   '& img': {
     borderRadius: '50%',
     height: 220,

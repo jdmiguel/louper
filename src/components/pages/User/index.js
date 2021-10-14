@@ -31,9 +31,9 @@ const Wrapper = styled('div')({
 });
 
 const ProfileWrapper = styled('aside')({
-  margin: '20px 0 0 0',
-  '@media (min-width: 769px)': {
-    margin: '20px 40px 0 0',
+  margin: '60px 40px 0 0',
+  '@media (max-width: 768px)': {
+    display: 'none',
   },
 });
 
@@ -50,11 +50,10 @@ const ContentUser = styled('main')({
   gridGap: 20,
   marginTop: 30,
   '@media (min-width: 992px)': {
-    gridTemplateColumns: 'repeat(2, minmax(300px, 400px))',
+    gridTemplateColumns: 'repeat(2, 300px)',
   },
   '@media (min-width: 1200px)': {
-    gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))',
-    maxWidth: 800,
+    gridTemplateColumns: 'repeat(2, 420px)',
   },
 });
 
