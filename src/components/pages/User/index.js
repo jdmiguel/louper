@@ -19,8 +19,6 @@ import Footer from '../../molecules/Footer';
 import { dataModel } from '../../../utils/models';
 
 const Root = styled('main')({
-  margin: '0 auto',
-  maxWidth: 1200,
   padding: '0 20px',
   '@media (min-width: 769px)': {
     padding: '0 40px',
@@ -43,6 +41,22 @@ const ProfileWrapper = styled('div')({
 const Content = styled('div')({
   display: 'flex',
   flexDirection: 'column',
+  '@media (max-width: 992px)': {
+    width: '100%',
+  },
+});
+
+const ContentUser = styled('div')({
+  display: 'grid',
+  gridGap: 20,
+  marginTop: 30,
+  '@media (min-width: 992px)': {
+    gridTemplateColumns: 'repeat(2, minmax(300px, 400px))',
+  },
+  '@media (min-width: 1200px)': {
+    gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))',
+    maxWidth: 800,
+  },
 });
 
 const User = ({ data, onBackFinder }) => {
@@ -68,30 +82,32 @@ const User = ({ data, onBackFinder }) => {
               }
             }}
           />
-          {activeSection === 0 && (
-            <Repos
-              data-test="user-repos"
-              user={data.login}
-              onFetchRepos={(repos) => setRepos(repos)}
-              repos={repos}
-            />
-          )}
-          {activeSection === 1 && (
-            <Following
-              data-test="user-following"
-              user={data.login}
-              onFetchFollowing={(following) => setFollowing(following)}
-              following={following}
-            />
-          )}
-          {activeSection === 2 && (
-            <Followers
-              data-test="user-followers"
-              user={data.login}
-              onFetchFollowers={(followers) => setFollowers(followers)}
-              followers={followers}
-            />
-          )}
+          <ContentUser>
+            {activeSection === 0 && (
+              <Repos
+                data-test="user-repos"
+                user={data.login}
+                onFetchRepos={(repos) => setRepos(repos)}
+                repos={repos}
+              />
+            )}
+            {activeSection === 1 && (
+              <Following
+                data-test="user-following"
+                user={data.login}
+                onFetchFollowing={(following) => setFollowing(following)}
+                following={following}
+              />
+            )}
+            {activeSection === 2 && (
+              <Followers
+                data-test="user-followers"
+                user={data.login}
+                onFetchFollowers={(followers) => setFollowers(followers)}
+                followers={followers}
+              />
+            )}
+          </ContentUser>
         </Content>
       </Wrapper>
       <Footer />

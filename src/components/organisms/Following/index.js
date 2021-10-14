@@ -18,14 +18,6 @@ import { getFollowings } from '../../../services/github';
 import { navigateToUrl } from '../../../utils';
 import { followingModel } from '../../../utils/models';
 
-const Root = styled('div')({
-  display: 'grid',
-  gridColumn: '2/5',
-  gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))',
-  gridGap: 20,
-  marginTop: 30,
-});
-
 const FollowingCard = styled('div')(({ theme }) => ({
   border: `1px solid ${theme.palette.secondary.light}`,
   borderRadius: 4,
@@ -114,7 +106,7 @@ const Following = ({ following: followingData, user, onFetchFollowing }) => {
   }
 
   return (
-    <Root>
+    <>
       {following.length > 0 ? (
         following.map((nextFollowing) => (
           <FollowingCard>
@@ -147,7 +139,7 @@ const Following = ({ following: followingData, user, onFetchFollowing }) => {
           <Typography variant="h6">No following added</Typography>
         </EmptyMsg>
       )}
-    </Root>
+    </>
   );
 };
 

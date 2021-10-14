@@ -18,14 +18,6 @@ import { getFollowers } from '../../../services/github';
 import { navigateToUrl } from '../../../utils';
 import { followersModel } from '../../../utils/models';
 
-const Root = styled('div')({
-  display: 'grid',
-  gridColumn: '2/5',
-  gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))',
-  gridGap: 20,
-  marginTop: 30,
-});
-
 const FollowerCard = styled('div')(({ theme }) => ({
   border: `1px solid ${theme.palette.secondary.light}`,
   borderRadius: 4,
@@ -114,7 +106,7 @@ const Followers = ({ followers: followersData, user, onFetchFollowers }) => {
   }
 
   return (
-    <Root>
+    <>
       {followers.length > 0 ? (
         followers.map((follower) => (
           <FollowerCard>
@@ -147,7 +139,7 @@ const Followers = ({ followers: followersData, user, onFetchFollowers }) => {
           <Typography variant="h6">No followers added</Typography>
         </EmptyMsg>
       )}
-    </Root>
+    </>
   );
 };
 

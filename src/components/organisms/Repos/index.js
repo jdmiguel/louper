@@ -17,14 +17,6 @@ import { getRepos } from '../../../services/github';
 /* utils */
 import { reposModel } from '../../../utils/models';
 
-const Root = styled('div')({
-  display: 'grid',
-  gridColumn: '2/5',
-  gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))',
-  gridGap: 20,
-  marginTop: 30,
-});
-
 const Repo = styled('div')(({ theme }) => ({
   border: `1px solid ${theme.palette.secondary.light}`,
   borderRadius: 4,
@@ -121,7 +113,7 @@ const Repos = ({ repos: reposData, user, onFetchRepos }) => {
   }
 
   return (
-    <Root>
+    <>
       {repos.length > 0 ? (
         repos.map((repo) => (
           <Repo data-test="repos-item" key={repo.name}>
@@ -172,7 +164,7 @@ const Repos = ({ repos: reposData, user, onFetchRepos }) => {
           <Typography variant="h6">No repos added</Typography>
         </EmptyMsg>
       )}
-    </Root>
+    </>
   );
 };
 
