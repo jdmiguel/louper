@@ -13,12 +13,11 @@ import Following from '../../organisms/Following';
 
 /* molecules */
 import Menu from '../../molecules/Menu';
-import Footer from '../../molecules/Footer';
 
 /* utils */
 import { dataModel } from '../../../utils/models';
 
-const Root = styled('main')({
+const Root = styled('div')({
   padding: '0 20px',
   '@media (min-width: 769px)': {
     padding: '0 40px',
@@ -28,10 +27,10 @@ const Root = styled('main')({
 const Wrapper = styled('div')({
   display: 'flex',
   justifyContent: 'center',
-  marginBottom: 30,
+  marginBottom: 50,
 });
 
-const ProfileWrapper = styled('div')({
+const ProfileWrapper = styled('aside')({
   margin: '20px 0 0 0',
   '@media (min-width: 769px)': {
     margin: '20px 40px 0 0',
@@ -46,7 +45,7 @@ const Content = styled('div')({
   },
 });
 
-const ContentUser = styled('div')({
+const ContentUser = styled('main')({
   display: 'grid',
   gridGap: 20,
   marginTop: 30,
@@ -110,7 +109,6 @@ const User = ({ data, onBackFinder }) => {
           </ContentUser>
         </Content>
       </Wrapper>
-      <Footer />
     </Root>
   );
 };

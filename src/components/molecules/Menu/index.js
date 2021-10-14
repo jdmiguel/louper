@@ -10,11 +10,15 @@ import FollowingIcon from '@mui/icons-material/Visibility';
 import FollowersIcon from '@mui/icons-material/Favorite';
 import SearchIcon from '@mui/icons-material/Search';
 
+const Root = styled('header')({
+  position: 'sticky',
+  top: 0,
+});
+
 const StyledTabs = styled(Tabs)(({ theme }) => ({
   backgroundColor: theme.palette.background.default,
   borderBottom: `1px solid ${theme.palette.secondary.light}`,
-  position: 'sticky',
-  top: 0,
+
   '& .MuiTabs-flexContainer': {
     justifyContent: 'space-between',
     '@media (min-width: 1200x)': {
@@ -67,44 +71,46 @@ const Menu = ({ onClick }) => {
   const [activeMenuItem, setActiveMenuItem] = useState(0);
 
   return (
-    <StyledTabs
-      data-test="menu-tabs"
-      value={activeMenuItem}
-      onChange={(event, tabValue) => {
-        onClick(tabValue);
-        setActiveMenuItem(tabValue);
-      }}
-      centered
-    >
-      <StyledTab
-        data-test="menu-tab-repos"
-        icon={<ReposIcon />}
-        disableRipple
-        label={<span>REPOS</span>}
-        wrapped
-      />
-      <StyledTab
-        data-test="menu-tab-following"
-        icon={<FollowingIcon />}
-        disableRipple
-        label={<span>FOLLOWING</span>}
-        wrapped
-      />
-      <StyledTab
-        data-test="menu-tab-followers"
-        icon={<FollowersIcon />}
-        disableRipple
-        label={<span>FOLLOWERS</span>}
-        wrapped
-      />
-      <StyledTab
-        data-test="menu-tab-search"
-        icon={<SearchIcon />}
-        disableRipple
-        label={<span>SEARCH</span>}
-        wrapped
-      />
-    </StyledTabs>
+    <Root>
+      <StyledTabs
+        data-test="menu-tabs"
+        value={activeMenuItem}
+        onChange={(event, tabValue) => {
+          onClick(tabValue);
+          setActiveMenuItem(tabValue);
+        }}
+        centered
+      >
+        <StyledTab
+          data-test="menu-tab-repos"
+          icon={<ReposIcon />}
+          disableRipple
+          label={<span>REPOS</span>}
+          wrapped
+        />
+        <StyledTab
+          data-test="menu-tab-following"
+          icon={<FollowingIcon />}
+          disableRipple
+          label={<span>FOLLOWING</span>}
+          wrapped
+        />
+        <StyledTab
+          data-test="menu-tab-followers"
+          icon={<FollowersIcon />}
+          disableRipple
+          label={<span>FOLLOWERS</span>}
+          wrapped
+        />
+        <StyledTab
+          data-test="menu-tab-search"
+          icon={<SearchIcon />}
+          disableRipple
+          label={<span>SEARCH</span>}
+          wrapped
+        />
+      </StyledTabs>
+    </Root>
   );
 };
 

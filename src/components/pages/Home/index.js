@@ -22,14 +22,14 @@ import { errorLiterals } from '../../../utils';
 
 const { maximumRequest, unavailableUser } = errorLiterals;
 
-const Root = styled('main')({
+const Root = styled('div')({
   display: 'flex',
   flexDirection: 'column',
   justifyContent: 'space-between',
   height: '100vh',
 });
 
-const CornerWrapper = styled('div')({
+const CornerWrapper = styled('header')({
   display: 'flex',
   justifyContent: 'flex-end',
   width: '100%',
@@ -115,14 +115,14 @@ const Home = ({ onFetchUser }) => {
       <CornerWrapper>
         <Corner />
       </CornerWrapper>
-      <div>
+      <main>
         <Heading />
         <Finder
           data-test="home-finder"
           onFetchUser={fetchUser}
           isLoading={isLoading}
         />
-      </div>
+      </main>
       <Footer />
       <Snackbar
         open={isErrorAlertOpen}
