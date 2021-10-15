@@ -9,13 +9,10 @@ import FolderIcon from '@mui/icons-material/Folder';
 
 /* atoms */
 import GithubIcon from '../../atoms/GithubIcon';
-import Loader from '../../atoms/Loader';
+import Placeholder from '../../atoms/Placeholder';
 
 /* services */
 import { getRepos } from '../../../services/github';
-
-/* utils */
-import { reposModel } from '../../../utils/models';
 
 const Repo = styled('div')(({ theme }) => ({
   border: `1px solid ${theme.palette.secondary.light}`,
@@ -90,7 +87,8 @@ const EmptyMsg = styled('div')({
   marginTop: 8,
 });
 
-const Repos = ({ repos: reposData, user, onFetchRepos }) => {
+const Repos = ({ reposCounter, user, onFetchRepos, repos: reposData }) => {
+  const [isLoading, setIsLoading] = useState(false);
   const [repos, setRepos] = useState(reposData);
 
   useEffect(() => {
@@ -98,8 +96,11 @@ const Repos = ({ repos: reposData, user, onFetchRepos }) => {
       return;
     }
 
+    setIsLoading(true);
+
     getRepos(user)
       .then((repos) => {
+        setIsLoading(false);
         setRepos(repos);
         onFetchRepos(repos);
       })
@@ -108,70 +109,64 @@ const Repos = ({ repos: reposData, user, onFetchRepos }) => {
       });
   }, []);
 
-  if (repos.length === 0) {
-    return <Loader data-test="repos-loader" />;
+  if (reposCounter === 0) {
+    return (
+      <EmptyMsg>
+        <Typography variant="h6">No repos added</Typography>
+      </EmptyMsg>
+    );
   }
 
-  return (
-    <>
-      {repos.length > 0 ? (
-        repos.map((repo) => (
-          <Repo data-test="repos-item" key={repo.name}>
-            <div>
-              <Title>
-                <RepoIcon />
-                <Typography variant="h5">{repo.name}</Typography>
-              </Title>
-              {repo.description ? (
-                <Typography variant="body1" sx={{ marginTop: 1 }}>
-                  {repo.description}
-                </Typography>
-              ) : (
-                <Typography variant="h6" sx={{ marginTop: 1 }}>
-                  No description added
-                </Typography>
-              )}
+  if (isLoading) {
+    const reposCounterList = new Array(reposCounter);
+    reposCounterList.fill(reposCounter);
+    return reposCounterList.map((item) => <Placeholder />);
+  }
 
-              <Topics>
-                {repo.topics?.length > 0 ? (
-                  repo.topics.map((topic) => (
-                    <Topic key={topic}>
-                      <Typography variant="body2">{topic}</Typography>
-                    </Topic>
-                  ))
-                ) : (
-                  <Topic>
-                    <Typography variant="body2">NO TOPICS</Typography>
-                  </Topic>
-                )}
-              </Topics>
-            </div>
-            <StyledLink
-              href={repo.html_url}
-              target="_self"
-              rel="noopener noreferrer"
-              aria-label={`View ${repo.name} repository on GitHub`}
-            >
-              <GithubIconWrapper>
-                <GithubIcon />
-              </GithubIconWrapper>
-              Visit repo
-            </StyledLink>
-          </Repo>
-        ))
-      ) : (
-        <EmptyMsg>
-          <Typography variant="h6">No repos added</Typography>
-        </EmptyMsg>
-      )}
-    </>
-  );
-};
+  return repos.map((repo) => (
+    <Repo data-test="repos-item" key={repo.name}>
+      <div>
+        <Title>
+          <RepoIcon />
+          <Typography variant="h5">{repo.name}</Typography>
+        </Title>
+        {repo.description ? (
+          <Typography variant="body1" sx={{ marginTop: 1 }}>
+            {repo.description}
+          </Typography>
+        ) : (
+          <Typography variant="h6" sx={{ marginTop: 1 }}>
+            No description added
+          </Typography>
+        )}
 
-Repos.propTypes = {
-  repos: reposModel,
-  user: PropTypes.string,
-  onFetchRepos: PropTypes.func,
+        <Topics>
+          {repo.topics?.length > 0 ? (
+            repo.topics.map((topic) => (
+              <Topic key={topic}>
+                <Typography variant="body2">{topic}</Typography>
+              </Topic>
+            ))
+          ) : (
+            <Topic>
+              <Typography variant="body2">NO TOPICS</Typography>
+            </Topic>
+          )}
+        </Topics>
+      </div>
+      <StyledLink
+        href={repo.html_url}
+        target="_self"
+        rel="noopener noreferrer"
+        aria-label={`View ${repo.name} repository on GitHub`}
+      >
+        <GithubIconWrapper>
+          <GithubIcon />
+        </GithubIconWrapper>
+        Visit repo
+      </StyledLink>
+    </Repo>
+  ));
 };
 
 export default Repos;

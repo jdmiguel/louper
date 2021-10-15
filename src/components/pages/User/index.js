@@ -83,7 +83,7 @@ const User = ({ data, onBackFinder }) => {
           <ContentUser>
             {activeSection === 0 && (
               <Repos
-                data-test="user-repos"
+                reposCounter={data.repos}
                 user={data.login}
                 onFetchRepos={(repos) => setRepos(repos)}
                 repos={repos}

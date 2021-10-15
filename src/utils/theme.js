@@ -108,7 +108,9 @@ export const theme = createTheme({
       contrastText: '#bac1d9',
     },
     neutral: {
-      main: '#353D40',
+      main: '#757d81',
+      light: '#cccfd1',
+      dark: '#353D40',
     },
   },
   animation: {
@@ -116,6 +118,10 @@ export const theme = createTheme({
       0%,100% { transform: rotate(0) }
       20%,60% { transform: rotate(-25deg) }
       40%,80% { transform: rotate(10deg) }
+    `,
+    shimmer: keyframes`
+      0% { background-position-x: -1200px}
+      100% { background-position-x: 1200px}
     `,
   },
 });

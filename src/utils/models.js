@@ -2,8 +2,8 @@ import PropTypes from 'prop-types';
 
 export const dataModel = PropTypes.shape({
   login: PropTypes.string,
-  avatarUrl: PropTypes.string,
-  createdAt: PropTypes.string,
+  avatar_url: PropTypes.string,
+  created_at: PropTypes.string,
   name: PropTypes.string,
   bio: PropTypes.string,
   email: PropTypes.string,
@@ -11,8 +11,8 @@ export const dataModel = PropTypes.shape({
   url: PropTypes.string,
   blog: PropTypes.string,
   company: PropTypes.string,
-  htmlUrl: PropTypes.string,
-  repos: PropTypes.number,
+  html_url: PropTypes.string,
+  public_repos: PropTypes.number,
   followers: PropTypes.number,
   following: PropTypes.number,
 });
