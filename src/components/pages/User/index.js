@@ -83,7 +83,7 @@ const User = ({ data, onBackFinder }) => {
           <ContentUser>
             {activeSection === 0 && (
               <Repos
-                reposCounter={data.repos}
+                total={data.repos}
                 user={data.login}
                 onFetchRepos={(repos) => setRepos(repos)}
                 repos={repos}
@@ -91,7 +91,7 @@ const User = ({ data, onBackFinder }) => {
             )}
             {activeSection === 1 && (
               <Following
-                data-test="user-following"
+                total={data.following}
                 user={data.login}
                 onFetchFollowing={(following) => setFollowing(following)}
                 following={following}
@@ -99,7 +99,7 @@ const User = ({ data, onBackFinder }) => {
             )}
             {activeSection === 2 && (
               <Followers
-                data-test="user-followers"
+                total={data.followers}
                 user={data.login}
                 onFetchFollowers={(followers) => setFollowers(followers)}
                 followers={followers}

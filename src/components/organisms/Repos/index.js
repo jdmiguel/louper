@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import PropTypes from 'prop-types';
+import { v4 as uuidv4 } from 'uuid';
 
 /* material-ui */
 import { styled } from '@mui/material/styles';
@@ -87,7 +87,7 @@ const EmptyMsg = styled('div')({
   marginTop: 8,
 });
 
-const Repos = ({ reposCounter, user, onFetchRepos, repos: reposData }) => {
+const Repos = ({ total, user, onFetchRepos, repos: reposData }) => {
   const [isLoading, setIsLoading] = useState(false);
   const [repos, setRepos] = useState(reposData);
 
@@ -109,7 +109,7 @@ const Repos = ({ reposCounter, user, onFetchRepos, repos: reposData }) => {
       });
   }, []);
 
-  if (reposCounter === 0) {
+  if (total === 0) {
     return (
       <EmptyMsg>
         <Typography variant="h6">No repos added</Typography>
@@ -118,9 +118,10 @@ const Repos = ({ reposCounter, user, onFetchRepos, repos: reposData }) => {
   }
 
   if (isLoading) {
-    const reposCounterList = new Array(reposCounter);
-    reposCounterList.fill(reposCounter);
-    return reposCounterList.map((item) => <Placeholder />);
+    const placeholderList = new Array(total);
+    placeholderList.fill('');
+
+    return placeholderList.map((item) => <Placeholder key={uuidv4()} />);
   }
 
   return repos.map((repo) => (

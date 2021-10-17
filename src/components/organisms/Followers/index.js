@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
-import PropTypes from 'prop-types';
+import { v4 as uuidv4 } from 'uuid';
+import PropTypes, { number } from 'prop-types';
 
 /* material-ui */
 import { styled } from '@mui/material/styles';
@@ -9,7 +10,7 @@ import FollowerIcon from '@mui/icons-material/Favorite';
 
 /* atoms */
 import GithubIcon from '../../atoms/GithubIcon';
-import Loader from '../../atoms/Loader';
+import Placeholder from '../../atoms/Placeholder';
 
 /* services */
 import { getFollowers } from '../../../services/github';
@@ -83,7 +84,13 @@ const EmptyMsg = styled('div')({
   marginTop: 8,
 });
 
-const Followers = ({ followers: followersData, user, onFetchFollowers }) => {
+const Followers = ({
+  total,
+  followers: followersData,
+  user,
+  onFetchFollowers,
+}) => {
+  const [isLoading, setIsLoading] = useState(false);
   const [followers, setFollowers] = useState(followersData);
 
   useEffect(() => {
@@ -91,8 +98,11 @@ const Followers = ({ followers: followersData, user, onFetchFollowers }) => {
       return;
     }
 
+    setIsLoading(true);
+
     getFollowers(user)
       .then((followers) => {
+        setIsLoading(false);
         setFollowers(followers);
         onFetchFollowers(followers);
       })
@@ -101,49 +111,51 @@ const Followers = ({ followers: followersData, user, onFetchFollowers }) => {
       });
   }, []);
 
-  if (followers.length === 0) {
-    return <Loader data-test="followers-loader" />;
+  if (total === 0) {
+    return (
+      <EmptyMsg>
+        <Typography variant="h6">No following added</Typography>
+      </EmptyMsg>
+    );
   }
 
-  return (
-    <>
-      {followers.length > 0 ? (
-        followers.map((follower) => (
-          <FollowerCard>
-            <img
-              data-test="following-image"
-              alt="user following avatar"
-              src={follower.avatar_url}
-            />
-            <Content>
-              <Title>
-                <StyledFollowerIcon />
-                <Typography variant="h5">{follower.login}</Typography>
-              </Title>
-              <StyledLink
-                onClick={() => navigateToUrl(follower.html_url)}
-                target="_self"
-                rel="noopener noreferrer"
-                aria-label={`View ${follower.login} profile on GitHub`}
-              >
-                <GithubIconWrapper>
-                  <GithubIcon />
-                </GithubIconWrapper>
-                Visit profile
-              </StyledLink>
-            </Content>
-          </FollowerCard>
-        ))
-      ) : (
-        <EmptyMsg>
-          <Typography variant="h6">No followers added</Typography>
-        </EmptyMsg>
-      )}
-    </>
-  );
+  if (isLoading) {
+    const placeholderList = new Array(total);
+    placeholderList.fill('');
+
+    return placeholderList.map((item) => <Placeholder key={uuidv4()} />);
+  }
+
+  return followers.map((follower) => (
+    <FollowerCard>
+      <img
+        data-test="following-image"
+        alt="user following avatar"
+        src={follower.avatar_url}
+      />
+      <Content>
+        <Title>
+          <StyledFollowerIcon />
+          <Typography variant="h5">{follower.login}</Typography>
+        </Title>
+        <StyledLink
+          onClick={() => navigateToUrl(follower.html_url)}
+          target="_self"
+          rel="noopener noreferrer"
+          aria-label={`View ${follower.login} profile on GitHub`}
+        >
+          <GithubIconWrapper>
+            <GithubIcon />
+          </GithubIconWrapper>
+          Visit profile
+        </StyledLink>
+      </Content>
+    </FollowerCard>
+  ));
 };
 
 Followers.propTypes = {
+  total: PropTypes.number,
   followers: followersModel,
   user: PropTypes.string,
   onFetchFollowers: PropTypes.func,

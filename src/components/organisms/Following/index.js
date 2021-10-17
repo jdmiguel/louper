@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import { v4 as uuidv4 } from 'uuid';
 import PropTypes from 'prop-types';
 
 /* material-ui */
@@ -9,7 +10,7 @@ import FollowingIcon from '@mui/icons-material/Visibility';
 
 /* atoms */
 import GithubIcon from '../../atoms/GithubIcon';
-import Loader from '../../atoms/Loader';
+import Placeholder from '../../atoms/Placeholder';
 
 /* services */
 import { getFollowings } from '../../../services/github';
@@ -83,7 +84,13 @@ const EmptyMsg = styled('div')({
   marginTop: 8,
 });
 
-const Following = ({ following: followingData, user, onFetchFollowing }) => {
+const Following = ({
+  total,
+  following: followingData,
+  user,
+  onFetchFollowing,
+}) => {
+  const [isLoading, setIsLoading] = useState(false);
   const [following, setFollowing] = useState(followingData);
 
   useEffect(() => {
@@ -91,8 +98,11 @@ const Following = ({ following: followingData, user, onFetchFollowing }) => {
       return;
     }
 
+    setIsLoading(true);
+
     getFollowings(user)
       .then((fetchedFollowing) => {
+        setIsLoading(false);
         setFollowing(fetchedFollowing);
         onFetchFollowing(fetchedFollowing);
       })
@@ -101,49 +111,51 @@ const Following = ({ following: followingData, user, onFetchFollowing }) => {
       });
   }, []);
 
-  if (following.length === 0) {
-    return <Loader data-test="followings-loader" />;
+  if (total === 0) {
+    return (
+      <EmptyMsg>
+        <Typography variant="h6">No following added</Typography>
+      </EmptyMsg>
+    );
   }
 
-  return (
-    <>
-      {following.length > 0 ? (
-        following.map((nextFollowing) => (
-          <FollowingCard>
-            <img
-              data-test="following-image"
-              alt="user following avatar"
-              src={nextFollowing.avatar_url}
-            />
-            <Content>
-              <Title>
-                <StyledFollowingIcon />
-                <Typography variant="h5">{nextFollowing.login}</Typography>
-              </Title>
-              <StyledLink
-                onClick={() => navigateToUrl(nextFollowing.html_url)}
-                target="_self"
-                rel="noopener noreferrer"
-                aria-label={`View ${nextFollowing.login} profile on GitHub`}
-              >
-                <GithubIconWrapper>
-                  <GithubIcon />
-                </GithubIconWrapper>
-                Visit profile
-              </StyledLink>
-            </Content>
-          </FollowingCard>
-        ))
-      ) : (
-        <EmptyMsg>
-          <Typography variant="h6">No following added</Typography>
-        </EmptyMsg>
-      )}
-    </>
-  );
+  if (isLoading) {
+    const placeholderList = new Array(total);
+    placeholderList.fill('');
+
+    return placeholderList.map((item) => <Placeholder key={uuidv4()} />);
+  }
+
+  return following.map((nextFollowing) => (
+    <FollowingCard>
+      <img
+        data-test="following-image"
+        alt="user following avatar"
+        src={nextFollowing.avatar_url}
+      />
+      <Content>
+        <Title>
+          <StyledFollowingIcon />
+          <Typography variant="h5">{nextFollowing.login}</Typography>
+        </Title>
+        <StyledLink
+          onClick={() => navigateToUrl(nextFollowing.html_url)}
+          target="_self"
+          rel="noopener noreferrer"
+          aria-label={`View ${nextFollowing.login} profile on GitHub`}
+        >
+          <GithubIconWrapper>
+            <GithubIcon />
+          </GithubIconWrapper>
+          Visit profile
+        </StyledLink>
+      </Content>
+    </FollowingCard>
+  ));
 };
 
 Following.propTypes = {
+  total: PropTypes.number,
   following: followingModel,
   user: PropTypes.string,
   onFetchFollowing: PropTypes.func,
