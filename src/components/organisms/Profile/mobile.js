@@ -27,7 +27,7 @@ const Content = styled('div')({
 
 const ProfileMobile = ({ data: { avatarUrl, name, login } }) => (
   <Root>
-    <img data-test="profile__image" alt="user avatar" src={avatarUrl} />
+    <img alt="user avatar" src={avatarUrl} />
     <Content>
       <Typography variant="h3" sx={{ marginBottom: 0.2 }}>
         {name}

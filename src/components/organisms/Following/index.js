@@ -128,11 +128,7 @@ const Following = ({
 
   return following.map((nextFollowing) => (
     <FollowingCard>
-      <img
-        data-test="following-image"
-        alt="user following avatar"
-        src={nextFollowing.avatar_url}
-      />
+      <img alt="user following avatar" src={nextFollowing.avatar_url} />
       <Content>
         <Title>
           <StyledFollowingIcon />

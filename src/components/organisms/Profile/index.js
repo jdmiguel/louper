@@ -129,7 +129,7 @@ const Profile = ({
   },
 }) => (
   <Root>
-    <img data-test="profile__image" alt="user avatar" src={avatarUrl} />
+    <img alt="user avatar" src={avatarUrl} />
     <Content>
       <Typography variant="h3" sx={{ marginBottom: 0.4 }}>
         {name}

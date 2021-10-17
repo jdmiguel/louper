@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { v4 as uuidv4 } from 'uuid';
-import PropTypes, { number } from 'prop-types';
+import PropTypes from 'prop-types';
 
 /* material-ui */
 import { styled } from '@mui/material/styles';
@@ -128,11 +128,7 @@ const Followers = ({
 
   return followers.map((follower) => (
     <FollowerCard>
-      <img
-        data-test="following-image"
-        alt="user following avatar"
-        src={follower.avatar_url}
-      />
+      <img alt="user following avatar" src={follower.avatar_url} />
       <Content>
         <Title>
           <StyledFollowerIcon />

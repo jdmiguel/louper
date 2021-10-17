@@ -73,7 +73,6 @@ const Menu = ({ onClick }) => {
   return (
     <Root>
       <StyledTabs
-        data-test="menu-tabs"
         value={activeMenuItem}
         onChange={(event, tabValue) => {
           onClick(tabValue);
@@ -82,28 +81,24 @@ const Menu = ({ onClick }) => {
         centered
       >
         <StyledTab
-          data-test="menu-tab-repos"
           icon={<ReposIcon />}
           disableRipple
           label={<span>REPOS</span>}
           wrapped
         />
         <StyledTab
-          data-test="menu-tab-following"
           icon={<FollowingIcon />}
           disableRipple
           label={<span>FOLLOWING</span>}
           wrapped
         />
         <StyledTab
-          data-test="menu-tab-followers"
           icon={<FollowersIcon />}
           disableRipple
           label={<span>FOLLOWERS</span>}
           wrapped
         />
         <StyledTab
-          data-test="menu-tab-search"
           icon={<SearchIcon />}
           disableRipple
           label={<span>SEARCH</span>}

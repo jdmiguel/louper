@@ -117,11 +117,7 @@ const Home = ({ onFetchUser }) => {
       </CornerWrapper>
       <main>
         <Heading />
-        <Finder
-          data-test="home-finder"
-          onFetchUser={fetchUser}
-          isLoading={isLoading}
-        />
+        <Finder onFetchUser={fetchUser} isLoading={isLoading} />
       </main>
       <Footer />
       <Snackbar

@@ -67,12 +67,11 @@ const User = ({ data, onBackFinder }) => {
     <Root>
       <Wrapper>
         <ProfileWrapper>
-          <Profile data-test="user-profile" data={data} />
+          <Profile data={data} />
         </ProfileWrapper>
         <Content>
-          <ProfileMobile data-test="user-profile" data={data} />
+          <ProfileMobile data={data} />
           <Menu
-            data-test="user-menu"
             onClick={(section) => {
               setActiveUserSection(section);
               if (section === 3) {

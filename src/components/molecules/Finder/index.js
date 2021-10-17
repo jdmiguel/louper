@@ -94,7 +94,6 @@ const Finder = ({ isLoading, onFetchUser }) => {
         />
       </InputWrapper>
       <StyledIconButton
-        data-test="finder-btn"
         onClick={() => {
           setIsValidating(true);
           if (inputValue !== '') {
