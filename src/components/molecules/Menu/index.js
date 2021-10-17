@@ -47,22 +47,21 @@ const StyledTab = styled(Tab)(({ theme }) => ({
     marginBottom: '2px !important',
     transition: 'fill ease-out 250ms',
     width: 22,
-  },
-  '& > span': {
-    color: theme.palette.primary.dark,
-    display: 'none',
-    fontSize: '0.9rem',
-    transition: 'color ease-out 250ms',
-    '@media (min-width: 992px)': {
-      display: 'inline',
+    '& + span': {
+      color: theme.palette.primary.dark,
+      display: 'none',
+      fontSize: '0.9rem',
+      transition: 'color ease-out 250ms',
+      '@media (min-width: 992px)': {
+        display: 'initial',
+      },
     },
   },
+
   '&:hover': {
     '& svg': {
       fill: theme.palette.primary.light,
-    },
-    '& > span': {
-      color: theme.palette.primary.light,
+      '& + span': { color: theme.palette.primary.light },
     },
   },
 }));
