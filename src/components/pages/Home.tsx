@@ -3,22 +3,23 @@ import PropTypes from 'prop-types';
 
 /* material-ui */
 import { styled } from '@mui/material/styles';
+import Typography from '@mui/material/Typography';
 import Snackbar from '@mui/material/Snackbar';
 import MuiAlert from '@mui/material/Alert';
 
-/* molecules */
-import Finder from '../../molecules/Finder';
-import Heading from '../../molecules/Heading';
-import Footer from '../../molecules/Footer';
-
 /* atoms */
-import Corner from '../../atoms/Corner';
+import Corner from '../atoms/GithubCorner';
+import GithubIcon from '../atoms/GithubIcon';
+
+/* molecules */
+import Finder from '../molecules/Finder';
+import Footer from '../molecules/Footer';
 
 /* services */
-import { getUserData } from '../../../services/github';
+import { getUserData } from '../../services/github';
 
 /* utils */
-import { errorLiterals } from '../../../utils';
+import { errorLiterals } from '../../utils';
 
 const { maximumRequest, unavailableUser } = errorLiterals;
 
@@ -35,6 +36,37 @@ const CornerWrapper = styled('header')({
   width: '100%',
 });
 
+const HomeHeading = styled('div')({
+  display: 'flex',
+  flexDirection: 'column',
+  alignItems: 'center',
+  marginBottom: '50px',
+});
+
+const Subtitle = styled('div')({
+  marginTop: '38px',
+  display: 'flex',
+  justifyContent: 'center',
+  alignItems: 'center',
+  '@media (min-width: 768px)': {
+    marginTop: '48px',
+  },
+});
+
+const IconWrapper = styled('div')(({ theme }) => ({
+  '& svg': {
+    width: 44,
+    marginLeft: 12,
+    '& path': {
+      fill: theme.palette.info.main,
+    },
+    '@media (min-width: 768px)': {
+      width: 64,
+      marginLeft: 12,
+    },
+  },
+}));
+
 const StyledAlert = styled(MuiAlert)({
   '& .MuiAlert-icon': {
     padding: '9px 0',
@@ -50,20 +82,18 @@ const StyledAlert = styled(MuiAlert)({
   },
 });
 
-const Alert = forwardRef(function Alert(props, ref) {
-  return <StyledAlert elevation={4} ref={ref} variant="filled" {...props} />;
-});
+const Alert = forwardRef((props, ref) => <StyledAlert elevation={4} ref={ref} variant="filled" {...props} />)
 
-const Home = ({ onFetchUser }) => {
+const Home = ({ onFetchUser }: {onFetchUser: Function}) => {
   const [isLoading, setIsLoading] = useState(false);
   const [errorMsg, setErrorMsg] = useState('');
   const [isErrorAlertOpen, setIsErrorAlertOpen] = useState(false);
 
-  const fetchUser = (userName) => {
+  const fetchUser = (userName: string) => {
     setIsLoading(true);
 
     getUserData(userName)
-      .then((user) => {
+      .then((user: any) => {
         onFetchUser({
           login: user.login,
           avatarUrl: user.avatar_url,
@@ -81,7 +111,7 @@ const Home = ({ onFetchUser }) => {
           following: user.following,
         });
       })
-      .catch((error) => {
+      .catch((error: any) => {
         let errorMsg = '';
 
         switch (error.code) {
@@ -102,7 +132,7 @@ const Home = ({ onFetchUser }) => {
       });
   };
 
-  const onClose = (event, reason) => {
+  const onClose = (_event: Event, reason: string) => {
     if (reason === 'clickaway') {
       return;
     }
@@ -116,7 +146,15 @@ const Home = ({ onFetchUser }) => {
         <Corner />
       </CornerWrapper>
       <main>
-        <Heading />
+      <HomeHeading>
+    <Typography variant="h1">Github</Typography>
+    <Subtitle>
+      <Typography variant="h2">Finder</Typography>
+      <IconWrapper>
+        <GithubIcon />
+      </IconWrapper>
+    </Subtitle>
+  </HomeHeading>
         <Finder onFetchUser={fetchUser} isLoading={isLoading} />
       </main>
       <Footer />

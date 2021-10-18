@@ -1,8 +1,5 @@
 import { useState } from 'react';
 
-/* material-ui */
-import { styled } from '@mui/material/styles';
-
 /* pages */
 import Home from './pages/Home';
 import User from './pages/User';
@@ -23,7 +20,7 @@ const App = () => {
         />
       ) : (
         <Home
-          onFetchUser={(data) => {
+          onFetchUser={(data: any) => {
             setUserData(data);
             setHasSelectedUser(true);
           }}

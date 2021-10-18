@@ -8,7 +8,7 @@ import axios from 'axios';
  * @param {object} response
  * @param {error} error
  */
-const handleError = ({ response }) => {
+const handleError = ({ response }:{response: any}) => {
   const error = {
     code: response.status,
     message: response.data?.message || null,
@@ -23,12 +23,12 @@ const handleError = ({ response }) => {
  * @param {object} response
  * @returns {object} response - object
  */
-const checkStatus = (response) => {
+const checkStatus = (response: any) => {
   if (response.status >= 200 && response.status < 300) {
     return response;
   }
 
-  const error = new Error(response.statusText);
+  const error:any = new Error(response.statusText);
   error.response = response;
   throw error;
 };
@@ -39,7 +39,7 @@ const checkStatus = (response) => {
  * @param {object} response
  * @returns {object} data - object
  */
-const normalizeResponse = (response) => response.data;
+const normalizeResponse = (response: any) => response.data;
 
 /**
  * create asynchronous call passing as parameter url string
@@ -51,10 +51,10 @@ const normalizeResponse = (response) => response.data;
  * @returns {promise} axios
  */
 
-export default function request(url, options = { method: 'get' }) {
+export default function request(url: any, options?: any) {
   return axios({
     url,
-    ...options,
+    ...options
   })
     .then(checkStatus)
     .then(normalizeResponse)

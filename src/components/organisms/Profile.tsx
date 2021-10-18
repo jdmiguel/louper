@@ -6,11 +6,10 @@ import Link from '@mui/material/Link';
 import WebIcon from '@mui/icons-material/Web';
 
 /* atoms */
-import GithubIcon from '../../atoms/GithubIcon';
+import GithubIcon from '../atoms/GithubIcon';
 
 /* utils */
-import { navigateToUrl } from '../../../utils';
-import { dataModel } from '../../../utils/models';
+import { navigateToUrl } from '../../utils';
 
 const Root = styled('div')({
   display: 'flex',
@@ -104,7 +103,7 @@ const StyledWebIcon = styled(WebIcon)(({ theme }) => ({
   marginBottom: 2,
 }));
 
-const buildCreationDate = (date) => {
+const buildCreationDate = (date: string) => {
   const newDate = new Date(date);
   const formattedDate = newDate.toLocaleString();
 
@@ -127,7 +126,7 @@ const Profile = ({
     company,
     htmlUrl,
   },
-}) => (
+}: any) => (
   <Root>
     <img alt="user avatar" src={avatarUrl} />
     <Content>
@@ -208,9 +207,5 @@ const Profile = ({
     </Content>
   </Root>
 );
-
-Profile.propTypes = {
-  data: dataModel,
-};
 
 export default Profile;

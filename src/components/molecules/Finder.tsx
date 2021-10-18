@@ -39,9 +39,9 @@ const StyledIconButton = styled(IconButton)(({ theme }) => ({
 
 const Finder = ({ isLoading, onFetchUser }) => {
   const [inputValue, setInputValue] = useState('');
-  const [isValidating, setIsValidating] = useState(null);
+  const [isValidating, setIsValidating] = useState(false);
 
-  const onKeyUp = ({ keyCode }) => {
+  const onKeyUp = ({ keyCode }: {keyCode: any}) => {
     if (!setInputValue || keyCode !== 13) {
       return;
     }

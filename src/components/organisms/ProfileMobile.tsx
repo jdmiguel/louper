@@ -2,9 +2,6 @@
 import { styled } from '@mui/material/styles';
 import Typography from '@mui/material/Typography';
 
-/* utils */
-import { dataModel } from '../../../utils/models';
-
 const Root = styled('div')({
   display: 'flex',
   marginTop: 20,
@@ -25,7 +22,7 @@ const Content = styled('div')({
   justifyContent: 'center',
 });
 
-const ProfileMobile = ({ data: { avatarUrl, name, login } }) => (
+const ProfileMobile = ({ data: { avatarUrl, name, login } }: any) => (
   <Root>
     <img alt="user avatar" src={avatarUrl} />
     <Content>
@@ -36,9 +33,5 @@ const ProfileMobile = ({ data: { avatarUrl, name, login } }) => (
     </Content>
   </Root>
 );
-
-ProfileMobile.propTypes = {
-  data: dataModel,
-};
 
 export default ProfileMobile;

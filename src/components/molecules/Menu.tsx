@@ -9,13 +9,14 @@ import ReposIcon from '@mui/icons-material/Folder';
 import FollowingIcon from '@mui/icons-material/Visibility';
 import FollowersIcon from '@mui/icons-material/Favorite';
 import SearchIcon from '@mui/icons-material/Search';
+import { Theme } from '@mui/material/styles';
 
 const Root = styled('header')({
   position: 'sticky',
   top: 0,
 });
 
-const StyledTabs = styled(Tabs)(({ theme }) => ({
+const StyledTabs = styled(Tabs)(({ theme }: {theme: Theme}) => ({
   backgroundColor: theme.palette.background.default,
   borderBottom: `1px solid ${theme.palette.secondary.light}`,
 
@@ -31,7 +32,7 @@ const StyledTabs = styled(Tabs)(({ theme }) => ({
   },
 }));
 
-const StyledTab = styled(Tab)(({ theme }) => ({
+const StyledTab = styled(Tab)(({ theme }: {theme: Theme}) => ({
   alignItems: 'center',
   display: 'flex',
   justifyContent: 'center',
@@ -66,14 +67,14 @@ const StyledTab = styled(Tab)(({ theme }) => ({
   },
 }));
 
-const Menu = ({ onClick }) => {
+const Menu = ({ onClick }: {onClick: any}) => {
   const [activeMenuItem, setActiveMenuItem] = useState(0);
 
   return (
     <Root>
       <StyledTabs
         value={activeMenuItem}
-        onChange={(event, tabValue) => {
+        onChange={(_event:any, tabValue) => {
           onClick(tabValue);
           setActiveMenuItem(tabValue);
         }}

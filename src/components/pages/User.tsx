@@ -1,21 +1,17 @@
 import { useState } from 'react';
-import PropTypes from 'prop-types';
 
 /* material-ui */
 import { styled } from '@mui/material/styles';
 
 /* organisms */
-import Profile from '../../organisms/Profile';
-import ProfileMobile from '../../organisms/Profile/mobile';
-import Repos from '../../organisms/Repos';
-import Followers from '../../organisms/Followers';
-import Following from '../../organisms/Following';
+import Profile from '../organisms/Profile';
+import ProfileMobile from '../organisms/ProfileMobile';
+import Repos from '../organisms/Repos';
+import Followers from '../organisms/Followers';
+import Following from '../organisms/Following';
 
 /* molecules */
-import Menu from '../../molecules/Menu';
-
-/* utils */
-import { dataModel } from '../../../utils/models';
+import Menu from '../molecules/Menu';
 
 const Root = styled('div')({
   padding: '0 20px',
@@ -57,7 +53,7 @@ const ContentUser = styled('main')({
   },
 });
 
-const User = ({ data, onBackFinder }) => {
+const User = ({ data, onBackFinder }: {data: any, onBackFinder: Function}) => {
   const [activeSection, setActiveUserSection] = useState(0);
   const [repos, setRepos] = useState([]);
   const [following, setFollowing] = useState([]);
@@ -72,7 +68,7 @@ const User = ({ data, onBackFinder }) => {
         <Content>
           <ProfileMobile data={data} />
           <Menu
-            onClick={(section) => {
+            onClick={(section: any) => {
               setActiveUserSection(section);
               if (section === 3) {
                 onBackFinder();
@@ -84,7 +80,7 @@ const User = ({ data, onBackFinder }) => {
               <Repos
                 total={data.repos}
                 user={data.login}
-                onFetchRepos={(repos) => setRepos(repos)}
+                onFetchRepos={(repos: any) => setRepos(repos)}
                 repos={repos}
               />
             )}
@@ -92,7 +88,7 @@ const User = ({ data, onBackFinder }) => {
               <Following
                 total={data.following}
                 user={data.login}
-                onFetchFollowing={(following) => setFollowing(following)}
+                onFetchFollowing={(following: any) => setFollowing(following)}
                 following={following}
               />
             )}
@@ -100,7 +96,7 @@ const User = ({ data, onBackFinder }) => {
               <Followers
                 total={data.followers}
                 user={data.login}
-                onFetchFollowers={(followers) => setFollowers(followers)}
+                onFetchFollowers={(followers: any) => setFollowers(followers)}
                 followers={followers}
               />
             )}
@@ -109,11 +105,6 @@ const User = ({ data, onBackFinder }) => {
       </Wrapper>
     </Root>
   );
-};
-
-User.propTypes = {
-  data: dataModel,
-  onBackFinder: PropTypes.func,
 };
 
 export default User;
