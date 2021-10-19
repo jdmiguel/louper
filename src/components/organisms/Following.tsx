@@ -16,13 +16,13 @@ import { navigateToUrl } from '../../utils';
 
 /* styles */
 import {
-  UserCard,
-  UserCardContent,
   GithubIconWrapper,
   StyledLink,
-  StyledFollowingIcon,
-  Title,
-  EmptyMsg,
+  CardTitle,
+  CardEmptyMsg,
+  UserCard,
+  UserCardContent,
+  UserFollowingIcon,
 } from './styles';
 
 type Props = {
@@ -56,9 +56,9 @@ const Following = ({ total, following: followingData, user, onFetchFollowing }: 
 
   if (total === 0) {
     return (
-      <EmptyMsg>
+      <CardEmptyMsg>
         <Typography variant="h6">No following added</Typography>
-      </EmptyMsg>
+      </CardEmptyMsg>
     );
   }
 
@@ -69,7 +69,7 @@ const Following = ({ total, following: followingData, user, onFetchFollowing }: 
     return (
       <>
         {placeholderList.map(() => (
-          <Placeholder key={uuidv4()} />
+          <Placeholder key={uuidv4()} hasUserStyle />
         ))}
       </>
     );
@@ -81,10 +81,10 @@ const Following = ({ total, following: followingData, user, onFetchFollowing }: 
         <UserCard key={nextFollowing.login}>
           <img alt="user following avatar" src={nextFollowing.avatar_url} />
           <UserCardContent>
-            <Title>
-              <StyledFollowingIcon />
+            <CardTitle>
+              <UserFollowingIcon />
               <Typography variant="h5">{nextFollowing.login}</Typography>
-            </Title>
+            </CardTitle>
             <StyledLink
               onClick={() => navigateToUrl(nextFollowing.html_url)}
               target="_self"

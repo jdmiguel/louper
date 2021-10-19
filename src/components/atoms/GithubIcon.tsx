@@ -1,5 +1,4 @@
-// eslint-disable-next-line react/display-name
-export default () => (
+const GithubIcon = () => (
   <svg
     version="1.1"
     x="0px"
@@ -17,3 +16,5 @@ export default () => (
     <path d="M45,97.8c0.1,0.5-0.4,1-1.1,1.1c-0.7,0.1-1.3-0.2-1.4-0.7c-0.1-0.5,0.4-1,1.1-1.1C44.3,97,44.9,97.3,45,97.8L45,97.8z M45,97.8" />
   </svg>
 );
+
+export default GithubIcon;

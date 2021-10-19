@@ -1,13 +1,12 @@
 import { forwardRef, useState, ReactNode } from 'react';
 
 /* material-ui */
-import { styled } from '@mui/material/styles';
 import Typography from '@mui/material/Typography';
 import Snackbar from '@mui/material/Snackbar';
-import MuiAlert, { AlertColor } from '@mui/material/Alert';
+import { AlertColor } from '@mui/material/Alert';
 
 /* atoms */
-import Corner from '../atoms/GithubCorner';
+import GithubCorner from '../atoms/GithubCorner';
 import GithubIcon from '../atoms/GithubIcon';
 
 /* molecules */
@@ -20,6 +19,16 @@ import { getUserData } from '../../services/github';
 /* utils */
 import { errorLiterals } from '../../utils';
 
+/* styles */
+import {
+  HomeRoot,
+  HomeAlert,
+  HomeCorner,
+  HomeHeading,
+  HomeSubtitle,
+  HomeIconWrapper,
+} from './styles';
+
 interface AlertProps {
   children?: ReactNode;
   onClose: any;
@@ -28,74 +37,16 @@ interface AlertProps {
 
 const { maximumRequest, unavailableUser } = errorLiterals;
 
-const Root = styled('div')({
-  display: 'flex',
-  flexDirection: 'column',
-  justifyContent: 'space-between',
-  height: '100vh',
-});
-
-const CornerWrapper = styled('header')({
-  display: 'flex',
-  justifyContent: 'flex-end',
-  width: '100%',
-});
-
-const HomeHeading = styled('div')({
-  display: 'flex',
-  flexDirection: 'column',
-  alignItems: 'center',
-  marginBottom: '50px',
-});
-
-const Subtitle = styled('div')({
-  marginTop: '38px',
-  display: 'flex',
-  justifyContent: 'center',
-  alignItems: 'center',
-  '@media (min-width: 768px)': {
-    marginTop: '48px',
-  },
-});
-
-const IconWrapper = styled('div')(({ theme }) => ({
-  '& svg': {
-    width: 44,
-    marginLeft: 12,
-    '& path': {
-      fill: theme.palette.neutral.main,
-    },
-    '@media (min-width: 768px)': {
-      width: 64,
-      marginLeft: 12,
-    },
-  },
-}));
-
-const StyledAlert = styled(MuiAlert)({
-  '& .MuiAlert-icon': {
-    padding: '9px 0',
-  },
-  '& .MuiAlert-message': {
-    padding: '12px 0',
-  },
-  '& .MuiAlert-action': {
-    svg: {
-      height: '1.4rem',
-      width: '1.4rem',
-    },
-  },
-});
-
-// eslint-disable-next-line react/display-name
 const Alert = forwardRef<HTMLDivElement, AlertProps>((props, ref) => (
-  <StyledAlert
+  <HomeAlert
     elevation={4}
     ref={ref as React.RefObject<HTMLDivElement>}
     variant="filled"
     {...props}
   />
 ));
+
+Alert.displayName = 'Alert';
 
 const Home = ({ onFetchUser }: { onFetchUser: (userData: any) => void }) => {
   const [isLoading, setIsLoading] = useState(false);
@@ -154,19 +105,19 @@ const Home = ({ onFetchUser }: { onFetchUser: (userData: any) => void }) => {
   };
 
   return (
-    <Root>
-      <CornerWrapper>
-        <Corner />
-      </CornerWrapper>
+    <HomeRoot>
+      <HomeCorner>
+        <GithubCorner />
+      </HomeCorner>
       <main>
         <HomeHeading>
           <Typography variant="h1">Github</Typography>
-          <Subtitle>
+          <HomeSubtitle>
             <Typography variant="h2">Finder</Typography>
-            <IconWrapper>
+            <HomeIconWrapper>
               <GithubIcon />
-            </IconWrapper>
-          </Subtitle>
+            </HomeIconWrapper>
+          </HomeSubtitle>
         </HomeHeading>
         <Finder onFetchUser={fetchUser} isLoading={isLoading} />
       </main>
@@ -184,7 +135,7 @@ const Home = ({ onFetchUser }: { onFetchUser: (userData: any) => void }) => {
           {errorMsg}
         </Alert>
       </Snackbar>
-    </Root>
+    </HomeRoot>
   );
 };
 

@@ -2,19 +2,8 @@
 import { styled } from '@mui/material/styles';
 import Typography from '@mui/material/Typography';
 
-const Root = styled('div')({
-  display: 'flex',
-  marginTop: 20,
-  '@media (min-width: 769px)': {
-    display: 'none',
-  },
-  '& > img': {
-    borderRadius: '50%',
-    height: 100,
-    marginRight: 20,
-    width: 100,
-  },
-});
+/* styles */
+import { ProfileMobileRoot } from './styles';
 
 const Content = styled('div')({
   display: 'flex',
@@ -23,7 +12,7 @@ const Content = styled('div')({
 });
 
 const ProfileMobile = ({ data: { avatarUrl, name, login } }: any) => (
-  <Root>
+  <ProfileMobileRoot>
     <img alt="user avatar" src={avatarUrl} />
     <Content>
       <Typography variant="h3" sx={{ marginBottom: 0.2 }}>
@@ -31,7 +20,7 @@ const ProfileMobile = ({ data: { avatarUrl, name, login } }: any) => (
       </Typography>
       <Typography variant="h4">{login}</Typography>
     </Content>
-  </Root>
+  </ProfileMobileRoot>
 );
 
 export default ProfileMobile;

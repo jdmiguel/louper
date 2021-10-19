@@ -1,9 +1,5 @@
 /* material-ui */
-import { styled } from '@mui/material/styles';
 import Typography from '@mui/material/Typography';
-import Icon from '@mui/material/Icon';
-import Link from '@mui/material/Link';
-import WebIcon from '@mui/icons-material/Web';
 
 /* atoms */
 import GithubIcon from '../atoms/GithubIcon';
@@ -11,97 +7,18 @@ import GithubIcon from '../atoms/GithubIcon';
 /* utils */
 import { navigateToUrl } from '../../utils';
 
-const Root = styled('div')({
-  display: 'flex',
-  flexDirection: 'column',
-  maxWidth: 240,
-  position: 'sticky',
-  top: 60,
-  '& img': {
-    borderRadius: '50%',
-    height: 220,
-    width: 220,
-    '@media (min-width: 1200px)': {
-      height: 240,
-      width: 240,
-    },
-  },
-});
-
-const Content = styled('div')({
-  marginTop: 20,
-  maxWidth: 300,
-});
-
-const ContentInfo = styled('div')(({ theme }) => ({
-  borderBottom: `1px solid ${theme.palette.secondary.light}`,
-  borderTop: `1px solid ${theme.palette.secondary.light}`,
-  display: 'flex',
-  flexWrap: 'wrap',
-  marginTop: 24,
-  paddingBottom: 10,
-  paddingTop: 10,
-}));
-
-const ContentActions = styled('div')({
-  marginTop: 20,
-});
-
-const InfoTag = styled('div')(({ theme }) => ({
-  alignItems: 'center',
-  color: theme.palette.secondary.main,
-  display: 'flex',
-  justifyContent: 'center',
-  marginRight: 12,
-  marginBottom: 6,
-  fontSize: '0.9rem',
-}));
-
-const StyledIcon = styled(Icon)(({ theme }) => ({
-  color: theme.palette.secondary.main,
-  fontSize: 22,
-  marginRight: 3,
-}));
-
-const StyledLink = styled(Link)(({ theme }) => ({
-  cursor: 'pointer',
-  alignItems: 'center',
-  display: 'flex',
-  fontSize: '0.9rem',
-  fontWeight: 700,
-  marginBottom: 6,
-  textDecoration: 'none',
-  textTransform: 'uppercase',
-  transition: 'color ease-out 250ms',
-  '& path': { transition: 'fill ease-out 250ms' },
-  '&:hover': {
-    color: theme.palette.primary.light,
-    '& path': { fill: theme.palette.primary.light },
-  },
-}));
-
-const GithubIconWrapper = styled('div')(({ theme }) => ({
-  marginRight: 6,
-  '& svg': {
-    width: 22,
-    '& path': {
-      fill: theme.palette.primary.main,
-    },
-  },
-}));
-
-const StyledLinkIcon = styled(Icon)(({ theme }) => ({
-  color: theme.palette.primary.main,
-  fontSize: 22,
-  marginRight: 6,
-}));
-
-const StyledWebIcon = styled(WebIcon)(({ theme }) => ({
-  color: theme.palette.primary.main,
-  fontSize: '1.3rem',
-  marginRight: 6,
-  marginBottom: 2,
-}));
+/* styles */
+import {
+  GithubIconWrapper,
+  StyledLink,
+  ProfileRoot,
+  ProfileContent,
+  ProfileContentInfo,
+  ProfileContentActions,
+  ProfileInfoTag,
+  ProfileIcon,
+  ProfileWebIcon,
+} from './styles';
 
 const buildCreationDate = (date: string) => {
   const newDate = new Date(date);
@@ -127,9 +44,9 @@ const Profile = ({
     htmlUrl,
   },
 }: any) => (
-  <Root>
+  <ProfileRoot>
     <img alt="user avatar" src={avatarUrl} />
-    <Content>
+    <ProfileContent>
       <Typography variant="h3" sx={{ marginBottom: 0.4 }}>
         {name}
       </Typography>
@@ -137,39 +54,39 @@ const Profile = ({
         {login}
       </Typography>
       <Typography variant="h5">{bio}</Typography>
-      <ContentInfo>
-        <InfoTag>
-          <StyledIcon>folder</StyledIcon>
+      <ProfileContentInfo>
+        <ProfileInfoTag>
+          <ProfileIcon>folder</ProfileIcon>
           {repos}
-        </InfoTag>
-        <InfoTag>
-          <StyledIcon>visibility</StyledIcon>
+        </ProfileInfoTag>
+        <ProfileInfoTag>
+          <ProfileIcon>visibility</ProfileIcon>
           {following}
-        </InfoTag>
-        <InfoTag>
-          <StyledIcon>favorite</StyledIcon>
+        </ProfileInfoTag>
+        <ProfileInfoTag>
+          <ProfileIcon>favorite</ProfileIcon>
           {followers}
-        </InfoTag>
+        </ProfileInfoTag>
         {createdAt && (
-          <InfoTag>
-            <StyledIcon>event_note</StyledIcon>
+          <ProfileInfoTag>
+            <ProfileIcon>event_note</ProfileIcon>
             {buildCreationDate(createdAt)}
-          </InfoTag>
+          </ProfileInfoTag>
         )}
         {location && (
-          <InfoTag>
-            <StyledIcon>location_on</StyledIcon>
+          <ProfileInfoTag>
+            <ProfileIcon>location_on</ProfileIcon>
             {location}
-          </InfoTag>
+          </ProfileInfoTag>
         )}
         {company && (
-          <InfoTag>
-            <StyledIcon>business</StyledIcon>
+          <ProfileInfoTag>
+            <ProfileIcon>business</ProfileIcon>
             {company}
-          </InfoTag>
+          </ProfileInfoTag>
         )}
-      </ContentInfo>
-      <ContentActions>
+      </ProfileContentInfo>
+      <ProfileContentActions>
         <StyledLink
           onClick={() => navigateToUrl(htmlUrl)}
           target="_self"
@@ -188,7 +105,7 @@ const Profile = ({
             rel="noopener noreferrer"
             aria-label={`Send email to ${login}`}
           >
-            <StyledLinkIcon>email</StyledLinkIcon>
+            <ProfileIcon>email</ProfileIcon>
             Send email
           </StyledLink>
         )}
@@ -199,13 +116,13 @@ const Profile = ({
             rel="noopener noreferrer"
             aria-label={`View portfolio of ${name}`}
           >
-            <StyledWebIcon />
+            <ProfileWebIcon />
             Visit portfolio
           </StyledLink>
         )}
-      </ContentActions>
-    </Content>
-  </Root>
+      </ProfileContentActions>
+    </ProfileContent>
+  </ProfileRoot>
 );
 
 export default Profile;

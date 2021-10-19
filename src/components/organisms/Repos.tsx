@@ -13,14 +13,14 @@ import { getRepos } from '../../services/github';
 
 /* styles */
 import {
-  Repo,
-  Title,
-  RepoIcon,
-  Topics,
-  Topic,
-  StyledLink,
   GithubIconWrapper,
-  EmptyMsg,
+  StyledLink,
+  CardTitle,
+  CardEmptyMsg,
+  RepoCard,
+  RepoIcon,
+  RepoTopics,
+  RepoTopic,
 } from './styles';
 
 type Props = { total: number; user: any; onFetchRepos: (repo: any) => void; repos: any[] };
@@ -49,9 +49,9 @@ const Repos = ({ total, user, onFetchRepos, repos: reposData }: Props) => {
 
   if (total === 0) {
     return (
-      <EmptyMsg>
+      <CardEmptyMsg>
         <Typography variant="h6">No repos added</Typography>
-      </EmptyMsg>
+      </CardEmptyMsg>
     );
   }
 
@@ -71,12 +71,12 @@ const Repos = ({ total, user, onFetchRepos, repos: reposData }: Props) => {
   return (
     <>
       {repos.map((repo: any) => (
-        <Repo data-test="repos-item" key={repo.name}>
+        <RepoCard data-test="repos-item" key={repo.name}>
           <div>
-            <Title>
+            <CardTitle>
               <RepoIcon />
               <Typography variant="h5">{repo.name}</Typography>
-            </Title>
+            </CardTitle>
             {repo.description ? (
               <Typography variant="body1" sx={{ marginTop: 1 }}>
                 {repo.description}
@@ -87,19 +87,19 @@ const Repos = ({ total, user, onFetchRepos, repos: reposData }: Props) => {
               </Typography>
             )}
 
-            <Topics>
+            <RepoTopics>
               {repo.topics?.length > 0 ? (
                 repo.topics.map((topic: string) => (
-                  <Topic key={topic}>
+                  <RepoTopic key={topic}>
                     <Typography variant="body2">{topic}</Typography>
-                  </Topic>
+                  </RepoTopic>
                 ))
               ) : (
-                <Topic>
+                <RepoTopic>
                   <Typography variant="body2">NO TOPICS</Typography>
-                </Topic>
+                </RepoTopic>
               )}
-            </Topics>
+            </RepoTopics>
           </div>
           <StyledLink
             href={repo.html_url}
@@ -112,7 +112,7 @@ const Repos = ({ total, user, onFetchRepos, repos: reposData }: Props) => {
             </GithubIconWrapper>
             Visit repo
           </StyledLink>
-        </Repo>
+        </RepoCard>
       ))}
     </>
   );
