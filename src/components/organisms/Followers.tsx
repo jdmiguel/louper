@@ -16,18 +16,23 @@ import { navigateToUrl } from '../../utils';
 
 /* styles */
 import {
-  UserCard, UserCardContent, GithubIconWrapper, StyledLink, StyledFollowerIcon,
-  Title,  EmptyMsg
-} from './styles'
+  UserCard,
+  UserCardContent,
+  GithubIconWrapper,
+  StyledLink,
+  StyledFollowerIcon,
+  Title,
+  EmptyMsg,
+} from './styles';
 
-type Props = {total: number, user: any, onFetchFollowers: (follower: any) => void, followers: any[]}
+type Props = {
+  total: number;
+  user: any;
+  onFetchFollowers: (follower: any) => void;
+  followers: any[];
+};
 
-const Followers = ({
-  total,
-  followers: followersData,
-  user,
-  onFetchFollowers,
-}: Props) => {
+const Followers = ({ total, followers: followersData, user, onFetchFollowers }: Props) => {
   const [isLoading, setIsLoading] = useState(false);
   const [followers, setFollowers] = useState(followersData);
 
@@ -63,40 +68,37 @@ const Followers = ({
 
     return (
       <>
-        {
-        // eslint-disable-next-line @typescript-eslint/no-unused-vars
-        placeholderList.map((_item: string) => <Placeholder key={uuidv4()} />)
-        }
+        {placeholderList.map(() => (
+          <Placeholder key={uuidv4()} />
+        ))}
       </>
     );
   }
 
   return (
     <>
-      {
-        followers.map((follower) => (
-          <UserCard key={follower.login}>
-            <img alt="user following avatar" src={follower.avatar_url} />
-            <UserCardContent>
-              <Title>
-                <StyledFollowerIcon />
-                <Typography variant="h5">{follower.login}</Typography>
-              </Title>
-              <StyledLink
-                onClick={() => navigateToUrl(follower.html_url)}
-                target="_self"
-                rel="noopener noreferrer"
-                aria-label={`View ${follower.login} profile on GitHub`}
-              >
-                <GithubIconWrapper>
-                  <GithubIcon />
-                </GithubIconWrapper>
-                Visit profile
-              </StyledLink>
-            </UserCardContent>
-          </UserCard>
-        ))
-      }
+      {followers.map((follower) => (
+        <UserCard key={follower.login}>
+          <img alt="user following avatar" src={follower.avatar_url} />
+          <UserCardContent>
+            <Title>
+              <StyledFollowerIcon />
+              <Typography variant="h5">{follower.login}</Typography>
+            </Title>
+            <StyledLink
+              onClick={() => navigateToUrl(follower.html_url)}
+              target="_self"
+              rel="noopener noreferrer"
+              aria-label={`View ${follower.login} profile on GitHub`}
+            >
+              <GithubIconWrapper>
+                <GithubIcon />
+              </GithubIconWrapper>
+              Visit profile
+            </StyledLink>
+          </UserCardContent>
+        </UserCard>
+      ))}
     </>
   );
 };

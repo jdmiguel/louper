@@ -8,7 +8,7 @@ import axios from 'axios';
  * @param {object} response
  * @param {error} error
  */
-const handleError = ({ response }:{response: any}) => {
+const handleError = ({ response }: { response: any }) => {
   const error = {
     code: response.status,
     message: response.data?.message || null,
@@ -28,7 +28,7 @@ const checkStatus = (response: any) => {
     return response;
   }
 
-  const error:any = new Error(response.statusText);
+  const error: any = new Error(response.statusText);
   error.response = response;
   throw error;
 };
@@ -54,7 +54,7 @@ const normalizeResponse = (response: any) => response.data;
 export default function request(url: any, options?: any) {
   return axios({
     url,
-    ...options
+    ...options,
   })
     .then(checkStatus)
     .then(normalizeResponse)

@@ -4,7 +4,7 @@ import { forwardRef, useState, ReactNode } from 'react';
 import { styled } from '@mui/material/styles';
 import Typography from '@mui/material/Typography';
 import Snackbar from '@mui/material/Snackbar';
-import MuiAlert, {AlertColor} from '@mui/material/Alert';
+import MuiAlert, { AlertColor } from '@mui/material/Alert';
 
 /* atoms */
 import Corner from '../atoms/GithubCorner';
@@ -22,10 +22,9 @@ import { errorLiterals } from '../../utils';
 
 interface AlertProps {
   children?: ReactNode;
-  onClose: any,
-  severity: AlertColor
+  onClose: any;
+  severity: AlertColor;
 }
-
 
 const { maximumRequest, unavailableUser } = errorLiterals;
 
@@ -89,9 +88,16 @@ const StyledAlert = styled(MuiAlert)({
 });
 
 // eslint-disable-next-line react/display-name
-const Alert = forwardRef<HTMLDivElement,AlertProps>((props, ref) => <StyledAlert elevation={4} ref={ref as React.RefObject<HTMLDivElement>} variant="filled" {...props} />)
+const Alert = forwardRef<HTMLDivElement, AlertProps>((props, ref) => (
+  <StyledAlert
+    elevation={4}
+    ref={ref as React.RefObject<HTMLDivElement>}
+    variant="filled"
+    {...props}
+  />
+));
 
-const Home = ({ onFetchUser }: {onFetchUser: (userData: any) => void}) => {
+const Home = ({ onFetchUser }: { onFetchUser: (userData: any) => void }) => {
   const [isLoading, setIsLoading] = useState(false);
   const [errorMsg, setErrorMsg] = useState('');
   const [isErrorAlertOpen, setIsErrorAlertOpen] = useState(false);
@@ -153,15 +159,15 @@ const Home = ({ onFetchUser }: {onFetchUser: (userData: any) => void}) => {
         <Corner />
       </CornerWrapper>
       <main>
-      <HomeHeading>
-    <Typography variant="h1">Github</Typography>
-    <Subtitle>
-      <Typography variant="h2">Finder</Typography>
-      <IconWrapper>
-        <GithubIcon />
-      </IconWrapper>
-    </Subtitle>
-  </HomeHeading>
+        <HomeHeading>
+          <Typography variant="h1">Github</Typography>
+          <Subtitle>
+            <Typography variant="h2">Finder</Typography>
+            <IconWrapper>
+              <GithubIcon />
+            </IconWrapper>
+          </Subtitle>
+        </HomeHeading>
         <Finder onFetchUser={fetchUser} isLoading={isLoading} />
       </main>
       <Footer />

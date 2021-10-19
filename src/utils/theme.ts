@@ -4,13 +4,13 @@ import { createTheme, PaletteColorOptions } from '@mui/material/styles';
 
 declare module '@mui/material/styles' {
   interface Theme {
-    animation: any,
-    overrides: any
+    animation: any;
+    overrides: any;
   }
 
   interface ThemeOptions {
-    animation: any,
-    overrides: any
+    animation: any;
+    overrides: any;
   }
 
   interface PaletteOptions {
@@ -30,23 +30,25 @@ export const theme = createTheme({
       100% { background-position-x: 1200px}
     `,
   },
-  overrides: [{
-    MuiCssBaseline: {
-      '@global': {
-        html: {
-          overflowX: 'hidden',
-          background: '#E0E6EF',
-        },
-        body: {
-          margin: 0,
-          padding: 0,
-        },
-        button: {
-          boxShadow: 'initial !important',
+  overrides: [
+    {
+      MuiCssBaseline: {
+        '@global': {
+          html: {
+            overflowX: 'hidden',
+            background: '#E0E6EF',
+          },
+          body: {
+            margin: 0,
+            padding: 0,
+          },
+          button: {
+            boxShadow: 'initial !important',
+          },
         },
       },
     },
-  }],
+  ],
   typography: {
     fontFamily: ['Comfortaa', 'Arial', 'sans-serif'].join(','),
     htmlFontSize: 12,
@@ -139,5 +141,5 @@ export const theme = createTheme({
       light: '#cccfd1',
       dark: '#353D40',
     },
-  }
+  },
 });

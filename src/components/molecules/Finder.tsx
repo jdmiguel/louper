@@ -36,11 +36,17 @@ const StyledIconButton = styled(IconButton)(({ theme }) => ({
   },
 }));
 
-const Finder = ({ isLoading, onFetchUser }: {isLoading:boolean, onFetchUser:(name:string) => void}) => {
+const Finder = ({
+  isLoading,
+  onFetchUser,
+}: {
+  isLoading: boolean;
+  onFetchUser: (name: string) => void;
+}) => {
   const [inputValue, setInputValue] = useState('');
   const [isValidating, setIsValidating] = useState(false);
 
-  const onKeyUp = ({ keyCode }: {keyCode: any}) => {
+  const onKeyUp = ({ keyCode }: { keyCode: any }) => {
     if (!setInputValue || keyCode !== 13) {
       return;
     }
@@ -79,11 +85,7 @@ const Finder = ({ isLoading, onFetchUser }: {isLoading:boolean, onFetchUser:(nam
             endAdornment: (
               <InputAdornment position="end">
                 {isLoading ? (
-                  <CircularProgress
-                    className="loaderIcon"
-                    size={22}
-                    thickness={4}
-                  />
+                  <CircularProgress className="loaderIcon" size={22} thickness={4} />
                 ) : (
                   <UserIcon />
                 )}

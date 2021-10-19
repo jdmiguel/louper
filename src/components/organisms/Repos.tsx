@@ -13,10 +13,17 @@ import { getRepos } from '../../services/github';
 
 /* styles */
 import {
-  Repo, Title, RepoIcon, Topics, Topic, StyledLink, GithubIconWrapper, EmptyMsg
-} from './styles'
+  Repo,
+  Title,
+  RepoIcon,
+  Topics,
+  Topic,
+  StyledLink,
+  GithubIconWrapper,
+  EmptyMsg,
+} from './styles';
 
-type Props = {total: number, user: any, onFetchRepos: (repo: any) => void, repos: any[]}
+type Props = { total: number; user: any; onFetchRepos: (repo: any) => void; repos: any[] };
 
 const Repos = ({ total, user, onFetchRepos, repos: reposData }: Props) => {
   const [isLoading, setIsLoading] = useState(false);
@@ -54,61 +61,61 @@ const Repos = ({ total, user, onFetchRepos, repos: reposData }: Props) => {
 
     return (
       <>
-        {placeholderList.map((_item: string) => <Placeholder key={uuidv4()} />)}
+        {placeholderList.map(() => (
+          <Placeholder key={uuidv4()} />
+        ))}
       </>
     );
   }
 
   return (
     <>
-      {
-        repos.map((repo: any) => (
-          <Repo data-test="repos-item" key={repo.name}>
-            <div>
-              <Title>
-                <RepoIcon />
-                <Typography variant="h5">{repo.name}</Typography>
-              </Title>
-              {repo.description ? (
-                <Typography variant="body1" sx={{ marginTop: 1 }}>
-                  {repo.description}
-                </Typography>
-              ) : (
-                <Typography variant="h6" sx={{ marginTop: 1 }}>
-                  No description added
-                </Typography>
-              )}
-      
-              <Topics>
-                {repo.topics?.length > 0 ? (
-                  repo.topics.map((topic: string) => (
-                    <Topic key={topic}>
-                      <Typography variant="body2">{topic}</Typography>
-                    </Topic>
-                  ))
-                ) : (
-                  <Topic>
-                    <Typography variant="body2">NO TOPICS</Typography>
+      {repos.map((repo: any) => (
+        <Repo data-test="repos-item" key={repo.name}>
+          <div>
+            <Title>
+              <RepoIcon />
+              <Typography variant="h5">{repo.name}</Typography>
+            </Title>
+            {repo.description ? (
+              <Typography variant="body1" sx={{ marginTop: 1 }}>
+                {repo.description}
+              </Typography>
+            ) : (
+              <Typography variant="h6" sx={{ marginTop: 1 }}>
+                No description added
+              </Typography>
+            )}
+
+            <Topics>
+              {repo.topics?.length > 0 ? (
+                repo.topics.map((topic: string) => (
+                  <Topic key={topic}>
+                    <Typography variant="body2">{topic}</Typography>
                   </Topic>
-                )}
-              </Topics>
-            </div>
-            <StyledLink
-              href={repo.html_url}
-              target="_self"
-              rel="noopener noreferrer"
-              aria-label={`View ${repo.name} repository on GitHub`}
-            >
-              <GithubIconWrapper>
-                <GithubIcon />
-              </GithubIconWrapper>
-              Visit repo
-            </StyledLink>
-          </Repo>
-        ))
-      }
+                ))
+              ) : (
+                <Topic>
+                  <Typography variant="body2">NO TOPICS</Typography>
+                </Topic>
+              )}
+            </Topics>
+          </div>
+          <StyledLink
+            href={repo.html_url}
+            target="_self"
+            rel="noopener noreferrer"
+            aria-label={`View ${repo.name} repository on GitHub`}
+          >
+            <GithubIconWrapper>
+              <GithubIcon />
+            </GithubIconWrapper>
+            Visit repo
+          </StyledLink>
+        </Repo>
+      ))}
     </>
-  ); 
+  );
 };
 
 export default Repos;

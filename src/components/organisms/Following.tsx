@@ -16,18 +16,23 @@ import { navigateToUrl } from '../../utils';
 
 /* styles */
 import {
-  UserCard, UserCardContent, GithubIconWrapper, StyledLink, StyledFollowingIcon,
-  Title,  EmptyMsg
-} from './styles'
+  UserCard,
+  UserCardContent,
+  GithubIconWrapper,
+  StyledLink,
+  StyledFollowingIcon,
+  Title,
+  EmptyMsg,
+} from './styles';
 
-type Props = {total: number, user: any, onFetchFollowing: (following: any) => void, following: any[]}
+type Props = {
+  total: number;
+  user: any;
+  onFetchFollowing: (following: any) => void;
+  following: any[];
+};
 
-const Following = ({
-  total,
-  following: followingData,
-  user,
-  onFetchFollowing,
-}: Props) => {
+const Following = ({ total, following: followingData, user, onFetchFollowing }: Props) => {
   const [isLoading, setIsLoading] = useState(false);
   const [following, setFollowing] = useState(followingData);
 
@@ -58,42 +63,42 @@ const Following = ({
   }
 
   if (isLoading) {
-    const placeholderList = new Array(total)
+    const placeholderList = new Array(total);
     placeholderList.fill('');
 
     return (
       <>
-        {placeholderList.map((_item: string) => <Placeholder key={uuidv4()} />)}
+        {placeholderList.map(() => (
+          <Placeholder key={uuidv4()} />
+        ))}
       </>
     );
   }
 
   return (
     <>
-      {
-        following.map((nextFollowing: any) => (
-          <UserCard key={nextFollowing.login}> 
-            <img alt="user following avatar" src={nextFollowing.avatar_url} />
-            <UserCardContent>
-              <Title>
-                <StyledFollowingIcon />
-                <Typography variant="h5">{nextFollowing.login}</Typography>
-              </Title>
-              <StyledLink
-                onClick={() => navigateToUrl(nextFollowing.html_url)}
-                target="_self"
-                rel="noopener noreferrer"
-                aria-label={`View ${nextFollowing.login} profile on GitHub`}
-              >
-                <GithubIconWrapper>
-                  <GithubIcon />
-                </GithubIconWrapper>
-                Visit profile
-              </StyledLink>
-            </UserCardContent>
-          </UserCard>
-        ))
-      }
+      {following.map((nextFollowing: any) => (
+        <UserCard key={nextFollowing.login}>
+          <img alt="user following avatar" src={nextFollowing.avatar_url} />
+          <UserCardContent>
+            <Title>
+              <StyledFollowingIcon />
+              <Typography variant="h5">{nextFollowing.login}</Typography>
+            </Title>
+            <StyledLink
+              onClick={() => navigateToUrl(nextFollowing.html_url)}
+              target="_self"
+              rel="noopener noreferrer"
+              aria-label={`View ${nextFollowing.login} profile on GitHub`}
+            >
+              <GithubIconWrapper>
+                <GithubIcon />
+              </GithubIconWrapper>
+              Visit profile
+            </StyledLink>
+          </UserCardContent>
+        </UserCard>
+      ))}
     </>
   );
 };

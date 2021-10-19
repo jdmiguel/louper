@@ -123,5 +123,5 @@ export {
   UserCard,
   UserCardContent,
   StyledFollowingIcon,
-  StyledFollowerIcon
-}
+  StyledFollowerIcon,
+};

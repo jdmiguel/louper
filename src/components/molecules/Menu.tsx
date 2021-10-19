@@ -15,7 +15,7 @@ const Root = styled('header')({
   top: 0,
 });
 
-const StyledTabs = styled(Tabs)(({ theme }: {theme: Theme}) => ({
+const StyledTabs = styled(Tabs)(({ theme }: { theme: Theme }) => ({
   backgroundColor: theme.palette.background.default,
   borderBottom: `1px solid ${theme.palette.secondary.light}`,
 
@@ -31,7 +31,7 @@ const StyledTabs = styled(Tabs)(({ theme }: {theme: Theme}) => ({
   },
 }));
 
-const StyledTab = styled(Tab)(({ theme }: {theme: Theme}) => ({
+const StyledTab = styled(Tab)(({ theme }: { theme: Theme }) => ({
   alignItems: 'center',
   display: 'flex',
   justifyContent: 'center',
@@ -66,43 +66,23 @@ const StyledTab = styled(Tab)(({ theme }: {theme: Theme}) => ({
   },
 }));
 
-const Menu = ({ onClick }: {onClick: any}) => {
+const Menu = ({ onClick }: { onClick: any }) => {
   const [activeMenuItem, setActiveMenuItem] = useState(0);
 
   return (
     <Root>
       <StyledTabs
         value={activeMenuItem}
-        onChange={(_event:any, tabValue) => {
+        onChange={(_event: any, tabValue) => {
           onClick(tabValue);
           setActiveMenuItem(tabValue);
         }}
         centered
       >
-        <StyledTab
-          icon={<ReposIcon />}
-          disableRipple
-          label={<span>REPOS</span>}
-          wrapped
-        />
-        <StyledTab
-          icon={<FollowingIcon />}
-          disableRipple
-          label={<span>FOLLOWING</span>}
-          wrapped
-        />
-        <StyledTab
-          icon={<FollowersIcon />}
-          disableRipple
-          label={<span>FOLLOWERS</span>}
-          wrapped
-        />
-        <StyledTab
-          icon={<SearchIcon />}
-          disableRipple
-          label={<span>SEARCH</span>}
-          wrapped
-        />
+        <StyledTab icon={<ReposIcon />} disableRipple label={<span>REPOS</span>} wrapped />
+        <StyledTab icon={<FollowingIcon />} disableRipple label={<span>FOLLOWING</span>} wrapped />
+        <StyledTab icon={<FollowersIcon />} disableRipple label={<span>FOLLOWERS</span>} wrapped />
+        <StyledTab icon={<SearchIcon />} disableRipple label={<span>SEARCH</span>} wrapped />
       </StyledTabs>
     </Root>
   );
