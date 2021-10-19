@@ -1,5 +1,4 @@
 import { useState } from 'react';
-import PropTypes from 'prop-types';
 
 /* material-ui */
 import { styled } from '@mui/styles';
@@ -107,13 +106,6 @@ const Menu = ({ onClick }: {onClick: any}) => {
       </StyledTabs>
     </Root>
   );
-};
-
-Menu.propTypes = {
-  withRepos: PropTypes.bool,
-  withFollowing: PropTypes.bool,
-  withFollowers: PropTypes.bool,
-  onClick: PropTypes.func.isRequired,
 };
 
 export default Menu;

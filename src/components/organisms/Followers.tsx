@@ -20,7 +20,7 @@ import {
   Title,  EmptyMsg
 } from './styles'
 
-type Props = {total: number, user: any, onFetchFollowers: Function, followers: any[]}
+type Props = {total: number, user: any, onFetchFollowers: (follower: any) => void, followers: any[]}
 
 const Followers = ({
   total,
@@ -63,7 +63,10 @@ const Followers = ({
 
     return (
       <>
-        {placeholderList.map((_item: string) => <Placeholder key={uuidv4()} />)}
+        {
+        // eslint-disable-next-line @typescript-eslint/no-unused-vars
+        placeholderList.map((_item: string) => <Placeholder key={uuidv4()} />)
+        }
       </>
     );
   }
@@ -72,7 +75,7 @@ const Followers = ({
     <>
       {
         followers.map((follower) => (
-          <UserCard>
+          <UserCard key={follower.login}>
             <img alt="user following avatar" src={follower.avatar_url} />
             <UserCardContent>
               <Title>

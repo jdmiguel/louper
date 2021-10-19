@@ -1,11 +1,10 @@
-import { useState, forwardRef } from 'react';
-import PropTypes from 'prop-types';
+import { forwardRef, useState, ReactNode } from 'react';
 
 /* material-ui */
 import { styled } from '@mui/material/styles';
 import Typography from '@mui/material/Typography';
 import Snackbar from '@mui/material/Snackbar';
-import MuiAlert from '@mui/material/Alert';
+import MuiAlert, {AlertColor} from '@mui/material/Alert';
 
 /* atoms */
 import Corner from '../atoms/GithubCorner';
@@ -20,6 +19,13 @@ import { getUserData } from '../../services/github';
 
 /* utils */
 import { errorLiterals } from '../../utils';
+
+interface AlertProps {
+  children?: ReactNode;
+  onClose: any,
+  severity: AlertColor
+}
+
 
 const { maximumRequest, unavailableUser } = errorLiterals;
 
@@ -58,7 +64,7 @@ const IconWrapper = styled('div')(({ theme }) => ({
     width: 44,
     marginLeft: 12,
     '& path': {
-      fill: theme.palette.info.main,
+      fill: theme.palette.neutral.main,
     },
     '@media (min-width: 768px)': {
       width: 64,
@@ -82,9 +88,10 @@ const StyledAlert = styled(MuiAlert)({
   },
 });
 
-const Alert = forwardRef((props, ref) => <StyledAlert elevation={4} ref={ref} variant="filled" {...props} />)
+// eslint-disable-next-line react/display-name
+const Alert = forwardRef<HTMLDivElement,AlertProps>((props, ref) => <StyledAlert elevation={4} ref={ref as React.RefObject<HTMLDivElement>} variant="filled" {...props} />)
 
-const Home = ({ onFetchUser }: {onFetchUser: Function}) => {
+const Home = ({ onFetchUser }: {onFetchUser: (userData: any) => void}) => {
   const [isLoading, setIsLoading] = useState(false);
   const [errorMsg, setErrorMsg] = useState('');
   const [isErrorAlertOpen, setIsErrorAlertOpen] = useState(false);
@@ -132,7 +139,7 @@ const Home = ({ onFetchUser }: {onFetchUser: Function}) => {
       });
   };
 
-  const onClose = (_event: Event, reason: string) => {
+  const onClose = (_event: any, reason: string) => {
     if (reason === 'clickaway') {
       return;
     }
@@ -173,10 +180,6 @@ const Home = ({ onFetchUser }: {onFetchUser: Function}) => {
       </Snackbar>
     </Root>
   );
-};
-
-Home.propTypes = {
-  onFetchUser: PropTypes.func.isRequired,
 };
 
 export default Home;

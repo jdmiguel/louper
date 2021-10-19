@@ -1,3 +1,4 @@
+// eslint-disable-next-line react/display-name
 export default () => (
   <svg
     version="1.1"

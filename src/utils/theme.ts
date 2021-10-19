@@ -16,8 +16,6 @@ declare module '@mui/material/styles' {
   interface PaletteOptions {
     neutral?: PaletteColorOptions;
   }
-
-  interface DefaultTheme extends Theme {}
 }
 
 export const theme = createTheme({

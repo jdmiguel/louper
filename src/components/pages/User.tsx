@@ -53,7 +53,7 @@ const ContentUser = styled('main')({
   },
 });
 
-const User = ({ data, onBackFinder }: {data: any, onBackFinder: Function}) => {
+const User = ({ data, onBackFinder }: {data: any, onBackFinder: () => void}) => {
   const [activeSection, setActiveUserSection] = useState(0);
   const [repos, setRepos] = useState([]);
   const [following, setFollowing] = useState([]);

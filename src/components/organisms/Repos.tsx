@@ -16,7 +16,7 @@ import {
   Repo, Title, RepoIcon, Topics, Topic, StyledLink, GithubIconWrapper, EmptyMsg
 } from './styles'
 
-type Props = {total: number, user: any, onFetchRepos: Function, repos: any[]}
+type Props = {total: number, user: any, onFetchRepos: (repo: any) => void, repos: any[]}
 
 const Repos = ({ total, user, onFetchRepos, repos: reposData }: Props) => {
   const [isLoading, setIsLoading] = useState(false);

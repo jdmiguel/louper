@@ -1,5 +1,4 @@
 import { useState } from 'react';
-import PropTypes from 'prop-types';
 
 /* material-ui */
 import { styled } from '@mui/material/styles';
@@ -37,7 +36,7 @@ const StyledIconButton = styled(IconButton)(({ theme }) => ({
   },
 }));
 
-const Finder = ({ isLoading, onFetchUser }) => {
+const Finder = ({ isLoading, onFetchUser }: {isLoading:boolean, onFetchUser:(name:string) => void}) => {
   const [inputValue, setInputValue] = useState('');
   const [isValidating, setIsValidating] = useState(false);
 
@@ -105,10 +104,6 @@ const Finder = ({ isLoading, onFetchUser }) => {
       </StyledIconButton>
     </FormControl>
   );
-};
-
-Finder.propTypes = {
-  onFetchUser: PropTypes.func.isRequired,
 };
 
 export default Finder;

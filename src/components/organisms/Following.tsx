@@ -20,7 +20,7 @@ import {
   Title,  EmptyMsg
 } from './styles'
 
-type Props = {total: number, user: any, onFetchFollowing: Function, following: any[]}
+type Props = {total: number, user: any, onFetchFollowing: (following: any) => void, following: any[]}
 
 const Following = ({
   total,
@@ -72,7 +72,7 @@ const Following = ({
     <>
       {
         following.map((nextFollowing: any) => (
-          <UserCard>
+          <UserCard key={nextFollowing.login}> 
             <img alt="user following avatar" src={nextFollowing.avatar_url} />
             <UserCardContent>
               <Title>
