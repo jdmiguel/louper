@@ -1,8 +1,7 @@
 import { useState } from 'react';
 
 /* material-ui */
-import { styled } from '@mui/styles';
-import { Theme } from '@mui/material/styles';
+import { styled } from '@mui/material/styles';
 import CircularProgress from '@mui/material/CircularProgress';
 import FormControl from '@mui/material/FormControl';
 import TextField from '@mui/material/TextField';
@@ -21,7 +20,7 @@ const InputWrapper = styled('div')({
   },
 });
 
-const StyledIconButton = styled(IconButton)(({ theme }: { theme: Theme }) => ({
+const StyledIconButton = styled(IconButton)(({ theme }) => ({
   backgroundColor: theme.palette.primary.main,
   color: theme.palette.primary.contrastText,
   border: 0,

@@ -1,8 +1,7 @@
 import { useState } from 'react';
 
 /* material-ui */
-import { styled } from '@mui/styles';
-import { Theme } from '@mui/material/styles';
+import { styled } from '@mui/material/styles';
 import Tabs from '@mui/material/Tabs';
 import Tab from '@mui/material/Tab';
 import ReposIcon from '@mui/icons-material/Folder';
@@ -15,7 +14,7 @@ const Root = styled('header')({
   top: 0,
 });
 
-const StyledTabs = styled(Tabs)(({ theme }: { theme: Theme }) => ({
+const StyledTabs = styled(Tabs)(({ theme }) => ({
   backgroundColor: theme.palette.background.default,
   borderBottom: `1px solid ${theme.palette.secondary.light}`,
 
@@ -31,7 +30,7 @@ const StyledTabs = styled(Tabs)(({ theme }: { theme: Theme }) => ({
   },
 }));
 
-const StyledTab = styled(Tab)(({ theme }: { theme: Theme }) => ({
+const StyledTab = styled(Tab)(({ theme }) => ({
   alignItems: 'center',
   display: 'flex',
   justifyContent: 'center',

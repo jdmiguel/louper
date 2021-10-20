@@ -1,8 +1,7 @@
 /* material-ui */
-import { styled } from '@mui/styles';
-import { Theme } from '@mui/material/styles';
+import { styled } from '@mui/material/styles';
 
-const Root = styled('div')(({ theme }: { theme: Theme }) => ({
+const Root = styled('div')(({ theme }) => ({
   flexDirection: 'column',
   border: `1px solid ${theme.palette.secondary.light}`,
   borderRadius: 4,
@@ -11,7 +10,7 @@ const Root = styled('div')(({ theme }: { theme: Theme }) => ({
   padding: 20,
 }));
 
-const Shimmer = styled('div')(({ theme }: { theme: Theme }) => ({
+const Shimmer = styled('div')(({ theme }) => ({
   animation: `${theme.animation.shimmer} 2000ms linear infinite`,
   backgroundSize: '1200px 100%',
   backgroundColor: theme.palette.background.default,
@@ -27,14 +26,14 @@ const RepoContent = styled('div')({
   marginBottom: 8,
 });
 
-const RepoLine = styled('span')(({ theme }: { theme: Theme }) => ({
+const RepoLine = styled('span')(({ theme }) => ({
   backgroundColor: theme.palette.background.default,
   height: 14,
   marginBottom: 12,
   width: '100%',
 }));
 
-const RepoDivider = styled('span')(({ theme }: { theme: Theme }) => ({
+const RepoDivider = styled('span')(({ theme }) => ({
   backgroundColor: theme.palette.background.default,
   height: 30,
   marginBottom: 2,
@@ -47,7 +46,7 @@ const PlaceholderUserContent = styled('div')({
   gridTemplateRows: '34px 34px',
 });
 
-const PlaceholderUserVline = styled('span')(({ theme }: { theme: Theme }) => ({
+const PlaceholderUserVline = styled('span')(({ theme }) => ({
   backgroundColor: theme.palette.background.default,
   gridColumn: '1/2',
   gridRow: '1/4',
@@ -56,7 +55,7 @@ const PlaceholderUserVline = styled('span')(({ theme }: { theme: Theme }) => ({
   width: 16,
 }));
 
-const UserHline = styled('span')(({ theme }: { theme: Theme }) => ({
+const UserHline = styled('span')(({ theme }) => ({
   backgroundColor: theme.palette.background.default,
   gridColumn: '2/5',
   height: 16,

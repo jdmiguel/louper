@@ -1,5 +1,5 @@
 /* material-ui */
-import { styled } from '@mui/styles';
+import { styled } from '@mui/material/styles';
 import Typography from '@mui/material/Typography';
 
 /* atoms */

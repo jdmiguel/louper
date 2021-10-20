@@ -1,8 +1,7 @@
 /* styles */
-import { styled } from '@mui/styles';
-import { Theme } from '@mui/material/styles';
+import { styled } from '@mui/material/styles';
 
-const GithubCornerRoot = styled('a')(({ theme }: { theme: Theme }) => ({
+const GithubCornerRoot = styled('a')(({ theme }) => ({
   '& svg': {
     fill: theme.palette.primary.main,
     color: theme.palette.background.default,
