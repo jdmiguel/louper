@@ -2,22 +2,17 @@
 import Typography from '@mui/material/Typography';
 
 /* atoms */
-import GithubIcon from '../atoms/GithubIcon';
-
-/* utils */
-import { navigateToUrl } from '../../utils';
+import Link from '../atoms/Link';
 
 /* styles */
 import {
-  GithubIconWrapper,
-  StyledLink,
   ProfileRoot,
   ProfileContent,
   ProfileContentInfo,
   ProfileContentActions,
+  ProfileContentAction,
   ProfileInfoTag,
   ProfileIcon,
-  ProfileWebIcon,
 } from './styles';
 
 const buildCreationDate = (date: string) => {
@@ -87,38 +82,36 @@ const Profile = ({
         )}
       </ProfileContentInfo>
       <ProfileContentActions>
-        <StyledLink
-          onClick={() => navigateToUrl(htmlUrl)}
-          target="_self"
-          rel="noopener noreferrer"
-          aria-label={`View ${name} profile on GitHub`}
-        >
-          <GithubIconWrapper>
-            <GithubIcon />
-          </GithubIconWrapper>
-          Visit Profile
-        </StyledLink>
+        <ProfileContentAction>
+          <Link
+            url={htmlUrl}
+            ariaLabel={`View ${name} profile on GitHub`}
+            content="VISIT PROFILE"
+            withIcon
+            iconType="person"
+          />
+        </ProfileContentAction>
         {email && (
-          <StyledLink
-            onClick={() => navigateToUrl(`mailto:${email}`)}
-            target="_self"
-            rel="noopener noreferrer"
-            aria-label={`Send email to ${login}`}
-          >
-            <ProfileIcon>email</ProfileIcon>
-            Send email
-          </StyledLink>
+          <ProfileContentAction>
+            <Link
+              url={`mailto:${email}`}
+              ariaLabel={`Send email to ${login}`}
+              content="SEND EMAIL"
+              withIcon
+              iconType="mail_outline"
+            />
+          </ProfileContentAction>
         )}
         {blog && (
-          <StyledLink
-            onClick={() => navigateToUrl(blog)}
-            target="_self"
-            rel="noopener noreferrer"
-            aria-label={`View portfolio of ${name}`}
-          >
-            <ProfileWebIcon />
-            Visit portfolio
-          </StyledLink>
+          <ProfileContentAction>
+            <Link
+              url={blog}
+              ariaLabel={`View portfolio of ${name}`}
+              content="VISIT PORTFOLIO"
+              withIcon
+              iconType="web_icon"
+            />
+          </ProfileContentAction>
         )}
       </ProfileContentActions>
     </ProfileContent>

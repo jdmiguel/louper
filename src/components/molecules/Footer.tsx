@@ -1,22 +1,22 @@
 /* material-ui */
 import Typography from '@mui/material/Typography';
 
+/* atoms */
+import Link from '../atoms/Link';
+
 /* styles */
-import { FooterRoot, FooterLink } from './styles';
+import { FooterRoot } from './styles';
 
 const Footer = () => (
   <FooterRoot>
-    <Typography variant="body1">
+    <Typography variant="body1" sx={{ marginRight: 0.7 }}>
       COPYRIGHT @2021 | Created by{' '}
-      <FooterLink
-        href="https://jdmiguel.netlify.app/"
-        target="_self"
-        rel="noopener noreferrer"
-        aria-label="View profile of jdmiguel on GitHub"
-      >
-        jdmiguel
-      </FooterLink>
     </Typography>
+    <Link
+      url="https://jdmiguel.netlify.app/"
+      ariaLabel="View profile of jdmiguel on GitHub"
+      content="jdmiguel"
+    />
   </FooterRoot>
 );
 

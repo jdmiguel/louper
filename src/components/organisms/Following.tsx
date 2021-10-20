@@ -5,25 +5,14 @@ import { v4 as uuidv4 } from 'uuid';
 import Typography from '@mui/material/Typography';
 
 /* atoms */
-import GithubIcon from '../atoms/GithubIcon';
+import Link from '../atoms/Link';
 import Placeholder from '../atoms/Placeholder';
 
 /* services */
 import { getFollowings } from '../../services/github';
 
-/* utils */
-import { navigateToUrl } from '../../utils';
-
 /* styles */
-import {
-  GithubIconWrapper,
-  StyledLink,
-  CardTitle,
-  CardEmptyMsg,
-  UserCard,
-  UserCardContent,
-  UserFollowingIcon,
-} from './styles';
+import { CardTitle, CardEmptyMsg, UserCard, UserCardContent, UserFollowingIcon } from './styles';
 
 type Props = {
   total: number;
@@ -85,17 +74,13 @@ const Following = ({ total, following: followingData, user, onFetchFollowing }: 
               <UserFollowingIcon />
               <Typography variant="h5">{nextFollowing.login}</Typography>
             </CardTitle>
-            <StyledLink
-              onClick={() => navigateToUrl(nextFollowing.html_url)}
-              target="_self"
-              rel="noopener noreferrer"
-              aria-label={`View ${nextFollowing.login} profile on GitHub`}
-            >
-              <GithubIconWrapper>
-                <GithubIcon />
-              </GithubIconWrapper>
-              Visit profile
-            </StyledLink>
+            <Link
+              url={nextFollowing.html_url}
+              ariaLabel={`View ${nextFollowing.login} profile on GitHub`}
+              content="VISIT PROFILE"
+              withIcon
+              iconType="person"
+            />
           </UserCardContent>
         </UserCard>
       ))}

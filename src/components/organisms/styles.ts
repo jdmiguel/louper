@@ -1,40 +1,9 @@
 /* material-ui */
 import { styled } from '@mui/material/styles';
-import Link from '@mui/material/Link';
 import Icon from '@mui/material/Icon';
-import WebIcon from '@mui/icons-material/Web';
 import FolderIcon from '@mui/icons-material/Folder';
 import FollowingIcon from '@mui/icons-material/Visibility';
 import FollowerIcon from '@mui/icons-material/Favorite';
-
-const GithubIconWrapper = styled('div')(({ theme }) => ({
-  marginRight: 6,
-  '& svg': {
-    width: 22,
-    '& path': {
-      fill: theme.palette.primary.main,
-    },
-  },
-}));
-
-const StyledLink = styled(Link)(({ theme }) => ({
-  borderTop: `1px solid ${theme.palette.secondary.light}`,
-  cursor: 'pointer',
-  alignItems: 'center',
-  display: 'flex',
-  fontSize: '0.9rem',
-  fontWeight: 700,
-  paddingTop: 10,
-  marginTop: 10,
-  textDecoration: 'none',
-  textTransform: 'uppercase',
-  transition: 'color ease-out 250ms',
-  '& path': { transition: 'fill ease-out 250ms' },
-  '&:hover': {
-    color: theme.palette.primary.light,
-    '& path': { fill: theme.palette.primary.light },
-  },
-}));
 
 const ProfileRoot = styled('div')({
   display: 'flex',
@@ -72,6 +41,10 @@ const ProfileContentActions = styled('div')({
   marginTop: 20,
 });
 
+const ProfileContentAction = styled('div')({
+  marginBottom: 5,
+});
+
 const ProfileInfoTag = styled('div')(({ theme }) => ({
   alignItems: 'center',
   color: theme.palette.secondary.main,
@@ -86,13 +59,6 @@ const ProfileIcon = styled(Icon)(({ theme }) => ({
   color: theme.palette.secondary.main,
   fontSize: 22,
   marginRight: 3,
-}));
-
-const ProfileWebIcon = styled(WebIcon)(({ theme }) => ({
-  color: theme.palette.primary.main,
-  fontSize: '1.3rem',
-  marginRight: 6,
-  marginBottom: 2,
 }));
 
 const ProfileMobileRoot = styled('div')({
@@ -112,6 +78,7 @@ const ProfileMobileRoot = styled('div')({
 const CardTitle = styled('div')(({ theme }) => ({
   alignItems: 'center',
   display: 'flex',
+  marginBottom: 4,
   '& path': { fill: theme.palette.secondary.main },
 }));
 
@@ -153,6 +120,12 @@ const RepoTopic = styled('div')(({ theme }) => ({
   marginRight: 5,
 }));
 
+const RepoAction = styled('div')(({ theme }) => ({
+  borderTop: `1px solid ${theme.palette.secondary.light}`,
+  marginTop: 10,
+  paddingTop: 10,
+}));
+
 const UserCard = styled('div')(({ theme }) => ({
   border: `1px solid ${theme.palette.secondary.light}`,
   borderRadius: 4,
@@ -187,15 +160,13 @@ const UserFollowerIcon = styled(FollowerIcon)(({ theme }) => ({
 }));
 
 export {
-  GithubIconWrapper,
-  StyledLink,
   ProfileRoot,
   ProfileContent,
   ProfileContentInfo,
   ProfileContentActions,
+  ProfileContentAction,
   ProfileInfoTag,
   ProfileIcon,
-  ProfileWebIcon,
   ProfileMobileRoot,
   CardTitle,
   CardEmptyMsg,
@@ -203,6 +174,7 @@ export {
   RepoIcon,
   RepoTopics,
   RepoTopic,
+  RepoAction,
   UserCard,
   UserCardContent,
   UserFollowingIcon,

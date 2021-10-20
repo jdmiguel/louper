@@ -5,7 +5,7 @@ import { v4 as uuidv4 } from 'uuid';
 import Typography from '@mui/material/Typography';
 
 /* atoms */
-import GithubIcon from '../atoms/GithubIcon';
+import Link from '../atoms/Link';
 import Placeholder from '../atoms/Placeholder';
 
 /* services */
@@ -13,14 +13,13 @@ import { getRepos } from '../../services/github';
 
 /* styles */
 import {
-  GithubIconWrapper,
-  StyledLink,
   CardTitle,
   CardEmptyMsg,
   RepoCard,
   RepoIcon,
   RepoTopics,
   RepoTopic,
+  RepoAction,
 } from './styles';
 
 type Props = { total: number; user: any; onFetchRepos: (repo: any) => void; repos: any[] };
@@ -101,17 +100,15 @@ const Repos = ({ total, user, onFetchRepos, repos: reposData }: Props) => {
               )}
             </RepoTopics>
           </div>
-          <StyledLink
-            href={repo.html_url}
-            target="_self"
-            rel="noopener noreferrer"
-            aria-label={`View ${repo.name} repository on GitHub`}
-          >
-            <GithubIconWrapper>
-              <GithubIcon />
-            </GithubIconWrapper>
-            Visit repo
-          </StyledLink>
+          <RepoAction>
+            <Link
+              url={repo.html_url}
+              ariaLabel={`View ${repo.name} repository on GitHub`}
+              content="VISIT REPO"
+              withIcon
+              iconType="folder_open"
+            />
+          </RepoAction>
         </RepoCard>
       ))}
     </>

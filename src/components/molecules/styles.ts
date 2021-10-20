@@ -4,7 +4,6 @@ import { Theme } from '@mui/material/styles';
 import Tabs from '@mui/material/Tabs';
 import Tab from '@mui/material/Tab';
 import IconButton from '@mui/material/IconButton';
-import Link from '@mui/material/Link';
 
 const MenuRoot = styled('header')({
   position: 'sticky',
@@ -95,14 +94,4 @@ const FooterRoot = styled('footer')({
   padding: '0 16px 24px',
 });
 
-const FooterLink = styled(Link)(({ theme }: { theme: Theme }) => ({
-  fontWeight: 700,
-  textDecoration: 'none',
-  color: theme.palette.primary.dark,
-  transition: 'color ease-out 250ms',
-  '&:hover': {
-    color: theme.palette.primary.light,
-  },
-}));
-
-export { MenuRoot, MenuTabs, MenuTab, FinderInput, FinderIconButton, FooterRoot, FooterLink };
+export { MenuRoot, MenuTabs, MenuTab, FinderInput, FinderIconButton, FooterRoot };
