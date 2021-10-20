@@ -1,15 +1,41 @@
 import { useState } from 'react';
 
 /* material-ui */
+import { styled } from '@mui/styles';
+import { Theme } from '@mui/material/styles';
 import CircularProgress from '@mui/material/CircularProgress';
 import FormControl from '@mui/material/FormControl';
 import TextField from '@mui/material/TextField';
 import InputAdornment from '@mui/material/InputAdornment';
 import UserIcon from '@mui/icons-material/Person';
 import Icon from '@mui/material/Icon';
+import IconButton from '@mui/material/IconButton';
 
-/* styles */
-import { FinderInput, FinderIconButton } from './styles';
+const InputWrapper = styled('div')({
+  '& > div > div': {
+    borderTopRightRadius: 0,
+    borderBottomRightRadius: 0,
+  },
+  '& svg': {
+    width: 22,
+  },
+});
+
+const StyledIconButton = styled(IconButton)(({ theme }: { theme: Theme }) => ({
+  backgroundColor: theme.palette.primary.main,
+  color: theme.palette.primary.contrastText,
+  border: 0,
+  borderTopLeftRadius: 0,
+  borderBottomLeftRadius: 0,
+  borderTopRightRadius: 4,
+  borderBottomRightRadius: 4,
+  '& > span > span': {
+    fontSize: '1.03rem',
+  },
+  '&:hover': {
+    backgroundColor: theme.palette.primary.light,
+  },
+}));
 
 const Finder = ({
   isLoading,
@@ -40,7 +66,7 @@ const Finder = ({
         justifyContent: 'center',
       }}
     >
-      <FinderInput>
+      <InputWrapper>
         <TextField
           placeholder="Type user name..."
           onFocus={() => {
@@ -68,8 +94,8 @@ const Finder = ({
             ),
           }}
         />
-      </FinderInput>
-      <FinderIconButton
+      </InputWrapper>
+      <StyledIconButton
         onClick={() => {
           setIsValidating(true);
           if (inputValue !== '') {
@@ -78,7 +104,7 @@ const Finder = ({
         }}
       >
         <Icon sx={{ fontSize: '1.5rem' }}>search</Icon>
-      </FinderIconButton>
+      </StyledIconButton>
     </FormControl>
   );
 };

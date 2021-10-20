@@ -1,5 +1,26 @@
 /* styles */
-import { GithubCornerRoot } from './styles';
+import { styled } from '@mui/styles';
+import { Theme } from '@mui/material/styles';
+
+const GithubCornerRoot = styled('a')(({ theme }: { theme: Theme }) => ({
+  '& svg': {
+    fill: theme.palette.primary.main,
+    color: theme.palette.background.default,
+    transition: 'fill ease-out 250ms',
+  },
+  '&:hover': {
+    '& svg': {
+      fill: theme.palette.primary.light,
+    },
+    '& path:nth-of-type(2)': {
+      animation: `${theme.animation.greet} 560ms ease-in-out`,
+    },
+  },
+  '& path:not(:first-of-type)': {
+    fill: theme.palette.background.default,
+    transformOrigin: '130px 106px',
+  },
+}));
 
 const GithubCorner = () => (
   <GithubCornerRoot

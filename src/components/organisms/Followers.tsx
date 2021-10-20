@@ -58,7 +58,7 @@ const Followers = ({ total, followers: followersData, user, onFetchFollowers }: 
     return (
       <>
         {placeholderList.map(() => (
-          <Placeholder key={uuidv4()} hasUserStyle />
+          <Placeholder key={uuidv4()} withUserTheme />
         ))}
       </>
     );

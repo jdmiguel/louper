@@ -1,14 +1,19 @@
 /* material-ui */
+import { styled } from '@mui/styles';
 import Typography from '@mui/material/Typography';
 
 /* atoms */
 import Link from '../atoms/Link';
 
-/* styles */
-import { FooterRoot } from './styles';
+const Root = styled('footer')({
+  display: 'flex',
+  justifyContent: 'center',
+  alignItems: 'center',
+  padding: '0 16px 24px',
+});
 
 const Footer = () => (
-  <FooterRoot>
+  <Root>
     <Typography variant="body1" sx={{ marginRight: 0.7 }}>
       COPYRIGHT @2021 | Created by{' '}
     </Typography>
@@ -17,7 +22,7 @@ const Footer = () => (
       ariaLabel="View profile of jdmiguel on GitHub"
       content="jdmiguel"
     />
-  </FooterRoot>
+  </Root>
 );
 
 export default Footer;

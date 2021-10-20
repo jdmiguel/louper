@@ -13,6 +13,10 @@ declare module '@mui/material/styles' {
     overrides: any;
   }
 
+  interface TypographyVariants {
+    body3: any;
+  }
+
   interface PaletteOptions {
     neutral?: PaletteColorOptions;
   }
@@ -97,7 +101,7 @@ export const theme = createTheme({
     h6: {
       color: '#757d81',
       fontSize: '0.8rem',
-      fontWeight: 500,
+      fontWeight: 700,
       textTransform: 'uppercase',
     },
     button: {
@@ -106,17 +110,18 @@ export const theme = createTheme({
     body1: {
       color: '#353D40',
       fontSize: '0.9rem',
+      fontWeight: 300,
       lineHeight: '1.1rem',
     },
     body2: {
-      color: '#E1D7EC',
-      fontSize: '0.8rem',
-      lineHeight: '1rem',
+      color: '#6b77a1',
+      fontSize: '0.9rem',
+      fontWeight: 700,
     },
-    subtitle2: {
-      color: '#353D40',
-      fontSize: '0.8rem',
-      fontWeight: 500,
+    overline: {
+      color: '#E1D7EC',
+      fontSize: '0.7rem',
+      lineHeight: '1rem',
       textTransform: 'uppercase',
     },
   },

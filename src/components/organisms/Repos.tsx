@@ -90,12 +90,12 @@ const Repos = ({ total, user, onFetchRepos, repos: reposData }: Props) => {
               {repo.topics?.length > 0 ? (
                 repo.topics.map((topic: string) => (
                   <RepoTopic key={topic}>
-                    <Typography variant="body2">{topic}</Typography>
+                    <Typography variant="overline">{topic}</Typography>
                   </RepoTopic>
                 ))
               ) : (
                 <RepoTopic>
-                  <Typography variant="body2">NO TOPICS</Typography>
+                  <Typography variant="overline">NO TOPICS</Typography>
                 </RepoTopic>
               )}
             </RepoTopics>

@@ -48,7 +48,7 @@ const Profile = ({
       <Typography variant="h4" sx={{ marginBottom: 2 }}>
         {login}
       </Typography>
-      <Typography variant="h5">{bio}</Typography>
+      <Typography variant="body2">{bio}</Typography>
       <ProfileContentInfo>
         <ProfileInfoTag>
           <ProfileIcon>folder</ProfileIcon>
