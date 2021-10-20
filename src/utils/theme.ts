@@ -2,14 +2,19 @@
 import { keyframes } from '@emotion/react';
 import { createTheme, PaletteColorOptions } from '@mui/material/styles';
 
+type Animation = {
+  greet: any;
+  shimmer: any;
+};
+
 declare module '@mui/material/styles' {
   interface Theme {
-    animation: any;
+    animation: Animation;
     overrides: any;
   }
 
   interface ThemeOptions {
-    animation: any;
+    animation: Animation;
     overrides: any;
   }
 

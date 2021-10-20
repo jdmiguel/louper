@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { SyntheticEvent, useState } from 'react';
 
 /* material-ui */
 import { styled } from '@mui/material/styles';
@@ -65,16 +65,20 @@ const StyledTab = styled(Tab)(({ theme }) => ({
   },
 }));
 
-const Menu = ({ onClick }: { onClick: any }) => {
+type Props = {
+  onClick: (selectedSection: number) => void;
+};
+
+const Menu = ({ onClick }: Props) => {
   const [activeMenuItem, setActiveMenuItem] = useState(0);
 
   return (
     <Root>
       <StyledTabs
         value={activeMenuItem}
-        onChange={(_event: any, tabValue) => {
-          onClick(tabValue);
-          setActiveMenuItem(tabValue);
+        onChange={(_event: SyntheticEvent, selectedSection) => {
+          onClick(selectedSection);
+          setActiveMenuItem(selectedSection);
         }}
         centered
       >

@@ -2,6 +2,9 @@
 import { styled } from '@mui/material/styles';
 import Typography from '@mui/material/Typography';
 
+/* types */
+import { User } from '../../utils/types';
+
 /* styles */
 import { ProfileMobileRoot } from './styles';
 
@@ -11,9 +14,13 @@ const Content = styled('div')({
   justifyContent: 'center',
 });
 
-const ProfileMobile = ({ data: { avatarUrl, name, login } }: any) => (
+type Props = {
+  user: User;
+};
+
+const ProfileMobile = ({ user: { avatar_url, name, login } }: Props) => (
   <ProfileMobileRoot>
-    <img alt="user avatar" src={avatarUrl} />
+    <img alt="user avatar" src={avatar_url} />
     <Content>
       <Typography variant="h3" sx={{ marginBottom: 0.2 }}>
         {name}

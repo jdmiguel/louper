@@ -25,13 +25,13 @@ const StyledIcon = styled(Icon)(({ theme }) => ({
   marginRight: 5,
 }));
 
-type Props = {
+type LinkProps = {
   url: string;
   ariaLabel: string;
   content: string;
-  withIcon?: boolean;
-  iconType?: string;
 };
+type IconProps = { withIcon?: false; iconType?: never } | { withIcon: true; iconType?: string };
+type Props = LinkProps & IconProps;
 
 const Link = ({ url, ariaLabel, content, withIcon, iconType }: Props) => (
   <StyledLink href={url} rel="noopener noreferrer" aria-label={ariaLabel}>

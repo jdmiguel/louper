@@ -11,17 +11,25 @@ import Placeholder from '../atoms/Placeholder';
 /* services */
 import { getFollowings } from '../../services/github';
 
+/* types */
+import { Following } from '../../utils/types';
+
 /* styles */
 import { CardTitle, CardEmptyMsg, UserCard, UserCardContent, UserFollowingIcon } from './styles';
 
 type Props = {
   total: number;
-  user: any;
-  onFetchFollowing: (following: any) => void;
-  following: any[];
+  userName: string;
+  following: Following[];
+  onFetchFollowing: (following: Following[]) => void;
 };
 
-const Following = ({ total, following: followingData, user, onFetchFollowing }: Props) => {
+const FollowingSection = ({
+  total,
+  userName,
+  following: followingData,
+  onFetchFollowing,
+}: Props) => {
   const [isLoading, setIsLoading] = useState(false);
   const [following, setFollowing] = useState(followingData);
 
@@ -32,7 +40,7 @@ const Following = ({ total, following: followingData, user, onFetchFollowing }: 
 
     setIsLoading(true);
 
-    getFollowings(user)
+    getFollowings(userName)
       .then((fetchedFollowing) => {
         setIsLoading(false);
         setFollowing(fetchedFollowing);
@@ -66,7 +74,7 @@ const Following = ({ total, following: followingData, user, onFetchFollowing }: 
 
   return (
     <>
-      {following.map((nextFollowing: any) => (
+      {following.map((nextFollowing: Following) => (
         <UserCard key={nextFollowing.login}>
           <img alt="user following avatar" src={nextFollowing.avatar_url} />
           <UserCardContent>
@@ -88,4 +96,4 @@ const Following = ({ total, following: followingData, user, onFetchFollowing }: 
   );
 };
 
-export default Following;
+export default FollowingSection;

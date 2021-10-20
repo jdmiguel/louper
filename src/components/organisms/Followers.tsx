@@ -11,17 +11,25 @@ import Placeholder from '../atoms/Placeholder';
 /* services */
 import { getFollowers } from '../../services/github';
 
+/* types */
+import { Follower } from '../../utils/types';
+
 /* styles */
 import { CardTitle, CardEmptyMsg, UserCard, UserCardContent, UserFollowerIcon } from './styles';
 
 type Props = {
   total: number;
-  user: any;
-  onFetchFollowers: (follower: any) => void;
-  followers: any[];
+  userName: string;
+  onFetchFollowers: (followers: Follower[]) => void;
+  followers: Follower[];
 };
 
-const Followers = ({ total, followers: followersData, user, onFetchFollowers }: Props) => {
+const FollowerSection = ({
+  total,
+  userName,
+  followers: followersData,
+  onFetchFollowers,
+}: Props) => {
   const [isLoading, setIsLoading] = useState(false);
   const [followers, setFollowers] = useState(followersData);
 
@@ -32,7 +40,7 @@ const Followers = ({ total, followers: followersData, user, onFetchFollowers }: 
 
     setIsLoading(true);
 
-    getFollowers(user)
+    getFollowers(userName)
       .then((followers) => {
         setIsLoading(false);
         setFollowers(followers);
@@ -88,4 +96,4 @@ const Followers = ({ total, followers: followersData, user, onFetchFollowers }: 
   );
 };
 
-export default Followers;
+export default FollowerSection;

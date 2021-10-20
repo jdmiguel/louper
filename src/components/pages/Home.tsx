@@ -16,8 +16,8 @@ import Footer from '../molecules/Footer';
 /* services */
 import { getUserData } from '../../services/github';
 
-/* utils */
-import { errorLiterals } from '../../utils';
+/* types */
+import { User } from '../../utils/types';
 
 /* styles */
 import {
@@ -31,24 +31,29 @@ import {
 
 interface AlertProps {
   children?: ReactNode;
-  onClose: any;
+  onClose: () => void;
   severity: AlertColor;
 }
 
-const { maximumRequest, unavailableUser } = errorLiterals;
+interface ResponseError extends Error {
+  code: number;
+}
+
+enum ErrorMsg {
+  MAX = 'You have excedeed the maximum allowed request. Please, wait for a while',
+  NO_USER = 'Please, choose an available user',
+}
 
 const Alert = forwardRef<HTMLDivElement, AlertProps>((props, ref) => (
-  <HomeAlert
-    elevation={4}
-    ref={ref as React.RefObject<HTMLDivElement>}
-    variant="filled"
-    {...props}
-  />
+  <HomeAlert elevation={4} ref={ref} variant="filled" {...props} />
 ));
-
 Alert.displayName = 'Alert';
 
-const Home = ({ onFetchUser }: { onFetchUser: (userData: any) => void }) => {
+type Props = {
+  onFetchUser: (user: User) => void;
+};
+
+const HomePage = ({ onFetchUser }: Props) => {
   const [isLoading, setIsLoading] = useState(false);
   const [errorMsg, setErrorMsg] = useState('');
   const [isErrorAlertOpen, setIsErrorAlertOpen] = useState(false);
@@ -57,34 +62,33 @@ const Home = ({ onFetchUser }: { onFetchUser: (userData: any) => void }) => {
     setIsLoading(true);
 
     getUserData(userName)
-      .then((user: any) => {
+      .then((user: User) => {
         onFetchUser({
           login: user.login,
-          avatarUrl: user.avatar_url,
-          createdAt: user.created_at,
+          avatar_url: user.avatar_url,
+          created_at: user.created_at,
           name: user.name,
           bio: user.bio,
           email: user.email,
           location: user.location,
-          url: user.url,
           blog: user.blog,
           company: user.company,
-          htmlUrl: user.html_url,
-          repos: user.public_repos,
+          html_url: user.html_url,
+          public_repos: user.public_repos,
           followers: user.followers,
           following: user.following,
         });
       })
-      .catch((error: any) => {
+      .catch((error: ResponseError) => {
         let errorMsg = '';
 
         switch (error.code) {
           case 403:
-            errorMsg = maximumRequest;
+            errorMsg = ErrorMsg.MAX;
             break;
           case 404:
           default:
-            errorMsg = unavailableUser;
+            errorMsg = ErrorMsg.NO_USER;
             break;
         }
 
@@ -96,13 +100,7 @@ const Home = ({ onFetchUser }: { onFetchUser: (userData: any) => void }) => {
       });
   };
 
-  const onClose = (_event: any, reason: string) => {
-    if (reason === 'clickaway') {
-      return;
-    }
-
-    setIsErrorAlertOpen(false);
-  };
+  const onClose = () => setIsErrorAlertOpen(false);
 
   return (
     <HomeRoot>
@@ -139,4 +137,4 @@ const Home = ({ onFetchUser }: { onFetchUser: (userData: any) => void }) => {
   );
 };
 
-export default Home;
+export default HomePage;

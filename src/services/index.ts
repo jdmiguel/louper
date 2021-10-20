@@ -1,5 +1,4 @@
-import axios from 'axios';
-
+import axios, { AxiosResponse } from 'axios';
 /**
  * get response status and set it as error.code
  * get response data and set it as error.message if response.data exits
@@ -8,7 +7,7 @@ import axios from 'axios';
  * @param {object} response
  * @param {error} error
  */
-const handleError = ({ response }: { response: any }) => {
+const handleError = ({ response }: { response: AxiosResponse }) => {
   const error = {
     code: response.status,
     message: response.data?.message || null,
@@ -23,7 +22,7 @@ const handleError = ({ response }: { response: any }) => {
  * @param {object} response
  * @returns {object} response - object
  */
-const checkStatus = (response: any) => {
+const checkStatus = (response: AxiosResponse) => {
   if (response.status >= 200 && response.status < 300) {
     return response;
   }
@@ -39,7 +38,7 @@ const checkStatus = (response: any) => {
  * @param {object} response
  * @returns {object} data - object
  */
-const normalizeResponse = (response: any) => response.data;
+const normalizeResponse = (response: AxiosResponse) => response.data;
 
 /**
  * create asynchronous call passing as parameter url string
@@ -51,12 +50,11 @@ const normalizeResponse = (response: any) => response.data;
  * @returns {promise} axios
  */
 
-export default function request(url: any, options?: any) {
-  return axios({
+export default (url: string, options?: any) =>
+  axios({
     url,
     ...options,
   })
     .then(checkStatus)
     .then(normalizeResponse)
     .catch(handleError);
-}

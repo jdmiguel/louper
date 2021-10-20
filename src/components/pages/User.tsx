@@ -3,31 +3,39 @@ import { useState } from 'react';
 /* organisms */
 import Profile from '../organisms/Profile';
 import ProfileMobile from '../organisms/ProfileMobile';
-import Repos from '../organisms/Repos';
-import Followers from '../organisms/Followers';
-import Following from '../organisms/Following';
+import RepoSection from '../organisms/Repos';
+import FollowerSection from '../organisms/Followers';
+import FollowingSection from '../organisms/Following';
 
 /* molecules */
 import Menu from '../molecules/Menu';
 
+/* types */
+import { User, Repo, Following, Follower } from '../../utils/types';
+
 /* styles */
 import { UserRoot, UserProfile, UserContent, UserSection } from './styles';
 
-const User = ({ data, onBackFinder }: { data: any; onBackFinder: () => void }) => {
+type Props = {
+  user: User;
+  onBackFinder: () => void;
+};
+
+const UserPage = ({ user, onBackFinder }: Props) => {
   const [activeSection, setActiveUserSection] = useState(0);
-  const [repos, setRepos] = useState([]);
-  const [following, setFollowing] = useState([]);
-  const [followers, setFollowers] = useState([]);
+  const [repos, setRepos] = useState<Repo[]>([]);
+  const [following, setFollowing] = useState<Following[]>([]);
+  const [followers, setFollowers] = useState<Follower[]>([]);
 
   return (
     <UserRoot>
       <UserProfile>
-        <Profile data={data} />
+        <Profile user={user} />
       </UserProfile>
       <UserContent>
-        <ProfileMobile data={data} />
+        <ProfileMobile user={user} />
         <Menu
-          onClick={(section: any) => {
+          onClick={(section: number) => {
             setActiveUserSection(section);
             if (section === 3) {
               onBackFinder();
@@ -36,26 +44,26 @@ const User = ({ data, onBackFinder }: { data: any; onBackFinder: () => void }) =
         />
         <UserSection>
           {activeSection === 0 && (
-            <Repos
-              total={data.repos}
-              user={data.login}
-              onFetchRepos={(repos: any) => setRepos(repos)}
+            <RepoSection
+              total={user.public_repos}
+              userName={user.login}
+              onFetchRepos={(repos: Repo[]) => setRepos(repos)}
               repos={repos}
             />
           )}
           {activeSection === 1 && (
-            <Following
-              total={data.following}
-              user={data.login}
-              onFetchFollowing={(following: any) => setFollowing(following)}
+            <FollowingSection
+              total={user.following}
+              userName={user.login}
+              onFetchFollowing={(following: Following[]) => setFollowing(following)}
               following={following}
             />
           )}
           {activeSection === 2 && (
-            <Followers
-              total={data.followers}
-              user={data.login}
-              onFetchFollowers={(followers: any) => setFollowers(followers)}
+            <FollowerSection
+              total={user.followers}
+              userName={user.login}
+              onFetchFollowers={(followers: Follower[]) => setFollowers(followers)}
               followers={followers}
             />
           )}
@@ -65,4 +73,4 @@ const User = ({ data, onBackFinder }: { data: any; onBackFinder: () => void }) =
   );
 };
 
-export default User;
+export default UserPage;

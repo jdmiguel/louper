@@ -22,12 +22,13 @@ const InputWrapper = styled('div')({
 
 const StyledIconButton = styled(IconButton)(({ theme }) => ({
   backgroundColor: theme.palette.primary.main,
-  color: theme.palette.primary.contrastText,
   border: 0,
-  borderTopLeftRadius: 0,
   borderBottomLeftRadius: 0,
-  borderTopRightRadius: 4,
   borderBottomRightRadius: 4,
+  borderTopLeftRadius: 0,
+  borderTopRightRadius: 4,
+  color: theme.palette.primary.contrastText,
+  padding: 7,
   '& > span > span': {
     fontSize: '1.03rem',
   },
@@ -36,17 +37,16 @@ const StyledIconButton = styled(IconButton)(({ theme }) => ({
   },
 }));
 
-const Finder = ({
-  isLoading,
-  onFetchUser,
-}: {
+type Props = {
   isLoading: boolean;
   onFetchUser: (name: string) => void;
-}) => {
+};
+
+const Finder = ({ isLoading, onFetchUser }: Props) => {
   const [inputValue, setInputValue] = useState('');
   const [isValidating, setIsValidating] = useState(false);
 
-  const onKeyUp = ({ keyCode }: { keyCode: any }) => {
+  const onKeyUp = ({ keyCode }: { keyCode: number }) => {
     if (!setInputValue || keyCode !== 13) {
       return;
     }

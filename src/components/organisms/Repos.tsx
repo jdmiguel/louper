@@ -11,6 +11,9 @@ import Placeholder from '../atoms/Placeholder';
 /* services */
 import { getRepos } from '../../services/github';
 
+/* types */
+import { Repo } from '../../utils/types';
+
 /* styles */
 import {
   CardTitle,
@@ -22,9 +25,14 @@ import {
   RepoAction,
 } from './styles';
 
-type Props = { total: number; user: any; onFetchRepos: (repo: any) => void; repos: any[] };
+type Props = {
+  total: number;
+  userName: string;
+  repos: Repo[];
+  onFetchRepos: (repos: Repo[]) => void;
+};
 
-const Repos = ({ total, user, onFetchRepos, repos: reposData }: Props) => {
+const RepoSection = ({ total, userName, repos: reposData, onFetchRepos }: Props) => {
   const [isLoading, setIsLoading] = useState(false);
   const [repos, setRepos] = useState(reposData);
 
@@ -35,13 +43,13 @@ const Repos = ({ total, user, onFetchRepos, repos: reposData }: Props) => {
 
     setIsLoading(true);
 
-    getRepos(user)
-      .then((repos: any) => {
+    getRepos(userName)
+      .then((repos: Repo[]) => {
         setIsLoading(false);
         setRepos(repos);
         onFetchRepos(repos);
       })
-      .catch((error: any) => {
+      .catch((error: Error) => {
         throw error;
       });
   }, []);
@@ -69,8 +77,8 @@ const Repos = ({ total, user, onFetchRepos, repos: reposData }: Props) => {
 
   return (
     <>
-      {repos.map((repo: any) => (
-        <RepoCard data-test="repos-item" key={repo.name}>
+      {repos.map((repo: Repo) => (
+        <RepoCard key={repo.name}>
           <div>
             <CardTitle>
               <RepoIcon />
@@ -115,4 +123,4 @@ const Repos = ({ total, user, onFetchRepos, repos: reposData }: Props) => {
   );
 };
 
-export default Repos;
+export default RepoSection;

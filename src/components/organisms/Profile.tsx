@@ -4,6 +4,9 @@ import Typography from '@mui/material/Typography';
 /* atoms */
 import Link from '../atoms/Link';
 
+/* types */
+import { User } from '../../utils/types';
+
 /* styles */
 import {
   ProfileRoot,
@@ -22,25 +25,29 @@ const buildCreationDate = (date: string) => {
   return formattedDate.slice(0, formattedDate.indexOf(','));
 };
 
+type Props = {
+  user: User;
+};
+
 const Profile = ({
-  data: {
-    avatarUrl,
+  user: {
+    avatar_url,
     name,
     login,
     bio,
-    email,
-    repos,
-    followers,
+    public_repos,
     following,
-    createdAt,
+    followers,
+    created_at,
     location,
-    blog,
     company,
-    htmlUrl,
+    html_url,
+    email,
+    blog,
   },
-}: any) => (
+}: Props) => (
   <ProfileRoot>
-    <img alt="user avatar" src={avatarUrl} />
+    <img alt="user avatar" src={avatar_url} />
     <ProfileContent>
       <Typography variant="h3" sx={{ marginBottom: 0.4 }}>
         {name}
@@ -52,7 +59,7 @@ const Profile = ({
       <ProfileContentInfo>
         <ProfileInfoTag>
           <ProfileIcon>folder</ProfileIcon>
-          {repos}
+          {public_repos}
         </ProfileInfoTag>
         <ProfileInfoTag>
           <ProfileIcon>visibility</ProfileIcon>
@@ -62,10 +69,10 @@ const Profile = ({
           <ProfileIcon>favorite</ProfileIcon>
           {followers}
         </ProfileInfoTag>
-        {createdAt && (
+        {created_at && (
           <ProfileInfoTag>
             <ProfileIcon>event_note</ProfileIcon>
-            {buildCreationDate(createdAt)}
+            {buildCreationDate(created_at)}
           </ProfileInfoTag>
         )}
         {location && (
@@ -84,7 +91,7 @@ const Profile = ({
       <ProfileContentActions>
         <ProfileContentAction>
           <Link
-            url={htmlUrl}
+            url={html_url}
             ariaLabel={`View ${name} profile on GitHub`}
             content="VISIT PROFILE"
             withIcon

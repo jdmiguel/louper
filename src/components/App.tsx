@@ -1,30 +1,21 @@
 import { useState } from 'react';
 
 /* pages */
-import Home from './pages/Home';
-import User from './pages/User';
+import HomePage from './pages/Home';
+import UserPage from './pages/User';
+
+/* types */
+import { User } from '../utils/types';
 
 const App = () => {
-  const [userData, setUserData] = useState(null);
-  const [hasSelectedUser, setHasSelectedUser] = useState(false);
+  const [user, setUser] = useState<User | null>(null);
 
   return (
     <>
-      {hasSelectedUser ? (
-        <User
-          data={userData}
-          onBackFinder={() => {
-            setUserData(null);
-            setHasSelectedUser(false);
-          }}
-        />
+      {user ? (
+        <UserPage user={user} onBackFinder={() => setUser(null)} />
       ) : (
-        <Home
-          onFetchUser={(data: any) => {
-            setUserData(data);
-            setHasSelectedUser(true);
-          }}
-        />
+        <HomePage onFetchUser={(user: User) => setUser(user)} />
       )}
     </>
   );
