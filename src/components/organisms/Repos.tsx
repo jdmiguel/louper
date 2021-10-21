@@ -5,8 +5,9 @@ import { v4 as uuidv4 } from 'uuid';
 import Typography from '@mui/material/Typography';
 
 /* atoms */
-import Link from '../atoms/Link';
 import Placeholder from '../atoms/Placeholder';
+import Label from '../atoms/Label';
+import Link from '../atoms/Link';
 
 /* services */
 import { getRepos } from '../../services/github';
@@ -15,15 +16,7 @@ import { getRepos } from '../../services/github';
 import { Repo } from '../../utils/types';
 
 /* styles */
-import {
-  CardTitle,
-  CardEmptyMsg,
-  RepoCard,
-  RepoIcon,
-  RepoTopics,
-  RepoTopic,
-  RepoAction,
-} from './styles';
+import { CardTitle, CardEmptyMsg, RepoCard, RepoTopics, RepoTopic, RepoAction } from './styles';
 
 type Props = {
   total: number;
@@ -81,8 +74,7 @@ const RepoSection = ({ total, userName, repos: reposData, onFetchRepos }: Props)
         <RepoCard key={repo.name}>
           <div>
             <CardTitle>
-              <RepoIcon />
-              <Typography variant="h5">{repo.name}</Typography>
+              <Label content={repo.name} withIcon iconType="folder" />
             </CardTitle>
             {repo.description ? (
               <Typography variant="body1" sx={{ marginTop: 1 }}>
