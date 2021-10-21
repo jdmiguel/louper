@@ -5,6 +5,7 @@ import { v4 as uuidv4 } from 'uuid';
 import Typography from '@mui/material/Typography';
 
 /* atoms */
+import Label from '../atoms/Label';
 import Link from '../atoms/Link';
 import Placeholder from '../atoms/Placeholder';
 
@@ -15,7 +16,7 @@ import { getFollowers } from '../../services/github';
 import { Follower } from '../../utils/types';
 
 /* styles */
-import { CardTitle, CardEmptyMsg, UserCard, UserCardContent, UserFollowerIcon } from './styles';
+import { CardTitle, CardEmptyMsg, UserCard, UserCardContent } from './styles';
 
 type Props = {
   total: number;
@@ -79,8 +80,7 @@ const FollowerSection = ({
           <img alt="user following avatar" src={follower.avatar_url} />
           <UserCardContent>
             <CardTitle>
-              <UserFollowerIcon />
-              <Typography variant="h5">{follower.login}</Typography>
+              <Label content={follower.login} withIcon iconType="favorite" />
             </CardTitle>
             <Link
               url={follower.html_url}

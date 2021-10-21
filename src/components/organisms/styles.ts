@@ -1,9 +1,6 @@
 /* material-ui */
 import { styled } from '@mui/material/styles';
-import Icon from '@mui/material/Icon';
 import FolderIcon from '@mui/icons-material/Folder';
-import FollowingIcon from '@mui/icons-material/Visibility';
-import FollowerIcon from '@mui/icons-material/Favorite';
 
 const ProfileRoot = styled('div')({
   display: 'flex',
@@ -45,7 +42,7 @@ const ProfileContentAction = styled('div')({
   marginBottom: 5,
 });
 
-const ProfileInfoTag = styled('div')(({ theme }) => ({
+const ProfileLabel = styled('div')(({ theme }) => ({
   alignItems: 'center',
   color: theme.palette.secondary.main,
   display: 'flex',
@@ -53,12 +50,6 @@ const ProfileInfoTag = styled('div')(({ theme }) => ({
   marginRight: 12,
   marginBottom: 6,
   fontSize: '0.9rem',
-}));
-
-const ProfileIcon = styled(Icon)(({ theme }) => ({
-  color: theme.palette.secondary.main,
-  fontSize: 22,
-  marginRight: 3,
 }));
 
 const ProfileMobileRoot = styled('div')({
@@ -145,28 +136,13 @@ const UserCardContent = styled('div')({
   justifyContent: 'center',
 });
 
-const UserFollowingIcon = styled(FollowingIcon)(({ theme }) => ({
-  color: theme.palette.primary.main,
-  fontSize: '1.3rem',
-  marginRight: 6,
-  marginBottom: 2,
-}));
-
-const UserFollowerIcon = styled(FollowerIcon)(({ theme }) => ({
-  color: theme.palette.primary.main,
-  fontSize: '1.3rem',
-  marginRight: 6,
-  marginBottom: 2,
-}));
-
 export {
   ProfileRoot,
   ProfileContent,
   ProfileContentInfo,
   ProfileContentActions,
   ProfileContentAction,
-  ProfileInfoTag,
-  ProfileIcon,
+  ProfileLabel,
   ProfileMobileRoot,
   CardTitle,
   CardEmptyMsg,
@@ -177,6 +153,4 @@ export {
   RepoAction,
   UserCard,
   UserCardContent,
-  UserFollowingIcon,
-  UserFollowerIcon,
 };

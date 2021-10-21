@@ -2,6 +2,7 @@
 import Typography from '@mui/material/Typography';
 
 /* atoms */
+import Label from '../atoms/Label';
 import Link from '../atoms/Link';
 
 /* types */
@@ -14,8 +15,7 @@ import {
   ProfileContentInfo,
   ProfileContentActions,
   ProfileContentAction,
-  ProfileInfoTag,
-  ProfileIcon,
+  ProfileLabel,
 } from './styles';
 
 const buildCreationDate = (date: string) => {
@@ -57,35 +57,29 @@ const Profile = ({
       </Typography>
       <Typography variant="body2">{bio}</Typography>
       <ProfileContentInfo>
-        <ProfileInfoTag>
-          <ProfileIcon>folder</ProfileIcon>
-          {public_repos}
-        </ProfileInfoTag>
-        <ProfileInfoTag>
-          <ProfileIcon>visibility</ProfileIcon>
-          {following}
-        </ProfileInfoTag>
-        <ProfileInfoTag>
-          <ProfileIcon>favorite</ProfileIcon>
-          {followers}
-        </ProfileInfoTag>
+        <ProfileLabel>
+          <Label content={`${public_repos}`} withIcon iconType="folder" />
+        </ProfileLabel>
+        <ProfileLabel>
+          <Label content={`${following}`} withIcon iconType="visibility" />
+        </ProfileLabel>
+        <ProfileLabel>
+          <Label content={`${followers}`} withIcon iconType="favorite" />
+        </ProfileLabel>
         {created_at && (
-          <ProfileInfoTag>
-            <ProfileIcon>event_note</ProfileIcon>
-            {buildCreationDate(created_at)}
-          </ProfileInfoTag>
+          <ProfileLabel>
+            <Label content={buildCreationDate(created_at)} withIcon iconType="event_note" />
+          </ProfileLabel>
         )}
         {location && (
-          <ProfileInfoTag>
-            <ProfileIcon>location_on</ProfileIcon>
-            {location}
-          </ProfileInfoTag>
+          <ProfileLabel>
+            <Label content={location} withLowerCase withIcon iconType="location_on" />
+          </ProfileLabel>
         )}
         {company && (
-          <ProfileInfoTag>
-            <ProfileIcon>business</ProfileIcon>
-            {company}
-          </ProfileInfoTag>
+          <ProfileLabel>
+            <Label content={company} withLowerCase withIcon iconType="business" />
+          </ProfileLabel>
         )}
       </ProfileContentInfo>
       <ProfileContentActions>
