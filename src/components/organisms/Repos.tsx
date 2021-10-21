@@ -72,34 +72,31 @@ const RepoSection = ({ total, userName, repos: reposData, onFetchRepos }: Props)
     <>
       {repos.map((repo: Repo) => (
         <RepoCard key={repo.name}>
-          <div>
-            <CardTitle>
-              <Label content={repo.name} withIcon iconType="folder" />
-            </CardTitle>
-            {repo.description ? (
-              <Typography variant="body1" sx={{ marginTop: 1 }}>
-                {repo.description}
-              </Typography>
-            ) : (
-              <Typography variant="h6" sx={{ marginTop: 1 }}>
-                No description added
-              </Typography>
-            )}
-
-            <RepoTopics>
-              {repo.topics?.length > 0 ? (
-                repo.topics.map((topic: string) => (
-                  <RepoTopic key={topic}>
-                    <Typography variant="overline">{topic}</Typography>
-                  </RepoTopic>
-                ))
-              ) : (
-                <RepoTopic>
-                  <Typography variant="overline">NO TOPICS</Typography>
+          <CardTitle>
+            <Label content={repo.name} withIcon iconType="folder" />
+          </CardTitle>
+          {repo.description ? (
+            <Typography variant="body1" sx={{ marginTop: 1 }}>
+              {repo.description}
+            </Typography>
+          ) : (
+            <Typography variant="h6" sx={{ marginTop: 1 }}>
+              No description added
+            </Typography>
+          )}
+          <RepoTopics>
+            {repo.topics?.length > 0 ? (
+              repo.topics.map((topic: string) => (
+                <RepoTopic key={topic}>
+                  <Typography variant="overline">{topic}</Typography>
                 </RepoTopic>
-              )}
-            </RepoTopics>
-          </div>
+              ))
+            ) : (
+              <RepoTopic>
+                <Typography variant="overline">NO TOPICS</Typography>
+              </RepoTopic>
+            )}
+          </RepoTopics>
           <RepoAction>
             <Link
               url={repo.html_url}
