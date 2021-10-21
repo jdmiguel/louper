@@ -8,7 +8,7 @@ const StyledLink = styled(MuiLink)(({ theme }) => ({
   alignItems: 'center',
   display: 'flex',
   fontSize: '0.9rem',
-  fontWeight: 700,
+  fontWeight: 400,
   lineHeight: 0,
   textDecoration: 'none',
   transition: 'color ease-out 250ms',
