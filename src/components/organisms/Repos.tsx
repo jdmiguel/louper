@@ -26,12 +26,11 @@ type Props = {
   onFetchRepos: (repos: Repo[]) => void;
 };
 
-const RepoSection = ({ total, userName, repos: reposData, onFetchRepos }: Props) => {
+const RepoSection = ({ total, userName, repos, onFetchRepos }: Props) => {
   const [isLoading, setIsLoading] = useState(false);
-  const [repos, setRepos] = useState(reposData);
 
   useEffect(() => {
-    if (reposData.length > 0) {
+    if (repos.length > 0) {
       return;
     }
 
@@ -40,7 +39,6 @@ const RepoSection = ({ total, userName, repos: reposData, onFetchRepos }: Props)
     getRepos(userName)
       .then((repos: Repo[]) => {
         setIsLoading(false);
-        setRepos(repos);
         onFetchRepos(repos);
       })
       .catch((error: Error) => {

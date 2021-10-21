@@ -10,9 +10,6 @@ import Placeholder from '../atoms/Placeholder';
 /* molecules */
 import Card from '../molecules/Card';
 
-/* services */
-import { getFollowings } from '../../services/github';
-
 /* types */
 import { RelatedUser } from '../../utils/types';
 
@@ -22,31 +19,31 @@ import { EmptyMsg } from './styles';
 type Props = {
   total: number;
   userName: string;
-  following: RelatedUser[];
-  onFetchFollowing: (following: RelatedUser[]) => void;
+  relatedUsers: RelatedUser[];
+  relatedUserRequest: (userName: string) => Promise<RelatedUser[]>;
+  onFetchRelatedUsers: (followers: RelatedUser[]) => void;
 };
 
-const FollowingSection = ({
+const RelatedUserSection = ({
   total,
   userName,
-  following: followingData,
-  onFetchFollowing,
+  relatedUserRequest: fetchRelatedUsers,
+  relatedUsers,
+  onFetchRelatedUsers,
 }: Props) => {
   const [isLoading, setIsLoading] = useState(false);
-  const [following, setFollowing] = useState(followingData);
 
   useEffect(() => {
-    if (followingData.length > 0) {
+    if (relatedUsers.length > 0) {
       return;
     }
 
     setIsLoading(true);
 
-    getFollowings(userName)
-      .then((fetchedFollowing) => {
+    fetchRelatedUsers(userName)
+      .then((relatedUsers) => {
         setIsLoading(false);
-        setFollowing(fetchedFollowing);
-        onFetchFollowing(fetchedFollowing);
+        onFetchRelatedUsers(relatedUsers);
       })
       .catch((error) => {
         throw error;
@@ -76,11 +73,11 @@ const FollowingSection = ({
 
   return (
     <>
-      {following.map((nextFollowing) => (
-        <Card key={nextFollowing.login} theme="USER" data={nextFollowing} />
+      {relatedUsers.map((relatedUser) => (
+        <Card key={relatedUser.login} theme="USER" data={relatedUser} />
       ))}
     </>
   );
 };
 
-export default FollowingSection;
+export default RelatedUserSection;

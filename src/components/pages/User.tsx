@@ -4,17 +4,24 @@ import { useState } from 'react';
 import Profile from '../organisms/Profile';
 import ProfileMobile from '../organisms/ProfileMobile';
 import RepoSection from '../organisms/Repos';
-import FollowerSection from '../organisms/Followers';
-import FollowingSection from '../organisms/Following';
+import RelatedUsers from '../organisms/RelatedUsers';
 
 /* molecules */
 import Menu from '../molecules/Menu';
+
+/* services */
+import { getFollowing, getFollowers } from '../../services/github';
 
 /* types */
 import { User, Repo, RelatedUser } from '../../utils/types';
 
 /* styles */
 import { UserRoot, UserProfile, UserContent, UserSection } from './styles';
+
+const relatedUsersRequest = {
+  following: getFollowing,
+  followers: getFollowers,
+};
 
 type Props = {
   user: User;
@@ -47,24 +54,26 @@ const UserPage = ({ user, onBackFinder }: Props) => {
             <RepoSection
               total={user.public_repos}
               userName={user.login}
-              onFetchRepos={(repos: Repo[]) => setRepos(repos)}
               repos={repos}
+              onFetchRepos={(repos: Repo[]) => setRepos(repos)}
             />
           )}
           {activeSection === 1 && (
-            <FollowingSection
+            <RelatedUsers
               total={user.following}
               userName={user.login}
-              onFetchFollowing={(following: RelatedUser[]) => setFollowing(following)}
-              following={following}
+              relatedUsers={following}
+              relatedUserRequest={relatedUsersRequest.followers}
+              onFetchRelatedUsers={(following: RelatedUser[]) => setFollowing(following)}
             />
           )}
           {activeSection === 2 && (
-            <FollowerSection
+            <RelatedUsers
               total={user.followers}
               userName={user.login}
-              onFetchFollowers={(followers: RelatedUser[]) => setFollowers(followers)}
-              followers={followers}
+              relatedUsers={followers}
+              relatedUserRequest={relatedUsersRequest.following}
+              onFetchRelatedUsers={(followers: RelatedUser[]) => setFollowers(followers)}
             />
           )}
         </UserSection>
