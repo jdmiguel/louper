@@ -21,14 +21,7 @@ export type Repo = {
   topics: string[];
 };
 
-export type Follower = {
-  id: number;
-  login: string;
-  html_url: string;
-  avatar_url: string;
-};
-
-export type Following = {
+export type RelatedUser = {
   id: number;
   login: string;
   html_url: string;

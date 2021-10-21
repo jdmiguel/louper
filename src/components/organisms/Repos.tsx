@@ -6,8 +6,9 @@ import Typography from '@mui/material/Typography';
 
 /* atoms */
 import Placeholder from '../atoms/Placeholder';
-import Label from '../atoms/Label';
-import Link from '../atoms/Link';
+
+/* molecules */
+import Card from '../molecules/Card';
 
 /* services */
 import { getRepos } from '../../services/github';
@@ -16,7 +17,7 @@ import { getRepos } from '../../services/github';
 import { Repo } from '../../utils/types';
 
 /* styles */
-import { CardTitle, CardEmptyMsg, RepoCard, RepoTopics, RepoTopic, RepoAction } from './styles';
+import { EmptyMsg } from './styles';
 
 type Props = {
   total: number;
@@ -49,9 +50,9 @@ const RepoSection = ({ total, userName, repos: reposData, onFetchRepos }: Props)
 
   if (total === 0) {
     return (
-      <CardEmptyMsg>
+      <EmptyMsg>
         <Typography variant="h6">No repos added</Typography>
-      </CardEmptyMsg>
+      </EmptyMsg>
     );
   }
 
@@ -71,42 +72,7 @@ const RepoSection = ({ total, userName, repos: reposData, onFetchRepos }: Props)
   return (
     <>
       {repos.map((repo: Repo) => (
-        <RepoCard key={repo.name}>
-          <CardTitle>
-            <Label content={repo.name} withIcon iconType="folder" />
-          </CardTitle>
-          {repo.description ? (
-            <Typography variant="body1" sx={{ marginTop: 1 }}>
-              {repo.description}
-            </Typography>
-          ) : (
-            <Typography variant="h6" sx={{ marginTop: 1 }}>
-              No description added
-            </Typography>
-          )}
-          <RepoTopics>
-            {repo.topics?.length > 0 ? (
-              repo.topics.map((topic: string) => (
-                <RepoTopic key={topic}>
-                  <Typography variant="overline">{topic}</Typography>
-                </RepoTopic>
-              ))
-            ) : (
-              <RepoTopic>
-                <Typography variant="overline">NO TOPICS</Typography>
-              </RepoTopic>
-            )}
-          </RepoTopics>
-          <RepoAction>
-            <Link
-              url={repo.html_url}
-              ariaLabel={`View ${repo.name} repository on GitHub`}
-              content="VISIT REPO"
-              withIcon
-              iconType="folder_open"
-            />
-          </RepoAction>
-        </RepoCard>
+        <Card key={repo.name} theme="REPO" data={repo} />
       ))}
     </>
   );

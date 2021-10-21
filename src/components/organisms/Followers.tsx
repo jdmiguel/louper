@@ -5,24 +5,25 @@ import { v4 as uuidv4 } from 'uuid';
 import Typography from '@mui/material/Typography';
 
 /* atoms */
-import Label from '../atoms/Label';
-import Link from '../atoms/Link';
 import Placeholder from '../atoms/Placeholder';
+
+/* molecules */
+import Card from '../molecules/Card';
 
 /* services */
 import { getFollowers } from '../../services/github';
 
 /* types */
-import { Follower } from '../../utils/types';
+import { RelatedUser } from '../../utils/types';
 
 /* styles */
-import { CardTitle, CardEmptyMsg, UserCard, UserCardContent } from './styles';
+import { EmptyMsg } from './styles';
 
 type Props = {
   total: number;
   userName: string;
-  onFetchFollowers: (followers: Follower[]) => void;
-  followers: Follower[];
+  onFetchFollowers: (followers: RelatedUser[]) => void;
+  followers: RelatedUser[];
 };
 
 const FollowerSection = ({
@@ -54,9 +55,9 @@ const FollowerSection = ({
 
   if (total === 0) {
     return (
-      <CardEmptyMsg>
+      <EmptyMsg>
         <Typography variant="h6">No following added</Typography>
-      </CardEmptyMsg>
+      </EmptyMsg>
     );
   }
 
@@ -76,21 +77,7 @@ const FollowerSection = ({
   return (
     <>
       {followers.map((follower) => (
-        <UserCard key={follower.login}>
-          <img alt="user following avatar" src={follower.avatar_url} />
-          <UserCardContent>
-            <CardTitle>
-              <Label content={follower.login} withIcon iconType="favorite" />
-            </CardTitle>
-            <Link
-              url={follower.html_url}
-              ariaLabel={`View ${follower.login} profile on GitHub`}
-              content="VISIT PROFILE"
-              withIcon
-              iconType="person"
-            />
-          </UserCardContent>
-        </UserCard>
+        <Card key={follower.login} theme="USER" data={follower} />
       ))}
     </>
   );

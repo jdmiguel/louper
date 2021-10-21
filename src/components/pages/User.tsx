@@ -11,7 +11,7 @@ import FollowingSection from '../organisms/Following';
 import Menu from '../molecules/Menu';
 
 /* types */
-import { User, Repo, Following, Follower } from '../../utils/types';
+import { User, Repo, RelatedUser } from '../../utils/types';
 
 /* styles */
 import { UserRoot, UserProfile, UserContent, UserSection } from './styles';
@@ -24,8 +24,8 @@ type Props = {
 const UserPage = ({ user, onBackFinder }: Props) => {
   const [activeSection, setActiveUserSection] = useState(0);
   const [repos, setRepos] = useState<Repo[]>([]);
-  const [following, setFollowing] = useState<Following[]>([]);
-  const [followers, setFollowers] = useState<Follower[]>([]);
+  const [following, setFollowing] = useState<RelatedUser[]>([]);
+  const [followers, setFollowers] = useState<RelatedUser[]>([]);
 
   return (
     <UserRoot>
@@ -55,7 +55,7 @@ const UserPage = ({ user, onBackFinder }: Props) => {
             <FollowingSection
               total={user.following}
               userName={user.login}
-              onFetchFollowing={(following: Following[]) => setFollowing(following)}
+              onFetchFollowing={(following: RelatedUser[]) => setFollowing(following)}
               following={following}
             />
           )}
@@ -63,7 +63,7 @@ const UserPage = ({ user, onBackFinder }: Props) => {
             <FollowerSection
               total={user.followers}
               userName={user.login}
-              onFetchFollowers={(followers: Follower[]) => setFollowers(followers)}
+              onFetchFollowers={(followers: RelatedUser[]) => setFollowers(followers)}
               followers={followers}
             />
           )}

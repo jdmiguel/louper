@@ -5,24 +5,25 @@ import { v4 as uuidv4 } from 'uuid';
 import Typography from '@mui/material/Typography';
 
 /* atoms */
-import Label from '../atoms/Label';
-import Link from '../atoms/Link';
 import Placeholder from '../atoms/Placeholder';
+
+/* molecules */
+import Card from '../molecules/Card';
 
 /* services */
 import { getFollowings } from '../../services/github';
 
 /* types */
-import { Following } from '../../utils/types';
+import { RelatedUser } from '../../utils/types';
 
 /* styles */
-import { CardTitle, CardEmptyMsg, UserCard, UserCardContent } from './styles';
+import { EmptyMsg } from './styles';
 
 type Props = {
   total: number;
   userName: string;
-  following: Following[];
-  onFetchFollowing: (following: Following[]) => void;
+  following: RelatedUser[];
+  onFetchFollowing: (following: RelatedUser[]) => void;
 };
 
 const FollowingSection = ({
@@ -54,9 +55,9 @@ const FollowingSection = ({
 
   if (total === 0) {
     return (
-      <CardEmptyMsg>
+      <EmptyMsg>
         <Typography variant="h6">No following added</Typography>
-      </CardEmptyMsg>
+      </EmptyMsg>
     );
   }
 
@@ -75,22 +76,8 @@ const FollowingSection = ({
 
   return (
     <>
-      {following.map((nextFollowing: Following) => (
-        <UserCard key={nextFollowing.login}>
-          <img alt="user following avatar" src={nextFollowing.avatar_url} />
-          <UserCardContent>
-            <CardTitle>
-              <Label content={nextFollowing.login} withIcon iconType="visibility" />
-            </CardTitle>
-            <Link
-              url={nextFollowing.html_url}
-              ariaLabel={`View ${nextFollowing.login} profile on GitHub`}
-              content="VISIT PROFILE"
-              withIcon
-              iconType="person"
-            />
-          </UserCardContent>
-        </UserCard>
+      {following.map((nextFollowing) => (
+        <Card key={nextFollowing.login} theme="USER" data={nextFollowing} />
       ))}
     </>
   );
