@@ -107,7 +107,7 @@ const displayUserContent = <T extends RelatedUser>(user: T): ReactElement => (
     <Avatar
       alt="user following avatar"
       src={user.avatar_url}
-      sx={{ width: 80, height: 80, marginRight: 2 }}
+      sx={{ width: 80, height: 80, marginRight: 2, position: 'initial' }}
     />
     <UserText>
       <Title>
