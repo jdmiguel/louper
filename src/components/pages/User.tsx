@@ -3,26 +3,27 @@ import { useState } from 'react';
 /* organisms */
 import Profile from '../organisms/Profile';
 import ProfileMobile from '../organisms/ProfileMobile';
-import RepoSection from '../organisms/Repos';
-import RelatedUsers from '../organisms/RelatedUsers';
+import UserSection from '../organisms/UserSection';
 
 /* molecules */
 import Menu from '../molecules/Menu';
 
 /* services */
-import { getFollowing, getFollowers } from '../../services/github';
+import { getRepos, getFollowing, getFollowers } from '../../services/github';
 
 /* types */
 import { User, Repo, RelatedUser } from '../../utils/types';
 
 /* styles */
-import { UserRoot, UserProfile, UserContent, UserSection } from './styles';
+import { UserRoot, UserProfile, UserContent, UserSectionWrapper } from './styles';
 
 const relatedUsersRequest = {
+  repos: getRepos,
   following: getFollowing,
   followers: getFollowers,
 };
 
+type Item = Repo | RelatedUser;
 type Props = {
   user: User;
   onBackFinder: () => void;
@@ -49,34 +50,41 @@ const UserPage = ({ user, onBackFinder }: Props) => {
             }
           }}
         />
-        <UserSection>
+        <UserSectionWrapper>
           {activeSection === 0 && (
-            <RepoSection
+            <UserSection
+              type="REPO"
               total={user.public_repos}
               userName={user.login}
-              repos={repos}
-              onFetchRepos={(repos: Repo[]) => setRepos(repos)}
+              items={repos}
+              request={relatedUsersRequest.repos}
+              onFetch={(repos: Item[]) => setRepos(repos as Repo[])}
+              emptyMsg="No repos added"
             />
           )}
           {activeSection === 1 && (
-            <RelatedUsers
+            <UserSection
+              type="RELATED_USER"
               total={user.following}
               userName={user.login}
-              relatedUsers={following}
-              relatedUserRequest={relatedUsersRequest.followers}
-              onFetchRelatedUsers={(following: RelatedUser[]) => setFollowing(following)}
+              items={following}
+              request={relatedUsersRequest.followers}
+              onFetch={(items: Item[]) => setFollowing(items as RelatedUser[])}
+              emptyMsg="No followers added"
             />
           )}
           {activeSection === 2 && (
-            <RelatedUsers
+            <UserSection
+              type="RELATED_USER"
               total={user.followers}
               userName={user.login}
-              relatedUsers={followers}
-              relatedUserRequest={relatedUsersRequest.following}
-              onFetchRelatedUsers={(followers: RelatedUser[]) => setFollowers(followers)}
+              items={followers}
+              request={relatedUsersRequest.following}
+              onFetch={(items: Item[]) => setFollowers(items as RelatedUser[])}
+              emptyMsg="No following added"
             />
           )}
-        </UserSection>
+        </UserSectionWrapper>
       </UserContent>
     </UserRoot>
   );

@@ -1,22 +1,14 @@
 /* material-ui */
+import { styled } from '@mui/material/styles';
 import Typography from '@mui/material/Typography';
 
 /* atoms */
+import Avatar from '@mui/material/Avatar';
 import Label from '../atoms/Label';
 import Link from '../atoms/Link';
 
 /* types */
 import { User } from '../../utils/types';
-
-/* styles */
-import {
-  ProfileRoot,
-  ProfileContent,
-  ProfileContentInfo,
-  ProfileContentActions,
-  ProfileContentAction,
-  ProfileLabel,
-} from './styles';
 
 const buildCreationDate = (date: string) => {
   const newDate = new Date(date);
@@ -24,6 +16,47 @@ const buildCreationDate = (date: string) => {
 
   return formattedDate.slice(0, formattedDate.indexOf(','));
 };
+
+const Root = styled('div')({
+  display: 'flex',
+  flexDirection: 'column',
+  maxWidth: 240,
+  position: 'sticky',
+  top: 60,
+});
+
+const Content = styled('div')({
+  marginTop: 20,
+  maxWidth: 300,
+});
+
+const Info = styled('div')(({ theme }) => ({
+  borderBottom: `1px solid ${theme.palette.secondary.light}`,
+  borderTop: `1px solid ${theme.palette.secondary.light}`,
+  display: 'flex',
+  flexWrap: 'wrap',
+  marginTop: 24,
+  paddingBottom: 10,
+  paddingTop: 10,
+}));
+
+const Actions = styled('div')({
+  marginTop: 20,
+});
+
+const Action = styled('div')({
+  marginBottom: 5,
+});
+
+const LabelWrapper = styled('div')(({ theme }) => ({
+  alignItems: 'center',
+  color: theme.palette.secondary.main,
+  display: 'flex',
+  justifyContent: 'center',
+  marginRight: 12,
+  marginBottom: 6,
+  fontSize: '0.9rem',
+}));
 
 type Props = {
   user: User;
@@ -46,9 +79,9 @@ const Profile = ({
     blog,
   },
 }: Props) => (
-  <ProfileRoot>
-    <img alt="user avatar" src={avatar_url} />
-    <ProfileContent>
+  <Root>
+    <Avatar alt="user avatar" src={avatar_url} sx={{ width: 240, height: 240 }} />
+    <Content>
       <Typography variant="h3" sx={{ marginBottom: 0.4 }}>
         {name}
       </Typography>
@@ -56,34 +89,34 @@ const Profile = ({
         {login}
       </Typography>
       <Typography variant="body2">{bio}</Typography>
-      <ProfileContentInfo>
-        <ProfileLabel>
+      <Info>
+        <LabelWrapper>
           <Label content={`${public_repos}`} withIcon iconType="folder" />
-        </ProfileLabel>
-        <ProfileLabel>
+        </LabelWrapper>
+        <LabelWrapper>
           <Label content={`${following}`} withIcon iconType="visibility" />
-        </ProfileLabel>
-        <ProfileLabel>
+        </LabelWrapper>
+        <LabelWrapper>
           <Label content={`${followers}`} withIcon iconType="favorite" />
-        </ProfileLabel>
+        </LabelWrapper>
         {created_at && (
-          <ProfileLabel>
+          <LabelWrapper>
             <Label content={buildCreationDate(created_at)} withIcon iconType="event_note" />
-          </ProfileLabel>
+          </LabelWrapper>
         )}
         {location && (
-          <ProfileLabel>
+          <LabelWrapper>
             <Label content={location} withLowerCase withIcon iconType="location_on" />
-          </ProfileLabel>
+          </LabelWrapper>
         )}
         {company && (
-          <ProfileLabel>
+          <LabelWrapper>
             <Label content={company} withLowerCase withIcon iconType="business" />
-          </ProfileLabel>
+          </LabelWrapper>
         )}
-      </ProfileContentInfo>
-      <ProfileContentActions>
-        <ProfileContentAction>
+      </Info>
+      <Actions>
+        <Action>
           <Link
             url={html_url}
             ariaLabel={`View ${name} profile on GitHub`}
@@ -91,9 +124,9 @@ const Profile = ({
             withIcon
             iconType="person"
           />
-        </ProfileContentAction>
+        </Action>
         {email && (
-          <ProfileContentAction>
+          <Action>
             <Link
               url={`mailto:${email}`}
               ariaLabel={`Send email to ${login}`}
@@ -101,10 +134,10 @@ const Profile = ({
               withIcon
               iconType="mail_outline"
             />
-          </ProfileContentAction>
+          </Action>
         )}
         {blog && (
-          <ProfileContentAction>
+          <Action>
             <Link
               url={blog}
               ariaLabel={`View portfolio of ${name}`}
@@ -112,11 +145,11 @@ const Profile = ({
               withIcon
               iconType="web_icon"
             />
-          </ProfileContentAction>
+          </Action>
         )}
-      </ProfileContentActions>
-    </ProfileContent>
-  </ProfileRoot>
+      </Actions>
+    </Content>
+  </Root>
 );
 
 export default Profile;

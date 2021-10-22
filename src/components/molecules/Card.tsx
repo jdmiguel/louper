@@ -18,21 +18,21 @@ const Root = styled('div')(({ theme }) => ({
   padding: 20,
 }));
 
-const CardTitle = styled('div')(({ theme }) => ({
+const Title = styled('div')(({ theme }) => ({
   alignItems: 'center',
   display: 'flex',
   marginBottom: 4,
   '& path': { fill: theme.palette.secondary.main },
 }));
 
-const CardTopics = styled('div')({
+const Topics = styled('div')({
   display: 'flex',
   flexWrap: 'wrap',
   marginTop: 14,
   marginBottom: 12,
 });
 
-const CardTopic = styled('div')(({ theme }) => ({
+const Topic = styled('div')(({ theme }) => ({
   backgroundColor: theme.palette.secondary.main,
   borderRadius: 4,
   color: theme.palette.secondary.light,
@@ -41,7 +41,7 @@ const CardTopic = styled('div')(({ theme }) => ({
   marginRight: 5,
 }));
 
-const CardAction = styled('div')(({ theme }) => ({
+const Action = styled('div')(({ theme }) => ({
   borderTop: `1px solid ${theme.palette.secondary.light}`,
   marginTop: 10,
   paddingTop: 10,
@@ -65,9 +65,9 @@ const UserText = styled('div')({
 
 const displayRepoContent = <T extends Repo>(data: T): ReactElement => (
   <RepoContent>
-    <CardTitle>
+    <Title>
       <Label content={data.name} withIcon iconType={'folder'} />
-    </CardTitle>
+    </Title>
     {data.description ? (
       <Typography variant="body1" sx={{ marginTop: 1 }}>
         {data.description}
@@ -77,20 +77,20 @@ const displayRepoContent = <T extends Repo>(data: T): ReactElement => (
         No description added
       </Typography>
     )}
-    <CardTopics>
+    <Topics>
       {data.topics?.length > 0 ? (
         data.topics.map((topic: string) => (
-          <CardTopic key={topic}>
+          <Topic key={topic}>
             <Typography variant="overline">{topic}</Typography>
-          </CardTopic>
+          </Topic>
         ))
       ) : (
-        <CardTopic>
+        <Topic>
           <Typography variant="overline">NO TOPICS</Typography>
-        </CardTopic>
+        </Topic>
       )}
-    </CardTopics>
-    <CardAction>
+    </Topics>
+    <Action>
       <Link
         url={data.html_url}
         ariaLabel={`View ${data.name} repository on GitHub`}
@@ -98,7 +98,7 @@ const displayRepoContent = <T extends Repo>(data: T): ReactElement => (
         withIcon
         iconType="folder_open"
       />
-    </CardAction>
+    </Action>
   </RepoContent>
 );
 
@@ -110,9 +110,9 @@ const displayUserContent = <T extends RelatedUser>(user: T): ReactElement => (
       sx={{ width: 80, height: 80, marginRight: 2 }}
     />
     <UserText>
-      <CardTitle>
+      <Title>
         <Label content={user.login} withIcon iconType="favorite" />
-      </CardTitle>
+      </Title>
       <Link
         url={user.html_url}
         ariaLabel={`View ${user.login} profile on GitHub`}

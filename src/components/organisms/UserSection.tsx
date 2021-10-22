@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import { v4 as uuidv4 } from 'uuid';
 
 /* material-ui */
+import { styled } from '@mui/material/styles';
 import Typography from '@mui/material/Typography';
 
 /* atoms */
@@ -11,39 +12,48 @@ import Placeholder from '../atoms/Placeholder';
 import Card from '../molecules/Card';
 
 /* types */
-import { RelatedUser } from '../../utils/types';
+import { SectionType, Repo, RelatedUser } from '../../utils/types';
 
-/* styles */
-import { EmptyMsg } from './styles';
+const EmptyMsg = styled('div')({
+  display: 'flex',
+  marginTop: 8,
+});
 
+type Item = Repo | RelatedUser;
 type Props = {
+  type: SectionType;
   total: number;
   userName: string;
-  relatedUsers: RelatedUser[];
-  relatedUserRequest: (userName: string) => Promise<RelatedUser[]>;
-  onFetchRelatedUsers: (followers: RelatedUser[]) => void;
+  items: Item[];
+  request: (userName: string) => Promise<Item[]>;
+  onFetch: (items: Item[]) => void;
+  emptyMsg: string;
 };
 
-const RelatedUserSection = ({
+const UserSection = ({
+  type,
   total,
   userName,
-  relatedUserRequest: fetchRelatedUsers,
-  relatedUsers,
-  onFetchRelatedUsers,
+  items,
+  request: fetchItems,
+  onFetch,
+  emptyMsg,
 }: Props) => {
   const [isLoading, setIsLoading] = useState(false);
 
+  const isRepoType = type === 'REPO';
+
   useEffect(() => {
-    if (relatedUsers.length > 0) {
+    if (items.length > 0) {
       return;
     }
 
     setIsLoading(true);
 
-    fetchRelatedUsers(userName)
-      .then((relatedUsers) => {
+    fetchItems(userName)
+      .then((items) => {
         setIsLoading(false);
-        onFetchRelatedUsers(relatedUsers);
+        onFetch(items);
       })
       .catch((error) => {
         throw error;
@@ -53,7 +63,7 @@ const RelatedUserSection = ({
   if (total === 0) {
     return (
       <EmptyMsg>
-        <Typography variant="h6">No following added</Typography>
+        <Typography variant="h6">{emptyMsg}</Typography>
       </EmptyMsg>
     );
   }
@@ -65,7 +75,7 @@ const RelatedUserSection = ({
     return (
       <>
         {placeholderList.map(() => (
-          <Placeholder key={uuidv4()} withUserTheme />
+          <Placeholder key={uuidv4()} withUserTheme={!isRepoType} />
         ))}
       </>
     );
@@ -73,11 +83,11 @@ const RelatedUserSection = ({
 
   return (
     <>
-      {relatedUsers.map((relatedUser) => (
-        <Card key={relatedUser.login} theme="USER" data={relatedUser} />
+      {items.map((item) => (
+        <Card key={item.id} theme={isRepoType ? 'REPO' : 'USER'} data={item} />
       ))}
     </>
   );
 };
 
-export default RelatedUserSection;
+export default UserSection;

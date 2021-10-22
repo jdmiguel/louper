@@ -14,7 +14,10 @@ export type User = {
   following: number;
 };
 
+export type SectionType = 'REPO' | 'RELATED_USER';
+
 export type Repo = {
+  id: number;
   name: string;
   description: string;
   html_url: string;

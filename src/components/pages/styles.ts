@@ -64,9 +64,9 @@ const HomeIconWrapper = styled('div')(({ theme }) => ({
 const UserRoot = styled('div')({
   display: 'flex',
   justifyContent: 'center',
-  padding: '0 20px 50px 0',
+  padding: '0 20px 50px',
   '@media (min-width: 769px)': {
-    padding: '0 40px 50px 0',
+    padding: '0 30px 50px',
   },
 });
 
@@ -85,12 +85,12 @@ const UserContent = styled('div')({
   },
 });
 
-const UserSection = styled('main')({
+const UserSectionWrapper = styled('main')({
   display: 'grid',
   gridGap: 20,
   marginTop: 30,
   '@media (min-width: 992px)': {
-    gridTemplateColumns: 'repeat(2, 300px)',
+    gridTemplateColumns: 'repeat(2, 330px)',
   },
   '@media (min-width: 1200px)': {
     gridTemplateColumns: 'repeat(2, 420px)',
@@ -107,5 +107,5 @@ export {
   UserRoot,
   UserProfile,
   UserContent,
-  UserSection,
+  UserSectionWrapper,
 };

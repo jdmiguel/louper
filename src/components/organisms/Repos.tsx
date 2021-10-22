@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import { v4 as uuidv4 } from 'uuid';
 
 /* material-ui */
+import { styled } from '@mui/material/styles';
 import Typography from '@mui/material/Typography';
 
 /* atoms */
@@ -16,8 +17,11 @@ import { getRepos } from '../../services/github';
 /* types */
 import { Repo } from '../../utils/types';
 
-/* styles */
-import { EmptyMsg } from './styles';
+const EmptyMsg = styled('div')({
+  display: 'flex',
+  justifyContent: 'center',
+  marginTop: 8,
+});
 
 type Props = {
   total: number;
