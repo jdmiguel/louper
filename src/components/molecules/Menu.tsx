@@ -17,7 +17,6 @@ const Root = styled('header')({
 const StyledTabs = styled(Tabs)(({ theme }) => ({
   backgroundColor: theme.palette.background.default,
   borderBottom: `1px solid ${theme.palette.secondary.light}`,
-
   '& .MuiTabs-flexContainer': {
     justifyContent: 'space-between',
     '@media (min-width: 1200x)': {

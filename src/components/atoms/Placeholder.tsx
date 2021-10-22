@@ -40,13 +40,13 @@ const RepoDivider = styled('span')(({ theme }) => ({
   width: '100%',
 }));
 
-const PlaceholderUserContent = styled('div')({
+const UserContent = styled('div')({
   display: 'grid',
   gridTemplateColumns: 'repeat(4, 1fr)',
   gridTemplateRows: '34px 34px',
 });
 
-const PlaceholderUserVline = styled('span')(({ theme }) => ({
+const UserVline = styled('span')(({ theme }) => ({
   backgroundColor: theme.palette.background.default,
   gridColumn: '1/2',
   gridRow: '1/4',
@@ -73,12 +73,12 @@ const RepoTheme = (
 );
 
 const UserTheme = (
-  <PlaceholderUserContent>
-    <PlaceholderUserVline />
+  <UserContent>
+    <UserVline />
     <UserHline />
     <UserHline />
     <UserHline />
-  </PlaceholderUserContent>
+  </UserContent>
 );
 
 type Props = {
