@@ -41,25 +41,28 @@ const RepoDivider = styled('span')(({ theme }) => ({
 }));
 
 const UserContent = styled('div')({
-  display: 'grid',
-  gridTemplateColumns: 'repeat(4, 1fr)',
-  gridTemplateRows: '34px 34px',
+  display: 'flex',
 });
 
 const UserVline = styled('span')(({ theme }) => ({
   backgroundColor: theme.palette.background.default,
-  gridColumn: '1/2',
-  gridRow: '1/4',
-  height: '100%',
-  marginLeft: 87,
+  marginLeft: 85,
   width: 16,
 }));
 
+const UserHlines = styled('div')({
+  display: 'flex',
+  flexDirection: 'column',
+  width: '100%',
+});
+
 const UserHline = styled('span')(({ theme }) => ({
   backgroundColor: theme.palette.background.default,
-  gridColumn: '2/5',
   height: 16,
   width: '100%',
+  '&:not(:last-of-type)': {
+    marginBottom: 17,
+  },
 }));
 
 const RepoTheme = (
@@ -75,9 +78,11 @@ const RepoTheme = (
 const UserTheme = (
   <UserContent>
     <UserVline />
-    <UserHline />
-    <UserHline />
-    <UserHline />
+    <UserHlines>
+      <UserHline />
+      <UserHline />
+      <UserHline />
+    </UserHlines>
   </UserContent>
 );
 
