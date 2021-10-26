@@ -63,7 +63,7 @@ const UserText = styled('div')({
   justifyContent: 'center',
 });
 
-const displayRepoContent = <T extends Repo>(data: T): ReactElement => (
+const displayRepoContent = (data: Repo): ReactElement => (
   <RepoContent>
     <Title>
       <Label content={data.name} withIcon iconType={'folder'} />
@@ -102,7 +102,7 @@ const displayRepoContent = <T extends Repo>(data: T): ReactElement => (
   </RepoContent>
 );
 
-const displayUserContent = <T extends RelatedUser>(user: T): ReactElement => (
+const displayUserContent = (user: RelatedUser): ReactElement => (
   <UserContent>
     <Avatar
       alt="user following avatar"

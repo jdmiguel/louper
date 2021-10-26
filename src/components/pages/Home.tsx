@@ -1,6 +1,8 @@
 import { forwardRef, useState, ReactNode } from 'react';
 
 /* material-ui */
+import { styled } from '@mui/material/styles';
+import MuiAlert from '@mui/material/Alert';
 import Typography from '@mui/material/Typography';
 import Snackbar from '@mui/material/Snackbar';
 import { AlertColor } from '@mui/material/Alert';
@@ -19,16 +21,6 @@ import { getUserData } from '../../services/github';
 /* types */
 import { User } from '../../utils/types';
 
-/* styles */
-import {
-  HomeRoot,
-  HomeAlert,
-  HomeCorner,
-  HomeHeading,
-  HomeSubtitle,
-  HomeIconWrapper,
-} from './styles';
-
 interface AlertProps {
   children?: ReactNode;
   onClose: () => void;
@@ -44,8 +36,67 @@ enum ErrorMsg {
   NO_USER = 'Please, choose an available user',
 }
 
+const Root = styled('div')({
+  display: 'flex',
+  flexDirection: 'column',
+  justifyContent: 'space-between',
+  height: '100vh',
+});
+
+const StyledAlert = styled(MuiAlert)({
+  '& .MuiAlert-icon': {
+    padding: '9px 0',
+  },
+  '& .MuiAlert-message': {
+    padding: '12px 0',
+  },
+  '& .MuiAlert-action': {
+    svg: {
+      height: '1.4rem',
+      width: '1.4rem',
+    },
+  },
+});
+
+const CornerWrapper = styled('header')({
+  display: 'flex',
+  justifyContent: 'flex-end',
+  width: '100%',
+});
+
+const Heading = styled('div')({
+  display: 'flex',
+  flexDirection: 'column',
+  alignItems: 'center',
+  marginBottom: '50px',
+});
+
+const Subtitle = styled('div')({
+  marginTop: '38px',
+  display: 'flex',
+  justifyContent: 'center',
+  alignItems: 'center',
+  '@media (min-width: 768px)': {
+    marginTop: '48px',
+  },
+});
+
+const IconWrapper = styled('div')(({ theme }) => ({
+  '& svg': {
+    width: 44,
+    marginLeft: 12,
+    '& path': {
+      fill: theme.palette.neutral.main,
+    },
+    '@media (min-width: 768px)': {
+      width: 64,
+      marginLeft: 12,
+    },
+  },
+}));
+
 const Alert = forwardRef<HTMLDivElement, AlertProps>((props, ref) => (
-  <HomeAlert elevation={4} ref={ref} variant="filled" {...props} />
+  <StyledAlert elevation={4} ref={ref} variant="filled" {...props} />
 ));
 Alert.displayName = 'Alert';
 
@@ -103,20 +154,20 @@ const HomePage = ({ onFetchUser }: Props) => {
   const onClose = () => setIsErrorAlertOpen(false);
 
   return (
-    <HomeRoot>
-      <HomeCorner>
+    <Root>
+      <CornerWrapper>
         <GithubCorner />
-      </HomeCorner>
+      </CornerWrapper>
       <main>
-        <HomeHeading>
+        <Heading>
           <Typography variant="h1">Github</Typography>
-          <HomeSubtitle>
+          <Subtitle>
             <Typography variant="h2">Finder</Typography>
-            <HomeIconWrapper>
+            <IconWrapper>
               <GithubIcon />
-            </HomeIconWrapper>
-          </HomeSubtitle>
-        </HomeHeading>
+            </IconWrapper>
+          </Subtitle>
+        </Heading>
         <Finder onFetchUser={fetchUser} isLoading={isLoading} />
       </main>
       <Footer />
@@ -133,7 +184,7 @@ const HomePage = ({ onFetchUser }: Props) => {
           {errorMsg}
         </Alert>
       </Snackbar>
-    </HomeRoot>
+    </Root>
   );
 };
 

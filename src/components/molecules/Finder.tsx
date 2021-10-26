@@ -6,32 +6,24 @@ import CircularProgress from '@mui/material/CircularProgress';
 import FormControl from '@mui/material/FormControl';
 import TextField from '@mui/material/TextField';
 import InputAdornment from '@mui/material/InputAdornment';
-import UserIcon from '@mui/icons-material/Person';
 import Icon from '@mui/material/Icon';
 import IconButton from '@mui/material/IconButton';
 
-const InputWrapper = styled('div')({
-  '& > div > div': {
+const StyledTextField = styled(TextField)({
+  '& .MuiOutlinedInput-root': {
     borderTopRightRadius: 0,
     borderBottomRightRadius: 0,
-  },
-  '& svg': {
-    width: 22,
   },
 });
 
 const StyledIconButton = styled(IconButton)(({ theme }) => ({
   backgroundColor: theme.palette.primary.main,
-  border: 0,
   borderBottomLeftRadius: 0,
   borderBottomRightRadius: 4,
   borderTopLeftRadius: 0,
   borderTopRightRadius: 4,
   color: theme.palette.primary.contrastText,
   padding: 7,
-  '& > span > span': {
-    fontSize: '1.03rem',
-  },
   '&:hover': {
     backgroundColor: theme.palette.primary.light,
   },
@@ -65,35 +57,33 @@ const Finder = ({ isLoading, onFetchUser }: Props) => {
         justifyContent: 'center',
       }}
     >
-      <InputWrapper>
-        <TextField
-          placeholder="Type user name..."
-          onFocus={() => {
-            setIsValidating(false);
-          }}
-          onChange={({ target: { value } }) => {
-            setInputValue(value);
-          }}
-          onKeyUp={onKeyUp}
-          size="small"
-          variant="outlined"
-          error={isNotValid}
-          inputProps={{
-            maxLength: 20,
-          }}
-          InputProps={{
-            endAdornment: (
-              <InputAdornment position="end">
-                {isLoading ? (
-                  <CircularProgress className="loaderIcon" size={22} thickness={4} />
-                ) : (
-                  <UserIcon />
-                )}
-              </InputAdornment>
-            ),
-          }}
-        />
-      </InputWrapper>
+      <StyledTextField
+        placeholder="Type user name..."
+        onFocus={() => {
+          setIsValidating(false);
+        }}
+        onChange={({ target: { value } }) => {
+          setInputValue(value);
+        }}
+        onKeyUp={onKeyUp}
+        size="small"
+        variant="outlined"
+        error={isNotValid}
+        inputProps={{
+          maxLength: 20,
+        }}
+        InputProps={{
+          endAdornment: (
+            <InputAdornment position="end">
+              {isLoading ? (
+                <CircularProgress className="loaderIcon" size={22} thickness={4} />
+              ) : (
+                <Icon sx={{ fontSize: '1.4rem' }}>person</Icon>
+              )}
+            </InputAdornment>
+          ),
+        }}
+      />
       <StyledIconButton
         onClick={() => {
           setIsValidating(true);

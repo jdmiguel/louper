@@ -40,7 +40,7 @@ const StyledTab = styled(Tab)(({ theme }) => ({
   '@media (min-width: 1200px)': {
     minWidth: 200,
   },
-  '& svg': {
+  '& .MuiSvgIcon-root': {
     fill: theme.palette.primary.dark,
     marginBottom: '2px !important',
     transition: 'fill ease-out 250ms',
@@ -55,9 +55,8 @@ const StyledTab = styled(Tab)(({ theme }) => ({
       },
     },
   },
-
   '&:hover': {
-    '& svg': {
+    '& .MuiSvgIcon-root': {
       fill: theme.palette.primary.light,
       '& + span': { color: theme.palette.primary.light },
     },

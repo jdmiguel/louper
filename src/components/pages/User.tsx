@@ -1,5 +1,8 @@
 import { useState } from 'react';
 
+/* material-ui */
+import { styled } from '@mui/material/styles';
+
 /* organisms */
 import Profile from '../organisms/Profile';
 import ProfileMobile from '../organisms/ProfileMobile';
@@ -14,8 +17,41 @@ import { getRepos, getFollowing, getFollowers } from '../../services/github';
 /* types */
 import { User, Repo, RelatedUser } from '../../utils/types';
 
-/* styles */
-import { UserRoot, UserProfile, UserContent, UserSectionWrapper } from './styles';
+const Root = styled('div')({
+  display: 'flex',
+  justifyContent: 'center',
+  padding: '0 20px 50px',
+  '@media (min-width: 769px)': {
+    padding: '0 30px 50px',
+  },
+});
+
+const ProfileWrapper = styled('aside')({
+  margin: '60px 40px 0 0',
+  '@media (max-width: 768px)': {
+    display: 'none',
+  },
+});
+
+const Content = styled('div')({
+  display: 'flex',
+  flexDirection: 'column',
+  '@media (max-width: 992px)': {
+    width: '100%',
+  },
+});
+
+const SectionWrapper = styled('main')({
+  display: 'grid',
+  gridGap: 20,
+  marginTop: 30,
+  '@media (min-width: 992px)': {
+    gridTemplateColumns: 'repeat(2, 330px)',
+  },
+  '@media (min-width: 1200px)': {
+    gridTemplateColumns: 'repeat(2, 420px)',
+  },
+});
 
 const relatedUsersRequest = {
   repos: getRepos,
@@ -36,11 +72,11 @@ const UserPage = ({ user, onBackFinder }: Props) => {
   const [followers, setFollowers] = useState<RelatedUser[]>([]);
 
   return (
-    <UserRoot>
-      <UserProfile>
+    <Root>
+      <ProfileWrapper>
         <Profile user={user} />
-      </UserProfile>
-      <UserContent>
+      </ProfileWrapper>
+      <Content>
         <ProfileMobile user={user} />
         <Menu
           onClick={(section: number) => {
@@ -50,7 +86,7 @@ const UserPage = ({ user, onBackFinder }: Props) => {
             }
           }}
         />
-        <UserSectionWrapper>
+        <SectionWrapper>
           {activeSection === 0 && (
             <UserSection
               type="REPO"
@@ -84,9 +120,9 @@ const UserPage = ({ user, onBackFinder }: Props) => {
               emptyMsg="No following added"
             />
           )}
-        </UserSectionWrapper>
-      </UserContent>
-    </UserRoot>
+        </SectionWrapper>
+      </Content>
+    </Root>
   );
 };
 
