@@ -2,8 +2,11 @@ import { forwardRef, useState, ReactNode } from 'react';
 
 /* material-ui */
 import { styled } from '@mui/material/styles';
+import Box from '@mui/material/Box';
 import MuiAlert from '@mui/material/Alert';
 import Typography from '@mui/material/Typography';
+import Switch from '@mui/material/Switch';
+import Stack from '@mui/material/Stack';
 import Snackbar from '@mui/material/Snackbar';
 import { AlertColor } from '@mui/material/Alert';
 
@@ -58,33 +61,10 @@ const StyledAlert = styled(MuiAlert)({
   },
 });
 
-const CornerWrapper = styled('header')({
-  display: 'flex',
-  justifyContent: 'flex-end',
-  width: '100%',
-});
-
-const Heading = styled('div')({
-  display: 'flex',
-  flexDirection: 'column',
-  alignItems: 'center',
-  marginBottom: '50px',
-});
-
-const Subtitle = styled('div')({
-  marginTop: '38px',
-  display: 'flex',
-  justifyContent: 'center',
-  alignItems: 'center',
-  '@media (min-width: 768px)': {
-    marginTop: '48px',
-  },
-});
-
 const IconWrapper = styled('div')(({ theme }) => ({
   '& svg': {
     width: 44,
-    marginLeft: 12,
+    marginLeft: 4,
     '& path': {
       fill: theme.palette.neutral.main,
     },
@@ -95,10 +75,25 @@ const IconWrapper = styled('div')(({ theme }) => ({
   },
 }));
 
+const StyledSwitch = styled(Switch)(({ theme }) => ({
+  '& .MuiTouchRipple-root': {
+    color: theme.palette.primary.main,
+  },
+  '& .MuiSwitch-thumb': {
+    color: theme.palette.primary.main,
+  },
+  '& .MuiSwitch-track': {
+    backgroundColor: theme.palette.primary.main,
+    opacity: 0.5,
+  },
+}));
+
 const Alert = forwardRef<HTMLDivElement, AlertProps>((props, ref) => (
   <StyledAlert elevation={4} ref={ref} variant="filled" {...props} />
 ));
 Alert.displayName = 'Alert';
+
+const label = { inputProps: { 'aria-label': 'Switch demo' } };
 
 type Props = {
   onFetchUser: (user: User) => void;
@@ -108,6 +103,7 @@ const HomePage = ({ onFetchUser }: Props) => {
   const [isLoading, setIsLoading] = useState(false);
   const [errorMsg, setErrorMsg] = useState('');
   const [isErrorAlertOpen, setIsErrorAlertOpen] = useState(false);
+  const [isLightTheme, setIsLightTheme] = useState(true);
 
   const fetchUser = (userName: string) => {
     setIsLoading(true);
@@ -155,21 +151,37 @@ const HomePage = ({ onFetchUser }: Props) => {
 
   return (
     <Root>
-      <CornerWrapper>
+      <Box
+        sx={{
+          display: 'flex',
+          justifyContent: 'flex-end',
+        }}
+      >
         <GithubCorner />
-      </CornerWrapper>
-      <main>
-        <Heading>
-          <Typography variant="h1">Github</Typography>
-          <Subtitle>
-            <Typography variant="h2">Finder</Typography>
-            <IconWrapper>
-              <GithubIcon />
-            </IconWrapper>
-          </Subtitle>
-        </Heading>
+      </Box>
+      <Stack component="main" spacing={5} alignItems="center" justifyContent="center">
+        <Typography variant="h1">Github</Typography>
+        <Stack direction="row" spacing={1} alignItems="center">
+          <Typography variant="h2">Finder</Typography>
+          <IconWrapper>
+            <GithubIcon />
+          </IconWrapper>
+        </Stack>
         <Finder onFetchUser={fetchUser} isLoading={isLoading} />
-      </main>
+        <Stack direction="row" spacing={1} alignItems="center">
+          <Typography variant="body1" sx={{ fontWeight: isLightTheme ? 300 : 700 }}>
+            Dark theme
+          </Typography>
+          <StyledSwitch
+            {...label}
+            defaultChecked
+            onChange={(event) => setIsLightTheme(event.target.checked)}
+          />
+          <Typography variant="body1" sx={{ fontWeight: isLightTheme ? 700 : 300 }}>
+            Light theme
+          </Typography>
+        </Stack>
+      </Stack>
       <Footer />
       <Snackbar
         open={isErrorAlertOpen}

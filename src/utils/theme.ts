@@ -18,12 +18,8 @@ declare module '@mui/material/styles' {
     overrides: any;
   }
 
-  interface TypographyVariants {
-    body3: any;
-  }
-
   interface PaletteOptions {
-    neutral?: PaletteColorOptions;
+    neutral: PaletteColorOptions;
   }
 }
 
@@ -122,6 +118,7 @@ export const theme = createTheme({
       color: '#6b77a1',
       fontSize: '0.9rem',
       fontWeight: 700,
+      lineHeight: '1.1rem',
     },
     overline: {
       color: '#E1D7EC',

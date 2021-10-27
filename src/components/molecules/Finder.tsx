@@ -55,6 +55,9 @@ const Finder = ({ isLoading, onFetchUser }: Props) => {
         display: 'flex',
         flexDirection: 'row',
         justifyContent: 'center',
+        '@media (max-width: 769px)': {
+          maxWidth: 250,
+        },
       }}
     >
       <StyledTextField
