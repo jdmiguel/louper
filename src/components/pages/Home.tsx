@@ -66,7 +66,7 @@ const IconWrapper = styled('div')(({ theme }) => ({
     width: 44,
     marginLeft: 4,
     '& path': {
-      fill: theme.palette.neutral.main,
+      fill: theme.palette.secondary.contrastText,
     },
     '@media (min-width: 768px)': {
       width: 64,
@@ -97,9 +97,10 @@ const label = { inputProps: { 'aria-label': 'Switch demo' } };
 
 type Props = {
   onFetchUser: (user: User) => void;
+  changeTheme: (isLightTheme: boolean) => void;
 };
 
-const HomePage = ({ onFetchUser }: Props) => {
+const HomePage = ({ onFetchUser, changeTheme }: Props) => {
   const [isLoading, setIsLoading] = useState(false);
   const [errorMsg, setErrorMsg] = useState('');
   const [isErrorAlertOpen, setIsErrorAlertOpen] = useState(false);
@@ -149,6 +150,13 @@ const HomePage = ({ onFetchUser }: Props) => {
 
   const onClose = () => setIsErrorAlertOpen(false);
 
+  const onChangeTheme = (event: any) => {
+    const isLightTheme = event.target.checked;
+
+    setIsLightTheme(isLightTheme);
+    changeTheme(isLightTheme);
+  };
+
   return (
     <Root>
       <Box
@@ -172,11 +180,7 @@ const HomePage = ({ onFetchUser }: Props) => {
           <Typography variant="body1" sx={{ fontWeight: isLightTheme ? 300 : 700 }}>
             Dark theme
           </Typography>
-          <StyledSwitch
-            {...label}
-            defaultChecked
-            onChange={(event) => setIsLightTheme(event.target.checked)}
-          />
+          <StyledSwitch {...label} defaultChecked onChange={onChangeTheme} />
           <Typography variant="body1" sx={{ fontWeight: isLightTheme ? 700 : 300 }}>
             Light theme
           </Typography>

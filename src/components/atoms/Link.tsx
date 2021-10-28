@@ -20,7 +20,7 @@ const StyledLink = styled(MuiLink)(({ theme }) => ({
 }));
 
 const StyledIcon = styled(Icon)(({ theme }) => ({
-  color: theme.palette.primary.dark,
+  color: theme.palette.primary.main,
   fontSize: 22,
   marginRight: 5,
 }));

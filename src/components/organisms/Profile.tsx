@@ -88,7 +88,9 @@ const Profile = ({
       <Typography variant="h4" sx={{ marginBottom: 2 }}>
         {login}
       </Typography>
-      <Typography variant="body2">{bio}</Typography>
+      <Typography variant="body2" sx={{ color: 'text.secondary' }}>
+        {bio}
+      </Typography>
       <Info>
         <LabelWrapper>
           <Label content={`${public_repos}`} withIcon iconType="folder" />

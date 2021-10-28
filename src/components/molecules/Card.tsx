@@ -33,7 +33,7 @@ const Topics = styled('div')({
 });
 
 const Topic = styled('div')(({ theme }) => ({
-  backgroundColor: theme.palette.secondary.main,
+  backgroundColor: theme.palette.secondary.dark,
   borderRadius: 4,
   color: theme.palette.secondary.light,
   padding: '4px 8px',

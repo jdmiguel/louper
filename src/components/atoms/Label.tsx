@@ -21,7 +21,9 @@ type Props = TextProps & IconProps;
 const Label = ({ content, withLowerCase = false, withIcon, iconType }: Props) => (
   <Root>
     {withIcon && <StyledIcon>{iconType}</StyledIcon>}
-    <Typography variant={withLowerCase ? 'body2' : 'h5'}>{content}</Typography>
+    <Typography variant={withLowerCase ? 'body2' : 'h5'} sx={{ color: 'text.secondary' }}>
+      {content}
+    </Typography>
   </Root>
 );
 
