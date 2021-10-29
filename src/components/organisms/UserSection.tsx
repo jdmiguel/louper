@@ -63,7 +63,9 @@ const UserSection = ({
   if (total === 0) {
     return (
       <EmptyMsg>
-        <Typography variant="h6">{emptyMsg}</Typography>
+        <Typography variant="h6" sx={{ color: 'text.secondary' }}>
+          {emptyMsg}
+        </Typography>
       </EmptyMsg>
     );
   }
