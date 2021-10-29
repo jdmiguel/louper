@@ -1,7 +1,7 @@
-import { forwardRef, useState, ReactNode } from 'react';
+import { forwardRef, useState, ReactNode, ChangeEvent } from 'react';
 
 /* material-ui */
-import { styled } from '@mui/material/styles';
+import { styled, useTheme } from '@mui/material/styles';
 import Box from '@mui/material/Box';
 import MuiAlert from '@mui/material/Alert';
 import Typography from '@mui/material/Typography';
@@ -77,15 +77,11 @@ const IconWrapper = styled('div')(({ theme }) => ({
 }));
 
 const StyledSwitch = styled(Switch)(({ theme }) => ({
-  '& .MuiTouchRipple-root': {
-    color: theme.palette.primary.main,
-  },
   '& .MuiSwitch-thumb': {
     color: theme.palette.primary.main,
   },
   '& .MuiSwitch-track': {
-    backgroundColor: theme.palette.primary.main,
-    opacity: 0.5,
+    backgroundColor: theme.palette.primary.light,
   },
 }));
 
@@ -97,17 +93,17 @@ Alert.displayName = 'Alert';
 const label = { inputProps: { 'aria-label': 'Switch demo' } };
 
 type Props = {
-  themeMode: ThemeMode;
   onFetchUser: (user: User) => void;
   changeTheme: (themeMode: ThemeMode) => void;
 };
 
-const HomePage = ({ themeMode, onFetchUser, changeTheme }: Props) => {
+const HomePage = ({ onFetchUser, changeTheme }: Props) => {
   const [isLoading, setIsLoading] = useState(false);
   const [errorMsg, setErrorMsg] = useState('');
   const [isErrorAlertOpen, setIsErrorAlertOpen] = useState(false);
 
-  const isLightTheme = themeMode === 'light';
+  const theme = useTheme();
+  const isLightTheme = theme.palette.mode === 'light';
 
   const fetchUser = (userName: string) => {
     setIsLoading(true);
@@ -153,7 +149,8 @@ const HomePage = ({ themeMode, onFetchUser, changeTheme }: Props) => {
 
   const onClose = () => setIsErrorAlertOpen(false);
 
-  const onChangeTheme = (event: any) => changeTheme(event.target.checked ? 'light' : 'dark');
+  const onChangeTheme = (event: ChangeEvent<HTMLInputElement>) =>
+    changeTheme(event.target.checked ? 'light' : 'dark');
 
   return (
     <Root>
@@ -175,11 +172,11 @@ const HomePage = ({ themeMode, onFetchUser, changeTheme }: Props) => {
         </Stack>
         <Finder onFetchUser={fetchUser} isLoading={isLoading} />
         <Stack direction="row" spacing={1} alignItems="center">
-          <Typography variant="body1" sx={{ fontWeight: isLightTheme ? 300 : 700 }}>
+          <Typography variant="body1" sx={{ opacity: isLightTheme ? 0.5 : 1 }}>
             Dark theme
           </Typography>
-          <StyledSwitch {...label} defaultChecked onChange={onChangeTheme} />
-          <Typography variant="body1" sx={{ fontWeight: isLightTheme ? 700 : 300 }}>
+          <StyledSwitch {...label} checked={isLightTheme} onChange={onChangeTheme} />
+          <Typography variant="body1" sx={{ opacity: isLightTheme ? 1 : 0.5 }}>
             Light theme
           </Typography>
         </Stack>

@@ -27,7 +27,6 @@ const App = () => {
         <UserPage user={user} onBackFinder={() => setUser(null)} />
       ) : (
         <HomePage
-          themeMode={themeMode}
           onFetchUser={(user: User) => setUser(user)}
           changeTheme={(themeMode: ThemeMode) => setThemeMode(themeMode)}
         />

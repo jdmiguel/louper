@@ -1,7 +1,7 @@
 export const sharedColor = {
   white: '#e0e6ef',
   pink: '#c94b73',
-  lightPink: '#ef427a',
+  lightPink: '#e56e94',
   darkGrey: '#353d40',
 };
 

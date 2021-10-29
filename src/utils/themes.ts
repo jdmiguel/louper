@@ -104,12 +104,12 @@ export const lightTheme = createTheme({
     body1: {
       fontSize: '0.9rem',
       fontWeight: 300,
-      lineHeight: '1.1rem',
+      lineHeight: '1.2rem',
     },
     body2: {
       fontSize: '0.9rem',
       fontWeight: 700,
-      lineHeight: '1.1rem',
+      lineHeight: '1.2rem',
     },
     overline: {
       fontSize: '0.7rem',
@@ -118,6 +118,7 @@ export const lightTheme = createTheme({
     },
   },
   palette: {
+    mode: 'light',
     primary: {
       main: sharedColor.pink,
       light: sharedColor.lightPink,
@@ -143,6 +144,7 @@ export const darkTheme = createTheme({
   ...lightTheme,
   palette: {
     ...lightTheme.palette,
+    mode: 'dark',
     secondary: {
       main: darkThemeColor.grey,
       light: darkThemeColor.lightGrey,

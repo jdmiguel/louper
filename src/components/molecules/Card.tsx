@@ -51,6 +51,7 @@ const RepoContent = styled('div')({
   display: 'flex',
   flexDirection: 'column',
   justifyContent: 'space-between',
+  height: '100%',
 });
 
 const UserContent = styled('div')({

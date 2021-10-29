@@ -77,7 +77,7 @@ const Finder = ({ isLoading, onFetchUser }: Props) => {
         }}
         InputProps={{
           endAdornment: (
-            <InputAdornment position="end">
+            <InputAdornment position="end" sx={{ color: 'secondary.light' }}>
               {isLoading ? (
                 <CircularProgress className="loaderIcon" size={22} thickness={4} />
               ) : (
