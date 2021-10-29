@@ -105,7 +105,7 @@ const UserPage = ({ user, onBackFinder }: Props) => {
               total={user.following}
               userName={user.login}
               items={following}
-              request={relatedUsersRequest.followers}
+              request={relatedUsersRequest.following}
               onFetch={(items: Item[]) => setFollowing(items as RelatedUser[])}
               emptyMsg="No followers added"
             />
@@ -116,7 +116,7 @@ const UserPage = ({ user, onBackFinder }: Props) => {
               total={user.followers}
               userName={user.login}
               items={followers}
-              request={relatedUsersRequest.following}
+              request={relatedUsersRequest.followers}
               onFetch={(items: Item[]) => setFollowers(items as RelatedUser[])}
               emptyMsg="No following added"
             />
