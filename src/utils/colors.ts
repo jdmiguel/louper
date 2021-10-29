@@ -1,17 +1,16 @@
-export const color = {
-  light: '#E0E6EF',
-  dark: '#353D40',
-  lightGrey: '#E1D7EC',
-  purple: '#553285',
-  lightPurple: '#7B52AB',
-  darkPurple: '#36175E',
-  blue: '#6b77a1',
-  lightBlue: '#c7cde1',
-  darkBlue: '#565e7a',
-  mauve: '#9c7fbf',
-  lightMauve: '#ad91cf',
-  darkMauve: '#745b93',
-  cyan: '#6497cd',
-  lightCyan: '#7797b9',
-  darkCyan: '#284768',
+export const sharedColor = {
+  white: '#e0e6ef',
+  pink: '#c94b73',
+  lightPink: '#ef427a',
+  darkGrey: '#353d40',
+};
+
+export const lightThemeColor = {
+  grey: '#877d82',
+  lightGrey: '#bbb0b5',
+};
+
+export const darkThemeColor = {
+  grey: '#998991',
+  lightGrey: '#5a5a5a',
 };

@@ -41,12 +41,12 @@ const StyledTab = styled(Tab)(({ theme }) => ({
     minWidth: 200,
   },
   '& .MuiSvgIcon-root': {
-    fill: theme.palette.primary.dark,
+    fill: theme.palette.primary.main,
     marginBottom: '2px !important',
     transition: 'fill ease-out 250ms',
     width: 22,
     '& + span': {
-      color: theme.palette.primary.dark,
+      color: theme.palette.primary.main,
       display: 'none',
       fontSize: '0.9rem',
       transition: 'color ease-out 250ms',

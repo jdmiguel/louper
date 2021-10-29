@@ -23,6 +23,7 @@ import { getUserData } from '../../services/github';
 
 /* types */
 import { User } from '../../utils/types';
+import { ThemeMode } from '../App';
 
 interface AlertProps {
   children?: ReactNode;
@@ -66,7 +67,7 @@ const IconWrapper = styled('div')(({ theme }) => ({
     width: 44,
     marginLeft: 4,
     '& path': {
-      fill: theme.palette.secondary.contrastText,
+      fill: theme.palette.text.primary,
     },
     '@media (min-width: 768px)': {
       width: 64,
@@ -96,15 +97,17 @@ Alert.displayName = 'Alert';
 const label = { inputProps: { 'aria-label': 'Switch demo' } };
 
 type Props = {
+  themeMode: ThemeMode;
   onFetchUser: (user: User) => void;
-  changeTheme: (isLightTheme: boolean) => void;
+  changeTheme: (themeMode: ThemeMode) => void;
 };
 
-const HomePage = ({ onFetchUser, changeTheme }: Props) => {
+const HomePage = ({ themeMode, onFetchUser, changeTheme }: Props) => {
   const [isLoading, setIsLoading] = useState(false);
   const [errorMsg, setErrorMsg] = useState('');
   const [isErrorAlertOpen, setIsErrorAlertOpen] = useState(false);
-  const [isLightTheme, setIsLightTheme] = useState(true);
+
+  const isLightTheme = themeMode === 'light';
 
   const fetchUser = (userName: string) => {
     setIsLoading(true);
@@ -150,12 +153,7 @@ const HomePage = ({ onFetchUser, changeTheme }: Props) => {
 
   const onClose = () => setIsErrorAlertOpen(false);
 
-  const onChangeTheme = (event: any) => {
-    const isLightTheme = event.target.checked;
-
-    setIsLightTheme(isLightTheme);
-    changeTheme(isLightTheme);
-  };
+  const onChangeTheme = (event: any) => changeTheme(event.target.checked ? 'light' : 'dark');
 
   return (
     <Root>

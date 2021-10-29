@@ -33,9 +33,9 @@ const Topics = styled('div')({
 });
 
 const Topic = styled('div')(({ theme }) => ({
-  backgroundColor: theme.palette.secondary.dark,
+  backgroundColor: theme.palette.secondary.main,
   borderRadius: 4,
-  color: theme.palette.secondary.light,
+  color: theme.palette.secondary.contrastText,
   padding: '4px 8px',
   marginBottom: 5,
   marginRight: 5,
@@ -73,7 +73,7 @@ const displayRepoContent = (data: Repo): ReactElement => (
         {data.description}
       </Typography>
     ) : (
-      <Typography variant="h6" sx={{ marginTop: 1 }}>
+      <Typography variant="h6" sx={{ marginTop: 1, color: 'text.disabled' }}>
         No description added
       </Typography>
     )}

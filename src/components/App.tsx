@@ -14,19 +14,22 @@ import { lightTheme, darkTheme } from '../utils/themes';
 /* types */
 import { User } from '../utils/types';
 
+export type ThemeMode = 'light' | 'dark';
+
 const App = () => {
   const [user, setUser] = useState<User | null>(null);
-  const [isLightTheme, setIsLightTheme] = useState(true);
+  const [themeMode, setThemeMode] = useState<ThemeMode>('light');
 
   return (
-    <ThemeProvider theme={isLightTheme ? lightTheme : darkTheme}>
+    <ThemeProvider theme={themeMode === 'light' ? lightTheme : darkTheme}>
       <CssBaseline />
       {user ? (
         <UserPage user={user} onBackFinder={() => setUser(null)} />
       ) : (
         <HomePage
+          themeMode={themeMode}
           onFetchUser={(user: User) => setUser(user)}
-          changeTheme={(isLightTheme: boolean) => setIsLightTheme(isLightTheme)}
+          changeTheme={(themeMode: ThemeMode) => setThemeMode(themeMode)}
         />
       )}
     </ThemeProvider>
