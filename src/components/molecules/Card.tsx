@@ -26,13 +26,6 @@ const Title = styled('div')(({ theme }) => ({
   '& path': { fill: theme.palette.secondary.main },
 }));
 
-const Topics = styled('div')({
-  display: 'flex',
-  flexWrap: 'wrap',
-  marginTop: 14,
-  marginBottom: 12,
-});
-
 const Topic = styled('div')(({ theme }) => ({
   backgroundColor: theme.palette.secondary.main,
   borderRadius: 4,
@@ -44,7 +37,7 @@ const Topic = styled('div')(({ theme }) => ({
 
 const Action = styled('div')(({ theme }) => ({
   borderTop: `1px solid ${theme.palette.secondary.light}`,
-  marginTop: 10,
+  marginTop: 14,
   paddingTop: 10,
 }));
 
@@ -63,7 +56,7 @@ const displayRepoContent = (data: Repo): ReactElement => (
           No description added
         </Typography>
       )}
-      <Topics>
+      <Stack direction="row" sx={{ flexWrap: 'wrap', marginTop: 1.75 }}>
         {data.topics?.length > 0 ? (
           data.topics.map((topic: string) => (
             <Topic key={topic}>
@@ -75,7 +68,7 @@ const displayRepoContent = (data: Repo): ReactElement => (
             <Typography variant="overline">NO TOPICS</Typography>
           </Topic>
         )}
-      </Topics>
+      </Stack>
     </Stack>
     <Action>
       <Link
