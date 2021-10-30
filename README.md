@@ -1,14 +1,8 @@
-## REACT APPLICATION TO DISPLAY GITHUB USER DATA AND HIS REPOSITORIES
+## REACT APPLICATION TO DISPLAY GITHUB USER DATA AND HIS REPOSITORIES, FOLLOWING AND FOLLOWERS
 
 ### TECHNOLOGIES
 
-* **REACT**
-* **JEST**
-* **ENZYME**
-* **AXIOS**
-* **MATERIAL-UI**
-
-### INSTALATION
-
-* **clone repo**: In your folder, open a new terminal and clone the repo
-* **install dependencies**: In your terminal, execute npm install script
+- **REACT**
+- **MATERIAL-UI**
+- **TYPESCRIPT**
+- **AXIOS**

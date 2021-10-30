@@ -7,7 +7,7 @@ import Typography from '@mui/material/Typography';
 
 /* atoms */
 import Avatar from '@mui/material/Avatar';
-import Label from '../atoms/Label';
+import TextTag from '../atoms/TextTag';
 import Link from '../atoms/Link';
 
 /* types */
@@ -52,7 +52,7 @@ const displayRepoContent = (data: Repo): ReactElement => (
   <Stack justifyContent="space-between" sx={{ height: '100%' }}>
     <Stack>
       <Title>
-        <Label content={data.name} withIcon iconType={'folder'} />
+        <TextTag content={data.name} withIcon iconType={'folder'} />
       </Title>
       {data.description ? (
         <Typography variant="body1" sx={{ marginTop: 1 }}>
@@ -98,7 +98,7 @@ const displayUserContent = (user: RelatedUser): ReactElement => (
     />
     <Stack justifyContent="center">
       <Title>
-        <Label content={user.login} withIcon iconType="favorite" />
+        <TextTag content={user.login} withIcon iconType="favorite" />
       </Title>
       <Link
         url={user.html_url}

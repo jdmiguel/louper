@@ -18,7 +18,7 @@ type TextProps = { content: string; withLowerCase?: boolean };
 type IconProps = { withIcon?: false; iconType?: never } | { withIcon: true; iconType?: string };
 type Props = TextProps & IconProps;
 
-const Label = ({ content, withLowerCase = false, withIcon, iconType }: Props) => (
+const TextTag = ({ content, withLowerCase = false, withIcon, iconType }: Props) => (
   <Root>
     {withIcon && <StyledIcon>{iconType}</StyledIcon>}
     <Typography variant={withLowerCase ? 'body2' : 'h5'} sx={{ color: 'text.secondary' }}>
@@ -27,4 +27,4 @@ const Label = ({ content, withLowerCase = false, withIcon, iconType }: Props) =>
   </Root>
 );
 
-export default Label;
+export default TextTag;

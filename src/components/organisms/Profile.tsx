@@ -4,7 +4,7 @@ import Typography from '@mui/material/Typography';
 
 /* atoms */
 import Avatar from '@mui/material/Avatar';
-import Label from '../atoms/Label';
+import TextTag from '../atoms/TextTag';
 import Link from '../atoms/Link';
 
 /* types */
@@ -40,15 +40,7 @@ const Info = styled('div')(({ theme }) => ({
   paddingTop: 10,
 }));
 
-const Actions = styled('div')({
-  marginTop: 20,
-});
-
-const Action = styled('div')({
-  marginBottom: 5,
-});
-
-const LabelWrapper = styled('div')(({ theme }) => ({
+const TextTagWrapper = styled('div')(({ theme }) => ({
   alignItems: 'center',
   color: theme.palette.secondary.main,
   display: 'flex',
@@ -57,6 +49,14 @@ const LabelWrapper = styled('div')(({ theme }) => ({
   marginBottom: 6,
   fontSize: '0.9rem',
 }));
+
+const Actions = styled('div')({
+  marginTop: 20,
+});
+
+const Action = styled('div')({
+  marginBottom: 5,
+});
 
 type Props = {
   user: User;
@@ -92,29 +92,29 @@ const Profile = ({
         {bio}
       </Typography>
       <Info>
-        <LabelWrapper>
-          <Label content={`${public_repos}`} withIcon iconType="folder" />
-        </LabelWrapper>
-        <LabelWrapper>
-          <Label content={`${following}`} withIcon iconType="visibility" />
-        </LabelWrapper>
-        <LabelWrapper>
-          <Label content={`${followers}`} withIcon iconType="favorite" />
-        </LabelWrapper>
+        <TextTagWrapper>
+          <TextTag content={`${public_repos}`} withIcon iconType="folder" />
+        </TextTagWrapper>
+        <TextTagWrapper>
+          <TextTag content={`${following}`} withIcon iconType="visibility" />
+        </TextTagWrapper>
+        <TextTagWrapper>
+          <TextTag content={`${followers}`} withIcon iconType="favorite" />
+        </TextTagWrapper>
         {created_at && (
-          <LabelWrapper>
-            <Label content={buildCreationDate(created_at)} withIcon iconType="event_note" />
-          </LabelWrapper>
+          <TextTagWrapper>
+            <TextTag content={buildCreationDate(created_at)} withIcon iconType="event_note" />
+          </TextTagWrapper>
         )}
         {location && (
-          <LabelWrapper>
-            <Label content={location} withLowerCase withIcon iconType="location_on" />
-          </LabelWrapper>
+          <TextTagWrapper>
+            <TextTag content={location} withLowerCase withIcon iconType="location_on" />
+          </TextTagWrapper>
         )}
         {company && (
-          <LabelWrapper>
-            <Label content={company} withLowerCase withIcon iconType="business" />
-          </LabelWrapper>
+          <TextTagWrapper>
+            <TextTag content={company} withLowerCase withIcon iconType="business" />
+          </TextTagWrapper>
         )}
       </Info>
       <Actions>
