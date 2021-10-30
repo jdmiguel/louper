@@ -1,5 +1,6 @@
 /* material-ui */
 import { styled } from '@mui/material/styles';
+import Stack from '@mui/material/Stack';
 
 const Root = styled('div')(({ theme }) => ({
   flexDirection: 'column',
@@ -20,12 +21,6 @@ const Shimmer = styled('div')(({ theme }) => ({
   willChange: 'background-position-x',
 }));
 
-const RepoContent = styled('div')({
-  display: 'flex',
-  flexDirection: 'column',
-  marginBottom: 8,
-});
-
 const RepoLine = styled('span')(({ theme }) => ({
   backgroundColor: theme.palette.background.default,
   height: 14,
@@ -40,21 +35,11 @@ const RepoDivider = styled('span')(({ theme }) => ({
   width: '100%',
 }));
 
-const UserContent = styled('div')({
-  display: 'flex',
-});
-
 const UserVline = styled('span')(({ theme }) => ({
   backgroundColor: theme.palette.background.default,
   marginLeft: 85,
   width: 16,
 }));
-
-const UserHlines = styled('div')({
-  display: 'flex',
-  flexDirection: 'column',
-  width: '100%',
-});
 
 const UserHline = styled('span')(({ theme }) => ({
   backgroundColor: theme.palette.background.default,
@@ -66,24 +51,24 @@ const UserHline = styled('span')(({ theme }) => ({
 }));
 
 const RepoTheme = (
-  <RepoContent>
+  <Stack justifyContent="center" sx={{ marginBottom: 0.4 }}>
     <RepoLine />
     <RepoLine />
     <RepoLine />
     <RepoDivider />
     <RepoLine />
-  </RepoContent>
+  </Stack>
 );
 
 const UserTheme = (
-  <UserContent>
+  <Stack direction="row">
     <UserVline />
-    <UserHlines>
+    <Stack sx={{ width: '100%' }}>
       <UserHline />
       <UserHline />
       <UserHline />
-    </UserHlines>
-  </UserContent>
+    </Stack>
+  </Stack>
 );
 
 type Props = {

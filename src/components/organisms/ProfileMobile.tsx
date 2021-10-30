@@ -1,5 +1,6 @@
 /* material-ui */
 import { styled } from '@mui/material/styles';
+import Stack from '@mui/material/Stack';
 import Typography from '@mui/material/Typography';
 
 /* atoms */
@@ -16,12 +17,6 @@ const Root = styled('div')({
   },
 });
 
-const Content = styled('div')({
-  display: 'flex',
-  flexDirection: 'column',
-  justifyContent: 'center',
-});
-
 type Props = {
   user: User;
 };
@@ -29,12 +24,12 @@ type Props = {
 const ProfileMobile = ({ user: { avatar_url, name, login } }: Props) => (
   <Root>
     <Avatar alt="user avatar" src={avatar_url} sx={{ width: 100, height: 100, marginRight: 2.8 }} />
-    <Content>
+    <Stack justifyContent="center">
       <Typography variant="h3" sx={{ marginBottom: 0.2 }}>
         {name}
       </Typography>
       <Typography variant="h4">{login}</Typography>
-    </Content>
+    </Stack>
   </Root>
 );
 

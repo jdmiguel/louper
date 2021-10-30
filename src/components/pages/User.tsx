@@ -2,6 +2,7 @@ import { useState } from 'react';
 
 /* material-ui */
 import { styled } from '@mui/material/styles';
+import Stack from '@mui/material/Stack';
 
 /* organisms */
 import Profile from '../organisms/Profile';
@@ -30,14 +31,6 @@ const ProfileWrapper = styled('aside')({
   margin: '60px 40px 0 0',
   '@media (max-width: 768px)': {
     display: 'none',
-  },
-});
-
-const Content = styled('div')({
-  display: 'flex',
-  flexDirection: 'column',
-  '@media (max-width: 992px)': {
-    width: '100%',
   },
 });
 
@@ -77,7 +70,13 @@ const UserPage = ({ user, onBackFinder }: Props) => {
       <ProfileWrapper>
         <Profile user={user} />
       </ProfileWrapper>
-      <Content>
+      <Stack
+        sx={{
+          '@media (max-width: 992px)': {
+            width: '100%',
+          },
+        }}
+      >
         <ProfileMobile user={user} />
         <Menu
           onClick={(section: number) => {
@@ -122,7 +121,7 @@ const UserPage = ({ user, onBackFinder }: Props) => {
             />
           )}
         </SectionWrapper>
-      </Content>
+      </Stack>
     </Root>
   );
 };

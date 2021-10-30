@@ -3,10 +3,10 @@ import { forwardRef, useState, ReactNode, ChangeEvent } from 'react';
 /* material-ui */
 import { styled, useTheme } from '@mui/material/styles';
 import Box from '@mui/material/Box';
+import Stack from '@mui/material/Stack';
 import MuiAlert from '@mui/material/Alert';
 import Typography from '@mui/material/Typography';
 import Switch from '@mui/material/Switch';
-import Stack from '@mui/material/Stack';
 import Snackbar from '@mui/material/Snackbar';
 import { AlertColor } from '@mui/material/Alert';
 
@@ -90,7 +90,7 @@ const Alert = forwardRef<HTMLDivElement, AlertProps>((props, ref) => (
 ));
 Alert.displayName = 'Alert';
 
-const label = { inputProps: { 'aria-label': 'Switch demo' } };
+const label = { inputProps: { 'aria-label': 'Switch theme' } };
 
 type Props = {
   onFetchUser: (user: User) => void;

@@ -2,6 +2,7 @@ import { ReactElement } from 'react';
 
 /* material-ui */
 import { styled } from '@mui/material/styles';
+import Stack from '@mui/material/Stack';
 import Typography from '@mui/material/Typography';
 
 /* atoms */
@@ -47,50 +48,35 @@ const Action = styled('div')(({ theme }) => ({
   paddingTop: 10,
 }));
 
-const RepoContent = styled('div')({
-  display: 'flex',
-  flexDirection: 'column',
-  justifyContent: 'space-between',
-  height: '100%',
-});
-
-const UserContent = styled('div')({
-  display: 'flex',
-});
-
-const UserText = styled('div')({
-  display: 'flex',
-  flexDirection: 'column',
-  justifyContent: 'center',
-});
-
 const displayRepoContent = (data: Repo): ReactElement => (
-  <RepoContent>
-    <Title>
-      <Label content={data.name} withIcon iconType={'folder'} />
-    </Title>
-    {data.description ? (
-      <Typography variant="body1" sx={{ marginTop: 1 }}>
-        {data.description}
-      </Typography>
-    ) : (
-      <Typography variant="h6" sx={{ marginTop: 1, color: 'text.disabled' }}>
-        No description added
-      </Typography>
-    )}
-    <Topics>
-      {data.topics?.length > 0 ? (
-        data.topics.map((topic: string) => (
-          <Topic key={topic}>
-            <Typography variant="overline">{topic}</Typography>
-          </Topic>
-        ))
+  <Stack justifyContent="space-between" sx={{ height: '100%' }}>
+    <Stack>
+      <Title>
+        <Label content={data.name} withIcon iconType={'folder'} />
+      </Title>
+      {data.description ? (
+        <Typography variant="body1" sx={{ marginTop: 1 }}>
+          {data.description}
+        </Typography>
       ) : (
-        <Topic>
-          <Typography variant="overline">NO TOPICS</Typography>
-        </Topic>
+        <Typography variant="h6" sx={{ marginTop: 1, color: 'text.disabled' }}>
+          No description added
+        </Typography>
       )}
-    </Topics>
+      <Topics>
+        {data.topics?.length > 0 ? (
+          data.topics.map((topic: string) => (
+            <Topic key={topic}>
+              <Typography variant="overline">{topic}</Typography>
+            </Topic>
+          ))
+        ) : (
+          <Topic>
+            <Typography variant="overline">NO TOPICS</Typography>
+          </Topic>
+        )}
+      </Topics>
+    </Stack>
     <Action>
       <Link
         url={data.html_url}
@@ -100,17 +86,17 @@ const displayRepoContent = (data: Repo): ReactElement => (
         iconType="folder_open"
       />
     </Action>
-  </RepoContent>
+  </Stack>
 );
 
 const displayUserContent = (user: RelatedUser): ReactElement => (
-  <UserContent>
+  <Stack direction="row">
     <Avatar
       alt="user following avatar"
       src={user.avatar_url}
       sx={{ width: 80, height: 80, marginRight: 2, position: 'initial' }}
     />
-    <UserText>
+    <Stack justifyContent="center">
       <Title>
         <Label content={user.login} withIcon iconType="favorite" />
       </Title>
@@ -121,8 +107,8 @@ const displayUserContent = (user: RelatedUser): ReactElement => (
         withIcon
         iconType="person"
       />
-    </UserText>
-  </UserContent>
+    </Stack>
+  </Stack>
 );
 
 type Props = {
