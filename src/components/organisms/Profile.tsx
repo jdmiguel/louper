@@ -1,0 +1,157 @@
+/* material-ui */
+import { styled } from '@mui/material/styles';
+import Typography from '@mui/material/Typography';
+
+/* atoms */
+import Avatar from '@mui/material/Avatar';
+import Label from '../atoms/Label';
+import Link from '../atoms/Link';
+
+/* types */
+import { User } from '../../utils/types';
+
+const buildCreationDate = (date: string) => {
+  const newDate = new Date(date);
+  const formattedDate = newDate.toLocaleString();
+
+  return formattedDate.slice(0, formattedDate.indexOf(','));
+};
+
+const Root = styled('div')({
+  display: 'flex',
+  flexDirection: 'column',
+  maxWidth: 240,
+  position: 'sticky',
+  top: 60,
+});
+
+const Content = styled('div')({
+  marginTop: 20,
+  maxWidth: 300,
+});
+
+const Info = styled('div')(({ theme }) => ({
+  borderBottom: `1px solid ${theme.palette.secondary.light}`,
+  borderTop: `1px solid ${theme.palette.secondary.light}`,
+  display: 'flex',
+  flexWrap: 'wrap',
+  marginTop: 24,
+  paddingBottom: 10,
+  paddingTop: 10,
+}));
+
+const Actions = styled('div')({
+  marginTop: 20,
+});
+
+const Action = styled('div')({
+  marginBottom: 5,
+});
+
+const LabelWrapper = styled('div')(({ theme }) => ({
+  alignItems: 'center',
+  color: theme.palette.secondary.main,
+  display: 'flex',
+  justifyContent: 'center',
+  marginRight: 12,
+  marginBottom: 6,
+  fontSize: '0.9rem',
+}));
+
+type Props = {
+  user: User;
+};
+
+const Profile = ({
+  user: {
+    avatar_url,
+    name,
+    login,
+    bio,
+    public_repos,
+    following,
+    followers,
+    created_at,
+    location,
+    company,
+    html_url,
+    email,
+    blog,
+  },
+}: Props) => (
+  <Root>
+    <Avatar alt="user avatar" src={avatar_url} sx={{ width: 240, height: 240 }} />
+    <Content>
+      <Typography variant="h3" sx={{ marginBottom: 0.4 }}>
+        {name}
+      </Typography>
+      <Typography variant="h4" sx={{ marginBottom: 2 }}>
+        {login}
+      </Typography>
+      <Typography variant="body2" sx={{ color: 'text.secondary' }}>
+        {bio}
+      </Typography>
+      <Info>
+        <LabelWrapper>
+          <Label content={`${public_repos}`} withIcon iconType="folder" />
+        </LabelWrapper>
+        <LabelWrapper>
+          <Label content={`${following}`} withIcon iconType="visibility" />
+        </LabelWrapper>
+        <LabelWrapper>
+          <Label content={`${followers}`} withIcon iconType="favorite" />
+        </LabelWrapper>
+        {created_at && (
+          <LabelWrapper>
+            <Label content={buildCreationDate(created_at)} withIcon iconType="event_note" />
+          </LabelWrapper>
+        )}
+        {location && (
+          <LabelWrapper>
+            <Label content={location} withLowerCase withIcon iconType="location_on" />
+          </LabelWrapper>
+        )}
+        {company && (
+          <LabelWrapper>
+            <Label content={company} withLowerCase withIcon iconType="business" />
+          </LabelWrapper>
+        )}
+      </Info>
+      <Actions>
+        <Action>
+          <Link
+            url={html_url}
+            ariaLabel={`View ${name} profile on GitHub`}
+            content="VISIT PROFILE"
+            withIcon
+            iconType="person"
+          />
+        </Action>
+        {email && (
+          <Action>
+            <Link
+              url={`mailto:${email}`}
+              ariaLabel={`Send email to ${login}`}
+              content="SEND EMAIL"
+              withIcon
+              iconType="mail_outline"
+            />
+          </Action>
+        )}
+        {blog && (
+          <Action>
+            <Link
+              url={blog}
+              ariaLabel={`View portfolio of ${name}`}
+              content="VISIT PORTFOLIO"
+              withIcon
+              iconType="web_icon"
+            />
+          </Action>
+        )}
+      </Actions>
+    </Content>
+  </Root>
+);
+
+export default Profile;
