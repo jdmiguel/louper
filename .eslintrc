@@ -18,8 +18,9 @@
   },
   "extends": [
     "plugin:@typescript-eslint/recommended",
+    "plugin:prettier/recommended",
     "plugin:react/recommended",
-    "plugin:prettier/recommended"
+    "plugin:react-hooks/recommended"
   ],
   "rules": {
     "@typescript-eslint/explicit-module-boundary-types": "off",

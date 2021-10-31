@@ -1,14 +1,11 @@
-import { forwardRef, useState, ReactNode, ChangeEvent } from 'react';
+import { useState, useEffect, ChangeEvent } from 'react';
 
 /* material-ui */
 import { styled, useTheme } from '@mui/material/styles';
 import Box from '@mui/material/Box';
 import Stack from '@mui/material/Stack';
-import MuiAlert from '@mui/material/Alert';
 import Typography from '@mui/material/Typography';
 import Switch from '@mui/material/Switch';
-import Snackbar from '@mui/material/Snackbar';
-import { AlertColor } from '@mui/material/Alert';
 
 /* atoms */
 import GithubCorner from '../atoms/GithubCorner';
@@ -17,19 +14,14 @@ import GithubIcon from '../atoms/GithubIcon';
 /* molecules */
 import Finder from '../molecules/Finder';
 import Footer from '../molecules/Footer';
+import Toast from '../molecules/Toast';
 
 /* services */
-import { getUserData } from '../../services/github';
+import { fetchUserData, abortControllerUserData } from '../../utils/services';
 
 /* types */
 import { User } from '../../utils/types';
 import { ThemeMode } from '../App';
-
-interface AlertProps {
-  children?: ReactNode;
-  onClose: () => void;
-  severity: AlertColor;
-}
 
 interface ResponseError extends Error {
   code: number;
@@ -45,21 +37,6 @@ const Root = styled('div')({
   flexDirection: 'column',
   justifyContent: 'space-between',
   height: '100vh',
-});
-
-const StyledAlert = styled(MuiAlert)({
-  '& .MuiAlert-icon': {
-    padding: '9px 0',
-  },
-  '& .MuiAlert-message': {
-    padding: '12px 0',
-  },
-  '& .MuiAlert-action': {
-    svg: {
-      height: '1.4rem',
-      width: '1.4rem',
-    },
-  },
 });
 
 const IconWrapper = styled('div')(({ theme }) => ({
@@ -85,11 +62,6 @@ const StyledSwitch = styled(Switch)(({ theme }) => ({
   },
 }));
 
-const Alert = forwardRef<HTMLDivElement, AlertProps>((props, ref) => (
-  <StyledAlert elevation={4} ref={ref} variant="filled" {...props} />
-));
-Alert.displayName = 'Alert';
-
 const label = { inputProps: { 'aria-label': 'Switch theme' } };
 
 type Props = {
@@ -99,16 +71,22 @@ type Props = {
 
 const HomePage = ({ onFetchUser, changeTheme }: Props) => {
   const [isLoading, setIsLoading] = useState(false);
+  const [isErrorToastOpen, setIsErrorToastOpen] = useState(false);
   const [errorMsg, setErrorMsg] = useState('');
-  const [isErrorAlertOpen, setIsErrorAlertOpen] = useState(false);
 
   const theme = useTheme();
   const isLightTheme = theme.palette.mode === 'light';
 
+  useEffect(() => {
+    return () => {
+      abortControllerUserData.abort();
+    };
+  }, []);
+
   const fetchUser = (userName: string) => {
     setIsLoading(true);
 
-    getUserData(userName)
+    fetchUserData(userName)
       .then((user: User) => {
         onFetchUser({
           login: user.login,
@@ -139,15 +117,13 @@ const HomePage = ({ onFetchUser, changeTheme }: Props) => {
             break;
         }
 
-        setIsErrorAlertOpen(true);
+        setIsErrorToastOpen(true);
         setErrorMsg(errorMsg);
       })
       .finally(() => {
         setIsLoading(false);
       });
   };
-
-  const onClose = () => setIsErrorAlertOpen(false);
 
   const onChangeTheme = (event: ChangeEvent<HTMLInputElement>) =>
     changeTheme(event.target.checked ? 'light' : 'dark');
@@ -182,19 +158,12 @@ const HomePage = ({ onFetchUser, changeTheme }: Props) => {
         </Stack>
       </Stack>
       <Footer />
-      <Snackbar
-        open={isErrorAlertOpen}
-        anchorOrigin={{
-          vertical: 'bottom',
-          horizontal: 'right',
-        }}
-        autoHideDuration={3000}
-        onClose={onClose}
-      >
-        <Alert onClose={onClose} severity="error">
-          {errorMsg}
-        </Alert>
-      </Snackbar>
+      <Toast
+        isOpen={isErrorToastOpen}
+        type="error"
+        msg={errorMsg}
+        onClose={() => setIsErrorToastOpen(false)}
+      />
     </Root>
   );
 };

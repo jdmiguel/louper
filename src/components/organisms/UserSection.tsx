@@ -1,4 +1,3 @@
-import { useState, useEffect } from 'react';
 import { v4 as uuidv4 } from 'uuid';
 
 /* material-ui */
@@ -23,42 +22,13 @@ type Item = Repo | RelatedUser;
 type Props = {
   type: SectionType;
   total: number;
-  userName: string;
+  isLoading: boolean;
   items: Item[];
-  request: (userName: string) => Promise<Item[]>;
-  onFetch: (items: Item[]) => void;
   emptyMsg: string;
 };
 
-const UserSection = ({
-  type,
-  total,
-  userName,
-  items,
-  request: fetchItems,
-  onFetch,
-  emptyMsg,
-}: Props) => {
-  const [isLoading, setIsLoading] = useState(false);
-
+const UserSection = ({ type, total, isLoading, items, emptyMsg }: Props) => {
   const isRepoType = type === 'REPO';
-
-  useEffect(() => {
-    if (items.length > 0) {
-      return;
-    }
-
-    setIsLoading(true);
-
-    fetchItems(userName)
-      .then((items) => {
-        setIsLoading(false);
-        onFetch(items);
-      })
-      .catch((error) => {
-        throw error;
-      });
-  }, []);
 
   if (total === 0) {
     return (

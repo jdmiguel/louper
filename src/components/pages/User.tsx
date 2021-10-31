@@ -1,19 +1,27 @@
-import { useState } from 'react';
+import { useState, useEffect, useMemo, useCallback } from 'react';
 
 /* material-ui */
 import { styled } from '@mui/material/styles';
 import Stack from '@mui/material/Stack';
+
+/* molecules */
+import Menu from '../molecules/Menu';
+import Toast from '../molecules/Toast';
 
 /* organisms */
 import Profile from '../organisms/Profile';
 import ProfileMobile from '../organisms/ProfileMobile';
 import UserSection from '../organisms/UserSection';
 
-/* molecules */
-import Menu from '../molecules/Menu';
-
 /* services */
-import { getRepos, getFollowing, getFollowers } from '../../services/github';
+import {
+  abortControllerRepos,
+  fetchRepos,
+  abortControllerFollowers,
+  fetchFollowing,
+  abortControllerFollowing,
+  fetchFollowers,
+} from '../../utils/services';
 
 /* types */
 import { User, Repo, RelatedUser } from '../../utils/types';
@@ -47,23 +55,91 @@ const SectionWrapper = styled('main')({
   },
 });
 
-const relatedUsersRequest = {
-  repos: getRepos,
-  following: getFollowing,
-  followers: getFollowers,
+const requestSettings = {
+  repos: {
+    fetchRequest: fetchRepos,
+    abortController: abortControllerRepos,
+  },
+  following: {
+    fetchRequest: fetchFollowing,
+    abortController: abortControllerFollowing,
+  },
+  followers: {
+    fetchRequest: fetchFollowers,
+    abortController: abortControllerFollowers,
+  },
 };
 
-type Item = Repo | RelatedUser;
 type Props = {
   user: User;
   onBackFinder: () => void;
 };
 
 const UserPage = ({ user, onBackFinder }: Props) => {
+  const [isLoading, setIsLoading] = useState(false);
+  const [isErrorToastOpen, setIsErrorToastOpen] = useState(false);
   const [activeSection, setActiveUserSection] = useState(0);
   const [repos, setRepos] = useState<Repo[]>([]);
   const [following, setFollowing] = useState<RelatedUser[]>([]);
   const [followers, setFollowers] = useState<RelatedUser[]>([]);
+
+  const isRequestAllowed = useMemo(
+    () =>
+      (activeSection === 0 && repos.length > 0) ||
+      (activeSection === 1 && following.length > 0) ||
+      (activeSection === 2 && followers.length > 0),
+    [activeSection, repos, following, followers],
+  );
+
+  const getRequestSettings = useCallback(() => {
+    switch (activeSection) {
+      case 0:
+      default:
+        return requestSettings.repos;
+      case 1:
+        return requestSettings.following;
+      case 2:
+        return requestSettings.followers;
+    }
+  }, [activeSection]);
+
+  const selectItemsSetter = useCallback(() => {
+    switch (activeSection) {
+      case 0:
+      default:
+        return setRepos;
+      case 1:
+        return setFollowing;
+      case 2:
+        return setFollowers;
+    }
+  }, [activeSection]);
+
+  useEffect(() => {
+    if (isRequestAllowed) {
+      return;
+    }
+
+    setIsLoading(true);
+
+    const setItems = selectItemsSetter();
+    const { fetchRequest, abortController } = getRequestSettings();
+
+    fetchRequest(user.login)
+      .then((items) => {
+        setItems(items);
+      })
+      .catch(() => {
+        setIsErrorToastOpen(true);
+      })
+      .finally(() => {
+        setIsLoading(false);
+      });
+
+    return () => {
+      abortController.abort();
+    };
+  }, [selectItemsSetter, getRequestSettings, isRequestAllowed, user.login]);
 
   return (
     <Root>
@@ -91,10 +167,8 @@ const UserPage = ({ user, onBackFinder }: Props) => {
             <UserSection
               type="REPO"
               total={user.public_repos}
-              userName={user.login}
+              isLoading={isLoading}
               items={repos}
-              request={relatedUsersRequest.repos}
-              onFetch={(repos: Item[]) => setRepos(repos as Repo[])}
               emptyMsg="No repos added"
             />
           )}
@@ -102,26 +176,28 @@ const UserPage = ({ user, onBackFinder }: Props) => {
             <UserSection
               type="RELATED_USER"
               total={user.following}
-              userName={user.login}
+              isLoading={isLoading}
               items={following}
-              request={relatedUsersRequest.following}
-              onFetch={(items: Item[]) => setFollowing(items as RelatedUser[])}
-              emptyMsg="No followers added"
+              emptyMsg="No following added"
             />
           )}
           {activeSection === 2 && (
             <UserSection
               type="RELATED_USER"
               total={user.followers}
-              userName={user.login}
+              isLoading={isLoading}
               items={followers}
-              request={relatedUsersRequest.followers}
-              onFetch={(items: Item[]) => setFollowers(items as RelatedUser[])}
-              emptyMsg="No following added"
+              emptyMsg="No followers added"
             />
           )}
         </SectionWrapper>
       </Stack>
+      <Toast
+        isOpen={isErrorToastOpen}
+        type="error"
+        msg="Sorry! there was an error on the server side."
+        onClose={() => setIsErrorToastOpen(false)}
+      />
     </Root>
   );
 };
