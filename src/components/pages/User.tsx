@@ -14,14 +14,7 @@ import ProfileMobile from '../organisms/ProfileMobile';
 import UserSection from '../organisms/UserSection';
 
 /* services */
-import {
-  abortControllerRepos,
-  fetchRepos,
-  abortControllerFollowers,
-  fetchFollowing,
-  abortControllerFollowing,
-  fetchFollowers,
-} from '../../utils/services';
+import { BASE_URL, handleErrors } from '../../utils/services';
 
 /* types */
 import { User, Repo, RelatedUser } from '../../utils/types';
@@ -55,21 +48,6 @@ const SectionWrapper = styled('main')({
   },
 });
 
-const requestSettings = {
-  repos: {
-    fetchRequest: fetchRepos,
-    abortController: abortControllerRepos,
-  },
-  following: {
-    fetchRequest: fetchFollowing,
-    abortController: abortControllerFollowing,
-  },
-  followers: {
-    fetchRequest: fetchFollowers,
-    abortController: abortControllerFollowers,
-  },
-};
-
 type Props = {
   user: User;
   onBackFinder: () => void;
@@ -91,18 +69,6 @@ const UserPage = ({ user, onBackFinder }: Props) => {
     [activeSection, repos, following, followers],
   );
 
-  const getRequestSettings = useCallback(() => {
-    switch (activeSection) {
-      case 0:
-      default:
-        return requestSettings.repos;
-      case 1:
-        return requestSettings.following;
-      case 2:
-        return requestSettings.followers;
-    }
-  }, [activeSection]);
-
   const selectItemsSetter = useCallback(() => {
     switch (activeSection) {
       case 0:
@@ -115,6 +81,30 @@ const UserPage = ({ user, onBackFinder }: Props) => {
     }
   }, [activeSection]);
 
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  const abortController = useMemo(() => new AbortController(), [activeSection]);
+
+  const getRequest = useCallback(
+    (userName: string) => {
+      switch (activeSection) {
+        case 0:
+        default:
+          return fetch(`${BASE_URL}/users/${userName}/repos`, {
+            signal: abortController.signal,
+          }).then(handleErrors);
+        case 1:
+          return fetch(`${BASE_URL}/users/${userName}/following`, {
+            signal: abortController.signal,
+          }).then(handleErrors);
+        case 2:
+          return fetch(`${BASE_URL}/users/${userName}/followers`, {
+            signal: abortController.signal,
+          }).then(handleErrors);
+      }
+    },
+    [activeSection, abortController],
+  );
+
   useEffect(() => {
     if (isRequestAllowed) {
       return;
@@ -123,9 +113,8 @@ const UserPage = ({ user, onBackFinder }: Props) => {
     setIsLoading(true);
 
     const setItems = selectItemsSetter();
-    const { fetchRequest, abortController } = getRequestSettings();
 
-    fetchRequest(user.login)
+    getRequest(user.login)
       .then((items) => {
         setItems(items);
       })
@@ -139,7 +128,7 @@ const UserPage = ({ user, onBackFinder }: Props) => {
     return () => {
       abortController.abort();
     };
-  }, [selectItemsSetter, getRequestSettings, isRequestAllowed, user.login]);
+  }, [getRequest, selectItemsSetter, isRequestAllowed, user.login, abortController]);
 
   return (
     <Root>

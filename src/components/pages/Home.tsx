@@ -1,4 +1,4 @@
-import { useState, useEffect, ChangeEvent } from 'react';
+import { useState, useEffect, useMemo, ChangeEvent } from 'react';
 
 /* material-ui */
 import { styled, useTheme } from '@mui/material/styles';
@@ -17,7 +17,7 @@ import Footer from '../molecules/Footer';
 import Toast from '../molecules/Toast';
 
 /* services */
-import { fetchUserData, abortControllerUserData } from '../../utils/services';
+import { BASE_URL, handleErrors } from '../../utils/services';
 
 /* types */
 import { User } from '../../utils/types';
@@ -77,16 +77,19 @@ const HomePage = ({ onFetchUser, changeTheme }: Props) => {
   const theme = useTheme();
   const isLightTheme = theme.palette.mode === 'light';
 
+  const abortController = useMemo(() => new AbortController(), []);
+
   useEffect(() => {
     return () => {
-      abortControllerUserData.abort();
+      abortController.abort();
     };
-  }, []);
+  }, [abortController]);
 
   const fetchUser = (userName: string) => {
     setIsLoading(true);
 
-    fetchUserData(userName)
+    fetch(`${BASE_URL}/users/${userName}`, { signal: abortController.signal })
+      .then(handleErrors)
       .then((user: User) => {
         onFetchUser({
           login: user.login,
