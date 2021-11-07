@@ -24,7 +24,6 @@ const GithubCornerRoot = styled('a')(({ theme }) => ({
 const GithubCorner = () => (
   <GithubCornerRoot
     href="https://github.com/jdmiguel/github_finder"
-    target="_blank"
     rel="noopener noreferrer"
     aria-label="View source on GitHub"
   >
