@@ -12,6 +12,7 @@ import SearchIcon from '@mui/icons-material/Search';
 const Root = styled('header')({
   position: 'sticky',
   top: 0,
+  zIndex: 1,
 });
 
 const StyledTabs = styled(Tabs)(({ theme }) => ({

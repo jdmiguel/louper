@@ -26,6 +26,13 @@ const Title = styled('div')(({ theme }) => ({
   '& path': { fill: theme.palette.secondary.main },
 }));
 
+const AvatarWrapper = styled('div')({
+  height: 80,
+  marginRight: 20,
+  position: 'relative',
+  width: 80,
+});
+
 const Topic = styled('div')(({ theme }) => ({
   backgroundColor: theme.palette.secondary.main,
   borderRadius: 4,
@@ -84,11 +91,15 @@ const displayRepoContent = (data: Repo): ReactElement => (
 
 const displayUserContent = (user: RelatedUser): ReactElement => (
   <Stack direction="row">
-    <Avatar
-      alt="user following avatar"
-      src={user.avatar_url}
-      sx={{ width: 80, height: 80, marginRight: 2, position: 'initial' }}
-    />
+    <AvatarWrapper>
+      <Avatar variant="rounded" sx={{ height: 80, width: 80, position: 'absolute' }} />
+      <Avatar
+        alt="user following avatar"
+        variant="rounded"
+        src={user.avatar_url}
+        sx={{ height: 80, width: 80, position: 'absolute' }}
+      />
+    </AvatarWrapper>
     <Stack justifyContent="center">
       <Title>
         <TextTag content={user.login} withIcon iconType="favorite" />
