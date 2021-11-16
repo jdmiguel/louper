@@ -25,6 +25,12 @@ const Root = styled('div')({
   top: 60,
 });
 
+const AvatarWrapper = styled('div')({
+  height: 240,
+  position: 'relative',
+  width: 240,
+});
+
 const Content = styled('div')({
   marginTop: 20,
   maxWidth: 300,
@@ -80,7 +86,14 @@ const Profile = ({
   },
 }: Props) => (
   <Root>
-    <Avatar alt="user avatar" src={avatar_url} sx={{ width: 240, height: 240 }} />
+    <AvatarWrapper>
+      <Avatar sx={{ width: 240, height: 240, position: 'absolute' }} />
+      <Avatar
+        alt="user avatar"
+        src={avatar_url}
+        sx={{ width: 240, height: 240, position: 'absolute' }}
+      />
+    </AvatarWrapper>
     <Content>
       <Typography variant="h3" sx={{ marginBottom: 0.4 }}>
         {name}
