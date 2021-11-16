@@ -37,7 +37,7 @@ const Root = styled('div')({
 
 const IconWrapper = styled('div')(({ theme }) => ({
   '& svg': {
-    width: 44,
+    width: 50,
     marginLeft: 4,
     '& path': {
       fill: theme.palette.text.primary,
@@ -139,7 +139,7 @@ const HomePage = ({ onFetchUser, changeTheme }: Props) => {
       </Box>
       <Stack component="main" spacing={5} alignItems="center" justifyContent="center">
         <Typography variant="h1">Github</Typography>
-        <Stack direction="row" spacing={1} alignItems="center">
+        <Stack direction="row" spacing={0.5} alignItems="center">
           <Typography variant="h2">Finder</Typography>
           <IconWrapper>
             <GithubIcon />

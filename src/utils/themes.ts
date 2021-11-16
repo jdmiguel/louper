@@ -61,30 +61,31 @@ export const lightTheme = createTheme({
       fontWeight: 700,
       letterSpacing: '-0.25rem',
       lineHeight: 0,
-      '@media (min-width: 769px)': {
-        fontSize: '6rem',
+      '@media (min-width: 768px)': {
+        fontSize: '5.8rem',
+        lineHeight: 0.2,
       },
     },
     h2: {
-      fontSize: '3.5rem',
+      fontSize: '3.6rem',
       fontWeight: 300,
       letterSpacing: '-0.1rem',
       lineHeight: 0,
-      '@media (min-width: 769px)': {
+      '@media (min-width: 768px)': {
         fontSize: '4.2rem',
       },
     },
     h3: {
       fontSize: '1.3rem',
       fontWeight: 700,
-      '@media (min-width: 769px)': {
+      '@media (min-width: 768px)': {
         fontSize: '1.5rem',
       },
     },
     h4: {
       fontSize: '1.1rem',
       fontWeight: 500,
-      '@media (min-width: 769px)': {
+      '@media (min-width: 768px)': {
         fontSize: '1.2rem',
       },
     },

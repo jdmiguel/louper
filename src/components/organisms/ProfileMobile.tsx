@@ -12,7 +12,7 @@ import { User } from '../../utils/types';
 const Root = styled('div')({
   display: 'flex',
   marginTop: 20,
-  '@media (min-width: 769px)': {
+  '@media (min-width: 768px)': {
     display: 'none',
   },
 });

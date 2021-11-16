@@ -55,7 +55,7 @@ const Finder = ({ isLoading, onFetchUser }: Props) => {
         display: 'flex',
         flexDirection: 'row',
         justifyContent: 'center',
-        '@media (max-width: 769px)': {
+        '@media (max-width: 767px)': {
           maxWidth: 250,
         },
       }}

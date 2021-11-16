@@ -23,7 +23,7 @@ const Root = styled('div')({
   display: 'flex',
   justifyContent: 'center',
   padding: '0 20px 50px',
-  '@media (min-width: 769px)': {
+  '@media (min-width: 768px)': {
     padding: '0 30px 50px',
   },
 });
