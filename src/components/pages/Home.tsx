@@ -16,16 +16,12 @@ import Finder from '../molecules/Finder';
 import Footer from '../molecules/Footer';
 import Toast from '../molecules/Toast';
 
-/* services */
-import { BASE_URL, handleErrors } from '../../utils/services';
+/* request */
+import { ResponseError, BASE_URL, handleErrors } from '../../utils/request';
 
 /* types */
 import { User } from '../../utils/types';
 import { ThemeMode } from '../App';
-
-interface ResponseError extends Error {
-  code: number;
-}
 
 enum ErrorMsg {
   MAX = 'You have excedeed the maximum allowed request. Please, wait for a while',

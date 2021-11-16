@@ -13,8 +13,8 @@ import Profile from '../organisms/Profile';
 import ProfileMobile from '../organisms/ProfileMobile';
 import UserSection from '../organisms/UserSection';
 
-/* services */
-import { BASE_URL, handleErrors } from '../../utils/services';
+/* request */
+import { ResponseError, BASE_URL, handleErrors } from '../../utils/request';
 
 /* types */
 import { User, Repo, RelatedUser } from '../../utils/types';
@@ -118,7 +118,10 @@ const UserPage = ({ user, onBackFinder }: Props) => {
       .then((items) => {
         setItems(items);
       })
-      .catch(() => {
+      .catch((error: ResponseError) => {
+        if (error.code === 20) {
+          return;
+        }
         setIsErrorToastOpen(true);
       })
       .finally(() => {

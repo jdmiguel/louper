@@ -1,3 +1,7 @@
+export interface ResponseError extends Error {
+  code: number;
+}
+
 export const BASE_URL = 'https://api.github.com';
 
 export const handleErrors = (response: Response) => {
