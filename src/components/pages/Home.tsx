@@ -32,10 +32,7 @@ const Root = styled('div')({
   display: 'flex',
   flexDirection: 'column',
   justifyContent: 'space-between',
-  height: '95vh',
-  '@media (min-width: 768px)': {
-    height: '100vh',
-  },
+  height: '100vh',
 });
 
 const IconWrapper = styled('div')(({ theme }) => ({
