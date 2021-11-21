@@ -2,6 +2,8 @@
 import { styled } from '@mui/material/styles';
 
 const GithubCornerRoot = styled('a')(({ theme }) => ({
+  opacity: 0,
+  visibility: 'hidden',
   '& svg': {
     fill: theme.palette.primary.main,
     color: theme.palette.background.default,
@@ -18,6 +20,10 @@ const GithubCornerRoot = styled('a')(({ theme }) => ({
   '& path:not(:first-of-type)': {
     fill: theme.palette.background.default,
     transformOrigin: '130px 106px',
+  },
+  '@media (min-width: 1200px)': {
+    opacity: 1,
+    visibility: 'visible',
   },
 }));
 
