@@ -1,15 +1,13 @@
-import { useState, useEffect, useMemo, ChangeEvent } from 'react';
+import { useState, useEffect, useMemo } from 'react';
 
 /* material-ui */
-import { styled, useTheme } from '@mui/material/styles';
+import { styled } from '@mui/material/styles';
 import Box from '@mui/material/Box';
-import Stack from '@mui/material/Stack';
 import Typography from '@mui/material/Typography';
-import Switch from '@mui/material/Switch';
 
 /* atoms */
-import GithubCorner from '../atoms/GithubCorner';
-import GithubIcon from '../atoms/GithubIcon';
+import Logo from '../atoms/Logo';
+import Corner from '../atoms/Corner';
 
 /* molecules */
 import Finder from '../molecules/Finder';
@@ -29,36 +27,14 @@ enum ErrorMsg {
 }
 
 const Root = styled('div')({
-  display: 'flex',
-  flexDirection: 'column',
-  justifyContent: 'space-between',
   height: '100vh',
 });
 
-const IconWrapper = styled('div')(({ theme }) => ({
-  '& svg': {
-    width: 50,
-    marginLeft: 4,
-    '& path': {
-      fill: theme.palette.text.primary,
-    },
-    '@media (min-width: 768px)': {
-      width: 64,
-      marginLeft: 12,
-    },
-  },
-}));
-
-const StyledSwitch = styled(Switch)(({ theme }) => ({
-  '& .MuiSwitch-thumb': {
-    color: theme.palette.primary.main,
-  },
-  '& .MuiSwitch-track': {
-    backgroundColor: theme.palette.primary.light,
-  },
-}));
-
-const label = { inputProps: { 'aria-label': 'Switch theme' } };
+const Main = styled('main')({
+  alignItems: 'center',
+  display: 'flex',
+  flexDirection: 'column',
+});
 
 type Props = {
   onFetchUser: (user: User) => void;
@@ -69,9 +45,6 @@ const HomePage = ({ onFetchUser, changeTheme }: Props) => {
   const [isLoading, setIsLoading] = useState(false);
   const [isErrorToastOpen, setIsErrorToastOpen] = useState(false);
   const [errorMsg, setErrorMsg] = useState('');
-
-  const theme = useTheme();
-  const isLightTheme = theme.palette.mode === 'light';
 
   const abortController = useMemo(() => new AbortController(), []);
 
@@ -135,9 +108,6 @@ const HomePage = ({ onFetchUser, changeTheme }: Props) => {
       });
   };
 
-  const onChangeTheme = (event: ChangeEvent<HTMLInputElement>) =>
-    changeTheme(event.target.checked ? 'light' : 'dark');
-
   return (
     <Root>
       <Box
@@ -146,28 +116,21 @@ const HomePage = ({ onFetchUser, changeTheme }: Props) => {
           justifyContent: 'flex-end',
         }}
       >
-        <GithubCorner />
+        <Corner />
       </Box>
-      <Stack component="main" spacing={5} alignItems="center" justifyContent="center">
-        <Typography variant="h1">Github</Typography>
-        <Stack direction="row" spacing={0.5} alignItems="center">
-          <Typography variant="h2">Finder</Typography>
-          <IconWrapper>
-            <GithubIcon />
-          </IconWrapper>
-        </Stack>
+      <Main>
+        <Logo />
+        <Typography
+          variant="h2"
+          sx={{
+            marginBottom: '40px',
+          }}
+        >
+          Search and find any Github user!
+        </Typography>
         <Finder isLoading={isLoading} onFetchUsers={fetchUsers} onFetchUser={fetchUser} />
-        <Stack direction="row" spacing={1} alignItems="center">
-          <Typography variant="body1" sx={{ opacity: isLightTheme ? 0.5 : 1 }}>
-            Dark theme
-          </Typography>
-          <StyledSwitch {...label} checked={isLightTheme} onChange={onChangeTheme} />
-          <Typography variant="body1" sx={{ opacity: isLightTheme ? 1 : 0.5 }}>
-            Light theme
-          </Typography>
-        </Stack>
-      </Stack>
-      <Footer />
+      </Main>
+      <Footer changeTheme={changeTheme} />
       <Toast
         isOpen={isErrorToastOpen}
         type="error"

@@ -56,24 +56,10 @@ export const lightTheme = createTheme({
   typography: {
     fontFamily: ['Comfortaa', 'Arial', 'sans-serif'].join(','),
     htmlFontSize: 12,
-    h1: {
-      fontSize: '4.8rem',
-      fontWeight: 700,
-      letterSpacing: '-0.25rem',
-      lineHeight: 0,
-      '@media (min-width: 768px)': {
-        fontSize: '5.8rem',
-        lineHeight: 0.2,
-      },
-    },
     h2: {
-      fontSize: '3.6rem',
+      fontSize: '1.3rem',
       fontWeight: 300,
-      letterSpacing: '-0.1rem',
       lineHeight: 0,
-      '@media (min-width: 768px)': {
-        fontSize: '4.2rem',
-      },
     },
     h3: {
       fontSize: '1.3rem',

@@ -13,6 +13,10 @@ const StyledTextField = styled(TextField)({
   '& .MuiOutlinedInput-root': {
     borderTopRightRadius: 0,
     borderBottomRightRadius: 0,
+    minWidth: 390,
+    '@media (max-width: 767px)': {
+      minWidth: 250,
+    },
   },
 });
 
@@ -62,9 +66,6 @@ const Finder = ({ isLoading, onFetchUsers, onFetchUser }: Props) => {
         display: 'flex',
         flexDirection: 'row',
         justifyContent: 'center',
-        '@media (max-width: 767px)': {
-          maxWidth: 250,
-        },
       }}
     >
       <StyledTextField
