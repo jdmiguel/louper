@@ -6,8 +6,9 @@ import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 
 /* atoms */
-import Logo from '../atoms/Logo';
 import Corner from '../atoms/Corner';
+import Logo from '../atoms/Logo';
+import Watermark from '../atoms/Watermark';
 
 /* molecules */
 import Finder from '../molecules/Finder';
@@ -28,12 +29,24 @@ enum ErrorMsg {
 
 const Root = styled('div')({
   height: '100vh',
+  backgroundImage: 'url("/bg.svg")',
+  backgroundRepeat: 'no-repeat',
+  backgroundPosition: 'center',
+  backgroundSize: 'contain',
+  backgroundBlendMode: 'color',
 });
 
 const Main = styled('main')({
   alignItems: 'center',
   display: 'flex',
   flexDirection: 'column',
+});
+
+const Suggestions = styled('div')({
+  marginTop: 50,
+  maxWidth: '100%',
+  padding: 20,
+  display: 'none',
 });
 
 type Props = {
@@ -123,12 +136,15 @@ const HomePage = ({ onFetchUser, changeTheme }: Props) => {
         <Typography
           variant="h2"
           sx={{
-            marginBottom: '40px',
+            marginBottom: '60px',
           }}
         >
           Search and find any Github user!
         </Typography>
         <Finder isLoading={isLoading} onFetchUsers={fetchUsers} onFetchUser={fetchUser} />
+        <Suggestions>
+          <Watermark />
+        </Suggestions>
       </Main>
       <Footer changeTheme={changeTheme} />
       <Toast
