@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
 /* material-ui */
 import { styled } from '@mui/material/styles';
@@ -31,12 +31,19 @@ const StyledIconButton = styled(IconButton)(({ theme }) => ({
 
 type Props = {
   isLoading: boolean;
+  onFetchUsers: (chars: string) => void;
   onFetchUser: (name: string) => void;
 };
 
-const Finder = ({ isLoading, onFetchUser }: Props) => {
+const Finder = ({ isLoading, onFetchUsers, onFetchUser }: Props) => {
   const [inputValue, setInputValue] = useState('');
   const [isValidating, setIsValidating] = useState(false);
+
+  useEffect(() => {
+    if (inputValue.length > 3) {
+      onFetchUsers(inputValue);
+    }
+  }, [onFetchUsers, inputValue]);
 
   const onKeyUp = ({ keyCode }: { keyCode: number }) => {
     if (!setInputValue || keyCode !== 13) {

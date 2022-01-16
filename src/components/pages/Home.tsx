@@ -81,6 +81,17 @@ const HomePage = ({ onFetchUser, changeTheme }: Props) => {
     };
   }, [abortController]);
 
+  const fetchUsers = (chars: string) => {
+    fetch(`${BASE_URL}/search/users?q=${chars}&per_page=10`, { signal: abortController.signal })
+      .then(handleErrors)
+      .then((users: any) => {
+        console.log(users);
+      })
+      .catch((error: ResponseError) => {
+        console.log(error);
+      });
+  };
+
   const fetchUser = (userName: string) => {
     setIsLoading(true);
 
@@ -145,7 +156,7 @@ const HomePage = ({ onFetchUser, changeTheme }: Props) => {
             <GithubIcon />
           </IconWrapper>
         </Stack>
-        <Finder onFetchUser={fetchUser} isLoading={isLoading} />
+        <Finder isLoading={isLoading} onFetchUsers={fetchUsers} onFetchUser={fetchUser} />
         <Stack direction="row" spacing={1} alignItems="center">
           <Typography variant="body1" sx={{ opacity: isLightTheme ? 0.5 : 1 }}>
             Dark theme
