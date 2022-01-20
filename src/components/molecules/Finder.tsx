@@ -69,6 +69,7 @@ const Finder = ({ isLoading, onFetchUsers, onFetchUser }: Props) => {
       }}
     >
       <StyledTextField
+        autoFocus
         placeholder="Type user name..."
         onFocus={() => {
           setIsValidating(false);

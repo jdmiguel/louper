@@ -27,19 +27,22 @@ enum ErrorMsg {
   NO_USER = 'Please, choose an available user',
 }
 
-const Root = styled('div')({
+const Root = styled('div')(({ theme }) => ({
   height: '100vh',
-  backgroundImage: 'url("/bg.svg")',
+  backgroundImage: `${
+    theme.palette.mode === 'light' ? "url('/white_bg.svg')" : "url('/black_bg.svg')"
+  }`,
   backgroundRepeat: 'no-repeat',
   backgroundPosition: 'center',
   backgroundSize: 'contain',
   backgroundBlendMode: 'color',
-});
+}));
 
 const Main = styled('main')({
   alignItems: 'center',
   display: 'flex',
   flexDirection: 'column',
+  marginTop: 60,
 });
 
 const Suggestions = styled('div')({
