@@ -165,9 +165,10 @@ const HomePage = ({ onFetchUser, changeTheme }: Props) => {
         <Finder isLoading={isFetchingUser} onFetchUsers={fetchUsers} onFetchUser={fetchUser} />
         <Suggestions>
           {isFetchingUsers && <CircularProgress className="loaderIcon" size={40} thickness={5} />}
-          {users.map((user: any) => (
-            <Card key={user.id} theme="FOLLOWING" data={user} size="SMALL" />
-          ))}
+          {!isFetchingUsers &&
+            users.map((user: any) => (
+              <Card key={user.id} theme="FOLLOWING" data={user} size="SMALL" />
+            ))}
         </Suggestions>
       </Main>
       <Footer changeTheme={changeTheme} />

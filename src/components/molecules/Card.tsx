@@ -28,6 +28,7 @@ const Title = styled('div')(({ theme }) => ({
 }));
 
 const StyledButton = styled(Button)(({ theme }) => ({
+  height: 60,
   '&:hover': {
     backgroundColor: theme.palette.primary.light,
   },
