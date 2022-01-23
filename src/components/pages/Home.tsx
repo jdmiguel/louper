@@ -1,17 +1,17 @@
-import { useState, useEffect, useMemo } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 
 /* material-ui */
 import { styled } from '@mui/material/styles';
-import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
+import CircularProgress from '@mui/material/CircularProgress';
 
 /* atoms */
 import Corner from '../atoms/Corner';
 import Logo from '../atoms/Logo';
-import Watermark from '../atoms/Watermark';
 
 /* molecules */
 import Finder from '../molecules/Finder';
+import Card from '../molecules/Card';
 import Footer from '../molecules/Footer';
 import Toast from '../molecules/Toast';
 
@@ -28,7 +28,6 @@ enum ErrorMsg {
 }
 
 const Root = styled('div')(({ theme }) => ({
-  height: '100vh',
   backgroundImage: `${
     theme.palette.mode === 'light' ? "url('/white_bg.svg')" : "url('/black_bg.svg')"
   }`,
@@ -36,21 +35,37 @@ const Root = styled('div')(({ theme }) => ({
   backgroundPosition: 'center',
   backgroundSize: 'contain',
   backgroundBlendMode: 'color',
+  display: 'flex',
+  flexDirection: 'column',
+  height: '100vh',
+  justifyContent: 'center',
 }));
+
+const CornerWrapper = styled('div')({
+  display: 'flex',
+  justifyContent: 'flex-end',
+  position: 'absolute',
+  top: 0,
+  width: '100%',
+});
 
 const Main = styled('main')({
   alignItems: 'center',
   display: 'flex',
   flexDirection: 'column',
-  marginTop: 60,
 });
 
 const Suggestions = styled('div')({
+  display: 'grid',
+  gap: 12,
+  gridTemplateColumns: 'repeat(4, 1fr)',
+  height: 220,
   marginTop: 50,
   maxWidth: '100%',
   padding: 20,
-  display: 'none',
 });
+
+const abortController = new AbortController();
 
 type Props = {
   onFetchUser: (user: User) => void;
@@ -58,31 +73,39 @@ type Props = {
 };
 
 const HomePage = ({ onFetchUser, changeTheme }: Props) => {
-  const [isLoading, setIsLoading] = useState(false);
+  const [isFetchingUser, setIsFetchingUser] = useState(false);
+  const [isFetchingUsers, setIsFetchingUsers] = useState(false);
   const [isErrorToastOpen, setIsErrorToastOpen] = useState(false);
+  const [users, setUsers] = useState([]);
   const [errorMsg, setErrorMsg] = useState('');
-
-  const abortController = useMemo(() => new AbortController(), []);
 
   useEffect(() => {
     return () => {
       abortController.abort();
     };
-  }, [abortController]);
+  }, []);
 
-  const fetchUsers = (chars: string) => {
-    fetch(`${BASE_URL}/search/users?q=${chars}&per_page=10`, { signal: abortController.signal })
+  const fetchUsers = useCallback((querySearch: string) => {
+    setIsFetchingUsers(true);
+
+    fetch(`${BASE_URL}/search/users?q=${querySearch}&per_page=10`, {
+      signal: abortController.signal,
+    })
       .then(handleErrors)
       .then((users: any) => {
+        setUsers(users.items);
         console.log(users);
       })
       .catch((error: ResponseError) => {
         console.log(error);
+      })
+      .finally(() => {
+        setIsFetchingUsers(false);
       });
-  };
+  }, []);
 
   const fetchUser = (userName: string) => {
-    setIsLoading(true);
+    setIsFetchingUser(true);
 
     fetch(`${BASE_URL}/users/${userName}`, { signal: abortController.signal })
       .then(handleErrors)
@@ -120,20 +143,15 @@ const HomePage = ({ onFetchUser, changeTheme }: Props) => {
         setErrorMsg(errorMsg);
       })
       .finally(() => {
-        setIsLoading(false);
+        setIsFetchingUser(false);
       });
   };
 
   return (
     <Root>
-      <Box
-        sx={{
-          display: 'flex',
-          justifyContent: 'flex-end',
-        }}
-      >
+      <CornerWrapper>
         <Corner />
-      </Box>
+      </CornerWrapper>
       <Main>
         <Logo />
         <Typography
@@ -144,9 +162,12 @@ const HomePage = ({ onFetchUser, changeTheme }: Props) => {
         >
           Search and find any Github user!
         </Typography>
-        <Finder isLoading={isLoading} onFetchUsers={fetchUsers} onFetchUser={fetchUser} />
+        <Finder isLoading={isFetchingUser} onFetchUsers={fetchUsers} onFetchUser={fetchUser} />
         <Suggestions>
-          <Watermark />
+          {isFetchingUsers && <CircularProgress className="loaderIcon" size={40} thickness={5} />}
+          {users.map((user: any) => (
+            <Card key={user.id} theme="FOLLOWING" data={user} size="SMALL" />
+          ))}
         </Suggestions>
       </Main>
       <Footer changeTheme={changeTheme} />

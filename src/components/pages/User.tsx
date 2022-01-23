@@ -17,7 +17,7 @@ import UserSection from '../organisms/UserSection';
 import { ResponseError, BASE_URL, handleErrors } from '../../utils/request';
 
 /* types */
-import { User, Repo, RelatedUser } from '../../utils/types';
+import { User, Repo, RelatedUser, SectionType } from '../../utils/types';
 
 const Root = styled('div')({
   display: 'flex',
@@ -57,6 +57,7 @@ const UserPage = ({ user, onBackFinder }: Props) => {
   const [isLoading, setIsLoading] = useState(false);
   const [isErrorToastOpen, setIsErrorToastOpen] = useState(false);
   const [activeSection, setActiveUserSection] = useState(0);
+  const [typeSection, setTypeSection] = useState<SectionType>('REPOS');
   const [repos, setRepos] = useState<Repo[]>([]);
   const [following, setFollowing] = useState<RelatedUser[]>([]);
   const [followers, setFollowers] = useState<RelatedUser[]>([]);
@@ -73,10 +74,13 @@ const UserPage = ({ user, onBackFinder }: Props) => {
     switch (activeSection) {
       case 0:
       default:
+        setTypeSection('REPOS');
         return setRepos;
       case 1:
+        setTypeSection('FOLLOWING');
         return setFollowing;
       case 2:
+        setTypeSection('FOLLOWERS');
         return setFollowers;
     }
   }, [activeSection]);
@@ -157,7 +161,7 @@ const UserPage = ({ user, onBackFinder }: Props) => {
         <SectionWrapper>
           {activeSection === 0 && (
             <UserSection
-              type="REPO"
+              type={typeSection}
               total={user.public_repos}
               isLoading={isLoading}
               items={repos}
@@ -166,7 +170,7 @@ const UserPage = ({ user, onBackFinder }: Props) => {
           )}
           {activeSection === 1 && (
             <UserSection
-              type="RELATED_USER"
+              type={typeSection}
               total={user.following}
               isLoading={isLoading}
               items={following}
@@ -175,7 +179,7 @@ const UserPage = ({ user, onBackFinder }: Props) => {
           )}
           {activeSection === 2 && (
             <UserSection
-              type="RELATED_USER"
+              type={typeSection}
               total={user.followers}
               isLoading={isLoading}
               items={followers}

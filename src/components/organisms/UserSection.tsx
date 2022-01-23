@@ -28,8 +28,6 @@ type Props = {
 };
 
 const UserSection = ({ type, total, isLoading, items, emptyMsg }: Props) => {
-  const isRepoType = type === 'REPO';
-
   if (total === 0) {
     return (
       <EmptyMsg>
@@ -47,7 +45,7 @@ const UserSection = ({ type, total, isLoading, items, emptyMsg }: Props) => {
     return (
       <>
         {placeholderList.map(() => (
-          <Placeholder key={uuidv4()} withUserTheme={!isRepoType} />
+          <Placeholder key={uuidv4()} withUserTheme={type !== 'REPOS'} />
         ))}
       </>
     );
@@ -56,7 +54,7 @@ const UserSection = ({ type, total, isLoading, items, emptyMsg }: Props) => {
   return (
     <>
       {items.map((item) => (
-        <Card key={item.id} theme={isRepoType ? 'REPO' : 'USER'} data={item} />
+        <Card key={item.id} theme={type} data={item} />
       ))}
     </>
   );

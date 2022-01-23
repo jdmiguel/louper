@@ -4,6 +4,7 @@ import { ReactElement } from 'react';
 import { styled } from '@mui/material/styles';
 import Stack from '@mui/material/Stack';
 import Typography from '@mui/material/Typography';
+import Button from '@mui/material/Button';
 
 /* atoms */
 import Avatar from '@mui/material/Avatar';
@@ -11,7 +12,7 @@ import TextTag from '../atoms/TextTag';
 import Link from '../atoms/Link';
 
 /* types */
-import { Repo, RelatedUser } from '../../utils/types';
+import { Repo, RelatedUser, CardSize, SectionType } from '../../utils/types';
 
 const Root = styled('div')(({ theme }) => ({
   border: `1px solid ${theme.palette.secondary.light}`,
@@ -26,12 +27,20 @@ const Title = styled('div')(({ theme }) => ({
   '& path': { fill: theme.palette.secondary.main },
 }));
 
-const AvatarWrapper = styled('div')({
-  height: 80,
-  marginRight: 20,
+const StyledButton = styled(Button)(({ theme }) => ({
+  '&:hover': {
+    backgroundColor: theme.palette.primary.light,
+  },
+}));
+
+const AvatarWrapper = styled('div')<{
+  size?: CardSize;
+}>(({ size }) => ({
+  height: size === 'SMALL' ? 40 : 80,
+  marginRight: size === 'SMALL' ? 10 : 20,
   position: 'relative',
-  width: 80,
-});
+  width: size === 'SMALL' ? 40 : 80,
+}));
 
 const Topic = styled('div')(({ theme }) => ({
   backgroundColor: theme.palette.secondary.main,
@@ -48,15 +57,15 @@ const Action = styled('div')(({ theme }) => ({
   paddingTop: 10,
 }));
 
-const displayRepoContent = (data: Repo): ReactElement => (
+const displayRepoContent = (repo: Repo): ReactElement => (
   <Stack justifyContent="space-between" sx={{ height: '100%' }}>
     <Stack>
       <Title>
-        <TextTag content={data.name} withIcon iconType={'folder'} />
+        <TextTag content={repo.name} withIcon iconType={'folder'} />
       </Title>
-      {data.description ? (
+      {repo.description ? (
         <Typography variant="body1" sx={{ marginTop: 1 }}>
-          {data.description}
+          {repo.description}
         </Typography>
       ) : (
         <Typography variant="h6" sx={{ marginTop: 1, color: 'text.disabled' }}>
@@ -64,8 +73,8 @@ const displayRepoContent = (data: Repo): ReactElement => (
         </Typography>
       )}
       <Stack direction="row" sx={{ flexWrap: 'wrap', marginTop: 1.75 }}>
-        {data.topics?.length > 0 ? (
-          data.topics.map((topic: string) => (
+        {repo.topics?.length > 0 ? (
+          repo.topics.map((topic: string) => (
             <Topic key={topic}>
               <Typography variant="overline">{topic}</Typography>
             </Topic>
@@ -79,8 +88,8 @@ const displayRepoContent = (data: Repo): ReactElement => (
     </Stack>
     <Action>
       <Link
-        url={data.html_url}
-        ariaLabel={`View ${data.name} repository on GitHub`}
+        url={repo.html_url}
+        ariaLabel={`View ${repo.name} repository on GitHub`}
         content="VISIT REPO"
         withIcon
         iconType="folder_open"
@@ -89,45 +98,72 @@ const displayRepoContent = (data: Repo): ReactElement => (
   </Stack>
 );
 
-const displayUserContent = (user: RelatedUser): ReactElement => (
-  <Stack direction="row">
-    <AvatarWrapper>
-      <Avatar variant="rounded" sx={{ height: 80, width: 80, position: 'absolute' }} />
-      <Avatar
-        alt="user following avatar"
-        variant="rounded"
-        src={user.avatar_url}
-        sx={{ height: 80, width: 80, position: 'absolute' }}
-      />
-    </AvatarWrapper>
-    <Stack justifyContent="center">
-      <Title>
-        <TextTag content={user.login} withIcon iconType="favorite" />
-      </Title>
-      <Link
-        url={user.html_url}
-        ariaLabel={`View ${user.login} profile on GitHub`}
-        content="VISIT PROFILE"
-        withIcon
-        iconType="person"
-      />
-    </Stack>
-  </Stack>
-);
-
-type Props = {
-  theme: 'REPO' | 'USER';
-  data: Repo | RelatedUser;
-};
-
-const Card = ({ theme, data }: Props) => {
-  const isRepoTheme = theme === 'REPO';
+const displayUserContent = (user: RelatedUser, theme: SectionType): ReactElement => {
+  const iconType = theme === 'FOLLOWING' ? 'visibility' : 'favorite';
 
   return (
-    <Root>
-      {isRepoTheme ? displayRepoContent(data as Repo) : displayUserContent(data as RelatedUser)}
-    </Root>
+    <Stack direction="row">
+      <AvatarWrapper>
+        <Avatar variant="rounded" sx={{ height: 80, width: 80, position: 'absolute' }} />
+        <Avatar
+          alt="user following avatar"
+          variant="rounded"
+          src={user.avatar_url}
+          sx={{ height: 80, width: 80, position: 'absolute' }}
+        />
+      </AvatarWrapper>
+      <Stack justifyContent="center">
+        <Title>
+          <TextTag content={user.login} withIcon iconType={iconType} />
+        </Title>
+        <Link
+          url={user.html_url}
+          ariaLabel={`View ${user.login} profile on GitHub`}
+          content="VISIT PROFILE"
+          withIcon
+          iconType="person"
+        />
+      </Stack>
+    </Stack>
   );
+};
+
+type Props = {
+  theme: SectionType;
+  data: Repo | RelatedUser;
+  size?: CardSize;
+};
+
+const Card = ({ theme, data, size = 'NORMAL' }: Props) => {
+  const isRepoTheme = theme === 'REPOS';
+  const repo = data as Repo;
+  const user = data as RelatedUser;
+
+  if (size === 'SMALL') {
+    return (
+      <StyledButton variant="contained">
+        <Stack direction="row" sx={{ alignItems: 'center', width: '100%' }}>
+          <AvatarWrapper size={size}>
+            <Avatar variant="circular" sx={{ height: 40, width: 40, position: 'absolute' }} />
+            <Avatar
+              alt="user following avatar"
+              variant="circular"
+              src={user.avatar_url}
+              sx={{ height: 40, width: 40, position: 'absolute' }}
+            />
+          </AvatarWrapper>
+          <Typography
+            variant="h5"
+            sx={{ maxWidth: 130, overflow: 'hidden', textOverflow: 'ellipsis' }}
+          >
+            {user.login}
+          </Typography>
+        </Stack>
+      </StyledButton>
+    );
+  }
+
+  return <Root>{isRepoTheme ? displayRepoContent(repo) : displayUserContent(user, theme)}</Root>;
 };
 
 export default Card;
