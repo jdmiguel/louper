@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useCallback } from 'react';
 
 /* material-ui */
 import { styled } from '@mui/material/styles';
@@ -8,6 +8,9 @@ import TextField from '@mui/material/TextField';
 import InputAdornment from '@mui/material/InputAdornment';
 import Icon from '@mui/material/Icon';
 import IconButton from '@mui/material/IconButton';
+
+/* utils */
+import { debounce } from '../../utils/index';
 
 const StyledTextField = styled(TextField)({
   '& .MuiOutlinedInput-root': {
@@ -34,30 +37,28 @@ const StyledIconButton = styled(IconButton)(({ theme }) => ({
 }));
 
 type Props = {
-  isLoading: boolean;
+  isLoadingUser: boolean;
+  isLoadingUsers: boolean;
   onFetchUsers: (chars: string) => void;
   onFetchUser: (name: string) => void;
 };
 
-const Finder = ({ isLoading, onFetchUsers, onFetchUser }: Props) => {
-  const [inputValue, setInputValue] = useState('');
+const Finder = ({ isLoadingUser, isLoadingUsers, onFetchUsers, onFetchUser }: Props) => {
+  const [searchQuery, setSearchQuery] = useState('');
   const [isValidating, setIsValidating] = useState(false);
 
-  useEffect(() => {
-    if (inputValue.length > 3) {
-      onFetchUsers(inputValue);
-    }
-  }, [onFetchUsers, inputValue]);
-
   const onKeyUp = ({ keyCode }: { keyCode: number }) => {
-    if (!setInputValue || keyCode !== 13) {
+    if (!searchQuery || keyCode !== 13) {
       return;
     }
 
-    onFetchUser(inputValue);
+    onFetchUser(searchQuery);
   };
 
-  const isNotValid = isValidating && inputValue === '';
+  const isNotValid = isValidating && !searchQuery;
+
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  const debouncedFunction = useCallback(debounce(onFetchUsers, 500), [onFetchUsers]);
 
   return (
     <FormControl
@@ -75,7 +76,12 @@ const Finder = ({ isLoading, onFetchUsers, onFetchUser }: Props) => {
           setIsValidating(false);
         }}
         onChange={({ target: { value } }) => {
-          setInputValue(value);
+          if (value === searchQuery) {
+            return;
+          }
+          setSearchQuery(value);
+
+          if (value.length > 2) debouncedFunction(value);
         }}
         onKeyUp={onKeyUp}
         size="small"
@@ -87,7 +93,7 @@ const Finder = ({ isLoading, onFetchUsers, onFetchUser }: Props) => {
         InputProps={{
           endAdornment: (
             <InputAdornment position="end" sx={{ color: 'secondary.light' }}>
-              {isLoading ? (
+              {isLoadingUsers ? (
                 <CircularProgress className="loaderIcon" size={22} thickness={4} />
               ) : (
                 <Icon sx={{ fontSize: '1.4rem' }}>person</Icon>
@@ -99,12 +105,16 @@ const Finder = ({ isLoading, onFetchUsers, onFetchUser }: Props) => {
       <StyledIconButton
         onClick={() => {
           setIsValidating(true);
-          if (inputValue !== '') {
-            onFetchUser(inputValue);
+          if (searchQuery !== '') {
+            onFetchUser(searchQuery);
           }
         }}
       >
-        <Icon sx={{ fontSize: '1.5rem' }}>search</Icon>
+        {isLoadingUser ? (
+          <CircularProgress className="loaderIcon" size={23} thickness={4} color="info" />
+        ) : (
+          <Icon sx={{ fontSize: '1.4rem' }}>search</Icon>
+        )}
       </StyledIconButton>
     </FormControl>
   );

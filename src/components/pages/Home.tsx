@@ -1,9 +1,8 @@
-import { useState, useEffect, useCallback } from 'react';
+import { useState, useEffect } from 'react';
 
 /* material-ui */
 import { styled } from '@mui/material/styles';
 import Typography from '@mui/material/Typography';
-import CircularProgress from '@mui/material/CircularProgress';
 
 /* atoms */
 import Corner from '../atoms/Corner';
@@ -11,7 +10,7 @@ import Logo from '../atoms/Logo';
 
 /* molecules */
 import Finder from '../molecules/Finder';
-import Card from '../molecules/Card';
+import Suggestions from '../molecules/Suggestions';
 import Footer from '../molecules/Footer';
 import Toast from '../molecules/Toast';
 
@@ -55,15 +54,11 @@ const Main = styled('main')({
   flexDirection: 'column',
 });
 
-const Suggestions = styled('div')({
-  display: 'grid',
-  gap: 12,
-  gridTemplateColumns: 'repeat(4, 1fr)',
+const SuggestionsWrapper = styled('div')(({ theme }) => ({
   height: 220,
   marginTop: 50,
-  maxWidth: '100%',
-  padding: 20,
-});
+  backgroundColor: theme.palette.primary.light,
+}));
 
 const abortController = new AbortController();
 
@@ -73,8 +68,10 @@ type Props = {
 };
 
 const HomePage = ({ onFetchUser, changeTheme }: Props) => {
-  const [isFetchingUser, setIsFetchingUser] = useState(false);
-  const [isFetchingUsers, setIsFetchingUsers] = useState(false);
+  const [isLoadingUser, setIsLoadingUser] = useState(false);
+  const [isLoadingUsers, setIsLoadingUsers] = useState(false);
+  const [areSuggestionsShown, setAreSuggestionsShown] = useState(false);
+  const [totalSuggestions, setTotalSuggestions] = useState(0);
   const [isErrorToastOpen, setIsErrorToastOpen] = useState(false);
   const [users, setUsers] = useState([]);
   const [errorMsg, setErrorMsg] = useState('');
@@ -85,27 +82,28 @@ const HomePage = ({ onFetchUser, changeTheme }: Props) => {
     };
   }, []);
 
-  const fetchUsers = useCallback((querySearch: string) => {
-    setIsFetchingUsers(true);
+  const fetchUsers = (querySearch: string) => {
+    setAreSuggestionsShown(true);
+    setIsLoadingUsers(true);
 
-    fetch(`${BASE_URL}/search/users?q=${querySearch}&per_page=10`, {
+    fetch(`${BASE_URL}/search/users?q=${querySearch}&per_page=9`, {
       signal: abortController.signal,
     })
       .then(handleErrors)
       .then((users: any) => {
         setUsers(users.items);
-        console.log(users);
+        setTotalSuggestions(users.total_count);
       })
       .catch((error: ResponseError) => {
         console.log(error);
       })
       .finally(() => {
-        setIsFetchingUsers(false);
+        setIsLoadingUsers(false);
       });
-  }, []);
+  };
 
   const fetchUser = (userName: string) => {
-    setIsFetchingUser(true);
+    setIsLoadingUser(true);
 
     fetch(`${BASE_URL}/users/${userName}`, { signal: abortController.signal })
       .then(handleErrors)
@@ -143,7 +141,7 @@ const HomePage = ({ onFetchUser, changeTheme }: Props) => {
         setErrorMsg(errorMsg);
       })
       .finally(() => {
-        setIsFetchingUser(false);
+        setIsLoadingUser(false);
       });
   };
 
@@ -162,14 +160,24 @@ const HomePage = ({ onFetchUser, changeTheme }: Props) => {
         >
           Search and find any Github user!
         </Typography>
-        <Finder isLoading={isFetchingUser} onFetchUsers={fetchUsers} onFetchUser={fetchUser} />
-        <Suggestions>
-          {isFetchingUsers && <CircularProgress className="loaderIcon" size={40} thickness={5} />}
-          {!isFetchingUsers &&
-            users.map((user: any) => (
-              <Card key={user.id} theme="FOLLOWING" data={user} size="SMALL" />
-            ))}
-        </Suggestions>
+        <Finder
+          isLoadingUser={isLoadingUser}
+          isLoadingUsers={isLoadingUsers}
+          onFetchUsers={fetchUsers}
+          onFetchUser={fetchUser}
+        />
+        <SuggestionsWrapper>
+          {areSuggestionsShown && (
+            <Suggestions
+              items={users}
+              totalItems={totalSuggestions}
+              onPaginate={(event: React.ChangeEvent<unknown>, page: number) => {
+                console.log({ event });
+                console.log({ page });
+              }}
+            />
+          )}
+        </SuggestionsWrapper>
       </Main>
       <Footer changeTheme={changeTheme} />
       <Toast

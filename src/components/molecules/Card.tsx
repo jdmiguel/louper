@@ -130,12 +130,12 @@ const displayUserContent = (user: RelatedUser, theme: SectionType): ReactElement
 };
 
 type Props = {
-  theme: SectionType;
+  theme?: SectionType;
   data: Repo | RelatedUser;
   size?: CardSize;
 };
 
-const Card = ({ theme, data, size = 'NORMAL' }: Props) => {
+const Card = ({ theme = 'FOLLOWING', data, size = 'NORMAL' }: Props) => {
   const isRepoTheme = theme === 'REPOS';
   const repo = data as Repo;
   const user = data as RelatedUser;

@@ -37,6 +37,7 @@ type Props = {
   msg: string;
   onClose: () => void;
 };
+
 const Toast = ({ isOpen, type, msg, onClose }: Props) => (
   <Snackbar
     open={isOpen}

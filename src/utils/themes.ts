@@ -119,6 +119,9 @@ export const lightTheme = createTheme({
       light: lightThemeColor.lightGrey,
       contrastText: sharedColor.white,
     },
+    info: {
+      main: sharedColor.white,
+    },
     background: {
       default: sharedColor.white,
     },
