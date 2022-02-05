@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useMemo } from 'react';
 
 /* material-ui */
 import { styled } from '@mui/material/styles';
@@ -54,13 +54,10 @@ const Main = styled('main')({
   flexDirection: 'column',
 });
 
-const SuggestionsWrapper = styled('div')(({ theme }) => ({
+const SuggestionsWrapper = styled('div')({
   height: 220,
   marginTop: 50,
-  backgroundColor: theme.palette.primary.light,
-}));
-
-const abortController = new AbortController();
+});
 
 type Props = {
   onFetchUser: (user: User) => void;
@@ -68,6 +65,7 @@ type Props = {
 };
 
 const HomePage = ({ onFetchUser, changeTheme }: Props) => {
+  const [searchQuery, setSearchQuery] = useState('');
   const [isLoadingUser, setIsLoadingUser] = useState(false);
   const [isLoadingUsers, setIsLoadingUsers] = useState(false);
   const [areSuggestionsShown, setAreSuggestionsShown] = useState(false);
@@ -76,25 +74,34 @@ const HomePage = ({ onFetchUser, changeTheme }: Props) => {
   const [users, setUsers] = useState([]);
   const [errorMsg, setErrorMsg] = useState('');
 
+  const abortControllerFetchUser = useMemo(() => new AbortController(), []);
+  const abortControllerFetchUsers = useMemo(() => new AbortController(), []);
+
   useEffect(() => {
     return () => {
-      abortController.abort();
+      abortControllerFetchUser.abort();
+      abortControllerFetchUsers.abort();
     };
-  }, []);
+  }, [abortControllerFetchUser, abortControllerFetchUsers]);
 
-  const fetchUsers = (querySearch: string) => {
-    setAreSuggestionsShown(true);
+  const fetchUsers = (querySearch: string, page?: number) => {
     setIsLoadingUsers(true);
 
-    fetch(`${BASE_URL}/search/users?q=${querySearch}&per_page=9`, {
-      signal: abortController.signal,
+    const endpoint = page
+      ? `${BASE_URL}/search/users?q=${querySearch}&page=${page}&per_page=9`
+      : `${BASE_URL}/search/users?q=${querySearch}&per_page=9`;
+
+    fetch(endpoint, {
+      signal: abortControllerFetchUsers.signal,
     })
       .then(handleErrors)
       .then((users: any) => {
         setUsers(users.items);
+        setAreSuggestionsShown(true);
         setTotalSuggestions(users.total_count);
       })
       .catch((error: ResponseError) => {
+        setAreSuggestionsShown(false);
         console.log(error);
       })
       .finally(() => {
@@ -105,7 +112,7 @@ const HomePage = ({ onFetchUser, changeTheme }: Props) => {
   const fetchUser = (userName: string) => {
     setIsLoadingUser(true);
 
-    fetch(`${BASE_URL}/users/${userName}`, { signal: abortController.signal })
+    fetch(`${BASE_URL}/users/${userName}`, { signal: abortControllerFetchUser.signal })
       .then(handleErrors)
       .then((user: User) => {
         onFetchUser({
@@ -163,17 +170,24 @@ const HomePage = ({ onFetchUser, changeTheme }: Props) => {
         <Finder
           isLoadingUser={isLoadingUser}
           isLoadingUsers={isLoadingUsers}
+          searchQuery={searchQuery}
+          onChangeSearchQuery={(query: string) => setSearchQuery(query)}
           onFetchUsers={fetchUsers}
           onFetchUser={fetchUser}
+          onClearUsers={() => {
+            setAreSuggestionsShown(false);
+            setUsers([]);
+          }}
         />
         <SuggestionsWrapper>
           {areSuggestionsShown && (
             <Suggestions
               items={users}
               totalItems={totalSuggestions}
-              onPaginate={(event: React.ChangeEvent<unknown>, page: number) => {
-                console.log({ event });
-                console.log({ page });
+              onPaginate={(_, page: number) => fetchUsers(searchQuery, page)}
+              onSelectUser={(userName: string) => {
+                setSearchQuery(userName);
+                fetchUser(userName);
               }}
             />
           )}

@@ -29,6 +29,7 @@ const Title = styled('div')(({ theme }) => ({
 
 const StyledButton = styled(Button)(({ theme }) => ({
   height: 60,
+  minWidth: 212,
   '&:hover': {
     backgroundColor: theme.palette.primary.light,
   },
@@ -133,16 +134,17 @@ type Props = {
   theme?: SectionType;
   data: Repo | RelatedUser;
   size?: CardSize;
+  onClick?: (userName: string) => void;
 };
 
-const Card = ({ theme = 'FOLLOWING', data, size = 'NORMAL' }: Props) => {
+const Card = ({ theme = 'FOLLOWING', data, size = 'NORMAL', onClick }: Props) => {
   const isRepoTheme = theme === 'REPOS';
   const repo = data as Repo;
   const user = data as RelatedUser;
 
   if (size === 'SMALL') {
     return (
-      <StyledButton variant="contained">
+      <StyledButton variant="contained" onClick={() => onClick?.(user.login)}>
         <Stack direction="row" sx={{ alignItems: 'center', width: '100%' }}>
           <AvatarWrapper size={size}>
             <Avatar variant="circular" sx={{ height: 40, width: 40, position: 'absolute' }} />

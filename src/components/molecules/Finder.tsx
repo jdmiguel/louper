@@ -36,15 +36,27 @@ const StyledIconButton = styled(IconButton)(({ theme }) => ({
   },
 }));
 
+const MIN_CHARS_TO_SEARCH_USERS = 2;
+
 type Props = {
+  searchQuery: string;
+  onChangeSearchQuery: (query: string) => void;
   isLoadingUser: boolean;
   isLoadingUsers: boolean;
-  onFetchUsers: (chars: string) => void;
+  onFetchUsers: (query: string) => void;
   onFetchUser: (name: string) => void;
+  onClearUsers: () => void;
 };
 
-const Finder = ({ isLoadingUser, isLoadingUsers, onFetchUsers, onFetchUser }: Props) => {
-  const [searchQuery, setSearchQuery] = useState('');
+const Finder = ({
+  searchQuery,
+  onChangeSearchQuery,
+  isLoadingUser,
+  isLoadingUsers,
+  onFetchUsers,
+  onFetchUser,
+  onClearUsers,
+}: Props) => {
   const [isValidating, setIsValidating] = useState(false);
 
   const onKeyUp = ({ keyCode }: { keyCode: number }) => {
@@ -60,6 +72,19 @@ const Finder = ({ isLoadingUser, isLoadingUsers, onFetchUsers, onFetchUser }: Pr
   // eslint-disable-next-line react-hooks/exhaustive-deps
   const debouncedFunction = useCallback(debounce(onFetchUsers, 500), [onFetchUsers]);
 
+  const onChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const currentSearchQuery = event?.target?.value;
+
+    if (currentSearchQuery === searchQuery) {
+      return;
+    }
+    onChangeSearchQuery(currentSearchQuery);
+
+    if (currentSearchQuery.length > MIN_CHARS_TO_SEARCH_USERS)
+      debouncedFunction(currentSearchQuery);
+    if (currentSearchQuery.length <= MIN_CHARS_TO_SEARCH_USERS) onClearUsers();
+  };
+
   return (
     <FormControl
       sx={{
@@ -72,17 +97,9 @@ const Finder = ({ isLoadingUser, isLoadingUsers, onFetchUsers, onFetchUser }: Pr
       <StyledTextField
         autoFocus
         placeholder="Type user name..."
-        onFocus={() => {
-          setIsValidating(false);
-        }}
-        onChange={({ target: { value } }) => {
-          if (value === searchQuery) {
-            return;
-          }
-          setSearchQuery(value);
-
-          if (value.length > 2) debouncedFunction(value);
-        }}
+        value={searchQuery}
+        onFocus={() => setIsValidating(false)}
+        onChange={onChange}
         onKeyUp={onKeyUp}
         size="small"
         variant="outlined"

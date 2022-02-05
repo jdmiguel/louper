@@ -11,24 +11,37 @@ const SuggestionsWrapper = styled('div')({
   gap: 12,
   gridTemplateColumns: 'repeat(3, 1fr)',
   height: 220,
+  marginBottom: 30,
   maxWidth: '100%',
   padding: 20,
 });
+
+const MIN_ITEMS_TO_PAGINATE = 10;
+const MAX_PAGES_ALLOWED = 50;
 
 type Props = {
   items: any[];
   totalItems: number;
   onPaginate: (event: React.ChangeEvent<unknown>, page: number) => void;
+  onSelectUser: (userName: string) => void;
 };
 
-const Suggestions = ({ items, totalItems, onPaginate }: Props) => (
+const Suggestions = ({ items, totalItems, onPaginate, onSelectUser }: Props) => (
   <Stack sx={{ alignItems: 'center' }}>
     <SuggestionsWrapper>
       {items.map((user: any) => (
-        <Card key={user.id} data={user} size="SMALL" />
+        <Card key={user.id} data={user} size="SMALL" onClick={onSelectUser} />
       ))}
     </SuggestionsWrapper>
-    <Pagination count={totalItems} color="primary" onChange={onPaginate} />
+    {totalItems >= MIN_ITEMS_TO_PAGINATE && (
+      <Pagination
+        count={totalItems <= MAX_PAGES_ALLOWED ? totalItems : MAX_PAGES_ALLOWED}
+        color="primary"
+        onChange={onPaginate}
+        hidePrevButton
+        hideNextButton
+      />
+    )}
   </Stack>
 );
 
