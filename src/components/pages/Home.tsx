@@ -18,7 +18,7 @@ import Toast from '../molecules/Toast';
 import { ResponseError, BASE_URL, handleErrors } from '../../utils/request';
 
 /* types */
-import { User } from '../../utils/types';
+import { UserData, UsersData } from '../../utils/types';
 import { ThemeMode } from '../App';
 
 enum ErrorMsg {
@@ -59,8 +59,13 @@ const SuggestionsWrapper = styled('div')({
   marginTop: 50,
 });
 
+const DEFAULT_USERS_DATA = {
+  total_count: 0,
+  items: [],
+};
+
 type Props = {
-  onFetchUser: (user: User) => void;
+  onFetchUser: (userData: UserData) => void;
   changeTheme: (themeMode: ThemeMode) => void;
 };
 
@@ -69,9 +74,8 @@ const HomePage = ({ onFetchUser, changeTheme }: Props) => {
   const [isLoadingUser, setIsLoadingUser] = useState(false);
   const [isLoadingUsers, setIsLoadingUsers] = useState(false);
   const [areSuggestionsShown, setAreSuggestionsShown] = useState(false);
-  const [totalSuggestions, setTotalSuggestions] = useState(0);
   const [isErrorToastOpen, setIsErrorToastOpen] = useState(false);
-  const [users, setUsers] = useState([]);
+  const [usersData, setUsersData] = useState<UsersData>(DEFAULT_USERS_DATA);
   const [errorMsg, setErrorMsg] = useState('');
 
   const abortControllerFetchUser = useMemo(() => new AbortController(), []);
@@ -95,10 +99,9 @@ const HomePage = ({ onFetchUser, changeTheme }: Props) => {
       signal: abortControllerFetchUsers.signal,
     })
       .then(handleErrors)
-      .then((users: any) => {
-        setUsers(users.items);
+      .then((fetchedUsersData: UsersData) => {
+        setUsersData(fetchedUsersData);
         setAreSuggestionsShown(true);
-        setTotalSuggestions(users.total_count);
       })
       .catch((error: ResponseError) => {
         setAreSuggestionsShown(false);
@@ -114,21 +117,21 @@ const HomePage = ({ onFetchUser, changeTheme }: Props) => {
 
     fetch(`${BASE_URL}/users/${userName}`, { signal: abortControllerFetchUser.signal })
       .then(handleErrors)
-      .then((user: User) => {
+      .then((userData: UserData) => {
         onFetchUser({
-          login: user.login,
-          avatar_url: user.avatar_url,
-          created_at: user.created_at,
-          name: user.name,
-          bio: user.bio,
-          email: user.email,
-          location: user.location,
-          blog: user.blog,
-          company: user.company,
-          html_url: user.html_url,
-          public_repos: user.public_repos,
-          followers: user.followers,
-          following: user.following,
+          login: userData.login,
+          avatar_url: userData.avatar_url,
+          created_at: userData.created_at,
+          name: userData.name,
+          bio: userData.bio,
+          email: userData.email,
+          location: userData.location,
+          blog: userData.blog,
+          company: userData.company,
+          html_url: userData.html_url,
+          public_repos: userData.public_repos,
+          followers: userData.followers,
+          following: userData.following,
         });
       })
       .catch((error: ResponseError) => {
@@ -176,14 +179,14 @@ const HomePage = ({ onFetchUser, changeTheme }: Props) => {
           onFetchUser={fetchUser}
           onClearUsers={() => {
             setAreSuggestionsShown(false);
-            setUsers([]);
+            setUsersData(DEFAULT_USERS_DATA);
           }}
         />
         <SuggestionsWrapper>
           {areSuggestionsShown && (
             <Suggestions
-              items={users}
-              totalItems={totalSuggestions}
+              items={usersData.items}
+              totalItems={usersData.total_count}
               onPaginate={(_, page: number) => fetchUsers(searchQuery, page)}
               onSelectUser={(userName: string) => {
                 setSearchQuery(userName);

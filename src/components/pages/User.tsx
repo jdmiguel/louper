@@ -17,7 +17,7 @@ import UserSection from '../organisms/UserSection';
 import { ResponseError, BASE_URL, handleErrors } from '../../utils/request';
 
 /* types */
-import { User, Repo, RelatedUser, SectionType } from '../../utils/types';
+import { UserData, Repo, User, SectionType } from '../../utils/types';
 
 const Root = styled('div')({
   display: 'flex',
@@ -49,18 +49,18 @@ const SectionWrapper = styled('main')({
 });
 
 type Props = {
-  user: User;
+  userData: UserData;
   onBackFinder: () => void;
 };
 
-const UserPage = ({ user, onBackFinder }: Props) => {
+const UserPage = ({ userData, onBackFinder }: Props) => {
   const [isLoading, setIsLoading] = useState(false);
   const [isErrorToastOpen, setIsErrorToastOpen] = useState(false);
   const [activeSection, setActiveUserSection] = useState(0);
   const [typeSection, setTypeSection] = useState<SectionType>('REPOS');
   const [repos, setRepos] = useState<Repo[]>([]);
-  const [following, setFollowing] = useState<RelatedUser[]>([]);
-  const [followers, setFollowers] = useState<RelatedUser[]>([]);
+  const [following, setFollowing] = useState<User[]>([]);
+  const [followers, setFollowers] = useState<User[]>([]);
 
   const isRequestAllowed = useMemo(
     () =>
@@ -118,7 +118,7 @@ const UserPage = ({ user, onBackFinder }: Props) => {
 
     const setItems = selectItemsSetter();
 
-    getRequest(user.login)
+    getRequest(userData.login)
       .then((items) => {
         setItems(items);
       })
@@ -135,12 +135,12 @@ const UserPage = ({ user, onBackFinder }: Props) => {
     return () => {
       abortController.abort();
     };
-  }, [getRequest, selectItemsSetter, isRequestAllowed, user.login, abortController]);
+  }, [getRequest, selectItemsSetter, isRequestAllowed, userData.login, abortController]);
 
   return (
     <Root>
       <ProfileWrapper>
-        <Profile user={user} />
+        <Profile userData={userData} />
       </ProfileWrapper>
       <Stack
         sx={{
@@ -149,7 +149,7 @@ const UserPage = ({ user, onBackFinder }: Props) => {
           },
         }}
       >
-        <ProfileMobile user={user} />
+        <ProfileMobile userData={userData} />
         <Menu
           onClick={(section: number) => {
             setActiveUserSection(section);
@@ -162,7 +162,7 @@ const UserPage = ({ user, onBackFinder }: Props) => {
           {activeSection === 0 && (
             <UserSection
               type={typeSection}
-              total={user.public_repos}
+              total={userData.public_repos}
               isLoading={isLoading}
               items={repos}
               emptyMsg="No repos added"
@@ -171,7 +171,7 @@ const UserPage = ({ user, onBackFinder }: Props) => {
           {activeSection === 1 && (
             <UserSection
               type={typeSection}
-              total={user.following}
+              total={userData.following}
               isLoading={isLoading}
               items={following}
               emptyMsg="No following added"
@@ -180,7 +180,7 @@ const UserPage = ({ user, onBackFinder }: Props) => {
           {activeSection === 2 && (
             <UserSection
               type={typeSection}
-              total={user.followers}
+              total={userData.followers}
               isLoading={isLoading}
               items={followers}
               emptyMsg="No followers added"

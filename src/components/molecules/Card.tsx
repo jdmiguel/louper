@@ -12,7 +12,7 @@ import TextTag from '../atoms/TextTag';
 import Link from '../atoms/Link';
 
 /* types */
-import { Repo, RelatedUser, CardSize, SectionType } from '../../utils/types';
+import { Repo, User, CardSize, SectionType } from '../../utils/types';
 
 const Root = styled('div')(({ theme }) => ({
   border: `1px solid ${theme.palette.secondary.light}`,
@@ -100,7 +100,7 @@ const displayRepoContent = (repo: Repo): ReactElement => (
   </Stack>
 );
 
-const displayUserContent = (user: RelatedUser, theme: SectionType): ReactElement => {
+const displayUserContent = (user: User, theme: SectionType): ReactElement => {
   const iconType = theme === 'FOLLOWING' ? 'visibility' : 'favorite';
 
   return (
@@ -132,7 +132,7 @@ const displayUserContent = (user: RelatedUser, theme: SectionType): ReactElement
 
 type Props = {
   theme?: SectionType;
-  data: Repo | RelatedUser;
+  data: Repo | User;
   size?: CardSize;
   onClick?: (userName: string) => void;
 };
@@ -140,7 +140,7 @@ type Props = {
 const Card = ({ theme = 'FOLLOWING', data, size = 'NORMAL', onClick }: Props) => {
   const isRepoTheme = theme === 'REPOS';
   const repo = data as Repo;
-  const user = data as RelatedUser;
+  const user = data as User;
 
   if (size === 'SMALL') {
     return (
@@ -157,7 +157,12 @@ const Card = ({ theme = 'FOLLOWING', data, size = 'NORMAL', onClick }: Props) =>
           </AvatarWrapper>
           <Typography
             variant="h5"
-            sx={{ maxWidth: 130, overflow: 'hidden', textOverflow: 'ellipsis' }}
+            sx={{
+              maxWidth: 130,
+              overflow: 'hidden',
+              textOverflow: 'ellipsis',
+              whiteSpace: 'nowrap',
+            }}
           >
             {user.login}
           </Typography>

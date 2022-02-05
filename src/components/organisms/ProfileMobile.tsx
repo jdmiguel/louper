@@ -7,7 +7,7 @@ import Typography from '@mui/material/Typography';
 import Avatar from '@mui/material/Avatar';
 
 /* types */
-import { User } from '../../utils/types';
+import { UserData } from '../../utils/types';
 
 const Root = styled('div')({
   display: 'flex',
@@ -18,10 +18,10 @@ const Root = styled('div')({
 });
 
 type Props = {
-  user: User;
+  userData: UserData;
 };
 
-const ProfileMobile = ({ user: { avatar_url, name, login } }: Props) => (
+const ProfileMobile = ({ userData: { avatar_url, name, login } }: Props) => (
   <Root>
     <Avatar alt="user avatar" src={avatar_url} sx={{ width: 100, height: 100, marginRight: 2.8 }} />
     <Stack justifyContent="center">

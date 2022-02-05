@@ -12,22 +12,22 @@ import UserPage from './pages/User';
 import { lightTheme, darkTheme } from '../utils/themes';
 
 /* types */
-import { User } from '../utils/types';
+import { UserData } from '../utils/types';
 
 export type ThemeMode = 'light' | 'dark';
 
 const App = () => {
-  const [user, setUser] = useState<User | null>(null);
+  const [userData, setUserData] = useState<UserData | null>(null);
   const [themeMode, setThemeMode] = useState<ThemeMode>('light');
 
   return (
     <ThemeProvider theme={themeMode === 'light' ? lightTheme : darkTheme}>
       <CssBaseline />
-      {user ? (
-        <UserPage user={user} onBackFinder={() => setUser(null)} />
+      {userData ? (
+        <UserPage userData={userData} onBackFinder={() => setUserData(null)} />
       ) : (
         <HomePage
-          onFetchUser={(user: User) => setUser(user)}
+          onFetchUser={(userData: UserData) => setUserData(userData)}
           changeTheme={(themeMode: ThemeMode) => setThemeMode(themeMode)}
         />
       )}

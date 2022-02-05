@@ -8,7 +8,7 @@ import TextTag from '../atoms/TextTag';
 import Link from '../atoms/Link';
 
 /* types */
-import { User } from '../../utils/types';
+import { UserData } from '../../utils/types';
 
 const buildCreationDate = (date: string) => {
   const newDate = new Date(date);
@@ -65,11 +65,11 @@ const Action = styled('div')({
 });
 
 type Props = {
-  user: User;
+  userData: UserData;
 };
 
 const Profile = ({
-  user: {
+  userData: {
     avatar_url,
     name,
     login,

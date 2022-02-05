@@ -11,14 +11,14 @@ import Placeholder from '../atoms/Placeholder';
 import Card from '../molecules/Card';
 
 /* types */
-import { SectionType, Repo, RelatedUser } from '../../utils/types';
+import { SectionType, Repo, User } from '../../utils/types';
 
 const EmptyMsg = styled('div')({
   display: 'flex',
   marginTop: 8,
 });
 
-type Item = Repo | RelatedUser;
+type Item = Repo | User;
 type Props = {
   type: SectionType;
   total: number;

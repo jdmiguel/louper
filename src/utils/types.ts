@@ -1,4 +1,4 @@
-export type User = {
+export type UserData = {
   login: string;
   avatar_url: string;
   created_at: string;
@@ -24,7 +24,7 @@ export type Repo = {
   topics: string[];
 };
 
-export type RelatedUser = {
+export type User = {
   id: number;
   login: string;
   html_url: string;
@@ -32,3 +32,8 @@ export type RelatedUser = {
 };
 
 export type CardSize = 'SMALL' | 'NORMAL';
+
+export type UsersData = {
+  total_count: number;
+  items: User[] | [];
+};
