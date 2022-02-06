@@ -91,7 +91,12 @@ const Profile = ({
       <Avatar
         alt="user avatar"
         src={avatar_url}
-        sx={{ width: 240, height: 240, position: 'absolute' }}
+        sx={{
+          width: 240,
+          height: 240,
+          position: 'absolute',
+          boxShadow: '0 3px 10px rgba(0,0,0,.25)',
+        }}
       />
     </AvatarWrapper>
     <Content>

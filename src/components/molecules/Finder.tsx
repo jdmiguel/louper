@@ -12,7 +12,7 @@ import IconButton from '@mui/material/IconButton';
 /* utils */
 import { debounce } from '../../utils/index';
 
-const StyledTextField = styled(TextField)({
+const StyledTextField = styled(TextField)(({ theme }) => ({
   '& .MuiOutlinedInput-root': {
     borderTopRightRadius: 0,
     borderBottomRightRadius: 0,
@@ -20,8 +20,17 @@ const StyledTextField = styled(TextField)({
     '@media (max-width: 767px)': {
       minWidth: 250,
     },
+    '&:hover': {
+      '& .MuiOutlinedInput-notchedOutline': {
+        borderColor: theme.palette.secondary.main,
+      },
+    },
   },
-});
+  '& .Mui-focused .MuiOutlinedInput-notchedOutline': {
+    border: 'none',
+    boxShadow: `inset 0 0 1px 2px ${theme.palette.primary.main}`,
+  },
+}));
 
 const StyledIconButton = styled(IconButton)(({ theme }) => ({
   backgroundColor: theme.palette.primary.main,

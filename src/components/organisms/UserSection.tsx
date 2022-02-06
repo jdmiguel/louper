@@ -1,3 +1,4 @@
+import { useMemo } from 'react';
 import { v4 as uuidv4 } from 'uuid';
 
 /* material-ui */
@@ -41,34 +42,20 @@ type Props = {
 };
 
 const UserSection = ({ type, isLoading, items, totalItems, emptyMsg }: Props) => {
-  if (totalItems === 0) {
-    return (
-      <EmptyMsg>
-        <Typography variant="h6" sx={{ color: 'text.secondary' }}>
-          {emptyMsg}
-        </Typography>
-      </EmptyMsg>
-    );
-  }
-
-  if (isLoading) {
-    const placeholderList = new Array(totalItems);
-    placeholderList.fill('');
-
-    return (
-      <Root>
-        {placeholderList.map(() => (
-          <Placeholder key={uuidv4()} withUserTheme={type !== 'REPOS'} />
-        ))}
-      </Root>
-    );
-  }
+  const placeholderList = useMemo(() => new Array(totalItems).fill(''), [totalItems]);
 
   return (
     <Root>
-      {items.map((item) => (
-        <Card key={item.id} theme={type} data={item} />
-      ))}
+      {totalItems === 0 && (
+        <EmptyMsg>
+          <Typography variant="h6" sx={{ color: 'text.secondary' }}>
+            {emptyMsg}
+          </Typography>
+        </EmptyMsg>
+      )}
+      {isLoading
+        ? placeholderList.map(() => <Placeholder key={uuidv4()} withUserTheme={type !== 'REPOS'} />)
+        : items.map((item) => <Card key={item.id} theme={type} data={item} />)}
     </Root>
   );
 };

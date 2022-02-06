@@ -28,7 +28,7 @@ const Root = styled('div')({
 });
 
 const ProfileWrapper = styled('aside')({
-  margin: '60px 40px 0 0',
+  margin: '60px 50px 0 0',
   '@media (max-width: 768px)': {
     display: 'none',
   },

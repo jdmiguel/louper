@@ -28,28 +28,24 @@ const MAX_PAGES_ALLOWED = 50;
 const StyledPaginationItem = styled(PaginationItem)(({ theme }) => ({
   '&.MuiPaginationItem-root': {
     color: theme.palette.primary.main,
-  },
-  '&.MuiPaginationItem-outlined': {
-    backgroundColor: theme.palette.primary.main,
-    color: theme.palette.primary.contrastText,
-    border: 'none',
+    margin: 0,
   },
   '&.Mui-selected': {
-    backgroundColor: theme.palette.text.secondary,
-    color: theme.palette.text.disabled,
+    backgroundColor: 'transparent',
+    color: theme.palette.text.secondary,
     cursor: 'default',
   },
   '&.MuiPaginationItem-ellipsis': {
-    backgroundColor: 'transparent',
     color: theme.palette.text.primary,
   },
   '&:hover': {
     '&.MuiPaginationItem-root': {
+      color: theme.palette.primary.contrastText,
       backgroundColor: theme.palette.primary.light,
     },
     '&.Mui-selected': {
-      backgroundColor: theme.palette.text.secondary,
-      color: theme.palette.text.disabled,
+      backgroundColor: 'transparent',
+      color: theme.palette.text.secondary,
       cursor: 'default',
     },
     '&.MuiPaginationItem-ellipsis': {
@@ -77,7 +73,6 @@ const Suggestions = ({ items, totalItems, onPaginate, onSelectUser }: Props) => 
       <Pagination
         count={totalItems <= MAX_PAGES_ALLOWED ? totalItems : MAX_PAGES_ALLOWED}
         renderItem={(item) => <StyledPaginationItem {...item} />}
-        variant="outlined"
         onChange={onPaginate}
         hidePrevButton
         hideNextButton
