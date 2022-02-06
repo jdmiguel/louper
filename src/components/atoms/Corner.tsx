@@ -18,7 +18,10 @@ const GithubCornerRoot = styled('a')(({ theme }) => ({
     },
   },
   '& path:not(:first-of-type)': {
-    fill: theme.palette.background.default,
+    fill:
+      theme.palette.mode === 'light'
+        ? theme.palette.secondary.dark
+        : theme.palette.background.default,
     transformOrigin: '130px 106px',
   },
   '@media (min-width: 1200px)': {

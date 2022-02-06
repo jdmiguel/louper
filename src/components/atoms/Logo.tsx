@@ -1,25 +1,16 @@
 /* material-ui */
-import { styled, useTheme } from '@mui/material/styles';
+import { useTheme } from '@mui/material/styles';
 
 /* colors */
 import { sharedColor } from '../../utils/colors';
 
-const Root = styled('svg')<Props>(({ size }) => ({
-  transform: `scale(${size === 'MEDIUM' ? 1 : 0.8})`,
-}));
-
-type LogoSize = 'MEDIUM' | 'SMALL';
-type Props = {
-  size?: LogoSize;
-};
-
-const Logo = ({ size = 'MEDIUM' }: Props) => {
+const Logo = () => {
   const theme = useTheme();
   const isLightTheme = theme.palette.mode === 'light';
   const selectedColor = isLightTheme ? sharedColor.darkGrey : sharedColor.white;
 
   return (
-    <Root width="281" height="79" viewBox="0 0 281 79" size={size}>
+    <svg width="281" height="79" viewBox="0 0 281 79">
       <path
         d="M37.3404 58.5375H0.368L10.6651 0.160004H25.2595L17.2326 45.889H39.6106L37.3404 58.5375Z"
         fill={selectedColor}
@@ -66,7 +57,7 @@ const Logo = ({ size = 'MEDIUM' }: Props) => {
         d="M280.368 25.556C280.368 27.3938 280.044 29.1776 279.395 30.9073C278.8 32.637 278.206 33.9072 277.611 34.718L276.719 35.8532H264.476C265.828 34.6099 266.503 33.0694 266.503 31.2316C266.503 30.2586 266.179 29.4749 265.53 28.8803C264.936 28.2316 264.098 27.9073 263.017 27.9073C261.179 27.9073 259.585 28.8262 258.233 30.664L253.693 56.2853H239.909L246.801 17.2859H259.612L258.639 22.7182C261.72 18.3399 265.449 16.1507 269.828 16.1507C273.341 16.1507 275.963 16.9886 277.692 18.6642C279.476 20.3399 280.368 22.6371 280.368 25.556Z"
         fill={selectedColor}
       />
-    </Root>
+    </svg>
   );
 };
 

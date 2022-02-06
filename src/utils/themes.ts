@@ -112,11 +112,13 @@ export const lightTheme = createTheme({
     primary: {
       main: sharedColor.pink,
       light: sharedColor.lightPink,
+      dark: sharedColor.lightPink,
       contrastText: sharedColor.white,
     },
     secondary: {
       main: lightThemeColor.grey,
       light: lightThemeColor.lightGrey,
+      dark: lightThemeColor.neutralGrey,
       contrastText: sharedColor.white,
     },
     info: {
@@ -141,6 +143,7 @@ export const darkTheme = createTheme({
     secondary: {
       main: darkThemeColor.grey,
       light: darkThemeColor.lightGrey,
+      dark: darkThemeColor.darkGrey,
       contrastText: sharedColor.white,
     },
     background: {

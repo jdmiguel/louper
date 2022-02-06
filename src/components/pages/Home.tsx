@@ -7,6 +7,7 @@ import Typography from '@mui/material/Typography';
 /* atoms */
 import Corner from '../atoms/Corner';
 import Logo from '../atoms/Logo';
+import Watermark from '../atoms/Watermark';
 
 /* molecules */
 import Finder from '../molecules/Finder';
@@ -31,19 +32,12 @@ enum ErrorMsg {
 
 const MIN_CHARS_TO_SEARCH_USERS = 2;
 
-const Root = styled('div')(({ theme }) => ({
-  backgroundImage: `${
-    theme.palette.mode === 'light' ? "url('/white_bg.svg')" : "url('/black_bg.svg')"
-  }`,
-  backgroundRepeat: 'no-repeat',
-  backgroundPosition: 'center',
-  backgroundSize: 'contain',
-  backgroundBlendMode: 'color',
+const Root = styled('div')({
   display: 'flex',
   flexDirection: 'column',
   height: '100vh',
   justifyContent: 'center',
-}));
+});
 
 const CornerWrapper = styled('div')({
   display: 'flex',
@@ -56,7 +50,15 @@ const CornerWrapper = styled('div')({
 const Main = styled('main')({
   alignItems: 'center',
   display: 'flex',
+  justifyContent: 'center',
+});
+
+const Content = styled('div')({
+  alignItems: 'center',
+  display: 'flex',
   flexDirection: 'column',
+  marginRight: 40,
+  minWidth: 650,
 });
 
 const LogoWrapper = styled('h1')({
@@ -69,6 +71,18 @@ const LogoWrapper = styled('h1')({
 const SuggestionsWrapper = styled('div')({
   height: 260,
   marginTop: 20,
+});
+
+const WatermarkWrapper = styled('div')({
+  opacity: 0.15,
+  marginTop: 10,
+});
+
+const Canvas = styled('div')({
+  alignItems: 'center',
+  display: 'flex',
+  flexDirection: 'column',
+  opacity: 0.3,
 });
 
 const DEFAULT_USERS_DATA = {
@@ -191,37 +205,46 @@ const HomePage = ({ onFetchUser, changeTheme }: Props) => {
         <Corner />
       </CornerWrapper>
       <Main>
-        <LogoWrapper>
-          <Logo />
-        </LogoWrapper>
-        <Typography
-          variant="h2"
-          sx={{
-            marginBottom: '60px',
-          }}
-        >
-          Search and find any Github user!
-        </Typography>
-        <Finder
-          isLoadingUser={isLoadingUser}
-          isLoadingUsers={isLoadingUsers}
-          searchQuery={searchQuery}
-          onChangeSearchQuery={onChangeSearchQuery}
-          onFetchUser={fetchUser}
-        />
-        <SuggestionsWrapper>
-          {areSuggestionsShown && (
-            <Suggestions
-              items={usersData.items}
-              totalItems={usersData.total_count}
-              onPaginate={(_, page: number) => fetchUsers(searchQuery, page)}
-              onSelectUser={(userName: string) => {
-                setSearchQuery(userName);
-                fetchUser(userName);
-              }}
-            />
-          )}
-        </SuggestionsWrapper>
+        <Content>
+          <LogoWrapper>
+            <Logo />
+          </LogoWrapper>
+          <Typography
+            variant="h2"
+            sx={{
+              marginBottom: '60px',
+            }}
+          >
+            Search and find any Github user!
+          </Typography>
+          <Finder
+            isLoadingUser={isLoadingUser}
+            isLoadingUsers={isLoadingUsers}
+            searchQuery={searchQuery}
+            onChangeSearchQuery={onChangeSearchQuery}
+            onFetchUser={fetchUser}
+          />
+          <SuggestionsWrapper>
+            {areSuggestionsShown ? (
+              <Suggestions
+                items={usersData.items}
+                totalItems={usersData.total_count}
+                onPaginate={(_, page: number) => fetchUsers(searchQuery, page)}
+                onSelectUser={(userName: string) => {
+                  setSearchQuery(userName);
+                  fetchUser(userName);
+                }}
+              />
+            ) : (
+              <WatermarkWrapper>
+                <Watermark />
+              </WatermarkWrapper>
+            )}
+          </SuggestionsWrapper>
+        </Content>
+        <Canvas>
+          <img src="/earth.png" />
+        </Canvas>
       </Main>
       <Footer changeTheme={changeTheme} />
       <Toast

@@ -8,9 +8,11 @@ export const sharedColor = {
 export const lightThemeColor = {
   grey: '#877d82',
   lightGrey: '#bbb0b5',
+  neutralGrey: '#aaa9a9',
 };
 
 export const darkThemeColor = {
   grey: '#998991',
   lightGrey: '#5a5a5a',
+  darkGrey: '#24282a',
 };
