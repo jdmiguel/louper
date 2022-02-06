@@ -1,4 +1,4 @@
-import { useState, useEffect, useMemo } from 'react';
+import { useState, useEffect, useMemo, useCallback } from 'react';
 
 /* material-ui */
 import { styled } from '@mui/material/styles';
@@ -21,10 +21,15 @@ import { ResponseError, BASE_URL, handleErrors } from '../../utils/request';
 import { UserData, UsersData } from '../../utils/types';
 import { ThemeMode } from '../App';
 
+/* utils */
+import { debounce } from '../../utils/index';
+
 enum ErrorMsg {
   MAX = 'You have excedeed the maximum allowed request. Please, wait for a while',
   NO_USER = 'Please, choose an available user',
 }
+
+const MIN_CHARS_TO_SEARCH_USERS = 2;
 
 const Root = styled('div')(({ theme }) => ({
   backgroundImage: `${
@@ -162,6 +167,24 @@ const HomePage = ({ onFetchUser, changeTheme }: Props) => {
       });
   };
 
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  const debouncedFunction = useCallback(debounce(fetchUsers, 500), []);
+
+  const onChangeSearchQuery = (currentSearchQuery: string) => {
+    if (currentSearchQuery === searchQuery) {
+      return;
+    }
+
+    setSearchQuery(currentSearchQuery);
+    if (currentSearchQuery.length > MIN_CHARS_TO_SEARCH_USERS) {
+      debouncedFunction(currentSearchQuery);
+    }
+    if (currentSearchQuery.length <= MIN_CHARS_TO_SEARCH_USERS) {
+      setAreSuggestionsShown(false);
+      setUsersData(DEFAULT_USERS_DATA);
+    }
+  };
+
   return (
     <Root>
       <CornerWrapper>
@@ -183,13 +206,8 @@ const HomePage = ({ onFetchUser, changeTheme }: Props) => {
           isLoadingUser={isLoadingUser}
           isLoadingUsers={isLoadingUsers}
           searchQuery={searchQuery}
-          onChangeSearchQuery={(query: string) => setSearchQuery(query)}
-          onFetchUsers={fetchUsers}
+          onChangeSearchQuery={onChangeSearchQuery}
           onFetchUser={fetchUser}
-          onClearUsers={() => {
-            setAreSuggestionsShown(false);
-            setUsersData(DEFAULT_USERS_DATA);
-          }}
         />
         <SuggestionsWrapper>
           {areSuggestionsShown && (

@@ -1,4 +1,4 @@
-import { useState, useCallback } from 'react';
+import { useState } from 'react';
 
 /* material-ui */
 import { styled } from '@mui/material/styles';
@@ -8,9 +8,6 @@ import TextField from '@mui/material/TextField';
 import InputAdornment from '@mui/material/InputAdornment';
 import Icon from '@mui/material/Icon';
 import IconButton from '@mui/material/IconButton';
-
-/* utils */
-import { debounce } from '../../utils/index';
 
 const StyledTextField = styled(TextField)(({ theme }) => ({
   '& .MuiOutlinedInput-root': {
@@ -45,16 +42,12 @@ const StyledIconButton = styled(IconButton)(({ theme }) => ({
   },
 }));
 
-const MIN_CHARS_TO_SEARCH_USERS = 2;
-
 type Props = {
   searchQuery: string;
-  onChangeSearchQuery: (query: string) => void;
   isLoadingUser: boolean;
   isLoadingUsers: boolean;
-  onFetchUsers: (query: string) => void;
+  onChangeSearchQuery: (query: string) => void;
   onFetchUser: (name: string) => void;
-  onClearUsers: () => void;
 };
 
 const Finder = ({
@@ -62,9 +55,7 @@ const Finder = ({
   onChangeSearchQuery,
   isLoadingUser,
   isLoadingUsers,
-  onFetchUsers,
   onFetchUser,
-  onClearUsers,
 }: Props) => {
   const [isValidating, setIsValidating] = useState(false);
 
@@ -72,27 +63,10 @@ const Finder = ({
     if (!searchQuery || keyCode !== 13) {
       return;
     }
-
     onFetchUser(searchQuery);
   };
 
   const isNotValid = isValidating && !searchQuery;
-
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  const debouncedFunction = useCallback(debounce(onFetchUsers, 500), [onFetchUsers]);
-
-  const onChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const currentSearchQuery = event?.target?.value;
-
-    if (currentSearchQuery === searchQuery) {
-      return;
-    }
-    onChangeSearchQuery(currentSearchQuery);
-
-    if (currentSearchQuery.length > MIN_CHARS_TO_SEARCH_USERS)
-      debouncedFunction(currentSearchQuery);
-    if (currentSearchQuery.length <= MIN_CHARS_TO_SEARCH_USERS) onClearUsers();
-  };
 
   return (
     <FormControl
@@ -108,7 +82,13 @@ const Finder = ({
         placeholder="Type user name..."
         value={searchQuery}
         onFocus={() => setIsValidating(false)}
-        onChange={onChange}
+        onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
+          const currentSearchQuery = event?.target?.value;
+          if (currentSearchQuery === searchQuery) {
+            return;
+          }
+          onChangeSearchQuery(currentSearchQuery);
+        }}
         onKeyUp={onKeyUp}
         size="small"
         variant="outlined"
