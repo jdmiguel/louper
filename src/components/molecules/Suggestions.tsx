@@ -1,6 +1,7 @@
 /* material-ui */
 import { styled } from '@mui/material/styles';
 import Pagination from '@mui/material/Pagination';
+import PaginationItem from '@mui/material/PaginationItem';
 import Stack from '@mui/material/Stack';
 
 /* molecules */
@@ -11,16 +12,52 @@ import { User } from '../../utils/types';
 
 const SuggestionsWrapper = styled('div')({
   display: 'grid',
-  gap: 12,
-  gridTemplateColumns: 'repeat(3, 1fr)',
-  height: 220,
-  marginBottom: 30,
+  gap: 14,
+  gridTemplateColumns: 'repeat(2, 1fr)',
   maxWidth: '100%',
   padding: 20,
+  '@media (min-width: 768px)': {
+    gridTemplateColumns: 'repeat(3, 1fr)',
+    height: 260,
+  },
 });
 
-const MIN_ITEMS_TO_PAGINATE = 10;
+const MIN_ITEMS_TO_PAGINATE = 13;
 const MAX_PAGES_ALLOWED = 50;
+
+const StyledPaginationItem = styled(PaginationItem)(({ theme }) => ({
+  '&.MuiPaginationItem-root': {
+    color: theme.palette.primary.main,
+  },
+  '&.MuiPaginationItem-outlined': {
+    backgroundColor: theme.palette.primary.main,
+    color: theme.palette.primary.contrastText,
+    border: 'none',
+  },
+  '&.Mui-selected': {
+    backgroundColor: theme.palette.text.secondary,
+    color: theme.palette.text.disabled,
+    cursor: 'default',
+  },
+  '&.MuiPaginationItem-ellipsis': {
+    backgroundColor: 'transparent',
+    color: theme.palette.text.primary,
+  },
+  '&:hover': {
+    '&.MuiPaginationItem-root': {
+      backgroundColor: theme.palette.primary.light,
+    },
+    '&.Mui-selected': {
+      backgroundColor: theme.palette.text.secondary,
+      color: theme.palette.text.disabled,
+      cursor: 'default',
+    },
+    '&.MuiPaginationItem-ellipsis': {
+      backgroundColor: 'transparent',
+      color: theme.palette.text.primary,
+    },
+  },
+}));
 
 type Props = {
   items: User[];
@@ -39,7 +76,8 @@ const Suggestions = ({ items, totalItems, onPaginate, onSelectUser }: Props) => 
     {totalItems >= MIN_ITEMS_TO_PAGINATE && (
       <Pagination
         count={totalItems <= MAX_PAGES_ALLOWED ? totalItems : MAX_PAGES_ALLOWED}
-        color="primary"
+        renderItem={(item) => <StyledPaginationItem {...item} />}
+        variant="outlined"
         onChange={onPaginate}
         hidePrevButton
         hideNextButton

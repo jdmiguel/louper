@@ -57,7 +57,7 @@ export const lightTheme = createTheme({
     fontFamily: ['Comfortaa', 'Arial', 'sans-serif'].join(','),
     htmlFontSize: 12,
     h2: {
-      fontSize: '1.2rem',
+      fontSize: '1.1rem',
       fontWeight: 300,
       lineHeight: 0,
       '@media (min-width: 768px)': {

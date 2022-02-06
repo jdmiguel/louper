@@ -28,8 +28,8 @@ const Title = styled('div')(({ theme }) => ({
 }));
 
 const StyledButton = styled(Button)(({ theme }) => ({
-  height: 60,
-  minWidth: 212,
+  height: 44,
+  minWidth: 180,
   '&:hover': {
     backgroundColor: theme.palette.primary.light,
   },
@@ -38,10 +38,10 @@ const StyledButton = styled(Button)(({ theme }) => ({
 const AvatarWrapper = styled('div')<{
   size?: CardSize;
 }>(({ size }) => ({
-  height: size === 'SMALL' ? 40 : 80,
+  height: size === 'SMALL' ? 32 : 80,
   marginRight: size === 'SMALL' ? 10 : 20,
   position: 'relative',
-  width: size === 'SMALL' ? 40 : 80,
+  width: size === 'SMALL' ? 32 : 80,
 }));
 
 const Topic = styled('div')(({ theme }) => ({
@@ -147,18 +147,18 @@ const Card = ({ theme = 'FOLLOWING', data, size = 'NORMAL', onClick }: Props) =>
       <StyledButton variant="contained" onClick={() => onClick?.(user.login)}>
         <Stack direction="row" sx={{ alignItems: 'center', width: '100%' }}>
           <AvatarWrapper size={size}>
-            <Avatar variant="circular" sx={{ height: 40, width: 40, position: 'absolute' }} />
+            <Avatar variant="circular" sx={{ height: 32, width: 32, position: 'absolute' }} />
             <Avatar
               alt="user following avatar"
               variant="circular"
               src={user.avatar_url}
-              sx={{ height: 40, width: 40, position: 'absolute' }}
+              sx={{ height: 32, width: 32, position: 'absolute' }}
             />
           </AvatarWrapper>
           <Typography
             variant="h5"
             sx={{
-              maxWidth: 130,
+              maxWidth: 100,
               overflow: 'hidden',
               textOverflow: 'ellipsis',
               whiteSpace: 'nowrap',

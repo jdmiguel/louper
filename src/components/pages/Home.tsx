@@ -54,9 +54,16 @@ const Main = styled('main')({
   flexDirection: 'column',
 });
 
+const LogoWrapper = styled('h1')({
+  transform: 'scale(0.9)',
+  '@media (min-width: 768px)': {
+    transform: 'scale(1)',
+  },
+});
+
 const SuggestionsWrapper = styled('div')({
-  height: 220,
-  marginTop: 50,
+  height: 260,
+  marginTop: 20,
 });
 
 const DEFAULT_USERS_DATA = {
@@ -92,8 +99,8 @@ const HomePage = ({ onFetchUser, changeTheme }: Props) => {
     setIsLoadingUsers(true);
 
     const endpoint = page
-      ? `${BASE_URL}/search/users?q=${querySearch}&page=${page}&per_page=9`
-      : `${BASE_URL}/search/users?q=${querySearch}&per_page=9`;
+      ? `${BASE_URL}/search/users?q=${querySearch}&page=${page}&per_page=12`
+      : `${BASE_URL}/search/users?q=${querySearch}&per_page=12`;
 
     fetch(endpoint, {
       signal: abortControllerFetchUsers.signal,
@@ -161,7 +168,9 @@ const HomePage = ({ onFetchUser, changeTheme }: Props) => {
         <Corner />
       </CornerWrapper>
       <Main>
-        <Logo />
+        <LogoWrapper>
+          <Logo />
+        </LogoWrapper>
         <Typography
           variant="h2"
           sx={{
