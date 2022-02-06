@@ -13,6 +13,19 @@ import Card from '../molecules/Card';
 /* types */
 import { SectionType, Repo, User } from '../../utils/types';
 
+const Root = styled('main')({
+  display: 'grid',
+  gridGap: 20,
+  marginTop: 30,
+  padding: 1,
+  '@media (min-width: 992px)': {
+    gridTemplateColumns: 'repeat(2, 330px)',
+  },
+  '@media (min-width: 1200px)': {
+    gridTemplateColumns: 'repeat(2, 420px)',
+  },
+});
+
 const EmptyMsg = styled('div')({
   display: 'flex',
   marginTop: 8,
@@ -21,14 +34,14 @@ const EmptyMsg = styled('div')({
 type Item = Repo | User;
 type Props = {
   type: SectionType;
-  total: number;
   isLoading: boolean;
   items: Item[];
+  totalItems: number;
   emptyMsg: string;
 };
 
-const UserSection = ({ type, total, isLoading, items, emptyMsg }: Props) => {
-  if (total === 0) {
+const UserSection = ({ type, isLoading, items, totalItems, emptyMsg }: Props) => {
+  if (totalItems === 0) {
     return (
       <EmptyMsg>
         <Typography variant="h6" sx={{ color: 'text.secondary' }}>
@@ -39,24 +52,24 @@ const UserSection = ({ type, total, isLoading, items, emptyMsg }: Props) => {
   }
 
   if (isLoading) {
-    const placeholderList = new Array(total);
+    const placeholderList = new Array(totalItems);
     placeholderList.fill('');
 
     return (
-      <>
+      <Root>
         {placeholderList.map(() => (
           <Placeholder key={uuidv4()} withUserTheme={type !== 'REPOS'} />
         ))}
-      </>
+      </Root>
     );
   }
 
   return (
-    <>
+    <Root>
       {items.map((item) => (
         <Card key={item.id} theme={type} data={item} />
       ))}
-    </>
+    </Root>
   );
 };
 
