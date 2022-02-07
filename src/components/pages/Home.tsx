@@ -32,12 +32,18 @@ enum ErrorMsg {
 
 const MIN_CHARS_TO_SEARCH_USERS = 2;
 
-const Root = styled('div')({
+const Root = styled('div')(({ theme }) => ({
   display: 'flex',
   flexDirection: 'column',
   height: '100vh',
   justifyContent: 'center',
-});
+  '@media (min-width: 1200px)': {
+    background:
+      theme.palette.mode === 'light'
+        ? `radial-gradient(circle, ${theme.palette.background.default} 0%, ${theme.palette.secondary.dark} 100%)`
+        : `radial-gradient(circle, ${theme.palette.background.default} 0%, ${theme.palette.secondary.dark} 100%)`,
+  },
+}));
 
 const CornerWrapper = styled('div')({
   display: 'flex',
@@ -50,15 +56,21 @@ const CornerWrapper = styled('div')({
 const Main = styled('main')({
   alignItems: 'center',
   display: 'flex',
+  flexDirection: 'column',
   justifyContent: 'center',
+  '@media (min-width: 1200px)': {
+    flexDirection: 'row',
+  },
 });
 
 const Content = styled('div')({
   alignItems: 'center',
   display: 'flex',
   flexDirection: 'column',
-  marginRight: 40,
-  minWidth: 650,
+  '@media (min-width: 1200px)': {
+    marginRight: 40,
+    minWidth: 650,
+  },
 });
 
 const LogoWrapper = styled('h1')({
@@ -79,10 +91,14 @@ const WatermarkWrapper = styled('div')({
 });
 
 const Canvas = styled('div')({
-  alignItems: 'center',
-  display: 'flex',
-  flexDirection: 'column',
-  opacity: 0.3,
+  display: 'none',
+  '@media (min-width: 1200px)': {
+    alignItems: 'center',
+    display: 'flex',
+    flexDirection: 'column',
+    maxWidth: '100%',
+    opacity: 0.3,
+  },
 });
 
 const DEFAULT_USERS_DATA = {

@@ -13,17 +13,26 @@ import Link from '../atoms/Link';
 import { ThemeMode } from '../App';
 
 const Root = styled('footer')({
+  alignItems: 'center',
+  display: 'flex',
+  justifyContent: 'center',
+  opacity: 1,
+  padding: '0 24px',
+  position: 'absolute',
+  bottom: 0,
+  visibility: 'visible',
+  width: '100%',
+  '@media (min-width: 1200px)': {
+    justifyContent: 'space-between',
+  },
+});
+
+const Rights = styled('div')({
   display: 'none',
   '@media (min-width: 1200px)': {
-    alignItems: 'flex-end',
+    alignItems: 'center',
     display: 'flex',
-    justifyContent: 'space-between',
-    opacity: 1,
-    padding: '0 24px',
-    position: 'absolute',
-    bottom: 0,
-    visibility: 'visible',
-    width: '100%',
+    marginBottom: '14px',
   },
 });
 
@@ -52,14 +61,16 @@ const Footer = ({ changeTheme }: Props) => {
 
   return (
     <Root>
-      <Stack direction="row" spacing={0.7} alignItems="center" sx={{ marginBottom: '18px' }}>
-        <Typography variant="body1">COPYRIGHT @2021 | Created by </Typography>
+      <Rights>
+        <Typography variant="body1" sx={{ marginRight: 0.7 }}>
+          COPYRIGHT @2021 | Created by{' '}
+        </Typography>
         <Link
           url="https://jdmiguel.netlify.app/"
           ariaLabel="View profile of jdmiguel on GitHub"
           content="jdmiguel"
         />
-      </Stack>
+      </Rights>
       <Stack direction="row" spacing={1} alignItems="center" sx={{ marginBottom: '6px' }}>
         <Typography variant="body1" sx={{ opacity: isLightTheme ? 0.5 : 1 }}>
           Dark theme
