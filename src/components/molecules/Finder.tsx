@@ -9,7 +9,7 @@ import InputAdornment from '@mui/material/InputAdornment';
 import Icon from '@mui/material/Icon';
 import IconButton from '@mui/material/IconButton';
 
-const StyledTextField = styled(TextField)(({ theme }) => ({
+const StyledTextField = styled<any>(TextField)(({ theme }) => ({
   '& .MuiOutlinedInput-root': {
     borderTopRightRadius: 0,
     borderBottomRightRadius: 0,
