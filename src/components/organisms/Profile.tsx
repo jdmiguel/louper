@@ -34,6 +34,7 @@ const AvatarWrapper = styled('div')({
 const Content = styled('div')({
   marginTop: 20,
   maxWidth: 300,
+  overflow: 'hidden',
 });
 
 const Info = styled('div')(({ theme }) => ({
@@ -106,7 +107,15 @@ const Profile = ({
       <Typography variant="h4" sx={{ marginBottom: 2 }}>
         {login}
       </Typography>
-      <Typography variant="body2" sx={{ color: 'text.secondary' }}>
+      <Typography
+        variant="body2"
+        sx={{
+          color: 'text.secondary',
+          overflow: 'hidden',
+          maxWidth: 240,
+          textOverflow: 'ellipsis',
+        }}
+      >
         {bio}
       </Typography>
       <Info>
