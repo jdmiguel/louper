@@ -1,18 +1,13 @@
-export const sharedColor = {
+export const colors = {
   white: '#e0e6ef',
-  pink: '#c94b73',
   lightPink: '#e56e94',
-  darkGrey: '#353d40',
-};
-
-export const lightThemeColor = {
-  grey: '#877d82',
-  lightGrey: '#bbb0b5',
-  neutralGrey: '#aaa9a9',
-};
-
-export const darkThemeColor = {
-  grey: '#998991',
+  pink: '#c94b73',
+  darkPink: '#832458',
   lightGrey: '#5a5a5a',
-  darkGrey: '#24282a',
+  grey: '#24282a',
+  darkGrey: '#998991',
+  blue: '#18206c',
+  lightBlue: '#2b3acf',
+  darkBlue: '#090b1f',
+  darkGradient: 'radial-gradient(at 70% 90%, #200f20 20%, #090b1f 70%)',
 };

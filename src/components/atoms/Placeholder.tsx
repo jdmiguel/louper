@@ -14,41 +14,41 @@ const Root = styled('div')(({ theme }) => ({
 const Shimmer = styled('div')(({ theme }) => ({
   animation: `${theme.animation.shimmer} 2000ms linear infinite`,
   backgroundSize: '1200px 100%',
-  backgroundColor: theme.palette.background.default,
+  backgroundColor: 'transparent',
   backgroundImage:
     '-webkit-gradient(linear,left top,right top,from(rgba(0,0,0,.08)),color-stop(15%,rgba(0,0,0,.15)),color-stop(30%,rgba(0,0,0,.08)))',
   overflow: 'hidden',
   willChange: 'background-position-x',
 }));
 
-const RepoLine = styled('span')(({ theme }) => ({
-  backgroundColor: theme.palette.background.default,
+const RepoLine = styled('span')({
+  backgroundColor: 'transparent',
   height: 14,
   marginBottom: 12,
   width: '100%',
-}));
+});
 
-const RepoDivider = styled('span')(({ theme }) => ({
-  backgroundColor: theme.palette.background.default,
+const RepoDivider = styled('span')({
+  backgroundColor: 'transparent',
   height: 30,
   marginBottom: 2,
   width: '100%',
-}));
+});
 
-const UserVline = styled('span')(({ theme }) => ({
-  backgroundColor: theme.palette.background.default,
+const UserVline = styled('span')({
+  backgroundColor: 'transparent',
   marginLeft: 85,
   width: 16,
-}));
+});
 
-const UserHline = styled('span')(({ theme }) => ({
-  backgroundColor: theme.palette.background.default,
+const UserHline = styled('span')({
+  backgroundColor: 'transparent',
   height: 16,
   width: '100%',
   '&:not(:last-of-type)': {
     marginBottom: 17,
   },
-}));
+});
 
 const RepoTheme = (
   <Stack justifyContent="center" sx={{ marginBottom: 0.4 }}>

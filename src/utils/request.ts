@@ -1,5 +1,5 @@
 export interface ResponseError extends Error {
-  code: number;
+  status: number;
 }
 
 export const BASE_URL = 'https://api.github.com';

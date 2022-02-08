@@ -32,7 +32,7 @@ const StyledPaginationItem = styled(PaginationItem)(({ theme }) => ({
   },
   '&.Mui-selected': {
     backgroundColor: 'transparent',
-    color: theme.palette.text.secondary,
+    color: theme.palette.text.disabled,
     cursor: 'default',
   },
   '&.MuiPaginationItem-ellipsis': {
@@ -45,7 +45,7 @@ const StyledPaginationItem = styled(PaginationItem)(({ theme }) => ({
     },
     '&.Mui-selected': {
       backgroundColor: 'transparent',
-      color: theme.palette.text.secondary,
+      color: theme.palette.text.disabled,
       cursor: 'default',
     },
     '&.MuiPaginationItem-ellipsis': {

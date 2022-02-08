@@ -17,8 +17,7 @@ import { SectionType, Repo, User } from '../../utils/types';
 const Root = styled('main')({
   display: 'grid',
   gridGap: 20,
-  marginTop: 30,
-  padding: 1,
+  paddingTop: 20,
   '@media (min-width: 992px)': {
     gridTemplateColumns: 'repeat(2, 330px)',
   },

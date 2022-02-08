@@ -44,7 +44,7 @@ const Followers = ({
         onFetchFollowers(fetchedFollowers);
       })
       .catch((error: ResponseError) => {
-        if (error.code === 20) {
+        if (error.status === 20) {
           return;
         }
         onRequestError();

@@ -38,7 +38,7 @@ const Repos = ({ userName, repos, totalRepos, onFetchRepos, onRequestError }: Pr
         onFetchRepos(fetchedRepos);
       })
       .catch((error: ResponseError) => {
-        if (error.code === 20) {
+        if (error.status === 20) {
           return;
         }
         onRequestError();

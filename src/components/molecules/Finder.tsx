@@ -17,9 +17,12 @@ const StyledTextField = styled<any>(TextField)(({ theme }) => ({
     '@media (max-width: 767px)': {
       minWidth: 250,
     },
+    '& .MuiOutlinedInput-notchedOutline': {
+      borderColor: theme.palette.primary.main,
+    },
     '&:hover': {
       '& .MuiOutlinedInput-notchedOutline': {
-        borderColor: theme.palette.secondary.main,
+        borderColor: theme.palette.primary.light,
       },
     },
   },
@@ -102,7 +105,9 @@ const Finder = ({
               {isLoadingUsers ? (
                 <CircularProgress className="loaderIcon" size={22} thickness={4} />
               ) : (
-                <Icon sx={{ fontSize: '1.4rem' }}>person</Icon>
+                <Icon color="info" sx={{ fontSize: '1.4rem' }}>
+                  person
+                </Icon>
               )}
             </InputAdornment>
           ),

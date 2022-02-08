@@ -3,7 +3,7 @@ import { keyframes } from '@emotion/react';
 import { createTheme } from '@mui/material/styles';
 
 /* colors */
-import { sharedColor, lightThemeColor, darkThemeColor } from './colors';
+import { colors } from './colors';
 
 type Animation = {
   greet: any;
@@ -22,7 +22,7 @@ declare module '@mui/material/styles' {
   }
 }
 
-export const lightTheme = createTheme({
+export const theme = createTheme({
   animation: {
     greet: keyframes`
       0%,100% { transform: rotate(0) }
@@ -40,7 +40,7 @@ export const lightTheme = createTheme({
         '@global': {
           html: {
             overflowX: 'hidden',
-            background: sharedColor.white,
+            background: colors.darkBlue,
           },
           body: {
             margin: 0,
@@ -110,49 +110,27 @@ export const lightTheme = createTheme({
   palette: {
     mode: 'light',
     primary: {
-      main: sharedColor.pink,
-      light: sharedColor.lightPink,
-      dark: sharedColor.lightPink,
-      contrastText: sharedColor.white,
+      main: colors.pink,
+      light: colors.lightPink,
+      dark: colors.darkPink,
+      contrastText: colors.white,
     },
     secondary: {
-      main: lightThemeColor.grey,
-      light: lightThemeColor.lightGrey,
-      dark: lightThemeColor.neutralGrey,
-      contrastText: sharedColor.white,
+      main: colors.blue,
+      light: colors.lightBlue,
+      dark: colors.darkBlue,
+      contrastText: colors.white,
     },
     info: {
-      main: sharedColor.white,
+      main: colors.lightGrey,
     },
     background: {
-      default: sharedColor.white,
+      default: colors.darkBlue,
     },
     text: {
-      primary: sharedColor.darkGrey,
-      secondary: lightThemeColor.grey,
-      disabled: lightThemeColor.lightGrey,
-    },
-  },
-});
-
-export const darkTheme = createTheme({
-  ...lightTheme,
-  palette: {
-    ...lightTheme.palette,
-    mode: 'dark',
-    secondary: {
-      main: darkThemeColor.grey,
-      light: darkThemeColor.lightGrey,
-      dark: darkThemeColor.darkGrey,
-      contrastText: sharedColor.white,
-    },
-    background: {
-      default: sharedColor.darkGrey,
-    },
-    text: {
-      primary: sharedColor.white,
-      secondary: darkThemeColor.grey,
-      disabled: darkThemeColor.lightGrey,
+      primary: colors.white,
+      secondary: colors.lightPink,
+      disabled: colors.lightGrey,
     },
   },
 });

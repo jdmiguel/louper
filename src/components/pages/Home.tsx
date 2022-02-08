@@ -15,12 +15,15 @@ import Suggestions from '../molecules/Suggestions';
 import Footer from '../molecules/Footer';
 import Toast from '../molecules/Toast';
 
+/* organisms */
+import InteractiveEarth from '../organisms/InteractiveEarth';
+import Universe from '../organisms/Universe';
+
 /* request */
 import { ResponseError, BASE_URL, handleErrors } from '../../utils/request';
 
 /* types */
 import { UserData, UsersData } from '../../utils/types';
-import { ThemeMode } from '../App';
 
 /* utils */
 import { debounce } from '../../utils/index';
@@ -32,18 +35,12 @@ enum ErrorMsg {
 
 const MIN_CHARS_TO_SEARCH_USERS = 2;
 
-const Root = styled('div')(({ theme }) => ({
+const Root = styled('div')({
   display: 'flex',
   flexDirection: 'column',
   height: '100vh',
   justifyContent: 'center',
-  '@media (min-width: 1200px)': {
-    background:
-      theme.palette.mode === 'light'
-        ? `radial-gradient(circle, ${theme.palette.background.default} 0%, ${theme.palette.secondary.dark} 100%)`
-        : `radial-gradient(circle, ${theme.palette.background.default} 0%, ${theme.palette.secondary.dark} 100%)`,
-  },
-}));
+});
 
 const CornerWrapper = styled('div')({
   display: 'flex',
@@ -68,8 +65,8 @@ const Content = styled('div')({
   display: 'flex',
   flexDirection: 'column',
   '@media (min-width: 1200px)': {
-    marginRight: 40,
-    minWidth: 650,
+    marginRight: 60,
+    minWidth: 620,
   },
 });
 
@@ -86,18 +83,24 @@ const SuggestionsWrapper = styled('div')({
 });
 
 const WatermarkWrapper = styled('div')({
-  opacity: 0.15,
   marginTop: 10,
 });
 
-const Canvas = styled('div')({
+const EarthWrapper = styled('div')({
   display: 'none',
   '@media (min-width: 1200px)': {
-    alignItems: 'center',
-    display: 'flex',
-    flexDirection: 'column',
-    maxWidth: '100%',
-    opacity: 0.3,
+    display: 'block',
+    height: 580,
+    width: 580,
+  },
+});
+
+const UniverseWrapper = styled('div')({
+  display: 'none',
+  '@media (min-width: 1200px)': {
+    position: 'absolute',
+    height: '100%',
+    width: '100%',
   },
 });
 
@@ -108,10 +111,9 @@ const DEFAULT_USERS_DATA = {
 
 type Props = {
   onFetchUser: (userData: UserData) => void;
-  changeTheme: (themeMode: ThemeMode) => void;
 };
 
-const HomePage = ({ onFetchUser, changeTheme }: Props) => {
+const HomePage = ({ onFetchUser }: Props) => {
   const [searchQuery, setSearchQuery] = useState('');
   const [isLoadingUser, setIsLoadingUser] = useState(false);
   const [isLoadingUsers, setIsLoadingUsers] = useState(false);
@@ -179,12 +181,14 @@ const HomePage = ({ onFetchUser, changeTheme }: Props) => {
       .catch((error: ResponseError) => {
         let errorMsg = '';
 
-        switch (error.code) {
+        console.log({ error });
+
+        switch (error.status) {
           case 403:
+          default:
             errorMsg = ErrorMsg.MAX;
             break;
           case 404:
-          default:
             errorMsg = ErrorMsg.NO_USER;
             break;
         }
@@ -258,11 +262,14 @@ const HomePage = ({ onFetchUser, changeTheme }: Props) => {
             )}
           </SuggestionsWrapper>
         </Content>
-        <Canvas>
-          <img src="/earth.png" />
-        </Canvas>
+        <EarthWrapper>
+          <InteractiveEarth />
+        </EarthWrapper>
+        <UniverseWrapper>
+          <Universe />
+        </UniverseWrapper>
       </Main>
-      <Footer changeTheme={changeTheme} />
+      <Footer />
       <Toast
         isOpen={isErrorToastOpen}
         type="error"
