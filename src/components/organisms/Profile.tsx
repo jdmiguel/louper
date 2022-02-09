@@ -103,20 +103,24 @@ const Profile = ({
       <Typography variant="h3" sx={{ marginBottom: 0.4 }}>
         {name}
       </Typography>
-      <Typography variant="h4" sx={{ marginBottom: 2 }}>
-        {login}
-      </Typography>
-      <Typography
-        variant="body2"
-        sx={{
-          color: 'secondary.light',
-          overflow: 'hidden',
-          maxWidth: 240,
-          textOverflow: 'ellipsis',
-        }}
-      >
-        {bio}
-      </Typography>
+      {login && (
+        <Typography variant="h4" sx={{ marginBottom: 2 }}>
+          {login}
+        </Typography>
+      )}
+      {bio && (
+        <Typography
+          variant="body2"
+          sx={{
+            color: 'secondary.light',
+            overflow: 'hidden',
+            maxWidth: 240,
+            textOverflow: 'ellipsis',
+          }}
+        >
+          {bio}
+        </Typography>
+      )}
       <Info>
         <TextTagWrapper>
           <TextTag content={`${public_repos}`} withIcon iconType="folder" />

@@ -18,6 +18,7 @@ const Root = styled('div')(({ theme }) => ({
   border: `1px solid ${theme.palette.secondary.light}`,
   borderRadius: 4,
   padding: 20,
+  overflow: 'hidden',
 }));
 
 const Title = styled('div')(({ theme }) => ({
@@ -66,7 +67,16 @@ const displayRepoContent = (repo: Repo): ReactElement => (
         <TextTag content={repo.name} withIcon iconType={'folder'} />
       </Title>
       {repo.description ? (
-        <Typography variant="body1" sx={{ marginTop: 1, color: 'text.secondary' }}>
+        <Typography
+          variant="body1"
+          sx={{
+            marginTop: 1,
+            color: 'text.secondary',
+            maxWidth: '350px',
+            overflow: 'hidden',
+            textOverflow: 'ellipsis',
+          }}
+        >
           {repo.description}
         </Typography>
       ) : (
