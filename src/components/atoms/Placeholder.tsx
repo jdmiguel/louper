@@ -21,9 +21,9 @@ type Props = {
 
 const Placeholder = ({ withUserTheme = false }: Props) => (
   <Root userTheme={withUserTheme}>
-    <LinearProgress color="primary" />
     <LinearProgress color="secondary" />
-    <LinearProgress color="primary" />
+    <LinearProgress color="secondary" />
+    <LinearProgress color="secondary" />
     <LinearProgress color="secondary" />
   </Root>
 );

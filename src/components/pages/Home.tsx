@@ -84,7 +84,7 @@ const SuggestionsWrapper = styled('div')({
 
 const WatermarkWrapper = styled('div')({
   marginTop: 10,
-  opacity: 0.08,
+  opacity: 0.15,
 });
 
 const EarthWrapper = styled('div')({

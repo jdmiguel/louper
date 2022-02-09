@@ -12,8 +12,8 @@ const Earth = () => {
   return (
     <group>
       <ambientLight intensity={0.01} />
-      <pointLight color="#52115e" intensity={0.8} position={[200, 200, 100]} />
-      <pointLight color="#1a258a" intensity={0.5} position={[-50, -50, -100]} />
+      <pointLight color="#661874" intensity={0.7} position={[200, 200, 100]} />
+      <pointLight color="#2331ad" intensity={0.4} position={[-50, -50, -100]} />
       <mesh ref={earthRef} scale={[0.9, 0.9, 0.9]}>
         <sphereBufferGeometry attach="geometry" args={[1.5, 100, 100]} />
         <meshStandardMaterial attach="material" map={texture} />
