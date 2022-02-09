@@ -47,15 +47,14 @@ const Info = styled('div')(({ theme }) => ({
   paddingTop: 10,
 }));
 
-const TextTagWrapper = styled('div')(({ theme }) => ({
+const TextTagWrapper = styled('div')({
   alignItems: 'center',
-  color: theme.palette.secondary.main,
   display: 'flex',
   justifyContent: 'center',
   marginRight: 12,
   marginBottom: 6,
   fontSize: '0.9rem',
-}));
+});
 
 const Actions = styled('div')({
   marginTop: 20,
@@ -96,7 +95,7 @@ const Profile = ({
           width: 240,
           height: 240,
           position: 'absolute',
-          boxShadow: '0 3px 10px rgba(0,0,0,.25)',
+          boxShadow: '0px 0px 14px 5px rgba(201,75,115,0.24)',
         }}
       />
     </AvatarWrapper>
@@ -110,7 +109,7 @@ const Profile = ({
       <Typography
         variant="body2"
         sx={{
-          color: 'text.secondary',
+          color: 'secondary.light',
           overflow: 'hidden',
           maxWidth: 240,
           textOverflow: 'ellipsis',

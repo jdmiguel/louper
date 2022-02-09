@@ -9,7 +9,7 @@ const Root = styled('div')({
 });
 
 const StyledIcon = styled(Icon)(({ theme }) => ({
-  color: theme.palette.secondary.main,
+  color: theme.palette.secondary.light,
   fontSize: 22,
   marginRight: 5,
 }));

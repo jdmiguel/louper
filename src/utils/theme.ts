@@ -113,23 +113,18 @@ export const theme = createTheme({
       main: colors.pink,
       light: colors.lightPink,
       dark: colors.darkPink,
-      contrastText: colors.white,
     },
     secondary: {
       main: colors.blue,
       light: colors.lightBlue,
       dark: colors.darkBlue,
-      contrastText: colors.white,
-    },
-    info: {
-      main: colors.lightGrey,
     },
     background: {
       default: colors.darkBlue,
     },
     text: {
       primary: colors.white,
-      secondary: colors.lightPink,
+      secondary: colors.lightBlue,
       disabled: colors.lightGrey,
     },
   },

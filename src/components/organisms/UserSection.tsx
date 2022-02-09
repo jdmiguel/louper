@@ -47,7 +47,7 @@ const UserSection = ({ type, isLoading, items, totalItems, emptyMsg }: Props) =>
     <Root>
       {totalItems === 0 && (
         <EmptyMsg>
-          <Typography variant="h6" sx={{ color: 'text.secondary' }}>
+          <Typography variant="h6" sx={{ color: 'text.disabled' }}>
             {emptyMsg}
           </Typography>
         </EmptyMsg>

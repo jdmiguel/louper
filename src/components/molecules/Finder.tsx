@@ -38,7 +38,7 @@ const StyledIconButton = styled(IconButton)(({ theme }) => ({
   borderBottomRightRadius: 4,
   borderTopLeftRadius: 0,
   borderTopRightRadius: 4,
-  color: theme.palette.primary.contrastText,
+  color: theme.palette.text.primary,
   padding: 7,
   '&:hover': {
     backgroundColor: theme.palette.primary.light,
@@ -101,13 +101,16 @@ const Finder = ({
         }}
         InputProps={{
           endAdornment: (
-            <InputAdornment position="end" sx={{ color: 'secondary.light' }}>
+            <InputAdornment position="end" sx={{ color: 'text.primary' }}>
               {isLoadingUsers ? (
-                <CircularProgress className="loaderIcon" size={22} thickness={4} />
+                <CircularProgress
+                  className="loaderIcon"
+                  size={22}
+                  thickness={4}
+                  sx={{ color: 'text.primary' }}
+                />
               ) : (
-                <Icon color="info" sx={{ fontSize: '1.4rem' }}>
-                  person
-                </Icon>
+                <Icon sx={{ color: 'text.disabled', fontSize: '1.4rem' }}>person</Icon>
               )}
             </InputAdornment>
           ),
@@ -122,7 +125,12 @@ const Finder = ({
         }}
       >
         {isLoadingUser ? (
-          <CircularProgress className="loaderIcon" size={23} thickness={4} color="info" />
+          <CircularProgress
+            className="loaderIcon"
+            size={23}
+            thickness={4}
+            sx={{ color: 'text.primary' }}
+          />
         ) : (
           <Icon sx={{ fontSize: '1.4rem' }}>search</Icon>
         )}

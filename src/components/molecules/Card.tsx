@@ -46,8 +46,8 @@ const AvatarWrapper = styled('div')<{
 
 const Topic = styled('div')(({ theme }) => ({
   backgroundColor: theme.palette.secondary.main,
+  color: theme.palette.secondary.light,
   borderRadius: 4,
-  color: theme.palette.secondary.contrastText,
   padding: '4px 8px',
   marginBottom: 5,
   marginRight: 5,
@@ -66,7 +66,7 @@ const displayRepoContent = (repo: Repo): ReactElement => (
         <TextTag content={repo.name} withIcon iconType={'folder'} />
       </Title>
       {repo.description ? (
-        <Typography variant="body1" sx={{ marginTop: 1 }}>
+        <Typography variant="body1" sx={{ marginTop: 1, color: 'text.secondary' }}>
           {repo.description}
         </Typography>
       ) : (

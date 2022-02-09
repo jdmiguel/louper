@@ -40,7 +40,7 @@ const StyledPaginationItem = styled(PaginationItem)(({ theme }) => ({
   },
   '&:hover': {
     '&.MuiPaginationItem-root': {
-      color: theme.palette.primary.contrastText,
+      color: theme.palette.text.primary,
       backgroundColor: theme.palette.primary.light,
     },
     '&.Mui-selected': {
@@ -50,7 +50,7 @@ const StyledPaginationItem = styled(PaginationItem)(({ theme }) => ({
     },
     '&.MuiPaginationItem-ellipsis': {
       backgroundColor: 'transparent',
-      color: theme.palette.text.primary,
+      color: theme.palette.primary.contrastText,
     },
   },
 }));
