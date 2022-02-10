@@ -9,12 +9,13 @@ const Root = styled('footer')({
   alignItems: 'center',
   display: 'flex',
   justifyContent: 'center',
-  opacity: 1,
   padding: '12px 24px',
-  position: 'absolute',
-  bottom: 0,
-  visibility: 'visible',
-  width: '100%',
+  '@media (min-width: 768px)': {
+    position: 'absolute',
+    bottom: 0,
+    visibility: 'visible',
+    width: '100%',
+  },
 });
 
 const Footer = () => {

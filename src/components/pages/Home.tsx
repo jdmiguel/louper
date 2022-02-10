@@ -17,7 +17,9 @@ import Toast from '../molecules/Toast';
 
 /* organisms */
 import InteractiveEarth from '../organisms/InteractiveEarth';
-import Universe from '../organisms/Universe';
+
+/* hooks */
+import useWindowSize from '../../hooks/useWindowSize';
 
 /* request */
 import { ResponseError, BASE_URL, handleErrors } from '../../utils/request';
@@ -38,8 +40,10 @@ const MIN_CHARS_TO_SEARCH_USERS = 2;
 const Root = styled('div')({
   display: 'flex',
   flexDirection: 'column',
-  height: '100vh',
-  justifyContent: 'center',
+  '@media (min-width: 768px)': {
+    justifyContent: 'center',
+    height: '100vh',
+  },
 });
 
 const CornerWrapper = styled('div')({
@@ -54,9 +58,12 @@ const Main = styled('main')({
   alignItems: 'center',
   display: 'flex',
   flexDirection: 'column',
-  justifyContent: 'center',
   '@media (min-width: 1200px)': {
     flexDirection: 'row',
+    justifyContent: 'space-evenly',
+  },
+  '@media (min-width: 1440px)': {
+    justifyContent: 'center',
   },
 });
 
@@ -64,15 +71,25 @@ const Content = styled('div')({
   alignItems: 'center',
   display: 'flex',
   flexDirection: 'column',
+  marginBottom: 40,
+  '@media (min-width: 768px)': {
+    marginBottom: 60,
+  },
   '@media (min-width: 1200px)': {
+    marginBottom: 0,
+    minWidth: 600,
+  },
+  '@media (min-width: 1440px)': {
     marginRight: 60,
     minWidth: 620,
   },
 });
 
 const LogoWrapper = styled('h1')({
+  marginTop: 60,
   transform: 'scale(0.9)',
   '@media (min-width: 768px)': {
+    marginTop: 0,
     transform: 'scale(1)',
   },
 });
@@ -88,20 +105,19 @@ const WatermarkWrapper = styled('div')({
 });
 
 const EarthWrapper = styled('div')({
-  display: 'none',
+  height: 320,
+  width: 320,
+  '@media (min-width: 375px)': {
+    height: 350,
+    width: 350,
+  },
   '@media (min-width: 1200px)': {
-    display: 'block',
+    height: 510,
+    width: 510,
+  },
+  '@media (min-width: 1440px)': {
     height: 580,
     width: 580,
-  },
-});
-
-const UniverseWrapper = styled('div')({
-  display: 'none',
-  '@media (min-width: 1200px)': {
-    position: 'absolute',
-    height: '100%',
-    width: '100%',
   },
 });
 
@@ -123,6 +139,10 @@ const HomePage = ({ onFetchUser }: Props) => {
   const [usersData, setUsersData] = useState<UsersData>(DEFAULT_USERS_DATA);
   const [errorMsg, setErrorMsg] = useState('');
 
+  const { windowWidth } = useWindowSize();
+  const isMobile = windowWidth <= 768;
+  const suggestionsPerPage = isMobile ? 8 : 12;
+
   const abortControllerFetchUser = useMemo(() => new AbortController(), []);
   const abortControllerFetchUsers = useMemo(() => new AbortController(), []);
 
@@ -137,8 +157,8 @@ const HomePage = ({ onFetchUser }: Props) => {
     setIsLoadingUsers(true);
 
     const endpoint = page
-      ? `${BASE_URL}/search/users?q=${querySearch}&page=${page}&per_page=12`
-      : `${BASE_URL}/search/users?q=${querySearch}&per_page=12`;
+      ? `${BASE_URL}/search/users?q=${querySearch}&page=${page}&per_page=${suggestionsPerPage}`
+      : `${BASE_URL}/search/users?q=${querySearch}&per_page=${suggestionsPerPage}`;
 
     fetch(endpoint, {
       signal: abortControllerFetchUsers.signal,
@@ -203,7 +223,7 @@ const HomePage = ({ onFetchUser }: Props) => {
   };
 
   // eslint-disable-next-line react-hooks/exhaustive-deps
-  const debouncedFunction = useCallback(debounce(fetchUsers, 500), []);
+  const debouncedFunction = useCallback(debounce(fetchUsers, 500), [suggestionsPerPage]);
 
   const onChangeSearchQuery = (currentSearchQuery: string) => {
     if (currentSearchQuery === searchQuery) {
@@ -266,9 +286,6 @@ const HomePage = ({ onFetchUser }: Props) => {
         <EarthWrapper>
           <InteractiveEarth />
         </EarthWrapper>
-        <UniverseWrapper>
-          <Universe />
-        </UniverseWrapper>
       </Main>
       <Footer />
       <Toast

@@ -30,9 +30,12 @@ const Title = styled('div')(({ theme }) => ({
 
 const StyledButton = styled(Button)(({ theme }) => ({
   height: 44,
-  minWidth: 180,
+  minWidth: 160,
   '&:hover': {
     backgroundColor: theme.palette.primary.light,
+  },
+  '@media (min-width: 768px)': {
+    minWidth: 180,
   },
 }));
 

@@ -13,9 +13,9 @@ const StyledTextField = styled<any>(TextField)(({ theme }) => ({
   '& .MuiOutlinedInput-root': {
     borderTopRightRadius: 0,
     borderBottomRightRadius: 0,
-    minWidth: 390,
-    '@media (max-width: 767px)': {
-      minWidth: 250,
+    minWidth: 300,
+    '@media (min-width: 768px)': {
+      minWidth: 390,
     },
     '& .MuiOutlinedInput-notchedOutline': {
       borderColor: theme.palette.primary.main,
@@ -132,7 +132,7 @@ const Finder = ({
             sx={{ color: 'text.primary' }}
           />
         ) : (
-          <Icon sx={{ fontSize: '1.4rem' }}>search</Icon>
+          <Icon sx={{ fontSize: '1.5rem' }}>search</Icon>
         )}
       </StyledIconButton>
     </FormControl>
