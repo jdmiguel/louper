@@ -47,13 +47,13 @@ const UserSection = ({ type, isLoading, items, totalItems, emptyMsg }: Props) =>
     <Root>
       {totalItems === 0 && (
         <EmptyMsg>
-          <Typography variant="h6" sx={{ color: 'text.disabled' }}>
+          <Typography variant="h6" sx={{ color: 'neutral.light' }}>
             {emptyMsg}
           </Typography>
         </EmptyMsg>
       )}
       {isLoading
-        ? placeholderList.map(() => <Placeholder key={uuidv4()} withUserTheme={type !== 'REPOS'} />)
+        ? placeholderList.map(() => <Placeholder key={uuidv4()} />)
         : items.map((item) => <Card key={item.id} theme={type} data={item} />)}
     </Root>
   );

@@ -50,11 +50,12 @@ const AvatarWrapper = styled('div')<{
 
 const Topic = styled('div')(({ theme }) => ({
   backgroundColor: theme.palette.secondary.main,
-  color: theme.palette.secondary.light,
   borderRadius: 4,
-  padding: '4px 8px',
+  color: theme.palette.primary.contrastText,
   marginBottom: 5,
   marginRight: 5,
+  padding: '4px 8px',
+  opacity: 0.5,
 }));
 
 const Action = styled('div')(({ theme }) => ({
@@ -74,7 +75,7 @@ const displayRepoContent = (repo: Repo): ReactElement => (
           variant="body1"
           sx={{
             marginTop: 1,
-            color: 'text.secondary',
+            color: 'text.primary',
             maxWidth: '350px',
             overflow: 'hidden',
             textOverflow: 'ellipsis',
@@ -83,7 +84,7 @@ const displayRepoContent = (repo: Repo): ReactElement => (
           {repo.description}
         </Typography>
       ) : (
-        <Typography variant="h6" sx={{ marginTop: 1, color: 'text.disabled' }}>
+        <Typography variant="h6" sx={{ marginTop: 1, color: 'neutral.light' }}>
           No description added
         </Typography>
       )}

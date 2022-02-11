@@ -17,7 +17,7 @@ const Root = styled('header')({
 
 const StyledTabs = styled(Tabs)(({ theme }) => ({
   backgroundColor: theme.palette.secondary.dark,
-  borderBottom: `1px solid ${theme.palette.secondary.light}`,
+  borderBottom: `1px solid ${theme.palette.neutral.main}`,
   '& .MuiTabs-flexContainer': {
     justifyContent: 'space-between',
     '@media (min-width: 1200x)': {
@@ -49,7 +49,8 @@ const StyledTab = styled(Tab)(({ theme }) => ({
     '& + span': {
       color: theme.palette.primary.main,
       display: 'none',
-      fontSize: '0.9rem',
+      fontSize: '1rem',
+      fontWeight: 700,
       transition: 'color ease-out 250ms',
       '@media (min-width: 992px)': {
         display: 'initial',

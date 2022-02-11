@@ -2,6 +2,7 @@ import { useRef, Suspense } from 'react';
 import { AdditiveBlending, BackSide, Mesh, TextureLoader } from 'three';
 import { Canvas, useLoader } from 'react-three-fiber';
 import { OrbitControls } from '@react-three/drei';
+import { colors } from '../../utils/colors';
 import map from '../../assets/map.png';
 
 const atmosphereVertexShader = [
@@ -15,8 +16,8 @@ const atmosphereVertexShader = [
 const atmosphereFragmentShader = [
   'varying vec3 vNormal;',
   'void main(){',
-  '  float intensity = pow(0.55 - dot(vNormal, vec3(0.15, -0.05, 1.5)), 2.5);',
-  '  gl_FragColor = vec4(0.1, 0.5, 0.8, 0.35) * intensity;',
+  '  float intensity = pow(0.6 - dot(vNormal, vec3(0.12, -0.08, 1.5)), 2.5);',
+  '  gl_FragColor = vec4(0.4, 0.2, 0.9, 0.35) * intensity;',
   '}',
 ].join('\n');
 
@@ -27,10 +28,9 @@ const Sphere = () => {
 
   return (
     <group>
-      <ambientLight intensity={0.01} />
-      <hemisphereLight color="#371d97" groundColor="#6b41dd" intensity={0.1} />
-      <pointLight color="#711874" intensity={0.5} position={[200, 200, 100]} />
-      <spotLight color="#293ad1" intensity={0.4} position={[-400, -50, -100]} />
+      <hemisphereLight color={colors.darkBlue} groundColor={colors.lightPurple} intensity={0.1} />
+      <pointLight color={colors.darkPink} intensity={0.5} position={[200, 200, 100]} />
+      <spotLight color={colors.purple} intensity={0.4} position={[-400, -50, -100]} />
       <mesh ref={sphereRef} scale={[0.9, 0.9, 0.9]}>
         <sphereBufferGeometry attach="geometry" args={[1.5, 100, 100]} />
         <meshStandardMaterial attach="material" map={texture} />

@@ -86,6 +86,7 @@ const Content = styled('div')({
 });
 
 const LogoWrapper = styled('h1')({
+  lineHeight: 0,
   marginTop: 60,
   transform: 'scale(0.9)',
   '@media (min-width: 768px)': {
@@ -254,6 +255,7 @@ const HomePage = ({ onFetchUser }: Props) => {
             variant="h2"
             sx={{
               marginBottom: '60px',
+              lineHeight: 0,
             }}
           >
             Search and find any Github user!

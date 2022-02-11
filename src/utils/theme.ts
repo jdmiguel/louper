@@ -15,10 +15,15 @@ declare module '@mui/material/styles' {
     animation: Animation;
     overrides: any;
   }
-
   interface ThemeOptions {
     animation: Animation;
     overrides: any;
+  }
+  interface Palette {
+    neutral: Palette['primary'];
+  }
+  interface PaletteOptions {
+    neutral: PaletteOptions['primary'];
   }
 }
 
@@ -59,7 +64,6 @@ export const theme = createTheme({
     h2: {
       fontSize: '1.1rem',
       fontWeight: 300,
-      lineHeight: 0,
       '@media (min-width: 768px)': {
         fontSize: '1.3rem',
       },
@@ -79,36 +83,26 @@ export const theme = createTheme({
       },
     },
     h5: {
-      fontSize: '0.9rem',
+      fontSize: '1rem',
       fontWeight: 700,
       textTransform: 'uppercase',
     },
     h6: {
-      fontSize: '0.8rem',
+      fontSize: '0.9rem',
       fontWeight: 700,
       textTransform: 'uppercase',
     },
-    button: {
-      fontSize: '0.9rem',
-    },
     body1: {
-      fontSize: '0.9rem',
-      fontWeight: 300,
-      lineHeight: '1.2rem',
-    },
-    body2: {
-      fontSize: '0.9rem',
-      fontWeight: 700,
-      lineHeight: '1.2rem',
+      fontSize: '1em',
     },
     overline: {
-      fontSize: '0.7rem',
+      fontSize: '0.8rem',
+      fontWeight: 700,
       lineHeight: '1rem',
       textTransform: 'uppercase',
     },
   },
   palette: {
-    mode: 'light',
     primary: {
       main: colors.pink,
       light: colors.lightPink,
@@ -119,13 +113,16 @@ export const theme = createTheme({
       light: colors.lightBlue,
       dark: colors.darkBlue,
     },
+    neutral: {
+      main: colors.grey,
+      light: colors.lightGrey,
+    },
     background: {
       default: colors.darkBlue,
     },
     text: {
       primary: colors.white,
       secondary: colors.lightBlue,
-      disabled: colors.lightGrey,
     },
   },
 });

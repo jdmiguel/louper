@@ -2,25 +2,19 @@
 import { styled } from '@mui/material/styles';
 import LinearProgress from '@mui/material/LinearProgress';
 
-const Root = styled('div')<{
-  userTheme: boolean;
-}>(({ theme, userTheme }) => ({
+const Root = styled('div')(({ theme }) => ({
   border: `1px solid ${theme.palette.secondary.light}`,
   borderRadius: 4,
   display: 'flex',
   flexDirection: 'column',
   justifyContent: 'space-between',
-  height: userTheme ? 122 : 188,
+  height: 122,
   padding: 20,
   opacity: 0.35,
 }));
 
-type Props = {
-  withUserTheme?: boolean;
-};
-
-const Placeholder = ({ withUserTheme = false }: Props) => (
-  <Root userTheme={withUserTheme}>
+const Placeholder = () => (
+  <Root>
     <LinearProgress color="secondary" />
     <LinearProgress color="secondary" />
     <LinearProgress color="secondary" />

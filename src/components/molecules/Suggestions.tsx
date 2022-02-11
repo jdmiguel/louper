@@ -29,28 +29,29 @@ const StyledPaginationItem = styled(PaginationItem)(({ theme }) => ({
   '&.MuiPaginationItem-root': {
     color: theme.palette.primary.main,
     margin: 0,
+    fontSize: '1rem',
   },
   '&.Mui-selected': {
     backgroundColor: 'transparent',
-    color: theme.palette.text.disabled,
+    color: theme.palette.neutral.light,
     cursor: 'default',
   },
   '&.MuiPaginationItem-ellipsis': {
-    color: theme.palette.text.primary,
+    color: theme.palette.neutral.light,
   },
   '&:hover': {
     '&.MuiPaginationItem-root': {
-      color: theme.palette.text.primary,
-      backgroundColor: theme.palette.primary.light,
+      color: theme.palette.primary.light,
+      backgroundColor: 'tranparent',
     },
     '&.Mui-selected': {
       backgroundColor: 'transparent',
-      color: theme.palette.text.disabled,
+      color: theme.palette.neutral.light,
       cursor: 'default',
     },
     '&.MuiPaginationItem-ellipsis': {
       backgroundColor: 'transparent',
-      color: theme.palette.primary.contrastText,
+      color: theme.palette.neutral.light,
     },
   },
 }));
@@ -76,6 +77,7 @@ const Suggestions = ({ items, totalItems, onPaginate, onSelectUser }: Props) => 
         onChange={onPaginate}
         hidePrevButton
         hideNextButton
+        size="small"
       />
     )}
   </Stack>

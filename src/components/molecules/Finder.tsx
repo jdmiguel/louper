@@ -110,7 +110,7 @@ const Finder = ({
                   sx={{ color: 'text.primary' }}
                 />
               ) : (
-                <Icon sx={{ color: 'text.disabled', fontSize: '1.4rem' }}>person</Icon>
+                <Icon sx={{ color: 'neutral.light', fontSize: '1.4rem' }}>person</Icon>
               )}
             </InputAdornment>
           ),
@@ -132,7 +132,7 @@ const Finder = ({
             sx={{ color: 'text.primary' }}
           />
         ) : (
-          <Icon sx={{ fontSize: '1.5rem' }}>search</Icon>
+          <Icon sx={{ fontSize: '1.6rem' }}>search</Icon>
         )}
       </StyledIconButton>
     </FormControl>

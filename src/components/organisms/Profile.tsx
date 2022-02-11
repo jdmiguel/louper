@@ -95,7 +95,7 @@ const Profile = ({
           width: 240,
           height: 240,
           position: 'absolute',
-          boxShadow: '0px 0px 14px 5px rgba(201,75,115,0.24)',
+          boxShadow: '0px 0px 22px 6px rgb(169 45 201 / 53%)',
         }}
       />
     </AvatarWrapper>
@@ -110,7 +110,6 @@ const Profile = ({
       )}
       {bio && (
         <Typography
-          variant="body2"
           sx={{
             color: 'secondary.light',
             overflow: 'hidden',
