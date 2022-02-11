@@ -16,7 +16,7 @@ import Footer from '../molecules/Footer';
 import Toast from '../molecules/Toast';
 
 /* organisms */
-import InteractiveEarth from '../organisms/InteractiveEarth';
+import Globe from '../organisms/Globe';
 
 /* hooks */
 import useWindowSize from '../../hooks/useWindowSize';
@@ -104,7 +104,7 @@ const WatermarkWrapper = styled('div')({
   opacity: 0.15,
 });
 
-const EarthWrapper = styled('div')({
+const GlobeWrapper = styled('div')({
   height: 320,
   width: 320,
   '@media (min-width: 375px)': {
@@ -283,9 +283,9 @@ const HomePage = ({ onFetchUser }: Props) => {
             )}
           </SuggestionsWrapper>
         </Content>
-        <EarthWrapper>
-          <InteractiveEarth />
-        </EarthWrapper>
+        <GlobeWrapper>
+          <Globe />
+        </GlobeWrapper>
       </Main>
       <Footer />
       <Toast
