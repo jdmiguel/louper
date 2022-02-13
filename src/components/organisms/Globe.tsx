@@ -16,8 +16,8 @@ const atmosphereVertexShader = [
 const atmosphereFragmentShader = [
   'varying vec3 vNormal;',
   'void main(){',
-  '  float intensity = pow(0.6 - dot(vNormal, vec3(0.12, -0.08, 1.5)), 2.5);',
-  '  gl_FragColor = vec4(0.4, 0.2, 0.9, 0.35) * intensity;',
+  '  float intensity = pow(0.65 - dot(vNormal, vec3(0.12, -0.02, 1.5)), 2.8);',
+  '  gl_FragColor = vec4(0.4, 0.25, 1, 0.45) * intensity;',
   '}',
 ].join('\n');
 
@@ -28,14 +28,14 @@ const Sphere = () => {
 
   return (
     <group>
-      <hemisphereLight color={colors.darkBlue} groundColor={colors.lightPurple} intensity={0.1} />
-      <pointLight color={colors.darkPink} intensity={0.5} position={[200, 200, 100]} />
-      <spotLight color={colors.purple} intensity={0.4} position={[-400, -50, -100]} />
+      <hemisphereLight color={colors.darkBlue} groundColor={colors.lightPurple} intensity={0.25} />
+      <pointLight color={colors.darkPink} intensity={0.45} position={[200, 200, 100]} />
+      <spotLight color={colors.purple} intensity={0.3} position={[-400, -50, -100]} />
       <mesh ref={sphereRef} scale={[0.9, 0.9, 0.9]}>
         <sphereBufferGeometry attach="geometry" args={[1.5, 100, 100]} />
         <meshStandardMaterial attach="material" map={texture} />
       </mesh>
-      <mesh ref={atmosphereRef} scale={[1, 1, 1]}>
+      <mesh ref={atmosphereRef} scale={[0.98, 0.98, 0.98]}>
         <sphereGeometry args={[1.5, 200, 200]} />
         <shaderMaterial
           vertexShader={atmosphereVertexShader}
