@@ -14,17 +14,28 @@ const calculateGlobePositions = (x: number, y: number) => {
 };
 
 type Props = {
+  name: string;
   posX: number;
   posY: number;
+  total: number;
+  onOver: () => void;
+  onOut: () => void;
 };
 
-const GlobeMarkers = ({ posX, posY }: Props) => {
+const GlobeMarkers = ({ posX, posY, onOver, onOut }: Props) => {
   const markerRef = useRef<Mesh>(null);
   const { x, y, z } = calculateGlobePositions(posX, posY);
 
   return (
-    <mesh ref={markerRef} position={[x, y, z]}>
-      <sphereBufferGeometry attach="geometry" args={[0.015, 20, 20]} />
+    <mesh
+      ref={markerRef}
+      position={[x, y, z]}
+      onPointerOver={() => {
+        onOver();
+      }}
+      onPointerOut={() => onOut()}
+    >
+      <sphereBufferGeometry attach="geometry" args={[0.035, 10, 10]} />
       <meshBasicMaterial attach="material" color={colors.pink} />
     </mesh>
   );

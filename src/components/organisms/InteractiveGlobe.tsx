@@ -1,10 +1,16 @@
-import { useRef, Suspense } from 'react';
+import { useState, useRef, Suspense } from 'react';
 import { AdditiveBlending, BackSide, Mesh, TextureLoader } from 'three';
 import { Canvas, useLoader } from 'react-three-fiber';
 import { OrbitControls } from '@react-three/drei';
 import GlobeMarker from '../atoms/GlobeMarker';
 import { colors } from '../../utils/colors';
+import countries from '../../assets/countries.json';
 import map from '../../assets/map.png';
+
+type SphereProps = {
+  onMarkerOver: () => void;
+  onMarkerOut: () => void;
+};
 
 const atmosphereVertexShader = [
   'varying vec3 vNormal;',
@@ -22,7 +28,7 @@ const atmosphereFragmentShader = [
   '}',
 ].join('\n');
 
-const Sphere = () => {
+const Globe = ({ onMarkerOver, onMarkerOut }: SphereProps) => {
   const sphereRef = useRef<Mesh>(null);
   const atmosphereRef = useRef<Mesh>(null);
   const texture = useLoader(TextureLoader, map);
@@ -46,27 +52,54 @@ const Sphere = () => {
           side={BackSide}
         />
       </mesh>
-      <GlobeMarker posX={15} posY={-14} />
-      <GlobeMarker posX={-3} posY={-15} />
-      <GlobeMarker posX={8} posY={-21} />
+      {countries.map((country) => (
+        <GlobeMarker
+          key={country.id}
+          name={country.name}
+          posX={country.posX}
+          posY={country.posY}
+          total={country.total}
+          onOver={onMarkerOver}
+          onOut={onMarkerOut}
+        />
+      ))}
     </group>
   );
 };
 
-const Globe = () => (
-  <Canvas camera={{ position: [6, 1, 8], fov: 13, far: 10000 }}>
-    <Suspense fallback={null}>
-      <Sphere />
-    </Suspense>
-    <OrbitControls
-      enableZoom={false}
-      autoRotate={true}
-      autoRotateSpeed={1}
-      rotateSpeed={0.18}
-      maxPolarAngle={1.8}
-      minPolarAngle={1.1}
-    />
-  </Canvas>
-);
+const InteractiveGlobe = () => {
+  const [isMarkerHovered, setIsMarkerHovered] = useState(false);
+  const [isAutoRotationAllowed, setIsAutoRotationAllowed] = useState(true);
 
-export default Globe;
+  return (
+    <Canvas
+      style={{ cursor: isMarkerHovered ? 'pointer' : '' }}
+      camera={{ position: [6, 1, 8], fov: 13, far: 10000 }}
+      onPointerMissed={() => console.log('onPointerMissed')}
+    >
+      <Suspense fallback={null}>
+        <Globe
+          onMarkerOver={() => {
+            setIsAutoRotationAllowed(false);
+            setIsMarkerHovered(true);
+          }}
+          onMarkerOut={() => {
+            setIsAutoRotationAllowed(true);
+            setIsMarkerHovered(false);
+          }}
+        />
+      </Suspense>
+      <OrbitControls
+        enableZoom={false}
+        enablePan
+        autoRotate={isAutoRotationAllowed}
+        autoRotateSpeed={0.75}
+        rotateSpeed={0.18}
+        maxPolarAngle={2.0}
+        minPolarAngle={1.1}
+      />
+    </Canvas>
+  );
+};
+
+export default InteractiveGlobe;

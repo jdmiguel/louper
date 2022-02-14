@@ -16,7 +16,7 @@ import Footer from '../molecules/Footer';
 import Toast from '../molecules/Toast';
 
 /* organisms */
-import Globe from '../organisms/Globe';
+import InteractiveGlobe from '../organisms/InteractiveGlobe';
 
 /* hooks */
 import useWindowSize from '../../hooks/useWindowSize';
@@ -286,7 +286,7 @@ const HomePage = ({ onFetchUser }: Props) => {
           </SuggestionsWrapper>
         </Content>
         <GlobeWrapper>
-          <Globe />
+          <InteractiveGlobe />
         </GlobeWrapper>
       </Main>
       <Footer />
