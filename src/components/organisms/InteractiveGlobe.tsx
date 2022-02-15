@@ -7,11 +7,6 @@ import { colors } from '../../utils/colors';
 import countries from '../../assets/countries.json';
 import map from '../../assets/map.png';
 
-type SphereProps = {
-  onMarkerOver: () => void;
-  onMarkerOut: () => void;
-};
-
 const atmosphereVertexShader = [
   'varying vec3 vNormal;',
   'void main(){',
@@ -28,7 +23,12 @@ const atmosphereFragmentShader = [
   '}',
 ].join('\n');
 
-const Globe = ({ onMarkerOver, onMarkerOut }: SphereProps) => {
+type GlobeProps = {
+  onMarkerOver: () => void;
+  onMarkerOut: () => void;
+};
+
+const Globe = ({ onMarkerOver, onMarkerOut }: GlobeProps) => {
   const sphereRef = useRef<Mesh>(null);
   const atmosphereRef = useRef<Mesh>(null);
   const texture = useLoader(TextureLoader, map);
@@ -67,13 +67,16 @@ const Globe = ({ onMarkerOver, onMarkerOut }: SphereProps) => {
   );
 };
 
-const InteractiveGlobe = () => {
-  const [isMarkerHovered, setIsMarkerHovered] = useState(false);
+type Props = {
+  onMarkerOver: () => void;
+  onMarkerOut: () => void;
+};
+
+const InteractiveGlobe = ({ onMarkerOver, onMarkerOut }: Props) => {
   const [isAutoRotationAllowed, setIsAutoRotationAllowed] = useState(true);
 
   return (
     <Canvas
-      style={{ cursor: isMarkerHovered ? 'pointer' : '' }}
       camera={{ position: [6, 1, 8], fov: 13, far: 10000 }}
       onPointerMissed={() => console.log('onPointerMissed')}
     >
@@ -81,11 +84,11 @@ const InteractiveGlobe = () => {
         <Globe
           onMarkerOver={() => {
             setIsAutoRotationAllowed(false);
-            setIsMarkerHovered(true);
+            onMarkerOver();
           }}
           onMarkerOut={() => {
             setIsAutoRotationAllowed(true);
-            setIsMarkerHovered(false);
+            onMarkerOut();
           }}
         />
       </Suspense>

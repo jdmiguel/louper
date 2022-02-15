@@ -53,7 +53,7 @@ const UserSection = ({ type, isLoading, items, totalItems, emptyMsg }: Props) =>
         </EmptyMsg>
       )}
       {isLoading
-        ? placeholderList.map(() => <Placeholder key={uuidv4()} />)
+        ? placeholderList.map(() => <Placeholder key={uuidv4()} sectionType={type} />)
         : items.map((item) => <Card key={item.id} theme={type} data={item} />)}
     </Root>
   );

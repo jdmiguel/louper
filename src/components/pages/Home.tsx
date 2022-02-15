@@ -139,6 +139,7 @@ const HomePage = ({ onFetchUser }: Props) => {
   const [isErrorToastOpen, setIsErrorToastOpen] = useState(false);
   const [usersData, setUsersData] = useState<UsersData>(DEFAULT_USERS_DATA);
   const [errorMsg, setErrorMsg] = useState('');
+  const [isMarkerHovered, setIsMarkerHovered] = useState(false);
 
   const { windowWidth } = useWindowSize();
   const isMobile = windowWidth <= 768;
@@ -285,8 +286,15 @@ const HomePage = ({ onFetchUser }: Props) => {
             )}
           </SuggestionsWrapper>
         </Content>
-        <GlobeWrapper>
-          <InteractiveGlobe />
+        <GlobeWrapper
+          sx={{
+            cursor: isMarkerHovered ? 'pointer' : 'default',
+          }}
+        >
+          <InteractiveGlobe
+            onMarkerOver={() => setIsMarkerHovered(true)}
+            onMarkerOut={() => setIsMarkerHovered(false)}
+          />
         </GlobeWrapper>
       </Main>
       <Footer />

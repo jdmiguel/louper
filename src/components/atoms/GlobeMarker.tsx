@@ -27,15 +27,8 @@ const GlobeMarkers = ({ posX, posY, onOver, onOut }: Props) => {
   const { x, y, z } = calculateGlobePositions(posX, posY);
 
   return (
-    <mesh
-      ref={markerRef}
-      position={[x, y, z]}
-      onPointerOver={() => {
-        onOver();
-      }}
-      onPointerOut={() => onOut()}
-    >
-      <sphereBufferGeometry attach="geometry" args={[0.035, 10, 10]} />
+    <mesh ref={markerRef} position={[x, y, z]} onPointerOver={onOver} onPointerOut={onOut}>
+      <sphereBufferGeometry attach="geometry" args={[0.03, 10, 10]} />
       <meshBasicMaterial attach="material" color={colors.pink} />
     </mesh>
   );
