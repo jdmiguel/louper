@@ -16,7 +16,7 @@ const SuggestionsWrapper = styled('div')({
   gridTemplateColumns: 'repeat(2, 1fr)',
   maxWidth: '100%',
   padding: 20,
-  '@media (min-width: 768px)': {
+  '@media (min-width: 1200px)': {
     gridTemplateColumns: 'repeat(3, 1fr)',
     height: 260,
   },

@@ -18,13 +18,13 @@ const atmosphereVertexShader = [
 const atmosphereFragmentShader = [
   'varying vec3 vNormal;',
   'void main(){',
-  '  float intensity = pow(0.58 - dot(vNormal, vec3(0.09, -0.06, 1.4)), 4.4);',
-  '  gl_FragColor = vec4(0.4, 0.25, 1, 0.48) * intensity;',
+  '  float intensity = pow(0.60 - dot(vNormal, vec3(0.06, -0.06, 1.4)), 5.2);',
+  '  gl_FragColor = vec4(0.4, 0.5, 1, 0.48) * intensity;',
   '}',
 ].join('\n');
 
 type GlobeProps = {
-  onMarkerOver: () => void;
+  onMarkerOver: ({ x, y }: any) => void;
   onMarkerOut: () => void;
 };
 
@@ -56,8 +56,8 @@ const Globe = ({ onMarkerOver, onMarkerOut }: GlobeProps) => {
         <GlobeMarker
           key={country.id}
           name={country.name}
-          posX={country.posX}
-          posY={country.posY}
+          initialPosX={country.posX}
+          initialPosY={country.posY}
           total={country.total}
           onOver={onMarkerOver}
           onOut={onMarkerOut}
@@ -68,12 +68,12 @@ const Globe = ({ onMarkerOver, onMarkerOut }: GlobeProps) => {
 };
 
 type Props = {
-  onMarkerOver: () => void;
+  onMarkerOver: ({ x, y }: any) => void;
   onMarkerOut: () => void;
 };
 
 const InteractiveGlobe = ({ onMarkerOver, onMarkerOut }: Props) => {
-  const [isAutoRotationAllowed, setIsAutoRotationAllowed] = useState(true);
+  const [isAutoRotationAllowed, setIsAutoRotationAllowed] = useState(false);
 
   return (
     <Canvas
@@ -82,12 +82,12 @@ const InteractiveGlobe = ({ onMarkerOver, onMarkerOut }: Props) => {
     >
       <Suspense fallback={null}>
         <Globe
-          onMarkerOver={() => {
+          onMarkerOver={(pos: any) => {
             setIsAutoRotationAllowed(false);
-            onMarkerOver();
+            onMarkerOver(pos);
           }}
           onMarkerOut={() => {
-            setIsAutoRotationAllowed(true);
+            setIsAutoRotationAllowed(false);
             onMarkerOut();
           }}
         />
