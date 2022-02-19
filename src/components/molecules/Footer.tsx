@@ -22,7 +22,7 @@ const Footer = () => {
   return (
     <Root>
       <Typography variant="body1" sx={{ marginRight: 0.7 }}>
-        COPYRIGHT @2021 | Created by{' '}
+        @2022 | Created by{' '}
       </Typography>
       <Link
         url="https://jdmiguel.netlify.app/"

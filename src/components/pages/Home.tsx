@@ -107,37 +107,6 @@ const WatermarkWrapper = styled('div')({
   opacity: 0.15,
 });
 
-const GlobeWrapper = styled('div')({
-  height: 320,
-  position: 'relative',
-  width: 320,
-  '@media (min-width: 375px)': {
-    height: 350,
-    width: 350,
-  },
-  '@media (min-width: 768px)': {
-    height: 450,
-    width: 450,
-  },
-  '@media (min-width: 1200px)': {
-    height: 510,
-    width: 510,
-  },
-  '@media (min-width: 1440px)': {
-    height: 580,
-    width: 580,
-  },
-});
-
-const Banner = styled('div')(({ theme }) => ({
-  backgroundColor: theme.palette.secondary.dark,
-  color: theme.palette.secondary.light,
-  height: 100,
-  position: 'absolute',
-  width: 220,
-  zIndex: 1,
-}));
-
 const DEFAULT_USERS_DATA = {
   total_count: 0,
   items: [],
@@ -155,8 +124,6 @@ const HomePage = ({ onFetchUser }: Props) => {
   const [isErrorToastOpen, setIsErrorToastOpen] = useState(false);
   const [usersData, setUsersData] = useState<UsersData>(DEFAULT_USERS_DATA);
   const [errorMsg, setErrorMsg] = useState('');
-  const [isMarkerHovered, setIsMarkerHovered] = useState(false);
-  const [bannerPositions, setBannerPositions] = useState<any>({ x: 0, y: 0 });
 
   const { windowWidth } = useWindowSize();
   const isSmallDevice = windowWidth <= 1200;
@@ -308,31 +275,7 @@ const HomePage = ({ onFetchUser }: Props) => {
             )}
           </SuggestionsWrapper>
         </Content>
-        <GlobeWrapper
-          sx={{
-            cursor: isMarkerHovered ? 'pointer' : 'default',
-          }}
-        >
-          <InteractiveGlobe
-            onMarkerOver={(currentBannerPositions: any) => {
-              setBannerPositions(currentBannerPositions);
-              setIsMarkerHovered(true);
-            }}
-            onMarkerOut={() => {
-              setIsMarkerHovered(false);
-            }}
-          />
-          {isMarkerHovered && (
-            <Banner
-              sx={{
-                left: `${bannerPositions.x - 100}px`,
-                top: `${bannerPositions.y + 20}px`,
-              }}
-            >
-              Text description
-            </Banner>
-          )}
-        </GlobeWrapper>
+        <InteractiveGlobe />
       </Main>
       <Footer />
       <Toast

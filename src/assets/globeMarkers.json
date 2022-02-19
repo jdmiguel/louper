@@ -1,0 +1,23 @@
+[
+  {
+    "id": "france",
+    "country": "France",
+    "lat": 8,
+    "lng": -21,
+    "totalUsers": "1.540.109"
+  },
+  {
+    "id": "italy",
+    "country": "Italy",
+    "lat": -3,
+    "lng": -15,
+    "totalUsers": "721.749"
+  },
+  {
+    "id": "spain",
+    "country": "Spain",
+    "lat": 15,
+    "lng": -14,
+    "totalUsers": "961.980"
+  }
+]

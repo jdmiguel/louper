@@ -3,6 +3,7 @@ export const colors = {
   lightPink: '#e56e94',
   pink: '#c94b73',
   darkPink: '#711874',
+  darkPinkOverlay: 'rgba(71, 19, 104, 0.55)',
   lightPurple: '#6b41dd',
   purple: '#571aa7',
   darkPurple: '#260036',

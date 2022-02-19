@@ -21,9 +21,11 @@ declare module '@mui/material/styles' {
   }
   interface Palette {
     neutral: Palette['primary'];
+    overlay: Palette['primary'];
   }
   interface PaletteOptions {
     neutral: PaletteOptions['primary'];
+    overlay: PaletteOptions['primary'];
   }
 }
 
@@ -95,6 +97,9 @@ export const theme = createTheme({
     body1: {
       fontSize: '1em',
     },
+    body2: {
+      fontSize: '0.9em',
+    },
     overline: {
       fontSize: '0.8rem',
       fontWeight: 700,
@@ -116,6 +121,9 @@ export const theme = createTheme({
     neutral: {
       main: colors.grey,
       light: colors.lightGrey,
+    },
+    overlay: {
+      main: colors.darkPinkOverlay,
     },
     background: {
       default: colors.darkBlue,
