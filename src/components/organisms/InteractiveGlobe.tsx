@@ -83,7 +83,7 @@ const Globe = () => {
 };
 
 const InteractiveGlobe = () => {
-  const [isAutoRotationAllowed, setIsAutoRotationAllowed] = useState(true);
+  const [isAutoRotationAllowed, setIsAutoRotationAllowed] = useState(false);
   const [isMarkerHovered, setIsMarkerHovered] = useState(false);
   const [overlayBoxData, setOverlayBoxData] = useState(DEFAULT_OVERLAY_BOX_DATA);
 
@@ -115,7 +115,7 @@ const InteractiveGlobe = () => {
               }}
               onOut={() => {
                 setIsMarkerHovered(false);
-                setIsAutoRotationAllowed(true);
+                setIsAutoRotationAllowed(false);
               }}
             />
           ))}

@@ -5,7 +5,7 @@ import Icon from '@mui/material/Icon';
 const Root = styled('div')(({ theme }) => ({
   backdropFilter: 'blur(6px)',
   backgroundColor: theme.palette.overlay.main,
-  borderRadius: 10,
+  borderRadius: 8,
   padding: 15,
   position: 'absolute',
   zIndex: 1,
@@ -51,8 +51,8 @@ const GlobeOverlayBox = ({ data }: Props) => {
   return (
     <Root
       sx={{
-        left: `${x - 120}px`,
-        top: `${y + 20}px`,
+        left: `${x - 54}px`,
+        top: `${y + 16}px`,
       }}
     >
       <OverlayBoxCountry>
@@ -61,7 +61,7 @@ const GlobeOverlayBox = ({ data }: Props) => {
       </OverlayBoxCountry>
       <OverlayBoxUsers>
         <OverlayBoxUsersIcon>person</OverlayBoxUsersIcon>
-        <Typography variant="body2">{`${totalUsers} users`}</Typography>
+        <Typography variant="body2">{`${totalUsers}`}</Typography>
       </OverlayBoxUsers>
     </Root>
   );
