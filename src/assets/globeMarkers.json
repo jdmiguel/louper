@@ -42,6 +42,13 @@
     "totalUsers": "1.304.427"
   },
   {
+    "id": "chile",
+    "country": "Chile",
+    "lat": 43,
+    "lng": 74,
+    "totalUsers": "201.145"
+  },
+  {
     "id": "china",
     "country": "China",
     "lat": -82,
@@ -56,6 +63,13 @@
     "totalUsers": "355.471"
   },
   {
+    "id": "congo",
+    "country": "Congo",
+    "lat": -11,
+    "lng": 20,
+    "totalUsers": "7.007"
+  },
+  {
     "id": "egipt",
     "country": "Egipt",
     "lat": -17,
@@ -68,6 +82,13 @@
     "lat": 12,
     "lng": -30,
     "totalUsers": "2.276.780"
+  },
+  {
+    "id": "ecuador",
+    "country": "Ecuador",
+    "lat": 60,
+    "lng": 77,
+    "totalUsers": "90.663"
   },
   {
     "id": "ethiopia",
@@ -126,11 +147,25 @@
     "totalUsers": "1.090.108"
   },
   {
+    "id": "israel",
+    "country": "Israel",
+    "lat": -21,
+    "lng": -5,
+    "totalUsers": "288.171"
+  },
+  {
     "id": "iran",
     "country": "Iran",
     "lat": -46,
     "lng": -6,
     "totalUsers": "247.234"
+  },
+  {
+    "id": "irak",
+    "country": "Irak",
+    "lat": -40,
+    "lng": -7,
+    "totalUsers": "69.582"
   },
   {
     "id": "italy",
@@ -189,6 +224,13 @@
     "totalUsers": "386.520"
   },
   {
+    "id": "paraguay",
+    "country": "Paraguay",
+    "lat": 40,
+    "lng": 67,
+    "totalUsers": "18.246"
+  },
+  {
     "id": "philippines",
     "country": "Philippines",
     "lat": -108,
@@ -198,8 +240,8 @@
   {
     "id": "peru",
     "country": "Peru",
-    "lat": 55,
-    "lng": 68,
+    "lat": 53,
+    "lng": 69,
     "totalUsers": "192.235"
   },
   {
@@ -299,6 +341,13 @@
     "lat": 108,
     "lng": 50,
     "totalUsers": "11.086.019"
+  },
+  {
+    "id": "venezuela",
+    "country": "Venezuela",
+    "lat": 64,
+    "lng": 49,
+    "totalUsers": "94.779"
   },
   {
     "id": "vietnam",
