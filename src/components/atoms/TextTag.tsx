@@ -23,7 +23,14 @@ const TextTag = ({ content, withLowerCase = false, withIcon, iconType }: Props) 
     {withIcon && <StyledIcon>{iconType}</StyledIcon>}
     <Typography
       variant={withLowerCase ? 'body1' : 'h5'}
-      sx={{ color: 'text.secondary', lineHeight: 1.1 }}
+      sx={{
+        color: 'text.secondary',
+        lineHeight: 1.1,
+        maxWidth: 350,
+        overflow: 'hidden',
+        textOverflow: 'ellipsis',
+        whiteSpace: 'nowrap',
+      }}
     >
       {content}
     </Typography>
