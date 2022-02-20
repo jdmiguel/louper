@@ -2,6 +2,7 @@ import { useState, useRef, Suspense } from 'react';
 import { AdditiveBlending, BackSide, Mesh, TextureLoader } from 'three';
 import { Canvas, useLoader } from 'react-three-fiber';
 import { OrbitControls } from '@react-three/drei';
+import { animated, useSpring } from '@react-spring/three';
 import { styled } from '@mui/material/styles';
 import GlobeMarker from '../atoms/GlobeMarker';
 import GlobeOverlayBox from '../molecules/GlobeOverlayBox';
@@ -55,13 +56,31 @@ const Root = styled('div')({
   },
 });
 
+const FallbackGlobe = styled('div')(({ theme }) => ({
+  background: theme.palette.background.paper,
+  borderRadius: '50%',
+  height: 300,
+  right: 'calc(50% - 150px)',
+  position: 'absolute',
+  top: 'calc(50% - 150px)',
+  width: 300,
+}));
+
 const Globe = () => {
   const sphereRef = useRef<Mesh>(null);
   const atmosphereRef = useRef<Mesh>(null);
+
   const texture = useLoader(TextureLoader, map);
 
+  const { scale } = useSpring({
+    to: {
+      scale: 1,
+    },
+    from: { scale: 0.5 },
+  });
+
   return (
-    <group>
+    <animated.group scale={scale}>
       <hemisphereLight color={colors.lightBlue} groundColor={colors.lightPurple} intensity={0.35} />
       <pointLight color={colors.lightPink} intensity={0.35} position={[200, 200, 100]} />
       <pointLight color={colors.pink} intensity={1.05} position={[-400, -50, -100]} />
@@ -69,8 +88,8 @@ const Globe = () => {
         <sphereBufferGeometry attach="geometry" args={[1, 100, 100]} />
         <meshStandardMaterial attach="material" map={texture} />
       </mesh>
-      <mesh ref={atmosphereRef} scale={[1.075, 1.075, 1.075]}>
-        <sphereBufferGeometry attach="geometry" args={[1, 100, 100]} />
+      <mesh ref={atmosphereRef}>
+        <sphereBufferGeometry attach="geometry" args={[1.075, 100, 100]} />
         <shaderMaterial
           attach="material"
           vertexShader={atmosphereVertexShader}
@@ -79,7 +98,7 @@ const Globe = () => {
           side={BackSide}
         />
       </mesh>
-    </group>
+    </animated.group>
   );
 };
 
@@ -88,48 +107,58 @@ const InteractiveGlobe = () => {
   const [isMarkerHovered, setIsMarkerHovered] = useState(false);
   const [overlayBoxData, setOverlayBoxData] = useState(DEFAULT_OVERLAY_BOX_DATA);
 
+  const { scale } = useSpring({
+    to: {
+      scale: 1,
+    },
+    from: { scale: 0.5 },
+  });
+
   return (
     <Root
       sx={{
         cursor: isMarkerHovered ? 'pointer' : 'default',
       }}
     >
+      <FallbackGlobe />
       <Canvas
         camera={{ position: [6, 1, 8], fov: 13, far: 10000 }}
         onPointerMissed={() => console.log('onPointerMissed')}
       >
         <Suspense fallback={null}>
           <Globe />
-          {globeMarkers.map((marker) => (
-            <GlobeMarker
-              key={marker.id}
-              data={{
-                country: marker.country,
-                lat: marker.lat,
-                lng: marker.lng,
-                totalUsers: marker.totalUsers,
-              }}
-              onOver={(currentOverlayBoxData) => {
-                setIsMarkerHovered(true);
-                setIsAutoRotationAllowed(false);
-                setOverlayBoxData(currentOverlayBoxData);
-              }}
-              onOut={() => {
-                setIsMarkerHovered(false);
-                setIsAutoRotationAllowed(true);
-              }}
-            />
-          ))}
+          <animated.group scale={scale}>
+            {globeMarkers.map((marker) => (
+              <GlobeMarker
+                key={marker.id}
+                data={{
+                  country: marker.country,
+                  lat: marker.lat,
+                  lng: marker.lng,
+                  totalUsers: marker.totalUsers,
+                }}
+                onOver={(currentOverlayBoxData) => {
+                  setIsMarkerHovered(true);
+                  setIsAutoRotationAllowed(false);
+                  setOverlayBoxData(currentOverlayBoxData);
+                }}
+                onOut={() => {
+                  setIsMarkerHovered(false);
+                  setIsAutoRotationAllowed(true);
+                }}
+              />
+            ))}
+          </animated.group>
+          <OrbitControls
+            enableZoom={false}
+            enablePan
+            autoRotate={isAutoRotationAllowed}
+            autoRotateSpeed={0.75}
+            rotateSpeed={0.18}
+            maxPolarAngle={2.0}
+            minPolarAngle={1.1}
+          />
         </Suspense>
-        <OrbitControls
-          enableZoom={false}
-          enablePan
-          autoRotate={isAutoRotationAllowed}
-          autoRotateSpeed={0.75}
-          rotateSpeed={0.18}
-          maxPolarAngle={2.0}
-          minPolarAngle={1.1}
-        />
       </Canvas>
       {isMarkerHovered && <GlobeOverlayBox data={overlayBoxData} />}
     </Root>

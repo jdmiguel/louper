@@ -7,7 +7,6 @@ import { colors } from './colors';
 
 type Animation = {
   greet: any;
-  shimmer: any;
 };
 
 declare module '@mui/material/styles' {
@@ -35,10 +34,6 @@ export const theme = createTheme({
       0%,100% { transform: rotate(0) }
       20%,60% { transform: rotate(-25deg) }
       40%,80% { transform: rotate(10deg) }
-    `,
-    shimmer: keyframes`
-      0% { background-position-x: -1200px}
-      100% { background-position-x: 1200px}
     `,
   },
   overrides: [
@@ -118,6 +113,9 @@ export const theme = createTheme({
       light: colors.lightBlue,
       dark: colors.darkBlue,
     },
+    error: {
+      main: colors.red,
+    },
     neutral: {
       main: colors.grey,
       light: colors.lightGrey,
@@ -127,6 +125,7 @@ export const theme = createTheme({
     },
     background: {
       default: colors.darkBlue,
+      paper: colors.gradient,
     },
     text: {
       primary: colors.white,

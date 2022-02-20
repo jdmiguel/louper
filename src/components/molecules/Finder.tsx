@@ -22,13 +22,12 @@ const StyledTextField = styled<any>(TextField)(({ theme }) => ({
     },
     '&:hover': {
       '& .MuiOutlinedInput-notchedOutline': {
-        borderColor: theme.palette.primary.light,
+        borderColor: theme.palette.primary.main,
       },
     },
   },
   '& .Mui-focused .MuiOutlinedInput-notchedOutline': {
-    border: 'none',
-    boxShadow: `inset 0 0 1px 2px ${theme.palette.primary.main}`,
+    borderColor: theme.palette.primary.main,
   },
 }));
 
