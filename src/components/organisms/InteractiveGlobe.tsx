@@ -35,6 +35,7 @@ const DEFAULT_OVERLAY_BOX_DATA = {
 const Root = styled('div')({
   height: 320,
   position: 'relative',
+  userSelect: 'none',
   width: 320,
   '@media (min-width: 375px)': {
     height: 350,
@@ -83,7 +84,7 @@ const Globe = () => {
 };
 
 const InteractiveGlobe = () => {
-  const [isAutoRotationAllowed, setIsAutoRotationAllowed] = useState(false);
+  const [isAutoRotationAllowed, setIsAutoRotationAllowed] = useState(true);
   const [isMarkerHovered, setIsMarkerHovered] = useState(false);
   const [overlayBoxData, setOverlayBoxData] = useState(DEFAULT_OVERLAY_BOX_DATA);
 
@@ -115,7 +116,7 @@ const InteractiveGlobe = () => {
               }}
               onOut={() => {
                 setIsMarkerHovered(false);
-                setIsAutoRotationAllowed(false);
+                setIsAutoRotationAllowed(true);
               }}
             />
           ))}

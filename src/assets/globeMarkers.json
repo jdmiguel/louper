@@ -1,5 +1,26 @@
 [
   {
+    "id": "algeria",
+    "country": "Algeria",
+    "lat": 10,
+    "lng": -5,
+    "totalUsers": "112.584"
+  },
+  {
+    "id": "argentine",
+    "country": "Argentine",
+    "lat": 34,
+    "lng": 78,
+    "totalUsers": "354.860"
+  },
+  {
+    "id": "australia",
+    "country": "Australia",
+    "lat": -140,
+    "lng": -64,
+    "totalUsers": "785.793"
+  },
+  {
     "id": "bangladesh",
     "country": "Bangladesh",
     "lat": -100,
@@ -7,11 +28,32 @@
     "totalUsers": "276.844"
   },
   {
+    "id": "brazil",
+    "country": "Brazil",
+    "lat": 44,
+    "lng": 50,
+    "totalUsers": "1.691.776"
+  },
+  {
+    "id": "canada",
+    "country": "Canada",
+    "lat": 130,
+    "lng": 58,
+    "totalUsers": "1.304.427"
+  },
+  {
     "id": "china",
     "country": "China",
     "lat": -82,
     "lng": -70,
     "totalUsers": "6.521.914"
+  },
+  {
+    "id": "colombia",
+    "country": "Colombia",
+    "lat": 67,
+    "lng": 64,
+    "totalUsers": "355.471"
   },
   {
     "id": "egipt",
@@ -26,6 +68,13 @@
     "lat": 12,
     "lng": -30,
     "totalUsers": "2.276.780"
+  },
+  {
+    "id": "ethiopia",
+    "country": "Ethiopia",
+    "lat": -29,
+    "lng": 18,
+    "totalUsers": "27.275"
   },
   {
     "id": "germany",
@@ -49,6 +98,13 @@
     "totalUsers": "1.541.190"
   },
   {
+    "id": "japan",
+    "country": "Japan",
+    "lat": -121,
+    "lng": 19,
+    "totalUsers": "1.343.723"
+  },
+  {
     "id": "ireland",
     "country": "Ireland",
     "lat": 17,
@@ -65,8 +121,8 @@
   {
     "id": "indonesia",
     "country": "Indonesia",
-    "lat": -111,
-    "lng": -108,
+    "lat": -114,
+    "lng": -70,
     "totalUsers": "1.090.108"
   },
   {
@@ -84,11 +140,39 @@
     "totalUsers": "721.749"
   },
   {
+    "id": "malaysa",
+    "country": "Malaysa",
+    "lat": -111,
+    "lng": -108,
+    "totalUsers": "279.634"
+  },
+  {
+    "id": "mexico",
+    "country": "Mexico",
+    "lat": 108,
+    "lng": -4,
+    "totalUsers": "666.975"
+  },
+  {
+    "id": "morocco",
+    "country": "Morocco",
+    "lat": 16,
+    "lng": -7,
+    "totalUsers": "173.599"
+  },
+  {
     "id": "netherlands",
     "country": "Netherlands",
     "lat": 5,
     "lng": -26,
     "totalUsers": "637.431"
+  },
+  {
+    "id": "nigeria",
+    "country": "Nigeria",
+    "lat": 1,
+    "lng": 15,
+    "totalUsers": "231.606"
   },
   {
     "id": "norway",
@@ -103,6 +187,20 @@
     "lat": -58,
     "lng": -4,
     "totalUsers": "386.520"
+  },
+  {
+    "id": "philippines",
+    "country": "Philippines",
+    "lat": -108,
+    "lng": -38,
+    "totalUsers": "509.208"
+  },
+  {
+    "id": "peru",
+    "country": "Peru",
+    "lat": 55,
+    "lng": 68,
+    "totalUsers": "192.235"
   },
   {
     "id": "polland",
@@ -133,11 +231,25 @@
     "totalUsers": "1.514.196"
   },
   {
+    "id": "safrica",
+    "country": "South Africa",
+    "lat": -10,
+    "lng": 44,
+    "totalUsers": "246.557"
+  },
+  {
     "id": "saudi",
-    "country": "S.Arabia",
+    "country": "Saudia Arabia",
     "lat": -31,
     "lng": 1,
     "totalUsers": "213.406"
+  },
+  {
+    "id": "skorea",
+    "country": "South Korea",
+    "lat": -112,
+    "lng": 27,
+    "totalUsers": "913.193"
   },
   {
     "id": "spain",
@@ -154,6 +266,13 @@
     "totalUsers": "434.324"
   },
   {
+    "id": "tanzania",
+    "country": "Tanzania",
+    "lat": -21,
+    "lng": 30,
+    "totalUsers": "21.376"
+  },
+  {
     "id": "thailand",
     "country": "Thailand",
     "lat": -101,
@@ -166,6 +285,20 @@
     "lat": -18,
     "lng": -13,
     "totalUsers": "596.410"
+  },
+  {
+    "id": "ukraine",
+    "country": "Ukraine",
+    "lat": -15,
+    "lng": -23,
+    "totalUsers": "646.318"
+  },
+  {
+    "id": "ustates",
+    "country": "United States",
+    "lat": 108,
+    "lng": 50,
+    "totalUsers": "11.086.019"
   },
   {
     "id": "vietnam",
