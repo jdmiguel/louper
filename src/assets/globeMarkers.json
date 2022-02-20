@@ -1,80 +1,59 @@
 [
   {
-    "id": "algeria",
-    "country": "Algeria",
-    "lat": 10,
-    "lng": -5,
-    "totalUsers": "112.584"
-  },
-  {
     "id": "argentine",
     "country": "Argentine",
     "lat": 34,
     "lng": 78,
-    "totalUsers": "354.860"
+    "totalUsers": "491.677"
   },
   {
     "id": "australia",
     "country": "Australia",
     "lat": -140,
     "lng": -64,
-    "totalUsers": "785.793"
+    "totalUsers": "962.923"
   },
   {
     "id": "bangladesh",
     "country": "Bangladesh",
     "lat": -100,
     "lng": -134,
-    "totalUsers": "276.844"
+    "totalUsers": "409.667"
   },
   {
     "id": "brazil",
     "country": "Brazil",
     "lat": 44,
     "lng": 50,
-    "totalUsers": "1.691.776"
+    "totalUsers": "2.369.096"
   },
   {
     "id": "canada",
     "country": "Canada",
     "lat": 130,
     "lng": 58,
-    "totalUsers": "1.304.427"
-  },
-  {
-    "id": "chile",
-    "country": "Chile",
-    "lat": 43,
-    "lng": 74,
-    "totalUsers": "201.145"
+    "totalUsers": "1.636.278"
   },
   {
     "id": "china",
     "country": "China",
     "lat": -82,
     "lng": -70,
-    "totalUsers": "6.521.914"
+    "totalUsers": "7.555.311"
   },
   {
     "id": "colombia",
     "country": "Colombia",
     "lat": 67,
     "lng": 64,
-    "totalUsers": "355.471"
-  },
-  {
-    "id": "congo",
-    "country": "Congo",
-    "lat": -11,
-    "lng": 20,
-    "totalUsers": "7.007"
+    "totalUsers": "498.007"
   },
   {
     "id": "egipt",
     "country": "Egipt",
     "lat": -17,
     "lng": -3,
-    "totalUsers": "296.735"
+    "totalUsers": "426.121"
   },
   {
     "id": "england",
@@ -84,20 +63,6 @@
     "totalUsers": "2.276.780"
   },
   {
-    "id": "ecuador",
-    "country": "Ecuador",
-    "lat": 60,
-    "lng": 77,
-    "totalUsers": "90.663"
-  },
-  {
-    "id": "ethiopia",
-    "country": "Ethiopia",
-    "lat": -29,
-    "lng": 18,
-    "totalUsers": "27.275"
-  },
-  {
     "id": "germany",
     "country": "Germany",
     "lat": 1,
@@ -105,67 +70,46 @@
     "totalUsers": "1.929.413"
   },
   {
-    "id": "greece",
-    "country": "Greece",
-    "lat": -10,
-    "lng": -13,
-    "totalUsers": "132.571"
-  },
-  {
     "id": "france",
     "country": "France",
     "lat": 8,
     "lng": -21,
-    "totalUsers": "1.541.190"
+    "totalUsers": "1.541.090"
   },
   {
     "id": "japan",
     "country": "Japan",
     "lat": -121,
     "lng": 19,
-    "totalUsers": "1.343.723"
-  },
-  {
-    "id": "ireland",
-    "country": "Ireland",
-    "lat": 17,
-    "lng": -29,
-    "totalUsers": "206.198"
+    "totalUsers": "1.747.877"
   },
   {
     "id": "india",
     "country": "India",
     "lat": -64,
     "lng": 9,
-    "totalUsers": "5.192.667"
+    "totalUsers": "7.210.455"
   },
   {
     "id": "indonesia",
     "country": "Indonesia",
     "lat": -114,
     "lng": -70,
-    "totalUsers": "1.090.108"
+    "totalUsers": "1.629.831"
   },
   {
     "id": "israel",
     "country": "Israel",
     "lat": -21,
     "lng": -5,
-    "totalUsers": "288.171"
+    "totalUsers": "365.865"
   },
   {
     "id": "iran",
     "country": "Iran",
     "lat": -46,
     "lng": -6,
-    "totalUsers": "247.234"
-  },
-  {
-    "id": "irak",
-    "country": "Irak",
-    "lat": -40,
-    "lng": -7,
-    "totalUsers": "69.582"
+    "totalUsers": "328.999"
   },
   {
     "id": "italy",
@@ -179,119 +123,77 @@
     "country": "Malaysa",
     "lat": -111,
     "lng": -108,
-    "totalUsers": "279.634"
+    "totalUsers": "389.123"
   },
   {
     "id": "mexico",
     "country": "Mexico",
     "lat": 108,
     "lng": -4,
-    "totalUsers": "666.975"
-  },
-  {
-    "id": "morocco",
-    "country": "Morocco",
-    "lat": 16,
-    "lng": -7,
-    "totalUsers": "173.599"
+    "totalUsers": "979.336"
   },
   {
     "id": "netherlands",
     "country": "Netherlands",
     "lat": 5,
     "lng": -26,
-    "totalUsers": "637.431"
+    "totalUsers": "789.156"
   },
   {
     "id": "nigeria",
     "country": "Nigeria",
     "lat": 1,
     "lng": 15,
-    "totalUsers": "231.606"
-  },
-  {
-    "id": "norway",
-    "country": "Norway",
-    "lat": 2,
-    "lng": -38,
-    "totalUsers": "177.896"
+    "totalUsers": "352.538"
   },
   {
     "id": "pakistan",
     "country": "Pakistan",
     "lat": -58,
     "lng": -4,
-    "totalUsers": "386.520"
-  },
-  {
-    "id": "paraguay",
-    "country": "Paraguay",
-    "lat": 40,
-    "lng": 67,
-    "totalUsers": "18.246"
+    "totalUsers": "549.433"
   },
   {
     "id": "philippines",
     "country": "Philippines",
     "lat": -108,
     "lng": -38,
-    "totalUsers": "509.208"
-  },
-  {
-    "id": "peru",
-    "country": "Peru",
-    "lat": 53,
-    "lng": 69,
-    "totalUsers": "192.235"
+    "totalUsers": "740.409"
   },
   {
     "id": "polland",
     "country": "Polland",
-    "lat": -3,
+    "lat": -4,
     "lng": -25,
-    "totalUsers": "598.931"
-  },
-  {
-    "id": "portugal",
-    "country": "Portugal",
-    "lat": 18,
-    "lng": -15,
-    "totalUsers": "256.128"
+    "totalUsers": "755.426"
   },
   {
     "id": "romania",
     "country": "Romania",
     "lat": -12,
     "lng": -19,
-    "totalUsers": "249.426"
+    "totalUsers": "321.220"
   },
   {
     "id": "russia",
     "country": "Russia",
     "lat": -42,
     "lng": -46,
-    "totalUsers": "1.514.196"
+    "totalUsers": "1.981.853"
   },
   {
     "id": "safrica",
     "country": "South Africa",
     "lat": -10,
     "lng": 44,
-    "totalUsers": "246.557"
-  },
-  {
-    "id": "saudi",
-    "country": "Saudia Arabia",
-    "lat": -31,
-    "lng": 1,
-    "totalUsers": "213.406"
+    "totalUsers": "318.874"
   },
   {
     "id": "skorea",
     "country": "South Korea",
     "lat": -112,
     "lng": 27,
-    "totalUsers": "913.193"
+    "totalUsers": "1.239.541"
   },
   {
     "id": "spain",
@@ -308,52 +210,45 @@
     "totalUsers": "434.324"
   },
   {
-    "id": "tanzania",
-    "country": "Tanzania",
-    "lat": -21,
-    "lng": 30,
-    "totalUsers": "21.376"
+    "id": "taiwan",
+    "country": "Taiwan",
+    "lat": -75,
+    "lng": -164,
+    "totalUsers": "626.405"
   },
   {
     "id": "thailand",
     "country": "Thailand",
-    "lat": -101,
-    "lng": -90,
-    "totalUsers": "357.716"
+    "lat": -102,
+    "lng": -94,
+    "totalUsers": "476.188"
   },
   {
     "id": "turkey",
     "country": "Turkey",
     "lat": -18,
     "lng": -13,
-    "totalUsers": "596.410"
+    "totalUsers": "862.852"
   },
   {
     "id": "ukraine",
     "country": "Ukraine",
     "lat": -15,
     "lng": -23,
-    "totalUsers": "646.318"
+    "totalUsers": "814.494"
   },
   {
     "id": "ustates",
     "country": "United States",
     "lat": 108,
     "lng": 50,
-    "totalUsers": "11.086.019"
-  },
-  {
-    "id": "venezuela",
-    "country": "Venezuela",
-    "lat": 64,
-    "lng": 49,
-    "totalUsers": "94.779"
+    "totalUsers": "13.551.846"
   },
   {
     "id": "vietnam",
     "country": "Vietnam",
     "lat": -100,
     "lng": -69,
-    "totalUsers": "597.237"
+    "totalUsers": "835.409"
   }
 ]
