@@ -1,6 +1,4 @@
 import { forwardRef, ReactNode } from 'react';
-
-/* material-ui */
 import { styled } from '@mui/material/styles';
 import MuiAlert, { AlertColor } from '@mui/material/Alert';
 import Snackbar from '@mui/material/Snackbar';

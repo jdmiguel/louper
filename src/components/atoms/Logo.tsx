@@ -1,4 +1,3 @@
-/* colors */
 import { colors } from '../../utils/colors';
 
 const Logo = () => (

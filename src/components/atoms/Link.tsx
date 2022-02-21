@@ -1,4 +1,3 @@
-/* material-ui */
 import { styled } from '@mui/material/styles';
 import MuiLink from '@mui/material/Link';
 import Icon from '@mui/material/Icon';

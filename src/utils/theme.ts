@@ -1,8 +1,5 @@
-/* material-ui */
 import { keyframes } from '@emotion/react';
 import { createTheme } from '@mui/material/styles';
-
-/* colors */
 import { colors } from './colors';
 
 type Animation = {

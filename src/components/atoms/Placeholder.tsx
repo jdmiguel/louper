@@ -1,8 +1,5 @@
-/* material-ui */
 import { styled } from '@mui/material/styles';
 import LinearProgress from '@mui/material/LinearProgress';
-
-/* types */
 import { SectionType } from '../../utils/types';
 
 const Root = styled('div')(({ theme }) => ({

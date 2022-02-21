@@ -1,17 +1,9 @@
 import { useMemo } from 'react';
 import { v4 as uuidv4 } from 'uuid';
-
-/* material-ui */
 import { styled } from '@mui/material/styles';
 import Typography from '@mui/material/Typography';
-
-/* atoms */
 import Placeholder from '../atoms/Placeholder';
-
-/* molecules */
 import Card from '../molecules/Card';
-
-/* types */
 import { SectionType, Repo, User } from '../../utils/types';
 
 const Root = styled('main')({

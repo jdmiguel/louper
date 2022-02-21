@@ -1,21 +1,13 @@
 import { useState } from 'react';
-
-/* material-ui */
 import { styled } from '@mui/material/styles';
 import Stack from '@mui/material/Stack';
-
-/* molecules */
 import Menu from '../molecules/Menu';
 import Toast from '../molecules/Toast';
-
-/* organisms */
 import Profile from '../organisms/Profile';
 import ProfileMobile from '../organisms/ProfileMobile';
 import Repos from '../organisms/Repos';
 import Following from '../organisms/Following';
 import Followers from '../organisms/Followers';
-
-/* types */
 import { Repo, User, UserData } from '../../utils/types';
 
 const Root = styled('div')({

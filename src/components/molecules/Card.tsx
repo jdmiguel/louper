@@ -1,17 +1,11 @@
 import { ReactElement } from 'react';
-
-/* material-ui */
 import { styled } from '@mui/material/styles';
 import Stack from '@mui/material/Stack';
 import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
-
-/* atoms */
 import Avatar from '@mui/material/Avatar';
 import TextTag from '../atoms/TextTag';
 import Link from '../atoms/Link';
-
-/* types */
 import { Repo, User, CardSize, SectionType } from '../../utils/types';
 
 const Root = styled('div')(({ theme }) => ({

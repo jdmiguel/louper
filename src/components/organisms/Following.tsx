@@ -1,12 +1,6 @@
 import { useState, useEffect, useMemo } from 'react';
-
-/* organisms */
 import UserSection from '../organisms/UserSection';
-
-/* request */
 import { ResponseError, BASE_URL, handleErrors } from '../../utils/request';
-
-/* types */
 import { User } from '../../utils/types';
 
 type Props = {

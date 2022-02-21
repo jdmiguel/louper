@@ -1,13 +1,8 @@
-/* material-ui */
 import { styled } from '@mui/material/styles';
 import Typography from '@mui/material/Typography';
-
-/* atoms */
 import Avatar from '@mui/material/Avatar';
 import TextTag from '../atoms/TextTag';
 import Link from '../atoms/Link';
-
-/* types */
 import { UserData } from '../../utils/types';
 
 const buildCreationDate = (date: string) => {

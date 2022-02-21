@@ -1,13 +1,8 @@
-/* material-ui */
 import { styled } from '@mui/material/styles';
 import Pagination from '@mui/material/Pagination';
 import PaginationItem from '@mui/material/PaginationItem';
 import Stack from '@mui/material/Stack';
-
-/* molecules */
 import Card from '../molecules/Card';
-
-/* types */
 import { User } from '../../utils/types';
 
 const SuggestionsWrapper = styled('div')({

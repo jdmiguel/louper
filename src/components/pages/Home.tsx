@@ -1,33 +1,17 @@
 import { useState, useEffect, useMemo, useCallback } from 'react';
-
-/* material-ui */
 import { styled } from '@mui/material/styles';
 import Typography from '@mui/material/Typography';
-
-/* atoms */
 import Corner from '../atoms/Corner';
 import Logo from '../atoms/Logo';
 import Watermark from '../atoms/Watermark';
-
-/* molecules */
 import Finder from '../molecules/Finder';
 import Suggestions from '../molecules/Suggestions';
 import Footer from '../molecules/Footer';
 import Toast from '../molecules/Toast';
-
-/* organisms */
 import InteractiveGlobe from '../organisms/InteractiveGlobe';
-
-/* hooks */
 import useWindowSize from '../../hooks/useWindowSize';
-
-/* request */
 import { ResponseError, BASE_URL, handleErrors } from '../../utils/request';
-
-/* types */
 import { UserData, UsersData } from '../../utils/types';
-
-/* utils */
 import { debounce } from '../../utils/index';
 
 enum ErrorMsg {

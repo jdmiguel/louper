@@ -1,4 +1,3 @@
-/* material-ui */
 import { styled } from '@mui/material/styles';
 import Icon from '@mui/material/Icon';
 import Typography from '@mui/material/Typography';

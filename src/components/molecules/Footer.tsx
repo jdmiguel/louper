@@ -1,8 +1,5 @@
-/* material-ui */
 import { styled } from '@mui/material/styles';
 import Typography from '@mui/material/Typography';
-
-/* atoms */
 import Link from '../atoms/Link';
 
 const Root = styled('footer')({

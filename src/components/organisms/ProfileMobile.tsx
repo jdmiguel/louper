@@ -1,12 +1,7 @@
-/* material-ui */
 import { styled } from '@mui/material/styles';
 import Stack from '@mui/material/Stack';
 import Typography from '@mui/material/Typography';
-
-/* atoms */
 import Avatar from '@mui/material/Avatar';
-
-/* types */
 import { UserData } from '../../utils/types';
 
 const Root = styled('div')({

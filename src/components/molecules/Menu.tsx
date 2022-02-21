@@ -1,6 +1,4 @@
 import { SyntheticEvent, useState } from 'react';
-
-/* material-ui */
 import { styled } from '@mui/material/styles';
 import Tabs from '@mui/material/Tabs';
 import Tab from '@mui/material/Tab';
