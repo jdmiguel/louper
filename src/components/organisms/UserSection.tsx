@@ -10,9 +10,6 @@ const Root = styled('main')({
   display: 'grid',
   gridGap: 20,
   paddingTop: 20,
-  '@media (min-width: 992px)': {
-    gridTemplateColumns: 'repeat(2, 330px)',
-  },
   '@media (min-width: 1200px)': {
     gridTemplateColumns: 'repeat(2, 420px)',
   },

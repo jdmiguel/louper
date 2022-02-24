@@ -10,7 +10,7 @@ const Root = styled('footer')({
   '@media (min-width: 768px)': {
     position: 'absolute',
     bottom: 0,
-    visibility: 'visible',
+    left: 0,
     width: '100%',
   },
 });

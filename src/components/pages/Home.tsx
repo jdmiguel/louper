@@ -24,9 +24,10 @@ const MIN_CHARS_TO_SEARCH_USERS = 2;
 const Root = styled('div')({
   display: 'flex',
   flexDirection: 'column',
+  minHeight: '100vh',
+  position: 'relative',
   '@media (min-width: 768px)': {
     justifyContent: 'center',
-    height: '100vh',
   },
 });
 
@@ -42,9 +43,14 @@ const Main = styled('main')({
   alignItems: 'center',
   display: 'flex',
   flexDirection: 'column',
+  marginBottom: 20,
+  '@media (min-width: 768px)': {
+    marginBottom: 50,
+  },
   '@media (min-width: 992px)': {
     flexDirection: 'row',
     justifyContent: 'space-evenly',
+    marginBottom: 0,
   },
   '@media (min-width: 1440px)': {
     justifyContent: 'center',
@@ -76,8 +82,10 @@ const LogoWrapper = styled('h1')({
   marginTop: 60,
   transform: 'scale(0.9)',
   '@media (min-width: 768px)': {
-    marginTop: 0,
     transform: 'scale(1)',
+  },
+  '@media (min-width: 992px)': {
+    marginTop: 0,
   },
 });
 
