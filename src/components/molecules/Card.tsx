@@ -109,7 +109,7 @@ const displayRepoContent = (repo: Repo): ReactElement => (
 );
 
 const displayUserContent = (user: User, theme: SectionType): ReactElement => {
-  const iconType = theme === 'FOLLOWING' ? 'visibility' : 'favorite';
+  const iconType = theme === 'following' ? 'visibility' : 'favorite';
 
   return (
     <Stack direction="row">
@@ -145,8 +145,8 @@ type Props = {
   onClick?: (userName: string) => void;
 };
 
-const Card = ({ theme = 'FOLLOWING', data, size = 'NORMAL', onClick }: Props) => {
-  const isRepoTheme = theme === 'REPOS';
+const Card = ({ theme = 'following', data, size = 'NORMAL', onClick }: Props) => {
+  const isRepoTheme = theme === 'repos';
   const repo = data as Repo;
   const user = data as User;
 

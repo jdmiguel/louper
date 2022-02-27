@@ -1,4 +1,4 @@
-export type SectionType = 'REPOS' | 'FOLLOWING' | 'FOLLOWERS';
+export type SectionType = 'repos' | 'following' | 'followers';
 
 export type Repo = {
   id: number;
@@ -14,6 +14,8 @@ export type User = {
   html_url: string;
   avatar_url: string;
 };
+
+export type Items = Repo[] & User[];
 
 export type CardSize = 'SMALL' | 'NORMAL';
 

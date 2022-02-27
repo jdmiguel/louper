@@ -1,15 +1,15 @@
-import { useState } from 'react';
+import { useState, useMemo } from 'react';
 import { styled } from '@mui/material/styles';
 import Stack from '@mui/material/Stack';
 import Menu from '../molecules/Menu';
 import Toast from '../molecules/Toast';
 import Footer from '../molecules/Footer';
-import Profile from '../organisms/Profile';
-import ProfileMobile from '../organisms/ProfileMobile';
-import Repos from '../organisms/Repos';
-import Following from '../organisms/Following';
-import Followers from '../organisms/Followers';
-import { Repo, User, UserData } from '../../utils/types';
+import UserProfile from '../organisms/UserProfile';
+import UserProfileMobile from '../organisms/UserProfileMobile';
+import UserSection from '../organisms/UserSection';
+import { UserData } from '../../utils/types';
+
+const TOTAL_ITEMS_ALLOWED = 100;
 
 const Root = styled('div')({
   minHeight: '100vh',
@@ -26,7 +26,7 @@ const Main = styled('div')({
   },
 });
 
-const ProfileWrapper = styled('aside')({
+const UserProfileWrapper = styled('aside')({
   display: 'none',
   margin: '60px 50px 0 0',
   '@media (min-width: 768px)': {
@@ -42,16 +42,25 @@ type Props = {
 const UserPage = ({ userData, onBackFinder }: Props) => {
   const [isErrorToastOpen, setIsErrorToastOpen] = useState(false);
   const [activeSection, setActiveUserSection] = useState(0);
-  const [repos, setRepos] = useState<Repo[] | null>(null);
-  const [following, setFollowing] = useState<User[] | null>(null);
-  const [followers, setFollowers] = useState<User[] | null>(null);
+
+  const totalItems = useMemo(
+    () => ({
+      repos:
+        userData.public_repos <= TOTAL_ITEMS_ALLOWED ? userData.public_repos : TOTAL_ITEMS_ALLOWED,
+      following:
+        userData.following <= TOTAL_ITEMS_ALLOWED ? userData.following : TOTAL_ITEMS_ALLOWED,
+      followers:
+        userData.followers <= TOTAL_ITEMS_ALLOWED ? userData.followers : TOTAL_ITEMS_ALLOWED,
+    }),
+    [userData],
+  );
 
   return (
     <Root>
       <Main>
-        <ProfileWrapper>
-          <Profile userData={userData} />
-        </ProfileWrapper>
+        <UserProfileWrapper>
+          <UserProfile userData={userData} />
+        </UserProfileWrapper>
         <Stack
           sx={{
             width: '100%',
@@ -60,7 +69,7 @@ const UserPage = ({ userData, onBackFinder }: Props) => {
             },
           }}
         >
-          <ProfileMobile userData={userData} />
+          <UserProfileMobile userData={userData} />
           <Menu
             onClick={(section: number) => {
               setActiveUserSection(section);
@@ -71,29 +80,26 @@ const UserPage = ({ userData, onBackFinder }: Props) => {
           />
           <>
             {activeSection === 0 && (
-              <Repos
+              <UserSection
                 userName={userData.login}
-                repos={repos}
-                totalRepos={userData.public_repos}
-                onFetchRepos={(fetchedRepos: Repo[]) => setRepos(fetchedRepos)}
+                sectionType="repos"
+                totalItems={totalItems.repos}
                 onRequestError={() => setIsErrorToastOpen(true)}
               />
             )}
             {activeSection === 1 && (
-              <Following
+              <UserSection
                 userName={userData.login}
-                following={following}
-                totalFollowing={userData.following}
-                onFetchFollowing={(fetchedFollowing: User[]) => setFollowing(fetchedFollowing)}
+                sectionType="following"
+                totalItems={totalItems.following}
                 onRequestError={() => setIsErrorToastOpen(true)}
               />
             )}
             {activeSection === 2 && (
-              <Followers
+              <UserSection
                 userName={userData.login}
-                followers={followers}
-                totalFollowers={userData.followers}
-                onFetchFollowers={(fetchedFollowers: User[]) => setFollowers(fetchedFollowers)}
+                sectionType="followers"
+                totalItems={totalItems.followers}
                 onRequestError={() => setIsErrorToastOpen(true)}
               />
             )}
