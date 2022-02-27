@@ -10,14 +10,9 @@ import Footer from '../molecules/Footer';
 import Toast from '../molecules/Toast';
 import InteractiveGlobe from '../organisms/InteractiveGlobe';
 import useWindowSize from '../../hooks/useWindowSize';
-import { ResponseError, BASE_URL, handleErrors } from '../../utils/request';
+import { getErrorMessage, debounce } from '../../utils';
+import { BASE_URL, handleErrors } from '../../utils/request';
 import { UserData, UsersData } from '../../utils/types';
-import { debounce } from '../../utils/index';
-
-enum ErrorMsg {
-  MAX = 'You have excedeed the maximum allowed request. Please, wait for a while',
-  NO_USER = 'Please, choose an available user',
-}
 
 const MIN_CHARS_TO_SEARCH_USERS = 2;
 
@@ -115,7 +110,7 @@ const HomePage = ({ onFetchUser }: Props) => {
   const [areSuggestionsShown, setAreSuggestionsShown] = useState(false);
   const [isErrorToastOpen, setIsErrorToastOpen] = useState(false);
   const [usersData, setUsersData] = useState<UsersData>(DEFAULT_USERS_DATA);
-  const [errorMsg, setErrorMsg] = useState('');
+  const [errorMessage, setErrorMessage] = useState('');
 
   const { windowWidth } = useWindowSize();
   const isSmallDevice = windowWidth <= 1200;
@@ -151,9 +146,9 @@ const HomePage = ({ onFetchUser }: Props) => {
         setUsersData(fetchedUsersData);
         setAreSuggestionsShown(true);
       })
-      .catch((error: ResponseError) => {
+      .catch((error) => {
         setAreSuggestionsShown(false);
-        console.log(error);
+        setErrorMessage(getErrorMessage(error));
       })
       .finally(() => {
         setIsLoadingUsers(false);
@@ -182,23 +177,9 @@ const HomePage = ({ onFetchUser }: Props) => {
           following: userData.following,
         });
       })
-      .catch((error: ResponseError) => {
-        let errorMsg = '';
-
-        console.log({ error });
-
-        switch (error.status) {
-          case 403:
-          default:
-            errorMsg = ErrorMsg.MAX;
-            break;
-          case 404:
-            errorMsg = ErrorMsg.NO_USER;
-            break;
-        }
-
+      .catch((error) => {
         setIsErrorToastOpen(true);
-        setErrorMsg(errorMsg);
+        setErrorMessage(getErrorMessage(error));
       })
       .finally(() => {
         setIsLoadingUser(false);
@@ -273,7 +254,7 @@ const HomePage = ({ onFetchUser }: Props) => {
       <Toast
         isOpen={isErrorToastOpen}
         type="error"
-        msg={errorMsg}
+        msg={errorMessage}
         onClose={() => setIsErrorToastOpen(false)}
       />
     </Root>

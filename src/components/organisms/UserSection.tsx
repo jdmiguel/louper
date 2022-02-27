@@ -4,7 +4,8 @@ import Typography from '@mui/material/Typography';
 import CircularProgress from '@mui/material/CircularProgress';
 import Card from '../molecules/Card';
 import useWindowScroll from '../../hooks/useWindowScroll';
-import { ResponseError, BASE_URL, handleErrors } from '../../utils/request';
+import { getErrorMessage } from '../../utils';
+import { BASE_URL, handleErrors } from '../../utils/request';
 import { SectionType, Items } from '../../utils/types';
 
 const ITEMS_PER_PAGE = 10;
@@ -36,7 +37,7 @@ type Props = {
   userName: string;
   sectionType: SectionType;
   totalItems: number;
-  onRequestError: () => void;
+  onRequestError: (errorMessage: string) => void;
 };
 
 const UserSection = ({ userName, sectionType, totalItems, onRequestError }: Props) => {
@@ -64,11 +65,8 @@ const UserSection = ({ userName, sectionType, totalItems, onRequestError }: Prop
       .then((fetchedItems: Items) => {
         setItems((prevItems: Items) => [...prevItems, ...fetchedItems]);
       })
-      .catch((error: ResponseError) => {
-        if (error.status === 20) {
-          return;
-        }
-        onRequestError();
+      .catch((error) => {
+        onRequestError(getErrorMessage(error));
       })
       .finally(() => {
         setIsLoading(false);

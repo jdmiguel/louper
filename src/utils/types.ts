@@ -39,3 +39,7 @@ export type UserData = {
   followers: number;
   following: number;
 };
+
+export type ResponseError = Error & {
+  status: number;
+};

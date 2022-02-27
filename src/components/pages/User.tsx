@@ -40,8 +40,9 @@ type Props = {
 };
 
 const UserPage = ({ userData, onBackFinder }: Props) => {
-  const [isErrorToastOpen, setIsErrorToastOpen] = useState(false);
   const [activeSection, setActiveUserSection] = useState(0);
+  const [isErrorToastOpen, setIsErrorToastOpen] = useState(false);
+  const [errorMessage, setErrorMessage] = useState('');
 
   const totalItems = useMemo(
     () => ({
@@ -54,6 +55,11 @@ const UserPage = ({ userData, onBackFinder }: Props) => {
     }),
     [userData],
   );
+
+  const handleRequestError = (errorMessage: string) => {
+    setErrorMessage(errorMessage);
+    setIsErrorToastOpen(true);
+  };
 
   return (
     <Root>
@@ -84,7 +90,7 @@ const UserPage = ({ userData, onBackFinder }: Props) => {
                 userName={userData.login}
                 sectionType="repos"
                 totalItems={totalItems.repos}
-                onRequestError={() => setIsErrorToastOpen(true)}
+                onRequestError={handleRequestError}
               />
             )}
             {activeSection === 1 && (
@@ -92,7 +98,7 @@ const UserPage = ({ userData, onBackFinder }: Props) => {
                 userName={userData.login}
                 sectionType="following"
                 totalItems={totalItems.following}
-                onRequestError={() => setIsErrorToastOpen(true)}
+                onRequestError={handleRequestError}
               />
             )}
             {activeSection === 2 && (
@@ -100,7 +106,7 @@ const UserPage = ({ userData, onBackFinder }: Props) => {
                 userName={userData.login}
                 sectionType="followers"
                 totalItems={totalItems.followers}
-                onRequestError={() => setIsErrorToastOpen(true)}
+                onRequestError={handleRequestError}
               />
             )}
           </>
@@ -108,7 +114,7 @@ const UserPage = ({ userData, onBackFinder }: Props) => {
         <Toast
           isOpen={isErrorToastOpen}
           type="error"
-          msg="Sorry! there was an error on the server side."
+          msg={errorMessage}
           onClose={() => setIsErrorToastOpen(false)}
         />
       </Main>
