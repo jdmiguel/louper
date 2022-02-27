@@ -41,20 +41,24 @@ type Props = {
 
 const UserSection = ({ userName, sectionType, totalItems, onRequestError }: Props) => {
   const [isLoading, setIsLoading] = useState(false);
+  const [isFullyLoaded, setIsFullyLoaded] = useState(false);
   const [items, setItems] = useState<Items>([]);
-  const [currentItemPage, setCurrentItemPage] = useState(1);
+  const [currentItemPage, setCurrentItemPage] = useState(0);
 
   const loaderRef = useRef<HTMLDivElement | null>(null);
   const loaderEntry = useIntersectionObserver(loaderRef, {});
   const isLoaderVisible = !!loaderEntry?.isIntersecting;
 
   const totalItemPages = Math.ceil(totalItems / ITEMS_PER_PAGE);
-  const isFullyLoaded = currentItemPage === totalItemPages;
 
   // eslint-disable-next-line react-hooks/exhaustive-deps
   const abortController = useMemo(() => new AbortController(), []);
 
   useEffect(() => {
+    if (!currentItemPage) {
+      return;
+    }
+
     setIsLoading(true);
 
     fetch(
@@ -66,6 +70,7 @@ const UserSection = ({ userName, sectionType, totalItems, onRequestError }: Prop
       .then(handleErrors)
       .then((fetchedItems: Items) => {
         setItems((prevItems: Items) => [...prevItems, ...fetchedItems]);
+        setIsFullyLoaded(currentItemPage === totalItemPages);
       })
       .catch((error) => {
         onRequestError(error.message);
@@ -74,7 +79,7 @@ const UserSection = ({ userName, sectionType, totalItems, onRequestError }: Prop
         setIsLoading(false);
       });
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [currentItemPage]);
+  }, [currentItemPage, totalItemPages]);
 
   useEffect(() => {
     if (isLoaderVisible && !isFullyLoaded) {

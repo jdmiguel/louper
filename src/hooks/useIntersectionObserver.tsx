@@ -11,10 +11,10 @@ const useIntersectionObserver = (
   };
 
   useEffect(() => {
-    const node = elementRef?.current; // DOM Ref
     const hasIOSupport = !!window.IntersectionObserver;
+    const node = elementRef?.current; // DOM Ref
 
-    if (!hasIOSupport || entry?.isIntersecting || !node) {
+    if (!hasIOSupport || !node || entry?.isIntersecting) {
       return;
     }
 
