@@ -3,6 +3,8 @@ import Stack from '@mui/material/Stack';
 import Typography from '@mui/material/Typography';
 import Link from '../atoms/Link';
 
+const spacer = 0.6;
+
 const Root = styled('footer')({
   alignItems: 'center',
   display: 'flex',
@@ -20,8 +22,8 @@ const Root = styled('footer')({
 
 const Footer = () => (
   <Root>
-    <Stack direction="row" sx={{ marginRight: 0.6 }}>
-      <Typography variant="body1" sx={{ color: 'text.secondary', marginRight: 1 }}>
+    <Stack direction="row" sx={{ marginRight: spacer }}>
+      <Typography variant="body1" sx={{ color: 'text.secondary', marginRight: spacer }}>
         @2022 | created by
       </Typography>
       <Link
@@ -35,7 +37,7 @@ const Footer = () => (
       sx={{
         color: 'text.secondary',
         display: 'none',
-        marginRight: 0.6,
+        marginRight: spacer,
         '@media (min-width: 768px)': {
           display: 'block',
         },
@@ -44,8 +46,8 @@ const Footer = () => (
       |
     </Typography>
     <Stack direction="row">
-      <Typography variant="body1" sx={{ color: 'text.secondary', marginRight: 1 }}>
-        statistics from{' '}
+      <Typography variant="body1" sx={{ color: 'text.secondary', marginRight: spacer }}>
+        github stats from
       </Typography>
       <Link
         url="https://octoverse.github.com/#future"
