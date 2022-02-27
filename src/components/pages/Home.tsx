@@ -10,7 +10,7 @@ import Footer from '../molecules/Footer';
 import Toast from '../molecules/Toast';
 import InteractiveGlobe from '../organisms/InteractiveGlobe';
 import useWindowSize from '../../hooks/useWindowSize';
-import { getErrorMessage, debounce } from '../../utils';
+import { debounce } from '../../utils';
 import { BASE_URL, handleErrors } from '../../utils/request';
 import { UserData, UsersData } from '../../utils/types';
 
@@ -148,7 +148,7 @@ const HomePage = ({ onFetchUser }: Props) => {
       })
       .catch((error) => {
         setAreSuggestionsShown(false);
-        setErrorMessage(getErrorMessage(error));
+        setErrorMessage(error.message);
       })
       .finally(() => {
         setIsLoadingUsers(false);
@@ -179,7 +179,7 @@ const HomePage = ({ onFetchUser }: Props) => {
       })
       .catch((error) => {
         setIsErrorToastOpen(true);
-        setErrorMessage(getErrorMessage(error));
+        setErrorMessage(error.message);
       })
       .finally(() => {
         setIsLoadingUser(false);

@@ -1,10 +1,9 @@
-import { useState, useEffect, useMemo } from 'react';
+import { useState, useEffect, useMemo, useRef } from 'react';
 import { styled } from '@mui/material/styles';
 import Typography from '@mui/material/Typography';
 import CircularProgress from '@mui/material/CircularProgress';
 import Card from '../molecules/Card';
-import useWindowScroll from '../../hooks/useWindowScroll';
-import { getErrorMessage } from '../../utils';
+import useIntersectionObserver from '../../hooks/useIntersectionObserver';
 import { BASE_URL, handleErrors } from '../../utils/request';
 import { SectionType, Items } from '../../utils/types';
 
@@ -45,9 +44,12 @@ const UserSection = ({ userName, sectionType, totalItems, onRequestError }: Prop
   const [items, setItems] = useState<Items>([]);
   const [currentItemPage, setCurrentItemPage] = useState(1);
 
+  const loaderRef = useRef<HTMLDivElement | null>(null);
+  const loaderEntry = useIntersectionObserver(loaderRef, {});
+  const isLoaderVisible = !!loaderEntry?.isIntersecting;
+
   const totalItemPages = Math.ceil(totalItems / ITEMS_PER_PAGE);
   const isFullyLoaded = currentItemPage === totalItemPages;
-  const scrollRatio = useWindowScroll();
 
   // eslint-disable-next-line react-hooks/exhaustive-deps
   const abortController = useMemo(() => new AbortController(), []);
@@ -66,7 +68,7 @@ const UserSection = ({ userName, sectionType, totalItems, onRequestError }: Prop
         setItems((prevItems: Items) => [...prevItems, ...fetchedItems]);
       })
       .catch((error) => {
-        onRequestError(getErrorMessage(error));
+        onRequestError(error.message);
       })
       .finally(() => {
         setIsLoading(false);
@@ -75,11 +77,11 @@ const UserSection = ({ userName, sectionType, totalItems, onRequestError }: Prop
   }, [currentItemPage]);
 
   useEffect(() => {
-    if (scrollRatio > 0.5 && !isFullyLoaded) {
+    if (isLoaderVisible && !isFullyLoaded) {
       setCurrentItemPage((prevCurrentItemPage) => prevCurrentItemPage + 1);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [scrollRatio, totalItemPages]);
+  }, [isLoaderVisible, totalItemPages]);
 
   return (
     <>
@@ -96,7 +98,7 @@ const UserSection = ({ userName, sectionType, totalItems, onRequestError }: Prop
         ))}
       </Main>
       {!isFullyLoaded && (
-        <LoaderWrapper>
+        <LoaderWrapper ref={loaderRef}>
           {isLoading && <CircularProgress className="loaderIcon" size={30} thickness={5} />}
         </LoaderWrapper>
       )}

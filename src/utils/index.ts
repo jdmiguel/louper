@@ -1,17 +1,15 @@
-import { ResponseError } from './types';
-
 enum ErrorMessage {
   MAX = 'You have excedeed the maximum allowed request. Please, wait for a while',
   NO_USER = 'Please, choose an available user',
   GENERIC = 'Sorry! there was an error on the server side.',
 }
 
-export const getErrorMessage = (error: ResponseError) => {
-  if (error.status === 403) {
+export const getErrorMessage = (errorStatus: number): string => {
+  if (errorStatus === 403) {
     return ErrorMessage.MAX;
   }
 
-  if (error.status === 404) {
+  if (errorStatus === 404) {
     return ErrorMessage.NO_USER;
   }
 
