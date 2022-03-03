@@ -1,15 +1,15 @@
 import { useRef } from 'react';
-// import { ThreeEvent } from 'react-three-fiber';
+import { ThreeEvent } from 'react-three-fiber';
 import { Mesh } from 'three';
 import { colors } from '../../utils/colors';
 import { OverlayBoxData } from '../molecules/GlobeOverlayBox';
 
-/*
-interface IPointerEvent extends ThreeEvent<PointerEvent> {
-  offsetX: number;
-  offsetY: number;
+declare module '@react-three/fiber' {
+  interface ThreeEvent {
+    offsetX: number;
+    offsetY: number;
+  }
 }
-*/
 
 const getSpherePositions = (lat: number, lng: number) => {
   const phi = lat * (Math.PI / 180);
@@ -44,14 +44,15 @@ const GlobeMarkers = ({ data, onOver, onOut }: Props) => {
     <mesh
       ref={markerRef}
       position={[x, y, z]}
-      onPointerOver={(event: any) =>
+      onPointerOver={(event: ThreeEvent<PointerEvent>) => {
+        console.log({ event });
         onOver({
           country,
           x: Math.round(event.offsetX),
           y: Math.round(event.offsetY),
           totalUsers,
-        })
-      }
+        });
+      }}
       onPointerOut={onOut}
     >
       <sphereBufferGeometry attach="geometry" args={[0.02, 10, 10]} />

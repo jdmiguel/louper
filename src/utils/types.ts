@@ -1,3 +1,5 @@
+import { Keyframes } from '@emotion/serialize';
+
 export type SectionType = 'repos' | 'following' | 'followers';
 
 export type Repo = {
@@ -42,4 +44,8 @@ export type UserData = {
 
 export type ResponseError = Error & {
   status: number;
+};
+
+export type Animation = {
+  greet: Keyframes;
 };

@@ -1,19 +1,14 @@
 import { keyframes } from '@emotion/react';
 import { createTheme } from '@mui/material/styles';
 import { colors } from './colors';
-
-type Animation = {
-  greet: any;
-};
+import { Animation } from './types';
 
 declare module '@mui/material/styles' {
   interface Theme {
     animation: Animation;
-    overrides: any;
   }
   interface ThemeOptions {
     animation: Animation;
-    overrides: any;
   }
   interface Palette {
     neutral: Palette['primary'];
@@ -33,25 +28,6 @@ export const theme = createTheme({
       40%,80% { transform: rotate(10deg) }
     `,
   },
-  overrides: [
-    {
-      MuiCssBaseline: {
-        '@global': {
-          html: {
-            overflowX: 'hidden',
-            background: colors.darkBlue,
-          },
-          body: {
-            margin: 0,
-            padding: 0,
-          },
-          button: {
-            boxShadow: 'initial !important',
-          },
-        },
-      },
-    },
-  ],
   typography: {
     fontFamily: ['Comfortaa', 'Arial', 'sans-serif'].join(','),
     htmlFontSize: 12,
