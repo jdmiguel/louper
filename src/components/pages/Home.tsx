@@ -5,7 +5,7 @@ import Corner from '../atoms/Corner';
 import Logo from '../atoms/Logo';
 import Watermark from '../atoms/Watermark';
 import Finder from '../molecules/Finder';
-import Suggestions from '../molecules/Suggestions';
+import Suggestions from '../organisms/Suggestions';
 import Footer from '../molecules/Footer';
 import Toast from '../molecules/Toast';
 import InteractiveGlobe from '../organisms/InteractiveGlobe';

@@ -2,7 +2,7 @@ import { styled } from '@mui/material/styles';
 import Pagination from '@mui/material/Pagination';
 import PaginationItem from '@mui/material/PaginationItem';
 import Stack from '@mui/material/Stack';
-import Card from '../molecules/Card';
+import Suggestion from '../molecules/Suggestion';
 import { User } from '../../utils/types';
 
 const SuggestionsWrapper = styled('div')({
@@ -62,7 +62,7 @@ const Suggestions = ({ items, totalItems, onPaginate, onSelectUser }: Props) => 
   <Stack sx={{ alignItems: 'center' }}>
     <SuggestionsWrapper>
       {items.map((user) => (
-        <Card key={user.id} data={user} size="SMALL" onClick={onSelectUser} />
+        <Suggestion key={user.id} data={user} onClick={onSelectUser} />
       ))}
     </SuggestionsWrapper>
     {totalItems >= MIN_ITEMS_TO_PAGINATE && (

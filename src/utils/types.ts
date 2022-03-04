@@ -19,8 +19,6 @@ export type User = {
 
 export type Items = Repo[] & User[];
 
-export type CardSize = 'SMALL' | 'NORMAL';
-
 export type UsersData = {
   total_count: number;
   items: User[] | [];

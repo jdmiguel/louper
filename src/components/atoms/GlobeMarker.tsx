@@ -45,7 +45,6 @@ const GlobeMarkers = ({ data, onOver, onOut }: Props) => {
       ref={markerRef}
       position={[x, y, z]}
       onPointerOver={(event: ThreeEvent<PointerEvent>) => {
-        console.log({ event });
         onOver({
           country,
           x: Math.round(event.offsetX),

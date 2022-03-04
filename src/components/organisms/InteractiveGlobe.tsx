@@ -114,6 +114,11 @@ const InteractiveGlobe = () => {
     from: { scale: 0.5 },
   });
 
+  const onMarkerOut = () => {
+    setIsMarkerHovered(false);
+    setIsAutoRotationAllowed(true);
+  };
+
   return (
     <Root
       sx={{
@@ -121,10 +126,7 @@ const InteractiveGlobe = () => {
       }}
     >
       <FallbackGlobe />
-      <Canvas
-        camera={{ position: [6, 1, 8], fov: 13, far: 10000 }}
-        onPointerMissed={() => console.log('onPointerMissed')}
-      >
+      <Canvas camera={{ position: [6, 1, 8], fov: 13, far: 10000 }} onPointerMissed={onMarkerOut}>
         <Suspense fallback={null}>
           <Globe />
           <animated.group scale={scale}>
@@ -142,10 +144,7 @@ const InteractiveGlobe = () => {
                   setIsAutoRotationAllowed(false);
                   setOverlayBoxData(currentOverlayBoxData);
                 }}
-                onOut={() => {
-                  setIsMarkerHovered(false);
-                  setIsAutoRotationAllowed(true);
-                }}
+                onOut={onMarkerOut}
               />
             ))}
           </animated.group>

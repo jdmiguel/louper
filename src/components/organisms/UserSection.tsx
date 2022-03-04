@@ -2,7 +2,7 @@ import { useState, useEffect, useMemo, useRef } from 'react';
 import { styled } from '@mui/material/styles';
 import Typography from '@mui/material/Typography';
 import CircularProgress from '@mui/material/CircularProgress';
-import Card from '../molecules/Card';
+import UserCard from '../molecules/UserCard';
 import useIntersectionObserver from '../../hooks/useIntersectionObserver';
 import { BASE_URL, handleErrors } from '../../utils/request';
 import { SectionType, Items } from '../../utils/types';
@@ -99,7 +99,7 @@ const UserSection = ({ userName, sectionType, totalItems, onRequestError }: Prop
           </EmptyMsg>
         )}
         {items.map((item) => (
-          <Card key={item.id} theme={sectionType} data={item} />
+          <UserCard key={item.id} theme={sectionType} data={item} />
         ))}
       </Main>
       {!isFullyLoaded && (

@@ -2,11 +2,10 @@ import { ReactElement } from 'react';
 import { styled } from '@mui/material/styles';
 import Stack from '@mui/material/Stack';
 import Typography from '@mui/material/Typography';
-import Button from '@mui/material/Button';
 import Avatar from '@mui/material/Avatar';
 import TextTag from '../atoms/TextTag';
 import Link from '../atoms/Link';
-import { Repo, User, CardSize, SectionType } from '../../utils/types';
+import { Repo, User, SectionType } from '../../utils/types';
 
 const Root = styled('div')(({ theme }) => ({
   border: `1px solid ${theme.palette.secondary.light}`,
@@ -22,25 +21,12 @@ const Title = styled('div')(({ theme }) => ({
   '& path': { fill: theme.palette.secondary.main },
 }));
 
-const StyledButton = styled(Button)(({ theme }) => ({
-  height: 44,
-  minWidth: 160,
-  '&:hover': {
-    backgroundColor: theme.palette.primary.light,
-  },
-  '@media (min-width: 768px)': {
-    minWidth: 180,
-  },
-}));
-
-const AvatarWrapper = styled('div')<{
-  size?: CardSize;
-}>(({ size }) => ({
-  height: size === 'SMALL' ? 32 : 80,
-  marginRight: size === 'SMALL' ? 10 : 20,
+const AvatarWrapper = styled('div')({
+  height: 80,
+  marginRight: 20,
   position: 'relative',
-  width: size === 'SMALL' ? 32 : 80,
-}));
+  width: 80,
+});
 
 const Topic = styled('div')(({ theme }) => ({
   backgroundColor: theme.palette.secondary.main,
@@ -141,45 +127,14 @@ const displayUserContent = (user: User, theme: SectionType): ReactElement => {
 type Props = {
   theme?: SectionType;
   data: Repo | User;
-  size?: CardSize;
-  onClick?: (userName: string) => void;
 };
 
-const Card = ({ theme = 'following', data, size = 'NORMAL', onClick }: Props) => {
+const UserCard = ({ theme = 'following', data }: Props) => {
   const isRepoTheme = theme === 'repos';
   const repo = data as Repo;
   const user = data as User;
 
-  if (size === 'SMALL') {
-    return (
-      <StyledButton variant="contained" onClick={() => onClick?.(user.login)}>
-        <Stack direction="row" sx={{ alignItems: 'center', width: '100%' }}>
-          <AvatarWrapper size={size}>
-            <Avatar variant="circular" sx={{ height: 32, width: 32, position: 'absolute' }} />
-            <Avatar
-              alt="user following avatar"
-              variant="circular"
-              src={user.avatar_url}
-              sx={{ height: 32, width: 32, position: 'absolute' }}
-            />
-          </AvatarWrapper>
-          <Typography
-            variant="h5"
-            sx={{
-              maxWidth: 100,
-              overflow: 'hidden',
-              textOverflow: 'ellipsis',
-              whiteSpace: 'nowrap',
-            }}
-          >
-            {user.login}
-          </Typography>
-        </Stack>
-      </StyledButton>
-    );
-  }
-
   return <Root>{isRepoTheme ? displayRepoContent(repo) : displayUserContent(user, theme)}</Root>;
 };
 
-export default Card;
+export default UserCard;
