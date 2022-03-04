@@ -6,14 +6,18 @@ import { OverlayBoxData } from '../molecules/GlobeOverlayBox';
 
 declare module '@react-three/fiber' {
   interface ThreeEvent {
+    distance: number;
     offsetX: number;
     offsetY: number;
   }
 }
 
+const DEFAULT_SPHERE_DEGREES = 180;
+const ALLOWED_POINT_DISTANCE = 10.18;
+
 const getSpherePositions = (lat: number, lng: number) => {
-  const phi = lat * (Math.PI / 180);
-  const theta = (lng + 180) * (Math.PI / 180);
+  const phi = lat * (Math.PI / DEFAULT_SPHERE_DEGREES);
+  const theta = (lng + DEFAULT_SPHERE_DEGREES) * (Math.PI / DEFAULT_SPHERE_DEGREES);
 
   return {
     x: -(Math.cos(phi) * Math.cos(theta)),
@@ -45,6 +49,9 @@ const GlobeMarkers = ({ data, onOver, onOut }: Props) => {
       ref={markerRef}
       position={[x, y, z]}
       onPointerOver={(event: ThreeEvent<PointerEvent>) => {
+        if (event.distance > ALLOWED_POINT_DISTANCE) {
+          return;
+        }
         onOver({
           country,
           x: Math.round(event.offsetX),
