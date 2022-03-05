@@ -189,21 +189,6 @@ const HomePage = ({ onFetchUser }: Props) => {
   // eslint-disable-next-line react-hooks/exhaustive-deps
   const debouncedFetchUsers = useCallback(debounce(fetchUsers, 500), [suggestionsPerPage]);
 
-  const onChangeSearchQuery = (currentSearchQuery: string) => {
-    if (currentSearchQuery === searchQuery) {
-      return;
-    }
-
-    setSearchQuery(currentSearchQuery);
-    if (currentSearchQuery.length > MIN_CHARS_TO_SEARCH_USERS) {
-      debouncedFetchUsers(currentSearchQuery);
-    }
-    if (currentSearchQuery.length <= MIN_CHARS_TO_SEARCH_USERS) {
-      setAreSuggestionsShown(false);
-      setUsersData(DEFAULT_USERS_DATA);
-    }
-  };
-
   return (
     <Root>
       <CornerWrapper>
@@ -227,7 +212,20 @@ const HomePage = ({ onFetchUser }: Props) => {
             isLoadingUser={isLoadingUser}
             isLoadingUsers={isLoadingUsers}
             searchQuery={searchQuery}
-            onChangeSearchQuery={onChangeSearchQuery}
+            onChangeSearchQuery={(currentSearchQuery: string) => {
+              if (currentSearchQuery === searchQuery) {
+                return;
+              }
+
+              setSearchQuery(currentSearchQuery);
+              if (currentSearchQuery.length > MIN_CHARS_TO_SEARCH_USERS) {
+                debouncedFetchUsers(currentSearchQuery);
+              }
+              if (currentSearchQuery.length <= MIN_CHARS_TO_SEARCH_USERS) {
+                setAreSuggestionsShown(false);
+                setUsersData(DEFAULT_USERS_DATA);
+              }
+            }}
             onFetchUser={fetchUser}
           />
           <SuggestionsWrapper>
