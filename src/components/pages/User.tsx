@@ -9,7 +9,9 @@ import UserProfileMobile from '../organisms/UserProfileMobile';
 import UserSection from '../organisms/UserSection';
 import { UserData } from '../../utils/types';
 
-const TOTAL_ITEMS_ALLOWED = 100;
+enum DefaultValues {
+  totalItemsAllowed = 100,
+}
 
 const Root = styled('div')({
   minHeight: '100vh',
@@ -47,11 +49,17 @@ const UserPage = ({ userData, onBackFinder }: Props) => {
   const totalItems = useMemo(
     () => ({
       repos:
-        userData.public_repos <= TOTAL_ITEMS_ALLOWED ? userData.public_repos : TOTAL_ITEMS_ALLOWED,
+        userData.public_repos <= DefaultValues.totalItemsAllowed
+          ? userData.public_repos
+          : DefaultValues.totalItemsAllowed,
       following:
-        userData.following <= TOTAL_ITEMS_ALLOWED ? userData.following : TOTAL_ITEMS_ALLOWED,
+        userData.following <= DefaultValues.totalItemsAllowed
+          ? userData.following
+          : DefaultValues.totalItemsAllowed,
       followers:
-        userData.followers <= TOTAL_ITEMS_ALLOWED ? userData.followers : TOTAL_ITEMS_ALLOWED,
+        userData.followers <= DefaultValues.totalItemsAllowed
+          ? userData.followers
+          : DefaultValues.totalItemsAllowed,
     }),
     [userData],
   );

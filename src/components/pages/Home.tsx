@@ -14,7 +14,9 @@ import { debounce } from '../../utils';
 import { BASE_URL, handleErrors } from '../../utils/request';
 import { UserData, UsersData } from '../../utils/types';
 
-const MIN_CHARS_TO_SEARCH_USERS = 2;
+enum DefaultValues {
+  MinCharsToSearchUsers = 2,
+}
 
 const Root = styled('div')({
   display: 'flex',
@@ -218,10 +220,10 @@ const HomePage = ({ onFetchUser }: Props) => {
               }
 
               setSearchQuery(currentSearchQuery);
-              if (currentSearchQuery.length > MIN_CHARS_TO_SEARCH_USERS) {
+              if (currentSearchQuery.length > DefaultValues.MinCharsToSearchUsers) {
                 debouncedFetchUsers(currentSearchQuery);
               }
-              if (currentSearchQuery.length <= MIN_CHARS_TO_SEARCH_USERS) {
+              if (currentSearchQuery.length <= DefaultValues.MinCharsToSearchUsers) {
                 setAreSuggestionsShown(false);
                 setUsersData(DEFAULT_USERS_DATA);
               }

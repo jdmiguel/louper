@@ -7,8 +7,6 @@ import useIntersectionObserver from '../../hooks/useIntersectionObserver';
 import { BASE_URL, handleErrors } from '../../utils/request';
 import { SectionType, Items } from '../../utils/types';
 
-const ITEMS_PER_PAGE = 10;
-
 const Main = styled('main')({
   display: 'grid',
   gridGap: 20,
@@ -49,7 +47,8 @@ const UserSection = ({ userName, sectionType, totalItems, onRequestError }: Prop
   const loaderEntry = useIntersectionObserver(loaderRef, {});
   const isLoaderVisible = !!loaderEntry?.isIntersecting;
 
-  const totalItemPages = Math.ceil(totalItems / ITEMS_PER_PAGE);
+  const itemsPerPage = sectionType === 'repos' ? 12 : 20;
+  const totalItemPages = Math.ceil(totalItems / itemsPerPage);
 
   // eslint-disable-next-line react-hooks/exhaustive-deps
   const abortController = useMemo(() => new AbortController(), []);
@@ -62,7 +61,7 @@ const UserSection = ({ userName, sectionType, totalItems, onRequestError }: Prop
     setIsLoading(true);
 
     fetch(
-      `${BASE_URL}/users/${userName}/${sectionType}?page=${currentItemPage}&per_page=${ITEMS_PER_PAGE}`,
+      `${BASE_URL}/users/${userName}/${sectionType}?page=${currentItemPage}&per_page=${itemsPerPage}`,
       {
         signal: abortController.signal,
       },

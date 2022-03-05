@@ -36,6 +36,8 @@ const StyledIconButton = styled(IconButton)(({ theme }) => ({
   borderTopLeftRadius: 0,
   borderTopRightRadius: 4,
   color: theme.palette.text.primary,
+  minHeight: 40,
+  minWidth: 40,
   padding: 7,
   '&:hover': {
     backgroundColor: theme.palette.primary.light,

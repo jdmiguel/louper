@@ -5,6 +5,11 @@ import Stack from '@mui/material/Stack';
 import Suggestion from '../molecules/Suggestion';
 import { User } from '../../utils/types';
 
+enum DefaultValues {
+  MinItemsToPaginate = 13,
+  MaxPagesAllowed = 50,
+}
+
 const SuggestionsWrapper = styled('div')({
   display: 'grid',
   gap: 14,
@@ -16,9 +21,6 @@ const SuggestionsWrapper = styled('div')({
     height: 260,
   },
 });
-
-const MIN_ITEMS_TO_PAGINATE = 13;
-const MAX_PAGES_ALLOWED = 50;
 
 const StyledPaginationItem = styled(PaginationItem)(({ theme }) => ({
   '&.MuiPaginationItem-root': {
@@ -65,9 +67,11 @@ const Suggestions = ({ items, totalItems, onPaginate, onSelectUser }: Props) => 
         <Suggestion key={user.id} data={user} onClick={onSelectUser} />
       ))}
     </SuggestionsWrapper>
-    {totalItems >= MIN_ITEMS_TO_PAGINATE && (
+    {totalItems >= DefaultValues.MinItemsToPaginate && (
       <Pagination
-        count={totalItems <= MAX_PAGES_ALLOWED ? totalItems : MAX_PAGES_ALLOWED}
+        count={
+          totalItems <= DefaultValues.MaxPagesAllowed ? totalItems : DefaultValues.MaxPagesAllowed
+        }
         renderItem={(item) => <StyledPaginationItem {...item} />}
         onChange={onPaginate}
         hidePrevButton
