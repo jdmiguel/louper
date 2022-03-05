@@ -59,13 +59,6 @@ const Finder = ({
 }: Props) => {
   const [isValidating, setIsValidating] = useState(false);
 
-  const onKeyUp = ({ keyCode }: { keyCode: number }) => {
-    if (!searchQuery || keyCode !== 13) {
-      return;
-    }
-    onFetchUser(searchQuery);
-  };
-
   const isNotValid = isValidating && !searchQuery;
 
   return (
@@ -89,7 +82,12 @@ const Finder = ({
           }
           onChangeSearchQuery(currentSearchQuery);
         }}
-        onKeyUp={onKeyUp}
+        onKeyUp={({ key }: { key: string }) => {
+          if (!searchQuery || key !== 'Enter') {
+            return;
+          }
+          onFetchUser(searchQuery);
+        }}
         size="small"
         variant="outlined"
         error={isNotValid}
