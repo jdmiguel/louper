@@ -25,11 +25,11 @@ const AvatarWrapper = styled('div')({
 
 type Props = {
   data: User;
-  onClick?: (userName: string) => void;
+  onClick: (userName: string) => void;
 };
 
 const Suggestion = ({ data, onClick }: Props) => (
-  <StyledButton variant="contained" onClick={() => onClick?.(data.login)}>
+  <StyledButton variant="contained" onClick={() => onClick(data.login)}>
     <Stack direction="row" sx={{ alignItems: 'center', width: '100%' }}>
       <AvatarWrapper>
         <Avatar variant="circular" sx={{ height: 32, width: 32, position: 'absolute' }} />

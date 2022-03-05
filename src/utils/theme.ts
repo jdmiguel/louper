@@ -1,7 +1,11 @@
 import { keyframes } from '@emotion/react';
+import { Keyframes } from '@emotion/serialize';
 import { createTheme } from '@mui/material/styles';
 import { colors } from './colors';
-import { Animation } from './types';
+
+type Animation = {
+  greet: Keyframes;
+};
 
 declare module '@mui/material/styles' {
   interface Theme {

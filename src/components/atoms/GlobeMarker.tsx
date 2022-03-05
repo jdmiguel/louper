@@ -2,7 +2,7 @@ import { useRef } from 'react';
 import { ThreeEvent } from 'react-three-fiber';
 import { Mesh } from 'three';
 import { colors } from '../../utils/colors';
-import { OverlayBoxData } from '../molecules/GlobeOverlayBox';
+import { OverlayBoxData } from '../../utils/types';
 
 declare module '@react-three/fiber' {
   interface ThreeEvent {

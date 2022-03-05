@@ -1,5 +1,3 @@
-import { Keyframes } from '@emotion/serialize';
-
 export type SectionType = 'repos' | 'following' | 'followers';
 
 export type Repo = {
@@ -15,13 +13,6 @@ export type User = {
   login: string;
   html_url: string;
   avatar_url: string;
-};
-
-export type Items = Repo[] & User[];
-
-export type UsersData = {
-  total_count: number;
-  items: User[] | [];
 };
 
 export type UserData = {
@@ -40,10 +31,9 @@ export type UserData = {
   following: number;
 };
 
-export type ResponseError = Error & {
-  status: number;
-};
-
-export type Animation = {
-  greet: Keyframes;
+export type OverlayBoxData = {
+  country: string;
+  x: number;
+  y: number;
+  totalUsers: string;
 };

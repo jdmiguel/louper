@@ -9,10 +9,6 @@ import UserProfileMobile from '../organisms/UserProfileMobile';
 import UserSection from '../organisms/UserSection';
 import { UserData } from '../../utils/types';
 
-enum DefaultValues {
-  totalItemsAllowed = 100,
-}
-
 const Root = styled('div')({
   minHeight: '100vh',
   padding: '0 20px',
@@ -35,6 +31,10 @@ const UserProfileWrapper = styled('aside')({
     display: 'block',
   },
 });
+
+enum DefaultValues {
+  totalItemsAllowed = 100,
+}
 
 type Props = {
   userData: UserData;

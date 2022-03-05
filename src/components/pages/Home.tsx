@@ -12,11 +12,7 @@ import InteractiveGlobe from '../organisms/InteractiveGlobe';
 import useWindowSize from '../../hooks/useWindowSize';
 import { debounce } from '../../utils';
 import { BASE_URL, handleErrors } from '../../utils/request';
-import { UserData, UsersData } from '../../utils/types';
-
-enum DefaultValues {
-  MinCharsToSearchUsers = 2,
-}
+import { User, UserData } from '../../utils/types';
 
 const Root = styled('div')({
   display: 'flex',
@@ -99,6 +95,15 @@ const WatermarkWrapper = styled('div')({
 const DEFAULT_USERS_DATA = {
   total_count: 0,
   items: [],
+};
+
+enum DefaultValues {
+  MinCharsToSearchUsers = 2,
+}
+
+type UsersData = {
+  total_count: number;
+  items: User[] | [];
 };
 
 type Props = {

@@ -5,11 +5,6 @@ import Stack from '@mui/material/Stack';
 import Suggestion from '../molecules/Suggestion';
 import { User } from '../../utils/types';
 
-enum DefaultValues {
-  MinItemsToPaginate = 13,
-  MaxPagesAllowed = 50,
-}
-
 const SuggestionsWrapper = styled('div')({
   display: 'grid',
   gap: 14,
@@ -52,6 +47,11 @@ const StyledPaginationItem = styled(PaginationItem)(({ theme }) => ({
     },
   },
 }));
+
+enum DefaultValues {
+  MinItemsToPaginate = 13,
+  MaxPagesAllowed = 50,
+}
 
 type Props = {
   items: User[];

@@ -5,7 +5,7 @@ import CircularProgress from '@mui/material/CircularProgress';
 import UserCard from '../molecules/UserCard';
 import useIntersectionObserver from '../../hooks/useIntersectionObserver';
 import { BASE_URL, handleErrors } from '../../utils/request';
-import { SectionType, Items } from '../../utils/types';
+import { SectionType, Repo, User } from '../../utils/types';
 
 const Main = styled('main')({
   display: 'grid',
@@ -29,6 +29,8 @@ const EmptyMsg = styled('div')({
   display: 'flex',
   marginTop: 8,
 });
+
+type Items = Repo[] & User[];
 
 type Props = {
   userName: string;

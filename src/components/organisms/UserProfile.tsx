@@ -5,13 +5,6 @@ import TextTag from '../atoms/TextTag';
 import Link from '../atoms/Link';
 import { UserData } from '../../utils/types';
 
-const buildCreationDate = (date: string) => {
-  const newDate = new Date(date);
-  const formattedDate = newDate.toLocaleString();
-
-  return formattedDate.slice(0, formattedDate.indexOf(','));
-};
-
 const Root = styled('div')({
   display: 'flex',
   flexDirection: 'column',
@@ -58,6 +51,13 @@ const Actions = styled('div')({
 const Action = styled('div')({
   marginBottom: 5,
 });
+
+const buildCreationDate = (date: string) => {
+  const newDate = new Date(date);
+  const formattedDate = newDate.toLocaleString();
+
+  return formattedDate.slice(0, formattedDate.indexOf(','));
+};
 
 type Props = {
   userData: UserData;

@@ -1,6 +1,7 @@
 import { styled } from '@mui/material/styles';
 import Typography from '@mui/material/Typography';
 import Icon from '@mui/material/Icon';
+import { OverlayBoxData } from '../../utils/types';
 
 enum Offset {
   Left = 54,
@@ -38,13 +39,6 @@ const OverlayBoxUsersIcon = styled(Icon)(({ theme }) => ({
   fontSize: 18,
   marginRight: 7,
 }));
-
-export type OverlayBoxData = {
-  country: string;
-  x: number;
-  y: number;
-  totalUsers: string;
-};
 
 type Props = {
   data: OverlayBoxData;

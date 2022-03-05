@@ -3,12 +3,6 @@ import { styled } from '@mui/material/styles';
 import MuiAlert, { AlertColor } from '@mui/material/Alert';
 import Snackbar from '@mui/material/Snackbar';
 
-interface AlertProps {
-  children?: ReactNode;
-  severity: AlertColor;
-  onClose: () => void;
-}
-
 const StyledAlert = styled(MuiAlert)({
   '& .MuiAlert-icon': {
     padding: '9px 0',
@@ -23,6 +17,12 @@ const StyledAlert = styled(MuiAlert)({
     },
   },
 });
+
+type AlertProps = {
+  children?: ReactNode;
+  severity: AlertColor;
+  onClose: () => void;
+};
 
 const Alert = forwardRef<HTMLDivElement, AlertProps>((props, ref) => (
   <StyledAlert elevation={4} ref={ref} variant="filled" {...props} />
