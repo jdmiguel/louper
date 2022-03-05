@@ -8,10 +8,10 @@ const StyledLink = styled(MuiLink)(({ theme }) => ({
   display: 'flex',
   textDecoration: 'none',
   transition: 'color ease-out 250ms',
-  '& span': { transition: 'color ease-out 250ms' },
+  span: { transition: 'color ease-out 250ms' },
   '&:hover': {
     color: theme.palette.primary.light,
-    '& span': { color: theme.palette.primary.light },
+    span: { color: theme.palette.primary.light },
   },
 }));
 

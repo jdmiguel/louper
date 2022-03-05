@@ -26,13 +26,6 @@ const atmosphereFragmentShader = [
   '}',
 ].join('\n');
 
-const DEFAULT_OVERLAY_BOX_DATA = {
-  country: '',
-  x: 0,
-  y: 0,
-  totalUsers: '',
-};
-
 const Root = styled('div')({
   height: 320,
   position: 'relative',
@@ -105,7 +98,12 @@ const Globe = () => {
 const InteractiveGlobe = () => {
   const [isAutoRotationAllowed, setIsAutoRotationAllowed] = useState(true);
   const [isMarkerHovered, setIsMarkerHovered] = useState(false);
-  const [overlayBoxData, setOverlayBoxData] = useState(DEFAULT_OVERLAY_BOX_DATA);
+  const [overlayBoxData, setOverlayBoxData] = useState({
+    country: '',
+    x: 0,
+    y: 0,
+    totalUsers: '',
+  });
 
   const { scale } = useSpring({
     to: {

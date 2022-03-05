@@ -45,7 +45,7 @@ const Action = styled('div')(({ theme }) => ({
 }));
 
 const displayRepoContent = (repo: Repo): ReactElement => (
-  <Stack justifyContent="space-between" sx={{ height: '100%' }}>
+  <Stack justifyContent="space-between" sx={{ height: '100%' }} data-testid="repoContent">
     <Stack>
       <Title>
         <TextTag content={repo.name} withIcon iconType={'folder'} />
@@ -98,7 +98,7 @@ const displayUserContent = (user: User, theme: SectionType): ReactElement => {
   const iconType = theme === 'following' ? 'visibility' : 'favorite';
 
   return (
-    <Stack direction="row">
+    <Stack direction="row" data-testid="userContent">
       <AvatarWrapper>
         <Avatar variant="rounded" sx={{ height: 80, width: 80, position: 'absolute' }} />
         <Avatar
@@ -125,11 +125,11 @@ const displayUserContent = (user: User, theme: SectionType): ReactElement => {
 };
 
 type Props = {
-  theme?: SectionType;
+  theme: SectionType;
   data: Repo | User;
 };
 
-const UserCard = ({ theme = 'following', data }: Props) => {
+const UserCard = ({ theme, data }: Props) => {
   const isRepoTheme = theme === 'repos';
   const repo = data as Repo;
   const user = data as User;

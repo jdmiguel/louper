@@ -1,19 +1,19 @@
 enum ErrorMessage {
-  MAX = 'You have excedeed the maximum allowed request. Please, wait for a while',
-  NO_USER = 'Please, choose an available user',
-  GENERIC = 'Sorry! there was an error on the server side.',
+  Max = 'You have excedeed the maximum allowed request. Please, wait for a while',
+  NoUser = 'Please, choose an available user',
+  Generic = 'Sorry! there was an error on the server side.',
 }
 
 export const getErrorMessage = (errorStatus: number): string => {
   if (errorStatus === 403) {
-    return ErrorMessage.MAX;
+    return ErrorMessage.Max;
   }
 
   if (errorStatus === 404) {
-    return ErrorMessage.NO_USER;
+    return ErrorMessage.NoUser;
   }
 
-  return ErrorMessage.GENERIC;
+  return ErrorMessage.Generic;
 };
 
 export const debounce = (fn: any, delay: number) => {

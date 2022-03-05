@@ -2,6 +2,11 @@ import { styled } from '@mui/material/styles';
 import Typography from '@mui/material/Typography';
 import Icon from '@mui/material/Icon';
 
+enum Offset {
+  Left = 54,
+  Top = 16,
+}
+
 const Root = styled('div')(({ theme }) => ({
   backdropFilter: 'blur(6px)',
   backgroundColor: theme.palette.overlay.main,
@@ -51,8 +56,8 @@ const GlobeOverlayBox = ({ data }: Props) => {
   return (
     <Root
       sx={{
-        left: `${x - 54}px`,
-        top: `${y + 16}px`,
+        left: `${x - Offset.Left}px`,
+        top: `${y + Offset.Top}px`,
       }}
     >
       <OverlayBoxCountry>

@@ -12,12 +12,14 @@ declare module '@react-three/fiber' {
   }
 }
 
-const DEFAULT_SPHERE_DEGREES = 180;
-const ALLOWED_POINT_DISTANCE = 10.18;
+enum DefaultValues {
+  SphereDegrees = 180,
+  AllowedPointDistance = 10.18,
+}
 
 const getSpherePositions = (lat: number, lng: number) => {
-  const phi = lat * (Math.PI / DEFAULT_SPHERE_DEGREES);
-  const theta = (lng + DEFAULT_SPHERE_DEGREES) * (Math.PI / DEFAULT_SPHERE_DEGREES);
+  const phi = lat * (Math.PI / DefaultValues.SphereDegrees);
+  const theta = (lng + DefaultValues.SphereDegrees) * (Math.PI / DefaultValues.SphereDegrees);
 
   return {
     x: -(Math.cos(phi) * Math.cos(theta)),
@@ -49,7 +51,7 @@ const GlobeMarkers = ({ data, onOver, onOut }: Props) => {
       ref={markerRef}
       position={[x, y, z]}
       onPointerOver={(event: ThreeEvent<PointerEvent>) => {
-        if (event.distance > ALLOWED_POINT_DISTANCE) {
+        if (event.distance > DefaultValues.AllowedPointDistance) {
           return;
         }
         onOver({

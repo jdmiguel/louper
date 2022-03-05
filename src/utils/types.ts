@@ -5,7 +5,7 @@ export type SectionType = 'repos' | 'following' | 'followers';
 export type Repo = {
   id: number;
   name: string;
-  description: string;
+  description: string | null;
   html_url: string;
   topics: string[];
 };

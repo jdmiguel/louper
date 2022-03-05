@@ -3,13 +3,13 @@ import { styled } from '@mui/material/styles';
 const GithubCornerRoot = styled('a')(({ theme }) => ({
   opacity: 0,
   visibility: 'hidden',
-  '& svg': {
+  svg: {
     fill: theme.palette.primary.main,
     color: theme.palette.background.default,
     transition: 'fill ease-out 250ms',
   },
   '&:hover': {
-    '& svg': {
+    svg: {
       fill: theme.palette.primary.light,
     },
     '& path:nth-of-type(2)': {

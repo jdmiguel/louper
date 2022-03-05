@@ -44,7 +44,7 @@ const StyledTab = styled(Tab)(({ theme }) => ({
     marginBottom: '2px !important',
     transition: 'fill ease-out 250ms',
     width: 22,
-    '& + span': {
+    '+ span': {
       color: theme.palette.primary.main,
       display: 'none',
       fontSize: '1rem',
@@ -58,7 +58,7 @@ const StyledTab = styled(Tab)(({ theme }) => ({
   '&:hover': {
     '& .MuiSvgIcon-root': {
       fill: theme.palette.primary.light,
-      '& + span': { color: theme.palette.primary.light },
+      '+ span': { color: theme.palette.primary.light },
     },
   },
 }));
