@@ -120,6 +120,7 @@ const Finder = ({
             onFetchUser(searchQuery);
           }
         }}
+        role="button"
       >
         {isLoadingUser ? (
           <CircularProgress
