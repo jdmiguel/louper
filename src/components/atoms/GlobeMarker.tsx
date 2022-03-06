@@ -1,5 +1,5 @@
 import { useRef } from 'react';
-import { ThreeEvent } from 'react-three-fiber';
+import { ThreeEvent } from '@react-three/fiber';
 import { Mesh } from 'three';
 import { colors } from '../../utils/colors';
 import { OverlayBoxData } from '../../utils/types';
@@ -41,7 +41,7 @@ type Props = {
   onOut: () => void;
 };
 
-const GlobeMarkers = ({ data, onOver, onOut }: Props) => {
+const GlobeMarker = ({ data, onOver, onOut }: Props) => {
   const { country, lat, lng, totalUsers } = data;
   const markerRef = useRef<Mesh>(null);
   const { x, y, z } = getSpherePositions(lat, lng);
@@ -69,4 +69,4 @@ const GlobeMarkers = ({ data, onOver, onOut }: Props) => {
   );
 };
 
-export default GlobeMarkers;
+export default GlobeMarker;

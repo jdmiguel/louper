@@ -1,6 +1,6 @@
 import { useState, useRef, Suspense } from 'react';
 import { AdditiveBlending, BackSide, Mesh, TextureLoader } from 'three';
-import { Canvas, useLoader } from 'react-three-fiber';
+import { Canvas, useLoader } from '@react-three/fiber';
 import { OrbitControls } from '@react-three/drei';
 import { animated, useSpring } from '@react-spring/three';
 import { styled } from '@mui/material/styles';
