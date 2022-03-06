@@ -15,7 +15,7 @@ describe('<Finder />', () => {
   it('displays a loader within the input while loading users', () => {
     render(<Finder {...props} isLoadingUsers />);
 
-    const inputWrapper = screen.getByPlaceholderText('Type user name...').parentNode;
+    const inputWrapper = screen.getByPlaceholderText('Type user name...').parentElement;
     const circularLoader = inputWrapper.querySelector('.MuiCircularProgress-root');
     expect(circularLoader).toBeVisible();
   });
@@ -44,7 +44,7 @@ describe('<Finder />', () => {
       const searchButton = screen.getByRole('button');
       await userEvent.click(searchButton);
 
-      const inputWrapper = screen.getByPlaceholderText('Type user name...').parentNode;
+      const inputWrapper = screen.getByPlaceholderText('Type user name...').parentElement;
       expect(inputWrapper).toHaveClass('Mui-error');
     });
   });
