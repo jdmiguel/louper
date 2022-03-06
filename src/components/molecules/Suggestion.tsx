@@ -34,7 +34,7 @@ const Suggestion = ({ data, onClick }: Props) => (
       <AvatarWrapper>
         <Avatar variant="circular" sx={{ height: 32, width: 32, position: 'absolute' }} />
         <Avatar
-          alt="user following avatar"
+          alt="user avatar"
           variant="circular"
           src={data.avatar_url}
           sx={{ height: 32, width: 32, position: 'absolute' }}

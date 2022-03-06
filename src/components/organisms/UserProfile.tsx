@@ -117,13 +117,13 @@ const Profile = ({
       )}
       <Info>
         <TextTagWrapper>
-          <TextTag content={`${public_repos}`} withIcon iconType="folder" />
+          <TextTag content={`${public_repos}`} withUppercase withIcon iconType="folder" />
         </TextTagWrapper>
         <TextTagWrapper>
-          <TextTag content={`${following}`} withIcon iconType="visibility" />
+          <TextTag content={`${following}`} withUppercase withIcon iconType="visibility" />
         </TextTagWrapper>
         <TextTagWrapper>
-          <TextTag content={`${followers}`} withIcon iconType="favorite" />
+          <TextTag content={`${followers}`} withUppercase withIcon iconType="favorite" />
         </TextTagWrapper>
         {created_at && (
           <TextTagWrapper>
@@ -132,12 +132,12 @@ const Profile = ({
         )}
         {location && (
           <TextTagWrapper>
-            <TextTag content={location} withLowerCase withIcon iconType="location_on" />
+            <TextTag content={location} withIcon iconType="location_on" />
           </TextTagWrapper>
         )}
         {company && (
           <TextTagWrapper>
-            <TextTag content={company} withLowerCase withIcon iconType="business" />
+            <TextTag content={company} withIcon iconType="business" />
           </TextTagWrapper>
         )}
       </Info>

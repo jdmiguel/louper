@@ -1,6 +1,5 @@
-import { render } from '@testing-library/react';
+import { render, screen } from '@testing-library/react';
 import '@testing-library/jest-dom';
-import { renderWithTheme } from '../../../utils/theme';
 import Link from '../Link';
 
 describe('<Link />', () => {
@@ -10,15 +9,16 @@ describe('<Link />', () => {
     content: 'VISIT PROFILE',
   };
 
-  it('renders the content properly', () => {
-    const { container } = render(renderWithTheme(<Link {...props} />));
-    expect(container).toMatchSnapshot();
+  it('renders with the correct data', () => {
+    render(<Link {...props} />);
+
+    const link = screen.getByText('VISIT PROFILE');
+    expect(link.getAttribute('href')).toBe('https://github.com/JohnDoe');
+    expect(link.getAttribute('aria-label')).toBe('View John Doe profile on GitHub');
   });
 
-  it('renders the content properly when there is an icon associated', () => {
-    const { container } = render(
-      renderWithTheme(<Link {...props} withIcon iconType="visibility" />),
-    );
-    expect(container).toMatchSnapshot();
+  it('displays the selected icon', () => {
+    render(<Link {...props} withIcon iconType="person" />);
+    expect(screen.getByText('person')).toBeInTheDocument();
   });
 });

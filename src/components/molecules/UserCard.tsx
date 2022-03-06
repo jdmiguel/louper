@@ -48,7 +48,7 @@ const displayRepoContent = (repo: Repo): ReactElement => (
   <Stack justifyContent="space-between" sx={{ height: '100%' }} data-testid="repoContent">
     <Stack>
       <Title>
-        <TextTag content={repo.name} withIcon iconType={'folder'} />
+        <TextTag content={repo.name} withUppercase withIcon iconType={'folder'} />
       </Title>
       {repo.description ? (
         <Typography
@@ -110,7 +110,7 @@ const displayUserContent = (user: User, theme: SectionType): ReactElement => {
       </AvatarWrapper>
       <Stack justifyContent="center">
         <Title>
-          <TextTag content={user.login} withIcon iconType={iconType} />
+          <TextTag content={user.login} withUppercase withIcon iconType={iconType} />
         </Title>
         <Link
           url={user.html_url}

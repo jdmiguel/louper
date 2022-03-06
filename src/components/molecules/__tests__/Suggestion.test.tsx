@@ -1,6 +1,5 @@
 import { render, screen } from '@testing-library/react';
 import '@testing-library/jest-dom';
-import { renderWithTheme } from '../../../utils/theme';
 import userEvent from '@testing-library/user-event';
 import Suggestion from '../Suggestion';
 
@@ -16,8 +15,12 @@ describe('<Suggestion />', () => {
   };
 
   it('renders the content properly', () => {
-    const { container } = render(renderWithTheme(<Suggestion {...props} />));
-    expect(container).toMatchSnapshot();
+    render(<Suggestion {...props} />);
+
+    expect(screen.getByText('John Doe')).toBeInTheDocument();
+
+    const userAvatar = screen.getByAltText('user avatar');
+    expect(userAvatar.getAttribute('src')).toBe('https://github.com/JohnDoe.jpg');
   });
 
   it('calls the correct callback when the enter key is pressed', async () => {

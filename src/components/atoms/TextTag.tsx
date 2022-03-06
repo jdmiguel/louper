@@ -13,15 +13,15 @@ const StyledIcon = styled(Icon)(({ theme }) => ({
   marginRight: 7,
 }));
 
-type TextProps = { content: string; withLowerCase?: boolean };
+type TextProps = { content: string; withUppercase?: boolean };
 type IconProps = { withIcon?: false; iconType?: never } | { withIcon: true; iconType?: string };
 type Props = TextProps & IconProps;
 
-const TextTag = ({ content, withLowerCase = false, withIcon, iconType }: Props) => (
+const TextTag = ({ content, withUppercase, withIcon, iconType }: Props) => (
   <Root>
     {withIcon && <StyledIcon>{iconType}</StyledIcon>}
     <Typography
-      variant={withLowerCase ? 'body1' : 'h5'}
+      variant={withUppercase ? 'h5' : 'body1'}
       sx={{
         color: 'text.secondary',
         lineHeight: 1.1,
@@ -29,6 +29,7 @@ const TextTag = ({ content, withLowerCase = false, withIcon, iconType }: Props) 
         overflow: 'hidden',
         textOverflow: 'ellipsis',
         whiteSpace: 'nowrap',
+        textTransform: 'uppercase',
       }}
     >
       {content}

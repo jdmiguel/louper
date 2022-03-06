@@ -1,27 +1,32 @@
-import { render } from '@testing-library/react';
+import { render, screen } from '@testing-library/react';
 import '@testing-library/jest-dom';
 import { renderWithTheme } from '../../../utils/theme';
 import TextTag from '../TextTag';
 
 describe('<TextTag />', () => {
   const props = {
-    content: 'Madrid',
+    content: 'madrid',
   };
 
   it('renders the content properly', () => {
-    const { container } = render(renderWithTheme(<TextTag {...props} />));
-    expect(container).toMatchSnapshot();
+    render(<TextTag {...props} />);
+    expect(screen.getByText('madrid')).toBeInTheDocument();
   });
 
-  it('renders the content properly with lower case', () => {
-    const { container } = render(renderWithTheme(<TextTag {...props} withLowerCase />));
-    expect(container).toMatchSnapshot();
+  it('displays the truncated text styles', () => {
+    render(<TextTag {...props} />);
+
+    const content = screen.getByText('madrid');
+    expect(content).toHaveStyle('max-width: 350px');
+    expect(content).toHaveStyle('overflow: hidden');
+    expect(content).toHaveStyle('text-overflow: ellipsis');
+    expect(content).toHaveStyle('white-space: nowrap');
   });
 
-  it('renders the content properly when there is an icon associated', () => {
-    const { container } = render(
-      renderWithTheme(<TextTag {...props} withIcon iconType="location_on" />),
-    );
-    expect(container).toMatchSnapshot();
+  it('displays the content properly with upper case', () => {
+    render(renderWithTheme(<TextTag {...props} />));
+
+    const content = screen.getByText('madrid');
+    expect(content).toHaveStyle('text-transform: uppercase');
   });
 });
