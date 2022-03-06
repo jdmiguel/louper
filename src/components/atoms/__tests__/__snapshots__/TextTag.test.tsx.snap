@@ -1,0 +1,49 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<TextTag /> renders the content properly 1`] = `
+<div>
+  <div
+    class="css-87uc0g"
+  >
+    <h5
+      class="MuiTypography-root MuiTypography-h5 css-19fdwvd-MuiTypography-root"
+    >
+      Madrid
+    </h5>
+  </div>
+</div>
+`;
+
+exports[`<TextTag /> renders the content properly when there is an icon associated 1`] = `
+<div>
+  <div
+    class="css-87uc0g"
+  >
+    <span
+      aria-hidden="true"
+      class="material-icons notranslate MuiIcon-root MuiIcon-fontSizeMedium css-zeofdm-MuiIcon-root"
+    >
+      location_on
+    </span>
+    <h5
+      class="MuiTypography-root MuiTypography-h5 css-19fdwvd-MuiTypography-root"
+    >
+      Madrid
+    </h5>
+  </div>
+</div>
+`;
+
+exports[`<TextTag /> renders the content properly with lower case 1`] = `
+<div>
+  <div
+    class="css-87uc0g"
+  >
+    <p
+      class="MuiTypography-root MuiTypography-body1 css-1umcbbb-MuiTypography-root"
+    >
+      Madrid
+    </p>
+  </div>
+</div>
+`;

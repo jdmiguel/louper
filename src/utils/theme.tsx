@@ -1,6 +1,7 @@
+import { ReactElement } from 'react';
 import { keyframes } from '@emotion/react';
 import { Keyframes } from '@emotion/serialize';
-import { createTheme } from '@mui/material/styles';
+import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { colors } from './colors';
 
 type Animation = {
@@ -110,3 +111,7 @@ export const theme = createTheme({
     },
   },
 });
+
+export const renderWithTheme = (component: ReactElement) => (
+  <ThemeProvider theme={theme}>{component}</ThemeProvider>
+);

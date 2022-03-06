@@ -102,7 +102,7 @@ const displayUserContent = (user: User, theme: SectionType): ReactElement => {
       <AvatarWrapper>
         <Avatar variant="rounded" sx={{ height: 80, width: 80, position: 'absolute' }} />
         <Avatar
-          alt="user following avatar"
+          alt={`user ${theme} avatar`}
           variant="rounded"
           src={user.avatar_url}
           sx={{ height: 80, width: 80, position: 'absolute' }}

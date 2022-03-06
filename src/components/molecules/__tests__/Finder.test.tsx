@@ -37,6 +37,18 @@ describe('<Finder />', () => {
     expect(props.onChangeSearchQuery).toHaveBeenCalled();
   });
 
+  describe('when there is no searchQuery', () => {
+    it('sets the invalid styles when clicking the search button', async () => {
+      render(<Finder {...props} />);
+
+      const searchButton = screen.getByRole('button');
+      await userEvent.click(searchButton);
+
+      const inputWrapper = screen.getByPlaceholderText('Type user name...').parentNode;
+      expect(inputWrapper).toHaveClass('Mui-error');
+    });
+  });
+
   describe('when there is a searchQuery', () => {
     it('calls the correct callback when clicking the search button', async () => {
       render(<Finder {...props} searchQuery="Dan" />);
