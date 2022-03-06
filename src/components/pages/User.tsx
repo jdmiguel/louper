@@ -121,7 +121,6 @@ const UserPage = ({ userData, onBackFinder }: Props) => {
         </Stack>
         <Toast
           isOpen={isErrorToastOpen}
-          type="error"
           msg={errorMessage}
           onClose={() => setIsErrorToastOpen(false)}
         />

@@ -23,12 +23,10 @@ describe('<Suggestion />', () => {
     expect(userAvatar.getAttribute('src')).toBe('https://github.com/JohnDoe.jpg');
   });
 
-  it('calls the correct callback when the enter key is pressed', async () => {
+  it('calls the correct callback when clicking', async () => {
     render(<Suggestion {...props} />);
 
-    const button = screen.getByRole('button');
-    await userEvent.click(button);
-
+    await userEvent.click(screen.getByRole('button'));
     expect(props.onClick).toHaveBeenCalledWith('John Doe');
   });
 });

@@ -258,7 +258,6 @@ const HomePage = ({ onFetchUser }: Props) => {
       <Footer />
       <Toast
         isOpen={isErrorToastOpen}
-        type="error"
         msg={errorMessage}
         onClose={() => setIsErrorToastOpen(false)}
       />

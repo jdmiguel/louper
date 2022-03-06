@@ -31,12 +31,11 @@ Alert.displayName = 'Alert';
 
 type Props = {
   isOpen: boolean;
-  type: AlertColor;
   msg: string;
   onClose: () => void;
 };
 
-const Toast = ({ isOpen, type, msg, onClose }: Props) => (
+const Toast = ({ isOpen, msg, onClose }: Props) => (
   <Snackbar
     open={isOpen}
     anchorOrigin={{
@@ -46,7 +45,7 @@ const Toast = ({ isOpen, type, msg, onClose }: Props) => (
     autoHideDuration={3000}
     onClose={onClose}
   >
-    <Alert severity={type} onClose={onClose}>
+    <Alert severity="error" onClose={onClose}>
       {msg}
     </Alert>
   </Snackbar>
