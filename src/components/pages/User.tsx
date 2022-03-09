@@ -24,7 +24,7 @@ const Main = styled('div')({
   },
 });
 
-const UserProfileWrapper = styled('aside')({
+const UserProfileWrapper = styled('div')({
   display: 'none',
   margin: '60px 50px 0 0',
   '@media (min-width: 768px)': {
@@ -72,7 +72,7 @@ const UserPage = ({ userData, onBackFinder }: Props) => {
   return (
     <Root>
       <Main>
-        <UserProfileWrapper>
+        <UserProfileWrapper data-testid="userProfile">
           <UserProfile userData={userData} />
         </UserProfileWrapper>
         <Stack
@@ -83,7 +83,7 @@ const UserPage = ({ userData, onBackFinder }: Props) => {
             },
           }}
         >
-          <UserProfileMobile userData={userData} />
+          <UserProfileMobile data-testid="userProfileMobile" userData={userData} />
           <Menu
             onClick={(section: number) => {
               setActiveUserSection(section);

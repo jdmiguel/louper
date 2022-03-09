@@ -7,7 +7,7 @@ import FollowingIcon from '@mui/icons-material/Visibility';
 import FollowersIcon from '@mui/icons-material/Favorite';
 import SearchIcon from '@mui/icons-material/Search';
 
-const Root = styled('header')({
+const Root = styled('nav')({
   position: 'sticky',
   top: 0,
   zIndex: 1,
