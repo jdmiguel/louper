@@ -50,6 +50,12 @@ describe('<Finder />', () => {
   });
 
   describe('when there is a searchQuery', () => {
+    it('displays the search query as input value', () => {
+      render(<Finder {...props} searchQuery="Dan" />);
+
+      expect(screen.getByPlaceholderText('Type user name...').getAttribute('value')).toBe('Dan');
+    });
+
     it('calls the correct callback when clicking the search button', async () => {
       render(<Finder {...props} searchQuery="Dan" />);
 

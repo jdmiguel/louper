@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`<Footer /> renders the content properly 1`] = `
+exports[`<Footer /> displays the content properly 1`] = `
 <div>
   <footer
     class="css-h2ohzc"

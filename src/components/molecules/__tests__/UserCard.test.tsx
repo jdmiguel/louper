@@ -13,14 +13,14 @@ describe('<UserCard />', () => {
 
   const followingData = {
     id: 1,
-    login: 'Jane Doe',
+    login: 'janeD12',
     html_url: 'https://github.com/JaneDoe',
     avatar_url: 'https://github.com/JaneDoe.jpg',
   };
 
   const followerData = {
     id: 2,
-    login: 'Peter Macbeth',
+    login: 'peMac',
     html_url: 'https://github.com/PeterMacbeth',
     avatar_url: 'https://github.com/PeterMacbeth.jpg',
   };
@@ -50,6 +50,7 @@ describe('<UserCard />', () => {
 
     it('displays a default topic when no topic', () => {
       render(<UserCard theme="repos" data={{ ...repoData, topics: [] }} />);
+
       expect(screen.getByText(/No topics/i)).toBeInTheDocument();
     });
   });
@@ -60,18 +61,19 @@ describe('<UserCard />', () => {
       expect(screen.getByTestId('userContent')).toBeInTheDocument();
       expect(screen.queryByTestId('repoContent')).not.toBeInTheDocument();
 
-      expect(screen.getByText('Jane Doe')).toBeInTheDocument();
+      expect(screen.getByText('janeD12')).toBeInTheDocument();
 
       const userAvatar = screen.getByAltText('user following avatar');
       expect(userAvatar.getAttribute('src')).toBe('https://github.com/JaneDoe.jpg');
 
       const userLink = screen.getByText(/Visit profile/i);
-      expect(userLink.getAttribute('aria-label')).toBe('View Jane Doe profile on GitHub');
+      expect(userLink.getAttribute('aria-label')).toBe('View janeD12 profile on GitHub');
       expect(userLink.getAttribute('href')).toBe('https://github.com/JaneDoe');
     });
 
     it('displays the visibility icon', () => {
       render(<UserCard theme="following" data={followingData} />);
+
       expect(screen.getByText('visibility')).toBeInTheDocument();
     });
   });
@@ -82,18 +84,19 @@ describe('<UserCard />', () => {
       expect(screen.getByTestId('userContent')).toBeInTheDocument();
       expect(screen.queryByTestId('repoContent')).not.toBeInTheDocument();
 
-      expect(screen.getByText('Peter Macbeth')).toBeInTheDocument();
+      expect(screen.getByText('peMac')).toBeInTheDocument();
 
       const userAvatar = screen.getByAltText('user followers avatar');
       expect(userAvatar.getAttribute('src')).toBe('https://github.com/PeterMacbeth.jpg');
 
       const userLink = screen.getByText(/Visit profile/i);
-      expect(userLink.getAttribute('aria-label')).toBe('View Peter Macbeth profile on GitHub');
+      expect(userLink.getAttribute('aria-label')).toBe('View peMac profile on GitHub');
       expect(userLink.getAttribute('href')).toBe('https://github.com/PeterMacbeth');
     });
 
     it('displays the favorite icon', () => {
       render(<UserCard theme="followers" data={followerData} />);
+
       expect(screen.getByText('favorite')).toBeInTheDocument();
     });
   });

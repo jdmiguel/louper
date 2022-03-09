@@ -9,7 +9,7 @@ describe('<Link />', () => {
     content: 'VISIT PROFILE',
   };
 
-  it('renders with the correct data', () => {
+  it('displays the correct data', () => {
     render(<Link {...props} />);
 
     const link = screen.getByText('VISIT PROFILE');
@@ -19,6 +19,7 @@ describe('<Link />', () => {
 
   it('displays the selected icon', () => {
     render(<Link {...props} withIcon iconType="person" />);
+
     expect(screen.getByText('person')).toBeInTheDocument();
   });
 });

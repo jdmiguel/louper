@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`<Corner /> renders the content properly 1`] = `
+exports[`<Corner /> displays the content properly 1`] = `
 <div>
   <a
     aria-label="View source on GitHub"

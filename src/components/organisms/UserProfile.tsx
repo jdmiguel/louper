@@ -20,12 +20,15 @@ const AvatarWrapper = styled('div')({
 });
 
 const Content = styled('div')({
-  marginTop: 20,
   maxWidth: 300,
   overflow: 'hidden',
 });
 
-const Info = styled('div')(({ theme }) => ({
+const MainInfo = styled('main')({
+  marginTop: 20,
+});
+
+const Details = styled('div')(({ theme }) => ({
   borderBottom: `1px solid ${theme.palette.secondary.light}`,
   borderTop: `1px solid ${theme.palette.secondary.light}`,
   display: 'flex',
@@ -95,27 +98,29 @@ const Profile = ({
       />
     </AvatarWrapper>
     <Content>
-      <Typography variant="h3" sx={{ marginBottom: 0.4 }}>
-        {name}
-      </Typography>
-      {login && (
+      <MainInfo>
+        {name && (
+          <Typography variant="h3" sx={{ marginBottom: 0.4 }}>
+            {name}
+          </Typography>
+        )}
         <Typography variant="h4" sx={{ marginBottom: 2 }}>
           {login}
         </Typography>
-      )}
-      {bio && (
-        <Typography
-          sx={{
-            color: 'secondary.light',
-            overflow: 'hidden',
-            maxWidth: 240,
-            textOverflow: 'ellipsis',
-          }}
-        >
-          {bio}
-        </Typography>
-      )}
-      <Info>
+        {bio && (
+          <Typography
+            sx={{
+              color: 'secondary.light',
+              overflow: 'hidden',
+              maxWidth: 240,
+              textOverflow: 'ellipsis',
+            }}
+          >
+            {bio}
+          </Typography>
+        )}
+      </MainInfo>
+      <Details>
         <TextTagWrapper>
           <TextTag content={`${public_repos}`} withUppercase withIcon iconType="folder" />
         </TextTagWrapper>
@@ -125,11 +130,9 @@ const Profile = ({
         <TextTagWrapper>
           <TextTag content={`${followers}`} withUppercase withIcon iconType="favorite" />
         </TextTagWrapper>
-        {created_at && (
-          <TextTagWrapper>
-            <TextTag content={buildCreationDate(created_at)} withIcon iconType="event_note" />
-          </TextTagWrapper>
-        )}
+        <TextTagWrapper>
+          <TextTag content={buildCreationDate(created_at)} withIcon iconType="event_note" />
+        </TextTagWrapper>
         {location && (
           <TextTagWrapper>
             <TextTag content={location} withIcon iconType="location_on" />
@@ -140,12 +143,12 @@ const Profile = ({
             <TextTag content={company} withIcon iconType="business" />
           </TextTagWrapper>
         )}
-      </Info>
+      </Details>
       <Actions>
         <Action>
           <Link
             url={html_url}
-            ariaLabel={`View ${name} profile on GitHub`}
+            ariaLabel={`View ${login} profile on GitHub`}
             content="VISIT PROFILE"
             withIcon
             iconType="person"
@@ -166,7 +169,7 @@ const Profile = ({
           <Action>
             <Link
               url={blog}
-              ariaLabel={`View portfolio of ${name}`}
+              ariaLabel={`View portfolio of ${login}`}
               content="VISIT PORTFOLIO"
               withIcon
               iconType="web_icon"

@@ -12,26 +12,38 @@ const Root = styled('div')({
   },
 });
 
+const AvatarWrapper = styled('div')({
+  height: 90,
+  marginRight: 20,
+  position: 'relative',
+  width: 90,
+});
+
 type Props = {
   userData: UserData;
 };
 
 const ProfileMobile = ({ userData: { avatar_url, name, login } }: Props) => (
   <Root>
-    <Avatar
-      alt="user avatar"
-      src={avatar_url}
-      sx={{
-        width: 100,
-        height: 100,
-        marginRight: 2.8,
-        boxShadow: '0px 0px 14px 5px rgba(201,75,115,0.24)',
-      }}
-    />
+    <AvatarWrapper>
+      <Avatar sx={{ width: 90, height: 90, position: 'absolute' }} />
+      <Avatar
+        alt="user avatar"
+        src={avatar_url}
+        sx={{
+          width: 90,
+          height: 90,
+          position: 'absolute',
+          boxShadow: '0px 0px 14px 5px rgba(201,75,115,0.24)',
+        }}
+      />
+    </AvatarWrapper>
     <Stack justifyContent="center">
-      <Typography variant="h3" sx={{ marginBottom: 0.2 }}>
-        {name}
-      </Typography>
+      {name && (
+        <Typography variant="h3" sx={{ marginBottom: 0.2 }}>
+          {name}
+        </Typography>
+      )}
       <Typography variant="h4">{login}</Typography>
     </Stack>
   </Root>

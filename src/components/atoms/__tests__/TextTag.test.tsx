@@ -8,8 +8,9 @@ describe('<TextTag />', () => {
     content: 'madrid',
   };
 
-  it('renders the content properly', () => {
+  it('displays the content properly', () => {
     render(<TextTag {...props} />);
+
     expect(screen.getByText('madrid')).toBeInTheDocument();
   });
 

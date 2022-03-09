@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`<Watermark /> renders the content properly 1`] = `
+exports[`<Watermark /> displays the content properly 1`] = `
 <div>
   <svg
     height="230"

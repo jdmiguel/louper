@@ -99,6 +99,8 @@ const DEFAULT_USERS_DATA = {
 
 enum DefaultValues {
   MinCharsToSearchUsers = 2,
+  MaxPagesAllowed = 50,
+  MinItemsToPaginate = 13,
 }
 
 type UsersData = {
@@ -126,6 +128,14 @@ const HomePage = ({ onFetchUser }: Props) => {
   const abortControllerFetchUser = useMemo(() => new AbortController(), []);
   const abortControllerFetchUsers = useMemo(() => new AbortController(), []);
 
+  const totalSuggestions = useMemo(
+    () =>
+      usersData.total_count <= DefaultValues.MaxPagesAllowed
+        ? usersData.total_count
+        : DefaultValues.MaxPagesAllowed,
+    [usersData],
+  );
+
   useEffect(() => {
     return () => {
       abortControllerFetchUser.abort();
@@ -150,8 +160,8 @@ const HomePage = ({ onFetchUser }: Props) => {
     })
       .then(handleErrors)
       .then((fetchedUsersData: UsersData) => {
-        setUsersData(fetchedUsersData);
         setAreSuggestionsShown(true);
+        setUsersData(fetchedUsersData);
       })
       .catch((error) => {
         setAreSuggestionsShown(false);
@@ -239,8 +249,9 @@ const HomePage = ({ onFetchUser }: Props) => {
             {areSuggestionsShown ? (
               <Suggestions
                 items={usersData.items}
-                totalItems={usersData.total_count}
-                onPaginate={(_, page: number) => fetchUsers(searchQuery, page)}
+                totalItems={totalSuggestions}
+                withPagination={totalSuggestions >= DefaultValues.MinItemsToPaginate}
+                onPaginate={(page: number) => fetchUsers(searchQuery, page)}
                 onSelectUser={(userName: string) => {
                   setSearchQuery(userName);
                   fetchUser(userName);

@@ -4,8 +4,9 @@ import { renderWithTheme } from '../../../utils/theme';
 import Footer from '../Footer';
 
 describe('<Footer />', () => {
-  it('renders the content properly', () => {
+  it('displays the content properly', () => {
     const { container } = render(renderWithTheme(<Footer />));
+
     expect(container).toMatchSnapshot();
   });
 });

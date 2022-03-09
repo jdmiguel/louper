@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`<Logo /> renders the content properly 1`] = `
+exports[`<Logo /> displays the content properly 1`] = `
 <div>
   <svg
     fill="none"

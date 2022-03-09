@@ -48,32 +48,26 @@ const StyledPaginationItem = styled(PaginationItem)(({ theme }) => ({
   },
 }));
 
-enum DefaultValues {
-  MinItemsToPaginate = 13,
-  MaxPagesAllowed = 50,
-}
-
 type Props = {
   items: User[];
   totalItems: number;
-  onPaginate: (event: React.ChangeEvent<unknown>, page: number) => void;
+  withPagination: boolean;
+  onPaginate: (page: number) => void;
   onSelectUser: (userName: string) => void;
 };
 
-const Suggestions = ({ items, totalItems, onPaginate, onSelectUser }: Props) => (
+const Suggestions = ({ items, totalItems, withPagination, onPaginate, onSelectUser }: Props) => (
   <Stack sx={{ alignItems: 'center' }}>
     <SuggestionsWrapper>
       {items.map((user) => (
         <Suggestion key={user.id} data={user} onClick={onSelectUser} />
       ))}
     </SuggestionsWrapper>
-    {totalItems >= DefaultValues.MinItemsToPaginate && (
+    {withPagination && (
       <Pagination
-        count={
-          totalItems <= DefaultValues.MaxPagesAllowed ? totalItems : DefaultValues.MaxPagesAllowed
-        }
+        count={totalItems}
         renderItem={(item) => <StyledPaginationItem {...item} />}
-        onChange={onPaginate}
+        onChange={(_, page: number) => onPaginate(page)}
         hidePrevButton
         hideNextButton
         size="small"

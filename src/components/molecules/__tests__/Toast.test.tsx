@@ -10,8 +10,9 @@ describe('<Toast />', () => {
     onClose: jest.fn(),
   };
 
-  it('renders the message properly', () => {
+  it('displays the message properly', () => {
     render(<Toast {...props} />);
+
     expect(screen.getByText('Please, choose an available user')).toBeInTheDocument();
   });
 
@@ -19,6 +20,7 @@ describe('<Toast />', () => {
     render(<Toast {...props} />);
 
     await userEvent.click(screen.getByRole('button'));
+
     expect(props.onClose).toHaveBeenCalled();
   });
 });

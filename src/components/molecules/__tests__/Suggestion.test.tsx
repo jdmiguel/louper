@@ -7,17 +7,17 @@ describe('<Suggestion />', () => {
   const props = {
     data: {
       id: 1,
-      login: 'John Doe',
+      login: 'jdoe',
       html_url: 'https://github.com/JohnDoe',
       avatar_url: 'https://github.com/JohnDoe.jpg',
     },
     onClick: jest.fn(),
   };
 
-  it('renders the content properly', () => {
+  it('displays the content properly', () => {
     render(<Suggestion {...props} />);
 
-    expect(screen.getByText('John Doe')).toBeInTheDocument();
+    expect(screen.getByText('jdoe')).toBeInTheDocument();
 
     const userAvatar = screen.getByAltText('user avatar');
     expect(userAvatar.getAttribute('src')).toBe('https://github.com/JohnDoe.jpg');
@@ -27,6 +27,7 @@ describe('<Suggestion />', () => {
     render(<Suggestion {...props} />);
 
     await userEvent.click(screen.getByRole('button'));
-    expect(props.onClick).toHaveBeenCalledWith('John Doe');
+
+    expect(props.onClick).toHaveBeenCalledWith('jdoe');
   });
 });
