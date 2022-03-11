@@ -110,12 +110,8 @@ describe('<UserProfile />', () => {
   it('displays the correct actions', () => {
     render(<UserProfile {...props} />);
 
-    const profileLink = screen.getByText(/visit profile/i);
-
-    const actions = profileLink.parentElement.parentElement;
-    expect(actions.children).toHaveLength(3);
-
     // profile action
+    const profileLink = screen.getByText(/visit profile/i);
     expect(profileLink.getAttribute('href')).toBe('https://github.com/JohnDoe');
     expect(profileLink.getAttribute('aria-label')).toBe('View jdoe profile on GitHub');
 
@@ -135,18 +131,12 @@ describe('<UserProfile />', () => {
   it('does not display the email action when no email', () => {
     render(<UserProfile {...props} userData={{ ...props.userData, email: null }} />);
 
-    const actions = screen.getByText(/visit profile/i).parentElement.parentElement;
-    expect(actions.children).toHaveLength(2);
-
     expect(screen.queryByText(/send email/i)).not.toBeInTheDocument();
     expect(screen.queryByText('mail_outline')).not.toBeInTheDocument();
   });
 
   it('does not display the blog action when no blog', () => {
     render(<UserProfile {...props} userData={{ ...props.userData, blog: null }} />);
-
-    const actions = screen.getByText(/visit profile/i).parentElement.parentElement;
-    expect(actions.children).toHaveLength(2);
 
     expect(screen.queryByText(/visit portfolio/i)).not.toBeInTheDocument();
     expect(screen.queryByText('web_icon')).not.toBeInTheDocument();
