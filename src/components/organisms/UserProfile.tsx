@@ -20,12 +20,13 @@ const AvatarWrapper = styled('div')({
 });
 
 const Content = styled('div')({
+  marginTop: 30,
   maxWidth: 300,
   overflow: 'hidden',
 });
 
-const MainInfo = styled('main')({
-  marginTop: 20,
+const Headings = styled('div')({
+  marginBottom: 24,
 });
 
 const Details = styled('div')(({ theme }) => ({
@@ -33,7 +34,7 @@ const Details = styled('div')(({ theme }) => ({
   borderTop: `1px solid ${theme.palette.secondary.light}`,
   display: 'flex',
   flexWrap: 'wrap',
-  marginTop: 24,
+  marginBottom: 24,
   paddingBottom: 10,
   paddingTop: 10,
 }));
@@ -45,10 +46,6 @@ const TextTagWrapper = styled('div')({
   marginRight: 12,
   marginBottom: 6,
   fontSize: '0.9rem',
-});
-
-const Actions = styled('div')({
-  marginTop: 20,
 });
 
 const Action = styled('div')({
@@ -98,7 +95,7 @@ const Profile = ({
       />
     </AvatarWrapper>
     <Content>
-      <MainInfo>
+      <Headings>
         {name && (
           <Typography variant="h3" sx={{ marginBottom: 0.4 }}>
             {name}
@@ -119,7 +116,7 @@ const Profile = ({
             {bio}
           </Typography>
         )}
-      </MainInfo>
+      </Headings>
       <Details>
         <TextTagWrapper>
           <TextTag content={`${public_repos}`} withUppercase withIcon iconType="folder" />
@@ -144,7 +141,7 @@ const Profile = ({
           </TextTagWrapper>
         )}
       </Details>
-      <Actions>
+      <>
         <Action>
           <Link
             url={html_url}
@@ -176,7 +173,7 @@ const Profile = ({
             />
           </Action>
         )}
-      </Actions>
+      </>
     </Content>
   </Root>
 );
