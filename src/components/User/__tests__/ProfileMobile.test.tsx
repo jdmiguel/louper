@@ -1,8 +1,8 @@
 import { render, screen } from '@testing-library/react';
 import '@testing-library/jest-dom';
-import UserProfileMobile from '../UserProfileMobile';
+import ProfileMobile from '../ProfileMobile';
 
-describe('<UserProfileMobile />', () => {
+describe('<ProfileMobile />', () => {
   const props = {
     userData: {
       login: 'jdoe',
@@ -22,7 +22,7 @@ describe('<UserProfileMobile />', () => {
   };
 
   it('displays the correct data', () => {
-    render(<UserProfileMobile {...props} />);
+    render(<ProfileMobile {...props} />);
 
     const userAvatar = screen.getByAltText('user avatar');
     expect(userAvatar.getAttribute('src')).toBe('https://github.com/JohnDoe.jpg');
@@ -32,7 +32,7 @@ describe('<UserProfileMobile />', () => {
   });
 
   it('does not display the name field when no name', () => {
-    render(<UserProfileMobile {...props} userData={{ ...props.userData, name: null }} />);
+    render(<ProfileMobile {...props} userData={{ ...props.userData, name: null }} />);
 
     expect(screen.queryByText('John Doe')).not.toBeInTheDocument();
   });

@@ -2,7 +2,7 @@ import { useState, useEffect, useMemo, useRef } from 'react';
 import { styled } from '@mui/material/styles';
 import Typography from '@mui/material/Typography';
 import CircularProgress from '@mui/material/CircularProgress';
-import UserCard from '../molecules/UserCard';
+import SectionItem from './SectionItem';
 import useIntersectionObserver from '../../hooks/useIntersectionObserver';
 import { BASE_URL, handleErrors } from '../../utils/request';
 import { SectionType, Repo, User } from '../../utils/types';
@@ -39,7 +39,7 @@ type Props = {
   onRequestError: (errorMessage: string) => void;
 };
 
-const UserSection = ({ userLogin, sectionType, totalItems, onRequestError }: Props) => {
+const Section = ({ userLogin, sectionType, totalItems, onRequestError }: Props) => {
   const [isLoading, setIsLoading] = useState(false);
   const [isFullyLoaded, setIsFullyLoaded] = useState(false);
   const [items, setItems] = useState<Items>([]);
@@ -100,7 +100,7 @@ const UserSection = ({ userLogin, sectionType, totalItems, onRequestError }: Pro
           </EmptyMsg>
         )}
         {items.map((item) => (
-          <UserCard key={item.id} theme={sectionType} data={item} />
+          <SectionItem key={item.id} theme={sectionType} data={item} />
         ))}
       </Main>
       {!isFullyLoaded && (
@@ -112,4 +112,4 @@ const UserSection = ({ userLogin, sectionType, totalItems, onRequestError }: Pro
   );
 };
 
-export default UserSection;
+export default Section;

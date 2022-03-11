@@ -1,8 +1,8 @@
 import { useState } from 'react';
 import CssBaseline from '@mui/material/CssBaseline';
 import { styled, ThemeProvider } from '@mui/material/styles';
-import HomePage from './pages/Home';
-import UserPage from './pages/User';
+import Intro from './Intro';
+import User from './User';
 import { theme } from '../utils/theme';
 import { colors } from '../utils/colors';
 import { UserData } from '../utils/types';
@@ -21,9 +21,9 @@ const App = () => {
       <CssBaseline />
       <Root>
         {userData ? (
-          <UserPage userData={userData} onBackFinder={() => setUserData(null)} />
+          <User userData={userData} onBackFinder={() => setUserData(null)} />
         ) : (
-          <HomePage onFetchUser={(userData: UserData) => setUserData(userData)} />
+          <Intro onFetchUser={(userData: UserData) => setUserData(userData)} />
         )}
       </Root>
     </ThemeProvider>

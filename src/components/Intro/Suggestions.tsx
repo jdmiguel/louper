@@ -2,7 +2,7 @@ import { styled } from '@mui/material/styles';
 import Pagination from '@mui/material/Pagination';
 import PaginationItem from '@mui/material/PaginationItem';
 import Stack from '@mui/material/Stack';
-import Suggestion from '../molecules/Suggestion';
+import Suggestion from './Suggestion';
 import { User } from '../../utils/types';
 
 const SuggestionsWrapper = styled('div')({

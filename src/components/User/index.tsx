@@ -1,12 +1,12 @@
 import { useState, useMemo } from 'react';
 import { styled } from '@mui/material/styles';
 import Stack from '@mui/material/Stack';
-import Menu from '../molecules/Menu';
-import Toast from '../molecules/Toast';
-import Footer from '../molecules/Footer';
-import UserProfile from '../organisms/UserProfile';
-import UserProfileMobile from '../organisms/UserProfileMobile';
-import UserSection from '../organisms/UserSection';
+import Menu from './Menu';
+import Toast from '../shared/Toast';
+import Footer from '../shared/Footer';
+import Profile from './Profile';
+import ProfileMobile from './ProfileMobile';
+import Section from './Section';
 import { UserData } from '../../utils/types';
 
 const Root = styled('div')({
@@ -24,7 +24,7 @@ const Main = styled('div')({
   },
 });
 
-const UserProfileWrapper = styled('div')({
+const ProfileWrapper = styled('div')({
   display: 'none',
   margin: '60px 50px 0 0',
   '@media (min-width: 768px)': {
@@ -72,9 +72,9 @@ const UserPage = ({ userData, onBackFinder }: Props) => {
   return (
     <Root>
       <Main>
-        <UserProfileWrapper data-testid="userProfile">
-          <UserProfile userData={userData} />
-        </UserProfileWrapper>
+        <ProfileWrapper data-testid="userProfile">
+          <Profile userData={userData} />
+        </ProfileWrapper>
         <Stack
           sx={{
             width: '100%',
@@ -83,7 +83,7 @@ const UserPage = ({ userData, onBackFinder }: Props) => {
             },
           }}
         >
-          <UserProfileMobile data-testid="userProfileMobile" userData={userData} />
+          <ProfileMobile data-testid="userProfileMobile" userData={userData} />
           <Menu
             onClick={(section: number) => {
               setActiveUserSection(section);
@@ -94,7 +94,7 @@ const UserPage = ({ userData, onBackFinder }: Props) => {
           />
           <>
             {activeSection === 0 && (
-              <UserSection
+              <Section
                 userLogin={userData.login}
                 sectionType="repos"
                 totalItems={totalItems.repos}
@@ -102,7 +102,7 @@ const UserPage = ({ userData, onBackFinder }: Props) => {
               />
             )}
             {activeSection === 1 && (
-              <UserSection
+              <Section
                 userLogin={userData.login}
                 sectionType="following"
                 totalItems={totalItems.following}
@@ -110,7 +110,7 @@ const UserPage = ({ userData, onBackFinder }: Props) => {
               />
             )}
             {activeSection === 2 && (
-              <UserSection
+              <Section
                 userLogin={userData.login}
                 sectionType="followers"
                 totalItems={totalItems.followers}

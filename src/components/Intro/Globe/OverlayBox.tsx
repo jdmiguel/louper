@@ -1,7 +1,7 @@
 import { styled } from '@mui/material/styles';
 import Typography from '@mui/material/Typography';
 import Icon from '@mui/material/Icon';
-import { OverlayBoxData } from '../../utils/types';
+import { OverlayBoxData } from '../../../utils/types';
 
 enum Offset {
   Left = 54,

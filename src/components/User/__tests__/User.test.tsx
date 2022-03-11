@@ -2,7 +2,7 @@ import { render, screen } from '@testing-library/react';
 import '@testing-library/jest-dom';
 import userEvent from '@testing-library/user-event';
 import { renderWithTheme } from '../../../utils/theme';
-import User from '../User';
+import User from '..';
 
 describe('<User />', () => {
   const props = {

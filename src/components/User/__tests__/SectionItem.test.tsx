@@ -1,8 +1,8 @@
 import { render, screen } from '@testing-library/react';
 import '@testing-library/jest-dom';
-import UserCard from '../UserCard';
+import SectionItem from '../SectionItem';
 
-describe('<UserCard />', () => {
+describe('<SectionItem />', () => {
   const repoData = {
     id: 1,
     name: 'Hello world',
@@ -26,8 +26,8 @@ describe('<UserCard />', () => {
   };
 
   describe('when the theme is repos', () => {
-    it('displays the repo content', () => {
-      render(<UserCard theme="repos" data={repoData} />);
+    it('displays the repos theme', () => {
+      render(<SectionItem theme="repos" data={repoData} />);
 
       expect(screen.getByTestId('repoContent')).toBeInTheDocument();
       expect(screen.queryByTestId('userContent')).not.toBeInTheDocument();
@@ -42,22 +42,22 @@ describe('<UserCard />', () => {
     });
 
     it('displays a default description when no description', () => {
-      render(<UserCard theme="repos" data={{ ...repoData, description: null }} />);
+      render(<SectionItem theme="repos" data={{ ...repoData, description: null }} />);
 
       const defaultDescription = screen.getByText('No description added');
       expect(defaultDescription).toBeInTheDocument();
     });
 
     it('displays a default topic when no topic', () => {
-      render(<UserCard theme="repos" data={{ ...repoData, topics: [] }} />);
+      render(<SectionItem theme="repos" data={{ ...repoData, topics: [] }} />);
 
       expect(screen.getByText(/No topics/i)).toBeInTheDocument();
     });
   });
 
   describe('when the theme is following', () => {
-    it('displays the user content', () => {
-      render(<UserCard theme="following" data={followingData} />);
+    it('displays the following theme', () => {
+      render(<SectionItem theme="following" data={followingData} />);
       expect(screen.getByTestId('userContent')).toBeInTheDocument();
       expect(screen.queryByTestId('repoContent')).not.toBeInTheDocument();
 
@@ -72,15 +72,15 @@ describe('<UserCard />', () => {
     });
 
     it('displays the visibility icon', () => {
-      render(<UserCard theme="following" data={followingData} />);
+      render(<SectionItem theme="following" data={followingData} />);
 
       expect(screen.getByText('visibility')).toBeInTheDocument();
     });
   });
 
   describe('when the theme is followers', () => {
-    it('displays the user content', () => {
-      render(<UserCard theme="followers" data={followerData} />);
+    it('displays the user followers theme', () => {
+      render(<SectionItem theme="followers" data={followerData} />);
       expect(screen.getByTestId('userContent')).toBeInTheDocument();
       expect(screen.queryByTestId('repoContent')).not.toBeInTheDocument();
 
@@ -95,7 +95,7 @@ describe('<UserCard />', () => {
     });
 
     it('displays the favorite icon', () => {
-      render(<UserCard theme="followers" data={followerData} />);
+      render(<SectionItem theme="followers" data={followerData} />);
 
       expect(screen.getByText('favorite')).toBeInTheDocument();
     });

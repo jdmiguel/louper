@@ -4,11 +4,11 @@ import { Canvas, useLoader } from '@react-three/fiber';
 import { OrbitControls } from '@react-three/drei';
 import { animated, useSpring } from '@react-spring/three';
 import { styled } from '@mui/material/styles';
-import GlobeMarker from '../atoms/GlobeMarker';
-import GlobeOverlayBox from '../molecules/GlobeOverlayBox';
-import { colors } from '../../utils/colors';
-import globeMarkers from '../../assets/globeMarkers.json';
-import map from '../../assets/map.png';
+import Marker from './Marker';
+import OverlayBox from './OverlayBox';
+import { colors } from '../../../utils/colors';
+import globeMarkers from '../../../assets/globeMarkers.json';
+import map from '../../../assets/map.png';
 
 const atmosphereVertexShader = [
   'varying vec3 vNormal;',
@@ -129,7 +129,7 @@ const InteractiveGlobe = () => {
           <Globe />
           <animated.group scale={scale}>
             {globeMarkers.map((marker) => (
-              <GlobeMarker
+              <Marker
                 key={marker.id}
                 data={{
                   country: marker.country,
@@ -157,7 +157,7 @@ const InteractiveGlobe = () => {
           />
         </Suspense>
       </Canvas>
-      {isMarkerHovered && <GlobeOverlayBox data={overlayBoxData} />}
+      {isMarkerHovered && <OverlayBox data={overlayBoxData} />}
     </Root>
   );
 };

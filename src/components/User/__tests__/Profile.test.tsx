@@ -1,8 +1,8 @@
 import { render, screen } from '@testing-library/react';
 import '@testing-library/jest-dom';
-import UserProfile from '../UserProfile';
+import Profile from '../Profile';
 
-describe('<UserProfile />', () => {
+describe('<Profile />', () => {
   const props = {
     userData: {
       login: 'jdoe',
@@ -22,14 +22,14 @@ describe('<UserProfile />', () => {
   };
 
   it('displays the correct avatar', () => {
-    render(<UserProfile {...props} />);
+    render(<Profile {...props} />);
 
     const userAvatar = screen.getByAltText('user avatar');
     expect(userAvatar.getAttribute('src')).toBe('https://github.com/JohnDoe.jpg');
   });
 
   it('displays the correct main data', () => {
-    render(<UserProfile {...props} />);
+    render(<Profile {...props} />);
 
     const mainInfo = screen.getByText('jdoe').parentElement;
     expect(mainInfo.children).toHaveLength(3);
@@ -39,7 +39,7 @@ describe('<UserProfile />', () => {
   });
 
   it('does not display the name field when no name', () => {
-    render(<UserProfile {...props} userData={{ ...props.userData, name: null }} />);
+    render(<Profile {...props} userData={{ ...props.userData, name: null }} />);
 
     const mainInfo = screen.getByText('jdoe').parentElement;
     expect(mainInfo.children).toHaveLength(2);
@@ -48,7 +48,7 @@ describe('<UserProfile />', () => {
   });
 
   it('does not display the bio field when no bio', () => {
-    render(<UserProfile {...props} userData={{ ...props.userData, bio: null }} />);
+    render(<Profile {...props} userData={{ ...props.userData, bio: null }} />);
 
     const mainInfo = screen.getByText('jdoe').parentElement;
     expect(mainInfo.children).toHaveLength(2);
@@ -57,7 +57,7 @@ describe('<UserProfile />', () => {
   });
 
   it('renders the correct info details', () => {
-    render(<UserProfile {...props} />);
+    render(<Profile {...props} />);
 
     const details = screen.getByText('jdoe').parentElement.nextElementSibling;
     expect(details.children).toHaveLength(6);
@@ -88,7 +88,7 @@ describe('<UserProfile />', () => {
   });
 
   it('does not display the location field when no location', () => {
-    render(<UserProfile {...props} userData={{ ...props.userData, location: null }} />);
+    render(<Profile {...props} userData={{ ...props.userData, location: null }} />);
 
     const details = screen.getByText('jdoe').parentElement.nextElementSibling;
     expect(details.children).toHaveLength(5);
@@ -98,7 +98,7 @@ describe('<UserProfile />', () => {
   });
 
   it('does not display the company field when no location', () => {
-    render(<UserProfile {...props} userData={{ ...props.userData, company: null }} />);
+    render(<Profile {...props} userData={{ ...props.userData, company: null }} />);
 
     const details = screen.getByText('jdoe').parentElement.nextElementSibling;
     expect(details.children).toHaveLength(5);
@@ -108,7 +108,7 @@ describe('<UserProfile />', () => {
   });
 
   it('displays the correct actions', () => {
-    render(<UserProfile {...props} />);
+    render(<Profile {...props} />);
 
     // profile action
     const profileLink = screen.getByText(/visit profile/i);
@@ -129,14 +129,14 @@ describe('<UserProfile />', () => {
   });
 
   it('does not display the email action when no email', () => {
-    render(<UserProfile {...props} userData={{ ...props.userData, email: null }} />);
+    render(<Profile {...props} userData={{ ...props.userData, email: null }} />);
 
     expect(screen.queryByText(/send email/i)).not.toBeInTheDocument();
     expect(screen.queryByText('mail_outline')).not.toBeInTheDocument();
   });
 
   it('does not display the blog action when no blog', () => {
-    render(<UserProfile {...props} userData={{ ...props.userData, blog: null }} />);
+    render(<Profile {...props} userData={{ ...props.userData, blog: null }} />);
 
     expect(screen.queryByText(/visit portfolio/i)).not.toBeInTheDocument();
     expect(screen.queryByText('web_icon')).not.toBeInTheDocument();

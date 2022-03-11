@@ -3,8 +3,8 @@ import { styled } from '@mui/material/styles';
 import Stack from '@mui/material/Stack';
 import Typography from '@mui/material/Typography';
 import Avatar from '@mui/material/Avatar';
-import TextTag from '../atoms/TextTag';
-import Link from '../atoms/Link';
+import TextTag from '../shared/TextTag';
+import Link from '../shared/Link';
 import { Repo, User, SectionType } from '../../utils/types';
 
 const Root = styled('div')(({ theme }) => ({
@@ -44,7 +44,7 @@ const Action = styled('div')(({ theme }) => ({
   paddingTop: 10,
 }));
 
-const displayRepoContent = (repo: Repo): ReactElement => (
+const displayRepoTheme = (repo: Repo): ReactElement => (
   <Stack justifyContent="space-between" sx={{ height: '100%' }} data-testid="repoContent">
     <Stack>
       <Title>
@@ -94,7 +94,7 @@ const displayRepoContent = (repo: Repo): ReactElement => (
   </Stack>
 );
 
-const displayUserContent = (user: User, theme: SectionType): ReactElement => {
+const displayUserTheme = (user: User, theme: SectionType): ReactElement => {
   const iconType = theme === 'following' ? 'visibility' : 'favorite';
 
   return (
@@ -129,12 +129,12 @@ type Props = {
   data: Repo | User;
 };
 
-const UserCard = ({ theme, data }: Props) => {
+const SectionItem = ({ theme, data }: Props) => {
   const isRepoTheme = theme === 'repos';
   const repo = data as Repo;
   const user = data as User;
 
-  return <Root>{isRepoTheme ? displayRepoContent(repo) : displayUserContent(user, theme)}</Root>;
+  return <Root>{isRepoTheme ? displayRepoTheme(repo) : displayUserTheme(user, theme)}</Root>;
 };
 
-export default UserCard;
+export default SectionItem;
