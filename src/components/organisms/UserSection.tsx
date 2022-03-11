@@ -33,13 +33,13 @@ const EmptyMsg = styled('div')({
 type Items = Repo[] & User[];
 
 type Props = {
-  userName: string;
+  userLogin: string;
   sectionType: SectionType;
   totalItems: number;
   onRequestError: (errorMessage: string) => void;
 };
 
-const UserSection = ({ userName, sectionType, totalItems, onRequestError }: Props) => {
+const UserSection = ({ userLogin, sectionType, totalItems, onRequestError }: Props) => {
   const [isLoading, setIsLoading] = useState(false);
   const [isFullyLoaded, setIsFullyLoaded] = useState(false);
   const [items, setItems] = useState<Items>([]);
@@ -63,7 +63,7 @@ const UserSection = ({ userName, sectionType, totalItems, onRequestError }: Prop
     setIsLoading(true);
 
     fetch(
-      `${BASE_URL}/users/${userName}/${sectionType}?page=${currentItemPage}&per_page=${itemsPerPage}`,
+      `${BASE_URL}/users/${userLogin}/${sectionType}?page=${currentItemPage}&per_page=${itemsPerPage}`,
       {
         signal: abortController.signal,
       },

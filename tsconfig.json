@@ -47,5 +47,5 @@
   "include": [
     "**/*.ts",
     "**/*.tsx"
-  ]
+, "src/mocks/server.ts", "src/mocks/mockServiceWorker.ts", "src/mocks/browser.ts", "src/mocks/handlers/index.ts", "src/mocks/handlers/getUser.ts"  ]
 }

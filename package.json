@@ -39,6 +39,7 @@
     "eslint-plugin-testing-library": "^5.0.6",
     "husky": "^7.0.1",
     "lint-staged": "^11.1.2",
+    "msw": "^0.39.1",
     "prettier": "^2.3.2",
     "react-scripts": "4.0.3",
     "typescript": "^4.4.4",
@@ -46,9 +47,10 @@
   },
   "scripts": {
     "start": "react-scripts start",
+    "start:mock": "REACT_APP_MOCK_API=true react-scripts start",
     "build": "react-scripts build",
     "lint": "tsc --noEmit && eslint '*/**/*.{js,ts}' --quiet --fix",
-    "test": "react-scripts test",
+    "test": "REACT_APP_MOCK_API=true react-scripts test",
     "test:debug": "react-scripts --inspect-brk test --runInBand --no-cache",
     "eject": "react-scripts eject"
   },
@@ -60,5 +62,8 @@
     "not dead",
     "not ie <= 11",
     "not op_mini all"
-  ]
+  ],
+  "msw": {
+    "workerDirectory": "public"
+  }
 }

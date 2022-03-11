@@ -95,7 +95,7 @@ const UserPage = ({ userData, onBackFinder }: Props) => {
           <>
             {activeSection === 0 && (
               <UserSection
-                userName={userData.login}
+                userLogin={userData.login}
                 sectionType="repos"
                 totalItems={totalItems.repos}
                 onRequestError={handleRequestError}
@@ -103,7 +103,7 @@ const UserPage = ({ userData, onBackFinder }: Props) => {
             )}
             {activeSection === 1 && (
               <UserSection
-                userName={userData.login}
+                userLogin={userData.login}
                 sectionType="following"
                 totalItems={totalItems.following}
                 onRequestError={handleRequestError}
@@ -111,7 +111,7 @@ const UserPage = ({ userData, onBackFinder }: Props) => {
             )}
             {activeSection === 2 && (
               <UserSection
-                userName={userData.login}
+                userLogin={userData.login}
                 sectionType="followers"
                 totalItems={totalItems.followers}
                 onRequestError={handleRequestError}

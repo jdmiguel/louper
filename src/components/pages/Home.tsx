@@ -99,8 +99,8 @@ const DEFAULT_USERS_DATA = {
 
 enum DefaultValues {
   MinCharsToSearchUsers = 2,
-  MaxPagesAllowed = 50,
-  MinItemsToPaginate = 13,
+  MaxSuggestionsAllowed = 100,
+  SuggestionsPerPage = 12,
 }
 
 type UsersData = {
@@ -130,9 +130,9 @@ const HomePage = ({ onFetchUser }: Props) => {
 
   const totalSuggestions = useMemo(
     () =>
-      usersData.total_count <= DefaultValues.MaxPagesAllowed
+      usersData.total_count <= DefaultValues.MaxSuggestionsAllowed
         ? usersData.total_count
-        : DefaultValues.MaxPagesAllowed,
+        : DefaultValues.MaxSuggestionsAllowed,
     [usersData],
   );
 
@@ -148,12 +148,12 @@ const HomePage = ({ onFetchUser }: Props) => {
     setAreSuggestionsShown(false);
   }, [windowWidth]);
 
-  const fetchUsers = (querySearch: string, page?: number) => {
+  const fetchUsers = (searchQuery: string, page?: number) => {
     setIsLoadingUsers(true);
 
     const endpoint = page
-      ? `${BASE_URL}/search/users?q=${querySearch}&page=${page}&per_page=${suggestionsPerPage}`
-      : `${BASE_URL}/search/users?q=${querySearch}&per_page=${suggestionsPerPage}`;
+      ? `${BASE_URL}/search/users?q=${searchQuery}&page=${page}&per_page=${suggestionsPerPage}`
+      : `${BASE_URL}/search/users?q=${searchQuery}&per_page=${suggestionsPerPage}`;
 
     fetch(endpoint, {
       signal: abortControllerFetchUsers.signal,
@@ -172,10 +172,10 @@ const HomePage = ({ onFetchUser }: Props) => {
       });
   };
 
-  const fetchUser = (userName: string) => {
+  const fetchUser = (userLogin: string) => {
     setIsLoadingUser(true);
 
-    fetch(`${BASE_URL}/users/${userName}`, { signal: abortControllerFetchUser.signal })
+    fetch(`${BASE_URL}/users/${userLogin}`, { signal: abortControllerFetchUser.signal })
       .then(handleErrors)
       .then((userData: UserData) => {
         onFetchUser({
@@ -249,8 +249,8 @@ const HomePage = ({ onFetchUser }: Props) => {
             {areSuggestionsShown ? (
               <Suggestions
                 items={usersData.items}
-                totalItems={totalSuggestions}
-                withPagination={totalSuggestions >= DefaultValues.MinItemsToPaginate}
+                totalItems={Math.ceil(totalSuggestions / DefaultValues.SuggestionsPerPage)}
+                withPagination={totalSuggestions >= DefaultValues.SuggestionsPerPage}
                 onPaginate={(page: number) => fetchUsers(searchQuery, page)}
                 onSelectUser={(userName: string) => {
                   setSearchQuery(userName);
