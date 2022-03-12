@@ -1,8 +1,8 @@
 import { styled } from '@mui/material/styles';
 import Typography from '@mui/material/Typography';
 import Avatar from '@mui/material/Avatar';
-import TextTag from '../../shared/TextTag/TextTag';
-import Link from '../../shared/Link/Link';
+import TextTag from '../../shared/TextTag';
+import Link from '../../shared/Link';
 import { UserData } from '../../../utils/types';
 
 const Root = styled('div')({

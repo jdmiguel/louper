@@ -1,6 +1,6 @@
 import { styled } from '@mui/material/styles';
 import Stack from '@mui/material/Stack';
-import Link from '../Link/Link';
+import Link from '../Link';
 
 const Root = styled('footer')(({ theme }) => ({
   alignItems: 'center',

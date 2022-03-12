@@ -1,7 +1,7 @@
 import { render, screen } from '@testing-library/react';
 import '@testing-library/jest-dom';
 import { renderWithTheme } from '../../../../utils/theme';
-import TextTag from '../TextTag';
+import TextTag from '..';
 
 describe('<TextTag />', () => {
   const props = {
