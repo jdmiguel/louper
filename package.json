@@ -50,7 +50,7 @@
     "start:mock": "REACT_APP_MOCK_API=true react-scripts start",
     "build": "react-scripts build",
     "lint": "tsc --noEmit && eslint '*/**/*.{js,ts}' --quiet --fix",
-    "test": "REACT_APP_MOCK_API=true react-scripts test",
+    "test": "react-scripts test",
     "test:debug": "react-scripts --inspect-brk test --runInBand --no-cache",
     "eject": "react-scripts eject"
   },

@@ -72,7 +72,7 @@ const UserPage = ({ userData, onBackFinder }: Props) => {
   return (
     <Root>
       <Main>
-        <ProfileWrapper data-testid="userProfile">
+        <ProfileWrapper data-testid="profile">
           <Profile userData={userData} />
         </ProfileWrapper>
         <Stack
@@ -83,7 +83,7 @@ const UserPage = ({ userData, onBackFinder }: Props) => {
             },
           }}
         >
-          <ProfileMobile data-testid="userProfileMobile" userData={userData} />
+          <ProfileMobile data-testid="profileMobile" userData={userData} />
           <Menu
             onClick={(section: number) => {
               setActiveUserSection(section);

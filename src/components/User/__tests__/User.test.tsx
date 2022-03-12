@@ -27,8 +27,8 @@ describe('<User />', () => {
   it('displays the correct content', () => {
     render(renderWithTheme(<User {...props} />));
 
-    expect(screen.queryByTestId('userProfile'));
-    expect(screen.queryByTestId('userProfileMobile')).not.toBeInTheDocument();
+    expect(screen.queryByTestId('profile'));
+    expect(screen.queryByTestId('profileMobile')).not.toBeInTheDocument();
     expect(screen.getByRole('navigation')).toBeInTheDocument();
   });
 

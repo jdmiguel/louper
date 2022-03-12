@@ -97,7 +97,7 @@ const secondPageData = {
   ],
 };
 
-const handler = rest.get('https://api.github.com/search/users', (req, res, ctx) => {
+const handler = rest.get(`${process.env.REACT_APP_BASE_URL}/search/users`, (req, res, ctx) => {
   const query = req.url.searchParams;
   const currentPage = query.get('page');
   const pageData = currentPage === '2' ? secondPageData : firstPageData;

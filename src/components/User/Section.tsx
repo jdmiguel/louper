@@ -4,7 +4,7 @@ import Typography from '@mui/material/Typography';
 import CircularProgress from '@mui/material/CircularProgress';
 import SectionItem from './SectionItem';
 import useIntersectionObserver from '../../hooks/useIntersectionObserver';
-import { BASE_URL, handleErrors } from '../../utils/request';
+import { handleErrors } from '../../utils/request';
 import { SectionType, Repo, User } from '../../utils/types';
 
 const Main = styled('main')({
@@ -40,10 +40,11 @@ type Props = {
 };
 
 const Section = ({ userLogin, sectionType, totalItems, onRequestError }: Props) => {
-  const [isLoading, setIsLoading] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
+  const [isInitialLoad, setIsInitialLoad] = useState(true);
   const [isFullyLoaded, setIsFullyLoaded] = useState(false);
   const [items, setItems] = useState<Items>([]);
-  const [currentItemPage, setCurrentItemPage] = useState(0);
+  const [currentItemPage, setCurrentItemPage] = useState(1);
 
   const loaderRef = useRef<HTMLDivElement | null>(null);
   const loaderEntry = useIntersectionObserver(loaderRef, {});
@@ -56,38 +57,37 @@ const Section = ({ userLogin, sectionType, totalItems, onRequestError }: Props) 
   const abortController = useMemo(() => new AbortController(), []);
 
   useEffect(() => {
-    if (!currentItemPage) {
+    if (!isLoading) {
       return;
     }
 
-    setIsLoading(true);
-
     fetch(
-      `${BASE_URL}/users/${userLogin}/${sectionType}?page=${currentItemPage}&per_page=${itemsPerPage}`,
+      `${process.env.REACT_APP_BASE_URL}/users/${userLogin}/${sectionType}?page=${currentItemPage}&per_page=${itemsPerPage}`,
       {
         signal: abortController.signal,
       },
     )
       .then(handleErrors)
       .then((fetchedItems: Items) => {
+        setIsInitialLoad(false);
+        setIsLoading(false);
         setItems((prevItems: Items) => [...prevItems, ...fetchedItems]);
         setIsFullyLoaded(currentItemPage === totalItemPages);
       })
       .catch((error) => {
-        onRequestError(error.message);
-      })
-      .finally(() => {
         setIsLoading(false);
+        onRequestError(error.message);
       });
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [currentItemPage, totalItemPages]);
+  }, [currentItemPage]);
 
   useEffect(() => {
-    if (isLoaderVisible && !isFullyLoaded) {
+    if (isLoaderVisible && !isInitialLoad && !isFullyLoaded) {
       setCurrentItemPage((prevCurrentItemPage) => prevCurrentItemPage + 1);
+      setIsLoading(true);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [isLoaderVisible, totalItemPages]);
+  }, [isLoaderVisible]);
 
   return (
     <>
@@ -104,7 +104,7 @@ const Section = ({ userLogin, sectionType, totalItems, onRequestError }: Props) 
         ))}
       </Main>
       {!isFullyLoaded && (
-        <LoaderWrapper ref={loaderRef}>
+        <LoaderWrapper ref={loaderRef} data-testid="loader">
           {isLoading && <CircularProgress className="loaderIcon" size={30} thickness={5} />}
         </LoaderWrapper>
       )}

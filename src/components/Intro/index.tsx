@@ -11,7 +11,7 @@ import Toast from '../shared/Toast';
 import InteractiveGlobe from './Globe/Globe';
 import useWindowSize from '../../hooks/useWindowSize';
 import { debounce } from '../../utils';
-import { BASE_URL, handleErrors } from '../../utils/request';
+import { handleErrors } from '../../utils/request';
 import { User, UserData } from '../../utils/types';
 
 const Root = styled('div')({
@@ -152,8 +152,8 @@ const HomePage = ({ onFetchUser }: Props) => {
     setIsLoadingUsers(true);
 
     const endpoint = page
-      ? `${BASE_URL}/search/users?q=${searchQuery}&page=${page}&per_page=${suggestionsPerPage}`
-      : `${BASE_URL}/search/users?q=${searchQuery}&per_page=${suggestionsPerPage}`;
+      ? `${process.env.REACT_APP_BASE_URL}/search/users?q=${searchQuery}&page=${page}&per_page=${suggestionsPerPage}`
+      : `${process.env.REACT_APP_BASE_URL}/search/users?q=${searchQuery}&per_page=${suggestionsPerPage}`;
 
     fetch(endpoint, {
       signal: abortControllerFetchUsers.signal,
@@ -175,7 +175,9 @@ const HomePage = ({ onFetchUser }: Props) => {
   const fetchUser = (userLogin: string) => {
     setIsLoadingUser(true);
 
-    fetch(`${BASE_URL}/users/${userLogin}`, { signal: abortControllerFetchUser.signal })
+    fetch(`${process.env.REACT_APP_BASE_URL}/users/${userLogin}`, {
+      signal: abortControllerFetchUser.signal,
+    })
       .then(handleErrors)
       .then((userData: UserData) => {
         onFetchUser({

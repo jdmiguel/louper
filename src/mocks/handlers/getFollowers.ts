@@ -51,8 +51,9 @@ const data = [
   },
 ];
 
-const handler = rest.get('https://api.github.com/users/:userLogin/followers', (_, res, ctx) =>
-  res(ctx.json(data)),
+const handler = rest.get(
+  `${process.env.REACT_APP_BASE_URL}/users/:userLogin/followers`,
+  (_, res, ctx) => res(ctx.json(data)),
 );
 
 export { handler, data };

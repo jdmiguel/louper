@@ -16,7 +16,7 @@ const data = {
   following: 16,
 };
 
-const handler = rest.get('https://api.github.com/users/:userLogin', (_, res, ctx) =>
+const handler = rest.get(`${process.env.REACT_APP_BASE_URL}/users/:userLogin`, (_, res, ctx) =>
   res(ctx.json(data)),
 );
 
