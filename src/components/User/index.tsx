@@ -6,7 +6,7 @@ import Toast from '../shared/Toast';
 import Footer from '../shared/Footer';
 import Profile from './Profile';
 import ProfileMobile from './ProfileMobile';
-import Section from './Section';
+import Section from './Section/Section';
 import { UserData } from '../../utils/types';
 
 const Root = styled('div')({
