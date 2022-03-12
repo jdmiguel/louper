@@ -1,6 +1,5 @@
 import { render, screen } from '@testing-library/react';
 import '@testing-library/jest-dom';
-import userEvent from '@testing-library/user-event';
 import { renderWithTheme } from '../../../utils/theme';
 import User from '..';
 
@@ -27,7 +26,7 @@ describe('<User />', () => {
   it('displays the correct content', () => {
     render(renderWithTheme(<User {...props} />));
 
-    expect(screen.queryByTestId('profile'));
+    expect(screen.getByTestId('profile')).toBeInTheDocument();
     expect(screen.queryByTestId('profileMobile')).not.toBeInTheDocument();
     expect(screen.getByRole('navigation')).toBeInTheDocument();
   });
@@ -37,13 +36,5 @@ describe('<User />', () => {
 
     const reposMenuItem = screen.getByText(/repos/i).parentElement;
     expect(reposMenuItem).toHaveClass('Mui-selected');
-  });
-
-  it('calls the correct callback when clicking the search menu item', async () => {
-    render(renderWithTheme(<User {...props} />));
-
-    await userEvent.click(screen.getByText(/search/i).parentElement);
-
-    expect(props.onBackFinder).toHaveBeenCalled();
   });
 });

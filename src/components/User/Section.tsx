@@ -104,7 +104,7 @@ const Section = ({ userLogin, sectionType, totalItems, onRequestError }: Props) 
         ))}
       </Main>
       {!isFullyLoaded && (
-        <LoaderWrapper ref={loaderRef} data-testid="loader">
+        <LoaderWrapper ref={loaderRef}>
           {isLoading && <CircularProgress className="loaderIcon" size={30} thickness={5} />}
         </LoaderWrapper>
       )}

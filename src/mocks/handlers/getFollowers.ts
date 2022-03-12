@@ -33,8 +33,8 @@ const data = [
   },
   {
     id: 6,
-    login: 'vini23',
-    html_url: 'https://github.com/vini23',
+    login: 'trocPoe',
+    html_url: 'https://github.com/trocPoe',
     avatar_url: '',
   },
   {

@@ -1,35 +1,61 @@
-import { server, rest } from '../../../mocks/server';
-import { data as reposData } from '../../../mocks/handlers/getRepos';
+// import { server, rest } from '../../../mocks/server';
+// import { data as reposData } from '../../../mocks/handlers/getRepos';
 import { render, screen, waitForElementToBeRemoved } from '@testing-library/react';
 import '@testing-library/jest-dom';
 import Section from '../Section';
 
-describe('<Section />', () => {
+describe.only('<Section />', () => {
   const props = {
     userLogin: 'jdoe',
-    totalItems: 4,
     onRequestError: jest.fn(),
   };
 
-  it('displays the correct content', async () => {
-    render(<Section {...props} sectionType="repos" totalItems={4} />);
+  describe('when section type is repos', () => {
+    it('displays the correct content after loading', async () => {
+      render(<Section {...props} sectionType="repos" totalItems={3} />);
 
-    server.use(
-      rest.get(`${process.env.REACT_APP_BASE_URL}/users/jdoe/repos`, (req, res, ctx) => {
-        const query = req.url.searchParams;
-        const page = query.get('page');
+      expect(screen.getByRole('progressbar')).toBeVisible();
+      await waitForElementToBeRemoved(screen.getByRole('progressbar'));
 
-        console.log({ query });
-        console.log({ page });
-        return res(ctx.json(reposData));
-      }),
-    );
+      expect(screen.queryByText(/no repos added/i)).not.toBeInTheDocument();
+      expect(screen.getByText('Hello world')).toBeInTheDocument();
+      expect(screen.getByText('To do app')).toBeInTheDocument();
+      expect(screen.getByText('Calender')).toBeInTheDocument();
+    });
+  });
 
-    const loader = screen.getByTestId('loader');
-    expect(loader).toBeVisible();
-    await waitForElementToBeRemoved(loader);
+  describe('when section type is following', () => {
+    it('displays the correct content after loading', async () => {
+      render(<Section {...props} sectionType="following" totalItems={5} />);
 
-    expect(screen.getByText('John Doe')).toBeInTheDocument();
-    expect(screen.getByText('jdoe')).toBeInTheDocument();
+      expect(screen.getByRole('progressbar')).toBeVisible();
+      await waitForElementToBeRemoved(screen.getByRole('progressbar'));
+
+      expect(screen.queryByText(/no following added/i)).not.toBeInTheDocument();
+      expect(screen.getByText('phiLands')).toBeInTheDocument();
+      expect(screen.getByText('rani234')).toBeInTheDocument();
+      expect(screen.getByText('linu')).toBeInTheDocument();
+      expect(screen.getByText('pani34')).toBeInTheDocument();
+      expect(screen.getByText('alb009')).toBeInTheDocument();
+    });
+  });
+
+  describe('when section type is followers', () => {
+    it('displays the correct content after loading', async () => {
+      render(<Section {...props} sectionType="followers" totalItems={8} />);
+
+      expect(screen.getByRole('progressbar')).toBeVisible();
+      await waitForElementToBeRemoved(screen.getByRole('progressbar'));
+
+      expect(screen.queryByText(/no followers added/i)).not.toBeInTheDocument();
+      expect(screen.getByText('shara89')).toBeInTheDocument();
+      expect(screen.getByText('malvinetto')).toBeInTheDocument();
+      expect(screen.getByText('vini23')).toBeInTheDocument();
+      expect(screen.getByText('nina45')).toBeInTheDocument();
+      expect(screen.getByText('liniam31')).toBeInTheDocument();
+      expect(screen.getByText('trocPoe')).toBeInTheDocument();
+      expect(screen.getByText('karl52')).toBeInTheDocument();
+      expect(screen.getByText('finn142')).toBeInTheDocument();
+    });
   });
 });

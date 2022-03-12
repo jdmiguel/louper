@@ -87,6 +87,7 @@ const UserPage = ({ userData, onBackFinder }: Props) => {
           <Menu
             onClick={(section: number) => {
               setActiveUserSection(section);
+              console.log('section: ', section);
               if (section === 3) {
                 onBackFinder();
               }
