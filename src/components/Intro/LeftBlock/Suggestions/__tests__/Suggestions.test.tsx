@@ -1,8 +1,8 @@
 import { render, screen } from '@testing-library/react';
 import '@testing-library/jest-dom';
 import userEvent from '@testing-library/user-event';
-import { renderWithTheme } from '../../../../utils/theme';
-import Suggestions from '../Suggestions';
+import { renderWithTheme } from '../../../../../utils/theme';
+import Suggestions from '..';
 
 describe('<Suggestions />', () => {
   const props = {

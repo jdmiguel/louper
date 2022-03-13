@@ -6,6 +6,7 @@ import Suggestion from '../Suggestion';
 import { User } from '../../../../utils/types';
 
 const SuggestionsWrapper = styled('div')({
+  alignContent: 'flex-start',
   display: 'grid',
   gap: 14,
   gridTemplateColumns: 'repeat(2, 1fr)',

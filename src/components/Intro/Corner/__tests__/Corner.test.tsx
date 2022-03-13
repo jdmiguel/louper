@@ -1,7 +1,7 @@
 import { render } from '@testing-library/react';
 import '@testing-library/jest-dom';
 import { renderWithTheme } from '../../../../utils/theme';
-import Corner from '../Corner';
+import Corner from '..';
 
 describe('<Corner />', () => {
   it('displays the content properly', () => {

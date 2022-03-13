@@ -32,7 +32,7 @@ describe('<Finder />', () => {
     render(<Finder {...props} />);
 
     const input = screen.getByPlaceholderText('Type user name...');
-    await userEvent.type(input, 'Dan');
+    await userEvent.type(input, 'jdmiguel');
 
     expect(props.onChangeSearchQuery).toHaveBeenCalled();
   });
@@ -51,26 +51,28 @@ describe('<Finder />', () => {
 
   describe('when there is a searchQuery', () => {
     it('displays the search query as input value', () => {
-      render(<Finder {...props} searchQuery="Dan" />);
+      render(<Finder {...props} searchQuery="jdmiguel" />);
 
-      expect(screen.getByPlaceholderText('Type user name...').getAttribute('value')).toBe('Dan');
+      expect(screen.getByPlaceholderText('Type user name...').getAttribute('value')).toBe(
+        'jdmiguel',
+      );
     });
 
     it('calls the correct callback when clicking the search button', async () => {
-      render(<Finder {...props} searchQuery="Dan" />);
+      render(<Finder {...props} searchQuery="jdmiguel" />);
 
       const searchButton = screen.getByRole('button');
       await userEvent.click(searchButton);
 
-      expect(props.onFetchUser).toHaveBeenCalledWith('Dan');
+      expect(props.onFetchUser).toHaveBeenCalledWith('jdmiguel');
     });
 
     it('calls the correct callback when the enter key is pressed', async () => {
-      render(<Finder {...props} searchQuery="Dan" />);
+      render(<Finder {...props} searchQuery="jdmiguel" />);
 
       await userEvent.keyboard('{Enter}');
 
-      expect(props.onFetchUser).toHaveBeenCalledWith('Dan');
+      expect(props.onFetchUser).toHaveBeenCalledWith('jdmiguel');
     });
   });
 });

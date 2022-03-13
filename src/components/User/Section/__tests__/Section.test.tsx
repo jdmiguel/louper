@@ -2,7 +2,7 @@
 // import { data as reposData } from '../../../mocks/handlers/getRepos';
 import { render, screen, waitForElementToBeRemoved } from '@testing-library/react';
 import '@testing-library/jest-dom';
-import Section from '../Section';
+import Section from '..';
 
 describe.only('<Section />', () => {
   const props = {
