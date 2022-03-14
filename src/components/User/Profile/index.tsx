@@ -5,7 +5,7 @@ import TextTag from '../../shared/TextTag';
 import Link from '../../shared/Link';
 import { UserData } from '../../../utils/types';
 
-const Root = styled('div')({
+const Root = styled('main')({
   display: 'flex',
   flexDirection: 'column',
   maxWidth: 240,

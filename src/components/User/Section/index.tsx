@@ -7,7 +7,7 @@ import useIntersectionObserver from '../../../hooks/useIntersectionObserver';
 import { handleErrors } from '../../../utils/request';
 import { SectionType, Repo, User } from '../../../utils/types';
 
-const Main = styled('main')({
+const Root = styled('section')({
   display: 'grid',
   gridGap: 20,
   paddingTop: 20,
@@ -91,7 +91,7 @@ const Section = ({ userLogin, sectionType, totalItems, onRequestError }: Props) 
 
   return (
     <>
-      <Main data-testid="user-section">
+      <Root data-testid="section">
         {totalItems === 0 && (
           <EmptyMsg>
             <Typography variant="h6" sx={{ color: 'neutral.light' }}>
@@ -102,7 +102,7 @@ const Section = ({ userLogin, sectionType, totalItems, onRequestError }: Props) 
         {items.map((item) => (
           <SectionItem key={item.id} theme={sectionType} data={item} />
         ))}
-      </Main>
+      </Root>
       {!isFullyLoaded && (
         <LoaderWrapper ref={loaderRef}>
           {isLoading && <CircularProgress className="loaderIcon" size={30} thickness={5} />}

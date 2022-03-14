@@ -114,6 +114,7 @@ const Finder = ({
         }}
       />
       <StyledIconButton
+        aria-label="search"
         onClick={() => {
           setIsValidating(true);
           if (searchQuery !== '') {
