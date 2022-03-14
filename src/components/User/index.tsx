@@ -83,11 +83,10 @@ const UserPage = ({ userData, onBackFinder }: Props) => {
             },
           }}
         >
-          <ProfileMobile data-testid="profileMobile" userData={userData} />
+          <ProfileMobile data-testid="profile-mobile" userData={userData} />
           <Menu
             onClick={(section: number) => {
               setActiveUserSection(section);
-              console.log('section: ', section);
               if (section === 3) {
                 onBackFinder();
               }

@@ -9,24 +9,30 @@ describe('<Suggestions />', () => {
     items: [
       {
         id: 1,
-        login: 'jdoe',
-        html_url: 'https://github.com/JohnDoe',
-        avatar_url: 'https://github.com/JohnDoe.jpg',
-      },
-      {
-        id: 2,
-        login: 'janeD12',
-        html_url: 'https://github.com/JaneDoe',
-        avatar_url: 'https://github.com/JaneDoe.jpg',
+        login: 'jdm',
+        html_url: 'https://github.com/jdm',
+        avatar_url: '',
       },
       {
         id: 3,
-        login: 'peMac',
-        html_url: 'https://github.com/PeterMacbeth',
-        avatar_url: 'https://github.com/PeterMacbeth.jpg',
+        login: 'jdm12',
+        html_url: 'https://github.com/jdm2',
+        avatar_url: '',
+      },
+      {
+        id: 5,
+        login: 'jdm34',
+        html_url: 'https://github.com/jdm34',
+        avatar_url: '',
+      },
+      {
+        id: 7,
+        login: 'jdmiguel',
+        html_url: 'https://github.com/jdmiguel',
+        avatar_url: '',
       },
     ],
-    totalItems: 5,
+    totalItems: 4,
     withPagination: false,
     onPaginate: jest.fn(),
     onSelectUser: jest.fn(),
@@ -35,9 +41,12 @@ describe('<Suggestions />', () => {
   it('displays the suggestions properly', () => {
     render(<Suggestions {...props} />);
 
-    expect(screen.getByText('jdoe')).toBeInTheDocument();
-    expect(screen.getByText('janeD12')).toBeInTheDocument();
-    expect(screen.getByText('peMac')).toBeInTheDocument();
+    const suggestions = screen.getByTestId('suggestions');
+    expect(suggestions.children.length).toBe(3);
+
+    expect(screen.getByText('jdm')).toBeInTheDocument();
+    expect(screen.getByText('jdm1')).toBeInTheDocument();
+    expect(screen.getByText('jdm12')).toBeInTheDocument();
   });
 
   it('does not displays the pagination', () => {
@@ -57,11 +66,11 @@ describe('<Suggestions />', () => {
 
     await userEvent.click(
       screen.getByRole('button', {
-        name: /jdoe/i,
+        name: /jdmiguel/i,
       }),
     );
 
-    expect(props.onSelectUser).toHaveBeenCalledWith('jdoe');
+    expect(props.onSelectUser).toHaveBeenCalledWith('jdmiguel');
   });
 
   it('calls the correct callback when a pagination item is clicked', async () => {

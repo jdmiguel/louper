@@ -29,7 +29,7 @@ describe('<Menu />', () => {
     expect(screen.getByTestId('SearchIcon')).toBeInTheDocument();
   });
 
-  it('call the correct callback when clicking the menu items', async () => {
+  it('calls the correct callback when clicking the menu items', async () => {
     render(renderWithTheme(<Menu {...props} />));
 
     // Click the second menu item

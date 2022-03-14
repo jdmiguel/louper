@@ -59,7 +59,7 @@ type Props = {
 
 const Suggestions = ({ items, totalItems, withPagination, onPaginate, onSelectUser }: Props) => (
   <Stack sx={{ alignItems: 'center' }}>
-    <SuggestionsWrapper>
+    <SuggestionsWrapper data-testid="suggestions">
       {items.map((user) => (
         <Suggestion key={user.id} data={user} onClick={onSelectUser} />
       ))}

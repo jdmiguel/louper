@@ -69,7 +69,7 @@ type Props = {
   onRequestError: (userLogin: string) => void;
 };
 
-const LeftBlock = ({ onFetchUser, onRequestError }: Props) => {
+const Search = ({ onFetchUser, onRequestError }: Props) => {
   const [searchQuery, setSearchQuery] = useState('');
   const [isLoadingUser, setIsLoadingUser] = useState(false);
   const [isLoadingUsers, setIsLoadingUsers] = useState(false);
@@ -94,7 +94,7 @@ const LeftBlock = ({ onFetchUser, onRequestError }: Props) => {
     };
   }, [abortControllerFetchUser, abortControllerFetchUsers]);
 
-  const fetchUsers = (searchQuery: string, page?: number) => {
+  const fetchUsers = (searchQuery: string, page = 1) => {
     setIsLoadingUsers(true);
 
     fetch(
@@ -150,9 +150,7 @@ const LeftBlock = ({ onFetchUser, onRequestError }: Props) => {
   };
 
   // eslint-disable-next-line react-hooks/exhaustive-deps
-  const debouncedFetchUsers = useCallback(debounce(fetchUsers, 500), [
-    DefaultValues.SuggestionsPerPage,
-  ]);
+  const debouncedFetchUsers = useCallback(debounce(fetchUsers, 500), []);
 
   return (
     <Root>
@@ -193,7 +191,7 @@ const LeftBlock = ({ onFetchUser, onRequestError }: Props) => {
           <Suggestions
             items={usersData.items}
             totalItems={Math.ceil(totalSuggestions / DefaultValues.SuggestionsPerPage)}
-            withPagination={totalSuggestions >= DefaultValues.SuggestionsPerPage}
+            withPagination={totalSuggestions > DefaultValues.SuggestionsPerPage}
             onPaginate={(page: number) => fetchUsers(searchQuery, page)}
             onSelectUser={(userName: string) => {
               setSearchQuery(userName);
@@ -210,4 +208,4 @@ const LeftBlock = ({ onFetchUser, onRequestError }: Props) => {
   );
 };
 
-export default LeftBlock;
+export default Search;

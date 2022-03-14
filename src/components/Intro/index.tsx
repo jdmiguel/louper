@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { styled } from '@mui/material/styles';
 import Corner from './Corner';
-import LeftBlock from './LeftBlock';
+import Search from './Search';
 import Footer from '../shared/Footer';
 import Toast from '../shared/Toast';
 import InteractiveGlobe from './Globe/Globe';
@@ -57,7 +57,7 @@ const HomePage = ({ onFetchUser }: Props) => {
         <Corner />
       </CornerWrapper>
       <Main>
-        <LeftBlock
+        <Search
           onFetchUser={onFetchUser}
           onRequestError={(errorMsg: string) => {
             setErrorMessage(errorMsg);

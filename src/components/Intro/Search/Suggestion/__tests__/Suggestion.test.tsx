@@ -6,10 +6,10 @@ import Suggestion from '..';
 describe('<Suggestion />', () => {
   const props = {
     data: {
-      id: 1,
-      login: 'jdoe',
-      html_url: 'https://github.com/JohnDoe',
-      avatar_url: 'https://github.com/JohnDoe.jpg',
+      id: 7,
+      login: 'jdmiguel',
+      html_url: 'https://github.com/jdmiguel',
+      avatar_url: '',
     },
     onClick: jest.fn(),
   };
@@ -17,10 +17,10 @@ describe('<Suggestion />', () => {
   it('displays the content properly', () => {
     render(<Suggestion {...props} />);
 
-    expect(screen.getByText('jdoe')).toBeInTheDocument();
+    expect(screen.getByText('jdmiguel')).toBeInTheDocument();
 
     const userAvatar = screen.getByAltText('user avatar');
-    expect(userAvatar.getAttribute('src')).toBe('https://github.com/JohnDoe.jpg');
+    expect(userAvatar.getAttribute('src')).toBe('https://github.com/jdmiguel.jpg');
   });
 
   it('calls the correct callback when clicking', async () => {
@@ -28,6 +28,6 @@ describe('<Suggestion />', () => {
 
     await userEvent.click(screen.getByRole('button'));
 
-    expect(props.onClick).toHaveBeenCalledWith('jdoe');
+    expect(props.onClick).toHaveBeenCalledWith('jdmiguel');
   });
 });

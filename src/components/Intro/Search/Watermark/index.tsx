@@ -1,7 +1,7 @@
 import { colors } from '../../../../utils/colors';
 
 const Watermark = () => (
-  <svg width="230" height="230" viewBox="0 0 230 230">
+  <svg data-testid="watermark" width="230" height="230" viewBox="0 0 230 230">
     <path
       fillRule="evenodd"
       clipRule="evenodd"

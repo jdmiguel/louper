@@ -1,17 +1,24 @@
-import { colors } from '../../../../utils/colors';
+// Jest Snapshot v1, https://goo.gl/fbAQLP
 
-const Logo = () => (
-  <svg width="280" height="79" viewBox="0 0 280 79" fill="none">
+exports[`<Logo /> displays the content properly 1`] = `
+<div>
+  <svg
+    data-testid="logo"
+    fill="none"
+    height="79"
+    viewBox="0 0 280 79"
+    width="280"
+  >
     <path
       d="M36.9724 58.3775H0L10.2971 0H24.8915L16.8646 45.729H39.2426L36.9724 58.3775Z"
       fill="url(#paint4_linear_105_2)"
     />
     <g>
       <path
-        fillRule="evenodd"
-        clipRule="evenodd"
+        clip-rule="evenodd"
         d="M80.4327 32.6833C81.9914 34.3672 82.7765 36.4265 82.7765 38.8272C82.7765 40.3859 82.5944 41.7853 82.2417 43.0368C81.8777 44.277 81.4226 45.2896 80.8878 46.0746C80.3303 46.8596 79.6591 47.5423 78.8626 48.1339C78.0548 48.7256 77.3153 49.1579 76.644 49.431C75.9728 49.704 75.1991 49.9202 74.323 50.0681C73.4583 50.216 72.8098 50.2956 72.3547 50.3298L70.9326 50.3639L69.7948 50.398L68.2133 50.4322L66.6319 50.398L65.4941 50.3639L64.0719 50.3298C63.6168 50.307 62.9683 50.2274 62.1036 50.0681C61.2276 49.9202 60.4653 49.7154 59.7826 49.431C59.1114 49.1579 58.3718 48.7256 57.564 48.1339C56.7562 47.5423 56.085 46.8596 55.5275 46.0746C54.9814 45.2896 54.5263 44.277 54.1736 43.0368C53.8209 41.7853 53.6388 40.3859 53.6388 38.8272C53.6388 36.4265 54.4239 34.3786 55.9826 32.6833C55.8119 32.6037 55.8005 31.7618 55.9598 30.1575C56.0963 28.5533 56.4377 27.0742 56.9952 25.7203C58.9407 25.9251 61.3414 27.0287 64.2085 29.0084C65.1756 28.7581 66.5067 28.6216 68.202 28.6216C69.9768 28.6216 71.308 28.7467 72.1954 29.0084C73.5039 28.121 74.7554 27.4042 75.95 26.8581C77.156 26.312 78.0321 25.9934 78.5896 25.9137L79.4088 25.7203C79.9663 27.0742 80.3076 28.5533 80.4441 30.1575C80.6148 31.7618 80.6034 32.6037 80.4327 32.6833ZM68.2703 49.0357C71.7745 49.0357 74.4141 48.6147 76.2117 47.7728C77.998 46.9309 78.9082 45.2015 78.9082 42.5733C78.9082 41.0601 78.3393 39.7858 77.1902 38.7732C76.6099 38.2271 75.9159 37.8858 75.1309 37.7607C74.3572 37.6355 73.1626 37.6355 71.5583 37.7607C69.9541 37.8858 68.8619 37.9541 68.2703 37.9541C67.4625 37.9541 66.5978 37.9086 65.5169 37.8289L62.9797 37.6696C62.3654 37.6469 61.7055 37.7265 60.9887 37.8972C60.2719 38.0678 59.6803 38.3637 59.2138 38.7846C58.1216 39.7517 57.5755 41.026 57.5755 42.5847C57.5755 45.2015 58.4629 46.9423 60.2378 47.7842C62.0127 48.6261 64.6409 49.0471 68.1451 49.0471L68.2703 49.0357Z"
         fill="url(#paint5_linear_105_2)"
+        fill-rule="evenodd"
       />
       <path
         d="M74.6302 40.92C74.232 40.3625 73.7655 40.0894 73.208 40.0894C72.6278 40.0894 72.1272 40.3625 71.7176 40.92C71.3194 41.4661 71.1146 42.1374 71.1146 42.9452C71.1146 43.7416 71.3194 44.4242 71.7176 44.9703C72.1158 45.5165 72.6164 45.7895 73.208 45.7895C73.7542 45.7895 74.2206 45.5165 74.6302 44.9703C75.0284 44.4242 75.2332 43.753 75.2332 42.9452C75.2332 42.1487 75.0284 41.4661 74.6302 40.92Z"
@@ -47,118 +54,167 @@ const Logo = () => (
       fill="url(#paint3_linear_105_2)"
     />
     <defs>
-      <linearGradient
+      <lineargradient
+        gradientUnits="userSpaceOnUse"
         id="paint0_linear_105_2"
         x1="-12"
-        y1="79"
         x2="289"
+        y1="79"
         y2="79"
-        gradientUnits="userSpaceOnUse"
       >
-        <stop stopColor={colors.lightPink} />
-        <stop offset="1" stopColor={colors.lightPurple} />
-      </linearGradient>
-      <linearGradient
+        <stop
+          stop-color="#e56e94"
+        />
+        <stop
+          offset="1"
+          stop-color="#6b41dd"
+        />
+      </lineargradient>
+      <lineargradient
+        gradientUnits="userSpaceOnUse"
         id="paint1_linear_105_2"
         x1="-12"
-        y1="79"
         x2="289"
+        y1="79"
         y2="79"
-        gradientUnits="userSpaceOnUse"
       >
-        <stop stopColor={colors.lightPink} />
-        <stop offset="1" stopColor={colors.lightPurple} />
-      </linearGradient>
-      <linearGradient
+        <stop
+          stop-color="#e56e94"
+        />
+        <stop
+          offset="1"
+          stop-color="#6b41dd"
+        />
+      </lineargradient>
+      <lineargradient
+        gradientUnits="userSpaceOnUse"
         id="paint2_linear_105_2"
         x1="-12"
-        y1="79"
         x2="289"
+        y1="79"
         y2="79"
-        gradientUnits="userSpaceOnUse"
       >
-        <stop stopColor={colors.lightPink} />
-        <stop offset="1" stopColor={colors.lightPurple} />
-      </linearGradient>
-      <linearGradient
+        <stop
+          stop-color="#e56e94"
+        />
+        <stop
+          offset="1"
+          stop-color="#6b41dd"
+        />
+      </lineargradient>
+      <lineargradient
+        gradientUnits="userSpaceOnUse"
         id="paint3_linear_105_2"
         x1="-12"
-        y1="79"
         x2="289"
+        y1="79"
         y2="79"
-        gradientUnits="userSpaceOnUse"
       >
-        <stop stopColor={colors.lightPink} />
-        <stop offset="1" stopColor={colors.lightPurple} />
-      </linearGradient>
-      <linearGradient
+        <stop
+          stop-color="#e56e94"
+        />
+        <stop
+          offset="1"
+          stop-color="#6b41dd"
+        />
+      </lineargradient>
+      <lineargradient
+        gradientUnits="userSpaceOnUse"
         id="paint4_linear_105_2"
         x1="-12"
-        y1="79"
         x2="289"
+        y1="79"
         y2="79"
-        gradientUnits="userSpaceOnUse"
       >
-        <stop stopColor={colors.lightPink} />
-        <stop offset="1" stopColor={colors.lightPurple} />
-      </linearGradient>
-      <linearGradient
+        <stop
+          stop-color="#e56e94"
+        />
+        <stop
+          offset="1"
+          stop-color="#6b41dd"
+        />
+      </lineargradient>
+      <lineargradient
+        gradientUnits="userSpaceOnUse"
         id="paint5_linear_105_2"
         x1="-12"
-        y1="79"
         x2="289"
+        y1="79"
         y2="79"
-        gradientUnits="userSpaceOnUse"
       >
-        <stop stopColor={colors.lightPink} />
-        <stop offset="1" stopColor={colors.lightPurple} />
-      </linearGradient>
-      <linearGradient
+        <stop
+          stop-color="#e56e94"
+        />
+        <stop
+          offset="1"
+          stop-color="#6b41dd"
+        />
+      </lineargradient>
+      <lineargradient
+        gradientUnits="userSpaceOnUse"
         id="paint6_linear_105_2"
         x1="-12"
-        y1="79"
         x2="289"
+        y1="79"
         y2="79"
-        gradientUnits="userSpaceOnUse"
       >
-        <stop stopColor={colors.lightPink} />
-        <stop offset="1" stopColor={colors.lightPurple} />
-      </linearGradient>
-      <linearGradient
+        <stop
+          stop-color="#e56e94"
+        />
+        <stop
+          offset="1"
+          stop-color="#6b41dd"
+        />
+      </lineargradient>
+      <lineargradient
+        gradientUnits="userSpaceOnUse"
         id="paint7_linear_105_2"
         x1="-12"
-        y1="79"
         x2="289"
+        y1="79"
         y2="79"
-        gradientUnits="userSpaceOnUse"
       >
-        <stop stopColor={colors.lightPink} />
-        <stop offset="1" stopColor={colors.lightPurple} />
-      </linearGradient>
-      <linearGradient
+        <stop
+          stop-color="#e56e94"
+        />
+        <stop
+          offset="1"
+          stop-color="#6b41dd"
+        />
+      </lineargradient>
+      <lineargradient
+        gradientUnits="userSpaceOnUse"
         id="paint8_linear_105_2"
         x1="-12"
-        y1="79"
         x2="289"
+        y1="79"
         y2="79"
-        gradientUnits="userSpaceOnUse"
       >
-        <stop stopColor={colors.lightPink} />
-        <stop offset="1" stopColor={colors.lightPurple} />
-      </linearGradient>
-      <linearGradient
+        <stop
+          stop-color="#e56e94"
+        />
+        <stop
+          offset="1"
+          stop-color="#6b41dd"
+        />
+      </lineargradient>
+      <lineargradient
+        gradientUnits="userSpaceOnUse"
         id="paint9_linear_105_2"
         x1="-12"
-        y1="79"
         x2="289"
+        y1="79"
         y2="79"
-        gradientUnits="userSpaceOnUse"
       >
-        <stop stopColor={colors.lightPink} />
-        <stop offset="1" stopColor={colors.lightPurple} />
-      </linearGradient>
+        <stop
+          stop-color="#e56e94"
+        />
+        <stop
+          offset="1"
+          stop-color="#6b41dd"
+        />
+      </lineargradient>
     </defs>
   </svg>
-);
-
-export default Logo;
+</div>
+`;

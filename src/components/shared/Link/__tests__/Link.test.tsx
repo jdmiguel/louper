@@ -4,8 +4,8 @@ import Link from '..';
 
 describe('<Link />', () => {
   const props = {
-    url: 'https://github.com/JohnDoe',
-    ariaLabel: 'View John Doe profile on GitHub',
+    url: 'https://github.com/jdmiguel',
+    ariaLabel: 'View jdmiguel profile on GitHub',
     content: 'VISIT PROFILE',
   };
 
@@ -13,8 +13,8 @@ describe('<Link />', () => {
     render(<Link {...props} />);
 
     const link = screen.getByText('VISIT PROFILE');
-    expect(link.getAttribute('href')).toBe('https://github.com/JohnDoe');
-    expect(link.getAttribute('aria-label')).toBe('View John Doe profile on GitHub');
+    expect(link.getAttribute('href')).toBe('https://github.com/jdmiguel');
+    expect(link.getAttribute('aria-label')).toBe('View jdmiguel profile on GitHub');
   });
 
   it('displays the selected icon', () => {

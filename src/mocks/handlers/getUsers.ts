@@ -1,7 +1,7 @@
 import { rest } from 'msw';
 
 const users = {
-  total_count: 14,
+  total_count: 15,
   items: [
     {
       id: 1,
@@ -97,14 +97,13 @@ const users = {
 };
 
 enum SearchQuery {
-  Min = 'jdm',
-  Med = 'jdmi',
-  Complete = 'jdmiguel',
+  Default = 'jdm',
+  Filter = 'jdmi',
 }
 
 const handler = rest.get(`${process.env.REACT_APP_BASE_URL}/search/users`, (req, res, ctx) => {
   const query = req.url.searchParams;
-  const searchQuery = query.get('q') || SearchQuery.Med;
+  const searchQuery = query.get('q') || SearchQuery.Default;
   const currentPage = query.get('page');
 
   let pageData = {
@@ -113,10 +112,10 @@ const handler = rest.get(`${process.env.REACT_APP_BASE_URL}/search/users`, (req,
   };
 
   if (currentPage === '2') {
-    pageData = { ...pageData, items: users.items.slice(10, 15) };
+    pageData = { ...pageData, items: users.items.slice(9, 15) };
   }
 
-  if (searchQuery !== SearchQuery.Min && SearchQuery.Complete.includes(searchQuery)) {
+  if (searchQuery.includes(SearchQuery.Filter)) {
     pageData = { total_count: 1, items: users.items.slice(6, 7) };
   }
 

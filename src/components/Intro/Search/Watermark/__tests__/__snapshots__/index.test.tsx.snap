@@ -3,6 +3,7 @@
 exports[`<Watermark /> displays the content properly 1`] = `
 <div>
   <svg
+    data-testid="watermark"
     height="230"
     viewBox="0 0 230 230"
     width="230"

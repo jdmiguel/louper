@@ -91,7 +91,7 @@ const Section = ({ userLogin, sectionType, totalItems, onRequestError }: Props) 
 
   return (
     <>
-      <Main>
+      <Main data-testid="user-section">
         {totalItems === 0 && (
           <EmptyMsg>
             <Typography variant="h6" sx={{ color: 'neutral.light' }}>
