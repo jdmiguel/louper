@@ -92,14 +92,14 @@ describe('<Search />', () => {
       expect(suggestions.children.length).toBe(9);
 
       expect(screen.getByText('jdm')).toBeInTheDocument();
-      expect(screen.getByText('jdm1')).toBeInTheDocument();
-      expect(screen.getByText('jdm12')).toBeInTheDocument();
-      expect(screen.getByText('jdm23')).toBeInTheDocument();
-      expect(screen.getByText('jdm34')).toBeInTheDocument();
-      expect(screen.getByText('jdm71')).toBeInTheDocument();
+      expect(screen.getByText('jdma')).toBeInTheDocument();
+      expect(screen.getByText('jdmac')).toBeInTheDocument();
+      expect(screen.getByText('jdmattheus')).toBeInTheDocument();
+      expect(screen.getByText('jdme')).toBeInTheDocument();
+      expect(screen.getByText('jdmfoil')).toBeInTheDocument();
       expect(screen.getByText('jdmiguel')).toBeInTheDocument();
-      expect(screen.getByText('jdmhmfd')).toBeInTheDocument();
-      expect(screen.getByText('jdmrr')).toBeInTheDocument();
+      expect(screen.getByText('jdmfua')).toBeInTheDocument();
+      expect(screen.getByText('jdmfuon')).toBeInTheDocument();
     });
 
     it('displays the pagination with the correct selected page', async () => {

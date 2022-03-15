@@ -15,14 +15,14 @@ describe('<Suggestions />', () => {
       },
       {
         id: 3,
-        login: 'jdm12',
+        login: 'jdmac',
         html_url: 'https://github.com/jdm2',
         avatar_url: '',
       },
       {
         id: 5,
-        login: 'jdm34',
-        html_url: 'https://github.com/jdm34',
+        login: 'jdme',
+        html_url: 'https://github.com/jdme',
         avatar_url: '',
       },
       {
@@ -45,8 +45,8 @@ describe('<Suggestions />', () => {
     expect(suggestions.children.length).toBe(4);
 
     expect(screen.getByText('jdm')).toBeInTheDocument();
-    expect(screen.getByText('jdm12')).toBeInTheDocument();
-    expect(screen.getByText('jdm34')).toBeInTheDocument();
+    expect(screen.getByText('jdmac')).toBeInTheDocument();
+    expect(screen.getByText('jdme')).toBeInTheDocument();
     expect(screen.getByText('jdmiguel')).toBeInTheDocument();
   });
 
