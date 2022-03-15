@@ -12,13 +12,13 @@ const users = {
     {
       id: 2,
       login: 'jdm1',
-      html_url: 'https://github.com/jdm',
+      html_url: 'https://github.com/jdm1',
       avatar_url: '',
     },
     {
       id: 3,
       login: 'jdm12',
-      html_url: 'https://github.com/jdm2',
+      html_url: 'https://github.com/jdm12',
       avatar_url: '',
     },
     {

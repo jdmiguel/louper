@@ -7,22 +7,22 @@ describe('<SectionItem />', () => {
     id: 1,
     name: 'Hello world',
     description: 'First repo with classic hello world',
-    html_url: 'https://github.com/JohnDoe/hello_world',
+    html_url: 'https://github.com/jdmiguel/hello_world',
     topics: ['javascript'],
   };
 
   const followingData = {
     id: 1,
-    login: 'janeD12',
-    html_url: 'https://github.com/JaneDoe',
-    avatar_url: 'https://github.com/JaneDoe.jpg',
+    login: 'phiLands',
+    html_url: 'https://github.com/phiLands',
+    avatar_url: 'https://github.com/phiLands.jpg',
   };
 
   const followerData = {
     id: 2,
-    login: 'peMac',
-    html_url: 'https://github.com/PeterMacbeth',
-    avatar_url: 'https://github.com/PeterMacbeth.jpg',
+    login: 'shara89',
+    html_url: 'https://github.com/shara89',
+    avatar_url: 'https://github.com/shara89.jpg',
   };
 
   describe('when the theme is repos', () => {
@@ -38,7 +38,7 @@ describe('<SectionItem />', () => {
 
       const repoLink = screen.getByText(/Visit repo/i);
       expect(repoLink.getAttribute('aria-label')).toBe('View Hello world repository on GitHub');
-      expect(repoLink.getAttribute('href')).toBe('https://github.com/JohnDoe/hello_world');
+      expect(repoLink.getAttribute('href')).toBe('https://github.com/jdmiguel/hello_world');
     });
 
     it('displays a default description when no description', () => {
@@ -61,14 +61,14 @@ describe('<SectionItem />', () => {
       expect(screen.getByTestId('userContent')).toBeInTheDocument();
       expect(screen.queryByTestId('repoContent')).not.toBeInTheDocument();
 
-      expect(screen.getByText('janeD12')).toBeInTheDocument();
+      expect(screen.getByText('phiLands')).toBeInTheDocument();
 
       const userAvatar = screen.getByAltText('user following avatar');
-      expect(userAvatar.getAttribute('src')).toBe('https://github.com/JaneDoe.jpg');
+      expect(userAvatar.getAttribute('src')).toBe('https://github.com/phiLands.jpg');
 
       const userLink = screen.getByText(/Visit profile/i);
-      expect(userLink.getAttribute('aria-label')).toBe('View janeD12 profile on GitHub');
-      expect(userLink.getAttribute('href')).toBe('https://github.com/JaneDoe');
+      expect(userLink.getAttribute('aria-label')).toBe('View phiLands profile on GitHub');
+      expect(userLink.getAttribute('href')).toBe('https://github.com/phiLands');
     });
 
     it('displays the visibility icon', () => {
@@ -84,14 +84,14 @@ describe('<SectionItem />', () => {
       expect(screen.getByTestId('userContent')).toBeInTheDocument();
       expect(screen.queryByTestId('repoContent')).not.toBeInTheDocument();
 
-      expect(screen.getByText('peMac')).toBeInTheDocument();
+      expect(screen.getByText('shara89')).toBeInTheDocument();
 
       const userAvatar = screen.getByAltText('user followers avatar');
-      expect(userAvatar.getAttribute('src')).toBe('https://github.com/PeterMacbeth.jpg');
+      expect(userAvatar.getAttribute('src')).toBe('https://github.com/shara89.jpg');
 
       const userLink = screen.getByText(/Visit profile/i);
-      expect(userLink.getAttribute('aria-label')).toBe('View peMac profile on GitHub');
-      expect(userLink.getAttribute('href')).toBe('https://github.com/PeterMacbeth');
+      expect(userLink.getAttribute('aria-label')).toBe('View shara89 profile on GitHub');
+      expect(userLink.getAttribute('href')).toBe('https://github.com/shara89');
     });
 
     it('displays the favorite icon', () => {

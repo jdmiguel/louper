@@ -4,8 +4,8 @@ const data = [
   {
     id: 1,
     login: 'phiLands',
-    html_url: 'https://github.com/PhillipLandsdale',
-    avatar_url: '',
+    html_url: 'https://github.com/phiLands',
+    avatar_url: 'https://github.com/phiLands.jpg',
   },
   {
     id: 2,

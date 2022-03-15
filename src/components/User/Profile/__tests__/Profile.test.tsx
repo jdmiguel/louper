@@ -5,16 +5,16 @@ import Profile from '..';
 describe('<Profile />', () => {
   const props = {
     userData: {
-      login: 'jdoe',
-      html_url: 'https://github.com/JohnDoe',
-      avatar_url: 'https://github.com/JohnDoe.jpg',
+      login: 'jdmiguel',
+      html_url: 'https://github.com/jdmiguel',
+      avatar_url: 'https://github.com/jdmiguel.jpg',
       created_at: '2014-03-20T23:24:22Z',
-      name: 'John Doe',
+      name: 'Jaime De Miguel',
       bio: 'Frontend developer',
-      email: 'jdoe@gmail.com',
+      email: 'jdmiguel@gmail.com',
       location: 'Dublin',
-      blog: 'https://jdoe.netlify.app/',
-      company: 'Google',
+      blog: 'https://jdmiguel.netlify.app/',
+      company: 'Kitman Labs',
       public_repos: 30,
       followers: 12,
       following: 16,
@@ -25,32 +25,32 @@ describe('<Profile />', () => {
     render(<Profile {...props} />);
 
     const userAvatar = screen.getByAltText('user avatar');
-    expect(userAvatar.getAttribute('src')).toBe('https://github.com/JohnDoe.jpg');
+    expect(userAvatar.getAttribute('src')).toBe('https://github.com/jdmiguel.jpg');
   });
 
   it('displays the correct main data', () => {
     render(<Profile {...props} />);
 
-    const mainInfo = screen.getByText('jdoe').parentElement;
+    const mainInfo = screen.getByText('jdmiguel').parentElement;
     expect(mainInfo.children).toHaveLength(3);
 
-    expect(screen.getByText('John Doe')).toBeInTheDocument();
+    expect(screen.getByText('Jaime De Miguel')).toBeInTheDocument();
     expect(screen.getByText('Frontend developer')).toBeInTheDocument();
   });
 
   it('does not display the name field when no name', () => {
     render(<Profile {...props} userData={{ ...props.userData, name: null }} />);
 
-    const mainInfo = screen.getByText('jdoe').parentElement;
+    const mainInfo = screen.getByText('jdmiguel').parentElement;
     expect(mainInfo.children).toHaveLength(2);
 
-    expect(screen.queryByText('John Doe')).not.toBeInTheDocument();
+    expect(screen.queryByText('Jaime De Miguel')).not.toBeInTheDocument();
   });
 
   it('does not display the bio field when no bio', () => {
     render(<Profile {...props} userData={{ ...props.userData, bio: null }} />);
 
-    const mainInfo = screen.getByText('jdoe').parentElement;
+    const mainInfo = screen.getByText('jdmiguel').parentElement;
     expect(mainInfo.children).toHaveLength(2);
 
     expect(screen.queryByText('Frontend developer')).not.toBeInTheDocument();
@@ -59,7 +59,7 @@ describe('<Profile />', () => {
   it('renders the correct info details', () => {
     render(<Profile {...props} />);
 
-    const details = screen.getByText('jdoe').parentElement.nextElementSibling;
+    const details = screen.getByText('jdmiguel').parentElement.nextElementSibling;
     expect(details.children).toHaveLength(6);
 
     // repos
@@ -83,14 +83,14 @@ describe('<Profile />', () => {
     expect(screen.getByText('location_on')).toBeInTheDocument();
 
     // company
-    expect(screen.getByText('Google')).toBeInTheDocument();
+    expect(screen.getByText('Kitman Labs')).toBeInTheDocument();
     expect(screen.getByText('business')).toBeInTheDocument();
   });
 
   it('does not display the location field when no location', () => {
     render(<Profile {...props} userData={{ ...props.userData, location: null }} />);
 
-    const details = screen.getByText('jdoe').parentElement.nextElementSibling;
+    const details = screen.getByText('jdmiguel').parentElement.nextElementSibling;
     expect(details.children).toHaveLength(5);
 
     expect(screen.queryByText('Dublin')).not.toBeInTheDocument();
@@ -100,10 +100,10 @@ describe('<Profile />', () => {
   it('does not display the company field when no location', () => {
     render(<Profile {...props} userData={{ ...props.userData, company: null }} />);
 
-    const details = screen.getByText('jdoe').parentElement.nextElementSibling;
+    const details = screen.getByText('jdmiguel').parentElement.nextElementSibling;
     expect(details.children).toHaveLength(5);
 
-    expect(screen.queryByText('Google')).not.toBeInTheDocument();
+    expect(screen.queryByText('Kitman Labs')).not.toBeInTheDocument();
     expect(screen.queryByText('business')).not.toBeInTheDocument();
   });
 
@@ -112,19 +112,19 @@ describe('<Profile />', () => {
 
     // profile action
     const profileLink = screen.getByText(/visit profile/i);
-    expect(profileLink.getAttribute('href')).toBe('https://github.com/JohnDoe');
-    expect(profileLink.getAttribute('aria-label')).toBe('View jdoe profile on GitHub');
+    expect(profileLink.getAttribute('href')).toBe('https://github.com/jdmiguel');
+    expect(profileLink.getAttribute('aria-label')).toBe('View jdmiguel profile on GitHub');
 
     // email action
     const emailLink = screen.getByText(/send email/i);
-    expect(emailLink.getAttribute('href')).toBe('mailto:jdoe@gmail.com');
-    expect(emailLink.getAttribute('aria-label')).toBe('Send email to jdoe');
+    expect(emailLink.getAttribute('href')).toBe('mailto:jdmiguel@gmail.com');
+    expect(emailLink.getAttribute('aria-label')).toBe('Send email to jdmiguel');
     expect(screen.getByText('mail_outline')).toBeInTheDocument();
 
     // blog action
     const blogLink = screen.getByText(/visit portfolio/i);
-    expect(blogLink.getAttribute('href')).toBe('https://jdoe.netlify.app/');
-    expect(blogLink.getAttribute('aria-label')).toBe('View portfolio of jdoe');
+    expect(blogLink.getAttribute('href')).toBe('https://jdmiguel.netlify.app/');
+    expect(blogLink.getAttribute('aria-label')).toBe('View portfolio of jdmiguel');
     expect(screen.getByText('web_icon')).toBeInTheDocument();
   });
 

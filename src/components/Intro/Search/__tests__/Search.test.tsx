@@ -122,6 +122,8 @@ describe('<Search />', () => {
         }),
       );
 
+      expect(screen.getByDisplayValue('jdmiguel')).toBeInTheDocument();
+
       loader = await screen.findByRole('progressbar');
       await waitForElementToBeRemoved(loader);
 

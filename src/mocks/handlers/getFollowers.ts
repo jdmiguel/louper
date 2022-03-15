@@ -5,7 +5,7 @@ const data = [
     id: 1,
     login: 'shara89',
     html_url: 'https://github.com/shara89',
-    avatar_url: '',
+    avatar_url: 'https://github.com/shara89.jpg',
   },
   {
     id: 2,
