@@ -1,6 +1,7 @@
 import { render, screen, waitForElementToBeRemoved } from '@testing-library/react';
 import '@testing-library/jest-dom';
 import userEvent from '@testing-library/user-event';
+import { server, rest } from '../../../../mocks/server';
 import { renderWithTheme } from '../../../../utils/theme';
 import Search from '..';
 
@@ -20,6 +21,64 @@ describe('<Search />', () => {
   });
 
   describe('when typing more than two chars', () => {
+    test('calls the correct callback when there is a 403 error', async () => {
+      server.use(
+        rest.get(`${process.env.REACT_APP_BASE_URL}/search/users`, (req, res, ctx) => {
+          return res(ctx.status(403));
+        }),
+      );
+
+      render(renderWithTheme(<Search {...props} />));
+
+      const input = screen.getByPlaceholderText('Type user name...');
+      await userEvent.type(input, 'jdm');
+
+      const loader = await screen.findByRole('progressbar');
+      await waitForElementToBeRemoved(loader);
+
+      expect(props.onRequestError).toHaveBeenCalledWith(
+        'You have excedeed the maximum allowed request. Please, wait for a while',
+      );
+    });
+
+    test('calls the correct callback when there is a 404 error', async () => {
+      server.use(
+        rest.get(`${process.env.REACT_APP_BASE_URL}/search/users`, (req, res, ctx) => {
+          return res(ctx.status(404));
+        }),
+      );
+
+      render(renderWithTheme(<Search {...props} />));
+
+      const input = screen.getByPlaceholderText('Type user name...');
+      await userEvent.type(input, 'jdm');
+
+      const loader = await screen.findByRole('progressbar');
+      await waitForElementToBeRemoved(loader);
+
+      expect(props.onRequestError).toHaveBeenCalledWith('Please, choose an available user');
+    });
+
+    test('calls the correct callback when there is a 500 error', async () => {
+      server.use(
+        rest.get(`${process.env.REACT_APP_BASE_URL}/search/users`, (req, res, ctx) => {
+          return res(ctx.status(500));
+        }),
+      );
+
+      render(renderWithTheme(<Search {...props} />));
+
+      const input = screen.getByPlaceholderText('Type user name...');
+      await userEvent.type(input, 'jdm');
+
+      const loader = await screen.findByRole('progressbar');
+      await waitForElementToBeRemoved(loader);
+
+      expect(props.onRequestError).toHaveBeenCalledWith(
+        'Sorry! there was an error on the server side.',
+      );
+    });
+
     it('displays the matched suggestions', async () => {
       render(renderWithTheme(<Search {...props} />));
 
@@ -71,7 +130,8 @@ describe('<Search />', () => {
     it('hides the pagination after untyping', async () => {
       render(renderWithTheme(<Search {...props} />));
 
-      await userEvent.type(screen.getByPlaceholderText('Type user name...'), 'jdm');
+      const input = screen.getByPlaceholderText('Type user name...');
+      await userEvent.type(input, 'jdm');
 
       const loader = await screen.findByRole('progressbar');
       await waitForElementToBeRemoved(loader);
@@ -122,40 +182,69 @@ describe('<Search />', () => {
       ).toHaveClass('Mui-selected');
     });
 
-    it('calls the correct callback when clicking a suggestion', async () => {
-      render(renderWithTheme(<Search {...props} />));
+    describe('when clicking a suggestion', () => {
+      it('calls the correct callback', async () => {
+        render(renderWithTheme(<Search {...props} />));
 
-      const input = screen.getByPlaceholderText('Type user name...');
-      await userEvent.type(input, 'jdmig');
+        const input = screen.getByPlaceholderText('Type user name...');
+        await userEvent.type(input, 'jdmig');
 
-      let loader = await screen.findByRole('progressbar');
-      await waitForElementToBeRemoved(loader);
+        let loader = await screen.findByRole('progressbar');
+        await waitForElementToBeRemoved(loader);
 
-      await userEvent.click(
-        screen.getByRole('button', {
-          name: /jdmiguel/i,
-        }),
-      );
+        await userEvent.click(
+          screen.getByRole('button', {
+            name: /jdmiguel/i,
+          }),
+        );
 
-      expect(screen.getByDisplayValue('jdmiguel')).toBeInTheDocument();
+        expect(screen.getByDisplayValue('jdmiguel')).toBeInTheDocument();
 
-      loader = await screen.findByRole('progressbar');
-      await waitForElementToBeRemoved(loader);
+        loader = await screen.findByRole('progressbar');
+        await waitForElementToBeRemoved(loader);
 
-      expect(props.onFetchUser).toHaveBeenCalledWith({
-        login: 'jdmiguel',
-        html_url: 'https://github.com/jdmiguel',
-        avatar_url: '',
-        created_at: '2014-03-20T23:24:22Z',
-        name: 'Jaime De Miguel',
-        bio: 'Frontend developer',
-        email: 'jdmiguel@gmail.com',
-        location: 'Dublin',
-        blog: 'https://jdmiguel.netlify.app/',
-        company: 'Kitman Labs',
-        public_repos: 30,
-        followers: 12,
-        following: 16,
+        expect(props.onFetchUser).toHaveBeenCalledWith({
+          login: 'jdmiguel',
+          html_url: 'https://github.com/jdmiguel',
+          avatar_url: '',
+          created_at: '2014-03-20T23:24:22Z',
+          name: 'Jaime De Miguel',
+          bio: 'Frontend developer',
+          email: 'jdmiguel@gmail.com',
+          location: 'Dublin',
+          blog: 'https://jdmiguel.netlify.app/',
+          company: 'Kitman Labs',
+          public_repos: 30,
+          followers: 12,
+          following: 16,
+        });
+      });
+
+      test('calls the correct callback when there is a 404 error', async () => {
+        server.use(
+          rest.get(`${process.env.REACT_APP_BASE_URL}/users/:userLogin`, (req, res, ctx) => {
+            return res(ctx.status(404));
+          }),
+        );
+
+        render(renderWithTheme(<Search {...props} />));
+
+        const input = screen.getByPlaceholderText('Type user name...');
+        await userEvent.type(input, 'jdmig');
+
+        let loader = await screen.findByRole('progressbar');
+        await waitForElementToBeRemoved(loader);
+
+        await userEvent.click(
+          screen.getByRole('button', {
+            name: /jdmiguel/i,
+          }),
+        );
+
+        loader = await screen.findByRole('progressbar');
+        await waitForElementToBeRemoved(loader);
+
+        expect(props.onRequestError).toHaveBeenCalledWith('Please, choose an available user');
       });
     });
   });
