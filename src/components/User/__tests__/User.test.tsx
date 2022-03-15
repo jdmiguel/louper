@@ -1,6 +1,5 @@
 import { render, screen } from '@testing-library/react';
 import '@testing-library/jest-dom';
-import userEvent from '@testing-library/user-event';
 import { renderWithTheme } from '../../../utils/theme';
 import User from '..';
 
@@ -9,7 +8,7 @@ describe('<User />', () => {
     userData: {
       login: 'jdmiguel',
       html_url: 'https://github.com/jdmiguel',
-      avatar_url: '',
+      avatar_url: 'https://github.com/jdmiguel.jpg',
       created_at: '2014-03-20T23:24:22Z',
       name: 'Jaime De Miguel',
       bio: 'Frontend developer',
@@ -29,7 +28,7 @@ describe('<User />', () => {
 
     expect(screen.getByTestId('profile')).toBeInTheDocument();
     expect(screen.queryByTestId('profile-mobile')).not.toBeInTheDocument();
-    expect(screen.getByRole('navigation')).toBeInTheDocument();
+    expect(screen.getByRole('tablist')).toBeInTheDocument();
     expect(screen.getByTestId('section')).toBeInTheDocument();
   });
 
@@ -38,17 +37,5 @@ describe('<User />', () => {
 
     const reposMenuItem = screen.getByText(/repos/i).parentElement;
     expect(reposMenuItem).toHaveClass('Mui-selected');
-  });
-
-  it('calls the correct callback when clicking the search menu item', async () => {
-    render(renderWithTheme(<User {...props} />));
-
-    await userEvent.click(
-      screen.getByRole('button', {
-        name: /search/i,
-      }),
-    );
-
-    expect(props.onBackFinder).toHaveBeenCalled();
   });
 });

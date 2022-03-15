@@ -9,7 +9,7 @@ describe('<Suggestion />', () => {
       id: 7,
       login: 'jdmiguel',
       html_url: 'https://github.com/jdmiguel',
-      avatar_url: '',
+      avatar_url: 'https://github.com/jdmiguel.jpg',
     },
     onClick: jest.fn(),
   };

@@ -51,7 +51,7 @@ describe('<Search />', () => {
       render(renderWithTheme(<Search {...props} />));
 
       const input = screen.getByPlaceholderText('Type user name...');
-      await userEvent.type(input, 'jdm');
+      await userEvent.type(input, 'bew');
 
       const loader = await screen.findByRole('progressbar');
       await waitForElementToBeRemoved(loader);
@@ -88,7 +88,7 @@ describe('<Search />', () => {
       const loader = await screen.findByRole('progressbar');
       await waitForElementToBeRemoved(loader);
 
-      const suggestions = screen.getByTestId('suggestions');
+      const suggestions = screen.getByRole('grid');
       expect(suggestions.children.length).toBe(9);
 
       expect(screen.getByText('jdm')).toBeInTheDocument();
@@ -161,7 +161,7 @@ describe('<Search />', () => {
       loader = await screen.findByRole('progressbar');
       await waitForElementToBeRemoved(loader);
 
-      const suggestions = screen.getByTestId('suggestions');
+      const suggestions = screen.getByRole('grid');
       expect(suggestions.children.length).toBe(6);
       expect(screen.getByText('jdmut')).toBeInTheDocument();
       expect(screen.getByText('jdmqaa')).toBeInTheDocument();
@@ -259,7 +259,7 @@ describe('<Search />', () => {
       const loader = await screen.findByRole('progressbar');
       await waitForElementToBeRemoved(loader);
 
-      const suggestions = screen.getByTestId('suggestions');
+      const suggestions = screen.getByRole('grid');
       expect(suggestions.children.length).toBe(1);
 
       expect(screen.getByText('jdmiguel')).toBeInTheDocument();

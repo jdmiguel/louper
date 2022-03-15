@@ -41,12 +41,13 @@ describe('<Suggestions />', () => {
   it('displays the suggestions properly', () => {
     render(<Suggestions {...props} />);
 
-    const suggestions = screen.getByTestId('suggestions');
-    expect(suggestions.children.length).toBe(3);
+    const suggestions = screen.getByRole('grid');
+    expect(suggestions.children.length).toBe(4);
 
     expect(screen.getByText('jdm')).toBeInTheDocument();
-    expect(screen.getByText('jdm1')).toBeInTheDocument();
     expect(screen.getByText('jdm12')).toBeInTheDocument();
+    expect(screen.getByText('jdm34')).toBeInTheDocument();
+    expect(screen.getByText('jdmiguel')).toBeInTheDocument();
   });
 
   it('does not displays the pagination', () => {
