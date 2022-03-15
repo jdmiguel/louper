@@ -68,6 +68,21 @@ describe('<Search />', () => {
       ).not.toHaveClass('Mui-selected');
     });
 
+    it('hides the pagination after untyping', async () => {
+      render(renderWithTheme(<Search {...props} />));
+
+      await userEvent.type(screen.getByPlaceholderText('Type user name...'), 'jdm');
+
+      const loader = await screen.findByRole('progressbar');
+      await waitForElementToBeRemoved(loader);
+
+      expect(screen.getByRole('navigation')).toBeInTheDocument();
+
+      await userEvent.clear(screen.getByPlaceholderText('Type user name...'));
+
+      expect(screen.queryByRole('navigation')).not.toBeInTheDocument();
+    });
+
     it('displays the next matched suggestions when clicking next pagination', async () => {
       render(renderWithTheme(<Search {...props} />));
 
