@@ -94,7 +94,7 @@ const Section = ({ userLogin, sectionType, totalItems, onRequestError }: Props) 
       <Root data-testid="section">
         {totalItems === 0 && (
           <EmptyMsg>
-            <Typography variant="h6" sx={{ color: 'neutral.light' }}>
+            <Typography variant="h6" sx={{ color: 'neutral.main' }}>
               {`No ${sectionType} added`}
             </Typography>
           </EmptyMsg>

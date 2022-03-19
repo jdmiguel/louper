@@ -64,7 +64,7 @@ const displayRepoTheme = (repo: Repo): ReactElement => (
           {repo.description}
         </Typography>
       ) : (
-        <Typography variant="h6" sx={{ marginTop: 1, color: 'neutral.light' }}>
+        <Typography variant="h6" sx={{ marginTop: 1, color: 'neutral.main' }}>
           No description added
         </Typography>
       )}

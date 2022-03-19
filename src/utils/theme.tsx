@@ -6,6 +6,7 @@ import { colors } from './colors';
 
 type Animation = {
   greet: Keyframes;
+  fadeUp: Keyframes;
 };
 
 declare module '@mui/material/styles' {
@@ -32,6 +33,10 @@ export const theme = createTheme({
       20%,60% { transform: rotate(-25deg) }
       40%,80% { transform: rotate(10deg) }
     `,
+    fadeUp: keyframes`
+      0% { opacity:0; transform: translateY(20px); }
+      100% { opacity:1; transform: translateY(0px);  }
+  `,
   },
   typography: {
     fontFamily: ['Comfortaa', 'Arial', 'sans-serif'].join(','),
@@ -95,8 +100,9 @@ export const theme = createTheme({
       main: colors.red,
     },
     neutral: {
-      main: colors.grey,
-      light: colors.lightGrey,
+      dark: colors.grey,
+      main: colors.lightGrey,
+      light: colors.white,
     },
     overlay: {
       main: colors.darkPinkOverlay,

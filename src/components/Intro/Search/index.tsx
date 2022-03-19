@@ -1,5 +1,5 @@
 import { useState, useEffect, useMemo, useCallback } from 'react';
-import { styled } from '@mui/material/styles';
+import { styled, useTheme } from '@mui/material/styles';
 import Typography from '@mui/material/Typography';
 import Logo from './Logo';
 import Watermark from './Watermark/index';
@@ -44,6 +44,9 @@ const SuggestionsWrapper = styled('div')({
 });
 
 const WatermarkWrapper = styled('div')({
+  alignItems: 'center',
+  display: 'flex',
+  flexDirection: 'column',
   marginTop: 10,
   opacity: 0.15,
 });
@@ -81,6 +84,8 @@ const Search = ({ onFetchUser, onRequestError }: Props) => {
         : DefaultValues.MaxSuggestionsAllowed,
     [usersData],
   );
+
+  const theme = useTheme();
 
   useEffect(() => {
     return () => {
@@ -191,7 +196,22 @@ const Search = ({ onFetchUser, onRequestError }: Props) => {
           />
         ) : (
           <WatermarkWrapper>
-            <Watermark />
+            {searchQuery.length > 2 && !usersData.total_count ? (
+              <Typography
+                variant="h6"
+                sx={{
+                  animation: `${theme.animation.fadeUp} 0.3s 0.5s 1 ease-out forwards`,
+                  color: 'neutral.light',
+                  marginBottom: 2,
+                  opacity: 0,
+                  transform: 'translateY(20px)',
+                }}
+              >
+                No matched users
+              </Typography>
+            ) : (
+              <Watermark />
+            )}
           </WatermarkWrapper>
         )}
       </SuggestionsWrapper>

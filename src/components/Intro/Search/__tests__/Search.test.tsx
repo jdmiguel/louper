@@ -21,7 +21,7 @@ describe('<Search />', () => {
   });
 
   describe('when typing no more than two chars', () => {
-    it('calls the correct callback when clicking the search button', async () => {
+    it('displays the correct label error', async () => {
       render(renderWithTheme(<Search {...props} />));
 
       const input = screen.getByPlaceholderText('Type user name...');
@@ -40,7 +40,7 @@ describe('<Search />', () => {
       expect(labelText).toBeInTheDocument();
     });
 
-    it('calls the correct callback when clicking the enter key', async () => {
+    it('displays the correct label error', async () => {
       render(renderWithTheme(<Search {...props} />));
 
       const input = screen.getByPlaceholderText('Type user name...');

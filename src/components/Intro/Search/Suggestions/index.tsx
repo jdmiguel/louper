@@ -26,25 +26,25 @@ const StyledPaginationItem = styled(PaginationItem)(({ theme }) => ({
   },
   '&.Mui-selected': {
     backgroundColor: 'transparent',
-    color: theme.palette.neutral.light,
+    color: theme.palette.neutral.main,
     cursor: 'default',
   },
   '&.MuiPaginationItem-ellipsis': {
-    color: theme.palette.neutral.light,
+    color: theme.palette.neutral.main,
   },
   '&:hover': {
     '&.MuiPaginationItem-root': {
-      color: theme.palette.primary.light,
+      color: theme.palette.primary.main,
       backgroundColor: 'tranparent',
     },
     '&.Mui-selected': {
       backgroundColor: 'transparent',
-      color: theme.palette.neutral.light,
+      color: theme.palette.neutral.main,
       cursor: 'default',
     },
     '&.MuiPaginationItem-ellipsis': {
       backgroundColor: 'transparent',
-      color: theme.palette.neutral.light,
+      color: theme.palette.neutral.main,
     },
   },
 }));

@@ -62,7 +62,6 @@ const Finder = ({
 }: Props) => {
   const [isOnError, setIsOnError] = useState(false);
   const withMinSearch = searchQuery?.length > 2;
-  const labelText = withMinSearch ? ErrorMessage.NoUser : ErrorMessage.MinChars;
 
   return (
     <FormControl
@@ -77,7 +76,7 @@ const Finder = ({
         autoFocus
         placeholder="Type user name..."
         value={searchQuery}
-        label={isOnError ? labelText : ''}
+        label={isOnError ? (withMinSearch ? ErrorMessage.NoUser : ErrorMessage.MinChars) : ''}
         onFocus={() => setIsOnError(false)}
         onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
           const currentSearchQuery = event?.target?.value;
@@ -114,7 +113,7 @@ const Finder = ({
                   sx={{ color: 'text.primary' }}
                 />
               ) : (
-                <Icon sx={{ color: 'neutral.light', fontSize: '1.4rem' }}>person</Icon>
+                <Icon sx={{ color: 'neutral.main', fontSize: '1.4rem' }}>person</Icon>
               )}
             </InputAdornment>
           ),

@@ -2,9 +2,9 @@ import { useState } from 'react';
 import { styled } from '@mui/material/styles';
 import Corner from './Corner';
 import Search from './Search';
+import InteractiveGlobe from './Globe';
 import Footer from '../shared/Footer';
 import Toast from '../shared/Toast';
-import InteractiveGlobe from './Globe/Globe';
 import { UserData } from '../../utils/types';
 
 const Root = styled('div')({
