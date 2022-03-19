@@ -153,7 +153,7 @@ const Search = ({ onFetchUser, onRequestError }: Props) => {
   const debouncedFetchUsers = useCallback(debounce(fetchUsers, 500), []);
 
   return (
-    <Root>
+    <Root data-testid="search">
       <LogoWrapper>
         <Logo />
       </LogoWrapper>

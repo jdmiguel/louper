@@ -4,6 +4,7 @@ exports[`<Footer /> displays the content properly 1`] = `
 <div>
   <footer
     class="css-h2ohzc"
+    data-testid="footer"
   >
     <div
       class="css-11y3ega-MuiStack-root"

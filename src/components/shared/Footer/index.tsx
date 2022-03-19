@@ -32,7 +32,7 @@ const Root = styled('footer')(({ theme }) => ({
 }));
 
 const Footer = () => (
-  <Root>
+  <Root data-testid="footer">
     <Stack direction="row" sx={{ marginRight: 0.6 }}>
       <span>@2022 | created by</span>
       <Link

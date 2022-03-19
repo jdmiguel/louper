@@ -17,7 +17,7 @@ const Root = styled('div')({
   },
 });
 
-const CornerWrapper = styled('div')({
+const CornerWrapper = styled('header')({
   display: 'flex',
   justifyContent: 'flex-end',
   position: 'absolute',
@@ -53,10 +53,10 @@ const HomePage = ({ onFetchUser }: Props) => {
 
   return (
     <Root>
-      <CornerWrapper>
+      <CornerWrapper data-testid="header-intro">
         <Corner />
       </CornerWrapper>
-      <Main>
+      <Main data-testid="main-intro">
         <Search
           onFetchUser={onFetchUser}
           onRequestError={(errorMsg: string) => {

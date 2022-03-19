@@ -119,6 +119,7 @@ const InteractiveGlobe = () => {
 
   return (
     <Root
+      data-testid="globe"
       sx={{
         cursor: isMarkerHovered ? 'pointer' : 'default',
       }}

@@ -8,7 +8,7 @@ describe('<Profile />', () => {
       login: 'jdmiguel',
       html_url: 'https://github.com/jdmiguel',
       avatar_url: 'https://github.com/jdmiguel.jpg',
-      created_at: '2014-03-20T23:24:22Z',
+      created_at: '2014-03-20T20:24:22Z',
       name: 'Jaime De Miguel',
       bio: 'Frontend developer',
       email: 'jdmiguel@gmail.com',
@@ -75,7 +75,7 @@ describe('<Profile />', () => {
     expect(screen.getByText('favorite')).toBeInTheDocument();
 
     // created_at
-    expect(screen.getByText('3/20/2014')).toBeInTheDocument();
+    expect(screen.getByText('20/3/2014')).toBeInTheDocument();
     expect(screen.getByText('event_note')).toBeInTheDocument();
 
     // location

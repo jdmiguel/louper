@@ -30,6 +30,7 @@ describe('<User />', () => {
     expect(screen.queryByTestId('profile-mobile')).not.toBeInTheDocument();
     expect(screen.getByRole('tablist')).toBeInTheDocument();
     expect(screen.getByTestId('section')).toBeInTheDocument();
+    expect(screen.getByTestId('footer')).toBeInTheDocument();
   });
 
   it('displays the repos section as active', () => {
