@@ -31,6 +31,11 @@ export type UserData = {
   following: number;
 };
 
+export type UsersData = {
+  total_count: number;
+  items: User[] | [];
+};
+
 export type OverlayBoxData = {
   country: string;
   x: number;

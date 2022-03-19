@@ -20,6 +20,42 @@ describe('<Search />', () => {
     expect(screen.getByTestId('watermark')).toBeInTheDocument();
   });
 
+  describe('when typing no more than two chars', () => {
+    it('calls the correct callback when clicking the search button', async () => {
+      render(renderWithTheme(<Search {...props} />));
+
+      const input = screen.getByPlaceholderText('Type user name...');
+      await userEvent.type(input, 'jd');
+
+      await userEvent.click(
+        screen.getByRole('button', {
+          name: /search/i,
+        }),
+      );
+
+      const labelText = screen
+        .getAllByText('Please, type three chars at least')
+        .find((domElement) => domElement.tagName === 'LABEL');
+
+      expect(labelText).toBeInTheDocument();
+    });
+
+    it('calls the correct callback when clicking the enter key', async () => {
+      render(renderWithTheme(<Search {...props} />));
+
+      const input = screen.getByPlaceholderText('Type user name...');
+      await userEvent.type(input, 'jd');
+
+      await userEvent.keyboard('{Enter}');
+
+      const labelText = screen
+        .getAllByText('Please, type three chars at least')
+        .find((domElement) => domElement.tagName === 'LABEL');
+
+      expect(labelText).toBeInTheDocument();
+    });
+  });
+
   describe('when typing more than two chars', () => {
     test('calls the correct callback when there is a 403 error', async () => {
       server.use(
@@ -187,7 +223,7 @@ describe('<Search />', () => {
         render(renderWithTheme(<Search {...props} />));
 
         const input = screen.getByPlaceholderText('Type user name...');
-        await userEvent.type(input, 'jdmig');
+        await userEvent.type(input, 'jdm');
 
         let loader = await screen.findByRole('progressbar');
         await waitForElementToBeRemoved(loader);
@@ -230,7 +266,7 @@ describe('<Search />', () => {
         render(renderWithTheme(<Search {...props} />));
 
         const input = screen.getByPlaceholderText('Type user name...');
-        await userEvent.type(input, 'jdmig');
+        await userEvent.type(input, 'jdm');
 
         let loader = await screen.findByRole('progressbar');
         await waitForElementToBeRemoved(loader);

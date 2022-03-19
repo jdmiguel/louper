@@ -1,6 +1,7 @@
 import { rest } from 'msw';
+import { UsersData } from '../../utils/types';
 
-const firstPageData = [
+const users = [
   {
     id: 1,
     login: 'jdm',
@@ -50,9 +51,6 @@ const firstPageData = [
     html_url: 'https://github.com/jdmfuon',
     avatar_url: '',
   },
-];
-
-const userData = [
   {
     id: 9,
     login: 'jdmiguel',
@@ -61,7 +59,7 @@ const userData = [
   },
 ];
 
-const secondPageData = [
+const extraUsers = [
   {
     id: 10,
     login: 'jdmut',
@@ -100,32 +98,37 @@ const secondPageData = [
   },
 ];
 
-const users = [...firstPageData, ...secondPageData, ...userData];
+const totalUsers = [...users, ...extraUsers];
 
-enum SearchQuery {
-  Basic = 'jdm',
-  Filter = 'jdmi',
-}
+const getUsersData = (searchQuery: string, currentPage: string): UsersData => {
+  switch (searchQuery) {
+    case 'jdmi':
+      return {
+        total_count: 1,
+        items: users.slice(users.length - 1, users.length),
+      };
+    case 'jdm':
+      return {
+        total_count: 15,
+        items: currentPage === '1' ? [...users] : [...extraUsers],
+      };
+
+    default:
+      return {
+        total_count: 0,
+        items: [],
+      };
+  }
+};
 
 const handler = rest.get(`${process.env.REACT_APP_BASE_URL}/search/users`, (req, res, ctx) => {
   const query = req.url.searchParams;
-  const searchQuery = query.get('q') || SearchQuery.Basic;
+  const searchQuery = query.get('q');
   const currentPage = query.get('page');
 
-  let pageData = {
-    total_count: 15,
-    items: [...firstPageData, ...userData],
-  };
+  const usersData = getUsersData(searchQuery || '', currentPage || '1');
 
-  if (currentPage === '2') {
-    pageData = { ...pageData, items: secondPageData };
-  }
-
-  if (searchQuery.includes(SearchQuery.Filter)) {
-    pageData = { total_count: 1, items: userData };
-  }
-
-  return res(ctx.json(pageData));
+  return res(ctx.json(usersData));
 });
 
-export { handler, users as data };
+export { handler, totalUsers as data };

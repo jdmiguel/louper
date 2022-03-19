@@ -7,7 +7,7 @@ import Finder from './Finder';
 import Suggestions from './Suggestions';
 import { debounce } from '../../../utils';
 import { handleErrors } from '../../../utils/request';
-import { User, UserData } from '../../../utils/types';
+import { UsersData, UserData } from '../../../utils/types';
 
 const Root = styled('div')({
   alignItems: 'center',
@@ -59,11 +59,6 @@ enum DefaultValues {
   SuggestionsPerPage = 9,
 }
 
-type UsersData = {
-  total_count: number;
-  items: User[] | [];
-};
-
 type Props = {
   onFetchUser: (userData: UserData) => void;
   onRequestError: (userLogin: string) => void;
@@ -105,7 +100,7 @@ const Search = ({ onFetchUser, onRequestError }: Props) => {
     )
       .then(handleErrors)
       .then((fetchedUsersData: UsersData) => {
-        setAreSuggestionsShown(true);
+        setAreSuggestionsShown(!!fetchedUsersData.total_count);
         setUsersData(fetchedUsersData);
       })
       .catch((error) => {
@@ -167,14 +162,10 @@ const Search = ({ onFetchUser, onRequestError }: Props) => {
         Search and find any Github user!
       </Typography>
       <Finder
+        searchQuery={searchQuery}
         isLoadingUser={isLoadingUser}
         isLoadingUsers={isLoadingUsers}
-        searchQuery={searchQuery}
         onChangeSearchQuery={(currentSearchQuery: string) => {
-          if (currentSearchQuery === searchQuery) {
-            return;
-          }
-
           setSearchQuery(currentSearchQuery);
           if (currentSearchQuery.length > DefaultValues.MinCharsToSearchUsers) {
             debouncedFetchUsers(currentSearchQuery);

@@ -21,7 +21,7 @@ const LoaderWrapper = styled('div')({
   alignItems: 'center',
   display: 'flex',
   justifyContent: 'center',
-  minHeight: 120,
+  minHeight: 90,
   width: '100%',
 });
 

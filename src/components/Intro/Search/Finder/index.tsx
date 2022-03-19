@@ -6,6 +6,7 @@ import TextField from '@mui/material/TextField';
 import InputAdornment from '@mui/material/InputAdornment';
 import Icon from '@mui/material/Icon';
 import IconButton from '@mui/material/IconButton';
+import { ErrorMessage } from '../../../../utils';
 
 const StyledTextField = styled<any>(TextField)(({ theme }) => ({
   '& .MuiOutlinedInput-root': {
@@ -59,14 +60,14 @@ const Finder = ({
   isLoadingUsers,
   onFetchUser,
 }: Props) => {
-  const [isValidating, setIsValidating] = useState(false);
-
-  const isNotValid = isValidating && !searchQuery;
+  const [isOnError, setIsOnError] = useState(false);
+  const withMinSearch = searchQuery?.length > 2;
+  const labelText = withMinSearch ? ErrorMessage.NoUser : ErrorMessage.MinChars;
 
   return (
     <FormControl
       sx={{
-        alignItems: 'center',
+        alignItems: 'flex-start',
         display: 'flex',
         flexDirection: 'row',
         justifyContent: 'center',
@@ -76,23 +77,29 @@ const Finder = ({
         autoFocus
         placeholder="Type user name..."
         value={searchQuery}
-        onFocus={() => setIsValidating(false)}
+        label={isOnError ? labelText : ''}
+        onFocus={() => setIsOnError(false)}
         onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
           const currentSearchQuery = event?.target?.value;
           if (currentSearchQuery === searchQuery) {
             return;
           }
+          setIsOnError(false);
           onChangeSearchQuery(currentSearchQuery);
         }}
         onKeyUp={({ key }: { key: string }) => {
-          if (!searchQuery || key !== 'Enter') {
+          if (key !== 'Enter') {
+            return;
+          }
+          if (!withMinSearch) {
+            setIsOnError(true);
             return;
           }
           onFetchUser(searchQuery);
         }}
         size="small"
         variant="outlined"
-        error={isNotValid}
+        error={isOnError}
         inputProps={{
           maxLength: 20,
         }}
@@ -116,10 +123,11 @@ const Finder = ({
       <StyledIconButton
         aria-label="search"
         onClick={() => {
-          setIsValidating(true);
-          if (searchQuery !== '') {
-            onFetchUser(searchQuery);
+          if (!withMinSearch) {
+            setIsOnError(true);
+            return;
           }
+          onFetchUser(searchQuery);
         }}
       >
         {isLoadingUser ? (

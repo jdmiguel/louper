@@ -8,6 +8,7 @@ describe('<Finder />', () => {
     searchQuery: '',
     isLoadingUser: false,
     isLoadingUsers: false,
+    isOnFetchingUserError: false,
     onChangeSearchQuery: jest.fn(),
     onFetchUser: jest.fn(),
   };
