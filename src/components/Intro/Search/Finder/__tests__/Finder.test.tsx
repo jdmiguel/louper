@@ -17,7 +17,7 @@ describe('<Finder />', () => {
     render(<Finder {...props} isLoadingUsers />);
 
     const inputWrapper = screen.getByPlaceholderText('Type user name...').parentElement;
-    const circularLoader = inputWrapper.querySelector('.MuiCircularProgress-root');
+    const circularLoader = inputWrapper?.querySelector('.MuiCircularProgress-root');
     expect(circularLoader).toBeVisible();
   });
 

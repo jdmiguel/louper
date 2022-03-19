@@ -1,8 +1,8 @@
 import { useRef } from 'react';
 import { ThreeEvent } from '@react-three/fiber';
 import { Mesh } from 'three';
-import { colors } from '../../../utils/colors';
-import { OverlayBoxData } from '../../../utils/types';
+import { colors } from 'src/utils/colors';
+import { OverlayBoxData } from 'src/utils/types';
 
 declare module '@react-three/fiber' {
   interface ThreeEvent {

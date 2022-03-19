@@ -3,7 +3,7 @@ import Pagination from '@mui/material/Pagination';
 import PaginationItem from '@mui/material/PaginationItem';
 import Stack from '@mui/material/Stack';
 import Suggestion from '../Suggestion';
-import { User } from '../../../../utils/types';
+import { User } from 'src/utils/types';
 
 const SuggestionsWrapper = styled('div')({
   alignContent: 'flex-start',

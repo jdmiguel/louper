@@ -3,9 +3,9 @@ import { styled } from '@mui/material/styles';
 import Typography from '@mui/material/Typography';
 import CircularProgress from '@mui/material/CircularProgress';
 import SectionItem from '../SectionItem';
-import useIntersectionObserver from '../../../hooks/useIntersectionObserver';
-import { handleErrors } from '../../../utils/request';
-import { SectionType, Repo, User } from '../../../utils/types';
+import useIntersectionObserver from 'src/hooks/useIntersectionObserver';
+import { handleErrors } from 'src/utils/request';
+import { SectionType, Repo, User } from 'src/utils/types';
 
 const Root = styled('section')({
   display: 'grid',

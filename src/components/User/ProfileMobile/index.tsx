@@ -2,7 +2,7 @@ import { styled } from '@mui/material/styles';
 import Stack from '@mui/material/Stack';
 import Typography from '@mui/material/Typography';
 import Avatar from '@mui/material/Avatar';
-import { UserData } from '../../../utils/types';
+import { UserData } from 'src/utils/types';
 
 const Root = styled('div')({
   display: 'flex',

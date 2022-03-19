@@ -6,9 +6,9 @@ import { animated, useSpring } from '@react-spring/three';
 import { styled } from '@mui/material/styles';
 import Marker from './Marker';
 import OverlayBox from './OverlayBox';
-import { colors } from '../../../utils/colors';
-import globeMarkers from '../../../assets/globeMarkers.json';
-import map from '../../../assets/map.png';
+import { colors } from 'src/utils/colors';
+import globeMarkers from 'src/assets/globeMarkers.json';
+import map from 'src/assets/map.png';
 
 const atmosphereVertexShader = [
   'varying vec3 vNormal;',

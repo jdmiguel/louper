@@ -5,9 +5,9 @@ import Logo from './Logo';
 import Watermark from './Watermark/index';
 import Finder from './Finder';
 import Suggestions from './Suggestions';
-import { debounce } from '../../../utils';
-import { handleErrors } from '../../../utils/request';
-import { UsersData, UserData } from '../../../utils/types';
+import { debounce } from 'src/utils';
+import { handleErrors } from 'src/utils/request';
+import { UsersData, UserData } from 'src/utils/types';
 
 const Root = styled('div')({
   alignItems: 'center',

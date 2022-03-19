@@ -3,9 +3,9 @@ import CssBaseline from '@mui/material/CssBaseline';
 import { styled, ThemeProvider } from '@mui/material/styles';
 import Intro from './Intro';
 import User from './User';
-import { theme } from '../utils/theme';
-import { colors } from '../utils/colors';
-import { UserData } from '../utils/types';
+import { theme } from 'src/utils/theme';
+import { colors } from 'src/utils/colors';
+import { UserData } from 'src/utils/types';
 
 const Root = styled('div')({
   background: colors.darkGradient,

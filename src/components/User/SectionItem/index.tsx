@@ -3,9 +3,9 @@ import { styled } from '@mui/material/styles';
 import Stack from '@mui/material/Stack';
 import Typography from '@mui/material/Typography';
 import Avatar from '@mui/material/Avatar';
-import TextTag from '../../shared/TextTag';
-import Link from '../../shared/Link';
-import { Repo, User, SectionType } from '../../../utils/types';
+import TextTag from 'src/components/shared/TextTag';
+import Link from 'src/components/shared/Link';
+import { Repo, User, SectionType } from 'src/utils/types';
 
 const Root = styled('div')(({ theme }) => ({
   border: `1px solid ${theme.palette.secondary.light}`,
