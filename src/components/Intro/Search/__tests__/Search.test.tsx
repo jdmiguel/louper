@@ -21,7 +21,7 @@ describe('<Search />', () => {
   });
 
   describe('when typing no more than two chars', () => {
-    it('displays the correct label error', async () => {
+    it('displays the correct label error when clicking the search button', async () => {
       render(renderWithTheme(<Search {...props} />));
 
       const input = screen.getByPlaceholderText('Type user name...');
@@ -40,7 +40,7 @@ describe('<Search />', () => {
       expect(labelText).toBeInTheDocument();
     });
 
-    it('displays the correct label error', async () => {
+    it('displays the correct label error when clicking the enter key', async () => {
       render(renderWithTheme(<Search {...props} />));
 
       const input = screen.getByPlaceholderText('Type user name...');
@@ -290,7 +290,7 @@ describe('<Search />', () => {
       render(renderWithTheme(<Search {...props} />));
 
       const input = screen.getByPlaceholderText('Type user name...');
-      await userEvent.type(input, 'jdmi');
+      await userEvent.type(input, 'jdmiguel');
 
       const loader = await screen.findByRole('progressbar');
       await waitForElementToBeRemoved(loader);
@@ -306,7 +306,7 @@ describe('<Search />', () => {
       render(renderWithTheme(<Search {...props} />));
 
       const input = screen.getByPlaceholderText('Type user name...');
-      await userEvent.type(input, 'jdmi');
+      await userEvent.type(input, 'jdmiguel');
 
       const loader = await screen.findByRole('progressbar');
       await waitForElementToBeRemoved(loader);

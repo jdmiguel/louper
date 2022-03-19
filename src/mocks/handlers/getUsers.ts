@@ -101,24 +101,24 @@ const extraUsers = [
 const totalUsers = [...users, ...extraUsers];
 
 const getUsersData = (searchQuery: string, currentPage: string): UsersData => {
-  switch (searchQuery) {
-    case 'jdmi':
-      return {
-        total_count: 1,
-        items: users.slice(users.length - 1, users.length),
-      };
-    case 'jdm':
-      return {
-        total_count: 15,
-        items: currentPage === '1' ? [...users] : [...extraUsers],
-      };
-
-    default:
-      return {
-        total_count: 0,
-        items: [],
-      };
+  if (searchQuery.includes('jdmiguel')) {
+    return {
+      total_count: 1,
+      items: users.slice(users.length - 1, users.length),
+    };
   }
+
+  if (searchQuery.includes('jdm')) {
+    return {
+      total_count: 15,
+      items: currentPage === '1' ? [...users] : [...extraUsers],
+    };
+  }
+
+  return {
+    total_count: 0,
+    items: [],
+  };
 };
 
 const handler = rest.get(`${process.env.REACT_APP_BASE_URL}/search/users`, (req, res, ctx) => {

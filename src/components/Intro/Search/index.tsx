@@ -200,7 +200,7 @@ const Search = ({ onFetchUser, onRequestError }: Props) => {
               <Typography
                 variant="h6"
                 sx={{
-                  animation: `${theme.animation.fadeUp} 0.3s 0.5s 1 ease-out forwards`,
+                  animation: `${theme.animation.fadeUp} 250ms 650ms 1 ease-out forwards`,
                   color: 'neutral.light',
                   marginBottom: 2,
                   opacity: 0,
