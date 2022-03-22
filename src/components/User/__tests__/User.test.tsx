@@ -1,5 +1,4 @@
 import { render, screen } from '@testing-library/react';
-import '@testing-library/jest-dom';
 import { renderWithTheme } from '../../../utils/theme';
 import User from '..';
 

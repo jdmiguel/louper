@@ -1,5 +1,4 @@
 import { render, screen, waitForElementToBeRemoved } from '@testing-library/react';
-import '@testing-library/jest-dom';
 import Section from '..';
 
 describe.only('<Section />', () => {

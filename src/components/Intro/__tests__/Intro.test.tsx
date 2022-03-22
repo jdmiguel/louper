@@ -1,5 +1,4 @@
 import { render, screen, waitForElementToBeRemoved } from '@testing-library/react';
-import '@testing-library/jest-dom';
 import userEvent from '@testing-library/user-event';
 import { renderWithTheme } from '../../../utils/theme';
 import Intro from '..';
