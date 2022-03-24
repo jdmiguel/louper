@@ -1,4 +1,21 @@
+export type SectionType = 'repos' | 'following' | 'followers';
+
+export type Repo = {
+  id: number;
+  name: string;
+  description: string | null;
+  html_url: string;
+  topics: string[];
+};
+
 export type User = {
+  id: number;
+  login: string;
+  html_url: string;
+  avatar_url: string;
+};
+
+export type UserData = {
   login: string;
   avatar_url: string;
   created_at: string;
@@ -14,19 +31,14 @@ export type User = {
   following: number;
 };
 
-export type SectionType = 'REPO' | 'RELATED_USER';
-
-export type Repo = {
-  id: number;
-  name: string;
-  description: string;
-  html_url: string;
-  topics: string[];
+export type UsersData = {
+  total_count: number;
+  items: User[] | [];
 };
 
-export type RelatedUser = {
-  id: number;
-  login: string;
-  html_url: string;
-  avatar_url: string;
+export type OverlayBoxData = {
+  country: string;
+  x: number;
+  y: number;
+  totalUsers: string;
 };

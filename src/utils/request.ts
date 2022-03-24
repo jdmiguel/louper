@@ -1,12 +1,9 @@
-export interface ResponseError extends Error {
-  code: number;
-}
-
-export const BASE_URL = 'https://api.github.com';
+import { getErrorMessage } from './index';
 
 export const handleErrors = (response: Response) => {
   if (!response.ok) {
-    throw Error(response.statusText);
+    const errorMessage = getErrorMessage(response.status);
+    throw Error(errorMessage);
   }
   return response.json();
 };

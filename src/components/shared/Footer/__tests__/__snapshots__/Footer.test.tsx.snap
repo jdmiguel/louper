@@ -1,0 +1,44 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<Footer /> displays the content properly 1`] = `
+<div>
+  <footer
+    class="css-h2ohzc"
+    data-testid="footer"
+  >
+    <div
+      class="css-11y3ega-MuiStack-root"
+    >
+      <span>
+        @2022 | created by
+      </span>
+      <a
+        aria-label="View profile of jdmiguel on GitHub"
+        class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineAlways css-vnlgj6-MuiTypography-root-MuiLink-root"
+        href="https://jdmiguel.netlify.app/"
+        rel="noopener noreferrer"
+      >
+        jdmiguel
+      </a>
+    </div>
+    <span>
+      |
+    </span>
+    <div
+      class="css-m69qwo-MuiStack-root"
+    >
+      <span>
+        github stats from
+      </span>
+      <a
+        aria-label="View github users statistics on octoverse"
+        class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineAlways css-vnlgj6-MuiTypography-root-MuiLink-root"
+        href="https://octoverse.github.com/#future"
+        rel="noopener noreferrer"
+      >
+        octoverse
+      </a>
+    </div>
+  </footer>
+</div>
+`;

@@ -10,6 +10,7 @@
       "es2017",
       "dom"
     ],
+    "baseUrl": ".",
     "skipLibCheck": true,
     "jsx": "react-jsx",
     "allowJs": false,
@@ -30,9 +31,9 @@
     "esModuleInterop": true,
     "resolveJsonModule": true,
     "isolatedModules": true,
-    "baseUrl": ".",
     "forceConsistentCasingInFileNames": true,
-    "noFallthroughCasesInSwitch": true
+    "noFallthroughCasesInSwitch": true,
+    
   },
   "$schema": "https://json.schemastore.org/tsconfig",
   "display": "Recommended",
@@ -41,8 +42,7 @@
     "**/*.spec.ts",
     "**/*.spec.tsx",
     "**/*.test.ts",
-    "**/*.test.tsx",
-    "**/*.story.tsx"
+    "**/*.test.tsx"
   ],
   "include": [
     "**/*.ts",

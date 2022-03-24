@@ -1,36 +1,31 @@
 import { useState } from 'react';
-
-/* material-ui */
 import CssBaseline from '@mui/material/CssBaseline';
-import { ThemeProvider } from '@mui/material/styles';
+import { styled, ThemeProvider } from '@mui/material/styles';
+import Intro from './Intro';
+import User from './User';
+import { theme } from 'src/utils/theme';
+import { colors } from 'src/utils/colors';
+import { UserData } from 'src/utils/types';
 
-/* pages */
-import HomePage from './pages/Home';
-import UserPage from './pages/User';
-
-/* utils */
-import { lightTheme, darkTheme } from '../utils/themes';
-
-/* types */
-import { User } from '../utils/types';
-
-export type ThemeMode = 'light' | 'dark';
+const Root = styled('div')({
+  background: colors.darkGradient,
+  backgroundAttachment: 'fixed',
+  minHeight: '100vh',
+});
 
 const App = () => {
-  const [user, setUser] = useState<User | null>(null);
-  const [themeMode, setThemeMode] = useState<ThemeMode>('light');
+  const [userData, setUserData] = useState<UserData | null>(null);
 
   return (
-    <ThemeProvider theme={themeMode === 'light' ? lightTheme : darkTheme}>
+    <ThemeProvider theme={theme}>
       <CssBaseline />
-      {user ? (
-        <UserPage user={user} onBackFinder={() => setUser(null)} />
-      ) : (
-        <HomePage
-          onFetchUser={(user: User) => setUser(user)}
-          changeTheme={(themeMode: ThemeMode) => setThemeMode(themeMode)}
-        />
-      )}
+      <Root>
+        {userData ? (
+          <User userData={userData} onBackFinder={() => setUserData(null)} />
+        ) : (
+          <Intro onFetchUser={(userData: UserData) => setUserData(userData)} />
+        )}
+      </Root>
     </ThemeProvider>
   );
 };
