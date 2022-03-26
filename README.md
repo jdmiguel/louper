@@ -1,7 +1,6 @@
 ## LOUPER
 
-Web application to find github users as well as their repositories, following and followers. Aside from that, the app includes a interactive 3D globe
-that displays the number of github users by country.
+Single page application intended to search github users by name and display some data such as their repositories, followers and following. In addition, it includes a 3D interactive globe that displays the number of github users by country..
 
 ### TECHNOLOGIES
 
