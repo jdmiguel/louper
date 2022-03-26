@@ -5,6 +5,7 @@ import Search from './Search';
 import InteractiveGlobe from './Globe';
 import Footer from 'src/components/shared/Footer';
 import Toast from 'src/components/shared/Toast';
+import useWindowSize from 'src/hooks/useWindowSize';
 import { UserData } from 'src/utils/types';
 
 const Root = styled('div')({
@@ -51,6 +52,8 @@ const HomePage = ({ onFetchUser }: Props) => {
   const [isErrorToastOpen, setIsErrorToastOpen] = useState(false);
   const [errorMessage, setErrorMessage] = useState('');
 
+  const { windowWidth } = useWindowSize();
+
   return (
     <Root>
       <CornerWrapper data-testid="header-intro">
@@ -64,7 +67,7 @@ const HomePage = ({ onFetchUser }: Props) => {
             setIsErrorToastOpen(true);
           }}
         />
-        <InteractiveGlobe />
+        {windowWidth > 1200 && <InteractiveGlobe />}
       </Main>
       <Footer />
       <Toast

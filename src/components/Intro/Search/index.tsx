@@ -5,6 +5,7 @@ import Logo from './Logo';
 import Watermark from './Watermark/index';
 import Finder from './Finder';
 import Suggestions from './Suggestions';
+import useWindowSize from 'src/hooks/useWindowSize';
 import { debounce } from 'src/utils';
 import { handleErrors } from 'src/utils/request';
 import { UsersData, UserData } from 'src/utils/types';
@@ -13,7 +14,7 @@ const Root = styled('div')({
   alignItems: 'center',
   display: 'flex',
   flexDirection: 'column',
-  marginBottom: 100,
+  marginBottom: 20,
   '@media (min-width: 992px)': {
     marginBottom: 0,
   },
@@ -59,7 +60,6 @@ const DEFAULT_USERS_DATA = {
 enum DefaultValues {
   MinCharsToSearchUsers = 2,
   MaxSuggestionsAllowed = 100,
-  SuggestionsPerPage = 9,
 }
 
 type Props = {
@@ -73,6 +73,9 @@ const Search = ({ onFetchUser, onRequestError }: Props) => {
   const [isLoadingUsers, setIsLoadingUsers] = useState(false);
   const [areSuggestionsShown, setAreSuggestionsShown] = useState(false);
   const [usersData, setUsersData] = useState<UsersData>(DEFAULT_USERS_DATA);
+
+  const { windowWidth } = useWindowSize();
+  const suggestionsPerPage = windowWidth <= 1200 ? 8 : 9;
 
   const abortControllerFetchUser = useMemo(() => new AbortController(), []);
   const abortControllerFetchUsers = useMemo(() => new AbortController(), []);
@@ -94,11 +97,16 @@ const Search = ({ onFetchUser, onRequestError }: Props) => {
     };
   }, [abortControllerFetchUser, abortControllerFetchUsers]);
 
+  useEffect(() => {
+    setSearchQuery('');
+    setAreSuggestionsShown(false);
+  }, [windowWidth]);
+
   const fetchUsers = (searchQuery: string, page = 1) => {
     setIsLoadingUsers(true);
 
     fetch(
-      `${process.env.REACT_APP_BASE_URL}/search/users?q=${searchQuery}&page=${page}&per_page=${DefaultValues.SuggestionsPerPage}`,
+      `${process.env.REACT_APP_BASE_URL}/search/users?q=${searchQuery}&page=${page}&per_page=${suggestionsPerPage}`,
       {
         signal: abortControllerFetchUsers.signal,
       },
@@ -186,8 +194,8 @@ const Search = ({ onFetchUser, onRequestError }: Props) => {
         {areSuggestionsShown ? (
           <Suggestions
             items={usersData.items}
-            totalItems={Math.ceil(totalSuggestions / DefaultValues.SuggestionsPerPage)}
-            withPagination={totalSuggestions > DefaultValues.SuggestionsPerPage}
+            totalItems={Math.ceil(totalSuggestions / suggestionsPerPage)}
+            withPagination={totalSuggestions > suggestionsPerPage}
             onPaginate={(page: number) => fetchUsers(searchQuery, page)}
             onSelectUser={(userName: string) => {
               setSearchQuery(userName);

@@ -27,22 +27,10 @@ const atmosphereFragmentShader = [
 ].join('\n');
 
 const Root = styled('div')({
-  height: 320,
+  height: 510,
   position: 'relative',
   userSelect: 'none',
-  width: 320,
-  '@media (min-width: 375px)': {
-    height: 350,
-    width: 350,
-  },
-  '@media (min-width: 768px)': {
-    height: 450,
-    width: 450,
-  },
-  '@media (min-width: 1200px)': {
-    height: 510,
-    width: 510,
-  },
+  width: 510,
   '@media (min-width: 1440px)': {
     height: 580,
     width: 580,
