@@ -14,10 +14,6 @@ const Root = styled('div')({
   alignItems: 'center',
   display: 'flex',
   flexDirection: 'column',
-  marginBottom: 20,
-  '@media (min-width: 992px)': {
-    marginBottom: 0,
-  },
   '@media (min-width: 1200px)': {
     minWidth: 600,
   },

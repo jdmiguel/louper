@@ -16,13 +16,6 @@ describe('<Intro />', () => {
     expect(screen.getByTestId('footer')).toBeInTheDocument();
   });
 
-  it('displays the correct main content', () => {
-    render(renderWithTheme(<Intro {...props} />));
-
-    expect(screen.getByTestId('search')).toBeInTheDocument();
-    expect(screen.getByTestId('globe')).toBeInTheDocument();
-  });
-
   it('calls the correct callback when fetching a user', async () => {
     render(renderWithTheme(<Intro {...props} />));
 

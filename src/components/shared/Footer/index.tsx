@@ -4,18 +4,18 @@ import Link from '../Link';
 
 const Root = styled('footer')(({ theme }) => ({
   alignItems: 'center',
+  bottom: 0,
   color: theme.palette.secondary.light,
   display: 'flex',
   flexDirection: 'column',
   fontSize: '0.9rem',
+  left: 0,
   padding: '12px 24px',
+  position: 'absolute',
+  width: '100%',
   '@media (min-width: 768px)': {
-    bottom: 0,
     flexDirection: 'row',
     justifyContent: 'center',
-    left: 0,
-    position: 'absolute',
-    width: '100%',
   },
   '@media (min-width: 1680px)': {
     fontSize: '1rem',
