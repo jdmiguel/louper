@@ -11,10 +11,8 @@ import { UserData } from 'src/utils/types';
 const Root = styled('div')({
   display: 'flex',
   flexDirection: 'column',
-  '@media (min-width: 1200px)': {
-    justifyContent: 'center',
-    minHeight: '100vh',
-  },
+  justifyContent: 'center',
+  minHeight: '100vh',
 });
 
 const CornerWrapper = styled('header')({
@@ -52,6 +50,7 @@ const HomePage = ({ onFetchUser }: Props) => {
   const [errorMessage, setErrorMessage] = useState('');
 
   const { windowWidth } = useWindowSize();
+  const isBigDevice = windowWidth > 1200;
 
   return (
     <Root>
@@ -66,9 +65,9 @@ const HomePage = ({ onFetchUser }: Props) => {
             setIsErrorToastOpen(true);
           }}
         />
-        {windowWidth > 1200 && <InteractiveGlobe />}
+        {isBigDevice && <InteractiveGlobe />}
       </Main>
-      <Footer />
+      {isBigDevice && <Footer />}
       <Toast
         isOpen={isErrorToastOpen}
         msg={errorMessage}

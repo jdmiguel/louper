@@ -22,12 +22,6 @@ const Root = styled('footer')(({ theme }) => ({
   span: {
     marginRight: 5,
   },
-  '> span': {
-    display: 'none',
-    '@media (min-width: 1200px)': {
-      display: 'block',
-    },
-  },
 }));
 
 const Footer = () => (
@@ -41,15 +35,7 @@ const Footer = () => (
       />
     </Stack>
     <span>|</span>
-    <Stack
-      direction="row"
-      sx={{
-        display: 'none',
-        '@media (min-width: 1200px)': {
-          display: 'flex',
-        },
-      }}
-    >
+    <Stack direction="row">
       <span>github stats from</span>
       <Link
         url="https://octoverse.github.com/#future"

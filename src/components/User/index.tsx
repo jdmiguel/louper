@@ -7,6 +7,7 @@ import Footer from '../shared/Footer';
 import Profile from './Profile';
 import ProfileMobile from './ProfileMobile';
 import Section from './Section';
+import useWindowSize from 'src/hooks/useWindowSize';
 import { UserData } from 'src/utils/types';
 
 const Root = styled('div')({
@@ -63,6 +64,8 @@ const UserPage = ({ userData, onBackFinder }: Props) => {
     }),
     [userData],
   );
+
+  const { windowWidth } = useWindowSize();
 
   const handleRequestError = (errorMessage: string) => {
     setErrorMessage(errorMessage);
@@ -125,7 +128,7 @@ const UserPage = ({ userData, onBackFinder }: Props) => {
           onClose={() => setIsErrorToastOpen(false)}
         />
       </Main>
-      <Footer />
+      {windowWidth > 1200 && <Footer />}
     </Root>
   );
 };
