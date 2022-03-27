@@ -9,11 +9,10 @@ const Root = styled('footer')(({ theme }) => ({
   display: 'flex',
   flexDirection: 'column',
   fontSize: '0.9rem',
-  left: 0,
   padding: '12px 24px',
-  position: 'absolute',
+  position: 'fixed',
   width: '100%',
-  '@media (min-width: 768px)': {
+  '@media (min-width: 1200px)': {
     flexDirection: 'row',
     justifyContent: 'center',
   },
@@ -25,7 +24,7 @@ const Root = styled('footer')(({ theme }) => ({
   },
   '> span': {
     display: 'none',
-    '@media (min-width: 768px)': {
+    '@media (min-width: 1200px)': {
       display: 'block',
     },
   },
@@ -42,7 +41,15 @@ const Footer = () => (
       />
     </Stack>
     <span>|</span>
-    <Stack direction="row">
+    <Stack
+      direction="row"
+      sx={{
+        display: 'none',
+        '@media (min-width: 1200px)': {
+          display: 'flex',
+        },
+      }}
+    >
       <span>github stats from</span>
       <Link
         url="https://octoverse.github.com/#future"
