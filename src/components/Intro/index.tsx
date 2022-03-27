@@ -11,8 +11,10 @@ import { UserData } from 'src/utils/types';
 const Root = styled('div')({
   display: 'flex',
   flexDirection: 'column',
-  justifyContent: 'center',
-  minHeight: '100vh',
+  '@media (min-width: 1200px)': {
+    justifyContent: 'center',
+    minHeight: '100vh',
+  },
 });
 
 const CornerWrapper = styled('header')({

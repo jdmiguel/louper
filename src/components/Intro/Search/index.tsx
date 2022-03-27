@@ -14,7 +14,9 @@ const Root = styled('div')({
   alignItems: 'center',
   display: 'flex',
   flexDirection: 'column',
+  marginTop: 60,
   '@media (min-width: 1200px)': {
+    marginTop: 0,
     minWidth: 600,
   },
   '@media (min-width: 1440px)': {
@@ -25,13 +27,9 @@ const Root = styled('div')({
 
 const LogoWrapper = styled('h1')({
   lineHeight: 0,
-  marginTop: 60,
   transform: 'scale(0.9)',
   '@media (min-width: 768px)': {
     transform: 'scale(1)',
-  },
-  '@media (min-width: 992px)': {
-    marginTop: 0,
   },
 });
 
