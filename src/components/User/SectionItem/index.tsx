@@ -55,7 +55,7 @@ const displayRepoTheme = (repo: Repo): ReactElement => (
           variant="body1"
           sx={{
             marginTop: 1,
-            color: 'text.primary',
+            color: 'text.secondary',
             maxWidth: '350px',
             overflow: 'hidden',
             textOverflow: 'ellipsis',

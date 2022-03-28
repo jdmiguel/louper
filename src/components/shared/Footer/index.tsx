@@ -10,7 +10,7 @@ const Root = styled('footer')(({ theme }) => ({
   flexDirection: 'column',
   fontSize: '0.9rem',
   padding: '12px 24px',
-  position: 'fixed',
+  position: 'absolute',
   width: '100%',
   '@media (min-width: 1200px)': {
     flexDirection: 'row',
