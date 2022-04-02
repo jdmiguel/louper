@@ -12,8 +12,18 @@ describe('<Intro />', () => {
     render(renderWithTheme(<Intro {...props} />));
 
     expect(screen.getByTestId('header-intro')).toBeInTheDocument();
-    expect(screen.getByTestId('main-intro')).toBeInTheDocument();
+    expect(screen.getByTestId('search')).toBeInTheDocument();
+    expect(screen.getByTestId('globe')).toBeInTheDocument();
     expect(screen.getByTestId('footer')).toBeInTheDocument();
+  });
+
+  it('does not display the globe and the footer with small devices', () => {
+    window.resizeTo(375, 667);
+
+    render(renderWithTheme(<Intro {...props} />));
+
+    expect(screen.queryByTestId('globe')).not.toBeInTheDocument();
+    expect(screen.queryByTestId('footer')).not.toBeInTheDocument();
   });
 
   it('calls the correct callback when fetching a user', async () => {

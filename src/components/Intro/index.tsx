@@ -57,7 +57,7 @@ const HomePage = ({ onFetchUser }: Props) => {
       <CornerWrapper data-testid="header-intro">
         <Corner />
       </CornerWrapper>
-      <Main data-testid="main-intro">
+      <Main>
         <Search
           onFetchUser={onFetchUser}
           onRequestError={(errorMsg: string) => {

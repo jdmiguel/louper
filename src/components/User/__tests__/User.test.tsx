@@ -32,6 +32,24 @@ describe('<User />', () => {
     expect(screen.getByTestId('footer')).toBeInTheDocument();
   });
 
+  it('displays the correct content', () => {
+    render(renderWithTheme(<User {...props} />));
+
+    expect(screen.getByTestId('profile')).toBeInTheDocument();
+    expect(screen.queryByTestId('profile-mobile')).not.toBeInTheDocument();
+    expect(screen.getByRole('tablist')).toBeInTheDocument();
+    expect(screen.getByTestId('section')).toBeInTheDocument();
+    expect(screen.getByTestId('footer')).toBeInTheDocument();
+  });
+
+  it('does not display the footer with small devices', () => {
+    window.resizeTo(375, 667);
+
+    render(renderWithTheme(<User {...props} />));
+
+    expect(screen.queryByTestId('footer')).not.toBeInTheDocument();
+  });
+
   it('displays the repos section as active', () => {
     render(renderWithTheme(<User {...props} />));
 
