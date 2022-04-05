@@ -52,6 +52,7 @@ const DEFAULT_USERS_DATA = {
 enum DefaultValues {
   MinCharsToSearchUsers = 2,
   MaxSuggestionsAllowed = 100,
+  SuggestionsPerPage = 9,
 }
 
 type Props = {
@@ -67,7 +68,6 @@ const Search = ({ onFetchUser, onRequestError }: Props) => {
   const [usersData, setUsersData] = useState<UsersData>(DEFAULT_USERS_DATA);
 
   const { windowWidth } = useWindowSize();
-  const suggestionsPerPage = windowWidth <= 1200 ? 8 : 9;
 
   const abortControllerFetchUser = useMemo(() => new AbortController(), []);
   const abortControllerFetchUsers = useMemo(() => new AbortController(), []);
@@ -90,6 +90,9 @@ const Search = ({ onFetchUser, onRequestError }: Props) => {
   }, [abortControllerFetchUser, abortControllerFetchUsers]);
 
   useEffect(() => {
+    if (!windowWidth) {
+      return;
+    }
     setSearchQuery('');
     setAreSuggestionsShown(false);
   }, [windowWidth]);
@@ -98,7 +101,7 @@ const Search = ({ onFetchUser, onRequestError }: Props) => {
     setIsLoadingUsers(true);
 
     fetch(
-      `${process.env.REACT_APP_BASE_URL}/search/users?q=${searchQuery}&page=${page}&per_page=${suggestionsPerPage}`,
+      `${process.env.REACT_APP_BASE_URL}/search/users?q=${searchQuery}&page=${page}&per_page=${DefaultValues.SuggestionsPerPage}`,
       {
         signal: abortControllerFetchUsers.signal,
       },
@@ -186,8 +189,8 @@ const Search = ({ onFetchUser, onRequestError }: Props) => {
         {areSuggestionsShown ? (
           <Suggestions
             items={usersData.items}
-            totalItems={Math.ceil(totalSuggestions / suggestionsPerPage)}
-            withPagination={totalSuggestions > suggestionsPerPage}
+            totalItems={Math.ceil(totalSuggestions / DefaultValues.SuggestionsPerPage)}
+            withPagination={totalSuggestions > DefaultValues.SuggestionsPerPage}
             onPaginate={(page: number) => fetchUsers(searchQuery, page)}
             onSelectUser={(userName: string) => {
               setSearchQuery(userName);
