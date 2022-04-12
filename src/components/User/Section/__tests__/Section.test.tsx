@@ -1,7 +1,7 @@
 import { render, screen, waitForElementToBeRemoved } from '@testing-library/react';
 import Section from '..';
 
-describe.only('<Section />', () => {
+describe('<Section />', () => {
   const props = {
     userLogin: 'jdmiguel',
     onRequestError: jest.fn(),
