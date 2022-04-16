@@ -38,6 +38,15 @@ export const theme = createTheme({
       100% { opacity:1; transform: translateY(0px);  }
   `,
   },
+  components: {
+    MuiCssBaseline: {
+      styleOverrides: {
+        body: {
+          overflowX: 'hidden',
+        },
+      },
+    },
+  },
   typography: {
     fontFamily: ['Comfortaa', 'Arial', 'sans-serif'].join(','),
     htmlFontSize: 12,
