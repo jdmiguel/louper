@@ -32,17 +32,13 @@
     "resolveJsonModule": true,
     "isolatedModules": true,
     "forceConsistentCasingInFileNames": true,
-    "noFallthroughCasesInSwitch": true,
+    "noFallthroughCasesInSwitch": true
     
   },
   "$schema": "https://json.schemastore.org/tsconfig",
   "display": "Recommended",
   "exclude": [
-    "node_modules",
-    "**/*.spec.ts",
-    "**/*.spec.tsx",
-    "**/*.test.ts",
-    "**/*.test.tsx"
+    "node_modules"
   ],
   "include": [
     "**/*.ts",
