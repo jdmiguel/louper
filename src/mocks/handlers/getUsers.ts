@@ -101,14 +101,14 @@ const extraUsers = [
 const totalUsers = [...users, ...extraUsers];
 
 const getUsersData = (searchQuery: string, currentPage: string): UsersData => {
-  if (searchQuery.includes('jdmiguel')) {
+  if (searchQuery === 'jdmiguel') {
     return {
       total_count: 1,
       items: users.slice(users.length - 1, users.length),
     };
   }
 
-  if (searchQuery.includes('jdm')) {
+  if (searchQuery === 'jdm') {
     return {
       total_count: 15,
       items: currentPage === '1' ? [...users] : [...extraUsers],

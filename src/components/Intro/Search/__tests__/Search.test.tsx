@@ -58,7 +58,7 @@ describe('<Search />', () => {
   describe('when typing more than two chars', () => {
     test('calls the correct callback when there is a 403 error', async () => {
       server.use(
-        rest.get(`${process.env.REACT_APP_BASE_URL}/search/users`, (req, res, ctx) => {
+        rest.get(`${process.env.REACT_APP_BASE_URL}/search/users`, (_, res, ctx) => {
           return res(ctx.status(403));
         }),
       );
@@ -78,7 +78,7 @@ describe('<Search />', () => {
 
     test('calls the correct callback when there is a 404 error', async () => {
       server.use(
-        rest.get(`${process.env.REACT_APP_BASE_URL}/search/users`, (req, res, ctx) => {
+        rest.get(`${process.env.REACT_APP_BASE_URL}/search/users`, (_, res, ctx) => {
           return res(ctx.status(404));
         }),
       );
@@ -96,7 +96,7 @@ describe('<Search />', () => {
 
     test('calls the correct callback when there is a 500 error', async () => {
       server.use(
-        rest.get(`${process.env.REACT_APP_BASE_URL}/search/users`, (req, res, ctx) => {
+        rest.get(`${process.env.REACT_APP_BASE_URL}/search/users`, (_, res, ctx) => {
           return res(ctx.status(500));
         }),
       );
@@ -257,7 +257,7 @@ describe('<Search />', () => {
 
       test('calls the correct callback when there is a 404 error', async () => {
         server.use(
-          rest.get(`${process.env.REACT_APP_BASE_URL}/users/:userLogin`, (req, res, ctx) => {
+          rest.get(`${process.env.REACT_APP_BASE_URL}/users/:userLogin`, (_, res, ctx) => {
             return res(ctx.status(404));
           }),
         );
@@ -265,9 +265,9 @@ describe('<Search />', () => {
         render(renderWithTheme(<Search {...props} />));
 
         const input = screen.getByPlaceholderText('Type user name...');
-        await userEvent.type(input, 'jdm');
+        await userEvent.type(input, 'jdmiguel');
 
-        let loader = await screen.findByRole('progressbar');
+        const loader = await screen.findByRole('progressbar');
         await waitForElementToBeRemoved(loader);
 
         await userEvent.click(
@@ -276,8 +276,7 @@ describe('<Search />', () => {
           }),
         );
 
-        loader = await screen.findByRole('progressbar');
-        await waitForElementToBeRemoved(loader);
+        await screen.findByRole('progressbar');
 
         expect(props.onRequestError).toHaveBeenCalledWith('Please, choose an available user');
       });

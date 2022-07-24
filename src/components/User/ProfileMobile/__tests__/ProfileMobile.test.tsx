@@ -31,7 +31,7 @@ describe('<ProfileMobile />', () => {
   });
 
   it('does not display the name field when no name', () => {
-    render(<ProfileMobile {...props} userData={{ ...props.userData, name: null }} />);
+    render(<ProfileMobile {...props} userData={{ ...props.userData, name: '' }} />);
 
     expect(screen.queryByText('Jaime De Miguel')).not.toBeInTheDocument();
   });

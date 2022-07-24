@@ -31,26 +31,26 @@ describe('<Profile />', () => {
     render(<Profile {...props} />);
 
     const mainInfo = screen.getByText('jdmiguel').parentElement;
-    expect(mainInfo.children).toHaveLength(3);
+    expect(mainInfo?.children).toHaveLength(3);
 
     expect(screen.getByText('Jaime De Miguel')).toBeInTheDocument();
     expect(screen.getByText('Frontend developer')).toBeInTheDocument();
   });
 
   it('does not display the name field when no name', () => {
-    render(<Profile {...props} userData={{ ...props.userData, name: null }} />);
+    render(<Profile {...props} userData={{ ...props.userData, name: '' }} />);
 
     const mainInfo = screen.getByText('jdmiguel').parentElement;
-    expect(mainInfo.children).toHaveLength(2);
+    expect(mainInfo?.children).toHaveLength(2);
 
     expect(screen.queryByText('Jaime De Miguel')).not.toBeInTheDocument();
   });
 
   it('does not display the bio field when no bio', () => {
-    render(<Profile {...props} userData={{ ...props.userData, bio: null }} />);
+    render(<Profile {...props} userData={{ ...props.userData, bio: '' }} />);
 
     const mainInfo = screen.getByText('jdmiguel').parentElement;
-    expect(mainInfo.children).toHaveLength(2);
+    expect(mainInfo?.children).toHaveLength(2);
 
     expect(screen.queryByText('Frontend developer')).not.toBeInTheDocument();
   });
@@ -58,8 +58,8 @@ describe('<Profile />', () => {
   it('renders the correct info details', () => {
     render(<Profile {...props} />);
 
-    const details = screen.getByText('jdmiguel').parentElement.nextElementSibling;
-    expect(details.children).toHaveLength(6);
+    const details = screen.getByText('jdmiguel').parentElement?.nextElementSibling;
+    expect(details?.children).toHaveLength(6);
 
     // repos
     expect(screen.getByText(30)).toBeInTheDocument();
@@ -74,7 +74,7 @@ describe('<Profile />', () => {
     expect(screen.getByText('favorite')).toBeInTheDocument();
 
     // created_at
-    expect(screen.getByText('20/3/2014')).toBeInTheDocument();
+    expect(screen.getByText('3/20/2014')).toBeInTheDocument();
     expect(screen.getByText('event_note')).toBeInTheDocument();
 
     // location
@@ -87,20 +87,20 @@ describe('<Profile />', () => {
   });
 
   it('does not display the location field when no location', () => {
-    render(<Profile {...props} userData={{ ...props.userData, location: null }} />);
+    render(<Profile {...props} userData={{ ...props.userData, location: '' }} />);
 
-    const details = screen.getByText('jdmiguel').parentElement.nextElementSibling;
-    expect(details.children).toHaveLength(5);
+    const details = screen.getByText('jdmiguel').parentElement?.nextElementSibling;
+    expect(details?.children).toHaveLength(5);
 
     expect(screen.queryByText('Dublin')).not.toBeInTheDocument();
     expect(screen.queryByText('location_on')).not.toBeInTheDocument();
   });
 
   it('does not display the company field when no location', () => {
-    render(<Profile {...props} userData={{ ...props.userData, company: null }} />);
+    render(<Profile {...props} userData={{ ...props.userData, company: '' }} />);
 
-    const details = screen.getByText('jdmiguel').parentElement.nextElementSibling;
-    expect(details.children).toHaveLength(5);
+    const details = screen.getByText('jdmiguel').parentElement?.nextElementSibling;
+    expect(details?.children).toHaveLength(5);
 
     expect(screen.queryByText('Kitman Labs')).not.toBeInTheDocument();
     expect(screen.queryByText('business')).not.toBeInTheDocument();
@@ -128,14 +128,14 @@ describe('<Profile />', () => {
   });
 
   it('does not display the email action when no email', () => {
-    render(<Profile {...props} userData={{ ...props.userData, email: null }} />);
+    render(<Profile {...props} userData={{ ...props.userData, email: '' }} />);
 
     expect(screen.queryByText(/send email/i)).not.toBeInTheDocument();
     expect(screen.queryByText('mail_outline')).not.toBeInTheDocument();
   });
 
   it('does not display the blog action when no blog', () => {
-    render(<Profile {...props} userData={{ ...props.userData, blog: null }} />);
+    render(<Profile {...props} userData={{ ...props.userData, blog: '' }} />);
 
     expect(screen.queryByText(/visit portfolio/i)).not.toBeInTheDocument();
     expect(screen.queryByText('web_icon')).not.toBeInTheDocument();
