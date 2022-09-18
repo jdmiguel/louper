@@ -1,4 +1,5 @@
 import { rest } from 'msw';
+import { API_BASE_URL } from 'src/utils';
 
 const data = [
   {
@@ -24,11 +25,8 @@ const data = [
   },
 ];
 
-const handler = rest.get(
-  `${process.env.REACT_APP_BASE_URL}/users/:userLogin/repos`,
-  (_, res, ctx) => {
-    return res(ctx.json(data));
-  },
-);
+const handler = rest.get(`${API_BASE_URL}/users/:userLogin/repos`, (_, res, ctx) => {
+  return res(ctx.json(data));
+});
 
 export { handler, data };

@@ -1,4 +1,5 @@
 import { rest } from 'msw';
+import { API_BASE_URL } from '../../utils';
 import { UsersData } from '../../utils/types';
 
 const users = [
@@ -121,7 +122,7 @@ const getUsersData = (searchQuery: string, currentPage: string): UsersData => {
   };
 };
 
-const handler = rest.get(`${process.env.REACT_APP_BASE_URL}/search/users`, (req, res, ctx) => {
+const handler = rest.get(`${API_BASE_URL}/search/users`, (req, res, ctx) => {
   const query = req.url.searchParams;
   const searchQuery = query.get('q');
   const currentPage = query.get('page');

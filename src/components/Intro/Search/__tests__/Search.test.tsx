@@ -1,6 +1,7 @@
 import { render, screen, waitForElementToBeRemoved } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { server, rest } from '../../../../mocks/server';
+import { API_BASE_URL } from '../../../../utils';
 import { renderWithTheme } from '../../../../utils/theme';
 import Search from '..';
 
@@ -58,7 +59,7 @@ describe('<Search />', () => {
   describe('when typing more than two chars', () => {
     test('calls the correct callback when there is a 403 error', async () => {
       server.use(
-        rest.get(`${process.env.REACT_APP_BASE_URL}/search/users`, (_, res, ctx) => {
+        rest.get(`${API_BASE_URL}/search/users`, (_, res, ctx) => {
           return res(ctx.status(403));
         }),
       );
@@ -78,7 +79,7 @@ describe('<Search />', () => {
 
     test('calls the correct callback when there is a 404 error', async () => {
       server.use(
-        rest.get(`${process.env.REACT_APP_BASE_URL}/search/users`, (_, res, ctx) => {
+        rest.get(`${API_BASE_URL}/search/users`, (_, res, ctx) => {
           return res(ctx.status(404));
         }),
       );
@@ -96,7 +97,7 @@ describe('<Search />', () => {
 
     test('calls the correct callback when there is a 500 error', async () => {
       server.use(
-        rest.get(`${process.env.REACT_APP_BASE_URL}/search/users`, (_, res, ctx) => {
+        rest.get(`${API_BASE_URL}/search/users`, (_, res, ctx) => {
           return res(ctx.status(500));
         }),
       );
@@ -257,7 +258,7 @@ describe('<Search />', () => {
 
       test('calls the correct callback when there is a 404 error', async () => {
         server.use(
-          rest.get(`${process.env.REACT_APP_BASE_URL}/users/:userLogin`, (_, res, ctx) => {
+          rest.get(`${API_BASE_URL}/users/:userLogin`, (_, res, ctx) => {
             return res(ctx.status(404));
           }),
         );

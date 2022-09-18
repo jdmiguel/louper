@@ -6,7 +6,7 @@ import Watermark from './Watermark/index';
 import Finder from './Finder';
 import Suggestions from './Suggestions';
 import useWindowSize from 'src/hooks/useWindowSize';
-import { debounce } from 'src/utils';
+import { API_BASE_URL, debounce } from 'src/utils';
 import { handleErrors } from 'src/utils/request';
 import { UsersData, UserData } from 'src/utils/types';
 
@@ -101,7 +101,7 @@ const Search = ({ onFetchUser, onRequestError }: Props) => {
     setIsLoadingUsers(true);
 
     fetch(
-      `${process.env.REACT_APP_BASE_URL}/search/users?q=${searchQuery}&page=${page}&per_page=${DefaultValues.SuggestionsPerPage}`,
+      `${API_BASE_URL}/search/users?q=${searchQuery}&page=${page}&per_page=${DefaultValues.SuggestionsPerPage}`,
       {
         signal: abortControllerFetchUsers.signal,
       },
@@ -123,7 +123,7 @@ const Search = ({ onFetchUser, onRequestError }: Props) => {
   const fetchUser = (userLogin: string) => {
     setIsLoadingUser(true);
 
-    fetch(`${process.env.REACT_APP_BASE_URL}/users/${userLogin}`, {
+    fetch(`${API_BASE_URL}/users/${userLogin}`, {
       signal: abortControllerFetchUser.signal,
     })
       .then(handleErrors)

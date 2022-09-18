@@ -2,6 +2,7 @@ import { useState, useEffect, useMemo, useRef } from 'react';
 import { styled } from '@mui/material/styles';
 import Typography from '@mui/material/Typography';
 import CircularProgress from '@mui/material/CircularProgress';
+import { API_BASE_URL } from 'src/utils';
 import SectionItem from '../SectionItem';
 import useIntersectionObserver from 'src/hooks/useIntersectionObserver';
 import { handleErrors } from 'src/utils/request';
@@ -62,7 +63,7 @@ const Section = ({ userLogin, sectionType, totalItems, onRequestError }: Props) 
     }
 
     fetch(
-      `${process.env.REACT_APP_BASE_URL}/users/${userLogin}/${sectionType}?page=${currentItemPage}&per_page=${itemsPerPage}`,
+      `${API_BASE_URL}/users/${userLogin}/${sectionType}?page=${currentItemPage}&per_page=${itemsPerPage}`,
       {
         signal: abortController.signal,
       },
