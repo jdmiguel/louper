@@ -1,9 +1,9 @@
 import { styled } from '@mui/material/styles';
 import Typography from '@mui/material/Typography';
 import Avatar from '@mui/material/Avatar';
-import TextTag from 'src/components/shared/TextTag';
-import Link from 'src/components/shared/Link';
-import { UserData } from 'src/utils/types';
+import TextTag from '@/components/shared/TextTag';
+import Link from '@/components/shared/Link';
+import { UserData } from '@/utils/types';
 
 const Root = styled('main')({
   display: 'flex',

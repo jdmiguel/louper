@@ -1,7 +1,13 @@
 {
-  "name": "github-finder",
-  "version": "0.1.0",
+  "name": "louper",
   "private": true,
+  "version": "1.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc && vite build",
+    "preview": "vite preview"
+  },
   "dependencies": {
     "@mui/icons-material": "^5.0.1",
     "@mui/material": "^5.0.2",
@@ -29,6 +35,7 @@
     "@types/uuid": "^8.3.1",
     "@typescript-eslint/eslint-plugin": "^5.0.0",
     "@typescript-eslint/parser": "^5.0.0",
+    "@vitejs/plugin-react": "^2.1.0",
     "eslint": "^7.32.0",
     "eslint-config-prettier": "^8.3.0",
     "eslint-plugin-jest": "^26.1.1",
@@ -42,31 +49,10 @@
     "mq-polyfill": "^1.1.8",
     "msw": "^0.39.1",
     "prettier": "^2.3.2",
-    "react-scripts": "4.0.3",
     "resize-observer-polyfill": "^1.5.1",
     "ts-jest": "^28.0.7",
     "typescript": "^4.4.4",
-    "uuid": "^8.3.2"
-  },
-  "scripts": {
-    "start": "react-scripts start",
-    "start:mock": "REACT_APP_MOCK_API=true react-scripts start",
-    "build": "react-scripts build",
-    "lint": "tsc --noEmit && eslint '*/**/*.{js,ts}' --quiet --fix",
-    "test": "react-scripts test",
-    "test:debug": "react-scripts --inspect-brk test --runInBand --no-cache",
-    "eject": "react-scripts eject"
-  },
-  "eslintConfig": {
-    "extends": "react-app"
-  },
-  "browserslist": [
-    ">0.2%",
-    "not dead",
-    "not ie <= 11",
-    "not op_mini all"
-  ],
-  "msw": {
-    "workerDirectory": "public"
+    "uuid": "^8.3.2",
+    "vite": "^3.1.0"
   }
 }

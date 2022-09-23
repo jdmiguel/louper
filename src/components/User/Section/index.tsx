@@ -2,11 +2,11 @@ import { useState, useEffect, useMemo, useRef } from 'react';
 import { styled } from '@mui/material/styles';
 import Typography from '@mui/material/Typography';
 import CircularProgress from '@mui/material/CircularProgress';
-import { API_BASE_URL } from 'src/utils';
 import SectionItem from '../SectionItem';
-import useIntersectionObserver from 'src/hooks/useIntersectionObserver';
-import { handleErrors } from 'src/utils/request';
-import { SectionType, Repo, User } from 'src/utils/types';
+import { API_BASE_URL } from '@/utils';
+import useIntersectionObserver from '@/hooks/useIntersectionObserver';
+import { handleErrors } from '@/utils/request';
+import { SectionType, Repo, User } from '@/utils/types';
 
 const Root = styled('section')({
   display: 'grid',

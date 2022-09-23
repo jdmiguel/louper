@@ -7,8 +7,8 @@ import Footer from '../shared/Footer';
 import Profile from './Profile';
 import ProfileMobile from './ProfileMobile';
 import Section from './Section';
-import useWindowSize from 'src/hooks/useWindowSize';
-import { UserData } from 'src/utils/types';
+import useWindowSize from '@/hooks/useWindowSize';
+import { UserData } from '@/utils/types';
 
 const Root = styled('div')({
   minHeight: '100vh',

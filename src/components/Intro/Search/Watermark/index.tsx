@@ -1,4 +1,4 @@
-import { colors } from 'src/utils/colors';
+import { colors } from '@/utils/colors';
 
 const Watermark = () => (
   <svg data-testid="watermark" width="230" height="230" viewBox="0 0 230 230">

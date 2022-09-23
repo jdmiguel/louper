@@ -3,7 +3,7 @@ import Stack from '@mui/material/Stack';
 import Typography from '@mui/material/Typography';
 import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
-import { User } from 'src/utils/types';
+import { User } from '@/utils/types';
 
 const StyledButton = styled(Button)(({ theme }) => ({
   height: 44,
