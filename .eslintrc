@@ -35,5 +35,8 @@
     "react": {
       "version": "detect"
     }
-  }
+  },
+  "plugins": [
+    "html"
+  ]
 }  
