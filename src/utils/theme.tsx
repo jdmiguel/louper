@@ -6,6 +6,7 @@ import { colors } from './colors';
 
 type Animation = {
   greet: Keyframes;
+  fadeIn: Keyframes;
   fadeUp: Keyframes;
 };
 
@@ -32,6 +33,10 @@ export const theme = createTheme({
       0%,100% { transform: rotate(0) }
       20%,60% { transform: rotate(-25deg) }
       40%,80% { transform: rotate(10deg) }
+    `,
+    fadeIn: keyframes`
+      0% { opacity:0 }
+      100% { opacity:1 }
     `,
     fadeUp: keyframes`
       0% { opacity:0; transform: translateY(20px); }
