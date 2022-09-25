@@ -8,7 +8,7 @@ import { colors } from '@/utils/colors';
 import { UserData } from '@/utils/types';
 
 const Root = styled('div')({
-  animation: `${theme.animation.fadeIn} 300ms 500ms 1 ease-out forwards`,
+  animation: `${theme.animation.fadeIn} 300ms 1 ease-out forwards`,
   background: colors.darkGradient,
   backgroundAttachment: 'fixed',
   minHeight: '100vh',
