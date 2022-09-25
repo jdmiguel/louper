@@ -3,10 +3,10 @@ import { styled } from '@mui/material/styles';
 import Corner from './Corner';
 import Search from './Search';
 import InteractiveGlobe from './Globe';
-import Footer from 'src/components/shared/Footer';
-import Toast from 'src/components/shared/Toast';
-import useWindowSize from 'src/hooks/useWindowSize';
-import { UserData } from 'src/utils/types';
+import Footer from '@/components/shared/Footer';
+import Toast from '@/components/shared/Toast';
+import useWindowSize from '@/hooks/useWindowSize';
+import { UserData } from '@/utils/types';
 
 const Root = styled('div')({
   display: 'flex',

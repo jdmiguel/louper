@@ -4,14 +4,14 @@ import Section from '..';
 describe('<Section />', () => {
   const props = {
     userLogin: 'jdmiguel',
-    onRequestError: jest.fn(),
+    onRequestError: vi.fn(),
   };
 
   describe('when section type is repos', () => {
     it('displays the correct content after loading', async () => {
       render(<Section {...props} sectionType="repos" totalItems={3} />);
 
-      expect(screen.getByRole('progressbar')).toBeVisible();
+      expect(screen.getByRole('progressbar')).toBeInTheDocument();
       await waitForElementToBeRemoved(screen.getByRole('progressbar'));
 
       expect(screen.queryByText(/no repos added/i)).not.toBeInTheDocument();
@@ -25,7 +25,7 @@ describe('<Section />', () => {
     it('displays the correct content after loading', async () => {
       render(<Section {...props} sectionType="following" totalItems={5} />);
 
-      expect(screen.getByRole('progressbar')).toBeVisible();
+      expect(screen.getByRole('progressbar')).toBeInTheDocument();
       await waitForElementToBeRemoved(screen.getByRole('progressbar'));
 
       expect(screen.queryByText(/no following added/i)).not.toBeInTheDocument();
@@ -41,7 +41,7 @@ describe('<Section />', () => {
     it('displays the correct content after loading', async () => {
       render(<Section {...props} sectionType="followers" totalItems={8} />);
 
-      expect(screen.getByRole('progressbar')).toBeVisible();
+      expect(screen.getByRole('progressbar')).toBeInTheDocument();
       await waitForElementToBeRemoved(screen.getByRole('progressbar'));
 
       expect(screen.queryByText(/no followers added/i)).not.toBeInTheDocument();

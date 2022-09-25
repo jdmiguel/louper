@@ -1,4 +1,4 @@
-import { colors } from 'src/utils/colors';
+import { colors } from '@/utils/colors';
 
 const Logo = () => (
   <svg data-testid="logo" width="280" height="79" viewBox="0 0 280 79" fill="none">

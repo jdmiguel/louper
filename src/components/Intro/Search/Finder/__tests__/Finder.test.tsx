@@ -8,8 +8,8 @@ describe('<Finder />', () => {
     isLoadingUser: false,
     isLoadingUsers: false,
     isOnFetchingUserError: false,
-    onChangeSearchQuery: jest.fn(),
-    onFetchUser: jest.fn(),
+    onChangeSearchQuery: vi.fn(),
+    onFetchUser: vi.fn(),
   };
 
   it('displays a loader within the input while loading users', () => {
@@ -17,7 +17,7 @@ describe('<Finder />', () => {
 
     const inputWrapper = screen.getByPlaceholderText('Type user name...').parentElement;
     const circularLoader = inputWrapper?.querySelector('.MuiCircularProgress-root');
-    expect(circularLoader).toBeVisible();
+    expect(circularLoader).toBeInTheDocument();
   });
 
   it('displays a loader within the search button while loading a user', () => {
@@ -25,7 +25,7 @@ describe('<Finder />', () => {
 
     const searchButton = screen.getByRole('button');
     const circularLoader = searchButton.querySelector('.MuiCircularProgress-root');
-    expect(circularLoader).toBeVisible();
+    expect(circularLoader).toBeInTheDocument();
   });
 
   it('calls the correct callback when typing more than two chars', async () => {

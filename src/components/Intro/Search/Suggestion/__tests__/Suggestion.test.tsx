@@ -10,7 +10,7 @@ describe('<Suggestion />', () => {
       html_url: 'https://github.com/jdmiguel',
       avatar_url: 'https://github.com/jdmiguel.jpg',
     },
-    onClick: jest.fn(),
+    onClick: vi.fn(),
   };
 
   it('displays the content properly', () => {

@@ -1,4 +1,5 @@
 import '@testing-library/jest-dom';
+import 'whatwg-fetch';
 import matchMediaPolyfill from 'mq-polyfill';
 import { server } from './mocks/server.ts';
 

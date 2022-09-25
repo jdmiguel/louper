@@ -19,7 +19,7 @@ describe('<User />', () => {
       followers: 12,
       following: 16,
     },
-    onBackFinder: jest.fn(),
+    onBackFinder: vi.fn(),
   };
 
   it('displays the correct content', () => {

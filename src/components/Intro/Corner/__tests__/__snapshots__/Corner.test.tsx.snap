@@ -1,6 +1,6 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
+// Vitest Snapshot v1
 
-exports[`<Corner /> displays the content properly 1`] = `
+exports[`<Corner /> > displays the content properly 1`] = `
 <div>
   <a
     aria-label="View source on GitHub"

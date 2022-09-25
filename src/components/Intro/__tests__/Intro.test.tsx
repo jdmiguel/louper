@@ -5,7 +5,7 @@ import Intro from '..';
 
 describe('<Intro />', () => {
   const props = {
-    onFetchUser: jest.fn(),
+    onFetchUser: vi.fn(),
   };
 
   it('displays the correct content', () => {
