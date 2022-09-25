@@ -8,8 +8,8 @@ describe('<Finder />', () => {
     isLoadingUser: false,
     isLoadingUsers: false,
     isOnFetchingUserError: false,
-    onChangeSearchQuery: jest.fn(),
-    onFetchUser: jest.fn(),
+    onChangeSearchQuery: vi.fn(),
+    onFetchUser: vi.fn(),
   };
 
   it('displays a loader within the input while loading users', () => {

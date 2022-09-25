@@ -7,8 +7,8 @@ import Search from '..';
 
 describe('<Search />', () => {
   const props = {
-    onFetchUser: jest.fn(),
-    onRequestError: jest.fn(),
+    onFetchUser: vi.fn(),
+    onRequestError: vi.fn(),
   };
 
   it('displays the correct content', () => {

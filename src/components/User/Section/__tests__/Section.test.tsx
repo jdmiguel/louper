@@ -4,7 +4,7 @@ import Section from '..';
 describe('<Section />', () => {
   const props = {
     userLogin: 'jdmiguel',
-    onRequestError: jest.fn(),
+    onRequestError: vi.fn(),
   };
 
   describe('when section type is repos', () => {

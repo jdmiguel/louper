@@ -1,6 +1,6 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
+// Vitest Snapshot v1
 
-exports[`<Footer /> displays the content properly 1`] = `
+exports[`<Footer /> > displays the content properly 1`] = `
 <div>
   <footer
     class="css-10zg1z5"

@@ -4,12 +4,13 @@ Single page application intended to search github users by name and display some
 
 ### TECHNOLOGIES
 
+- **VITE**
 - **REACT**
 - **REACT FIBER**
 - **REACT DREI**
 - **TYPESCRIPT**
 - **MATERIAL-UI**
-- **JEST**
+- **VITEST**
 - **REACT-TESTING-LIBRARY**
 - **MSW**
 

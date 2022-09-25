@@ -1,6 +1,6 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
+// Vitest Snapshot v1
 
-exports[`<Watermark /> displays the content properly 1`] = `
+exports[`<Watermark /> > displays the content properly 1`] = `
 <div>
   <svg
     data-testid="watermark"

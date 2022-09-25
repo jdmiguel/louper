@@ -5,7 +5,7 @@ import Menu from '..';
 
 describe('<Menu />', () => {
   const props = {
-    onClick: jest.fn(),
+    onClick: vi.fn(),
   };
 
   it('displays the menu items', () => {

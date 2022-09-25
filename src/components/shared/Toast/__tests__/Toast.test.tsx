@@ -6,7 +6,7 @@ describe('<Toast />', () => {
   const props = {
     isOpen: true,
     msg: 'Please, choose an available user',
-    onClose: jest.fn(),
+    onClose: vi.fn(),
   };
 
   it('displays the message properly', () => {

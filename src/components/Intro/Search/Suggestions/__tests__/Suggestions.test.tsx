@@ -33,8 +33,8 @@ describe('<Suggestions />', () => {
     ],
     totalItems: 4,
     withPagination: false,
-    onPaginate: jest.fn(),
-    onSelectUser: jest.fn(),
+    onPaginate: vi.fn(),
+    onSelectUser: vi.fn(),
   };
 
   it('displays the suggestions properly', () => {
