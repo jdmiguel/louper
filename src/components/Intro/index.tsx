@@ -2,10 +2,9 @@ import { useState } from 'react';
 import { styled } from '@mui/material/styles';
 import Corner from './Corner';
 import Search from './Search';
-import InteractiveGlobe from './Globe';
+import Globe from './Globe';
 import Footer from '@/components/shared/Footer';
 import Toast from '@/components/shared/Toast';
-import useWindowSize from '@/hooks/useWindowSize';
 import { UserData } from '@/utils/types';
 
 const Root = styled('div')({
@@ -49,9 +48,6 @@ const HomePage = ({ onFetchUser }: Props) => {
   const [isErrorToastOpen, setIsErrorToastOpen] = useState(false);
   const [errorMessage, setErrorMessage] = useState('');
 
-  const { windowWidth } = useWindowSize();
-  const isBigDevice = windowWidth > 1200;
-
   return (
     <Root>
       <CornerWrapper data-testid="header-intro">
@@ -65,9 +61,9 @@ const HomePage = ({ onFetchUser }: Props) => {
             setIsErrorToastOpen(true);
           }}
         />
-        {isBigDevice && <InteractiveGlobe />}
+        <Globe />
       </Main>
-      {isBigDevice && <Footer />}
+      <Footer />
       <Toast
         isOpen={isErrorToastOpen}
         msg={errorMessage}

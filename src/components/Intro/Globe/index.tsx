@@ -27,10 +27,14 @@ const atmosphereFragmentShader = [
 ].join('\n');
 
 const Root = styled('div')({
+  display: 'none',
   height: 510,
   position: 'relative',
   userSelect: 'none',
   width: 510,
+  '@media (min-width: 1200px)': {
+    display: 'block',
+  },
   '@media (min-width: 1440px)': {
     height: 580,
     width: 580,
@@ -47,7 +51,7 @@ const FallbackGlobe = styled('div')(({ theme }) => ({
   width: 300,
 }));
 
-const Globe = () => {
+const GlobeModel = () => {
   const sphereRef = useRef<Mesh>(null);
   const atmosphereRef = useRef<Mesh>(null);
 
@@ -83,7 +87,7 @@ const Globe = () => {
   );
 };
 
-const InteractiveGlobe = () => {
+const Globe = () => {
   const [isAutoRotationAllowed, setIsAutoRotationAllowed] = useState(true);
   const [isMarkerHovered, setIsMarkerHovered] = useState(false);
   const [overlayBoxData, setOverlayBoxData] = useState({
@@ -114,41 +118,39 @@ const InteractiveGlobe = () => {
     >
       <FallbackGlobe />
       <Canvas camera={{ position: [6, 1, 8], fov: 13, far: 10000 }} onPointerMissed={onMarkerOut}>
-        <Suspense fallback={null}>
-          <Globe />
-          <animated.group scale={scale}>
-            {globeMarkers.map((marker) => (
-              <Marker
-                key={marker.id}
-                data={{
-                  country: marker.country,
-                  lat: marker.lat,
-                  lng: marker.lng,
-                  totalUsers: marker.totalUsers,
-                }}
-                onOver={(currentOverlayBoxData) => {
-                  setIsMarkerHovered(true);
-                  setIsAutoRotationAllowed(false);
-                  setOverlayBoxData(currentOverlayBoxData);
-                }}
-                onOut={onMarkerOut}
-              />
-            ))}
-          </animated.group>
-          <OrbitControls
-            enableZoom={false}
-            enablePan
-            autoRotate={isAutoRotationAllowed}
-            autoRotateSpeed={0.75}
-            rotateSpeed={0.18}
-            maxPolarAngle={2.0}
-            minPolarAngle={1.1}
-          />
-        </Suspense>
+        <GlobeModel />
+        <animated.group scale={scale}>
+          {globeMarkers.map((marker) => (
+            <Marker
+              key={marker.id}
+              data={{
+                country: marker.country,
+                lat: marker.lat,
+                lng: marker.lng,
+                totalUsers: marker.totalUsers,
+              }}
+              onOver={(currentOverlayBoxData) => {
+                setIsMarkerHovered(true);
+                setIsAutoRotationAllowed(false);
+                setOverlayBoxData(currentOverlayBoxData);
+              }}
+              onOut={onMarkerOut}
+            />
+          ))}
+        </animated.group>
+        <OrbitControls
+          enableZoom={false}
+          enablePan
+          autoRotate={isAutoRotationAllowed}
+          autoRotateSpeed={0.75}
+          rotateSpeed={0.18}
+          maxPolarAngle={2.0}
+          minPolarAngle={1.1}
+        />
       </Canvas>
       {isMarkerHovered && <OverlayBox data={overlayBoxData} />}
     </Root>
   );
 };
 
-export default InteractiveGlobe;
+export default Globe;
