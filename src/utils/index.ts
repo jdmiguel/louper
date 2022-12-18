@@ -1,9 +1,9 @@
-export enum ErrorMessage {
-  Max = 'You have excedeed the maximum allowed request. Please, wait for a while',
-  NoUser = 'Please, choose an available user',
-  MinChars = 'Please, type three chars at least',
-  Generic = 'Sorry! there was an error on the server side.',
-}
+export const ErrorMessage = {
+  Max: 'You have excedeed the maximum allowed request. Please, wait for a while',
+  NoUser: 'Please, choose an available user',
+  MinChars: 'Please, type three chars at least',
+  Generic: 'Sorry! there was an error on the server side.',
+};
 
 export const getErrorMessage = (errorStatus: number): string => {
   if (errorStatus === 403) {

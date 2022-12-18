@@ -10,6 +10,14 @@ import { API_BASE_URL, debounce } from '@/utils';
 import { handleErrors } from '@/utils/request';
 import { UsersData, UserData } from '@/utils/types';
 
+const DEFAULT_USERS_DATA = {
+  total_count: 0,
+  items: [],
+};
+const MIN_CHARS_TO_SEARCH_USERS = 2;
+const MAX_SUGGESTIONS_ALLOWED = 100;
+const SUGGESTIONS_PER_PAGE = 9;
+
 const Root = styled('div')({
   alignItems: 'center',
   display: 'flex',
@@ -44,17 +52,6 @@ const WatermarkWrapper = styled('div')({
   opacity: 0.15,
 });
 
-const DEFAULT_USERS_DATA = {
-  total_count: 0,
-  items: [],
-};
-
-enum DefaultValues {
-  MinCharsToSearchUsers = 2,
-  MaxSuggestionsAllowed = 100,
-  SuggestionsPerPage = 9,
-}
-
 type Props = {
   onFetchUser: (userData: UserData) => void;
   onRequestError: (userLogin: string) => void;
@@ -74,9 +71,9 @@ const Search = ({ onFetchUser, onRequestError }: Props) => {
 
   const totalSuggestions = useMemo(
     () =>
-      usersData.total_count <= DefaultValues.MaxSuggestionsAllowed
+      usersData.total_count <= MAX_SUGGESTIONS_ALLOWED
         ? usersData.total_count
-        : DefaultValues.MaxSuggestionsAllowed,
+        : MAX_SUGGESTIONS_ALLOWED,
     [usersData],
   );
 
@@ -101,7 +98,7 @@ const Search = ({ onFetchUser, onRequestError }: Props) => {
     setIsLoadingUsers(true);
 
     fetch(
-      `${API_BASE_URL}/search/users?q=${searchQuery}&page=${page}&per_page=${DefaultValues.SuggestionsPerPage}`,
+      `${API_BASE_URL}/search/users?q=${searchQuery}&page=${page}&per_page=${SUGGESTIONS_PER_PAGE}`,
       {
         signal: abortControllerFetchUsers.signal,
       },
@@ -175,10 +172,10 @@ const Search = ({ onFetchUser, onRequestError }: Props) => {
         isLoadingUsers={isLoadingUsers}
         onChangeSearchQuery={(currentSearchQuery: string) => {
           setSearchQuery(currentSearchQuery);
-          if (currentSearchQuery.length > DefaultValues.MinCharsToSearchUsers) {
+          if (currentSearchQuery.length > MIN_CHARS_TO_SEARCH_USERS) {
             debouncedFetchUsers(currentSearchQuery);
           }
-          if (currentSearchQuery.length <= DefaultValues.MinCharsToSearchUsers) {
+          if (currentSearchQuery.length <= MIN_CHARS_TO_SEARCH_USERS) {
             setAreSuggestionsShown(false);
             setUsersData(DEFAULT_USERS_DATA);
           }
@@ -189,8 +186,8 @@ const Search = ({ onFetchUser, onRequestError }: Props) => {
         {areSuggestionsShown ? (
           <Suggestions
             items={usersData.items}
-            totalItems={Math.ceil(totalSuggestions / DefaultValues.SuggestionsPerPage)}
-            withPagination={totalSuggestions > DefaultValues.SuggestionsPerPage}
+            totalItems={Math.ceil(totalSuggestions / SUGGESTIONS_PER_PAGE)}
+            withPagination={totalSuggestions > SUGGESTIONS_PER_PAGE}
             onPaginate={(page: number) => fetchUsers(searchQuery, page)}
             onSelectUser={(userName: string) => {
               setSearchQuery(userName);

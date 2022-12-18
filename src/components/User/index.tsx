@@ -9,6 +9,13 @@ import ProfileMobile from './ProfileMobile';
 import Section from './Section';
 import { UserData } from '@/utils/types';
 
+const TOTAL_ITEMS_ALLOWED = 100;
+enum ActiveSection {
+  repos,
+  following,
+  followers,
+}
+
 const Root = styled('div')({
   minHeight: '100vh',
   padding: '0 20px',
@@ -32,10 +39,6 @@ const ProfileWrapper = styled('div')({
   },
 });
 
-enum DefaultValues {
-  totalItemsAllowed = 100,
-}
-
 type Props = {
   userData: UserData;
   onBackFinder: () => void;
@@ -49,17 +52,11 @@ const UserPage = ({ userData, onBackFinder }: Props) => {
   const totalItems = useMemo(
     () => ({
       repos:
-        userData.public_repos <= DefaultValues.totalItemsAllowed
-          ? userData.public_repos
-          : DefaultValues.totalItemsAllowed,
+        userData.public_repos <= TOTAL_ITEMS_ALLOWED ? userData.public_repos : TOTAL_ITEMS_ALLOWED,
       following:
-        userData.following <= DefaultValues.totalItemsAllowed
-          ? userData.following
-          : DefaultValues.totalItemsAllowed,
+        userData.following <= TOTAL_ITEMS_ALLOWED ? userData.following : TOTAL_ITEMS_ALLOWED,
       followers:
-        userData.followers <= DefaultValues.totalItemsAllowed
-          ? userData.followers
-          : DefaultValues.totalItemsAllowed,
+        userData.followers <= TOTAL_ITEMS_ALLOWED ? userData.followers : TOTAL_ITEMS_ALLOWED,
     }),
     [userData],
   );
@@ -93,7 +90,7 @@ const UserPage = ({ userData, onBackFinder }: Props) => {
             }}
           />
           <>
-            {activeSection === 0 && (
+            {activeSection === ActiveSection.repos && (
               <Section
                 userLogin={userData.login}
                 sectionType="repos"
@@ -101,7 +98,7 @@ const UserPage = ({ userData, onBackFinder }: Props) => {
                 onRequestError={handleRequestError}
               />
             )}
-            {activeSection === 1 && (
+            {activeSection === ActiveSection.following && (
               <Section
                 userLogin={userData.login}
                 sectionType="following"
@@ -109,7 +106,7 @@ const UserPage = ({ userData, onBackFinder }: Props) => {
                 onRequestError={handleRequestError}
               />
             )}
-            {activeSection === 2 && (
+            {activeSection === ActiveSection.followers && (
               <Section
                 userLogin={userData.login}
                 sectionType="followers"

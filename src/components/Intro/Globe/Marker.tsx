@@ -12,14 +12,12 @@ declare module '@react-three/fiber' {
   }
 }
 
-enum DefaultValues {
-  SphereDegrees = 180,
-  AllowedPointDistance = 10.18,
-}
+const SPHERE_DEGREES = 180;
+const ALLOWED_POINT_DISTANCE = 10.18;
 
 const getSpherePositions = (lat: number, lng: number) => {
-  const phi = lat * (Math.PI / DefaultValues.SphereDegrees);
-  const theta = (lng + DefaultValues.SphereDegrees) * (Math.PI / DefaultValues.SphereDegrees);
+  const phi = lat * (Math.PI / SPHERE_DEGREES);
+  const theta = (lng + SPHERE_DEGREES) * (Math.PI / SPHERE_DEGREES);
 
   return {
     x: -(Math.cos(phi) * Math.cos(theta)),
@@ -51,7 +49,7 @@ const Marker = ({ data, onOver, onOut }: Props) => {
       ref={markerRef}
       position={[x, y, z]}
       onPointerOver={(event: ThreeEvent<PointerEvent>) => {
-        if (event.distance > DefaultValues.AllowedPointDistance) {
+        if (event.distance > ALLOWED_POINT_DISTANCE) {
           return;
         }
         onOver({

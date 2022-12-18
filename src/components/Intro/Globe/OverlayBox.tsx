@@ -3,10 +3,8 @@ import Typography from '@mui/material/Typography';
 import Icon from '@mui/material/Icon';
 import { OverlayBoxData } from '@/utils/types';
 
-enum Offset {
-  Left = 54,
-  Top = 16,
-}
+const OFFSET_LEFT = 54;
+const OFFSET_TOP = 16;
 
 const Root = styled('div')(({ theme }) => ({
   backdropFilter: 'blur(6px)',
@@ -50,8 +48,8 @@ const GlobeOverlayBox = ({ data }: Props) => {
   return (
     <Root
       sx={{
-        left: `${x - Offset.Left}px`,
-        top: `${y + Offset.Top}px`,
+        left: `${x - OFFSET_LEFT}px`,
+        top: `${y + OFFSET_TOP}px`,
       }}
     >
       <OverlayBoxCountry>
