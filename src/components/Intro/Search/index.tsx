@@ -7,7 +7,7 @@ import Finder from './Finder';
 import Suggestions from './Suggestions';
 import useWindowSize from '@/hooks/useWindowSize';
 import { API_BASE_URL, debounce } from '@/utils';
-import { handleErrors } from '@/utils/request';
+import { formatRequest } from '@/utils/request';
 import { UsersData, UserData } from '@/utils/types';
 
 const DEFAULT_USERS_DATA = {
@@ -103,7 +103,7 @@ const Search = ({ onFetchUser, onRequestError }: Props) => {
         signal: abortControllerFetchUsers.signal,
       },
     )
-      .then(handleErrors)
+      .then(formatRequest)
       .then((fetchedUsersData: UsersData) => {
         setAreSuggestionsShown(!!fetchedUsersData.total_count);
         setUsersData(fetchedUsersData);
@@ -123,7 +123,7 @@ const Search = ({ onFetchUser, onRequestError }: Props) => {
     fetch(`${API_BASE_URL}/users/${userLogin}`, {
       signal: abortControllerFetchUser.signal,
     })
-      .then(handleErrors)
+      .then(formatRequest)
       .then((userData: UserData) => {
         onFetchUser({
           login: userData.login,

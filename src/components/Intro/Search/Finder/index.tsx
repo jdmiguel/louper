@@ -60,7 +60,7 @@ const Finder = ({
   isLoadingUsers,
   onFetchUser,
 }: Props) => {
-  const [isOnError, setIsOnError] = useState(false);
+  const [isInputErrorDisplayed, setIsInputErrorDisplayed] = useState(false);
   const withMinSearch = searchQuery?.length > 2;
 
   return (
@@ -76,14 +76,14 @@ const Finder = ({
         autoFocus
         placeholder="Type user name..."
         value={searchQuery}
-        label={isOnError ? (withMinSearch ? ErrorMessage.NoUser : ErrorMessage.MinChars) : ''}
-        onFocus={() => setIsOnError(false)}
+        label={isInputErrorDisplayed ? ErrorMessage.MinChars : ''}
+        onFocus={() => setIsInputErrorDisplayed(false)}
         onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
           const currentSearchQuery = event?.target?.value;
           if (currentSearchQuery === searchQuery) {
             return;
           }
-          setIsOnError(false);
+          setIsInputErrorDisplayed(false);
           onChangeSearchQuery(currentSearchQuery);
         }}
         onKeyUp={({ key }: { key: string }) => {
@@ -91,14 +91,14 @@ const Finder = ({
             return;
           }
           if (!withMinSearch) {
-            setIsOnError(true);
+            setIsInputErrorDisplayed(true);
             return;
           }
           onFetchUser(searchQuery);
         }}
         size="small"
         variant="outlined"
-        error={isOnError}
+        error={isInputErrorDisplayed}
         inputProps={{
           maxLength: 20,
         }}
@@ -123,7 +123,7 @@ const Finder = ({
         aria-label="search"
         onClick={() => {
           if (!withMinSearch) {
-            setIsOnError(true);
+            setIsInputErrorDisplayed(true);
             return;
           }
           onFetchUser(searchQuery);
