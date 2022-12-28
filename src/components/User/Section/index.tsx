@@ -5,7 +5,7 @@ import CircularProgress from '@mui/material/CircularProgress';
 import SectionItem from '../SectionItem';
 import { API_BASE_URL } from '@/utils';
 import useIntersectionObserver from '@/hooks/useIntersectionObserver';
-import { handleErrors } from '@/utils/request';
+import { formatRequest } from '@/utils/request';
 import { SectionType, Repo, User } from '@/utils/types';
 
 const Root = styled('section')({
@@ -68,7 +68,7 @@ const Section = ({ userLogin, sectionType, totalItems, onRequestError }: Props) 
         signal: abortController.signal,
       },
     )
-      .then(handleErrors)
+      .then(formatRequest)
       .then((fetchedItems: Items) => {
         setIsInitialLoad(false);
         setIsLoading(false);

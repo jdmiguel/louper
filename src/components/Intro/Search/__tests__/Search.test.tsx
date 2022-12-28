@@ -1,6 +1,7 @@
-import { render, screen, waitForElementToBeRemoved } from '@testing-library/react';
+import { render, screen, waitFor, waitForElementToBeRemoved } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
-import { server, rest } from '../../../../mocks/server';
+import { rest } from 'msw';
+import { server } from '../../../../mocks/server';
 import { API_BASE_URL } from '../../../../utils';
 import { renderWithTheme } from '../../../../utils/theme';
 import Search from '..';
@@ -57,7 +58,7 @@ describe('<Search />', () => {
   });
 
   describe('when typing more than two chars', () => {
-    test('calls the correct callback when there is a 403 error', async () => {
+    it('calls the correct callback when there is a 403 error', async () => {
       server.use(
         rest.get(`${API_BASE_URL}/search/users`, (_, res, ctx) => {
           return res(ctx.status(403));
@@ -77,7 +78,7 @@ describe('<Search />', () => {
       );
     });
 
-    test('calls the correct callback when there is a 404 error', async () => {
+    it('calls the correct callback when there is a 404 error', async () => {
       server.use(
         rest.get(`${API_BASE_URL}/search/users`, (_, res, ctx) => {
           return res(ctx.status(404));
@@ -95,7 +96,7 @@ describe('<Search />', () => {
       expect(props.onRequestError).toHaveBeenCalledWith('Please, choose an available user');
     });
 
-    test('calls the correct callback when there is a 500 error', async () => {
+    it('calls the correct callback when there is a 500 error', async () => {
       server.use(
         rest.get(`${API_BASE_URL}/search/users`, (_, res, ctx) => {
           return res(ctx.status(500));
@@ -124,7 +125,7 @@ describe('<Search />', () => {
       const loader = await screen.findByRole('progressbar');
       await waitForElementToBeRemoved(loader);
 
-      const suggestions = screen.getByRole('grid');
+      const suggestions = await screen.findByRole('grid');
       expect(suggestions.children.length).toBe(9);
 
       expect(screen.getByText('jdm')).toBeInTheDocument();
@@ -185,7 +186,7 @@ describe('<Search />', () => {
       const input = screen.getByPlaceholderText('Type user name...');
       await userEvent.type(input, 'jdm');
 
-      let loader = await screen.findByRole('progressbar');
+      const loader = await screen.findByRole('progressbar');
       await waitForElementToBeRemoved(loader);
 
       await userEvent.click(
@@ -193,9 +194,6 @@ describe('<Search />', () => {
           name: /Go to page 2/,
         }),
       );
-
-      loader = await screen.findByRole('progressbar');
-      await waitForElementToBeRemoved(loader);
 
       const suggestions = screen.getByRole('grid');
       expect(suggestions.children.length).toBe(6);
@@ -225,7 +223,7 @@ describe('<Search />', () => {
         const input = screen.getByPlaceholderText('Type user name...');
         await userEvent.type(input, 'jdm');
 
-        let loader = await screen.findByRole('progressbar');
+        const loader = await screen.findByRole('progressbar');
         await waitForElementToBeRemoved(loader);
 
         await userEvent.click(
@@ -235,9 +233,6 @@ describe('<Search />', () => {
         );
 
         expect(screen.getByDisplayValue('jdmiguel')).toBeInTheDocument();
-
-        loader = await screen.findByRole('progressbar');
-        await waitForElementToBeRemoved(loader);
 
         expect(props.onFetchUser).toHaveBeenCalledWith({
           login: 'jdmiguel',
@@ -256,7 +251,7 @@ describe('<Search />', () => {
         });
       });
 
-      test('calls the correct callback when there is a 404 error', async () => {
+      it('calls the correct callback when there is a 404 error', async () => {
         server.use(
           rest.get(`${API_BASE_URL}/users/:userLogin`, (_, res, ctx) => {
             return res(ctx.status(404));
@@ -276,8 +271,6 @@ describe('<Search />', () => {
             name: /jdmiguel/i,
           }),
         );
-
-        await screen.findByRole('progressbar');
 
         expect(props.onRequestError).toHaveBeenCalledWith('Please, choose an available user');
       });
@@ -319,7 +312,7 @@ describe('<Search />', () => {
       const input = screen.getByPlaceholderText('Type user name...');
       await userEvent.type(input, 'jdmiguel');
 
-      let loader = await screen.findByRole('progressbar');
+      const loader = await screen.findByRole('progressbar');
       await waitForElementToBeRemoved(loader);
 
       await userEvent.click(
@@ -327,9 +320,6 @@ describe('<Search />', () => {
           name: /search/i,
         }),
       );
-
-      loader = await screen.findByRole('progressbar');
-      await waitForElementToBeRemoved(loader);
 
       expect(props.onFetchUser).toHaveBeenCalledWith({
         login: 'jdmiguel',
@@ -354,13 +344,10 @@ describe('<Search />', () => {
       const input = screen.getByPlaceholderText('Type user name...');
       await userEvent.type(input, 'jdmiguel');
 
-      let loader = await screen.findByRole('progressbar');
+      const loader = await screen.findByRole('progressbar');
       await waitForElementToBeRemoved(loader);
 
       await userEvent.keyboard('{Enter}');
-
-      loader = await screen.findByRole('progressbar');
-      await waitForElementToBeRemoved(loader);
 
       expect(props.onFetchUser).toHaveBeenCalledWith({
         login: 'jdmiguel',

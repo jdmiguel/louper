@@ -47,7 +47,7 @@ describe('<User />', () => {
 
     render(renderWithTheme(<User {...props} />));
 
-    expect(screen.queryByTestId('footer')).not.toBeInTheDocument();
+    expect(screen.queryByTestId('footer')).not.toBeVisible();
   });
 
   it('displays the repos section as active', () => {
