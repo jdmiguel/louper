@@ -1,4 +1,6 @@
 /// <reference types="vitest" />
+/// <reference types="vite/client" />
+
 import { defineConfig } from 'vite';
 import * as path from 'path';
 import react from '@vitejs/plugin-react';
@@ -18,6 +20,6 @@ export default defineConfig({
   test: {
     environment: 'jsdom',
     globals: true,
-    setupFiles: 'src/setupTests.js',
+    setupFiles: './src/setupTests.js',
   },
 });

@@ -6,7 +6,7 @@ const Root = styled('footer')(({ theme }) => ({
   alignItems: 'center',
   bottom: 0,
   color: theme.palette.secondary.light,
-  display: 'none ',
+  display: 'none',
   fontSize: '0.9rem',
   padding: '12px 24px',
   position: 'absolute',

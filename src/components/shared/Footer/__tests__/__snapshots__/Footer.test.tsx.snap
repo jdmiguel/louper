@@ -3,7 +3,7 @@
 exports[`<Footer /> > displays the content properly 1`] = `
 <div>
   <footer
-    class="css-1e2syb1"
+    class="css-yxo7oz"
     data-testid="footer"
   >
     <div

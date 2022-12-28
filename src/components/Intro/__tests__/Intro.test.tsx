@@ -17,22 +17,13 @@ describe('<Intro />', () => {
     expect(screen.getByTestId('footer')).toBeInTheDocument();
   });
 
-  it('does not display the globe and the footer with small devices', () => {
-    window.resizeTo(375, 667);
-
-    render(renderWithTheme(<Intro {...props} />));
-
-    expect(screen.queryByTestId('globe')).not.toBeInTheDocument();
-    expect(screen.queryByTestId('footer')).not.toBeInTheDocument();
-  });
-
   it('calls the correct callback when fetching a user', async () => {
     render(renderWithTheme(<Intro {...props} />));
 
     const input = screen.getByPlaceholderText('Type user name...');
     await userEvent.type(input, 'jdm');
 
-    let loader = await screen.findByRole('progressbar');
+    const loader = await screen.findByRole('progressbar');
     await waitForElementToBeRemoved(loader);
 
     await userEvent.click(
@@ -40,9 +31,6 @@ describe('<Intro />', () => {
         name: /jdmiguel/i,
       }),
     );
-
-    loader = await screen.findByRole('progressbar');
-    await waitForElementToBeRemoved(loader);
 
     expect(props.onFetchUser).toHaveBeenCalledWith({
       login: 'jdmiguel',
