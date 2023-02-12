@@ -10,7 +10,7 @@ exports[`<Footer /> > displays the content properly 1`] = `
       class="css-11y3ega-MuiStack-root"
     >
       <span>
-        @2022 | created by
+        @2023 | created by
       </span>
       <a
         aria-label="View profile of jdmiguel on GitHub"
