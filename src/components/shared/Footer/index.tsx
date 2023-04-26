@@ -27,9 +27,9 @@ const Root = styled('footer')(({ theme }) => ({
 const Footer = () => (
   <Root data-testid="footer">
     <Stack direction="row" sx={{ marginRight: 0.6 }}>
-      <span>@2022 | created by</span>
+      <span>@2023 | created by</span>
       <Link
-        url="https://jdmiguel.netlify.app/"
+        url="https://jdmiguel.com/"
         ariaLabel="View profile of jdmiguel on GitHub"
         content="jdmiguel"
       />
