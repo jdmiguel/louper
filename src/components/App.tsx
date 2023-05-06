@@ -8,12 +8,6 @@ import { theme } from '@/utils/theme';
 import { colors } from '@/utils/colors';
 import { UserData } from '@/utils/types';
 
-const Root = styled('div')({
-  background: colors.darkGradient,
-  backgroundAttachment: 'fixed',
-  minHeight: '100vh',
-});
-
 const FallbackApp = ({ error }: FallbackProps) => (
   <div
     role="alert"
@@ -29,6 +23,12 @@ const FallbackApp = ({ error }: FallbackProps) => (
     <pre style={{ color: 'red', fontSize: 16 }}>{error.message}</pre>
   </div>
 );
+
+const Root = styled('div')({
+  background: colors.darkGradient,
+  backgroundAttachment: 'fixed',
+  minHeight: '100vh',
+});
 
 const App = () => {
   const [userData, setUserData] = useState<UserData | null>(null);
