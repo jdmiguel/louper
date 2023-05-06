@@ -1,4 +1,5 @@
 import { useState, useEffect, useMemo, useCallback } from 'react';
+import { useSpring, animated } from '@react-spring/web';
 import { styled, useTheme } from '@mui/material/styles';
 import Typography from '@mui/material/Typography';
 import Logo from './Logo';
@@ -18,18 +19,20 @@ const MIN_CHARS_TO_SEARCH_USERS = 2;
 const MAX_SUGGESTIONS_ALLOWED = 100;
 const SUGGESTIONS_PER_PAGE = 9;
 
-const Root = styled('div')({
-  alignItems: 'center',
-  display: 'flex',
-  flexDirection: 'column',
-  '@media (min-width: 1200px)': {
-    minWidth: 600,
-  },
-  '@media (min-width: 1440px)': {
-    marginRight: 60,
-    minWidth: 620,
-  },
-});
+const Root = animated(
+  styled('div')({
+    alignItems: 'center',
+    display: 'flex',
+    flexDirection: 'column',
+    '@media (min-width: 1200px)': {
+      minWidth: 600,
+    },
+    '@media (min-width: 1440px)': {
+      marginRight: 60,
+      minWidth: 620,
+    },
+  }),
+);
 
 const LogoWrapper = styled('h1')({
   lineHeight: 0,
@@ -39,10 +42,12 @@ const LogoWrapper = styled('h1')({
   },
 });
 
-const SuggestionsWrapper = styled('div')({
-  height: 260,
-  marginTop: 20,
-});
+const SuggestionsWrapper = animated(
+  styled('div')({
+    height: 260,
+    marginTop: 20,
+  }),
+);
 
 const WatermarkWrapper = styled('div')({
   alignItems: 'center',
@@ -152,8 +157,17 @@ const Search = ({ onFetchUser, onRequestError }: Props) => {
   // eslint-disable-next-line react-hooks/exhaustive-deps
   const debouncedFetchUsers = useCallback(debounce(fetchUsers, 500), []);
 
+  const entrySearch = useSpring({
+    from: { opacity: 0 },
+    to: { opacity: 1 },
+    delay: 300,
+    config: {
+      duration: 1400,
+    },
+  });
+
   return (
-    <Root data-testid="search">
+    <Root data-testid="search" style={entrySearch}>
       <LogoWrapper>
         <Logo />
       </LogoWrapper>

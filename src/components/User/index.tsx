@@ -1,4 +1,5 @@
 import { useState, useMemo } from 'react';
+import { useSpring, easings, animated } from '@react-spring/web';
 import { styled } from '@mui/material/styles';
 import Stack from '@mui/material/Stack';
 import Menu from './Menu';
@@ -31,13 +32,17 @@ const Main = styled('div')({
   },
 });
 
-const ProfileWrapper = styled('div')({
-  display: 'none',
-  margin: '60px 50px 0 0',
-  '@media (min-width: 768px)': {
-    display: 'block',
-  },
-});
+const ProfileWrapper = animated(
+  styled('div')({
+    display: 'none',
+    margin: '60px 50px 0 0',
+    '@media (min-width: 768px)': {
+      display: 'block',
+    },
+  }),
+);
+
+const AnimatedStack = animated(Stack);
 
 type Props = {
   userData: UserData;
@@ -66,19 +71,40 @@ const UserPage = ({ userData, onBackFinder }: Props) => {
     setIsErrorToastOpen(true);
   };
 
+  const entryProfile = useSpring({
+    from: { x: -50, opacity: 0 },
+    to: { x: 0, opacity: 1 },
+    delay: 250,
+    config: {
+      duration: 750,
+      easing: easings.easeOutCubic,
+    },
+  });
+
+  const entryData = useSpring({
+    from: { x: 50, opacity: 0 },
+    to: { x: 0, opacity: 1 },
+    delay: 250,
+    config: {
+      duration: 500,
+      easing: easings.easeOutCubic,
+    },
+  });
+
   return (
     <Root>
       <Main>
-        <ProfileWrapper data-testid="profile">
+        <ProfileWrapper data-testid="profile" style={entryProfile}>
           <Profile userData={userData} />
         </ProfileWrapper>
-        <Stack
+        <AnimatedStack
           sx={{
             width: '100%',
             '@media (min-width: 992px)': {
               width: 'initial',
             },
           }}
+          style={entryData}
         >
           <ProfileMobile data-testid="profile-mobile" userData={userData} />
           <Menu
@@ -115,7 +141,7 @@ const UserPage = ({ userData, onBackFinder }: Props) => {
               />
             )}
           </>
-        </Stack>
+        </AnimatedStack>
         <Toast
           isOpen={isErrorToastOpen}
           msg={errorMessage}

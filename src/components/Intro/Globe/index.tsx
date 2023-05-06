@@ -1,4 +1,5 @@
 import { useState, Suspense } from 'react';
+import { useSpring, easings, animated } from '@react-spring/web';
 import { AdditiveBlending, BackSide, TextureLoader } from 'three';
 import { Canvas, useLoader } from '@react-three/fiber';
 import { OrbitControls } from '@react-three/drei';
@@ -25,25 +26,21 @@ const atmosphereFragmentShader = [
   '}',
 ].join('\n');
 
-const Root = styled('div')({
-  display: 'none',
-  height: 510,
-  position: 'relative',
-  userSelect: 'none',
-  width: 510,
-  '@media (min-width: 1200px)': {
-    display: 'block',
-  },
-  '@media (min-width: 1440px)': {
-    height: 580,
-    width: 580,
-  },
-});
-
-const FallbackGlobe = () => (
-  <mesh>
-    <sphereBufferGeometry attach="geometry" args={[1, 100, 100]} />
-  </mesh>
+const Root = animated(
+  styled('div')({
+    display: 'none',
+    height: 510,
+    position: 'relative',
+    userSelect: 'none',
+    width: 510,
+    '@media (min-width: 1200px)': {
+      display: 'block',
+    },
+    '@media (min-width: 1440px)': {
+      height: 580,
+      width: 580,
+    },
+  }),
 );
 
 const GlobeModel = () => {
@@ -87,15 +84,26 @@ const Globe = () => {
     setIsAutoRotationAllowed(true);
   };
 
+  const entryGlobe = useSpring({
+    from: { y: -40, x: 34, opacity: 0 },
+    to: { y: 0, x: 0, opacity: 1 },
+    delay: 300,
+    config: {
+      duration: 1400,
+      easing: easings.easeOutCubic,
+    },
+  });
+
   return (
     <Root
       data-testid="globe"
       sx={{
         cursor: isMarkerHovered ? 'pointer' : 'default',
       }}
+      style={entryGlobe}
     >
       <Canvas camera={{ position: [6, 1, 8], fov: 13, far: 10000 }} onPointerMissed={onMarkerOut}>
-        <Suspense fallback={<FallbackGlobe />}>
+        <Suspense fallback={null}>
           <GlobeModel />
         </Suspense>
         {globeMarkers.map((marker) => (
