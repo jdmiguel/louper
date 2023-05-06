@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { ErrorBoundary, FallbackProps } from 'react-error-boundary';
 import CssBaseline from '@mui/material/CssBaseline';
 import { styled, ThemeProvider } from '@mui/material/styles';
 import Intro from './Intro';
@@ -13,20 +14,38 @@ const Root = styled('div')({
   minHeight: '100vh',
 });
 
+const FallbackApp = ({ error }: FallbackProps) => (
+  <div
+    role="alert"
+    style={{
+      display: 'flex',
+      flexDirection: 'column',
+      justifyContent: 'center',
+      alignItems: 'center',
+      minHeight: '100vh',
+    }}
+  >
+    <pre style={{ color: 'white', fontSize: 18, margin: 0 }}>Something went wrong:</pre>
+    <pre style={{ color: 'red', fontSize: 16 }}>{error.message}</pre>
+  </div>
+);
+
 const App = () => {
   const [userData, setUserData] = useState<UserData | null>(null);
 
   return (
-    <ThemeProvider theme={theme}>
-      <CssBaseline />
-      <Root>
-        {userData ? (
-          <User userData={userData} onBackFinder={() => setUserData(null)} />
-        ) : (
-          <Intro onFetchUser={(userData: UserData) => setUserData(userData)} />
-        )}
-      </Root>
-    </ThemeProvider>
+    <ErrorBoundary FallbackComponent={FallbackApp}>
+      <ThemeProvider theme={theme}>
+        <CssBaseline />
+        <Root>
+          {userData ? (
+            <User userData={userData} onBackFinder={() => setUserData(null)} />
+          ) : (
+            <Intro onFetchUser={(userData: UserData) => setUserData(userData)} />
+          )}
+        </Root>
+      </ThemeProvider>
+    </ErrorBoundary>
   );
 };
 
