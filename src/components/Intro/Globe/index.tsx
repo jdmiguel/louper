@@ -1,4 +1,4 @@
-import { useState, useRef, Suspense } from 'react';
+import { useState, useRef } from 'react';
 import { AdditiveBlending, BackSide, Mesh, TextureLoader } from 'three';
 import { Canvas, useLoader } from '@react-three/fiber';
 import { OrbitControls } from '@react-three/drei';
@@ -8,7 +8,7 @@ import Marker from './Marker';
 import OverlayBox from './OverlayBox';
 import { colors } from '@/utils/colors';
 import globeMarkers from '@/assets/globeMarkers.json';
-import map from '@/assets/map.png';
+import map from '@/assets/texture-map.png';
 
 const atmosphereVertexShader = [
   'varying vec3 vNormal;',
