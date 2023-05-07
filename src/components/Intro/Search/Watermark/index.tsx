@@ -1,23 +1,14 @@
-import { useSpring, easings, animated } from '@react-spring/web';
+import { styled } from '@mui/material/styles';
 import { colors } from '@/utils/colors';
 
-const Watermark = () => {
-  const entryWatermark = useSpring({
-    from: { opacity: 0 },
-    to: { opacity: 1 },
-    config: {
-      duration: 200,
-    },
-  });
+const Root = styled('svg')(({ theme }) => ({
+  opacity: 0,
+  animation: `${theme.animation.fadeIn} 200ms forwards`,
+}));
 
+const Watermark = () => {
   return (
-    <animated.svg
-      data-testid="watermark"
-      width="230"
-      height="230"
-      viewBox="0 0 230 230"
-      style={entryWatermark}
-    >
+    <Root data-testid="watermark" width="230" height="230" viewBox="0 0 230 230">
       <path
         fillRule="evenodd"
         clipRule="evenodd"
@@ -40,7 +31,7 @@ const Watermark = () => {
         d="M162.143 180.946C157.32 176.25 157.33 168.644 162.164 163.959C166.999 159.274 174.827 159.284 179.649 163.98C184.471 168.677 226.39 209.505 226.39 209.505C231.212 214.202 231.202 221.807 226.368 226.492C221.534 231.177 213.706 231.168 208.883 226.471L162.143 180.946Z"
         fill={colors.blue}
       />
-    </animated.svg>
+    </Root>
   );
 };
 

@@ -1,6 +1,5 @@
 import { useState } from 'react';
 import { ErrorBoundary, FallbackProps } from 'react-error-boundary';
-import { useSpring, animated } from '@react-spring/web';
 import CssBaseline from '@mui/material/CssBaseline';
 import { styled, ThemeProvider } from '@mui/material/styles';
 import Intro from './Intro';
@@ -25,30 +24,21 @@ const FallbackApp = ({ error }: FallbackProps) => (
   </div>
 );
 
-const Root = animated(
-  styled('div')({
-    background: colors.darkGradient,
-    backgroundAttachment: 'fixed',
-    minHeight: '100vh',
-  }),
-);
+const Root = styled('div')(({ theme }) => ({
+  background: colors.darkGradient,
+  backgroundAttachment: 'fixed',
+  minHeight: '100vh',
+  animation: `${theme.animation.fadeIn} 1500ms`,
+}));
 
 const App = () => {
   const [userData, setUserData] = useState<UserData | null>(null);
-
-  const entryRoot = useSpring({
-    from: { opacity: 0 },
-    to: { opacity: 1 },
-    config: {
-      duration: 1200,
-    },
-  });
 
   return (
     <ThemeProvider theme={theme}>
       <CssBaseline />
       <ErrorBoundary FallbackComponent={FallbackApp}>
-        <Root style={entryRoot}>
+        <Root>
           {userData ? (
             <User userData={userData} onBackFinder={() => setUserData(null)} />
           ) : (

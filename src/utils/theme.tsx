@@ -7,7 +7,9 @@ import { colors } from './colors';
 type Animation = {
   greet: Keyframes;
   fadeIn: Keyframes;
-  fadeUp: Keyframes;
+  fadeInUp: Keyframes;
+  fadeInLeft: Keyframes;
+  fadeInRight: Keyframes;
 };
 
 declare module '@mui/material/styles' {
@@ -38,10 +40,18 @@ export const theme = createTheme({
       0% { opacity:0 }
       100% { opacity:1 }
     `,
-    fadeUp: keyframes`
+    fadeInUp: keyframes`
       0% { opacity:0; transform: translateY(20px); }
       100% { opacity:1; transform: translateY(0px);  }
-  `,
+    `,
+    fadeInLeft: keyframes`
+      0% { opacity:0; transform: translateX(-50px); }
+      100% { opacity:1; transform: translateX(0px);  }
+    `,
+    fadeInRight: keyframes`
+      0% { opacity:0; transform: translateX(50px); }
+      100% { opacity:1; transform: translateX(0px);  }
+    `,
   },
   components: {
     MuiCssBaseline: {

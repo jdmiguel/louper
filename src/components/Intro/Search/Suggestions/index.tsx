@@ -1,10 +1,15 @@
-import { useSpring, easings, animated } from '@react-spring/web';
 import { styled } from '@mui/material/styles';
 import Pagination from '@mui/material/Pagination';
 import PaginationItem from '@mui/material/PaginationItem';
 import Stack from '@mui/material/Stack';
 import Suggestion from '../Suggestion';
 import { User } from '@/utils/types';
+
+const Root = styled(Stack)(({ theme }) => ({
+  alignItems: 'center',
+  opacity: 0,
+  animation: `${theme.animation.fadeIn} 200ms forwards`,
+}));
 
 const SuggestionsWrapper = styled('div')({
   alignContent: 'flex-start',
@@ -50,8 +55,6 @@ const StyledPaginationItem = styled(PaginationItem)(({ theme }) => ({
   },
 }));
 
-const AnimatedStack = animated(Stack);
-
 type Props = {
   items: User[];
   totalItems: number;
@@ -60,34 +63,24 @@ type Props = {
   onSelectUser: (userName: string) => void;
 };
 
-const Suggestions = ({ items, totalItems, withPagination, onPaginate, onSelectUser }: Props) => {
-  const entrySuggestions = useSpring({
-    from: { opacity: 0 },
-    to: { opacity: 1 },
-    config: {
-      duration: 200,
-    },
-  });
-
-  return (
-    <AnimatedStack sx={{ alignItems: 'center' }} style={entrySuggestions}>
-      <SuggestionsWrapper role="grid">
-        {items.map((user) => (
-          <Suggestion key={user.id} data={user} onClick={onSelectUser} />
-        ))}
-      </SuggestionsWrapper>
-      {withPagination && (
-        <Pagination
-          count={totalItems}
-          renderItem={(item) => <StyledPaginationItem {...item} />}
-          onChange={(_, page: number) => onPaginate(page)}
-          hidePrevButton
-          hideNextButton
-          size="small"
-        />
-      )}
-    </AnimatedStack>
-  );
-};
+const Suggestions = ({ items, totalItems, withPagination, onPaginate, onSelectUser }: Props) => (
+  <Root>
+    <SuggestionsWrapper role="grid">
+      {items.map((user) => (
+        <Suggestion key={user.id} data={user} onClick={onSelectUser} />
+      ))}
+    </SuggestionsWrapper>
+    {withPagination && (
+      <Pagination
+        count={totalItems}
+        renderItem={(item) => <StyledPaginationItem {...item} />}
+        onChange={(_, page: number) => onPaginate(page)}
+        hidePrevButton
+        hideNextButton
+        size="small"
+      />
+    )}
+  </Root>
+);
 
 export default Suggestions;
