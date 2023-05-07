@@ -1,34 +1,11 @@
 import { useState, useEffect, useMemo, useRef } from 'react';
-import { styled } from '@mui/material/styles';
 import Typography from '@mui/material/Typography';
 import CircularProgress from '@mui/material/CircularProgress';
 import SectionItem from '../SectionItem';
 import useIntersectionObserver from '@/hooks/useIntersectionObserver';
 import { API_BASE_URL, formatRequest } from '@/utils/request';
 import { SectionType, Repo, User } from '@/utils/types';
-
-const Root = styled('section')({
-  display: 'grid',
-  gridGap: 20,
-  paddingTop: 20,
-  position: 'relative',
-  '@media (min-width: 1200px)': {
-    gridTemplateColumns: 'repeat(2, 420px)',
-  },
-});
-
-const LoaderWrapper = styled('div')({
-  alignItems: 'center',
-  display: 'flex',
-  justifyContent: 'center',
-  minHeight: 90,
-  width: '100%',
-});
-
-const EmptyMsg = styled('div')({
-  display: 'flex',
-  marginTop: 8,
-});
+import { StyledRoot, StyledEmptyMsg, StyledLoaderWrapper } from './styles';
 
 type Items = Repo[] & User[];
 
@@ -91,22 +68,22 @@ const Section = ({ userLogin, sectionType, totalItems, onRequestError }: Props) 
 
   return (
     <>
-      <Root data-testid="section">
+      <StyledRoot data-testid="section">
         {totalItems === 0 && (
-          <EmptyMsg>
+          <StyledEmptyMsg>
             <Typography variant="h6" sx={{ color: 'neutral.main' }}>
               {`No ${sectionType} added`}
             </Typography>
-          </EmptyMsg>
+          </StyledEmptyMsg>
         )}
         {items.map((item) => (
           <SectionItem key={item.id} theme={sectionType} data={item} />
         ))}
-      </Root>
+      </StyledRoot>
       {!isFullyLoaded && (
-        <LoaderWrapper ref={loaderRef}>
+        <StyledLoaderWrapper ref={loaderRef}>
           {isLoading && <CircularProgress className="loaderIcon" size={30} thickness={5} />}
-        </LoaderWrapper>
+        </StyledLoaderWrapper>
       )}
     </>
   );

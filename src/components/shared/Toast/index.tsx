@@ -1,22 +1,7 @@
 import { forwardRef, ReactNode } from 'react';
-import { styled } from '@mui/material/styles';
-import MuiAlert, { AlertColor } from '@mui/material/Alert';
+import { AlertColor } from '@mui/material/Alert';
 import Snackbar from '@mui/material/Snackbar';
-
-const StyledAlert = styled(MuiAlert)({
-  '& .MuiAlert-icon': {
-    padding: '9px 0',
-  },
-  '& .MuiAlert-message': {
-    padding: '12px 0',
-  },
-  '& .MuiAlert-action': {
-    svg: {
-      height: '1.4rem',
-      width: '1.4rem',
-    },
-  },
-});
+import { StyledAlert } from './styles';
 
 type AlertProps = {
   children?: ReactNode;

@@ -1,49 +1,10 @@
 import { useState } from 'react';
-import { styled } from '@mui/material/styles';
 import CircularProgress from '@mui/material/CircularProgress';
 import FormControl from '@mui/material/FormControl';
-import TextField from '@mui/material/TextField';
 import InputAdornment from '@mui/material/InputAdornment';
 import Icon from '@mui/material/Icon';
-import IconButton from '@mui/material/IconButton';
-import { ERROR_MESSAGE } from '@/utils/request';
-
-const StyledTextField = styled<any>(TextField)(({ theme }) => ({
-  '& .MuiOutlinedInput-root': {
-    borderTopRightRadius: 0,
-    borderBottomRightRadius: 0,
-    minWidth: 300,
-    '@media (min-width: 768px)': {
-      minWidth: 390,
-    },
-    '& .MuiOutlinedInput-notchedOutline': {
-      borderColor: theme.palette.primary.main,
-    },
-    '&:hover': {
-      '& .MuiOutlinedInput-notchedOutline': {
-        borderColor: theme.palette.primary.main,
-      },
-    },
-  },
-  '& .Mui-focused .MuiOutlinedInput-notchedOutline': {
-    borderColor: theme.palette.primary.main,
-  },
-}));
-
-const StyledIconButton = styled(IconButton)(({ theme }) => ({
-  backgroundColor: theme.palette.primary.main,
-  borderBottomLeftRadius: 0,
-  borderBottomRightRadius: 4,
-  borderTopLeftRadius: 0,
-  borderTopRightRadius: 4,
-  color: theme.palette.text.primary,
-  minHeight: 40,
-  minWidth: 40,
-  padding: 7,
-  '&:hover': {
-    backgroundColor: theme.palette.primary.light,
-  },
-}));
+import { ERROR_MESSAGE, FINDER_ICON } from '@/utils/literals';
+import { StyledTextField, StyledIconButton } from './styles';
 
 type Props = {
   searchQuery: string;
@@ -61,6 +22,35 @@ const Finder = ({
   onFetchUser,
 }: Props) => {
   const [isInputErrorDisplayed, setIsInputErrorDisplayed] = useState(false);
+
+  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const currentSearchQuery = event?.target?.value;
+    if (currentSearchQuery === searchQuery) {
+      return;
+    }
+    setIsInputErrorDisplayed(false);
+    onChangeSearchQuery(currentSearchQuery);
+  };
+
+  const handleKeyUp = ({ key }: { key: string }) => {
+    if (key !== 'Enter') {
+      return;
+    }
+    if (!withMinSearch) {
+      setIsInputErrorDisplayed(true);
+      return;
+    }
+    onFetchUser(searchQuery);
+  };
+
+  const handleClick = () => {
+    if (!withMinSearch) {
+      setIsInputErrorDisplayed(true);
+      return;
+    }
+    onFetchUser(searchQuery);
+  };
+
   const withMinSearch = searchQuery?.length > 2;
 
   return (
@@ -78,24 +68,8 @@ const Finder = ({
         value={searchQuery}
         label={isInputErrorDisplayed ? ERROR_MESSAGE.minChars : ''}
         onFocus={() => setIsInputErrorDisplayed(false)}
-        onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
-          const currentSearchQuery = event?.target?.value;
-          if (currentSearchQuery === searchQuery) {
-            return;
-          }
-          setIsInputErrorDisplayed(false);
-          onChangeSearchQuery(currentSearchQuery);
-        }}
-        onKeyUp={({ key }: { key: string }) => {
-          if (key !== 'Enter') {
-            return;
-          }
-          if (!withMinSearch) {
-            setIsInputErrorDisplayed(true);
-            return;
-          }
-          onFetchUser(searchQuery);
-        }}
+        onChange={handleChange}
+        onKeyUp={handleKeyUp}
         size="small"
         variant="outlined"
         error={isInputErrorDisplayed}
@@ -113,22 +87,15 @@ const Finder = ({
                   sx={{ color: 'text.primary' }}
                 />
               ) : (
-                <Icon sx={{ color: 'neutral.main', fontSize: '1.4rem' }}>person</Icon>
+                <Icon sx={{ color: 'neutral.main', fontSize: '1.4rem' }}>
+                  {FINDER_ICON.placeholder}
+                </Icon>
               )}
             </InputAdornment>
           ),
         }}
       />
-      <StyledIconButton
-        aria-label="search"
-        onClick={() => {
-          if (!withMinSearch) {
-            setIsInputErrorDisplayed(true);
-            return;
-          }
-          onFetchUser(searchQuery);
-        }}
-      >
+      <StyledIconButton aria-label="search" onClick={handleClick}>
         {isLoadingUser ? (
           <CircularProgress
             className="loaderIcon"
@@ -137,7 +104,7 @@ const Finder = ({
             sx={{ color: 'text.primary' }}
           />
         ) : (
-          <Icon sx={{ fontSize: '1.6rem' }}>search</Icon>
+          <Icon sx={{ fontSize: '1.6rem' }}>{FINDER_ICON.button}</Icon>
         )}
       </StyledIconButton>
     </FormControl>

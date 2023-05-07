@@ -2,12 +2,12 @@ import { useState, Suspense } from 'react';
 import { AdditiveBlending, BackSide, TextureLoader } from 'three';
 import { Canvas, useLoader } from '@react-three/fiber';
 import { OrbitControls } from '@react-three/drei';
-import { styled } from '@mui/material/styles';
 import Marker from './Marker';
 import OverlayBox from './OverlayBox';
 import { colors } from '@/utils/colors';
 import globeMarkers from '@/assets/globeMarkers.json';
 import map from '@/assets/texture-map.png';
+import { StyledRoot } from './styles';
 
 const atmosphereVertexShader = [
   'varying vec3 vNormal;',
@@ -24,23 +24,6 @@ const atmosphereFragmentShader = [
   '  gl_FragColor = vec4(0.4, 0.5, 1, 0.48) * intensity;',
   '}',
 ].join('\n');
-
-const Root = styled('div')(({ theme }) => ({
-  display: 'none',
-  height: 510,
-  position: 'relative',
-  userSelect: 'none',
-  width: 510,
-  opacity: 0,
-  animation: `${theme.animation.fadeInUp} 1400ms ease-out 300ms forwards`,
-  '@media (min-width: 1200px)': {
-    display: 'block',
-  },
-  '@media (min-width: 1440px)': {
-    height: 580,
-    width: 580,
-  },
-}));
 
 const GlobeModel = () => {
   const texture = useLoader(TextureLoader, map);
@@ -84,7 +67,7 @@ const Globe = () => {
   };
 
   return (
-    <Root
+    <StyledRoot
       data-testid="globe"
       sx={{
         cursor: isMarkerHovered ? 'pointer' : 'default',
@@ -122,7 +105,7 @@ const Globe = () => {
         />
       </Canvas>
       {isMarkerHovered && <OverlayBox data={overlayBoxData} />}
-    </Root>
+    </StyledRoot>
   );
 };
 

@@ -3,19 +3,19 @@
 exports[`<Footer /> > displays the content properly 1`] = `
 <div>
   <footer
-    class="css-yxo7oz"
+    class="css-16wb799"
     data-testid="footer"
   >
     <div
-      class="css-11y3ega-MuiStack-root"
+      class="MuiStack-root css-1oy7hqd-MuiStack-root"
     >
       <span>
         @2023 | created by
       </span>
       <a
         aria-label="View profile of jdmiguel on GitHub"
-        class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineAlways css-19wn53l-MuiTypography-root-MuiLink-root"
-        href="https://jdmiguel.netlify.app/"
+        class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineAlways css-1o7qz1o-MuiTypography-root-MuiLink-root"
+        href="https://jdmiguel.com/"
         rel="noopener noreferrer"
       >
         jdmiguel
@@ -25,14 +25,14 @@ exports[`<Footer /> > displays the content properly 1`] = `
       |
     </span>
     <div
-      class="css-m69qwo-MuiStack-root"
+      class="MuiStack-root css-m69qwo-MuiStack-root"
     >
       <span>
         github stats from
       </span>
       <a
         aria-label="View github users statistics on octoverse"
-        class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineAlways css-19wn53l-MuiTypography-root-MuiLink-root"
+        class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineAlways css-1o7qz1o-MuiTypography-root-MuiLink-root"
         href="https://octoverse.github.com/#future"
         rel="noopener noreferrer"
       >

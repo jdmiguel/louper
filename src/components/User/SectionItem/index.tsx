@@ -1,55 +1,19 @@
 import { ReactElement } from 'react';
-import { styled } from '@mui/material/styles';
 import Stack from '@mui/material/Stack';
 import Typography from '@mui/material/Typography';
 import Avatar from '@mui/material/Avatar';
 import TextTag from '@/components/shared/TextTag';
 import Link from '@/components/shared/Link';
+import { NO_ITEMS_TEXT } from '@/utils/literals';
 import { Repo, User, SectionType } from '@/utils/types';
-
-const Root = styled('div')(({ theme }) => ({
-  border: `1px solid ${theme.palette.secondary.light}`,
-  borderRadius: 4,
-  padding: 20,
-  overflow: 'hidden',
-}));
-
-const Title = styled('div')(({ theme }) => ({
-  alignItems: 'center',
-  display: 'flex',
-  marginBottom: 4,
-  '& path': { fill: theme.palette.secondary.main },
-}));
-
-const AvatarWrapper = styled('div')({
-  height: 80,
-  marginRight: 20,
-  position: 'relative',
-  width: 80,
-});
-
-const Topic = styled('div')(({ theme }) => ({
-  backgroundColor: theme.palette.secondary.main,
-  borderRadius: 4,
-  color: theme.palette.primary.contrastText,
-  marginBottom: 5,
-  marginRight: 5,
-  padding: '4px 8px',
-  opacity: 0.5,
-}));
-
-const Action = styled('div')(({ theme }) => ({
-  borderTop: `1px solid ${theme.palette.secondary.light}`,
-  marginTop: 14,
-  paddingTop: 10,
-}));
+import { StyledRoot, StyledTitle, StyledAvatarWrapper, StyledTopic, StyledAction } from './styles';
 
 const displayRepoTheme = (repo: Repo): ReactElement => (
   <Stack justifyContent="space-between" sx={{ height: '100%' }} data-testid="repoContent">
     <Stack>
-      <Title>
+      <StyledTitle>
         <TextTag content={repo.name} withUppercase withIcon iconType={'folder'} />
-      </Title>
+      </StyledTitle>
       {repo.description ? (
         <Typography
           variant="body1"
@@ -65,24 +29,24 @@ const displayRepoTheme = (repo: Repo): ReactElement => (
         </Typography>
       ) : (
         <Typography variant="h6" sx={{ marginTop: 1, color: 'neutral.main' }}>
-          No description added
+          {NO_ITEMS_TEXT.description}
         </Typography>
       )}
       <Stack direction="row" sx={{ flexWrap: 'wrap', marginTop: 1.75 }}>
         {repo.topics?.length > 0 ? (
           repo.topics.map((topic: string) => (
-            <Topic key={topic}>
+            <StyledTopic key={topic}>
               <Typography variant="overline">{topic}</Typography>
-            </Topic>
+            </StyledTopic>
           ))
         ) : (
-          <Topic>
-            <Typography variant="overline">NO TOPICS</Typography>
-          </Topic>
+          <StyledTopic>
+            <Typography variant="overline">{NO_ITEMS_TEXT.topics}</Typography>
+          </StyledTopic>
         )}
       </Stack>
     </Stack>
-    <Action>
+    <StyledAction>
       <Link
         url={repo.html_url}
         ariaLabel={`View ${repo.name} repository on GitHub`}
@@ -90,7 +54,7 @@ const displayRepoTheme = (repo: Repo): ReactElement => (
         withIcon
         iconType="folder_open"
       />
-    </Action>
+    </StyledAction>
   </Stack>
 );
 
@@ -99,7 +63,7 @@ const displayUserTheme = (user: User, theme: SectionType): ReactElement => {
 
   return (
     <Stack direction="row" data-testid="userContent">
-      <AvatarWrapper>
+      <StyledAvatarWrapper>
         <Avatar variant="rounded" sx={{ height: 80, width: 80, position: 'absolute' }} />
         <Avatar
           alt={`user ${theme} avatar`}
@@ -107,11 +71,11 @@ const displayUserTheme = (user: User, theme: SectionType): ReactElement => {
           src={user.avatar_url}
           sx={{ height: 80, width: 80, position: 'absolute' }}
         />
-      </AvatarWrapper>
+      </StyledAvatarWrapper>
       <Stack justifyContent="center">
-        <Title>
+        <StyledTitle>
           <TextTag content={user.login} withUppercase withIcon iconType={iconType} />
-        </Title>
+        </StyledTitle>
         <Link
           url={user.html_url}
           ariaLabel={`View ${user.login} profile on GitHub`}
@@ -134,7 +98,9 @@ const SectionItem = ({ theme, data }: Props) => {
   const repo = data as Repo;
   const user = data as User;
 
-  return <Root>{isRepoTheme ? displayRepoTheme(repo) : displayUserTheme(user, theme)}</Root>;
+  return (
+    <StyledRoot>{isRepoTheme ? displayRepoTheme(repo) : displayUserTheme(user, theme)}</StyledRoot>
+  );
 };
 
 export default SectionItem;

@@ -1,26 +1,13 @@
-import { styled } from '@mui/material/styles';
-import Icon from '@mui/material/Icon';
-import Typography from '@mui/material/Typography';
-
-const Root = styled('div')({
-  alignItems: 'flex-end',
-  display: 'flex',
-});
-
-const StyledIcon = styled(Icon)(({ theme }) => ({
-  color: theme.palette.secondary.light,
-  fontSize: 22,
-  marginRight: 7,
-}));
+import { StyledRoot, StyledContent, StyledIcon } from './styles';
 
 type TextProps = { content: string; withUppercase?: boolean };
 type IconProps = { withIcon?: false; iconType?: never } | { withIcon: true; iconType?: string };
 type Props = TextProps & IconProps;
 
 const TextTag = ({ content, withUppercase, withIcon, iconType }: Props) => (
-  <Root>
+  <StyledRoot>
     {withIcon && <StyledIcon>{iconType}</StyledIcon>}
-    <Typography
+    <StyledContent
       variant={withUppercase ? 'h5' : 'body1'}
       sx={{
         color: 'text.secondary',
@@ -33,8 +20,8 @@ const TextTag = ({ content, withUppercase, withIcon, iconType }: Props) => (
       }}
     >
       {content}
-    </Typography>
-  </Root>
+    </StyledContent>
+  </StyledRoot>
 );
 
 export default TextTag;

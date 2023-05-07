@@ -74,7 +74,7 @@ describe('<Profile />', () => {
     expect(screen.getByText('favorite')).toBeInTheDocument();
 
     // created_at
-    expect(screen.getByText('20/03/2014')).toBeInTheDocument();
+    expect(screen.getByText('20/3/2014')).toBeInTheDocument();
     expect(screen.getByText('event_note')).toBeInTheDocument();
 
     // location

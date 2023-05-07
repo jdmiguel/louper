@@ -1,11 +1,6 @@
-export const API_BASE_URL = 'https://api.github.com';
+import { ERROR_MESSAGE } from './literals';
 
-export const ERROR_MESSAGE = {
-  max: 'You have excedeed the maximum allowed request. Please, wait for a while',
-  noUser: 'Please, choose an available user',
-  minChars: 'Please, type three chars at least',
-  generic: 'Sorry! there was an error on the server side.',
-};
+export const API_BASE_URL = 'https://api.github.com';
 
 const getErrorMessage = (errorStatus: number): string => {
   if (errorStatus === 403) {

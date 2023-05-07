@@ -1,5 +1,5 @@
 import { useState, useEffect, useMemo, useCallback } from 'react';
-import { styled, useTheme } from '@mui/material/styles';
+import { useTheme } from '@mui/material/styles';
 import Typography from '@mui/material/Typography';
 import Logo from './Logo';
 import Watermark from './Watermark/index';
@@ -7,53 +7,25 @@ import Finder from './Finder';
 import Suggestions from './Suggestions';
 import useWindowSize from '@/hooks/useWindowSize';
 import { debounce } from '@/utils';
-import { INTRO_TITLE } from '@/utils/literals';
+import {
+  MAX_SUGGESTIONS_ALLOWED,
+  SUGGESTIONS_PER_PAGE,
+  MIN_CHARS_TO_SEARCH_USERS,
+  INTRO_TITLE,
+} from '@/utils/literals';
 import { API_BASE_URL, formatRequest } from '@/utils/request';
 import { UsersData, UserData } from '@/utils/types';
+import {
+  StyledRoot,
+  StyledLogoWrapper,
+  StyledSuggestionsWrapper,
+  StyledWatermarkWrapper,
+} from './styles';
 
 const DEFAULT_USERS_DATA = {
   total_count: 0,
   items: [],
 };
-const MIN_CHARS_TO_SEARCH_USERS = 2;
-const MAX_SUGGESTIONS_ALLOWED = 100;
-const SUGGESTIONS_PER_PAGE = 9;
-
-const Root = styled('div')(({ theme }) => ({
-  alignItems: 'center',
-  display: 'flex',
-  flexDirection: 'column',
-  opacity: 0,
-  animation: `${theme.animation.fadeIn} 1400ms 300ms forwards`,
-  '@media (min-width: 1200px)': {
-    minWidth: 600,
-  },
-  '@media (min-width: 1440px)': {
-    marginRight: 60,
-    minWidth: 620,
-  },
-}));
-
-const LogoWrapper = styled('h1')({
-  lineHeight: 0,
-  transform: 'scale(0.9)',
-  '@media (min-width: 768px)': {
-    transform: 'scale(1)',
-  },
-});
-
-const SuggestionsWrapper = styled('div')({
-  height: 260,
-  marginTop: 20,
-});
-
-const WatermarkWrapper = styled('div')({
-  alignItems: 'center',
-  display: 'flex',
-  flexDirection: 'column',
-  marginTop: 10,
-  opacity: 0.15,
-});
 
 type Props = {
   onFetchUser: (userData: UserData) => void;
@@ -152,14 +124,25 @@ const Search = ({ onFetchUser, onRequestError }: Props) => {
       });
   };
 
+  const handleChangeSearchQuery = (currentSearchQuery: string) => {
+    setSearchQuery(currentSearchQuery);
+    if (currentSearchQuery.length > MIN_CHARS_TO_SEARCH_USERS) {
+      debouncedFetchUsers(currentSearchQuery);
+    }
+    if (currentSearchQuery.length <= MIN_CHARS_TO_SEARCH_USERS) {
+      setAreSuggestionsShown(false);
+      setUsersData(DEFAULT_USERS_DATA);
+    }
+  };
+
   // eslint-disable-next-line react-hooks/exhaustive-deps
   const debouncedFetchUsers = useCallback(debounce(fetchUsers, 500), []);
 
   return (
-    <Root data-testid="search">
-      <LogoWrapper>
+    <StyledRoot data-testid="search">
+      <StyledLogoWrapper>
         <Logo />
-      </LogoWrapper>
+      </StyledLogoWrapper>
       <Typography
         variant="h2"
         sx={{
@@ -173,19 +156,10 @@ const Search = ({ onFetchUser, onRequestError }: Props) => {
         searchQuery={searchQuery}
         isLoadingUser={isLoadingUser}
         isLoadingUsers={isLoadingUsers}
-        onChangeSearchQuery={(currentSearchQuery: string) => {
-          setSearchQuery(currentSearchQuery);
-          if (currentSearchQuery.length > MIN_CHARS_TO_SEARCH_USERS) {
-            debouncedFetchUsers(currentSearchQuery);
-          }
-          if (currentSearchQuery.length <= MIN_CHARS_TO_SEARCH_USERS) {
-            setAreSuggestionsShown(false);
-            setUsersData(DEFAULT_USERS_DATA);
-          }
-        }}
+        onChangeSearchQuery={handleChangeSearchQuery}
         onFetchUser={fetchUser}
       />
-      <SuggestionsWrapper>
+      <StyledSuggestionsWrapper>
         {areSuggestionsShown ? (
           <Suggestions
             items={usersData.items}
@@ -198,7 +172,7 @@ const Search = ({ onFetchUser, onRequestError }: Props) => {
             }}
           />
         ) : (
-          <WatermarkWrapper>
+          <StyledWatermarkWrapper>
             {searchQuery.length > 2 && !usersData.total_count ? (
               <Typography
                 variant="h6"
@@ -215,10 +189,10 @@ const Search = ({ onFetchUser, onRequestError }: Props) => {
             ) : (
               <Watermark />
             )}
-          </WatermarkWrapper>
+          </StyledWatermarkWrapper>
         )}
-      </SuggestionsWrapper>
-    </Root>
+      </StyledSuggestionsWrapper>
+    </StyledRoot>
   );
 };
 

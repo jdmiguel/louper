@@ -38,7 +38,7 @@ describe('<Suggestions />', () => {
   };
 
   it('displays the suggestions properly', () => {
-    render(<Suggestions {...props} />);
+    render(renderWithTheme(<Suggestions {...props} />));
 
     const suggestions = screen.getByRole('grid');
     expect(suggestions.children.length).toBe(4);
@@ -50,7 +50,7 @@ describe('<Suggestions />', () => {
   });
 
   it('does not displays the pagination', () => {
-    render(<Suggestions {...props} />);
+    render(renderWithTheme(<Suggestions {...props} />));
 
     expect(screen.queryByRole('navigation')).not.toBeInTheDocument();
   });
@@ -62,7 +62,7 @@ describe('<Suggestions />', () => {
   });
 
   it('calls the correct callback when a suggestion is clicked', async () => {
-    render(<Suggestions {...props} />);
+    render(renderWithTheme(<Suggestions {...props} />));
 
     await userEvent.click(
       screen.getByRole('button', {

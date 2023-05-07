@@ -97,10 +97,10 @@ export const theme = createTheme({
       textTransform: 'uppercase',
     },
     body1: {
-      fontSize: '1em',
+      fontSize: '1rem',
     },
     body2: {
-      fontSize: '0.9em',
+      fontSize: '0.9rem',
     },
     overline: {
       fontSize: '0.8rem',

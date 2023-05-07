@@ -1,56 +1,17 @@
-import { styled } from '@mui/material/styles';
 import Typography from '@mui/material/Typography';
 import Avatar from '@mui/material/Avatar';
 import TextTag from '@/components/shared/TextTag';
 import Link from '@/components/shared/Link';
 import { UserData } from '@/utils/types';
-
-const Root = styled('main')({
-  display: 'flex',
-  flexDirection: 'column',
-  maxWidth: 240,
-  position: 'sticky',
-  top: 60,
-});
-
-const AvatarWrapper = styled('div')({
-  height: 240,
-  position: 'relative',
-  width: 240,
-});
-
-const Content = styled('div')({
-  marginTop: 30,
-  maxWidth: 300,
-  overflow: 'hidden',
-});
-
-const Headings = styled('div')({
-  marginBottom: 24,
-});
-
-const Details = styled('div')(({ theme }) => ({
-  borderBottom: `1px solid ${theme.palette.secondary.light}`,
-  borderTop: `1px solid ${theme.palette.secondary.light}`,
-  display: 'flex',
-  flexWrap: 'wrap',
-  marginBottom: 24,
-  paddingBottom: 10,
-  paddingTop: 10,
-}));
-
-const TextTagWrapper = styled('div')({
-  alignItems: 'center',
-  display: 'flex',
-  justifyContent: 'center',
-  marginRight: 12,
-  marginBottom: 6,
-  fontSize: '0.9rem',
-});
-
-const Action = styled('div')({
-  marginBottom: 5,
-});
+import {
+  StyledRoot,
+  StyledAvatarWrapper,
+  StyledContent,
+  StyledHeadings,
+  StyledDetails,
+  StyledTextTagWrapper,
+  StyledAction,
+} from './styles';
 
 const buildCreationDate = (date: string) => {
   const newDate = new Date(date);
@@ -80,8 +41,8 @@ const Profile = ({
     blog,
   },
 }: Props) => (
-  <Root>
-    <AvatarWrapper>
+  <StyledRoot>
+    <StyledAvatarWrapper>
       <Avatar sx={{ width: 240, height: 240, position: 'absolute' }} />
       <Avatar
         alt="user avatar"
@@ -93,9 +54,9 @@ const Profile = ({
           boxShadow: '0px 0px 14px 6px rgb(169 45 201 / 40%)',
         }}
       />
-    </AvatarWrapper>
-    <Content>
-      <Headings>
+    </StyledAvatarWrapper>
+    <StyledContent>
+      <StyledHeadings>
         {name && (
           <Typography variant="h3" sx={{ marginBottom: 0.4 }}>
             {name}
@@ -116,33 +77,33 @@ const Profile = ({
             {bio}
           </Typography>
         )}
-      </Headings>
-      <Details>
-        <TextTagWrapper>
+      </StyledHeadings>
+      <StyledDetails>
+        <StyledTextTagWrapper>
           <TextTag content={`${public_repos}`} withUppercase withIcon iconType="folder" />
-        </TextTagWrapper>
-        <TextTagWrapper>
+        </StyledTextTagWrapper>
+        <StyledTextTagWrapper>
           <TextTag content={`${following}`} withUppercase withIcon iconType="visibility" />
-        </TextTagWrapper>
-        <TextTagWrapper>
+        </StyledTextTagWrapper>
+        <StyledTextTagWrapper>
           <TextTag content={`${followers}`} withUppercase withIcon iconType="favorite" />
-        </TextTagWrapper>
-        <TextTagWrapper>
+        </StyledTextTagWrapper>
+        <StyledTextTagWrapper>
           <TextTag content={buildCreationDate(created_at)} withIcon iconType="event_note" />
-        </TextTagWrapper>
+        </StyledTextTagWrapper>
         {location && (
-          <TextTagWrapper>
+          <StyledTextTagWrapper>
             <TextTag content={location} withIcon iconType="location_on" />
-          </TextTagWrapper>
+          </StyledTextTagWrapper>
         )}
         {company && (
-          <TextTagWrapper>
+          <StyledTextTagWrapper>
             <TextTag content={company} withIcon iconType="business" />
-          </TextTagWrapper>
+          </StyledTextTagWrapper>
         )}
-      </Details>
+      </StyledDetails>
       <>
-        <Action>
+        <StyledAction>
           <Link
             url={html_url}
             ariaLabel={`View ${login} profile on GitHub`}
@@ -150,9 +111,9 @@ const Profile = ({
             withIcon
             iconType="person"
           />
-        </Action>
+        </StyledAction>
         {email && (
-          <Action>
+          <StyledAction>
             <Link
               url={`mailto:${email}`}
               ariaLabel={`Send email to ${login}`}
@@ -160,10 +121,10 @@ const Profile = ({
               withIcon
               iconType="mail_outline"
             />
-          </Action>
+          </StyledAction>
         )}
         {blog && (
-          <Action>
+          <StyledAction>
             <Link
               url={blog}
               ariaLabel={`View portfolio of ${login}`}
@@ -171,11 +132,11 @@ const Profile = ({
               withIcon
               iconType="web_icon"
             />
-          </Action>
+          </StyledAction>
         )}
       </>
-    </Content>
-  </Root>
+    </StyledContent>
+  </StyledRoot>
 );
 
 export default Profile;
