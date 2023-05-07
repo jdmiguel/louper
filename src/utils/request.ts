@@ -1,22 +1,22 @@
 export const API_BASE_URL = 'https://api.github.com';
 
-export const ErrorMessage = {
-  Max: 'You have excedeed the maximum allowed request. Please, wait for a while',
-  NoUser: 'Please, choose an available user',
-  MinChars: 'Please, type three chars at least',
-  Generic: 'Sorry! there was an error on the server side.',
+export const ERROR_MESSAGE = {
+  max: 'You have excedeed the maximum allowed request. Please, wait for a while',
+  noUser: 'Please, choose an available user',
+  minChars: 'Please, type three chars at least',
+  generic: 'Sorry! there was an error on the server side.',
 };
 
 const getErrorMessage = (errorStatus: number): string => {
   if (errorStatus === 403) {
-    return ErrorMessage.Max;
+    return ERROR_MESSAGE.max;
   }
 
   if (errorStatus === 404) {
-    return ErrorMessage.NoUser;
+    return ERROR_MESSAGE.noUser;
   }
 
-  return ErrorMessage.Generic;
+  return ERROR_MESSAGE.generic;
 };
 
 export const formatRequest = (response: Response) => {

@@ -6,7 +6,7 @@ import TextField from '@mui/material/TextField';
 import InputAdornment from '@mui/material/InputAdornment';
 import Icon from '@mui/material/Icon';
 import IconButton from '@mui/material/IconButton';
-import { ErrorMessage } from '@/utils/request';
+import { ERROR_MESSAGE } from '@/utils/request';
 
 const StyledTextField = styled<any>(TextField)(({ theme }) => ({
   '& .MuiOutlinedInput-root': {
@@ -76,7 +76,7 @@ const Finder = ({
         autoFocus
         placeholder="Type user name..."
         value={searchQuery}
-        label={isInputErrorDisplayed ? ErrorMessage.MinChars : ''}
+        label={isInputErrorDisplayed ? ERROR_MESSAGE.minChars : ''}
         onFocus={() => setIsInputErrorDisplayed(false)}
         onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
           const currentSearchQuery = event?.target?.value;
