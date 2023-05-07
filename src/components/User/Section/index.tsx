@@ -3,9 +3,8 @@ import { styled } from '@mui/material/styles';
 import Typography from '@mui/material/Typography';
 import CircularProgress from '@mui/material/CircularProgress';
 import SectionItem from '../SectionItem';
-import { API_BASE_URL } from '@/utils';
 import useIntersectionObserver from '@/hooks/useIntersectionObserver';
-import { formatRequest } from '@/utils/request';
+import { API_BASE_URL, formatRequest } from '@/utils/request';
 import { SectionType, Repo, User } from '@/utils/types';
 
 const Root = styled('section')({

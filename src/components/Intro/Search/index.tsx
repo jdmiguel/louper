@@ -6,8 +6,9 @@ import Watermark from './Watermark/index';
 import Finder from './Finder';
 import Suggestions from './Suggestions';
 import useWindowSize from '@/hooks/useWindowSize';
-import { API_BASE_URL, debounce } from '@/utils';
-import { formatRequest } from '@/utils/request';
+import { debounce } from '@/utils';
+import { INTRO_TITLE } from '@/utils/literals';
+import { API_BASE_URL, formatRequest } from '@/utils/request';
 import { UsersData, UserData } from '@/utils/types';
 
 const DEFAULT_USERS_DATA = {
@@ -166,7 +167,7 @@ const Search = ({ onFetchUser, onRequestError }: Props) => {
           lineHeight: 0,
         }}
       >
-        Search and find any Github user!
+        {INTRO_TITLE}
       </Typography>
       <Finder
         searchQuery={searchQuery}

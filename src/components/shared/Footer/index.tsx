@@ -1,6 +1,9 @@
 import { styled } from '@mui/material/styles';
 import Stack from '@mui/material/Stack';
+import { FOOTER_CONTENT, FOOTER_LINKS } from '@/utils/literals';
 import Link from '../Link';
+
+const [portfolioLink, octoverseLink] = FOOTER_LINKS;
 
 const Root = styled('footer')(({ theme }) => ({
   alignItems: 'center',
@@ -27,20 +30,20 @@ const Root = styled('footer')(({ theme }) => ({
 const Footer = () => (
   <Root data-testid="footer">
     <Stack direction="row" sx={{ marginRight: 0.6 }}>
-      <span>@2023 | created by</span>
+      <span>{FOOTER_CONTENT.creation}</span>
       <Link
-        url="https://jdmiguel.com/"
-        ariaLabel="View profile of jdmiguel on GitHub"
-        content="jdmiguel"
+        url={portfolioLink.url}
+        ariaLabel={portfolioLink.ariaLabel}
+        content={portfolioLink.content}
       />
     </Stack>
     <span>|</span>
     <Stack direction="row">
-      <span>github stats from</span>
+      <span>{FOOTER_CONTENT.stats}</span>
       <Link
-        url="https://octoverse.github.com/#future"
-        ariaLabel="View github users statistics on octoverse"
-        content="octoverse"
+        url={octoverseLink.url}
+        ariaLabel={octoverseLink.ariaLabel}
+        content={octoverseLink.content}
       />
     </Stack>
   </Root>

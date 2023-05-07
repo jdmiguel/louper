@@ -1,5 +1,5 @@
 import { rest } from 'msw';
-import { API_BASE_URL } from '@/utils';
+import { API_BASE_URL } from '@/utils/request';
 
 const data = [
   {

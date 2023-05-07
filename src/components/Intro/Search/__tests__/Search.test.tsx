@@ -2,7 +2,7 @@ import { render, screen, waitFor, waitForElementToBeRemoved } from '@testing-lib
 import userEvent from '@testing-library/user-event';
 import { rest } from 'msw';
 import { server } from '../../../../mocks/server';
-import { API_BASE_URL } from '../../../../utils';
+import { API_BASE_URL } from '../../../../utils/request';
 import { renderWithTheme } from '../../../../utils/theme';
 import Search from '..';
 
