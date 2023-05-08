@@ -23,6 +23,8 @@ const Finder = ({
 }: Props) => {
   const [isInputErrorDisplayed, setIsInputErrorDisplayed] = useState(false);
 
+  const withMinSearch = searchQuery?.length > 2;
+
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const currentSearchQuery = event?.target?.value;
     if (currentSearchQuery === searchQuery) {
@@ -50,8 +52,6 @@ const Finder = ({
     }
     onFetchUser(searchQuery);
   };
-
-  const withMinSearch = searchQuery?.length > 2;
 
   return (
     <FormControl

@@ -39,14 +39,42 @@ export const SUGGESTIONS_PER_PAGE = 9;
 
 export const TABS = ['REPOS', 'FOLLOWING', 'FOLLOWERS', 'SEARCH'];
 
-export const NO_ITEMS_TEXT = {
+export const UNAVAILABLE_ITEMS = {
   description: 'No description added',
   topics: 'NO TOPICS',
+  users: 'No matched users',
 };
 
 export const TOTAL_USER_ITEMS_ALLOWED = 100;
+
 export enum TAB {
   repos,
   following,
   followers,
 }
+export const SECTION_TYPE = {
+  repos: 'repos',
+  following: 'following',
+  followers: 'followers',
+};
+
+export const LINK_TEXT = {
+  profile: 'VISIT PROFILE',
+  repo: 'VISIT REPO',
+  portfolio: 'VISIT PORTFOLIO',
+  email: 'SEND EMAIL',
+};
+
+export const ICON_TYPE = {
+  repo: 'folder',
+  repoItem: 'folder_open',
+  following: 'visibility',
+  followers: 'favorite',
+  creationDate: 'event_note',
+  location: 'location_on',
+  company: 'business',
+  profile: 'person',
+  email: 'mail_outline',
+  portfolio: 'web_icon',
+  folder: 'folder',
+};

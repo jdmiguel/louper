@@ -3,6 +3,7 @@ import Typography from '@mui/material/Typography';
 import CircularProgress from '@mui/material/CircularProgress';
 import SectionItem from '../SectionItem';
 import useIntersectionObserver from '@/hooks/useIntersectionObserver';
+import { SECTION_TYPE } from '@/utils/literals';
 import { API_BASE_URL, formatRequest } from '@/utils/request';
 import { SectionType, Repo, User } from '@/utils/types';
 import { StyledRoot, StyledEmptyMsg, StyledLoaderWrapper } from './styles';
@@ -27,7 +28,7 @@ const Section = ({ userLogin, sectionType, totalItems, onRequestError }: Props) 
   const loaderEntry = useIntersectionObserver(loaderRef, {});
   const isLoaderVisible = !!loaderEntry?.isIntersecting;
 
-  const itemsPerPage = sectionType === 'repos' ? 12 : 20;
+  const itemsPerPage = sectionType === SECTION_TYPE.repos ? 12 : 20;
   const totalItemPages = Math.ceil(totalItems / itemsPerPage);
 
   // eslint-disable-next-line react-hooks/exhaustive-deps

@@ -7,20 +7,7 @@ type Props = TextProps & IconProps;
 const TextTag = ({ content, withUppercase, withIcon, iconType }: Props) => (
   <StyledRoot>
     {withIcon && <StyledIcon>{iconType}</StyledIcon>}
-    <StyledContent
-      variant={withUppercase ? 'h5' : 'body1'}
-      sx={{
-        color: 'text.secondary',
-        lineHeight: 1.1,
-        maxWidth: 350,
-        overflow: 'hidden',
-        textOverflow: 'ellipsis',
-        whiteSpace: 'nowrap',
-        textTransform: 'uppercase',
-      }}
-    >
-      {content}
-    </StyledContent>
+    <StyledContent variant={withUppercase ? 'h5' : 'body1'}>{content}</StyledContent>
   </StyledRoot>
 );
 

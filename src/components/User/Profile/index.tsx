@@ -2,6 +2,7 @@ import Typography from '@mui/material/Typography';
 import Avatar from '@mui/material/Avatar';
 import TextTag from '@/components/shared/TextTag';
 import Link from '@/components/shared/Link';
+import { ICON_TYPE, LINK_TEXT } from '@/utils/literals';
 import { UserData } from '@/utils/types';
 import {
   StyledRoot,
@@ -80,25 +81,29 @@ const Profile = ({
       </StyledHeadings>
       <StyledDetails>
         <StyledTextTagWrapper>
-          <TextTag content={`${public_repos}`} withUppercase withIcon iconType="folder" />
+          <TextTag content={`${public_repos}`} withUppercase withIcon iconType={ICON_TYPE.repo} />
         </StyledTextTagWrapper>
         <StyledTextTagWrapper>
-          <TextTag content={`${following}`} withUppercase withIcon iconType="visibility" />
+          <TextTag content={`${following}`} withUppercase withIcon iconType={ICON_TYPE.following} />
         </StyledTextTagWrapper>
         <StyledTextTagWrapper>
-          <TextTag content={`${followers}`} withUppercase withIcon iconType="favorite" />
+          <TextTag content={`${followers}`} withUppercase withIcon iconType={ICON_TYPE.followers} />
         </StyledTextTagWrapper>
         <StyledTextTagWrapper>
-          <TextTag content={buildCreationDate(created_at)} withIcon iconType="event_note" />
+          <TextTag
+            content={buildCreationDate(created_at)}
+            withIcon
+            iconType={ICON_TYPE.creationDate}
+          />
         </StyledTextTagWrapper>
         {location && (
           <StyledTextTagWrapper>
-            <TextTag content={location} withIcon iconType="location_on" />
+            <TextTag content={location} withIcon iconType={ICON_TYPE.location} />
           </StyledTextTagWrapper>
         )}
         {company && (
           <StyledTextTagWrapper>
-            <TextTag content={company} withIcon iconType="business" />
+            <TextTag content={company} withIcon iconType={ICON_TYPE.company} />
           </StyledTextTagWrapper>
         )}
       </StyledDetails>
@@ -107,9 +112,9 @@ const Profile = ({
           <Link
             url={html_url}
             ariaLabel={`View ${login} profile on GitHub`}
-            content="VISIT PROFILE"
+            content={LINK_TEXT.profile}
             withIcon
-            iconType="person"
+            iconType={ICON_TYPE.profile}
           />
         </StyledAction>
         {email && (
@@ -117,9 +122,9 @@ const Profile = ({
             <Link
               url={`mailto:${email}`}
               ariaLabel={`Send email to ${login}`}
-              content="SEND EMAIL"
+              content={LINK_TEXT.email}
               withIcon
-              iconType="mail_outline"
+              iconType={ICON_TYPE.email}
             />
           </StyledAction>
         )}
@@ -128,9 +133,9 @@ const Profile = ({
             <Link
               url={blog}
               ariaLabel={`View portfolio of ${login}`}
-              content="VISIT PORTFOLIO"
+              content={LINK_TEXT.portfolio}
               withIcon
-              iconType="web_icon"
+              iconType={ICON_TYPE.portfolio}
             />
           </StyledAction>
         )}

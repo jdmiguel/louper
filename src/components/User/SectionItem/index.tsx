@@ -4,7 +4,7 @@ import Typography from '@mui/material/Typography';
 import Avatar from '@mui/material/Avatar';
 import TextTag from '@/components/shared/TextTag';
 import Link from '@/components/shared/Link';
-import { NO_ITEMS_TEXT } from '@/utils/literals';
+import { UNAVAILABLE_ITEMS, LINK_TEXT, ICON_TYPE, SECTION_TYPE } from '@/utils/literals';
 import { Repo, User, SectionType } from '@/utils/types';
 import { StyledRoot, StyledTitle, StyledAvatarWrapper, StyledTopic, StyledAction } from './styles';
 
@@ -12,7 +12,7 @@ const displayRepoTheme = (repo: Repo): ReactElement => (
   <Stack justifyContent="space-between" sx={{ height: '100%' }} data-testid="repoContent">
     <Stack>
       <StyledTitle>
-        <TextTag content={repo.name} withUppercase withIcon iconType={'folder'} />
+        <TextTag content={repo.name} withUppercase withIcon iconType={ICON_TYPE.repo} />
       </StyledTitle>
       {repo.description ? (
         <Typography
@@ -29,7 +29,7 @@ const displayRepoTheme = (repo: Repo): ReactElement => (
         </Typography>
       ) : (
         <Typography variant="h6" sx={{ marginTop: 1, color: 'neutral.main' }}>
-          {NO_ITEMS_TEXT.description}
+          {UNAVAILABLE_ITEMS.description}
         </Typography>
       )}
       <Stack direction="row" sx={{ flexWrap: 'wrap', marginTop: 1.75 }}>
@@ -41,7 +41,7 @@ const displayRepoTheme = (repo: Repo): ReactElement => (
           ))
         ) : (
           <StyledTopic>
-            <Typography variant="overline">{NO_ITEMS_TEXT.topics}</Typography>
+            <Typography variant="overline">{UNAVAILABLE_ITEMS.topics}</Typography>
           </StyledTopic>
         )}
       </Stack>
@@ -50,16 +50,16 @@ const displayRepoTheme = (repo: Repo): ReactElement => (
       <Link
         url={repo.html_url}
         ariaLabel={`View ${repo.name} repository on GitHub`}
-        content="VISIT REPO"
+        content={LINK_TEXT.repo}
         withIcon
-        iconType="folder_open"
+        iconType={ICON_TYPE.repoItem}
       />
     </StyledAction>
   </Stack>
 );
 
 const displayUserTheme = (user: User, theme: SectionType): ReactElement => {
-  const iconType = theme === 'following' ? 'visibility' : 'favorite';
+  const iconType = theme === SECTION_TYPE.following ? ICON_TYPE.following : ICON_TYPE.followers;
 
   return (
     <Stack direction="row" data-testid="userContent">
@@ -79,9 +79,9 @@ const displayUserTheme = (user: User, theme: SectionType): ReactElement => {
         <Link
           url={user.html_url}
           ariaLabel={`View ${user.login} profile on GitHub`}
-          content="VISIT PROFILE"
+          content={LINK_TEXT.profile}
           withIcon
-          iconType="person"
+          iconType={ICON_TYPE.profile}
         />
       </Stack>
     </Stack>
@@ -94,7 +94,7 @@ type Props = {
 };
 
 const SectionItem = ({ theme, data }: Props) => {
-  const isRepoTheme = theme === 'repos';
+  const isRepoTheme = theme === SECTION_TYPE.repos;
   const repo = data as Repo;
   const user = data as User;
 

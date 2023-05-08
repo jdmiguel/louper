@@ -5,8 +5,8 @@ import Footer from '../shared/Footer';
 import Profile from './Profile';
 import ProfileMobile from './ProfileMobile';
 import Section from './Section';
-import { TOTAL_USER_ITEMS_ALLOWED, TAB } from '@/utils/literals';
-import { UserData } from '@/utils/types';
+import { TOTAL_USER_ITEMS_ALLOWED, TAB, SECTION_TYPE } from '@/utils/literals';
+import { UserData, SectionType } from '@/utils/types';
 import { StyledRoot, StyledMain, StyledProfileWrapper, StyledDataWrapper } from './styles';
 
 type Props = {
@@ -69,7 +69,7 @@ const UserPage = ({ userData, onBackFinder }: Props) => {
             {activeTab === TAB.repos && (
               <Section
                 userLogin={userData.login}
-                sectionType="repos"
+                sectionType={SECTION_TYPE.repos as SectionType}
                 totalItems={totalItems.repos}
                 onRequestError={handleRequestError}
               />
@@ -77,7 +77,7 @@ const UserPage = ({ userData, onBackFinder }: Props) => {
             {activeTab === TAB.following && (
               <Section
                 userLogin={userData.login}
-                sectionType="following"
+                sectionType={SECTION_TYPE.following as SectionType}
                 totalItems={totalItems.following}
                 onRequestError={handleRequestError}
               />
@@ -85,7 +85,7 @@ const UserPage = ({ userData, onBackFinder }: Props) => {
             {activeTab === TAB.followers && (
               <Section
                 userLogin={userData.login}
-                sectionType="followers"
+                sectionType={SECTION_TYPE.followers as SectionType}
                 totalItems={totalItems.followers}
                 onRequestError={handleRequestError}
               />

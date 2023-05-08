@@ -7,15 +7,15 @@ export const StyledRoot = styled('div')({
   display: 'flex',
 });
 
-export const StyledContent = styled(Typography)({
-  color: 'text.secondary',
+export const StyledContent = styled(Typography)(({ theme }) => ({
+  color: theme.palette.secondary.light,
   lineHeight: 1.1,
   maxWidth: 350,
   overflow: 'hidden',
   textOverflow: 'ellipsis',
   whiteSpace: 'nowrap',
   textTransform: 'uppercase',
-});
+}));
 
 export const StyledIcon = styled(Icon)(({ theme }) => ({
   color: theme.palette.secondary.light,

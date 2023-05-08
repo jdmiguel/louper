@@ -1,4 +1,4 @@
-import { useState, useEffect, useMemo, useCallback } from 'react';
+import { useState, useRef, useEffect, useMemo, useCallback } from 'react';
 import { useTheme } from '@mui/material/styles';
 import Typography from '@mui/material/Typography';
 import Logo from './Logo';
@@ -12,6 +12,7 @@ import {
   SUGGESTIONS_PER_PAGE,
   MIN_CHARS_TO_SEARCH_USERS,
   INTRO_TITLE,
+  UNAVAILABLE_ITEMS,
 } from '@/utils/literals';
 import { API_BASE_URL, formatRequest } from '@/utils/request';
 import { UsersData, UserData } from '@/utils/types';
@@ -38,6 +39,8 @@ const Search = ({ onFetchUser, onRequestError }: Props) => {
   const [isLoadingUsers, setIsLoadingUsers] = useState(false);
   const [areSuggestionsShown, setAreSuggestionsShown] = useState(false);
   const [usersData, setUsersData] = useState<UsersData>(DEFAULT_USERS_DATA);
+
+  const shouldFetchUsers = useRef(false);
 
   const { windowWidth } = useWindowSize();
 
@@ -70,6 +73,8 @@ const Search = ({ onFetchUser, onRequestError }: Props) => {
   }, [windowWidth]);
 
   const fetchUsers = (searchQuery: string, page = 1) => {
+    if (!shouldFetchUsers.current) return;
+
     setIsLoadingUsers(true);
 
     fetch(
@@ -127,12 +132,24 @@ const Search = ({ onFetchUser, onRequestError }: Props) => {
   const handleChangeSearchQuery = (currentSearchQuery: string) => {
     setSearchQuery(currentSearchQuery);
     if (currentSearchQuery.length > MIN_CHARS_TO_SEARCH_USERS) {
+      shouldFetchUsers.current = true;
       debouncedFetchUsers(currentSearchQuery);
     }
     if (currentSearchQuery.length <= MIN_CHARS_TO_SEARCH_USERS) {
+      shouldFetchUsers.current = false;
       setAreSuggestionsShown(false);
       setUsersData(DEFAULT_USERS_DATA);
     }
+  };
+
+  const handleSelectUser = (userName: string) => {
+    setSearchQuery(userName);
+    fetchUser(userName);
+  };
+
+  const handlePaginate = (page: number) => {
+    shouldFetchUsers.current = true;
+    fetchUsers(searchQuery, page);
   };
 
   // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -165,11 +182,8 @@ const Search = ({ onFetchUser, onRequestError }: Props) => {
             items={usersData.items}
             totalItems={Math.ceil(totalSuggestions / SUGGESTIONS_PER_PAGE)}
             withPagination={totalSuggestions > SUGGESTIONS_PER_PAGE}
-            onPaginate={(page: number) => fetchUsers(searchQuery, page)}
-            onSelectUser={(userName: string) => {
-              setSearchQuery(userName);
-              fetchUser(userName);
-            }}
+            onPaginate={handlePaginate}
+            onSelectUser={handleSelectUser}
           />
         ) : (
           <StyledWatermarkWrapper>
@@ -184,7 +198,7 @@ const Search = ({ onFetchUser, onRequestError }: Props) => {
                   transform: 'translateY(20px)',
                 }}
               >
-                No matched users
+                {UNAVAILABLE_ITEMS.users}
               </Typography>
             ) : (
               <Watermark />
