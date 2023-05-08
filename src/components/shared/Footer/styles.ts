@@ -10,13 +10,17 @@ export const StyledRoot = styled('footer')(({ theme }) => ({
   padding: '12px 24px',
   position: 'absolute',
   width: '100%',
+  '> span': {
+    marginLeft: 4,
+    marginRight: 4,
+  },
+  span: {
+    marginRight: 5,
+  },
   '@media (min-width: 500px)': {
     display: 'flex',
     flexDirection: 'row',
     justifyContent: 'center',
-  },
-  span: {
-    marginRight: 5,
   },
 }));
 
