@@ -42,6 +42,14 @@ const UserPage = ({ userData, onBackFinder }: Props) => {
     setIsErrorToastOpen(true);
   };
 
+  const handleClickTab = (selectedTab: number) => {
+    if (selectedTab === 3) {
+      onBackFinder();
+      return;
+    }
+    setActiveTab(selectedTab);
+  };
+
   return (
     <StyledRoot>
       <StyledMain>
@@ -57,14 +65,7 @@ const UserPage = ({ userData, onBackFinder }: Props) => {
           }}
         >
           <ProfileMobile data-testid="profile-mobile" userData={userData} />
-          <Menu
-            onClick={(section: number) => {
-              setActiveTab(section);
-              if (section === 3) {
-                onBackFinder();
-              }
-            }}
-          />
+          <Menu onClick={handleClickTab} />
           <>
             {activeTab === TAB.repos && (
               <Section

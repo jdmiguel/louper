@@ -15,16 +15,14 @@ type Props = {
 const Menu = ({ onClick }: Props) => {
   const [activeMenuItem, setActiveMenuItem] = useState(0);
 
+  const handleChange = (_event: SyntheticEvent, selectedTab: number) => {
+    onClick(selectedTab);
+    setActiveMenuItem(selectedTab);
+  };
+
   return (
     <StyledRoot>
-      <StyledTabs
-        value={activeMenuItem}
-        onChange={(_event: SyntheticEvent, selectedSection) => {
-          onClick(selectedSection);
-          setActiveMenuItem(selectedSection);
-        }}
-        centered
-      >
+      <StyledTabs value={activeMenuItem} onChange={handleChange} centered>
         <StyledTab icon={<ReposIcon />} disableRipple label={<span>{ReposTab}</span>} wrapped />
         <StyledTab
           icon={<FollowingIcon />}

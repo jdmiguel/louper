@@ -40,27 +40,25 @@ type Props = {
 };
 
 const Marker = ({ data, onOver, onOut }: Props) => {
-  const { country, lat, lng, totalUsers } = data;
   const markerRef = useRef<Mesh>(null);
+
+  const { country, lat, lng, totalUsers } = data;
   const { x, y, z } = getSpherePositions(lat, lng);
 
+  const handlePointOver = (event: ThreeEvent<PointerEvent>) => {
+    if (event.distance > ALLOWED_POINT_DISTANCE) {
+      return;
+    }
+    onOver({
+      country,
+      x: Math.round(event.offsetX),
+      y: Math.round(event.offsetY),
+      totalUsers,
+    });
+  };
+
   return (
-    <mesh
-      ref={markerRef}
-      position={[x, y, z]}
-      onPointerOver={(event: ThreeEvent<PointerEvent>) => {
-        if (event.distance > ALLOWED_POINT_DISTANCE) {
-          return;
-        }
-        onOver({
-          country,
-          x: Math.round(event.offsetX),
-          y: Math.round(event.offsetY),
-          totalUsers,
-        });
-      }}
-      onPointerOut={onOut}
-    >
+    <mesh ref={markerRef} position={[x, y, z]} onPointerOver={handlePointOver} onPointerOut={onOut}>
       <sphereBufferGeometry attach="geometry" args={[0.02, 10, 10]} />
       <meshBasicMaterial attach="material" color={colors.pink} />
     </mesh>
