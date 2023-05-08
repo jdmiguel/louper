@@ -8,6 +8,8 @@ export const StyledRoot = styled('div')(({ theme }) => ({
   padding: 15,
   position: 'absolute',
   zIndex: 1,
+  opacity: 0,
+  animation: `${theme.animation.fadeIn} 250ms ease-out forwards`,
 }));
 
 export const StyledOverlayBoxCountry = styled('div')(({ theme }) => ({

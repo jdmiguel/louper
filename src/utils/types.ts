@@ -42,3 +42,5 @@ export type OverlayBoxData = {
   y: number;
   totalUsers: string;
 };
+
+export type Timer = ReturnType<typeof setTimeout>;

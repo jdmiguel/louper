@@ -1,10 +1,11 @@
-import { useState, Suspense } from 'react';
+import { useState, useRef, Suspense, useEffect } from 'react';
 import { AdditiveBlending, BackSide, TextureLoader } from 'three';
 import { Canvas, useLoader } from '@react-three/fiber';
 import { OrbitControls } from '@react-three/drei';
 import Marker from './Marker';
 import OverlayBox from './OverlayBox';
 import { colors } from '@/utils/colors';
+import { Timer } from '@/utils/types';
 import globeMarkers from '@/assets/globeMarkers.json';
 import map from '@/assets/texture-map.png';
 import { StyledRoot } from './styles';
@@ -51,20 +52,52 @@ const GlobeModel = () => {
   );
 };
 
+type OverlayBoxData = {
+  country: string;
+  x: number;
+  y: number;
+  totalUsers: string;
+};
+
 const Globe = () => {
   const [isAutoRotationAllowed, setIsAutoRotationAllowed] = useState(true);
   const [isMarkerHovered, setIsMarkerHovered] = useState(false);
-  const [overlayBoxData, setOverlayBoxData] = useState({
+  const [overlayBoxData, setOverlayBoxData] = useState<OverlayBoxData>({
     country: '',
     x: 0,
     y: 0,
     totalUsers: '',
   });
 
-  const onMarkerOut = () => {
-    setIsMarkerHovered(false);
-    setIsAutoRotationAllowed(true);
+  const autoRotateTimer = useRef<Timer | null>(null);
+
+  const clearTimer = () => {
+    if (!autoRotateTimer.current) return;
+    clearTimeout(autoRotateTimer.current);
+    autoRotateTimer.current = null;
   };
+
+  const handleMarkerOver = (currentOverlayBoxData: OverlayBoxData) => {
+    setIsMarkerHovered(true);
+    setIsAutoRotationAllowed(false);
+    setOverlayBoxData(currentOverlayBoxData);
+    clearTimer();
+  };
+
+  const handleMarkerOut = () => {
+    setIsMarkerHovered(false);
+    if (!autoRotateTimer.current) {
+      autoRotateTimer.current = setTimeout(() => {
+        setIsAutoRotationAllowed(true);
+      }, 500);
+    }
+  };
+
+  useEffect(() => {
+    return () => {
+      clearTimer();
+    };
+  }, []);
 
   return (
     <StyledRoot
@@ -73,7 +106,10 @@ const Globe = () => {
         cursor: isMarkerHovered ? 'pointer' : 'default',
       }}
     >
-      <Canvas camera={{ position: [6, 1, 8], fov: 13, far: 10000 }} onPointerMissed={onMarkerOut}>
+      <Canvas
+        camera={{ position: [6, 1, 8], fov: 13, far: 10000 }}
+        onPointerMissed={handleMarkerOut}
+      >
         <Suspense fallback={null}>
           <GlobeModel />
         </Suspense>
@@ -86,12 +122,8 @@ const Globe = () => {
               lng: marker.lng,
               totalUsers: marker.totalUsers,
             }}
-            onOver={(currentOverlayBoxData) => {
-              setIsMarkerHovered(true);
-              setIsAutoRotationAllowed(false);
-              setOverlayBoxData(currentOverlayBoxData);
-            }}
-            onOut={onMarkerOut}
+            onOver={handleMarkerOver}
+            onOut={handleMarkerOut}
           />
         ))}
         <OrbitControls

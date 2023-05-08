@@ -1,5 +1,7 @@
+import { Timer } from './types';
+
 export const debounce = (fn: any, delay: number) => {
-  let timer: ReturnType<typeof setTimeout>;
+  let timer: Timer;
 
   return (...args: unknown[]) => {
     if (timer) clearTimeout(timer);
