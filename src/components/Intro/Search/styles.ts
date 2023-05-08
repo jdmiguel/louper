@@ -6,19 +6,15 @@ export const StyledRoot = styled('div')(({ theme }) => ({
   flexDirection: 'column',
   opacity: 0,
   animation: `${theme.animation.fadeIn} 1400ms 300ms forwards`,
-  '@media (min-width: 1200px)': {
-    minWidth: 600,
-  },
-  '@media (min-width: 1440px)': {
-    marginRight: 60,
-    minWidth: 620,
-  },
 }));
 
 export const StyledLogoWrapper = styled('h1')({
   lineHeight: 0,
-  transform: 'scale(0.9)',
+  transform: 'scale(0.8)',
   '@media (min-width: 768px)': {
+    transform: 'scale(0.9)',
+  },
+  '@media (min-width: 1440px)': {
     transform: 'scale(1)',
   },
 });

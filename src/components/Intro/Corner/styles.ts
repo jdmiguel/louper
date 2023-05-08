@@ -1,8 +1,6 @@
 import { styled } from '@mui/material/styles';
 
 export const StyledRoot = styled('a')(({ theme }) => ({
-  opacity: 0,
-  visibility: 'hidden',
   svg: {
     fill: theme.palette.primary.main,
     color: theme.palette.background.default,
@@ -19,9 +17,5 @@ export const StyledRoot = styled('a')(({ theme }) => ({
   '& path:not(:first-of-type)': {
     fill: theme.palette.secondary.dark,
     transformOrigin: '130px 106px',
-  },
-  '@media (min-width: 1200px)': {
-    opacity: 1,
-    visibility: 'visible',
   },
 }));

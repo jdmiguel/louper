@@ -5,6 +5,9 @@ export const StyledRoot = styled('section')({
   gridGap: 20,
   paddingTop: 20,
   position: 'relative',
+  '@media (min-width: 992px)': {
+    gridTemplateColumns: 'repeat(2, 310px)',
+  },
   '@media (min-width: 1200px)': {
     gridTemplateColumns: 'repeat(2, 420px)',
   },

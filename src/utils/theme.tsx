@@ -69,6 +69,9 @@ export const theme = createTheme({
       fontSize: '1.1rem',
       fontWeight: 300,
       '@media (min-width: 768px)': {
+        fontSize: '1.2rem',
+      },
+      '@media (min-width: 1440px)': {
         fontSize: '1.3rem',
       },
     },

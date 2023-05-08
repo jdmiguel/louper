@@ -163,8 +163,11 @@ const Search = ({ onFetchUser, onRequestError }: Props) => {
       <Typography
         variant="h2"
         sx={{
-          marginBottom: '60px',
+          marginBottom: '40px',
           lineHeight: 0,
+          '@media (min-width: 1440px)': {
+            marginBottom: '50px',
+          },
         }}
       >
         {INTRO_TITLE}

@@ -2,7 +2,7 @@ import { styled } from '@mui/material/styles';
 import Tabs from '@mui/material/Tabs';
 import Tab from '@mui/material/Tab';
 
-export const StyledRoot = styled('nav')({
+export const StyledRoot = styled('header')({
   position: 'sticky',
   top: 0,
   zIndex: 1,
