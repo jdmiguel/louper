@@ -21,6 +21,16 @@ export const StyledMain = styled('main')({
   },
 });
 
+export const StyledLoaderWrapper = styled('div')({
+  position: 'fixed',
+  top: 0,
+  left: 0,
+  zIndex: 1,
+  overflow: 'hidden',
+  width: '100%',
+  height: 2,
+});
+
 export const StyledProfileWrapper = styled('aside')(({ theme }) => ({
   display: 'none',
   margin: '60px 50px 0 0',
@@ -38,6 +48,9 @@ export const StyledDataWrapper = styled('div')(({ theme }) => ({
   '@media (min-width: 768px)': {
     display: 'block',
     animation: `${theme.animation.fadeInRight} 600ms ease-out 300ms forwards`,
+  },
+  '@media (min-width: 992px)': {
+    width: 'initial',
   },
   '@media (min-width: 1200x)': {
     width: 'initial',

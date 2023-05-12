@@ -17,11 +17,3 @@ export const StyledEmptyMsg = styled('div')({
   display: 'flex',
   marginTop: 8,
 });
-
-export const StyledLoaderWrapper = styled('div')({
-  alignItems: 'center',
-  display: 'flex',
-  justifyContent: 'center',
-  minHeight: 90,
-  width: '100%',
-});

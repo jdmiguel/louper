@@ -68,6 +68,7 @@ const Search = ({ onFetchUser, onRequestError }: Props) => {
     if (!windowWidth) {
       return;
     }
+
     setSearchQuery('');
     setAreSuggestionsShown(false);
   }, [windowWidth]);

@@ -1,5 +1,3 @@
-export type SectionType = 'repos' | 'following' | 'followers';
-
 export type Repo = {
   id: number;
   name: string;
@@ -14,6 +12,9 @@ export type User = {
   html_url: string;
   avatar_url: string;
 };
+
+export type UserItems = Repo[] & User[];
+export type UserItemsType = 'repos' | 'following' | 'followers';
 
 export type UserData = {
   login: string;

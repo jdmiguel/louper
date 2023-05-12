@@ -1,3 +1,5 @@
+import { UserItemsType } from './types';
+
 export const INTRO_TITLE = 'Search and find any Github user!';
 
 export const FOOTER_CONTENT = {
@@ -51,12 +53,16 @@ export enum TAB {
   repos,
   following,
   followers,
+  search,
 }
-export const SECTION_TYPE = {
+export const USER_ITEMS_TYPE: Record<string, UserItemsType> = {
   repos: 'repos',
   following: 'following',
   followers: 'followers',
 };
+
+export const REPOS_PER_PAGE = 12;
+export const RELATED_USERS_PER_PAGE = 20;
 
 export const LINK_TEXT = {
   profile: 'VISIT PROFILE',

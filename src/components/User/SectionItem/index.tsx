@@ -1,11 +1,11 @@
-import { ReactElement } from 'react';
+import { ReactElement, forwardRef } from 'react';
 import Stack from '@mui/material/Stack';
 import Typography from '@mui/material/Typography';
 import Avatar from '@mui/material/Avatar';
 import TextTag from '@/components/shared/TextTag';
 import Link from '@/components/shared/Link';
-import { UNAVAILABLE_ITEMS, LINK_TEXT, ICON_TYPE, SECTION_TYPE } from '@/utils/literals';
-import { Repo, User, SectionType } from '@/utils/types';
+import { UNAVAILABLE_ITEMS, LINK_TEXT, ICON_TYPE, USER_ITEMS_TYPE } from '@/utils/literals';
+import { Repo, User, UserItemsType } from '@/utils/types';
 import { StyledRoot, StyledTitle, StyledAvatarWrapper, StyledTopic, StyledAction } from './styles';
 
 const displayRepoTheme = (repo: Repo): ReactElement => (
@@ -58,8 +58,8 @@ const displayRepoTheme = (repo: Repo): ReactElement => (
   </Stack>
 );
 
-const displayUserTheme = (user: User, theme: SectionType): ReactElement => {
-  const iconType = theme === SECTION_TYPE.following ? ICON_TYPE.following : ICON_TYPE.followers;
+const displayUserTheme = (user: User, theme: UserItemsType): ReactElement => {
+  const iconType = theme === USER_ITEMS_TYPE.following ? ICON_TYPE.following : ICON_TYPE.followers;
 
   return (
     <Stack direction="row" data-testid="userContent">
@@ -89,18 +89,20 @@ const displayUserTheme = (user: User, theme: SectionType): ReactElement => {
 };
 
 type Props = {
-  theme: SectionType;
+  theme: UserItemsType;
   data: Repo | User;
 };
 
-const SectionItem = ({ theme, data }: Props) => {
-  const isRepoTheme = theme === SECTION_TYPE.repos;
+const SectionItem = forwardRef<HTMLDivElement, Props>(({ theme, data }, ref) => {
+  const isRepoTheme = theme === USER_ITEMS_TYPE.repos;
   const repo = data as Repo;
   const user = data as User;
 
   return (
-    <StyledRoot>{isRepoTheme ? displayRepoTheme(repo) : displayUserTheme(user, theme)}</StyledRoot>
+    <StyledRoot ref={ref}>
+      {isRepoTheme ? displayRepoTheme(repo) : displayUserTheme(user, theme)}
+    </StyledRoot>
   );
-};
+});
 
 export default SectionItem;

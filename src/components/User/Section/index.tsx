@@ -1,92 +1,60 @@
-import { useState, useEffect, useMemo, useRef } from 'react';
+import { useRef, useCallback } from 'react';
 import Typography from '@mui/material/Typography';
-import CircularProgress from '@mui/material/CircularProgress';
 import SectionItem from '../SectionItem';
-import useIntersectionObserver from '@/hooks/useIntersectionObserver';
-import { SECTION_TYPE } from '@/utils/literals';
-import { API_BASE_URL, formatRequest } from '@/utils/request';
-import { SectionType, Repo, User } from '@/utils/types';
-import { StyledRoot, StyledEmptyMsg, StyledLoaderWrapper } from './styles';
-
-type Items = Repo[] & User[];
+import { UserItems, UserItemsType } from '@/utils/types';
+import { StyledRoot, StyledEmptyMsg } from './styles';
 
 type Props = {
-  userLogin: string;
-  sectionType: SectionType;
-  totalItems: number;
-  onRequestError: (errorMessage: string) => void;
+  isLoading: boolean;
+  itemsType: UserItemsType;
+  items: UserItems;
+  areAllItemsLoaded: boolean;
+  onNextPage: () => void;
 };
 
-const Section = ({ userLogin, sectionType, totalItems, onRequestError }: Props) => {
-  const [isLoading, setIsLoading] = useState(true);
-  const [isInitialLoad, setIsInitialLoad] = useState(true);
-  const [isFullyLoaded, setIsFullyLoaded] = useState(false);
-  const [items, setItems] = useState<Items>([]);
-  const [currentItemPage, setCurrentItemPage] = useState(1);
+const Section = ({ isLoading, itemsType, items, areAllItemsLoaded, onNextPage }: Props) => {
+  const observer = useRef<IntersectionObserver>();
+  const lastItemRef = useCallback(
+    (item: HTMLDivElement) => {
+      if (isLoading || areAllItemsLoaded) {
+        return;
+      }
 
-  const loaderRef = useRef<HTMLDivElement | null>(null);
-  const loaderEntry = useIntersectionObserver(loaderRef, {});
-  const isLoaderVisible = !!loaderEntry?.isIntersecting;
+      if (observer.current) {
+        observer.current.disconnect();
+      }
 
-  const itemsPerPage = sectionType === SECTION_TYPE.repos ? 12 : 20;
-  const totalItemPages = Math.ceil(totalItems / itemsPerPage);
-
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  const abortController = useMemo(() => new AbortController(), []);
-
-  useEffect(() => {
-    if (!isLoading) {
-      return;
-    }
-
-    fetch(
-      `${API_BASE_URL}/users/${userLogin}/${sectionType}?page=${currentItemPage}&per_page=${itemsPerPage}`,
-      {
-        signal: abortController.signal,
-      },
-    )
-      .then(formatRequest)
-      .then((fetchedItems: Items) => {
-        setIsInitialLoad(false);
-        setIsLoading(false);
-        setItems((prevItems: Items) => [...prevItems, ...fetchedItems]);
-        setIsFullyLoaded(currentItemPage === totalItemPages);
-      })
-      .catch((error) => {
-        setIsLoading(false);
-        onRequestError(error.message);
+      observer.current = new IntersectionObserver((entries) => {
+        if (entries[0].isIntersecting) {
+          onNextPage();
+        }
       });
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [currentItemPage]);
 
-  useEffect(() => {
-    if (isLoaderVisible && !isInitialLoad && !isFullyLoaded) {
-      setCurrentItemPage((prevCurrentItemPage) => prevCurrentItemPage + 1);
-      setIsLoading(true);
-    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [isLoaderVisible]);
+      if (item) {
+        observer.current.observe(item);
+      }
+    },
+    [isLoading, areAllItemsLoaded, onNextPage],
+  );
+
+  const totalItems = items.length;
 
   return (
-    <>
-      <StyledRoot data-testid="section">
-        {totalItems === 0 && (
-          <StyledEmptyMsg>
-            <Typography variant="h6" sx={{ color: 'neutral.main' }}>
-              {`No ${sectionType} added`}
-            </Typography>
-          </StyledEmptyMsg>
-        )}
-        {items.map((item) => (
-          <SectionItem key={item.id} theme={sectionType} data={item} />
-        ))}
-      </StyledRoot>
-      {!isFullyLoaded && (
-        <StyledLoaderWrapper ref={loaderRef}>
-          {isLoading && <CircularProgress className="loaderIcon" size={30} thickness={5} />}
-        </StyledLoaderWrapper>
+    <StyledRoot data-testid="section">
+      {!isLoading && totalItems === 0 && (
+        <StyledEmptyMsg>
+          <Typography variant="h6" sx={{ color: 'neutral.main' }}>
+            {`No ${itemsType} added`}
+          </Typography>
+        </StyledEmptyMsg>
       )}
-    </>
+      {items.map((item, index) => {
+        if (index + 1 === totalItems) {
+          return <SectionItem ref={lastItemRef} key={item.id} theme={itemsType} data={item} />;
+        }
+        return <SectionItem key={item.id} theme={itemsType} data={item} />;
+      })}
+    </StyledRoot>
   );
 };
 
