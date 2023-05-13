@@ -12,7 +12,7 @@ export const StyledHeader = styled('header')({
   alignItems: 'center',
   display: 'flex',
   flexDirection: 'column',
-  gap: 16,
+  gap: 12,
   marginBottom: 36,
 });
 

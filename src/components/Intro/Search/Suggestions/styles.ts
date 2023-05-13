@@ -11,7 +11,7 @@ export const StyledRoot = styled(Stack)(({ theme }) => ({
 export const StyledSuggestionsWrapper = styled('div')({
   alignContent: 'flex-start',
   display: 'grid',
-  gap: 14,
+  gap: 10,
   gridTemplateColumns: 'repeat(2, 1fr)',
   maxWidth: '100%',
   padding: '20px 0',

@@ -4,17 +4,15 @@ export const StyledRoot = styled('div')(({ theme }) => ({
   display: 'none',
   position: 'relative',
   userSelect: 'none',
-  height: 450,
-  width: 450,
+  height: 570,
+  width: 570,
   opacity: 0,
   animation: `${theme.animation.fadeInUp} 1400ms ease-out 300ms forwards`,
   '@media (min-width: 1200px)': {
     display: 'block',
-    height: 600,
-    width: 600,
   },
   '@media (min-width: 1440px)': {
-    height: 640,
-    width: 640,
+    height: 620,
+    width: 620,
   },
 }));
