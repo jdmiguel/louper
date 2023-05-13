@@ -4,7 +4,7 @@ exports[`<Corner /> > displays the content properly 1`] = `
 <div>
   <a
     aria-label="View source on GitHub"
-    class="css-9s5x0q"
+    class="css-ct5cml"
     href="https://github.com/jdmiguel/github_finder"
     rel="noopener noreferrer"
   >

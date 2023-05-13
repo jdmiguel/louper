@@ -1,58 +1,72 @@
 import { render, screen, waitForElementToBeRemoved } from '@testing-library/react';
+import { UserItems } from '@/utils/types';
+import '@/mocks/intersectionObserverMock';
 import Section from '..';
 
 describe('<Section />', () => {
+  const repoItems = [
+    {
+      id: 1,
+      name: 'Hello world',
+      description: 'First repo with classic hello world',
+      html_url: 'https://github.com/jdmiguel/hello_world',
+      topics: ['javascript'],
+    },
+  ];
+  const followingItems = [
+    {
+      id: 1,
+      login: 'phiLands',
+      html_url: 'https://github.com/phiLands',
+      avatar_url: 'https://github.com/phiLands.jpg',
+    },
+  ];
+  const followerItems = [
+    {
+      id: 1,
+      login: 'shara89',
+      html_url: 'https://github.com/shara89',
+      avatar_url: 'https://github.com/shara89.jpg',
+    },
+  ];
+
   const props = {
-    userLogin: 'jdmiguel',
-    onRequestError: vi.fn(),
+    isLoading: false,
+    areAllItemsLoaded: false,
+    onNextPage: vi.fn(),
   };
 
-  describe('when section type is repos', () => {
-    it('displays the correct content after loading', async () => {
-      render(<Section {...props} sectionType="repos" totalItems={3} />);
-
-      expect(screen.getByRole('progressbar')).toBeInTheDocument();
-      await waitForElementToBeRemoved(screen.getByRole('progressbar'));
+  describe('when items type is repos', () => {
+    it('displays the correct content', () => {
+      render(<Section {...props} itemsType="repos" items={repoItems as UserItems} />);
 
       expect(screen.queryByText(/no repos added/i)).not.toBeInTheDocument();
       expect(screen.getByText('Hello world')).toBeInTheDocument();
-      expect(screen.getByText('To do app')).toBeInTheDocument();
-      expect(screen.getByText('Calender')).toBeInTheDocument();
+      expect(screen.getByText('First repo with classic hello world')).toBeInTheDocument();
+    });
+
+    it('displays the no items message', () => {
+      render(<Section {...props} itemsType="repos" items={[]} />);
+
+      expect(screen.getByText(/no repos added/i)).toBeInTheDocument();
     });
   });
 
-  describe('when section type is following', () => {
-    it('displays the correct content after loading', async () => {
-      render(<Section {...props} sectionType="following" totalItems={5} />);
-
-      expect(screen.getByRole('progressbar')).toBeInTheDocument();
-      await waitForElementToBeRemoved(screen.getByRole('progressbar'));
+  describe('when items type is following', () => {
+    it('displays the correct content', () => {
+      render(<Section {...props} itemsType="following" items={followingItems as UserItems} />);
 
       expect(screen.queryByText(/no following added/i)).not.toBeInTheDocument();
       expect(screen.getByText('phiLands')).toBeInTheDocument();
-      expect(screen.getByText('rani234')).toBeInTheDocument();
-      expect(screen.getByText('linu')).toBeInTheDocument();
-      expect(screen.getByText('pani34')).toBeInTheDocument();
-      expect(screen.getByText('alb009')).toBeInTheDocument();
     });
   });
 
-  describe('when section type is followers', () => {
-    it('displays the correct content after loading', async () => {
-      render(<Section {...props} sectionType="followers" totalItems={8} />);
-
-      expect(screen.getByRole('progressbar')).toBeInTheDocument();
-      await waitForElementToBeRemoved(screen.getByRole('progressbar'));
+  describe('when items type is followers', () => {
+    it('displays the correct content', () => {
+      render(<Section {...props} itemsType="followers" items={followerItems as UserItems} />);
 
       expect(screen.queryByText(/no followers added/i)).not.toBeInTheDocument();
       expect(screen.getByText('shara89')).toBeInTheDocument();
-      expect(screen.getByText('malvinetto')).toBeInTheDocument();
-      expect(screen.getByText('vini23')).toBeInTheDocument();
-      expect(screen.getByText('nina45')).toBeInTheDocument();
-      expect(screen.getByText('liniam31')).toBeInTheDocument();
-      expect(screen.getByText('trocPoe')).toBeInTheDocument();
-      expect(screen.getByText('karl52')).toBeInTheDocument();
-      expect(screen.getByText('finn142')).toBeInTheDocument();
     });
   });
 });
