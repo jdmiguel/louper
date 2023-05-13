@@ -14,11 +14,7 @@ export const StyledSuggestionsWrapper = styled('div')({
   gap: 14,
   gridTemplateColumns: 'repeat(2, 1fr)',
   maxWidth: '100%',
-  padding: 20,
-  '@media (min-width: 768px)': {
-    gridTemplateColumns: 'repeat(3, 1fr)',
-    height: 200,
-  },
+  padding: '20px 0',
 });
 
 export const StyledPaginationItem = styled(PaginationItem)(({ theme }) => ({
@@ -29,11 +25,11 @@ export const StyledPaginationItem = styled(PaginationItem)(({ theme }) => ({
   },
   '&.Mui-selected': {
     backgroundColor: 'transparent',
-    color: theme.palette.neutral.main,
+    color: theme.palette.text.secondary,
     cursor: 'default',
   },
   '&.MuiPaginationItem-ellipsis': {
-    color: theme.palette.neutral.main,
+    color: theme.palette.text.secondary,
   },
   '&:hover': {
     '&.MuiPaginationItem-root': {

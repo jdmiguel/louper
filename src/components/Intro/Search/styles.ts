@@ -8,26 +8,29 @@ export const StyledRoot = styled('div')(({ theme }) => ({
   animation: `${theme.animation.fadeIn} 1400ms 300ms forwards`,
 }));
 
+export const StyledHeader = styled('header')({
+  alignItems: 'center',
+  display: 'flex',
+  flexDirection: 'column',
+  gap: 16,
+  marginBottom: 36,
+});
+
 export const StyledLogoWrapper = styled('h1')({
-  lineHeight: 0,
   transform: 'scale(0.8)',
-  '@media (min-width: 768px)': {
-    transform: 'scale(0.9)',
-  },
   '@media (min-width: 1440px)': {
-    transform: 'scale(1)',
+    transform: 'scale(0.9)',
   },
 });
 
 export const StyledSuggestionsWrapper = styled('div')({
   height: 260,
-  marginTop: 20,
 });
 
 export const StyledWatermarkWrapper = styled('div')({
   alignItems: 'center',
   display: 'flex',
   flexDirection: 'column',
-  marginTop: 10,
+  marginTop: 30,
   opacity: 0.15,
 });

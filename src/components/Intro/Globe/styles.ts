@@ -10,11 +10,11 @@ export const StyledRoot = styled('div')(({ theme }) => ({
   animation: `${theme.animation.fadeInUp} 1400ms ease-out 300ms forwards`,
   '@media (min-width: 1200px)': {
     display: 'block',
-    height: 520,
-    width: 520,
+    height: 600,
+    width: 600,
   },
   '@media (min-width: 1440px)': {
-    height: 580,
-    width: 580,
+    height: 640,
+    width: 640,
   },
 }));

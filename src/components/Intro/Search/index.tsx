@@ -18,6 +18,7 @@ import { API_BASE_URL, formatRequest } from '@/utils/request';
 import { UsersData, UserData } from '@/utils/types';
 import {
   StyledRoot,
+  StyledHeader,
   StyledLogoWrapper,
   StyledSuggestionsWrapper,
   StyledWatermarkWrapper,
@@ -158,21 +159,12 @@ const Search = ({ onFetchUser, onRequestError }: Props) => {
 
   return (
     <StyledRoot data-testid="search">
-      <StyledLogoWrapper>
-        <Logo />
-      </StyledLogoWrapper>
-      <Typography
-        variant="h2"
-        sx={{
-          marginBottom: '40px',
-          lineHeight: 0,
-          '@media (min-width: 1440px)': {
-            marginBottom: '50px',
-          },
-        }}
-      >
-        {INTRO_TITLE}
-      </Typography>
+      <StyledHeader>
+        <StyledLogoWrapper>
+          <Logo />
+        </StyledLogoWrapper>
+        <Typography variant="h2">{INTRO_TITLE}</Typography>
+      </StyledHeader>
       <Finder
         searchQuery={searchQuery}
         isLoadingUser={isLoadingUser}

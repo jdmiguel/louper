@@ -1,6 +1,8 @@
 import { UserItemsType } from './types';
 
-export const INTRO_TITLE = 'Search and find any Github user!';
+export const INTRO_TITLE = 'Seek and find any Github user worldwide';
+
+export const GLOBE_ACTIVATE_ROTATION_TIMER = 800;
 
 export const FOOTER_CONTENT = {
   creation: '@2023 | created by',
@@ -36,8 +38,8 @@ export const OVERLAY_BOX_OFFSET_LEFT = 54;
 export const OVERLAY_BOX_OFFSET_TOP = 16;
 
 export const MIN_CHARS_TO_SEARCH_USERS = 2;
-export const MAX_SUGGESTIONS_ALLOWED = 100;
-export const SUGGESTIONS_PER_PAGE = 9;
+export const MAX_SUGGESTIONS_ALLOWED = 80;
+export const SUGGESTIONS_PER_PAGE = 6;
 
 export const TABS = ['REPOS', 'FOLLOWING', 'FOLLOWERS', 'SEARCH'];
 
@@ -47,7 +49,7 @@ export const UNAVAILABLE_ITEMS = {
   users: 'No matched users',
 };
 
-export const TOTAL_USER_ITEMS_ALLOWED = 100;
+export const TOTAL_USER_ITEMS_ALLOWED = 80;
 
 export enum TAB {
   repos,

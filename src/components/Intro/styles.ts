@@ -24,10 +24,10 @@ export const StyledMain = styled('main')({
   flexDirection: 'column',
   '@media (min-width: 992px)': {
     flexDirection: 'row',
-    justifyContent: 'space-evenly',
+    justifyContent: 'center',
+    gap: 110,
   },
   '@media (min-width: 1440px)': {
-    justifyContent: 'center',
     gap: 140,
   },
 });

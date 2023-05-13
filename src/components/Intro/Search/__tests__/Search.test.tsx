@@ -17,7 +17,7 @@ describe('<Search />', () => {
 
     expect(screen.getByTestId('logo')).toBeInTheDocument();
     expect(screen.getByPlaceholderText('Type user name...'));
-    expect(screen.getByText('Search and find any Github user!')).toBeInTheDocument();
+    expect(screen.getByText('Seek and find any Github user worldwide')).toBeInTheDocument();
     expect(screen.getByTestId('watermark')).toBeInTheDocument();
   });
 
@@ -150,7 +150,7 @@ describe('<Search />', () => {
 
       const pagination = screen.getByRole('navigation');
       const paginationItems = pagination.querySelectorAll('li');
-      expect(paginationItems.length).toBe(2);
+      expect(paginationItems.length).toBe(3);
 
       expect(
         screen.getByRole('button', {

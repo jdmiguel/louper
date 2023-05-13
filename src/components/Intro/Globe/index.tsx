@@ -5,6 +5,7 @@ import { OrbitControls } from '@react-three/drei';
 import Marker from './Marker';
 import OverlayBox from './OverlayBox';
 import { colors } from '@/utils/colors';
+import { GLOBE_ACTIVATE_ROTATION_TIMER } from '@/utils/literals';
 import { Timer } from '@/utils/types';
 import globeMarkers from '@/assets/globeMarkers.json';
 import map from '@/assets/texture-map.png';
@@ -89,7 +90,7 @@ const Globe = () => {
     if (!autoRotateTimer.current) {
       autoRotateTimer.current = setTimeout(() => {
         setIsAutoRotationAllowed(true);
-      }, 500);
+      }, GLOBE_ACTIVATE_ROTATION_TIMER);
     }
   };
 

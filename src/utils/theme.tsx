@@ -59,6 +59,14 @@ export const theme = createTheme({
         body: {
           overflowX: 'hidden',
         },
+        h1: {
+          margin: 0,
+          lineHeight: 0,
+        },
+        h2: {
+          margin: 0,
+          lineHeight: 0,
+        },
       },
     },
   },
@@ -66,14 +74,17 @@ export const theme = createTheme({
     fontFamily: ['Comfortaa', 'Arial', 'sans-serif'].join(','),
     htmlFontSize: 12,
     h2: {
-      fontSize: '1.1rem',
-      fontWeight: 300,
+      fontSize: '0.9rem',
+      '@media (min-width: 480px)': {
+        fontSize: '1rem',
+      },
       '@media (min-width: 768px)': {
-        fontSize: '1.2rem',
+        fontSize: '1.1rem',
       },
       '@media (min-width: 1440px)': {
-        fontSize: '1.3rem',
+        fontSize: '1.15rem',
       },
+      fontWeight: 300,
     },
     h3: {
       fontSize: '1.3rem',
