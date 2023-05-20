@@ -1,0 +1,153 @@
+// Vitest Snapshot v1
+
+exports[`<Profile /> > displays the content properly 1`] = `
+<div>
+  <main
+    class="css-12cao3m"
+  >
+    <div
+      class="css-1wkrglf"
+    >
+      <div
+        class="MuiAvatar-root MuiAvatar-circular MuiAvatar-colorDefault css-1xprkry-MuiAvatar-root"
+      >
+        <svg
+          aria-hidden="true"
+          class="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium MuiAvatar-fallback css-10mi8st-MuiSvgIcon-root-MuiAvatar-fallback"
+          data-testid="PersonIcon"
+          focusable="false"
+          viewBox="0 0 24 24"
+        >
+          <path
+            d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"
+          />
+        </svg>
+      </div>
+      <div
+        class="MuiAvatar-root MuiAvatar-circular MuiAvatar-colorDefault css-1th8twn-MuiAvatar-root"
+      >
+        <svg
+          aria-hidden="true"
+          class="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium MuiAvatar-fallback css-10mi8st-MuiSvgIcon-root-MuiAvatar-fallback"
+          data-testid="PersonIcon"
+          focusable="false"
+          viewBox="0 0 24 24"
+        >
+          <path
+            d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"
+          />
+        </svg>
+      </div>
+    </div>
+    <div
+      class="css-1v5r5rc"
+    >
+      <div
+        class="css-i3pbo"
+      >
+        <h4
+          class="MuiTypography-root MuiTypography-h4 css-pxw7rc-MuiTypography-root"
+        />
+      </div>
+      <div
+        class="css-r8nah5"
+      >
+        <div
+          class="css-x8ggji"
+        >
+          <div
+            class="css-87uc0g"
+          >
+            <span
+              aria-hidden="true"
+              class="material-icons notranslate MuiIcon-root MuiIcon-fontSizeMedium css-r5mrhv-MuiIcon-root"
+            >
+              folder
+            </span>
+            <h5
+              class="MuiTypography-root MuiTypography-h5 css-1o3q8fu-MuiTypography-root"
+            >
+              0
+            </h5>
+          </div>
+        </div>
+        <div
+          class="css-x8ggji"
+        >
+          <div
+            class="css-87uc0g"
+          >
+            <span
+              aria-hidden="true"
+              class="material-icons notranslate MuiIcon-root MuiIcon-fontSizeMedium css-r5mrhv-MuiIcon-root"
+            >
+              visibility
+            </span>
+            <h5
+              class="MuiTypography-root MuiTypography-h5 css-1o3q8fu-MuiTypography-root"
+            >
+              0
+            </h5>
+          </div>
+        </div>
+        <div
+          class="css-x8ggji"
+        >
+          <div
+            class="css-87uc0g"
+          >
+            <span
+              aria-hidden="true"
+              class="material-icons notranslate MuiIcon-root MuiIcon-fontSizeMedium css-r5mrhv-MuiIcon-root"
+            >
+              favorite
+            </span>
+            <h5
+              class="MuiTypography-root MuiTypography-h5 css-1o3q8fu-MuiTypography-root"
+            >
+              0
+            </h5>
+          </div>
+        </div>
+        <div
+          class="css-x8ggji"
+        >
+          <div
+            class="css-87uc0g"
+          >
+            <span
+              aria-hidden="true"
+              class="material-icons notranslate MuiIcon-root MuiIcon-fontSizeMedium css-r5mrhv-MuiIcon-root"
+            >
+              event_note
+            </span>
+            <p
+              class="MuiTypography-root MuiTypography-body1 css-1y33nkg-MuiTypography-root"
+            >
+              Invalid Dat
+            </p>
+          </div>
+        </div>
+      </div>
+      <div
+        class="css-r7q7qr"
+      >
+        <a
+          aria-label="View  profile on GitHub"
+          class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineAlways css-18fl2wv-MuiTypography-root-MuiLink-root"
+          href=""
+          rel="noopener noreferrer"
+        >
+          <span
+            aria-hidden="true"
+            class="material-icons notranslate MuiIcon-root MuiIcon-fontSizeMedium css-7qvvgc-MuiIcon-root"
+          >
+            person
+          </span>
+          VISIT PROFILE
+        </a>
+      </div>
+    </div>
+  </main>
+</div>
+`;

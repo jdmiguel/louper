@@ -1,6 +1,7 @@
 import { UserItemsType } from './types';
 
 export const INTRO_TITLE = 'Seek and find any Github user worldwide';
+export const SEARCH_PLACEHOLDER = 'Type user name...';
 
 export const GLOBE_ACTIVATE_ROTATION_TIMER = 800;
 
@@ -85,4 +86,44 @@ export const ICON_TYPE = {
   email: 'mail_outline',
   portfolio: 'web_icon',
   folder: 'folder',
+};
+
+export const DEFAULT_USER = {
+  login: '',
+  id: 0,
+  node_id: '',
+  url: '',
+  html_url: '',
+  avatar_url: '',
+  followers_url: '',
+  following_url: '',
+  gists_url: '',
+  starred_url: '',
+  subscriptions_url: '',
+  organizations_url: '',
+  repos_url: '',
+  events_url: '',
+  received_events_url: '',
+  type: '',
+  site_admin: false,
+  hireable: null,
+  gravatar_id: '',
+  created_at: '',
+  updated_at: '',
+  name: '',
+  bio: '',
+  email: null,
+  location: '',
+  blog: '',
+  company: null,
+  public_repos: 0,
+  public_gists: 0,
+  followers: 0,
+  following: 0,
+  twitter_username: null,
+};
+
+export const DEFAULT_USERS = {
+  total_count: 0,
+  items: [],
 };

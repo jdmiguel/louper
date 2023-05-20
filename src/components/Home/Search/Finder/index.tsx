@@ -3,8 +3,12 @@ import CircularProgress from '@mui/material/CircularProgress';
 import FormControl from '@mui/material/FormControl';
 import InputAdornment from '@mui/material/InputAdornment';
 import Icon from '@mui/material/Icon';
-import { ERROR_MESSAGE, FINDER_ICON } from '@/utils/literals';
+import { SEARCH_PLACEHOLDER, ERROR_MESSAGE, FINDER_ICON } from '@/utils/literals';
 import { StyledTextField, StyledIconButton } from './styles';
+
+const Loader = (
+  <CircularProgress className="loaderIcon" size={22} thickness={4} sx={{ color: 'text.primary' }} />
+);
 
 type Props = {
   searchQuery: string;
@@ -64,7 +68,7 @@ const Finder = ({
     >
       <StyledTextField
         autoFocus
-        placeholder="Type user name..."
+        placeholder={SEARCH_PLACEHOLDER}
         value={searchQuery}
         label={isInputErrorDisplayed ? ERROR_MESSAGE.minChars : ''}
         onFocus={() => setIsInputErrorDisplayed(false)}
@@ -80,12 +84,7 @@ const Finder = ({
           endAdornment: (
             <InputAdornment position="end" sx={{ color: 'text.primary' }}>
               {isLoadingUsers ? (
-                <CircularProgress
-                  className="loaderIcon"
-                  size={22}
-                  thickness={4}
-                  sx={{ color: 'text.primary' }}
-                />
+                Loader
               ) : (
                 <Icon sx={{ color: 'neutral.main', fontSize: '1.4rem' }}>
                   {FINDER_ICON.placeholder}
@@ -96,16 +95,7 @@ const Finder = ({
         }}
       />
       <StyledIconButton aria-label="search" onClick={handleClick}>
-        {isLoadingUser ? (
-          <CircularProgress
-            className="loaderIcon"
-            size={23}
-            thickness={4}
-            sx={{ color: 'text.primary' }}
-          />
-        ) : (
-          <Icon sx={{ fontSize: '1.6rem' }}>{FINDER_ICON.button}</Icon>
-        )}
+        {isLoadingUser ? Loader : <Icon sx={{ fontSize: '1.6rem' }}>{FINDER_ICON.button}</Icon>}
       </StyledIconButton>
     </FormControl>
   );

@@ -1,4 +1,4 @@
-import { render, screen, waitFor, waitForElementToBeRemoved } from '@testing-library/react';
+import { render, screen, waitForElementToBeRemoved } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { rest } from 'msw';
 import { server } from '../../../../mocks/server';
@@ -8,7 +8,6 @@ import Search from '..';
 
 describe('<Search />', () => {
   const props = {
-    onFetchUser: vi.fn(),
     onRequestError: vi.fn(),
   };
 
@@ -215,66 +214,6 @@ describe('<Search />', () => {
         }),
       ).toHaveClass('Mui-selected');
     });
-
-    describe('when clicking a suggestion', () => {
-      it('calls the correct callback', async () => {
-        render(renderWithTheme(<Search {...props} />));
-
-        const input = screen.getByPlaceholderText('Type user name...');
-        await userEvent.type(input, 'jdm');
-
-        const loader = await screen.findByRole('progressbar');
-        await waitForElementToBeRemoved(loader);
-
-        await userEvent.click(
-          screen.getByRole('button', {
-            name: /jdmiguel/i,
-          }),
-        );
-
-        expect(screen.getByDisplayValue('jdmiguel')).toBeInTheDocument();
-
-        expect(props.onFetchUser).toHaveBeenCalledWith({
-          login: 'jdmiguel',
-          html_url: 'https://github.com/jdmiguel',
-          avatar_url: '',
-          created_at: '2014-03-20T23:24:22Z',
-          name: 'Jaime De Miguel',
-          bio: 'Frontend developer',
-          email: 'jdmiguel@gmail.com',
-          location: 'Dublin',
-          blog: 'https://jdmiguel.netlify.app/',
-          company: 'Kitman Labs',
-          public_repos: 30,
-          followers: 12,
-          following: 16,
-        });
-      });
-
-      it('calls the correct callback when there is a 404 error', async () => {
-        server.use(
-          rest.get(`${API_BASE_URL}/users/:userLogin`, (_, res, ctx) => {
-            return res(ctx.status(404));
-          }),
-        );
-
-        render(renderWithTheme(<Search {...props} />));
-
-        const input = screen.getByPlaceholderText('Type user name...');
-        await userEvent.type(input, 'jdmiguel');
-
-        const loader = await screen.findByRole('progressbar');
-        await waitForElementToBeRemoved(loader);
-
-        await userEvent.click(
-          screen.getByRole('button', {
-            name: /jdmiguel/i,
-          }),
-        );
-
-        expect(props.onRequestError).toHaveBeenCalledWith('Please, choose an available user');
-      });
-    });
   });
 
   describe('when refining the search', () => {
@@ -304,66 +243,6 @@ describe('<Search />', () => {
       await waitForElementToBeRemoved(loader);
 
       expect(screen.queryByRole('navigation')).not.toBeInTheDocument();
-    });
-
-    it('calls the correct callback when clicking the search button', async () => {
-      render(renderWithTheme(<Search {...props} />));
-
-      const input = screen.getByPlaceholderText('Type user name...');
-      await userEvent.type(input, 'jdmiguel');
-
-      const loader = await screen.findByRole('progressbar');
-      await waitForElementToBeRemoved(loader);
-
-      await userEvent.click(
-        screen.getByRole('button', {
-          name: /search/i,
-        }),
-      );
-
-      expect(props.onFetchUser).toHaveBeenCalledWith({
-        login: 'jdmiguel',
-        html_url: 'https://github.com/jdmiguel',
-        avatar_url: '',
-        created_at: '2014-03-20T23:24:22Z',
-        name: 'Jaime De Miguel',
-        bio: 'Frontend developer',
-        email: 'jdmiguel@gmail.com',
-        location: 'Dublin',
-        blog: 'https://jdmiguel.netlify.app/',
-        company: 'Kitman Labs',
-        public_repos: 30,
-        followers: 12,
-        following: 16,
-      });
-    });
-
-    it('calls the correct callback when clicking the enter key', async () => {
-      render(renderWithTheme(<Search {...props} />));
-
-      const input = screen.getByPlaceholderText('Type user name...');
-      await userEvent.type(input, 'jdmiguel');
-
-      const loader = await screen.findByRole('progressbar');
-      await waitForElementToBeRemoved(loader);
-
-      await userEvent.keyboard('{Enter}');
-
-      expect(props.onFetchUser).toHaveBeenCalledWith({
-        login: 'jdmiguel',
-        html_url: 'https://github.com/jdmiguel',
-        avatar_url: '',
-        created_at: '2014-03-20T23:24:22Z',
-        name: 'Jaime De Miguel',
-        bio: 'Frontend developer',
-        email: 'jdmiguel@gmail.com',
-        location: 'Dublin',
-        blog: 'https://jdmiguel.netlify.app/',
-        company: 'Kitman Labs',
-        public_repos: 30,
-        followers: 12,
-        following: 16,
-      });
     });
   });
 });

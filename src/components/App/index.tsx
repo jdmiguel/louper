@@ -1,38 +1,23 @@
-import { useState } from 'react';
-import { ErrorBoundary, FallbackProps } from 'react-error-boundary';
+import { ErrorBoundary } from 'react-error-boundary';
 import CssBaseline from '@mui/material/CssBaseline';
 import { ThemeProvider } from '@mui/material/styles';
-import Intro from '../Intro';
-import User from '../User';
+import { ViewContextProvider } from '@/contexts/ViewContext';
+import { UserContextProvider } from '@/contexts/UserContext';
+import FallbackApp from './FallbackApp';
 import { theme } from '@/utils/theme';
-import { ERROR_MESSAGE_HEADING } from '@/utils/literals';
-import { UserData } from '@/utils/types';
-import { StyledFallbackAppRoot, StyledErrorMessage, StyledAppRoot } from './styles';
+import Root from './Root';
 
-const FallbackApp = ({ error }: FallbackProps) => (
-  <StyledFallbackAppRoot>
-    <p>{ERROR_MESSAGE_HEADING}</p>
-    <StyledErrorMessage>{error.message}</StyledErrorMessage>
-  </StyledFallbackAppRoot>
+const App = () => (
+  <ThemeProvider theme={theme}>
+    <CssBaseline />
+    <ErrorBoundary FallbackComponent={FallbackApp}>
+      <ViewContextProvider>
+        <UserContextProvider>
+          <Root />
+        </UserContextProvider>
+      </ViewContextProvider>
+    </ErrorBoundary>
+  </ThemeProvider>
 );
-
-const App = () => {
-  const [userData, setUserData] = useState<UserData | null>(null);
-
-  return (
-    <ThemeProvider theme={theme}>
-      <CssBaseline />
-      <ErrorBoundary FallbackComponent={FallbackApp}>
-        <StyledAppRoot>
-          {userData ? (
-            <User userData={userData} onBackFinder={() => setUserData(null)} />
-          ) : (
-            <Intro onFetchUser={(userData: UserData) => setUserData(userData)} />
-          )}
-        </StyledAppRoot>
-      </ErrorBoundary>
-    </ThemeProvider>
-  );
-};
 
 export default App;

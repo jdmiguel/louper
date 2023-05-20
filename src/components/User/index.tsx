@@ -5,7 +5,8 @@ import Footer from '../shared/Footer';
 import Profile from './Profile';
 import ProfileMobile from './ProfileMobile';
 import Section from './Section';
-import { UserData } from '@/utils/types';
+import { useView } from '@/contexts/ViewContext';
+import { useUser } from '@/contexts/UserContext';
 import useUserPage from '@/hooks/useUserPage';
 import useUserItems from '@/hooks/useUserItems';
 import {
@@ -16,24 +17,24 @@ import {
   StyledDataWrapper,
 } from './styles';
 
-type Props = {
-  userData: UserData;
-  onBackFinder: () => void;
-};
+const UserPage = () => {
+  const { updateView } = useView();
+  const { user } = useUser();
 
-const UserPage = ({ userData, onBackFinder }: Props) => {
-  const { public_repos: userRepos, following: userFollowing, followers: userFollowers } = userData;
+  const { public_repos: userRepos, following: userFollowing, followers: userFollowers } = user;
+
+  const onBackHome = () => updateView('home');
 
   const { itemsType, currentPage, itemsPerPage, totalPages, onNextPage, onClickTab } = useUserPage({
     userRepos,
     userFollowing,
     userFollowers,
-    onBackFinder,
+    onBackHome,
   });
 
   const { isLoading, items, areAllItemsLoaded, errorMessage, resetItems, resetErrorMessage } =
     useUserItems({
-      userName: userData.login,
+      userName: user.login,
       itemsType,
       totalPages,
       currentPage,
@@ -54,10 +55,10 @@ const UserPage = ({ userData, onBackFinder }: Props) => {
           </StyledLoaderWrapper>
         )}
         <StyledProfileWrapper data-testid="profile">
-          <Profile userData={userData} />
+          <Profile />
         </StyledProfileWrapper>
         <StyledDataWrapper>
-          <ProfileMobile data-testid="profile-mobile" userData={userData} />
+          <ProfileMobile data-testid="profile-mobile" />
           <Menu onClick={onClick} />
           <Section
             isLoading={isLoading}

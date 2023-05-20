@@ -1,0 +1,51 @@
+// Vitest Snapshot v1
+
+exports[`<ProfileMobile /> > displays the content properly 1`] = `
+<div>
+  <div
+    class="css-12acrs6"
+  >
+    <div
+      class="css-l7hz6c"
+    >
+      <div
+        class="MuiAvatar-root MuiAvatar-circular MuiAvatar-colorDefault css-dmgw83-MuiAvatar-root"
+      >
+        <svg
+          aria-hidden="true"
+          class="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium MuiAvatar-fallback css-10mi8st-MuiSvgIcon-root-MuiAvatar-fallback"
+          data-testid="PersonIcon"
+          focusable="false"
+          viewBox="0 0 24 24"
+        >
+          <path
+            d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"
+          />
+        </svg>
+      </div>
+      <div
+        class="MuiAvatar-root MuiAvatar-circular MuiAvatar-colorDefault css-1isswer-MuiAvatar-root"
+      >
+        <svg
+          aria-hidden="true"
+          class="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium MuiAvatar-fallback css-10mi8st-MuiSvgIcon-root-MuiAvatar-fallback"
+          data-testid="PersonIcon"
+          focusable="false"
+          viewBox="0 0 24 24"
+        >
+          <path
+            d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"
+          />
+        </svg>
+      </div>
+    </div>
+    <div
+      class="MuiStack-root css-omazcq-MuiStack-root"
+    >
+      <h4
+        class="MuiTypography-root MuiTypography-h4 css-5lbw0b-MuiTypography-root"
+      />
+    </div>
+  </div>
+</div>
+`;

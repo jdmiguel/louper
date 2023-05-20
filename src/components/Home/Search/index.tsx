@@ -5,9 +5,11 @@ import Logo from './Logo';
 import Watermark from './Watermark/index';
 import Finder from './Finder';
 import Suggestions from './Suggestions';
-import useWindowSize from '@/hooks/useWindowSize';
+import { useView } from '@/contexts/ViewContext';
+import { useUser } from '@/contexts/UserContext';
 import { debounce } from '@/utils';
 import {
+  DEFAULT_USERS,
   MAX_SUGGESTIONS_ALLOWED,
   SUGGESTIONS_PER_PAGE,
   MIN_CHARS_TO_SEARCH_USERS,
@@ -15,7 +17,7 @@ import {
   UNAVAILABLE_ITEMS,
 } from '@/utils/literals';
 import { API_BASE_URL, formatRequest } from '@/utils/request';
-import { UsersData, UserData } from '@/utils/types';
+import { User, Users } from '@/utils/types';
 import {
   StyledRoot,
   StyledHeader,
@@ -24,36 +26,29 @@ import {
   StyledWatermarkWrapper,
 } from './styles';
 
-const DEFAULT_USERS_DATA = {
-  total_count: 0,
-  items: [],
-};
-
 type Props = {
-  onFetchUser: (userData: UserData) => void;
   onRequestError: (userLogin: string) => void;
 };
 
-const Search = ({ onFetchUser, onRequestError }: Props) => {
+const Search = ({ onRequestError }: Props) => {
   const [searchQuery, setSearchQuery] = useState('');
   const [isLoadingUser, setIsLoadingUser] = useState(false);
   const [isLoadingUsers, setIsLoadingUsers] = useState(false);
   const [areSuggestionsShown, setAreSuggestionsShown] = useState(false);
-  const [usersData, setUsersData] = useState<UsersData>(DEFAULT_USERS_DATA);
+  const [users, setUsers] = useState<Users>(DEFAULT_USERS);
 
   const shouldFetchUsers = useRef(false);
 
-  const { windowWidth } = useWindowSize();
+  const { updateView } = useView();
+  const { updateUser } = useUser();
 
   const abortControllerFetchUser = useMemo(() => new AbortController(), []);
   const abortControllerFetchUsers = useMemo(() => new AbortController(), []);
 
   const totalSuggestions = useMemo(
     () =>
-      usersData.total_count <= MAX_SUGGESTIONS_ALLOWED
-        ? usersData.total_count
-        : MAX_SUGGESTIONS_ALLOWED,
-    [usersData],
+      users.total_count <= MAX_SUGGESTIONS_ALLOWED ? users.total_count : MAX_SUGGESTIONS_ALLOWED,
+    [users],
   );
 
   const theme = useTheme();
@@ -64,15 +59,6 @@ const Search = ({ onFetchUser, onRequestError }: Props) => {
       abortControllerFetchUsers.abort();
     };
   }, [abortControllerFetchUser, abortControllerFetchUsers]);
-
-  useEffect(() => {
-    if (!windowWidth) {
-      return;
-    }
-
-    setSearchQuery('');
-    setAreSuggestionsShown(false);
-  }, [windowWidth]);
 
   const fetchUsers = (searchQuery: string, page = 1) => {
     if (!shouldFetchUsers.current) return;
@@ -86,9 +72,9 @@ const Search = ({ onFetchUser, onRequestError }: Props) => {
       },
     )
       .then(formatRequest)
-      .then((fetchedUsersData: UsersData) => {
+      .then((fetchedUsersData: Users) => {
         setAreSuggestionsShown(!!fetchedUsersData.total_count);
-        setUsersData(fetchedUsersData);
+        setUsers(fetchedUsersData);
       })
       .catch((error) => {
         setAreSuggestionsShown(false);
@@ -106,21 +92,41 @@ const Search = ({ onFetchUser, onRequestError }: Props) => {
       signal: abortControllerFetchUser.signal,
     })
       .then(formatRequest)
-      .then((userData: UserData) => {
-        onFetchUser({
-          login: userData.login,
-          avatar_url: userData.avatar_url,
-          created_at: userData.created_at,
-          name: userData.name,
-          bio: userData.bio,
-          email: userData.email,
-          location: userData.location,
-          blog: userData.blog,
-          company: userData.company,
-          html_url: userData.html_url,
-          public_repos: userData.public_repos,
-          followers: userData.followers,
-          following: userData.following,
+      .then((user: User) => {
+        updateView('user');
+        updateUser({
+          login: user.login,
+          id: user.id,
+          avatar_url: user.avatar_url,
+          gravatar_id: user.gravatar_id,
+          created_at: user.created_at,
+          updated_at: user.updated_at,
+          name: user.name,
+          bio: user.bio,
+          email: user.email,
+          location: user.location,
+          blog: user.blog,
+          company: user.company,
+          html_url: user.html_url,
+          url: user.url,
+          followers_url: user.followers_url,
+          following_url: user.following_url,
+          gists_url: user.gists_url,
+          starred_url: user.starred_url,
+          public_repos: user.public_repos,
+          subscriptions_url: user.subscriptions_url,
+          organizations_url: user.organizations_url,
+          repos_url: user.repos_url,
+          events_url: user.events_url,
+          followers: user.followers,
+          following: user.following,
+          node_id: user.node_id,
+          received_events_url: user.received_events_url,
+          type: user.type,
+          site_admin: user.site_admin,
+          hireable: user.hireable,
+          twitter_username: user.twitter_username,
+          public_gists: user.public_gists,
         });
       })
       .catch((error) => {
@@ -140,7 +146,7 @@ const Search = ({ onFetchUser, onRequestError }: Props) => {
     if (currentSearchQuery.length <= MIN_CHARS_TO_SEARCH_USERS) {
       shouldFetchUsers.current = false;
       setAreSuggestionsShown(false);
-      setUsersData(DEFAULT_USERS_DATA);
+      setUsers(DEFAULT_USERS);
     }
   };
 
@@ -175,7 +181,7 @@ const Search = ({ onFetchUser, onRequestError }: Props) => {
       <StyledSuggestionsWrapper>
         {areSuggestionsShown ? (
           <Suggestions
-            items={usersData.items}
+            items={users.items}
             totalItems={Math.ceil(totalSuggestions / SUGGESTIONS_PER_PAGE)}
             withPagination={totalSuggestions > SUGGESTIONS_PER_PAGE}
             onPaginate={handlePaginate}
@@ -183,7 +189,7 @@ const Search = ({ onFetchUser, onRequestError }: Props) => {
           />
         ) : (
           <StyledWatermarkWrapper>
-            {searchQuery.length > 2 && !usersData.total_count ? (
+            {searchQuery.length > 2 && !users.total_count ? (
               <Typography
                 variant="h6"
                 sx={{

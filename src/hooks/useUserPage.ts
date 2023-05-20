@@ -11,15 +11,10 @@ type UseUserPageProps = {
   userRepos: number;
   userFollowing: number;
   userFollowers: number;
-  onBackFinder: () => void;
+  onBackHome: () => void;
 };
 
-const useUserPage = ({
-  userRepos,
-  userFollowing,
-  userFollowers,
-  onBackFinder,
-}: UseUserPageProps) => {
+const useUserPage = ({ userRepos, userFollowing, userFollowers, onBackHome }: UseUserPageProps) => {
   const [activeTab, setActiveTab] = useState(0);
   const [currentPage, setCurrentPage] = useState(1);
 
@@ -57,7 +52,7 @@ const useUserPage = ({
 
   const onClickTab = (selectedTab: number) => {
     if (selectedTab === TAB.search) {
-      onBackFinder();
+      onBackHome();
       return;
     }
     setActiveTab(selectedTab);

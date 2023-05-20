@@ -6,6 +6,7 @@ export const StyledTextField = styled<any>(TextField)(({ theme }) => ({
   '& .MuiOutlinedInput-root': {
     borderTopRightRadius: 0,
     borderBottomRightRadius: 0,
+    minWidth: 318,
     '& .MuiOutlinedInput-notchedOutline': {
       borderColor: theme.palette.primary.main,
     },
