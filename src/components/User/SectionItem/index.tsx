@@ -5,7 +5,7 @@ import Avatar from '@mui/material/Avatar';
 import TextTag from '@/components/shared/TextTag';
 import Link from '@/components/shared/Link';
 import { UNAVAILABLE_ITEMS, LINK_TEXT, ICON_TYPE, USER_ITEMS_TYPE } from '@/utils/literals';
-import { Repo, User, UserItemsType } from '@/utils/types';
+import { Repo, RelatedUser, UserItemsType } from '@/utils/types';
 import { StyledRoot, StyledTitle, StyledAvatarWrapper, StyledTopic, StyledAction } from './styles';
 
 const displayRepoTheme = (repo: Repo): ReactElement => (
@@ -58,7 +58,7 @@ const displayRepoTheme = (repo: Repo): ReactElement => (
   </Stack>
 );
 
-const displayUserTheme = (user: User, theme: UserItemsType): ReactElement => {
+const displayUserTheme = (user: RelatedUser, theme: UserItemsType): ReactElement => {
   const iconType = theme === USER_ITEMS_TYPE.following ? ICON_TYPE.following : ICON_TYPE.followers;
 
   return (
@@ -90,13 +90,13 @@ const displayUserTheme = (user: User, theme: UserItemsType): ReactElement => {
 
 type Props = {
   theme: UserItemsType;
-  data: Repo | User;
+  data: Repo | RelatedUser;
 };
 
 const SectionItem = forwardRef<HTMLDivElement, Props>(({ theme, data }, ref) => {
   const isRepoTheme = theme === USER_ITEMS_TYPE.repos;
   const repo = data as Repo;
-  const user = data as User;
+  const user = data as RelatedUser;
 
   return (
     <StyledRoot ref={ref}>

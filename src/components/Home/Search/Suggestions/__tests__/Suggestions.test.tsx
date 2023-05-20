@@ -1,6 +1,7 @@
 import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { renderWithTheme } from '../../../../../utils/theme';
+import { data } from '../../../../../mocks/handlers/getUsers';
 import Suggestions from '..';
 
 describe('<Suggestions />', () => {
@@ -10,31 +11,91 @@ describe('<Suggestions />', () => {
         id: 1,
         login: 'jdm',
         html_url: 'https://github.com/jdm',
+        url: 'https://github.com/jdm',
         avatar_url: '',
+        node_id: '',
+        gravatar_id: '',
+        followers_url: '',
+        following_url: '',
+        gists_url: '',
+        starred_url: '',
+        subscriptions_url: '',
+        organizations_url: '',
+        repos_url: '',
+        events_url: '',
+        received_events_url: '',
+        type: '',
+        site_admin: true,
+        score: 1424,
       },
       {
         id: 3,
         login: 'jdmac',
         html_url: 'https://github.com/jdm2',
+        url: 'https://github.com/jdm2',
         avatar_url: '',
+        node_id: '',
+        gravatar_id: '',
+        followers_url: '',
+        following_url: '',
+        gists_url: '',
+        starred_url: '',
+        subscriptions_url: '',
+        organizations_url: '',
+        repos_url: '',
+        events_url: '',
+        received_events_url: '',
+        type: '',
+        site_admin: true,
+        score: 1424,
       },
       {
         id: 5,
         login: 'jdme',
         html_url: 'https://github.com/jdme',
+        url: 'https://github.com/jdme',
         avatar_url: '',
+        node_id: '',
+        gravatar_id: '',
+        followers_url: '',
+        following_url: '',
+        gists_url: '',
+        starred_url: '',
+        subscriptions_url: '',
+        organizations_url: '',
+        repos_url: '',
+        events_url: '',
+        received_events_url: '',
+        type: '',
+        site_admin: true,
+        score: 1424,
       },
       {
         id: 7,
         login: 'jdmiguel',
         html_url: 'https://github.com/jdmiguel',
+        url: 'https://github.com/jdmiguel',
         avatar_url: '',
+        node_id: '',
+        gravatar_id: '',
+        followers_url: '',
+        following_url: '',
+        gists_url: '',
+        starred_url: '',
+        subscriptions_url: '',
+        organizations_url: '',
+        repos_url: '',
+        events_url: '',
+        received_events_url: '',
+        type: '',
+        site_admin: true,
+        score: 1424,
       },
     ],
     totalItems: 4,
     withPagination: false,
     onPaginate: vi.fn(),
-    onSelectUser: vi.fn(),
+    onClickSuggestion: vi.fn(),
   };
 
   it('displays the suggestions properly', () => {
@@ -70,7 +131,7 @@ describe('<Suggestions />', () => {
       }),
     );
 
-    expect(props.onSelectUser).toHaveBeenCalledWith('jdmiguel');
+    expect(props.onClickSuggestion).toHaveBeenCalledWith('jdmiguel');
   });
 
   it('calls the correct callback when a pagination item is clicked', async () => {

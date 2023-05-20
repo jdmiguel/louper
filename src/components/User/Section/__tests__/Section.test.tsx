@@ -1,4 +1,4 @@
-import { render, screen, waitForElementToBeRemoved } from '@testing-library/react';
+import { render, screen } from '@testing-library/react';
 import { UserItems } from '@/utils/types';
 import '@/mocks/intersectionObserverMock';
 import Section from '..';

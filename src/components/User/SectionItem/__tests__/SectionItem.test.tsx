@@ -41,7 +41,7 @@ describe('<SectionItem />', () => {
     });
 
     it('displays a default description when no description', () => {
-      render(<SectionItem theme="repos" data={{ ...repoData, description: null }} />);
+      render(<SectionItem theme="repos" data={{ ...repoData, description: '' }} />);
 
       const defaultDescription = screen.getByText('No description added');
       expect(defaultDescription).toBeInTheDocument();

@@ -29,13 +29,13 @@ export type Users = {
 
 export type User = Omit<BasicUser, 'score'> & {
   name: string;
-  company: null;
+  company: string;
   blog: string;
   location: string;
-  email: null;
-  hireable: null;
+  email: string;
+  hireable: boolean;
   bio: string;
-  twitter_username: null;
+  twitter_username: string;
   public_repos: number;
   public_gists: number;
   followers: number;
@@ -47,12 +47,12 @@ export type User = Omit<BasicUser, 'score'> & {
 export type Repo = {
   id: number;
   name: string;
-  description: string | null;
+  description: string;
   html_url: string;
   topics: string[];
 };
-
-export type UserItems = Repo[] & User[];
+export type RelatedUser = Pick<BasicUser, 'id' | 'login' | 'html_url' | 'avatar_url'>;
+export type UserItems = Repo[] & RelatedUser[];
 export type UserItemsType = 'repos' | 'following' | 'followers';
 
 export type OverlayBoxData = {

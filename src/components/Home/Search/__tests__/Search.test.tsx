@@ -1,18 +1,11 @@
 import { render, screen, waitForElementToBeRemoved } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
-import { rest } from 'msw';
-import { server } from '../../../../mocks/server';
-import { API_BASE_URL } from '../../../../utils/request';
 import { renderWithTheme } from '../../../../utils/theme';
 import Search from '..';
 
 describe('<Search />', () => {
-  const props = {
-    onRequestError: vi.fn(),
-  };
-
   it('displays the correct content', () => {
-    render(renderWithTheme(<Search {...props} />));
+    render(renderWithTheme(<Search />));
 
     expect(screen.getByTestId('logo')).toBeInTheDocument();
     expect(screen.getByPlaceholderText('Type user name...'));
@@ -22,7 +15,7 @@ describe('<Search />', () => {
 
   describe('when typing no more than two chars', () => {
     it('displays the correct label error when clicking the search button', async () => {
-      render(renderWithTheme(<Search {...props} />));
+      render(renderWithTheme(<Search />));
 
       const input = screen.getByPlaceholderText('Type user name...');
       await userEvent.type(input, 'jd');
@@ -41,7 +34,7 @@ describe('<Search />', () => {
     });
 
     it('displays the correct label error when clicking the enter key', async () => {
-      render(renderWithTheme(<Search {...props} />));
+      render(renderWithTheme(<Search />));
 
       const input = screen.getByPlaceholderText('Type user name...');
       await userEvent.type(input, 'jd');
@@ -57,66 +50,8 @@ describe('<Search />', () => {
   });
 
   describe('when typing more than two chars', () => {
-    it('calls the correct callback when there is a 403 error', async () => {
-      server.use(
-        rest.get(`${API_BASE_URL}/search/users`, (_, res, ctx) => {
-          return res(ctx.status(403));
-        }),
-      );
-
-      render(renderWithTheme(<Search {...props} />));
-
-      const input = screen.getByPlaceholderText('Type user name...');
-      await userEvent.type(input, 'jdm');
-
-      const loader = await screen.findByRole('progressbar');
-      await waitForElementToBeRemoved(loader);
-
-      expect(props.onRequestError).toHaveBeenCalledWith(
-        'You have excedeed the maximum allowed request. Please, wait for a while',
-      );
-    });
-
-    it('calls the correct callback when there is a 404 error', async () => {
-      server.use(
-        rest.get(`${API_BASE_URL}/search/users`, (_, res, ctx) => {
-          return res(ctx.status(404));
-        }),
-      );
-
-      render(renderWithTheme(<Search {...props} />));
-
-      const input = screen.getByPlaceholderText('Type user name...');
-      await userEvent.type(input, 'bew');
-
-      const loader = await screen.findByRole('progressbar');
-      await waitForElementToBeRemoved(loader);
-
-      expect(props.onRequestError).toHaveBeenCalledWith('Please, choose an available user');
-    });
-
-    it('calls the correct callback when there is a 500 error', async () => {
-      server.use(
-        rest.get(`${API_BASE_URL}/search/users`, (_, res, ctx) => {
-          return res(ctx.status(500));
-        }),
-      );
-
-      render(renderWithTheme(<Search {...props} />));
-
-      const input = screen.getByPlaceholderText('Type user name...');
-      await userEvent.type(input, 'jdm');
-
-      const loader = await screen.findByRole('progressbar');
-      await waitForElementToBeRemoved(loader);
-
-      expect(props.onRequestError).toHaveBeenCalledWith(
-        'Sorry! there was an error on the server side.',
-      );
-    });
-
     it('displays the matched suggestions', async () => {
-      render(renderWithTheme(<Search {...props} />));
+      render(renderWithTheme(<Search />));
 
       const input = screen.getByPlaceholderText('Type user name...');
       await userEvent.type(input, 'jdm');
@@ -125,21 +60,18 @@ describe('<Search />', () => {
       await waitForElementToBeRemoved(loader);
 
       const suggestions = await screen.findByRole('grid');
-      expect(suggestions.children.length).toBe(9);
+      expect(suggestions.children.length).toBe(6);
 
       expect(screen.getByText('jdm')).toBeInTheDocument();
       expect(screen.getByText('jdma')).toBeInTheDocument();
       expect(screen.getByText('jdmac')).toBeInTheDocument();
       expect(screen.getByText('jdmattheus')).toBeInTheDocument();
-      expect(screen.getByText('jdme')).toBeInTheDocument();
-      expect(screen.getByText('jdmfoil')).toBeInTheDocument();
-      expect(screen.getByText('jdmiguel')).toBeInTheDocument();
-      expect(screen.getByText('jdmfua')).toBeInTheDocument();
-      expect(screen.getByText('jdmfuon')).toBeInTheDocument();
+      expect(screen.getByText('jdmav')).toBeInTheDocument();
+      expect(screen.getByText('jdmaw')).toBeInTheDocument();
     });
 
     it('displays the pagination with the correct selected page', async () => {
-      render(renderWithTheme(<Search {...props} />));
+      render(renderWithTheme(<Search />));
 
       const input = screen.getByPlaceholderText('Type user name...');
       await userEvent.type(input, 'jdm');
@@ -149,7 +81,7 @@ describe('<Search />', () => {
 
       const pagination = screen.getByRole('navigation');
       const paginationItems = pagination.querySelectorAll('li');
-      expect(paginationItems.length).toBe(3);
+      expect(paginationItems.length).toBe(2);
 
       expect(
         screen.getByRole('button', {
@@ -164,7 +96,7 @@ describe('<Search />', () => {
     });
 
     it('hides the pagination after untyping', async () => {
-      render(renderWithTheme(<Search {...props} />));
+      render(renderWithTheme(<Search />));
 
       const input = screen.getByPlaceholderText('Type user name...');
       await userEvent.type(input, 'jdm');
@@ -180,7 +112,7 @@ describe('<Search />', () => {
     });
 
     it('displays the next matched suggestions when clicking next pagination', async () => {
-      render(renderWithTheme(<Search {...props} />));
+      render(renderWithTheme(<Search />));
 
       const input = screen.getByPlaceholderText('Type user name...');
       await userEvent.type(input, 'jdm');
@@ -195,13 +127,9 @@ describe('<Search />', () => {
       );
 
       const suggestions = screen.getByRole('grid');
-      expect(suggestions.children.length).toBe(6);
-      expect(screen.getByText('jdmut')).toBeInTheDocument();
-      expect(screen.getByText('jdmqaa')).toBeInTheDocument();
-      expect(screen.getByText('jdmnm')).toBeInTheDocument();
-      expect(screen.getByText('jdmstr')).toBeInTheDocument();
-      expect(screen.getByText('jdmld')).toBeInTheDocument();
-      expect(screen.getByText('jdmx')).toBeInTheDocument();
+      expect(suggestions.children.length).toBe(2);
+      expect(screen.getByText('jdmit')).toBeInTheDocument();
+      expect(screen.getByText('jdmiguel')).toBeInTheDocument();
 
       expect(
         screen.getByRole('button', {
@@ -218,7 +146,7 @@ describe('<Search />', () => {
 
   describe('when refining the search', () => {
     it('displays a specific suggestion', async () => {
-      render(renderWithTheme(<Search {...props} />));
+      render(renderWithTheme(<Search />));
 
       const input = screen.getByPlaceholderText('Type user name...');
       await userEvent.type(input, 'jdmiguel');
@@ -230,18 +158,6 @@ describe('<Search />', () => {
       expect(suggestions.children.length).toBe(1);
 
       expect(screen.getByText('jdmiguel')).toBeInTheDocument();
-      expect(screen.queryByRole('navigation')).not.toBeInTheDocument();
-    });
-
-    it('does not display the pagination', async () => {
-      render(renderWithTheme(<Search {...props} />));
-
-      const input = screen.getByPlaceholderText('Type user name...');
-      await userEvent.type(input, 'jdmiguel');
-
-      const loader = await screen.findByRole('progressbar');
-      await waitForElementToBeRemoved(loader);
-
       expect(screen.queryByRole('navigation')).not.toBeInTheDocument();
     });
   });
