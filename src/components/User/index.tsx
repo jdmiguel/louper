@@ -1,6 +1,5 @@
 import LinearProgress from '@mui/material/LinearProgress';
 import Menu from './Menu';
-import Toast from '../shared/Toast';
 import Footer from '../shared/Footer';
 import Profile from './Profile';
 import ProfileMobile from './ProfileMobile';
@@ -32,14 +31,13 @@ const UserPage = () => {
     onBackHome,
   });
 
-  const { isLoading, items, areAllItemsLoaded, errorMessage, resetItems, resetErrorMessage } =
-    useUserItems({
-      userName: user.login,
-      itemsType,
-      totalPages,
-      currentPage,
-      itemsPerPage,
-    });
+  const { isLoading, items, areAllItemsLoaded, resetItems } = useUserItems({
+    userName: user.login,
+    itemsType,
+    totalPages,
+    currentPage,
+    itemsPerPage,
+  });
 
   const onClick = (selectedTab: number) => {
     resetItems();
@@ -68,7 +66,6 @@ const UserPage = () => {
             onNextPage={onNextPage}
           />
         </StyledDataWrapper>
-        <Toast isOpen={Boolean(errorMessage)} msg={errorMessage} onClose={resetErrorMessage} />
       </StyledMain>
       <Footer />
     </StyledRoot>

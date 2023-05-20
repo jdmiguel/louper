@@ -1,5 +1,6 @@
 import { ReactNode, createContext, useState, useContext } from 'react';
 import { useView } from './ViewContext';
+import { useErrorMessage } from './ErrorMessageContext';
 import { API_BASE_URL, formatRequest } from '@/utils/request';
 import { DEFAULT_USER } from '@/utils/literals';
 import { User } from '@/utils/types';
@@ -8,7 +9,7 @@ const UserContext = createContext({
   isLoading: false,
   user: DEFAULT_USER,
   updateUser: (_: User) => {},
-  fetchUser: (_: string, __: (userName: string) => void) => {},
+  fetchUser: (_: string) => {},
 });
 
 type Props = {
@@ -21,7 +22,9 @@ const UserContextProvider = ({ children }: Props) => {
 
   const { updateView } = useView();
 
-  const fetchUser = (userName: string, errorCallback: (userName: string) => void) => {
+  const { displayErrorMessage, updateErrorMessage } = useErrorMessage();
+
+  const fetchUser = (userName: string) => {
     setIsLoading(true);
 
     fetch(`${API_BASE_URL}/users/${userName}`)
@@ -64,7 +67,8 @@ const UserContextProvider = ({ children }: Props) => {
         });
       })
       .catch((error) => {
-        errorCallback(error.message);
+        displayErrorMessage();
+        updateErrorMessage(error.message);
       })
       .finally(() => {
         setIsLoading(false);

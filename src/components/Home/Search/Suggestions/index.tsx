@@ -8,14 +8,20 @@ type Props = {
   totalItems: number;
   withPagination: boolean;
   onPaginate: (page: number) => void;
-  onSelectUser: (userName: string) => void;
+  onClickSuggestion: (userName: string) => void;
 };
 
-const Suggestions = ({ items, totalItems, withPagination, onPaginate, onSelectUser }: Props) => (
+const Suggestions = ({
+  items,
+  totalItems,
+  withPagination,
+  onPaginate,
+  onClickSuggestion,
+}: Props) => (
   <StyledRoot>
     <StyledSuggestionsWrapper role="grid">
       {items.map((user) => (
-        <Suggestion key={user.id} data={user} onClick={onSelectUser} />
+        <Suggestion key={user.id} data={user} onClick={onClickSuggestion} />
       ))}
     </StyledSuggestionsWrapper>
     {withPagination && (

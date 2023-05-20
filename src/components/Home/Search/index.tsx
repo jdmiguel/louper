@@ -1,4 +1,3 @@
-import { useState, useRef, useEffect, useMemo, useCallback } from 'react';
 import { useTheme } from '@mui/material/styles';
 import Typography from '@mui/material/Typography';
 import Logo from './Logo';
@@ -6,17 +5,8 @@ import Watermark from './Watermark/index';
 import Finder from './Finder';
 import Suggestions from './Suggestions';
 import { useUser } from '@/contexts/UserContext';
-import { debounce } from '@/utils';
-import {
-  DEFAULT_USERS,
-  MAX_SUGGESTIONS_ALLOWED,
-  SUGGESTIONS_PER_PAGE,
-  MIN_CHARS_TO_SEARCH_USERS,
-  INTRO_TITLE,
-  UNAVAILABLE_ITEMS,
-} from '@/utils/literals';
-import { API_BASE_URL, formatRequest } from '@/utils/request';
-import { Users } from '@/utils/types';
+import useSearchUsers from '@/hooks/useSearchUsers';
+import { SUGGESTIONS_PER_PAGE, INTRO_TITLE, UNAVAILABLE_ITEMS } from '@/utils/literals';
 import {
   StyledRoot,
   StyledHeader,
@@ -25,88 +15,27 @@ import {
   StyledWatermarkWrapper,
 } from './styles';
 
-type Props = {
-  onRequestError: (userName: string) => void;
-};
-
-const Search = ({ onRequestError }: Props) => {
-  const [searchQuery, setSearchQuery] = useState('');
-  const [isLoadingUsers, setIsLoadingUsers] = useState(false);
-  const [areSuggestionsShown, setAreSuggestionsShown] = useState(false);
-  const [users, setUsers] = useState<Users>(DEFAULT_USERS);
-
-  const shouldFetchUsers = useRef(false);
-
+const Search = () => {
   const { isLoading: isLoadingUser, fetchUser } = useUser();
-
-  const abortControllerFetchUsers = useMemo(() => new AbortController(), []);
-
-  const totalSuggestions = useMemo(
-    () =>
-      users.total_count <= MAX_SUGGESTIONS_ALLOWED ? users.total_count : MAX_SUGGESTIONS_ALLOWED,
-    [users],
-  );
+  const {
+    isLoading: isLoadingUsers,
+    searchUsersQuery,
+    onChangeSearchUsers,
+    updateSearchUsersQuery,
+    matchedUsers,
+    totalMatchedUsers,
+    shouldDisplayMatchedUsers,
+    onPaginateSearchUsers,
+  } = useSearchUsers();
 
   const theme = useTheme();
 
-  useEffect(() => {
-    return () => {
-      abortControllerFetchUsers.abort();
-    };
-  }, [abortControllerFetchUsers]);
+  const handleFetchUser = (userName: string) => fetchUser(userName);
 
-  const fetchUsers = (searchQuery: string, page = 1) => {
-    if (!shouldFetchUsers.current) return;
-
-    setIsLoadingUsers(true);
-
-    fetch(
-      `${API_BASE_URL}/search/users?q=${searchQuery}&page=${page}&per_page=${SUGGESTIONS_PER_PAGE}`,
-      {
-        signal: abortControllerFetchUsers.signal,
-      },
-    )
-      .then(formatRequest)
-      .then((fetchedUsersData: Users) => {
-        setAreSuggestionsShown(!!fetchedUsersData.total_count);
-        setUsers(fetchedUsersData);
-      })
-      .catch((error) => {
-        setAreSuggestionsShown(false);
-        onRequestError(error.message);
-      })
-      .finally(() => {
-        setIsLoadingUsers(false);
-      });
-  };
-
-  const handleChangeSearchQuery = (currentSearchQuery: string) => {
-    setSearchQuery(currentSearchQuery);
-    if (currentSearchQuery.length > MIN_CHARS_TO_SEARCH_USERS) {
-      shouldFetchUsers.current = true;
-      debouncedFetchUsers(currentSearchQuery);
-    }
-    if (currentSearchQuery.length <= MIN_CHARS_TO_SEARCH_USERS) {
-      shouldFetchUsers.current = false;
-      setAreSuggestionsShown(false);
-      setUsers(DEFAULT_USERS);
-    }
-  };
-
-  const handleFetchUser = (userName: string) => fetchUser(userName, onRequestError);
-
-  const handleSelectUser = (userName: string) => {
-    setSearchQuery(userName);
+  const handleClickSuggestion = (userName: string) => {
+    updateSearchUsersQuery(userName);
     handleFetchUser(userName);
   };
-
-  const handlePaginate = (page: number) => {
-    shouldFetchUsers.current = true;
-    fetchUsers(searchQuery, page);
-  };
-
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  const debouncedFetchUsers = useCallback(debounce(fetchUsers, 500), []);
 
   return (
     <StyledRoot data-testid="search">
@@ -117,24 +46,24 @@ const Search = ({ onRequestError }: Props) => {
         <Typography variant="h2">{INTRO_TITLE}</Typography>
       </StyledHeader>
       <Finder
-        searchQuery={searchQuery}
+        searchQuery={searchUsersQuery}
         isLoadingUser={isLoadingUser}
         isLoadingUsers={isLoadingUsers}
-        onChangeSearchQuery={handleChangeSearchQuery}
+        onChangeSearchQuery={onChangeSearchUsers}
         onFetchUser={handleFetchUser}
       />
       <StyledSuggestionsWrapper>
-        {areSuggestionsShown ? (
+        {shouldDisplayMatchedUsers ? (
           <Suggestions
-            items={users.items}
-            totalItems={Math.ceil(totalSuggestions / SUGGESTIONS_PER_PAGE)}
-            withPagination={totalSuggestions > SUGGESTIONS_PER_PAGE}
-            onPaginate={handlePaginate}
-            onSelectUser={handleSelectUser}
+            items={matchedUsers.items}
+            totalItems={Math.ceil(totalMatchedUsers / SUGGESTIONS_PER_PAGE)}
+            withPagination={totalMatchedUsers > SUGGESTIONS_PER_PAGE}
+            onPaginate={onPaginateSearchUsers}
+            onClickSuggestion={handleClickSuggestion}
           />
         ) : (
           <StyledWatermarkWrapper>
-            {searchQuery.length > 2 && !users.total_count ? (
+            {searchUsersQuery.length > 2 && !matchedUsers.total_count ? (
               <Typography
                 variant="h6"
                 sx={{

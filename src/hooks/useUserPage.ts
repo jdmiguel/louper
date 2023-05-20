@@ -7,14 +7,19 @@ import {
   RELATED_USERS_PER_PAGE,
 } from '@/utils/literals';
 
-type UseUserPageProps = {
+type UseUserPageParams = {
   userRepos: number;
   userFollowing: number;
   userFollowers: number;
   onBackHome: () => void;
 };
 
-const useUserPage = ({ userRepos, userFollowing, userFollowers, onBackHome }: UseUserPageProps) => {
+const useUserPage = ({
+  userRepos,
+  userFollowing,
+  userFollowers,
+  onBackHome,
+}: UseUserPageParams) => {
   const [activeTab, setActiveTab] = useState(0);
   const [currentPage, setCurrentPage] = useState(1);
 
