@@ -25,6 +25,7 @@ export const StyledLogoWrapper = styled('h1')({
 
 export const StyledSuggestionsWrapper = styled('div')({
   height: 260,
+  padding: '0 18px',
 });
 
 export const StyledWatermarkWrapper = styled('div')({

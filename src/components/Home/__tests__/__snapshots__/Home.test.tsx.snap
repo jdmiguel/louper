@@ -270,7 +270,7 @@ exports[`<Home /> > displays the content properly 1`] = `
           class="MuiFormControl-root css-11t3d8y-MuiFormControl-root"
         >
           <div
-            class="MuiFormControl-root MuiTextField-root css-12q9gcj-MuiFormControl-root-MuiTextField-root"
+            class="MuiFormControl-root MuiTextField-root css-3oz8kf-MuiFormControl-root-MuiTextField-root"
           >
             <div
               class="MuiInputBase-root MuiOutlinedInput-root MuiInputBase-colorPrimary Mui-focused MuiInputBase-formControl MuiInputBase-sizeSmall MuiInputBase-adornedEnd css-l87l5e-MuiInputBase-root-MuiOutlinedInput-root"
@@ -328,7 +328,7 @@ exports[`<Home /> > displays the content properly 1`] = `
           </button>
         </div>
         <div
-          class="css-tjudwr"
+          class="css-17cww1d"
         >
           <div
             class="css-hwx7e5"
