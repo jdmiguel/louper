@@ -4,9 +4,8 @@ import Footer from '../shared/Footer';
 import Profile from './Profile';
 import ProfileMobile from './ProfileMobile';
 import Section from './Section';
-import { useView } from '@/contexts/ViewContext';
 import { useUser } from '@/contexts/UserContext';
-import useUserPage from '@/hooks/useUserPage';
+import useUserView from '@/hooks/useUserView';
 import useUserItems from '@/hooks/useUserItems';
 import {
   StyledRoot,
@@ -17,21 +16,17 @@ import {
 } from './styles';
 
 const UserPage = () => {
-  const { updateView } = useView();
   const { user } = useUser();
 
   const { public_repos: userRepos, following: userFollowing, followers: userFollowers } = user;
 
-  const onBackHome = () => updateView('home');
-
-  const { itemsType, currentPage, itemsPerPage, totalPages, onNextPage, onClickTab } = useUserPage({
+  const { itemsType, currentPage, itemsPerPage, totalPages, onNextPage, onClickTab } = useUserView({
     userRepos,
     userFollowing,
     userFollowers,
-    onBackHome,
   });
 
-  const { isLoading, items, areAllItemsLoaded, resetItems } = useUserItems({
+  const { isLoading, shouldDisplayItems, items, areAllItemsLoaded, resetItems } = useUserItems({
     userName: user.login,
     itemsType,
     totalPages,
@@ -60,6 +55,7 @@ const UserPage = () => {
           <Menu onClick={onClick} />
           <Section
             isLoading={isLoading}
+            shouldDisplayItems={shouldDisplayItems}
             itemsType={itemsType}
             items={items}
             areAllItemsLoaded={areAllItemsLoaded}

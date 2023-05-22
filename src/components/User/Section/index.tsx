@@ -6,13 +6,21 @@ import { StyledRoot, StyledEmptyMsg } from './styles';
 
 type Props = {
   isLoading: boolean;
+  shouldDisplayItems: boolean;
   itemsType: UserItemsType;
   items: UserItems;
   areAllItemsLoaded: boolean;
   onNextPage: () => void;
 };
 
-const Section = ({ isLoading, itemsType, items, areAllItemsLoaded, onNextPage }: Props) => {
+const Section = ({
+  isLoading,
+  shouldDisplayItems,
+  itemsType,
+  items,
+  areAllItemsLoaded,
+  onNextPage,
+}: Props) => {
   const observer = useRef<IntersectionObserver>();
   const lastItemRef = useCallback(
     (item: HTMLDivElement) => {
@@ -41,19 +49,23 @@ const Section = ({ isLoading, itemsType, items, areAllItemsLoaded, onNextPage }:
 
   return (
     <StyledRoot data-testid="section">
-      {!isLoading && totalItems === 0 && (
+      {shouldDisplayItems && totalItems > 0 && (
+        <>
+          {items.map((item, index) => {
+            if (index + 1 === totalItems) {
+              return <SectionItem ref={lastItemRef} key={item.id} theme={itemsType} data={item} />;
+            }
+            return <SectionItem key={item.id} theme={itemsType} data={item} />;
+          })}
+        </>
+      )}
+      {shouldDisplayItems && totalItems === 0 && (
         <StyledEmptyMsg>
           <Typography variant="h6" sx={{ color: 'neutral.main' }}>
             {`No ${itemsType} added`}
           </Typography>
         </StyledEmptyMsg>
       )}
-      {items.map((item, index) => {
-        if (index + 1 === totalItems) {
-          return <SectionItem ref={lastItemRef} key={item.id} theme={itemsType} data={item} />;
-        }
-        return <SectionItem key={item.id} theme={itemsType} data={item} />;
-      })}
     </StyledRoot>
   );
 };

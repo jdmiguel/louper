@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { useView } from '@/contexts/ViewContext';
 import {
   TOTAL_USER_ITEMS_ALLOWED,
   TAB,
@@ -11,17 +12,13 @@ type UseUserPageParams = {
   userRepos: number;
   userFollowing: number;
   userFollowers: number;
-  onBackHome: () => void;
 };
 
-const useUserPage = ({
-  userRepos,
-  userFollowing,
-  userFollowers,
-  onBackHome,
-}: UseUserPageParams) => {
+const useUserView = ({ userRepos, userFollowing, userFollowers }: UseUserPageParams) => {
   const [activeTab, setActiveTab] = useState(0);
   const [currentPage, setCurrentPage] = useState(1);
+
+  const { updateView } = useView();
 
   const getItemsType = () => {
     switch (activeTab) {
@@ -57,7 +54,7 @@ const useUserPage = ({
 
   const onClickTab = (selectedTab: number) => {
     if (selectedTab === TAB.search) {
-      onBackHome();
+      updateView('home');
       return;
     }
     setActiveTab(selectedTab);
@@ -74,4 +71,4 @@ const useUserPage = ({
   };
 };
 
-export default useUserPage;
+export default useUserView;

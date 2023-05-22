@@ -18,7 +18,8 @@ const useUserItems = ({
   currentPage,
   itemsPerPage,
 }: UseUserItemsParams) => {
-  const [isLoading, setIsLoading] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
+  const [shouldDisplayItems, setShouldDisplayItems] = useState(false);
   const [areAllItemsLoaded, setAreAllItemsLoaded] = useState(false);
   const [items, setItems] = useState<UserItems>([]);
 
@@ -32,6 +33,7 @@ const useUserItems = ({
     )
       .then(formatRequest)
       .then((fetchedItems: UserItems) => {
+        setShouldDisplayItems(true);
         setItems((prevItems: UserItems) => [...prevItems, ...fetchedItems]);
         setAreAllItemsLoaded(currentPage === totalPages);
       })
@@ -52,10 +54,14 @@ const useUserItems = ({
     updateErrorMessage,
   ]);
 
-  const resetItems = () => setItems([]);
+  const resetItems = () => {
+    setShouldDisplayItems(false);
+    setItems([]);
+  };
 
   return {
     isLoading,
+    shouldDisplayItems,
     areAllItemsLoaded,
     items,
     resetItems,

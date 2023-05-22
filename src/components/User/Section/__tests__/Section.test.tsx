@@ -10,7 +10,6 @@ describe('<Section />', () => {
       name: 'Hello world',
       description: 'First repo with classic hello world',
       html_url: 'https://github.com/jdmiguel/hello_world',
-      topics: ['javascript'],
     },
   ];
   const followingItems = [
@@ -32,6 +31,7 @@ describe('<Section />', () => {
 
   const props = {
     isLoading: false,
+    shouldDisplayItems: true,
     areAllItemsLoaded: false,
     onNextPage: vi.fn(),
   };

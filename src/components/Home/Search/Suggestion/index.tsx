@@ -1,11 +1,11 @@
 import Stack from '@mui/material/Stack';
 import Typography from '@mui/material/Typography';
 import Avatar from '@mui/material/Avatar';
-import { BasicUser } from '@/utils/types';
+import { SimplifiedUser } from '@/utils/types';
 import { StyledButton, StyledAvatarWrapper } from './styles';
 
 type Props = {
-  data: BasicUser;
+  data: SimplifiedUser;
   onClick: (userName: string) => void;
 };
 

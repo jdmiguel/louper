@@ -49,10 +49,9 @@ export type Repo = {
   name: string;
   description: string;
   html_url: string;
-  topics: string[];
 };
-export type RelatedUser = Pick<BasicUser, 'id' | 'login' | 'html_url' | 'avatar_url'>;
-export type UserItems = Repo[] & RelatedUser[];
+export type SimplifiedUser = Pick<BasicUser, 'id' | 'login' | 'html_url' | 'avatar_url'>;
+export type UserItems = Repo[] & SimplifiedUser[];
 export type UserItemsType = 'repos' | 'following' | 'followers';
 
 export type OverlayBoxData = {

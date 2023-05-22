@@ -1,10 +1,10 @@
 import Pagination from '@mui/material/Pagination';
 import Suggestion from '../Suggestion';
-import { BasicUser } from '@/utils/types';
+import { SimplifiedUser } from '@/utils/types';
 import { StyledRoot, StyledSuggestionsWrapper, StyledPaginationItem } from './styles';
 
 type Props = {
-  items: BasicUser[];
+  items: SimplifiedUser[];
   totalItems: number;
   withPagination: boolean;
   onPaginate: (page: number) => void;

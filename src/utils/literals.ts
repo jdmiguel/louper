@@ -46,7 +46,6 @@ export const TABS = ['REPOS', 'FOLLOWING', 'FOLLOWERS', 'SEARCH'];
 
 export const UNAVAILABLE_ITEMS = {
   description: 'No description added',
-  topics: 'NO TOPICS',
   users: 'No matched users',
 };
 

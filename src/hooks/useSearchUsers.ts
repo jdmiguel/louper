@@ -2,7 +2,7 @@ import { useState, useRef, useMemo, useCallback } from 'react';
 import { useErrorMessage } from '@/contexts/ErrorMessageContext';
 import { debounce } from '@/utils';
 import { API_BASE_URL, formatRequest } from '@/utils/request';
-import { Users } from '@/utils/types';
+import { Users, SimplifiedUser } from '@/utils/types';
 import {
   DEFAULT_USERS,
   MAX_SUGGESTIONS_ALLOWED,
@@ -12,18 +12,26 @@ import {
 
 const useSearchUsers = () => {
   const [isLoading, setIsLoading] = useState(false);
+  const [shouldDisplaySuggestions, setShouldDisplaySuggestions] = useState(false);
   const [searchUsersQuery, setSearchUsersQuery] = useState('');
-  const [shouldDisplayMatchedUsers, setShouldDisplayMatchedUsers] = useState(false);
-  const [matchedUsers, setMatchedUsers] = useState<Users>(DEFAULT_USERS);
+  const [users, setUsers] = useState<Users>(DEFAULT_USERS);
 
   const shouldFetchUsers = useRef(false);
 
+  const matchedUsers: SimplifiedUser[] = useMemo(
+    () =>
+      users.items.map((item) => ({
+        id: item.id,
+        login: item.login,
+        html_url: item.html_url,
+        avatar_url: item.avatar_url,
+      })),
+    [users],
+  );
   const totalMatchedUsers = useMemo(
     () =>
-      matchedUsers.total_count <= MAX_SUGGESTIONS_ALLOWED
-        ? matchedUsers.total_count
-        : MAX_SUGGESTIONS_ALLOWED,
-    [matchedUsers],
+      users.total_count <= MAX_SUGGESTIONS_ALLOWED ? users.total_count : MAX_SUGGESTIONS_ALLOWED,
+    [users],
   );
 
   const { displayErrorMessage, updateErrorMessage } = useErrorMessage();
@@ -35,12 +43,11 @@ const useSearchUsers = () => {
 
     fetch(`${API_BASE_URL}/search/users?q=${query}&page=${page}&per_page=${SUGGESTIONS_PER_PAGE}`)
       .then(formatRequest)
-      .then((fetchedUsersData: Users) => {
-        setShouldDisplayMatchedUsers(!!fetchedUsersData.total_count);
-        setMatchedUsers(fetchedUsersData);
+      .then((fetchedUsers: Users) => {
+        setUsers(fetchedUsers);
+        setShouldDisplaySuggestions(true);
       })
       .catch((error) => {
-        setShouldDisplayMatchedUsers(false);
         displayErrorMessage();
         updateErrorMessage(error.message);
       })
@@ -57,8 +64,8 @@ const useSearchUsers = () => {
     }
     if (currentSearchQuery.length <= MIN_CHARS_TO_SEARCH_USERS) {
       shouldFetchUsers.current = false;
-      setShouldDisplayMatchedUsers(false);
-      setMatchedUsers(DEFAULT_USERS);
+      setShouldDisplaySuggestions(false);
+      setUsers(DEFAULT_USERS);
     }
   };
 
@@ -75,9 +82,9 @@ const useSearchUsers = () => {
   return {
     isLoading,
     searchUsersQuery,
+    shouldDisplaySuggestions,
     matchedUsers,
     totalMatchedUsers,
-    shouldDisplayMatchedUsers,
     onChangeSearchUsers,
     onPaginateSearchUsers,
     updateSearchUsersQuery,

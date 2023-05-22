@@ -7,7 +7,6 @@ describe('<SectionItem />', () => {
     name: 'Hello world',
     description: 'First repo with classic hello world',
     html_url: 'https://github.com/jdmiguel/hello_world',
-    topics: ['javascript'],
   };
 
   const followingData = {
@@ -33,7 +32,6 @@ describe('<SectionItem />', () => {
 
       expect(screen.getByText('Hello world')).toBeInTheDocument();
       expect(screen.getByText('First repo with classic hello world')).toBeInTheDocument();
-      expect(screen.getByText('javascript')).toBeInTheDocument();
 
       const repoLink = screen.getByText(/Visit repo/i);
       expect(repoLink.getAttribute('aria-label')).toBe('View Hello world repository on GitHub');
@@ -45,12 +43,6 @@ describe('<SectionItem />', () => {
 
       const defaultDescription = screen.getByText('No description added');
       expect(defaultDescription).toBeInTheDocument();
-    });
-
-    it('displays a default topic when no topic', () => {
-      render(<SectionItem theme="repos" data={{ ...repoData, topics: [] }} />);
-
-      expect(screen.getByText(/No topics/i)).toBeInTheDocument();
     });
   });
 

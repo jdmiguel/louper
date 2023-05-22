@@ -1,7 +1,6 @@
 import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { renderWithTheme } from '../../../../../utils/theme';
-import { data } from '../../../../../mocks/handlers/getUsers';
 import Suggestions from '..';
 
 describe('<Suggestions />', () => {

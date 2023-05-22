@@ -2,14 +2,22 @@ import { styled } from '@mui/material/styles';
 import Tabs from '@mui/material/Tabs';
 import Tab from '@mui/material/Tab';
 
-export const StyledRoot = styled('header')({
+export const StyledRoot = styled('header')(({ theme }) => ({
   position: 'sticky',
   top: 0,
   zIndex: 1,
-});
+  '&:after': {
+    display: 'block',
+    content: '""',
+    height: 4,
+    width: '100%',
+    backgroundColor: theme.palette.background.default,
+  },
+}));
 
 export const StyledTabs = styled(Tabs)(({ theme }) => ({
   backgroundColor: theme.palette.secondary.dark,
+  borderBottom: `1px solid ${theme.palette.neutral.dark}`,
   '& .MuiTabs-flexContainer': {
     justifyContent: 'space-between',
     '@media (min-width: 1200x)': {

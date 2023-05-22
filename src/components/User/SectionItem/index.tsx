@@ -5,8 +5,8 @@ import Avatar from '@mui/material/Avatar';
 import TextTag from '@/components/shared/TextTag';
 import Link from '@/components/shared/Link';
 import { UNAVAILABLE_ITEMS, LINK_TEXT, ICON_TYPE, USER_ITEMS_TYPE } from '@/utils/literals';
-import { Repo, RelatedUser, UserItemsType } from '@/utils/types';
-import { StyledRoot, StyledTitle, StyledAvatarWrapper, StyledTopic, StyledAction } from './styles';
+import { Repo, SimplifiedUser, UserItemsType } from '@/utils/types';
+import { StyledRoot, StyledTitle, StyledAvatarWrapper, StyledAction } from './styles';
 
 const displayRepoTheme = (repo: Repo): ReactElement => (
   <Stack justifyContent="space-between" sx={{ height: '100%' }} data-testid="repoContent">
@@ -28,23 +28,10 @@ const displayRepoTheme = (repo: Repo): ReactElement => (
           {repo.description}
         </Typography>
       ) : (
-        <Typography variant="h6" sx={{ marginTop: 1, color: 'neutral.main' }}>
+        <Typography variant="body1" sx={{ marginTop: 1, color: 'neutral.main' }}>
           {UNAVAILABLE_ITEMS.description}
         </Typography>
       )}
-      <Stack direction="row" sx={{ flexWrap: 'wrap', marginTop: 1.75 }}>
-        {repo.topics?.length > 0 ? (
-          repo.topics.map((topic: string) => (
-            <StyledTopic key={topic}>
-              <Typography variant="overline">{topic}</Typography>
-            </StyledTopic>
-          ))
-        ) : (
-          <StyledTopic>
-            <Typography variant="overline">{UNAVAILABLE_ITEMS.topics}</Typography>
-          </StyledTopic>
-        )}
-      </Stack>
     </Stack>
     <StyledAction>
       <Link
@@ -58,7 +45,7 @@ const displayRepoTheme = (repo: Repo): ReactElement => (
   </Stack>
 );
 
-const displayUserTheme = (user: RelatedUser, theme: UserItemsType): ReactElement => {
+const displayUserTheme = (user: SimplifiedUser, theme: UserItemsType): ReactElement => {
   const iconType = theme === USER_ITEMS_TYPE.following ? ICON_TYPE.following : ICON_TYPE.followers;
 
   return (
@@ -90,13 +77,13 @@ const displayUserTheme = (user: RelatedUser, theme: UserItemsType): ReactElement
 
 type Props = {
   theme: UserItemsType;
-  data: Repo | RelatedUser;
+  data: Repo | SimplifiedUser;
 };
 
 const SectionItem = forwardRef<HTMLDivElement, Props>(({ theme, data }, ref) => {
   const isRepoTheme = theme === USER_ITEMS_TYPE.repos;
   const repo = data as Repo;
-  const user = data as RelatedUser;
+  const user = data as SimplifiedUser;
 
   return (
     <StyledRoot ref={ref}>

@@ -33,5 +33,4 @@ export const StyledWatermarkWrapper = styled('div')({
   display: 'flex',
   flexDirection: 'column',
   marginTop: 30,
-  opacity: 0.15,
 });

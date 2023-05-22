@@ -21,18 +21,7 @@ export const StyledAvatarWrapper = styled('div')({
   width: 80,
 });
 
-export const StyledTopic = styled('div')(({ theme }) => ({
-  backgroundColor: theme.palette.secondary.main,
-  borderRadius: 4,
-  color: theme.palette.primary.contrastText,
-  marginBottom: 5,
-  marginRight: 5,
-  padding: '4px 8px',
-  opacity: 0.5,
-}));
-
 export const StyledAction = styled('div')(({ theme }) => ({
-  borderTop: `1px solid ${theme.palette.secondary.light}`,
   marginTop: 14,
   paddingTop: 10,
 }));
