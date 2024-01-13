@@ -134,7 +134,7 @@ exports[`<Profile /> > displays the content properly 1`] = `
       >
         <a
           aria-label="View  profile on GitHub"
-          class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineAlways css-18fl2wv-MuiTypography-root-MuiLink-root"
+          class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineAlways css-1efa7me-MuiTypography-root-MuiLink-root"
           href=""
           rel="noopener noreferrer"
         >

@@ -10,11 +10,11 @@ exports[`<Footer /> > displays the content properly 1`] = `
       class="MuiStack-root css-1oy7hqd-MuiStack-root"
     >
       <span>
-        @2023 | created by
+        @2024 | created by
       </span>
       <a
         aria-label="View profile of jdmiguel on GitHub"
-        class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineAlways css-1o7qz1o-MuiTypography-root-MuiLink-root"
+        class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineAlways css-rli18p-MuiTypography-root-MuiLink-root"
         href="https://jdmiguel.com/"
         rel="noopener noreferrer"
       >
@@ -32,7 +32,7 @@ exports[`<Footer /> > displays the content properly 1`] = `
       </span>
       <a
         aria-label="View github users statistics on octoverse"
-        class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineAlways css-1o7qz1o-MuiTypography-root-MuiLink-root"
+        class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineAlways css-rli18p-MuiTypography-root-MuiLink-root"
         href="https://octoverse.github.com/#future"
         rel="noopener noreferrer"
       >
