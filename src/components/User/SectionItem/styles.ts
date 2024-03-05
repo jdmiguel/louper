@@ -21,7 +21,7 @@ export const StyledAvatarWrapper = styled('div')({
   width: 80,
 });
 
-export const StyledAction = styled('div')(({ theme }) => ({
+export const StyledAction = styled('div')({
   marginTop: 14,
   paddingTop: 10,
-}));
+});
