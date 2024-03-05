@@ -9,7 +9,7 @@ exports[`<ProfileMobile /> > displays the content properly 1`] = `
       class="css-l7hz6c"
     >
       <div
-        class="MuiAvatar-root MuiAvatar-circular MuiAvatar-colorDefault css-dmgw83-MuiAvatar-root"
+        class="MuiAvatar-root MuiAvatar-circular MuiAvatar-colorDefault css-78bsg3-MuiAvatar-root"
       >
         <svg
           aria-hidden="true"
@@ -24,7 +24,7 @@ exports[`<ProfileMobile /> > displays the content properly 1`] = `
         </svg>
       </div>
       <div
-        class="MuiAvatar-root MuiAvatar-circular MuiAvatar-colorDefault css-1isswer-MuiAvatar-root"
+        class="MuiAvatar-root MuiAvatar-circular MuiAvatar-colorDefault css-j6tec4-MuiAvatar-root"
       >
         <svg
           aria-hidden="true"

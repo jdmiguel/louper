@@ -1,4 +1,4 @@
-import { rest } from 'msw';
+import { http, HttpResponse } from 'msw';
 import { API_BASE_URL } from '../../utils/request';
 import { Users } from '../../utils/types';
 
@@ -199,14 +199,15 @@ const getUsers = (searchQuery: string, currentPage: string): Users => {
   };
 };
 
-const handler = rest.get(`${API_BASE_URL}/search/users`, (req, res, ctx) => {
-  const query = req.url.searchParams;
+const handler = http.get(`${API_BASE_URL}/search/users`, ({ request }) => {
+  const url = new URL(request.url);
+  const query = url.searchParams;
   const searchQuery = query.get('q');
   const currentPage = query.get('page');
 
   const users = getUsers(searchQuery || '', currentPage || '1');
 
-  return res(ctx.json(users));
+  return HttpResponse.json(users);
 });
 
 export { handler, totalUsers as data };

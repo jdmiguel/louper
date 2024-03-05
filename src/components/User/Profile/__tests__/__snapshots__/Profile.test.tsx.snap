@@ -9,7 +9,7 @@ exports[`<Profile /> > displays the content properly 1`] = `
       class="css-1wkrglf"
     >
       <div
-        class="MuiAvatar-root MuiAvatar-circular MuiAvatar-colorDefault css-1xprkry-MuiAvatar-root"
+        class="MuiAvatar-root MuiAvatar-circular MuiAvatar-colorDefault css-zsnfb9-MuiAvatar-root"
       >
         <svg
           aria-hidden="true"
@@ -24,7 +24,7 @@ exports[`<Profile /> > displays the content properly 1`] = `
         </svg>
       </div>
       <div
-        class="MuiAvatar-root MuiAvatar-circular MuiAvatar-colorDefault css-1th8twn-MuiAvatar-root"
+        class="MuiAvatar-root MuiAvatar-circular MuiAvatar-colorDefault css-1s3wu4-MuiAvatar-root"
       >
         <svg
           aria-hidden="true"

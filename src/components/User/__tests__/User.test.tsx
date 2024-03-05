@@ -1,10 +1,11 @@
 import { render, screen } from '@testing-library/react';
 import { renderWithTheme } from '../../../utils/theme';
+import { renderWithUserDataMocked } from '../../../mocks/userDataMocked';
 import User from '..';
 
 describe('<User />', () => {
   it('displays the correct content', () => {
-    render(renderWithTheme(<User />));
+    render(renderWithTheme(renderWithUserDataMocked(<User />)));
 
     expect(screen.getByTestId('profile')).toBeInTheDocument();
     expect(screen.queryByTestId('profile-mobile')).not.toBeInTheDocument();
@@ -16,13 +17,13 @@ describe('<User />', () => {
   it('does not display the footer with small devices', () => {
     window.resizeTo(375, 667);
 
-    render(renderWithTheme(<User />));
+    render(renderWithTheme(renderWithUserDataMocked(<User />)));
 
     expect(screen.queryByTestId('footer')).not.toBeVisible();
   });
 
   it('displays the repos section as active', () => {
-    render(renderWithTheme(<User />));
+    render(renderWithTheme(renderWithUserDataMocked(<User />)));
 
     const reposMenuItem = screen.getByText(/repos/i).parentElement;
     expect(reposMenuItem).toHaveClass('Mui-selected');

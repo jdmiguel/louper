@@ -1,4 +1,4 @@
-import { rest } from 'msw';
+import { http, HttpResponse } from 'msw';
 import { API_BASE_URL } from '@/utils/request';
 
 const data = [
@@ -52,8 +52,8 @@ const data = [
   },
 ];
 
-const handler = rest.get(`${API_BASE_URL}/users/:userLogin/followers`, (_, res, ctx) =>
-  res(ctx.json(data)),
+const handler = http.get(`${API_BASE_URL}/users/:userLogin/followers`, () =>
+  HttpResponse.json(data),
 );
 
 export { handler, data };
