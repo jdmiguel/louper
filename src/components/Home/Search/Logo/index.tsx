@@ -55,8 +55,8 @@ const Logo = () => (
         y2="79"
         gradientUnits="userSpaceOnUse"
       >
-        <stop stopColor={colors.lightPink} />
-        <stop offset="1" stopColor={colors.lightPurple} />
+        <stop stopColor={colors.lightCyan} />
+        <stop offset="1" stopColor={colors.blue} />
       </linearGradient>
       <linearGradient
         id="paint1_linear_105_2"
@@ -66,8 +66,8 @@ const Logo = () => (
         y2="79"
         gradientUnits="userSpaceOnUse"
       >
-        <stop stopColor={colors.lightPink} />
-        <stop offset="1" stopColor={colors.lightPurple} />
+        <stop stopColor={colors.lightCyan} />
+        <stop offset="1" stopColor={colors.blue} />
       </linearGradient>
       <linearGradient
         id="paint2_linear_105_2"
@@ -77,8 +77,8 @@ const Logo = () => (
         y2="79"
         gradientUnits="userSpaceOnUse"
       >
-        <stop stopColor={colors.lightPink} />
-        <stop offset="1" stopColor={colors.lightPurple} />
+        <stop stopColor={colors.lightCyan} />
+        <stop offset="1" stopColor={colors.blue} />
       </linearGradient>
       <linearGradient
         id="paint3_linear_105_2"
@@ -88,8 +88,8 @@ const Logo = () => (
         y2="79"
         gradientUnits="userSpaceOnUse"
       >
-        <stop stopColor={colors.lightPink} />
-        <stop offset="1" stopColor={colors.lightPurple} />
+        <stop stopColor={colors.lightCyan} />
+        <stop offset="1" stopColor={colors.blue} />
       </linearGradient>
       <linearGradient
         id="paint4_linear_105_2"
@@ -99,8 +99,8 @@ const Logo = () => (
         y2="79"
         gradientUnits="userSpaceOnUse"
       >
-        <stop stopColor={colors.lightPink} />
-        <stop offset="1" stopColor={colors.lightPurple} />
+        <stop stopColor={colors.lightCyan} />
+        <stop offset="1" stopColor={colors.blue} />
       </linearGradient>
       <linearGradient
         id="paint5_linear_105_2"
@@ -110,8 +110,8 @@ const Logo = () => (
         y2="79"
         gradientUnits="userSpaceOnUse"
       >
-        <stop stopColor={colors.lightPink} />
-        <stop offset="1" stopColor={colors.lightPurple} />
+        <stop stopColor={colors.lightCyan} />
+        <stop offset="1" stopColor={colors.blue} />
       </linearGradient>
       <linearGradient
         id="paint6_linear_105_2"
@@ -121,8 +121,8 @@ const Logo = () => (
         y2="79"
         gradientUnits="userSpaceOnUse"
       >
-        <stop stopColor={colors.lightPink} />
-        <stop offset="1" stopColor={colors.lightPurple} />
+        <stop stopColor={colors.lightCyan} />
+        <stop offset="1" stopColor={colors.blue} />
       </linearGradient>
       <linearGradient
         id="paint7_linear_105_2"
@@ -132,8 +132,8 @@ const Logo = () => (
         y2="79"
         gradientUnits="userSpaceOnUse"
       >
-        <stop stopColor={colors.lightPink} />
-        <stop offset="1" stopColor={colors.lightPurple} />
+        <stop stopColor={colors.lightCyan} />
+        <stop offset="1" stopColor={colors.blue} />
       </linearGradient>
       <linearGradient
         id="paint8_linear_105_2"
@@ -143,8 +143,8 @@ const Logo = () => (
         y2="79"
         gradientUnits="userSpaceOnUse"
       >
-        <stop stopColor={colors.lightPink} />
-        <stop offset="1" stopColor={colors.lightPurple} />
+        <stop stopColor={colors.lightCyan} />
+        <stop offset="1" stopColor={colors.blue} />
       </linearGradient>
       <linearGradient
         id="paint9_linear_105_2"
@@ -154,8 +154,8 @@ const Logo = () => (
         y2="79"
         gradientUnits="userSpaceOnUse"
       >
-        <stop stopColor={colors.lightPink} />
-        <stop offset="1" stopColor={colors.lightPurple} />
+        <stop stopColor={colors.lightCyan} />
+        <stop offset="1" stopColor={colors.blue} />
       </linearGradient>
     </defs>
   </svg>

@@ -4,7 +4,7 @@ import Stack from '@mui/material/Stack';
 export const StyledRoot = styled('footer')(({ theme }) => ({
   alignItems: 'center',
   bottom: 0,
-  color: theme.palette.secondary.light,
+  color: theme.palette.text.primary,
   display: 'none',
   fontSize: '0.9rem',
   padding: '12px 24px',

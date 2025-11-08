@@ -25,12 +25,12 @@ export const StyledOverlayBoxCountryIcon = styled(Icon)(({ theme }) => ({
 }));
 
 export const StyledOverlayBoxUsers = styled('div')(({ theme }) => ({
-  color: theme.palette.text.secondary,
+  color: theme.palette.text.primary,
   display: 'flex',
 }));
 
 export const StyledOverlayBoxUsersIcon = styled(Icon)(({ theme }) => ({
-  color: theme.palette.text.secondary,
+  color: theme.palette.text.primary,
   fontSize: 18,
   marginRight: 7,
 }));

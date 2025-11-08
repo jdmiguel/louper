@@ -32,9 +32,9 @@ const GlobeModel = () => {
 
   return (
     <group>
-      <hemisphereLight color={colors.lightBlue} groundColor={colors.lightPurple} intensity={0.35} />
-      <pointLight color={colors.lightPink} intensity={0.35} position={[200, 200, 100]} />
-      <pointLight color={colors.pink} intensity={1.05} position={[-400, -50, -100]} />
+      <hemisphereLight color={colors.lightBlue} groundColor={colors.lightCyan} intensity={0.35} />
+      <pointLight color={colors.lightCyan} intensity={0.35} position={[200, 200, 100]} />
+      <pointLight color={colors.cyan} intensity={1.05} position={[-400, -50, -100]} />
       <mesh>
         <sphereBufferGeometry attach="geometry" args={[1, 100, 100]} />
         <meshStandardMaterial attach="material" map={texture} />

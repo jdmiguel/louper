@@ -50,7 +50,7 @@ const Profile = () => {
             width: 240,
             height: 240,
             position: 'absolute',
-            boxShadow: '0px 0px 14px 6px rgb(169 45 201 / 40%)',
+            boxShadow: '0px 0px 14px 6px rgb(41 112 146 / 60%)',
           }}
         />
       </StyledAvatarWrapper>

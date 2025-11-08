@@ -60,7 +60,7 @@ const Marker = ({ data, onOver, onOut }: Props) => {
   return (
     <mesh ref={markerRef} position={[x, y, z]} onPointerOver={handlePointOver} onPointerOut={onOut}>
       <sphereBufferGeometry attach="geometry" args={[0.02, 10, 10]} />
-      <meshBasicMaterial attach="material" color={colors.pink} />
+      <meshBasicMaterial attach="material" color={colors.lightCyan} />
     </mesh>
   );
 };

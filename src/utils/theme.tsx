@@ -125,9 +125,9 @@ export const theme = createTheme({
   },
   palette: {
     primary: {
-      main: colors.pink,
-      light: colors.lightPink,
-      dark: colors.darkPink,
+      main: colors.cyan,
+      light: colors.lightCyan,
+      dark: colors.darkCyan,
     },
     secondary: {
       main: colors.blue,
@@ -143,15 +143,15 @@ export const theme = createTheme({
       light: colors.white,
     },
     overlay: {
-      main: colors.darkPinkOverlay,
+      main: colors.darkCyanOverlay,
     },
     background: {
-      default: colors.darkBlue,
-      paper: colors.gradient,
+      default: colors.darkerBlue,
+      paper: colors.darkGradient,
     },
     text: {
       primary: colors.white,
-      secondary: colors.lightBlue,
+      secondary: colors.lightGrey,
     },
   },
 });
