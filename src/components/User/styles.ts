@@ -52,7 +52,4 @@ export const StyledDataWrapper = styled('div')(({ theme }) => ({
   '@media (min-width: 992px)': {
     width: 'initial',
   },
-  '@media (min-width: 1200x)': {
-    width: 'initial',
-  },
 }));

@@ -6,7 +6,7 @@ export const SEARCH_PLACEHOLDER = 'Type user name...';
 export const GLOBE_ACTIVATE_ROTATION_TIMER = 800;
 
 export const FOOTER_CONTENT = {
-  creation: '@2024 | created by',
+  creation: '@2025 | created by',
   stats: 'github stats from',
 };
 export const FOOTER_LINKS = [

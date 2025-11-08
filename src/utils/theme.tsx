@@ -138,16 +138,13 @@ export const theme = createTheme({
       main: colors.red,
     },
     neutral: {
-      dark: colors.grey,
       main: colors.lightGrey,
-      light: colors.white,
     },
     overlay: {
       main: colors.darkCyanOverlay,
     },
     background: {
       default: colors.darkerBlue,
-      paper: colors.darkGradient,
     },
     text: {
       primary: colors.white,

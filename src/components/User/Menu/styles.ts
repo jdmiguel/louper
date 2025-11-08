@@ -16,8 +16,11 @@ export const StyledRoot = styled('header')(({ theme }) => ({
 }));
 
 export const StyledTabs = styled(Tabs)(({ theme }) => ({
-  backgroundColor: theme.palette.secondary.dark,
+  backgroundColor: theme.palette.background.default,
   borderBottom: `1px solid ${theme.palette.secondary.light}`,
+  '@media (min-width: 768px)': {
+    backgroundColor: theme.palette.secondary.dark,
+  },
   '& .MuiTabs-flexContainer': {
     justifyContent: 'space-between',
     '@media (min-width: 1200x)': {

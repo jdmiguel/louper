@@ -11,6 +11,9 @@ export const StyledFallbackAppRoot = styled('div')({
   '& p': {
     margin: 0,
   },
+  '@media (min-width: 768px)': {
+    background: colors.darkGradientDesktop,
+  },
 });
 
 export const StyledErrorMessage = styled('p')(({ theme }) => ({

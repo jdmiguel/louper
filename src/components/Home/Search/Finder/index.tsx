@@ -80,19 +80,6 @@ const Finder = ({
         inputProps={{
           maxLength: 20,
         }}
-        InputProps={{
-          endAdornment: (
-            <InputAdornment position="end" sx={{ color: 'text.primary' }}>
-              {isLoadingUsers ? (
-                Loader
-              ) : (
-                <Icon sx={{ color: 'neutral.main', fontSize: '1.4rem' }}>
-                  {FINDER_ICON.placeholder}
-                </Icon>
-              )}
-            </InputAdornment>
-          ),
-        }}
       />
       <StyledIconButton aria-label="search" onClick={handleClick}>
         {isLoadingUser ? Loader : <Icon sx={{ fontSize: '1.6rem' }}>{FINDER_ICON.button}</Icon>}
