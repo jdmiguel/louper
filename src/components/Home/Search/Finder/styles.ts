@@ -3,22 +3,27 @@ import TextField from '@mui/material/TextField';
 import IconButton from '@mui/material/IconButton';
 
 export const StyledTextField = styled<any>(TextField)(({ theme }) => ({
+  transition: 'all ease-out 250ms',
+
   '& .MuiOutlinedInput-root': {
     borderTopRightRadius: 0,
     borderBottomRightRadius: 0,
     '@media (min-width: 400px)': {
-      minWidth: 318,
+      minWidth: 300,
     },
     '& .MuiOutlinedInput-notchedOutline': {
       borderColor: theme.palette.primary.main,
     },
     '&:hover': {
       '& .MuiOutlinedInput-notchedOutline': {
+        background: theme.palette.overlay.dark,
         borderColor: theme.palette.primary.main,
       },
     },
   },
   '& .Mui-focused .MuiOutlinedInput-notchedOutline': {
+    background: theme.palette.overlay.dark,
+    borderWidth: '1px !important',
     borderColor: theme.palette.primary.main,
   },
 }));

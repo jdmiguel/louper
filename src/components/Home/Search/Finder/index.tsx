@@ -1,10 +1,10 @@
 import { useState } from 'react';
 import CircularProgress from '@mui/material/CircularProgress';
 import FormControl from '@mui/material/FormControl';
-import InputAdornment from '@mui/material/InputAdornment';
 import Icon from '@mui/material/Icon';
 import { SEARCH_PLACEHOLDER, ERROR_MESSAGE, FINDER_ICON } from '@/utils/literals';
 import { StyledTextField, StyledIconButton } from './styles';
+import { InputAdornment } from '@mui/material';
 
 const Loader = (
   <CircularProgress className="loaderIcon" size={22} thickness={4} sx={{ color: 'text.primary' }} />
@@ -79,6 +79,19 @@ const Finder = ({
         error={isInputErrorDisplayed}
         inputProps={{
           maxLength: 20,
+        }}
+        InputProps={{
+          endAdornment: (
+            <InputAdornment position="end" sx={{ color: 'text.primary' }}>
+              {isLoadingUsers ? (
+                Loader
+              ) : (
+                <Icon sx={{ color: 'neutral.main', fontSize: '1.4rem' }}>
+                  {FINDER_ICON.placeholder}
+                </Icon>
+              )}
+            </InputAdornment>
+          ),
         }}
       />
       <StyledIconButton aria-label="search" onClick={handleClick}>

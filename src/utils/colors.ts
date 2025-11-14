@@ -10,6 +10,7 @@ export const colors = {
   lightBlue: '#58aaec',
   darkBlue: '#0b135d',
   darkerBlue: '#020321',
+  darkBlueOverlay: 'rgba(2, 3, 33, 0.35)',
   navy: '#142364',
   red: '#cf1b55',
   darkGradient: 'linear-gradient(0deg, #0b135d 30%, #020321 80%)',

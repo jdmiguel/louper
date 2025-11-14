@@ -1,10 +1,15 @@
 import { styled } from '@mui/material/styles';
 
-export const StyledRoot = styled('div')(({ theme }) => ({
+export const StyledRoot = styled('a')(({ theme }) => ({
   border: `1px solid ${theme.palette.secondary.light}`,
   borderRadius: 4,
   padding: 20,
   overflow: 'hidden',
+  textDecoration: 'none',
+  transition: 'background-color ease-out 250ms',
+  '&:hover': {
+    backgroundColor: theme.palette.overlay.dark,
+  },
 }));
 
 export const StyledTitle = styled('div')(({ theme }) => ({
@@ -15,13 +20,8 @@ export const StyledTitle = styled('div')(({ theme }) => ({
 }));
 
 export const StyledAvatarWrapper = styled('div')({
-  height: 80,
+  height: 60,
   marginRight: 20,
   position: 'relative',
-  width: 80,
-});
-
-export const StyledAction = styled('div')({
-  marginTop: 14,
-  paddingTop: 10,
+  width: 60,
 });

@@ -23,7 +23,7 @@ const Section = ({
 }: Props) => {
   const observer = useRef<IntersectionObserver>();
   const lastItemRef = useCallback(
-    (item: HTMLDivElement) => {
+    (item: HTMLAnchorElement) => {
       if (isLoading || areAllItemsLoaded) {
         return;
       }

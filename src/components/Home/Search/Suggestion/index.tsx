@@ -10,7 +10,7 @@ type Props = {
 };
 
 const Suggestion = ({ data, onClick }: Props) => (
-  <StyledButton variant="contained" onClick={() => onClick(data.login)}>
+  <StyledButton variant="outlined" onClick={() => onClick(data.login)}>
     <Stack direction="row" sx={{ alignItems: 'center', width: '100%' }}>
       <StyledAvatarWrapper>
         <Avatar variant="circular" sx={{ height: 32, width: 32, position: 'absolute' }} />
@@ -22,12 +22,12 @@ const Suggestion = ({ data, onClick }: Props) => (
         />
       </StyledAvatarWrapper>
       <Typography
-        variant="h5"
         sx={{
           maxWidth: 100,
           overflow: 'hidden',
           textOverflow: 'ellipsis',
           whiteSpace: 'nowrap',
+          textTransform: 'capitalize',
         }}
       >
         {data.login}

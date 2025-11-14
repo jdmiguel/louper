@@ -142,6 +142,7 @@ export const theme = createTheme({
     },
     overlay: {
       main: colors.darkCyanOverlay,
+      dark: colors.darkBlueOverlay,
     },
     background: {
       default: colors.darkerBlue,

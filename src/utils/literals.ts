@@ -67,10 +67,10 @@ export const REPOS_PER_PAGE = 12;
 export const RELATED_USERS_PER_PAGE = 20;
 
 export const LINK_TEXT = {
-  profile: 'VISIT PROFILE',
-  repo: 'VISIT REPO',
-  portfolio: 'VISIT PORTFOLIO',
-  email: 'SEND EMAIL',
+  profile: 'Visit Profile',
+  repo: 'Visit Repo',
+  portfolio: 'Visit Portfolio',
+  email: 'Send Email',
 };
 
 export const ICON_TYPE = {

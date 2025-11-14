@@ -10,7 +10,7 @@ export const StyledRoot = styled('div')({
 export const StyledContent = styled(Typography)(({ theme }) => ({
   color: theme.palette.secondary.light,
   lineHeight: 1.1,
-  maxWidth: 350,
+  maxWidth: 153,
   overflow: 'hidden',
   textOverflow: 'ellipsis',
   whiteSpace: 'nowrap',

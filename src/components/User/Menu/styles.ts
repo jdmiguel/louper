@@ -6,18 +6,10 @@ export const StyledRoot = styled('header')(({ theme }) => ({
   position: 'sticky',
   top: 0,
   zIndex: 1,
-  '&:after': {
-    display: 'block',
-    content: '""',
-    height: 4,
-    width: '100%',
-    backgroundColor: theme.palette.background.default,
-  },
 }));
 
 export const StyledTabs = styled(Tabs)(({ theme }) => ({
   backgroundColor: theme.palette.background.default,
-  borderBottom: `1px solid ${theme.palette.secondary.light}`,
   '@media (min-width: 768px)': {
     backgroundColor: theme.palette.secondary.dark,
   },
